@@ -1,0 +1,169 @@
+algorithm: trees.lca
+title: Lowest common ancestor
+summary: A table of the 2^k-th ancestors of every vertex answers the lowest common ancestor of two vertices in logarithmic time.
+subject: trees
+divisions: [gold, platinum]
+importance: common-contest-technique
+complexity:
+    time: "O((n + m) log n) to build, O(log n) per query"
+    space: "O(n log n)"
+assumptions:
+    - The input is a tree, so there is exactly one path between any two vertices.
+reviewed: false
+variants:
+    - id: minimal
+      language: c
+      file: c/minimal.c
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable struct with an explicit init/destroy pair that builds the table of the 2^k-th ancestors of a rooted tree and answers the lowest common ancestor and the depth of a vertex; no I/O."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1 and the root of the tree."
+      outputs: "The lowest common ancestor of two vertices, the depth of a vertex and the ancestor of a vertex that lies 2^k edges above it."
+      notes: "up[k * n + v] holds the ancestor of v that lies 2^k edges above it, and the root is its own ancestor, so every entry is defined. A breadth-first walk from the root fills the depths and the parents, and the table of the 2^k ancestors is then built from the table of the 2^(k-1) ancestors. A query lifts the deeper vertex to the depth of the other one and then descends from the largest jump, where the two vertices either stay together or they both move one step below the common ancestor. The C variant owns its storage through an explicit init/destroy pair: init allocates and destroy frees, so every successful init must be matched by exactly one destroy and the table must not be used afterwards. The adjacency list belongs to the caller and is only read while the table is built."
+      operations: [build-table, lift, lca]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class that builds the table of the 2^k-th ancestors of a rooted tree and answers the lowest common ancestor and the depth of a vertex; no I/O."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1 and the root of the tree."
+      outputs: "The lowest common ancestor of two vertices, the depth of a vertex and the ancestor of a vertex that lies 2^k edges above it."
+      notes: "up_[k * n + v] holds the ancestor of v that lies 2^k edges above it, and the root is its own ancestor, so every entry is defined. A breadth-first walk from the root fills the depths and the parents, and the table of the 2^k ancestors is then built from the table of the 2^(k-1) ancestors. A query lifts the deeper vertex to the depth of the other one and then descends from the largest jump, where the two vertices either stay together or they both move one step below the common ancestor. The C++ variant keeps the tables in std::vectors, so the constructor allocates them and the destructor releases them without any explicit destroy call."
+      operations: [build-table, lift, lca]
+    - id: minimal
+      language: java
+      file: java/Program.java
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class that builds the table of the 2^k-th ancestors of a rooted tree and answers the lowest common ancestor and the depth of a vertex; no I/O."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1 and the root of the tree."
+      outputs: "The lowest common ancestor of two vertices, the depth of a vertex and the ancestor of a vertex that lies 2^k edges above it."
+      notes: "up[k * n + v] holds the ancestor of v that lies 2^k edges above it, and the root is its own ancestor, so every entry is defined. A breadth-first walk from the root fills the depths and the parents, and the table of the 2^k ancestors is then built from the table of the 2^(k-1) ancestors. A query lifts the deeper vertex to the depth of the other one and then descends from the largest jump, where the two vertices either stay together or they both move one step below the common ancestor. The Java variant keeps the tables on the heap and leaves the reclamation to the garbage collector."
+      operations: [build-table, lift, lca]
+    - id: minimal
+      language: javascript
+      file: javascript/minimal.js
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. Reusable class that builds the table of the 2^k-th ancestors of a rooted tree and answers the lowest common ancestor and the depth of a vertex; no I/O."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1 and the root of the tree."
+      outputs: "The lowest common ancestor of two vertices, the depth of a vertex and the ancestor of a vertex that lies 2^k edges above it."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. up[k * n + v] holds the ancestor of v that lies 2^k edges above it, and the root is its own ancestor, so every entry is defined. The JavaScript variant models the table as a class, so the instance owns its arrays."
+      operations: [build-table, lift, lca]
+    - id: minimal
+      language: pascal
+      file: pascal/minimal.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. Reusable class that builds the table of the 2^k-th ancestors of a rooted tree and answers the lowest common ancestor and the depth of a vertex; no I/O."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1 and the root of the tree."
+      outputs: "The lowest common ancestor of two vertices, the depth of a vertex and the ancestor of a vertex that lies 2^k edges above it."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Up[k * n + v] holds the ancestor of v that lies 2^k edges above it, and the root is its own ancestor, so every entry is defined. The Pascal variant is a class whose constructor allocates the tables and whose destructor releases them, so the caller owns the instance and must free it."
+      operations: [build-table, lift, lca]
+    - id: minimal
+      language: python
+      file: python/minimal.py
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class that builds the table of the 2^k-th ancestors of a rooted tree and answers the lowest common ancestor and the depth of a vertex; no I/O."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1 and the root of the tree."
+      outputs: "The lowest common ancestor of two vertices, the depth of a vertex and the ancestor of a vertex that lies 2^k edges above it."
+      notes: "up[k * n + v] holds the ancestor of v that lies 2^k edges above it, and the root is its own ancestor, so every entry is defined. The Python variant models the table as a class, so the instance owns its lists."
+      operations: [build-table, lift, lca]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a tree from stdin and prints the lowest common ancestor of every queried pair of vertices."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the index of the lowest common ancestor."
+      notes: "The root is the vertex 0 and the answer for a vertex paired with itself is that vertex. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with -1, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build-table, lift, lca]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a tree from stdin and prints the lowest common ancestor of every queried pair of vertices."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the index of the lowest common ancestor."
+      notes: "The root is the vertex 0 and the answer for a vertex paired with itself is that vertex. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with -1, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build-table, lift, lca]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a tree from stdin and prints the lowest common ancestor of every queried pair of vertices."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the index of the lowest common ancestor."
+      notes: "The root is the vertex 0 and the answer for a vertex paired with itself is that vertex. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with -1, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build-table, lift, lca]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it parses a tree from stdin and prints the lowest common ancestor of every queried pair of vertices."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the index of the lowest common ancestor."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The root is the vertex 0 and the answer for a vertex paired with itself is that vertex. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with -1, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build-table, lift, lca]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it parses a tree from stdin and prints the lowest common ancestor of every queried pair of vertices."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the index of the lowest common ancestor."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The root is the vertex 0 and the answer for a vertex paired with itself is that vertex. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with -1, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build-table, lift, lca]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a tree from stdin and prints the lowest common ancestor of every queried pair of vertices."
+      time: "O((n + m) log n) to build, O(log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and the depth array, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the index of the lowest common ancestor."
+      notes: "The root is the vertex 0 and the answer for a vertex paired with itself is that vertex. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with -1, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build-table, lift, lca]
