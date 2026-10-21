@@ -21,6 +21,8 @@ The demonstrations are also deterministic. Nothing is random, nothing is timed, 
 
 The laboratory does not read your code. It runs the reference implementation on an input you choose, and shows you what that implementation does with it.
 
+Every demonstration runs the algorithm of its article at the cost the article claims, so the picture and the complexity never disagree: a prefix sum is $O(1)$ once the totals are stored, a Fenwick tree answers a range in $O(\log n)$, and a table of ancestors is built in $O(n \log n)$.
+
 ## The twelve laboratories
 
 | Algorithm | Scene | What the picture shows | Article |
