@@ -77,7 +77,7 @@ var
   Count: Integer;
   I: Integer;
 begin
-  { SetLength leaves a dynamic array of a simple type uninitialised, so the
+  { SetLength leaves a dynamic array of a simple type uninitialized, so the
     visited flags have to be cleared explicitly. }
   SetLength(Visited, Length(Adj));
   for I := 0 to High(Visited) do
