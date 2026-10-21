@@ -421,4 +421,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The graph representation that the search assumes is described in [graph representation](/algorithms/graphs/representation).
 - Why a queue is a queue, and why `pop(0)` is not one, is covered in [data structures and modeling](/start/from-ap-csa/part-4-data-structures-and-modeling).
 - The level structure of a breadth-first search is the same structure that a [segment tree](/algorithms/range-queries/segment-tree) is built on, and the two make a natural pair. (Compare [binary search](/algorithms/searching/binary-search) for the other monotone structure.)
-- Every listing in this article, in all six languages, is collected on the [breadth-first search source page](/implementations/graphs-bfs).
+- Every listing in this article, in all six languages, is collected on the [breadth-first search source page](/implementations/graphs-bfs/).
