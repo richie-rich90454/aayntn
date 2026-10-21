@@ -18,7 +18,7 @@ typedef struct {
  * distance is already the length of a shortest path to it.
  *
  * adj       adjacency list of the graph
- * n         number of vertices, labelled 0..n-1
+ * n         number of vertices, labeled 0..n-1
  * source    the start vertex
  * distance  receives the distance from source to every vertex and -1 for the
  *           vertices source cannot reach; room for n entries
