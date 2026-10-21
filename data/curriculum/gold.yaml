@@ -1,0 +1,22 @@
+id: curriculum.gold
+title: The Gold track
+summary: Shortest paths, trees, dynamic programming, and the data structures that make the right solution expressible.
+division: gold
+lessons:
+    - start.discrete-mathematics
+    - start.data-structures
+    - start.contest-literacy
+    - graphs.dijkstra
+    - graphs.0-1-bfs
+    - graphs.bellman-ford
+    - graphs.topological-sort
+    - graphs.mst
+    - trees.lca
+    - trees.heavy-light-decomposition
+    - trees.tree-dp
+    - range-queries.fenwick-tree
+    - range-queries.segment-tree
+    - dynamic-programming.0-1-knapsack
+    - dynamic-programming.longest-increasing-subsequence
+    - combinatorics.binomial-coefficients
+    - number-theory.modular-arithmetic
