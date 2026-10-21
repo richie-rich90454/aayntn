@@ -1,5 +1,10 @@
 "use strict";
 
+/*
+ * Educational reference implementation. JavaScript is not a USACO submission
+ * language; this listing exists so that the algorithm can be read in a
+ * scripting runtime, not so that it can be submitted.
+ */
 /**
  * Binary search over a sorted array.
  *
