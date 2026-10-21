@@ -1,0 +1,169 @@
+algorithm: graphs.dsu
+title: Disjoint set union
+summary: A structure that keeps a partition of the elements into sets and answers whether two elements share a set, using union by size and path compression.
+subject: graphs
+divisions: [silver, gold]
+importance: common-contest-technique
+complexity:
+    time: "O((n + q) alpha(n))"
+    space: "O(n)"
+assumptions:
+    - Operations are only unions and membership queries; there is no deletion.
+reviewed: false
+variants:
+    - id: minimal
+      language: c
+      file: c/minimal.c
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable struct with an explicit init/destroy pair offering find, unite and same over n elements, using union by size and path compression."
+      time: "O(alpha(n)) amortised per operation"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: "A set of n elements, numbered 0..n-1, and the pairs of elements passed to unite and same."
+      outputs: "find returns the representative of the set holding an element, and same returns whether two elements share a set."
+      notes: "Union by size attaches the root of the smaller set below the root of the larger one, which keeps the trees shallow, and path compression points every element of a path at its root, which flattens them. The two together make every operation take amortised O(alpha(n)) time. Ownership: the structure owns its storage through an explicit init/destroy pair, so init allocates the parent and size arrays and destroy frees them, every successful init must be matched by exactly one destroy, and the structure must not be used after that destroy."
+      operations: [find, compress-path, unite, same]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class offering find, unite and same over n elements, using union by size and path compression."
+      time: "O(alpha(n)) amortised per operation"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: "A set of n elements, numbered 0..n-1, and the pairs of elements passed to unite and same."
+      outputs: "find returns the representative of the set holding an element, and same returns whether two elements share a set."
+      notes: "Union by size attaches the root of the smaller set below the root of the larger one, which keeps the trees shallow, and path compression points every element of a path at its root, which flattens them. The two together make every operation take amortised O(alpha(n)) time. The vectors own the storage, so the constructor allocates them and the destructor releases them without any explicit destroy call."
+      operations: [find, compress-path, unite, same]
+    - id: minimal
+      language: java
+      file: java/Program.java
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class offering find, unite and same over n elements, using union by size and path compression."
+      time: "O(alpha(n)) amortised per operation"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: "A set of n elements, numbered 0..n-1, and the pairs of elements passed to unite and same."
+      outputs: "find returns the representative of the set holding an element, and same returns whether two elements share a set."
+      notes: "Union by size attaches the root of the smaller set below the root of the larger one, which keeps the trees shallow, and path compression points every element of a path at its root, which flattens them. The two together make every operation take amortised O(alpha(n)) time. The arrays live on the heap and the garbage collector reclaims them."
+      operations: [find, compress-path, unite, same]
+    - id: minimal
+      language: javascript
+      file: javascript/minimal.js
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. Reusable class offering find, unite and same over n elements, using union by size and path compression."
+      time: "O(alpha(n)) amortised per operation"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: "A set of n elements, numbered 0..n-1, and the pairs of elements passed to unite and same."
+      outputs: "find returns the representative of the set holding an element, and same returns whether two elements share a set."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Union by size attaches the root of the smaller set below the root of the larger one, which keeps the trees shallow, and path compression points every element of a path at its root, which flattens them. The two together make every operation take amortised O(alpha(n)) time. The instance owns its two arrays, so they are released together with it."
+      operations: [find, compress-path, unite, same]
+    - id: minimal
+      language: pascal
+      file: pascal/minimal.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. Reusable class offering find, unite and same over n elements, using union by size and path compression."
+      time: "O(alpha(n)) amortised per operation"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: "A set of n elements, numbered 0..n-1, and the pairs of elements passed to unite and same."
+      outputs: "find returns the representative of the set holding an element, and same returns whether two elements share a set."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Union by size attaches the root of the smaller set below the root of the larger one, which keeps the trees shallow, and path compression points every element of a path at its root, which flattens them. The two together make every operation take amortised O(alpha(n)) time. The class owns its storage: the constructor allocates the parent and size arrays and the destructor releases them, so the caller owns the instance and must free it exactly once."
+      operations: [find, compress-path, unite, same]
+    - id: minimal
+      language: python
+      file: python/minimal.py
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class offering find, unite and same over n elements, using union by size and path compression."
+      time: "O(alpha(n)) amortised per operation"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: "A set of n elements, numbered 0..n-1, and the pairs of elements passed to unite and same."
+      outputs: "find returns the representative of the set holding an element, and same returns whether two elements share a set."
+      notes: "Union by size attaches the root of the smaller set below the root of the larger one, which keeps the trees shallow, and path compression points every element of a path at its root, which flattens them. The two together make every operation take amortised O(alpha(n)) time. The instance owns its parent and size lists, so they are released together with the instance."
+      operations: [find, compress-path, unite, same]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the unions and the membership queries from stdin and prints yes or no for every query."
+      time: "O((n + q) alpha(n))"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" merges the sets of u and v and "2 u v" queries whether u and v are in the same set.'
+      outputs: "One line per query, holding yes or no."
+      notes: "Union by size keeps the trees shallow and path compression flattens them, so the whole run costs O((n + q) alpha(n)) time. An operation that names an element outside 0..n-1 is ignored, and such a membership query answers no. The C variant owns its storage through an explicit init/destroy pair: init allocates the parent and size arrays and destroy frees them, so every successful init must be matched by exactly one destroy. The output is canonical, which makes the six language versions byte-identical."
+      operations: [find, compress-path, unite, same]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the unions and the membership queries from stdin and prints yes or no for every query."
+      time: "O((n + q) alpha(n))"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" merges the sets of u and v and "2 u v" queries whether u and v are in the same set.'
+      outputs: "One line per query, holding yes or no."
+      notes: "Union by size keeps the trees shallow and path compression flattens them, so the whole run costs O((n + q) alpha(n)) time. An operation that names an element outside 0..n-1 is ignored, and such a membership query answers no. The output is canonical, which makes the six language versions byte-identical."
+      operations: [find, compress-path, unite, same]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the unions and the membership queries from stdin and prints yes or no for every query."
+      time: "O((n + q) alpha(n))"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" merges the sets of u and v and "2 u v" queries whether u and v are in the same set.'
+      outputs: "One line per query, holding yes or no."
+      notes: "Union by size keeps the trees shallow and path compression flattens them, so the whole run costs O((n + q) alpha(n)) time. An operation that names an element outside 0..n-1 is ignored, and such a membership query answers no. The output is canonical, which makes the six language versions byte-identical."
+      operations: [find, compress-path, unite, same]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads the unions and the membership queries from stdin and prints yes or no for every query."
+      time: "O((n + q) alpha(n))"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" merges the sets of u and v and "2 u v" queries whether u and v are in the same set.'
+      outputs: "One line per query, holding yes or no."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Union by size keeps the trees shallow and path compression flattens them, so the whole run costs O((n + q) alpha(n)) time. An operation that names an element outside 0..n-1 is ignored, and such a membership query answers no. The output is canonical, which makes the six language versions byte-identical."
+      operations: [find, compress-path, unite, same]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads the unions and the membership queries from stdin and prints yes or no for every query."
+      time: "O((n + q) alpha(n))"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" merges the sets of u and v and "2 u v" queries whether u and v are in the same set.'
+      outputs: "One line per query, holding yes or no."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Union by size keeps the trees shallow and path compression flattens them, so the whole run costs O((n + q) alpha(n)) time. An operation that names an element outside 0..n-1 is ignored, and such a membership query answers no. The class owns its storage: the constructor allocates the parent and size arrays and the destructor releases them, so the caller owns the instance and must free it exactly once. The output is canonical, which makes the six language versions byte-identical."
+      operations: [find, compress-path, unite, same]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the unions and the membership queries from stdin and prints yes or no for every query."
+      time: "O((n + q) alpha(n))"
+      auxiliarySpace: "O(n) for the parent and size arrays"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" merges the sets of u and v and "2 u v" queries whether u and v are in the same set.'
+      outputs: "One line per query, holding yes or no."
+      notes: "Union by size keeps the trees shallow and path compression flattens them, so the whole run costs O((n + q) alpha(n)) time. An operation that names an element outside 0..n-1 is ignored, and such a membership query answers no. The output is canonical, which makes the six language versions byte-identical."
+      operations: [find, compress-path, unite, same]
