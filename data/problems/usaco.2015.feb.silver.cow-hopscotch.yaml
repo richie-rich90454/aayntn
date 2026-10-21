@@ -1,0 +1,29 @@
+id: usaco.2015.feb.silver.cow-hopscotch
+title: Cow Hopscotch (Silver)
+source: USACO
+contest: 2015 February Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=530
+editorialUrl: https://usaco.org/current/data/sol_hopscotch_silver.html
+techniques:
+    - arrays.prefix-sums
+    - arrays.two-dimensional-prefix-sums
+prerequisites:
+    - arrays.prefix-sums
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - A hundred by a hundred grid with a hundred candidates in each direction gives a hundred million transitions, which is too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Count the paths with a dynamic program. Every path into a cell comes from a cell above and to the left, and the jump has to change the label.
+    - Summing over all the predecessors of a cell is quadratic in the size of the grid, so the transitions have to be summarized rather than enumerated.
+    - For each cell, keep a total over all earlier cells and a separate total over the earlier cells that share its label.
+    - Prefix sums over the rows and the columns let you read both totals in constant time per cell.
+discussion: >-
+    The dynamic program is straightforward, but the transition is a sum over a rectangle with one label excluded, and that is what makes the naive version too slow. Keeping a total and a per-label total, each readable from prefix sums, turns the transition into constant time. The label that has to be excluded is the one of the cell being jumped to rather than the one being left, and getting that backwards is the classic mistake.
+related:
+    - usaco.2016.jan.bronze.promotion-counting
+    - usaco.2015.feb.gold.censoring
