@@ -1,7 +1,8 @@
 import { defineConfig } from "vitepress";
 import { katex } from "@mdit/plugin-katex";
-import type { ThemeConfig } from "vitepress";
+import type { DefaultTheme } from "vitepress";
 import { aayntnDark, aayntnLight } from "./theme/shiki-theme";
+import { katexMacros } from "./theme/katex-macros";
 
 /**
  * aayntn — All Algorithms You Need to Know
@@ -16,7 +17,7 @@ import { aayntnDark, aayntnLight } from "./theme/shiki-theme";
 /* Navigation                                                          */
 /* ------------------------------------------------------------------ */
 
-const nav: ThemeConfig["nav"] = [
+const nav: DefaultTheme.Config["nav"] = [
     { text: "Start here", link: "/start/", activeMatch: "/start/" },
     { text: "Curriculum", link: "/curriculum/", activeMatch: "/curriculum/" },
     { text: "Algorithms", link: "/algorithms/", activeMatch: "/algorithms/" },
@@ -32,53 +33,51 @@ const nav: ThemeConfig["nav"] = [
 /* Sidebars                                                            */
 /* ------------------------------------------------------------------ */
 
-const algorithmsSidebar: ThemeConfig["sidebar"] = {
-    "/algorithms/": [
-        {
-            text: "Encyclopedia",
-            collapsed: false,
-            items: [
-                { text: "All subjects", link: "/algorithms/" },
-                { text: "Foundations and complexity", link: "/algorithms/foundations/" },
-                { text: "Enumeration and searching", link: "/algorithms/enumeration/" },
-                { text: "Greedy methods", link: "/algorithms/greedy/" },
-                { text: "Arrays and sequences", link: "/algorithms/arrays/" },
-                { text: "Range query structures", link: "/algorithms/range-queries/" },
-                { text: "Graphs and shortest paths", link: "/algorithms/graphs/" },
-                { text: "Trees and decompositions", link: "/algorithms/trees/" },
-                { text: "Dynamic programming", link: "/algorithms/dynamic-programming/" },
-                { text: "Strings", link: "/algorithms/strings/" },
-                { text: "Number theory", link: "/algorithms/number-theory/" },
-                { text: "Combinatorics", link: "/algorithms/combinatorics/" },
-                { text: "Computational geometry", link: "/algorithms/geometry/" },
-                { text: "Advanced techniques", link: "/algorithms/advanced/" },
-            ],
-        },
-        {
-            text: "Core algorithms",
-            collapsed: false,
-            items: [
-                { text: "Binary search", link: "/algorithms/searching/binary-search" },
-                { text: "Depth-first search", link: "/algorithms/graphs/dfs" },
-                { text: "Breadth-first search", link: "/algorithms/graphs/bfs" },
-                { text: "Disjoint set union", link: "/algorithms/graphs/dsu" },
-                { text: "Dijkstra's algorithm", link: "/algorithms/graphs/dijkstra" },
-                { text: "0-1 BFS", link: "/algorithms/graphs/0-1-bfs" },
-                { text: "Prefix sums", link: "/algorithms/arrays/prefix-sums" },
-                { text: "Fenwick tree", link: "/algorithms/range-queries/fenwick-tree" },
-                { text: "Segment tree", link: "/algorithms/range-queries/segment-tree" },
-                { text: "Lowest common ancestor", link: "/algorithms/trees/lca" },
-                {
-                    text: "Heavy-light decomposition",
-                    link: "/algorithms/trees/heavy-light-decomposition",
-                },
-                { text: "0/1 knapsack", link: "/algorithms/dynamic-programming/0-1-knapsack" },
-            ],
-        },
-    ],
-};
+const algorithmsSidebar: DefaultTheme.SidebarItem[] = [
+    {
+        text: "Encyclopedia",
+        collapsed: false,
+        items: [
+            { text: "All subjects", link: "/algorithms/" },
+            { text: "Foundations and complexity", link: "/algorithms/foundations/" },
+            { text: "Enumeration and searching", link: "/algorithms/enumeration/" },
+            { text: "Greedy methods", link: "/algorithms/greedy/" },
+            { text: "Arrays and sequences", link: "/algorithms/arrays/" },
+            { text: "Range query structures", link: "/algorithms/range-queries/" },
+            { text: "Graphs and shortest paths", link: "/algorithms/graphs/" },
+            { text: "Trees and decompositions", link: "/algorithms/trees/" },
+            { text: "Dynamic programming", link: "/algorithms/dynamic-programming/" },
+            { text: "Strings", link: "/algorithms/strings/" },
+            { text: "Number theory", link: "/algorithms/number-theory/" },
+            { text: "Combinatorics", link: "/algorithms/combinatorics/" },
+            { text: "Computational geometry", link: "/algorithms/geometry/" },
+            { text: "Advanced techniques", link: "/algorithms/advanced/" },
+        ],
+    },
+    {
+        text: "Core algorithms",
+        collapsed: false,
+        items: [
+            { text: "Binary search", link: "/algorithms/searching/binary-search" },
+            { text: "Depth-first search", link: "/algorithms/graphs/dfs" },
+            { text: "Breadth-first search", link: "/algorithms/graphs/bfs" },
+            { text: "Disjoint set union", link: "/algorithms/graphs/dsu" },
+            { text: "Dijkstra's algorithm", link: "/algorithms/graphs/dijkstra" },
+            { text: "0-1 BFS", link: "/algorithms/graphs/0-1-bfs" },
+            { text: "Prefix sums", link: "/algorithms/arrays/prefix-sums" },
+            { text: "Fenwick tree", link: "/algorithms/range-queries/fenwick-tree" },
+            { text: "Segment tree", link: "/algorithms/range-queries/segment-tree" },
+            { text: "Lowest common ancestor", link: "/algorithms/trees/lca" },
+            {
+                text: "Heavy-light decomposition",
+                link: "/algorithms/trees/heavy-light-decomposition",
+            },
+            { text: "0/1 knapsack", link: "/algorithms/dynamic-programming/0-1-knapsack" },
+        ],
+    },
+];
 
-const sidebar: ThemeConfig["sidebar"] = {
+const sidebar: DefaultTheme.Config["sidebar"] = {
     "/start/": [
         {
             text: "Prerequisite academy",
@@ -261,43 +260,34 @@ export default defineConfig({
         // KaTeX is the only mathematics renderer; MathJax must stay off.
         math: false,
         lineNumbers: false,
-        anchors: { permalink: false },
         config(md) {
-            md.use(katex, {
+            md.use(katex as never, {
                 delimiters: "dollars",
                 throwOnError: false,
                 errorColor: "#C63D32",
                 strict: false,
                 trust: false,
-                macros: {
-                    "\\O": "\\mathcal{O}",
-                    "\\adj": "\\operatorname{adj}",
-                    "\\dist": "\\operatorname{dist}",
-                    "\\deg": "\\operatorname{deg}",
-                    "\\mod": "\\bmod",
-                },
+                macros: katexMacros,
             });
         },
-        shiki: {
-            theme: aayntnLight,
-            themes: { light: aayntnLight, dark: aayntnDark },
-            defaultColor: "light",
-            langs: [
-                "c",
-                "cpp",
-                "java",
-                "python",
-                "pascal",
-                "javascript",
-                "json",
-                "yaml",
-                "bash",
-                "powershell",
-                "text",
-                "diff",
-            ],
-            wrap: false,
+        theme: {
+            light: aayntnLight,
+            dark: aayntnDark,
         },
+        languages: [
+            "c",
+            "cpp",
+            "java",
+            "python",
+            "pascal",
+            "javascript",
+            "json",
+            "yaml",
+            "bash",
+            "powershell",
+            "text",
+            "diff",
+        ] as const,
     },
 
     themeConfig: {
