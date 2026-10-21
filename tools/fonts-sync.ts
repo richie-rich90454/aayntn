@@ -8,7 +8,7 @@
  * unicode subset that carries the whole weight axis, so we download one file
  * per (family, subset) and declare the supported weight range.
  *
- * Both families are licensed under the SIL Open Font License 1.1; the licence
+ * Both families are licensed under the SIL Open Font License 1.1; the license
  * text ships next to the binaries in docs/public/fonts/OFL.txt.
  */
 import { mkdir, writeFile } from "node:fs/promises";
@@ -93,7 +93,7 @@ async function main() {
 
     const header = `/* aayntn self-hosted webfonts.
  * Noto Sans and Noto Sans Mono — SIL Open Font License 1.1.
- * See ./OFL.txt for the full licence text. */
+ * See ./OFL.txt for the full license text. */
 `;
     await writeFile(join(FONT_DIR, "fonts.css"), header + faces.join("\n\n") + "\n", "utf8");
     process.stdout.write(`wrote ${join(FONT_DIR, "fonts.css")}\n`);
