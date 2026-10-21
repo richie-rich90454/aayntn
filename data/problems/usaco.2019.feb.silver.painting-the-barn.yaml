@@ -1,0 +1,30 @@
+id: usaco.2019.feb.silver.painting-the-barn
+title: Painting the Barn
+source: USACO
+contest: 2019 February Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=919
+editorialUrl: https://usaco.org/current/data/sol_paintbarn_silver_feb19.html
+techniques:
+    - arrays.difference-arrays
+    - arrays.two-dimensional-prefix-sums
+prerequisites:
+    - arrays.prefix-sums
+difficulty: 3
+estimatedMinutes: 25
+specialConstraints:
+    - The coordinates reach a billion, so the covered area cannot be accumulated cell by cell.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The answer is the total area painted exactly once, so the problem is to find where the number of coats equals one.
+    - Each rectangle adds one coat to a region, which is a range update over a rectangle rather than a point.
+    - A two-dimensional difference array applies a rectangle update in four writes, and a two-dimensional prefix sum recovers the coat count at every point.
+    - Count the cells whose recovered count is exactly one, and add up their areas.
+discussion: >-
+    This is the two-dimensional version of the difference array, and the shape of the solution follows from it, with four corner writes per rectangle and one prefix sum pass to recover the coverage. The counting step is then a scan over the compressed grid, weighted by the area of each cell. The coordinate bound is what forces the compression, since the grid itself cannot be built.
+related:
+    - usaco.2016.jan.bronze.promotion-counting
+    - usaco.2020.open.bronze.social-distancing-ii
