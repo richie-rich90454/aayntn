@@ -209,7 +209,7 @@ function build(input: string): LabEvent[] {
         touched = [node.index];
         events.push({
             type: "build",
-            operation: "build",
+            operation: "merge",
             narration: `The node that covers ${node.low}..${node.high} merges its two children and holds ${total}.`,
             state: snapshot(
                 `The node for ${node.low}..${node.high} holds ${total}.`,
@@ -259,7 +259,7 @@ function build(input: string): LabEvent[] {
         touched = [node.index];
         events.push({
             type: "update",
-            operation: "point-update",
+            operation: "merge",
             narration: `The node that covers ${node.low}..${node.high} merges its two children again and holds ${total}.`,
             state: snapshot(
                 `The node for ${node.low}..${node.high} holds ${total}.`,
