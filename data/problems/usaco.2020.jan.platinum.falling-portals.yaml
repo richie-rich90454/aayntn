@@ -1,0 +1,29 @@
+id: usaco.2020.jan.platinum.falling-portals
+title: Falling Portals
+source: USACO
+contest: 2020 January Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=998
+editorialUrl: https://usaco.org/current/data/sol_falling_platinum_jan20.html
+techniques:
+    - dynamic-programming.convex-hull-trick
+    - geometry.convex-hull
+prerequisites:
+    - dynamic-programming.convex-hull-trick
+difficulty: 5
+estimatedMinutes: 55
+specialConstraints:
+    - Two hundred thousand worlds, and the times at which two worlds align are not integers, so the computation has to be done exactly.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The worlds fall at different speeds, so two of them meet at a time that depends only on their starting heights and their speeds.
+    - A cow can move between two worlds at the moment they align, and she wants to reach a particular world as early as possible, so this is a shortest-path problem over the alignment times.
+    - The alignment time between two worlds is a ratio of two differences, so the edges of the graph are not independent of one another.
+    - Because the speeds are the indices, the times can be sorted and the structure of the alignments lets a hull over the candidate lines answer the minimum in constant amortized time.
+discussion: >-
+    The graph is defined by the alignment times, and each of those is a quotient of two differences, which makes the edges highly structured rather than independent. A cow's journey is a sequence of alignments, and the earliest arrival is a shortest-path computation in that graph. The hull over the candidate lines is what keeps the search from becoming quadratic, and the ordering of the worlds by speed is what makes the structure exploitable.
+related:
+    - usaco.2019.feb.platinum.mowing-mischief
+    - usaco.2022.jan.platinum.multiple-choice-test
