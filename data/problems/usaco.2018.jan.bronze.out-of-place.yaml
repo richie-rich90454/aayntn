@@ -1,0 +1,29 @@
+id: usaco.2018.jan.bronze.out-of-place
+title: Out of Place
+source: USACO
+contest: 2018 January Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=785
+editorialUrl: https://usaco.org/current/data/sol_outofplace_bronze_jan18.html
+techniques:
+    - foundations.sorting
+prerequisites:
+    - foundations.sorting
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - Heights repeat, so the answer is not simply the number of pairs that are out of order.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Bessie moved to one new position, so the current order differs from the sorted order in one place plus a shift of the block she jumped over.
+    - The number of swaps needed is the number of cows that are out of their sorted position, halved for the cows that are merely displaced.
+    - Sort the heights to get the target order, and remember the original position of each cow, because Bessie's move is what breaks the symmetry.
+    - Count the cows whose sorted position differs from their position before Bessie's move, and halve the result.
+discussion: >-
+    The key is that a single relocation produces a very specific kind of disorder, and the minimum number of swaps is the number of misplaced cows divided by two rather than the number of out-of-order pairs. Sorting gives the target order, and the identity of the cow Bessie moved has to be recovered from the ranks. The rest is counting, and the trap is forgetting to halve.
+related:
+    - usaco.2022.dec.bronze.cow-college
+    - usaco.2021.jan.bronze.just-stalling
