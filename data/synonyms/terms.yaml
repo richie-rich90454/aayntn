@@ -80,7 +80,7 @@ Z algorithm:
 
 bitmask DP:
     - subset DP
-    - travelling salesman DP
+    - traveling salesman DP
 
 expected value:
     - expectation
