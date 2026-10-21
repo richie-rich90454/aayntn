@@ -1,12 +1,8 @@
 # Contributing to aayntn
 
-**aayntn** — *All Algorithms You Need to Know* — is a static, Markdown-authored, mathematically
-rigorous encyclopedia of competitive programming, from AP Computer Science A proficiency
-through USACO Platinum and beyond.
+**aayntn** — _All Algorithms You Need to Know_ — is a static, Markdown-authored, mathematically rigorous encyclopedia of competitive programming, from AP Computer Science A proficiency through USACO Platinum and beyond.
 
-This document is the contract between the editorial content, the executable implementations,
-and the build tooling. If you follow it, a new algorithm can be added without touching a
-single Vue component.
+This document is the contract between the editorial content, the executable implementations, and the build tooling. If you follow it, a new algorithm can be added without touching a single Vue component.
 
 ---
 
@@ -20,8 +16,7 @@ single Vue component.
 | Presentation | `docs/.vitepress/theme/**` | No — it renders metadata, it never contains content |
 | Derived artefacts | `docs/.vitepress/data/generated/**`, `docs/public/**` | **No** — never edit these by hand |
 
-The build regenerates everything derived. If you find yourself editing a file under
-`docs/.vitepress/data/generated/`, you are doing it wrong.
+The build regenerates everything derived. If you find yourself editing a file under `docs/.vitepress/data/generated/`, you are doing it wrong.
 
 ---
 
@@ -68,51 +63,43 @@ implementations/<domain>/<algorithm>/
 └── javascript/
 ```
 
-Only create a variant file that is genuinely useful. A recursive variant for an algorithm
-where recursion is not appropriate is worse than no variant at all; mark the variant
-`not-applicable` with a reason instead of inventing one.
+Only create a variant file that is genuinely useful. A recursive variant for an algorithm where recursion is not appropriate is worse than no variant at all; mark the variant `not-applicable` with a reason instead of inventing one.
 
 ---
 
 ## 3. Lesson frontmatter contract
 
-Every lesson begins with validated YAML frontmatter. The schema lives in
-`tools/lib/schema.ts` and is enforced by `pnpm run validate`.
+Every lesson begins with validated YAML frontmatter. The schema lives in `tools/lib/schema.ts` and is enforced by `pnpm run validate`.
 
 ```yaml
 ---
-id: graphs.dijkstra                # unique, lowercase dotted segments
+id: graphs.dijkstra # unique, lowercase dotted segments
 title: Dijkstra's algorithm
 summary: Single-source shortest paths with nonnegative weights
-division: [gold]                  # bronze | silver | gold | platinum
-subjects: [graphs]                 # see the subject list below
-level: intermediate                # introductory | intermediate | advanced
+division: [gold] # bronze | silver | gold | platinum
+subjects: [graphs] # see the subject list below
+level: intermediate # introductory | intermediate | advanced
 importance: common-contest-technique
 keywords: [shortest path, weighted graph, priority queue]
 prerequisites:
-  required: [graphs.representation, structures.priority-queue]
-  recommended: [graphs.bfs]
+    required: [graphs.representation, structures.priority-queue]
+    recommended: [graphs.bfs]
 complexity:
-  time: "O((V + E) log V)"
-  space: "O(V + E)"
+    time: "O((V + E) log V)"
+    space: "O(V + E)"
 assumptions:
-  - Edge weights are nonnegative.
-implementations: graphs.dijkstra     # must match an algorithm.yaml `algorithm` id
-visualization: graphs.dijkstra       # must match a data/visualizations/*.yaml id
+    - Edge weights are nonnegative.
+implementations: graphs.dijkstra # must match an algorithm.yaml `algorithm` id
+visualization: graphs.dijkstra # must match a data/visualizations/*.yaml id
 problems: [usaco.2019.dec.gold.flight]
 reviewed: true
 draft: false
 ---
 ```
 
-**Subjects.** `foundations`, `enumeration`, `searching`, `greedy`, `arrays`,
-`range-queries`, `graphs`, `trees`, `dynamic-programming`, `strings`, `number-theory`,
-`combinatorics`, `geometry`, `advanced`.
+**Subjects.** `foundations`, `enumeration`, `searching`, `greedy`, `arrays`, `range-queries`, `graphs`, `trees`, `dynamic-programming`, `strings`, `number-theory`, `combinatorics`, `geometry`, `advanced`.
 
-**Importance** is independent of division: `core-prerequisite`,
-`common-contest-technique`, `advanced-technique`, `specialized-technique`,
-`extended-reference`. A technique can be a superb extension topic and still be rare in
-contests.
+**Importance** is independent of division: `core-prerequisite`, `common-contest-technique`, `advanced-technique`, `specialized-technique`, `extended-reference`. A technique can be a superb extension topic and still be rare in contests.
 
 ---
 
@@ -128,47 +115,43 @@ subject: graphs
 divisions: [gold]
 importance: common-contest-technique
 prerequisites:
-  required: [...]
-  recommended: [...]
+    required: [...]
+    recommended: [...]
 complexity:
-  time: "O((V + E) log V)"
-  space: "O(V + E)"
+    time: "O((V + E) log V)"
+    space: "O(V + E)"
 assumptions:
-  - Edge weights are nonnegative.
+    - Edge weights are nonnegative.
 visualization: graphs.dijkstra
 reviewed: true
 variants:
-  - id: minimal
-    language: cpp17
-    file: cpp17/minimal.cpp
-    kind: minimal                 # minimal | program | educational
-    recommended: recommended      # recommended | conditional | not-applicable
-    reason: "Reusable function over an adjacency list; no I/O."
-    time: "O((V + E) log V)"
-    auxiliarySpace: "O(V + E)"
-    status: verified              # verified | unverified
-    inputs: "..."
-    outputs: "..."
-    notes: "..."
-    operations: [relax-edge, extract-min]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal # minimal | program | educational
+      recommended: recommended # recommended | conditional | not-applicable
+      reason: "Reusable function over an adjacency list; no I/O."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E)"
+      status: verified # verified | unverified
+      inputs: "..."
+      outputs: "..."
+      notes: "..."
+      operations: [relax-edge, extract-min]
 ```
 
 Rules that the validator enforces:
 
 - `file` must exist, and must be inside the algorithm's own directory.
 - `id` and `language` together must be unique inside the algorithm.
-- `auxiliarySpace` must describe **the implementation you actually wrote**, not the
-  textbook. An iterative DFS that marks a vertex only when popped can hold O(E) stack
-  entries; say so.
-- `status: verified` is only correct once `pnpm run validate:code` has compiled and run
-  the file.
+- `auxiliarySpace` must describe **the implementation you actually wrote**, not the textbook. An iterative DFS that marks a vertex only when popped can hold O(E) stack entries; say so.
+- `status: verified` is only correct once `pnpm run validate:code` has compiled and run the file.
 
 ---
 
 ## 5. Code style
 
-The generated listings must look like code a strong competitor would write, not like a
-tutorial with a comment on every statement.
+The generated listings must look like code a strong competitor would write, not like a tutorial with a comment on every statement.
 
 **Comments explain decisions, invariants, and subtlety — not syntax.**
 
@@ -180,14 +163,9 @@ if (dist[u] + w < dist[v]) { ... }
 ++i;   // Increment i by one.
 ```
 
-For complex algorithms, the comments should identify the maintained invariant, the purpose
-of the data structure, a non-obvious transition, why an optimization is valid, and any
-overflow or memory-safety consideration.
+For complex algorithms, the comments should identify the maintained invariant, the purpose of the data structure, a non-obvious transition, why an optimization is valid, and any overflow or memory-safety consideration.
 
-**Do not present a truncated fragment as a complete program.** A `minimal` variant is a
-reusable function or data structure with a documented contract. A `program` variant parses
-input, calls the algorithm, and formats output. An `educational` variant adds explanation;
-if `minimal` already does that job, do not create a third file.
+**Do not present a truncated fragment as a complete program.** A `minimal` variant is a reusable function or data structure with a documented contract. A `program` variant parses input, calls the algorithm, and formats output. An `educational` variant adds explanation; if `minimal` already does that job, do not create a third file.
 
 **Every implementation must:**
 
@@ -211,15 +189,13 @@ if `minimal` already does that job, do not create a third file.
 | Pascal | Free Pascal 3.x | `program` mode, `{$mode objfpc}{$H+}`. Educational reference only. |
 | JavaScript | Node.js 18+ | CommonJS. Educational reference only — never labelled a USACO submission solution. |
 
-**USACO submission languages are C, C++, Java and Python.** Pascal and JavaScript are
-educational reference implementations and must be marked as such wherever they appear.
+**USACO submission languages are C, C++, Java and Python.** Pascal and JavaScript are educational reference implementations and must be marked as such wherever they appear.
 
 ---
 
 ## 6. Article structure
 
-A substantial algorithm article follows the order below. Small prerequisite lessons may be
-shorter, but they keep the teaching elements.
+A substantial algorithm article follows the order below. Small prerequisite lessons may be shorter, but they keep the teaching elements.
 
 1. At a glance
 2. Problem motivation
@@ -252,8 +228,7 @@ If the predicate is monotone, binary search returns the first index at which it 
 </MathPanel>
 ```
 
-Types: `definition`, `lemma`, `theorem`, `proof`, `invariant`, `recurrence`,
-`counterexample`, `complexity`.
+Types: `definition`, `lemma`, `theorem`, `proof`, `invariant`, `recurrence`, `counterexample`, `complexity`.
 
 The implementation viewer and the animation are inserted by identifier, not by hand:
 
@@ -273,14 +248,10 @@ The implementation viewer and the animation are inserted by identifier, not by h
 - No serif interface fonts. No letterspacing on long paragraphs.
 - One idea per paragraph. The reading measure is 68–76 characters.
 - Never state a complexity bound without saying which implementation it assumes.
-- Every proof names its claim, its assumptions, and the logical reason the result follows.
-  "Obviously optimal" is not a proof.
-- Show counterexamples. A wrong approach explained with the smallest counterexample is
-  worth more than a paragraph of correct prose.
-- Do not reproduce copyrighted problem statements or editorials. Link to the original and
-  write your own explanation.
-- Do not claim that a technique is "USACO-approved" or that a page is an official
-  resource. aayntn is an independent preparation resource.
+- Every proof names its claim, its assumptions, and the logical reason the result follows. "Obviously optimal" is not a proof.
+- Show counterexamples. A wrong approach explained with the smallest counterexample is worth more than a paragraph of correct prose.
+- Do not reproduce copyrighted problem statements or editorials. Link to the original and write your own explanation.
+- Do not claim that a technique is "USACO-approved" or that a page is an official resource. aayntn is an independent preparation resource.
 
 ---
 
@@ -302,10 +273,6 @@ CI runs the same commands. A pull request that fails the build does not merge.
 
 ## 9. Licence
 
-The project is licensed under **AGPL-3.0-only**. Original lessons, implementations and
-artwork are covered by it. Contributed code must be your own or compatible with it; the
-webfonts under `docs/public/fonts` are covered by the SIL Open Font License 1.1, and the
-manifest of every implementation records its licence and provenance.
+The project is licensed under **AGPL-3.0-only**. Original lessons, implementations and artwork are covered by it. Contributed code must be your own or compatible with it; the webfonts under `docs/public/fonts` are covered by the SIL Open Font License 1.1, and the manifest of every implementation records its licence and provenance.
 
-`aayntn` is an independent preparation resource. It is not affiliated with, endorsed by,
-or supported by the United States of America Computing Olympiad.
+`aayntn` is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
