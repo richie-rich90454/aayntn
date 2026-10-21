@@ -145,9 +145,10 @@ function renderEdge(edge: LabEdge, nodes: Map<string, LabNode>): string {
         } marker-end="url(#${markerId})" />`,
     );
 
+    const mx = (x1 + sx) / 2;
+    const my = (y1 + sy) / 2 - (curve ? curve / 2 : 0);
+
     if (edge.label) {
-        const mx = (x1 + sx) / 2;
-        const my = (y1 + sy) / 2 - (curve ? curve / 2 : 0);
         parts.push(
             `<rect x="${mx - 12}" y="${my - 10}" width="24" height="16" fill="${PALETTE.surface}" stroke="${PALETTE.grid}" />`,
             `<text x="${mx}" y="${my + 2}" text-anchor="middle" font-size="11" font-family="Noto Sans Mono, monospace" fill="${PALETTE.text}">${escapeXml(edge.label)}</text>`,
