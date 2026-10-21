@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Division insignia">
+  <title>Division insignia</title>
+  <path d="M16 2 L29 9 V23 L16 30 L3 23 V9 Z" fill="none" stroke="#161616" stroke-width="1.4"/>
+  <path d="M16 7 L24 11.5 V20.5 L16 25 L8 20.5 V11.5 Z" fill="none" stroke="#161616" stroke-width="0.7" opacity="0.6"/>
+  <circle cx="16" cy="16" r="3" fill="#E8B84A"/>
+</svg>
