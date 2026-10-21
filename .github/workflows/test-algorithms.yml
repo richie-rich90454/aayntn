@@ -1,0 +1,87 @@
+name: Test the implementations
+
+# Every reference implementation is compiled and run in every language, and
+# the six languages of one algorithm are required to agree byte for byte.
+# The toolchains are installed here rather than assumed, so a contributor
+# without Free Pascal is not blocked from contributing and the published
+# listings are still all verified.
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+    workflow_dispatch:
+
+concurrency:
+    group: algorithms-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    implementations:
+        name: Compile and run every implementation
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 12.14.0
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: pnpm
+
+            - name: Install the dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Install the C and C++ toolchain
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install --yes build-essential clang
+
+            - name: Install the Java toolchain
+              run: |
+                  sudo apt-get install --yes openjdk-17-jdk-headless
+
+            - name: Install the Free Pascal compiler
+              run: |
+                  sudo apt-get install --yes fpc
+
+            - name: Install Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.12"
+
+            - name: Compile and run the implementations
+              run: pnpm run validate:code
+
+            - name: Compile with the sanitizers
+              run: |
+                  set -euo pipefail
+                  mkdir -p .tmp/sanitizers
+                  for source in implementations/*/*/c/*.c; do
+                    name="$(echo "$source" | tr '/' '_')"
+                    clang -std=c11 -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer \
+                      "$source" -o ".tmp/sanitizers/$name"
+                  done
+                  for source in implementations/*/*/cpp17/*.cpp; do
+                    name="$(echo "$source" | tr '/' '_')"
+                    clang++ -std=c++17 -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer \
+                      "$source" -o ".tmp/sanitizers/$name"
+                  done
+                  echo "every implementation compiles under the address and undefined-behavior sanitizers"
+
+            - name: Compile with the warnings as errors
+              run: |
+                  set -euo pipefail
+                  mkdir -p .tmp/warnings
+                  for source in implementations/*/*/c/*.c; do
+                    name="$(echo "$source" | tr '/' '_')"
+                    gcc -std=c11 -O2 -Wall -Wextra -Werror "$source" -o ".tmp/warnings/$name"
+                  done
+                  for source in implementations/*/*/cpp17/*.cpp; do
+                    name="$(echo "$source" | tr '/' '_')"
+                    g++ -std=c++17 -O2 -Wall -Wextra -Werror "$source" -o ".tmp/warnings/$name"
+                  done
+                  echo "every implementation compiles without a warning"
