@@ -160,7 +160,7 @@ $$
 a^{p-1}(p-1)! \equiv (p-1)! \pmod p.
 $$
 Since $p$ is prime, $(p-1)!$ is not divisible by $p$, so it can be
-cancelled, leaving $a^{p-1} \equiv 1 \pmod p$.
+canceled, leaving $a^{p-1} \equiv 1 \pmod p$.
 
 Finally, multiplying that congruence by $a^{-1}$ gives $a^{p-2} \equiv a^{-1} \pmod p$, which is the stated formula. $\square$
 </MathPanel>
