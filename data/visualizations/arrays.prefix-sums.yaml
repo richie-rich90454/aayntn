@@ -1,0 +1,19 @@
+# The prefix sums demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: arrays.prefix-sums
+title: Prefix sums
+algorithm: arrays.prefix-sums
+scene: array
+preset: mixed
+storyboard:
+    - title: The empty prefix
+      description: The prefix array starts with a single zero, because the sum of the first zero elements is zero.
+    - title: One element consumed
+      description: After the first element, the prefix sum is that element.
+    - title: The running total grows
+      description: Every later entry is the entry before it plus the next element, so the total follows the data.
+    - title: A range is a difference
+      description: A query reads the total at the right end and the total before the left end, and subtracts them.
