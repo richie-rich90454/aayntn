@@ -1,0 +1,29 @@
+id: usaco.2022.dec.silver.circular-barn
+title: Circular Barn (Silver)
+source: USACO
+contest: 2022 December Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1255
+editorialUrl: https://usaco.org/current/data/sol_prob2_silver_dec22.html
+techniques:
+    - arrays.prefix-sums
+    - searching.two-pointers
+prerequisites:
+    - arrays.prefix-sums
+difficulty: 4
+estimatedMinutes: 35
+specialConstraints:
+    - The rooms form a circle, so doubling the array turns every wraparound into a linear range.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The two farmers take turns removing a cow, and the player who faces an empty room loses, so the outcome depends on how the cows are spread around the circle.
+    - The farmers walk around the circle in order, so a starting point splits the circle into a sequence of stretches, and each stretch is consumed at a fixed rate of one cow per turn.
+    - Double the array of room counts, and prefix sums turn the number of cows in any stretch into a constant-time query.
+    - The interesting part is the choice of where the second farmer starts, and a two-pointer sweep keeps the stretch boundaries monotone as the first starting point moves.
+discussion: >-
+    The circle is the whole difficulty, and the standard way to remove it is to duplicate the array so that every possible starting point becomes a linear range. With prefix sums, the number of cows in any stretch is a constant-time query, and the search over the two starting points becomes a two-pointer sweep because both boundaries move in the same direction. The number of cows per room is large, which is why the answer is a comparison of prefix sums rather than a simulation.
+related:
+    - usaco.2016.feb.gold.circular-barn
+    - usaco.2016.feb.platinum.circular-barn
