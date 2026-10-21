@@ -497,4 +497,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The structure that handles a quantity without an inverse is the [segment tree](/algorithms/range-queries/segment-tree), and the article states the monoid framing that the two structures differ on.
 - The technique that answers a range sum in constant time when nothing changes is [prefix sums](/algorithms/arrays/prefix-sums), and the article explains why a point update defeats it.
 - The reverse operation, in which a range update becomes two changes, is described under difference arrays, which the prefix sums article covers as a variant.
-- Every listing in this article, in all six languages, is collected on the [Fenwick tree source page](/implementations/range-queries-fenwick-tree).
+- Every listing in this article, in all six languages, is collected on the [Fenwick tree source page](/implementations/range-queries-fenwick-tree/).
