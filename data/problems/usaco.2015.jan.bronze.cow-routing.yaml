@@ -1,0 +1,30 @@
+id: usaco.2015.jan.bronze.cow-routing
+title: Cow Routing
+source: USACO
+contest: 2015 January Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=507
+editorialUrl: https://usaco.org/current/data/sol_cowroute_bronze.html
+techniques:
+    - graphs.representation
+    - foundations.complexity
+prerequisites:
+    - foundations.complexity
+difficulty: 1
+estimatedMinutes: 15
+specialConstraints:
+    - Each plane lists up to a thousand routes, so scanning every route of every plane costs far more than the statement makes it look.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Read the statement as a lookup problem. A route is an ordered list of cities, and a cow can use it only if both of her endpoints appear on it.
+    - There is no need to build a graph of the whole farm. For one pair of endpoints, a single pass over a route is enough to decide whether it works.
+    - A route is usable only when the origin appears before the destination, so the positions matter and not just the membership.
+    - Keep scanning the routes of a plane until one works, and remember that the same plane may answer several cows.
+discussion: >-
+    The whole problem is a membership test repeated per route, and the only thing that makes it more than a scan is that a route is an ordered list rather than a set of edges. Treating a route as a pair of endpoints loses the ordering, so the check has to be that the origin comes first. A linear pass per route is enough because the number of routes is small, and the outer loop over the planes can stop as soon as a usable route is found.
+related:
+    - usaco.2015.jan.silver.meeting-time
+    - usaco.2016.jan.bronze.promotion-counting
