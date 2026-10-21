@@ -1,0 +1,31 @@
+id: usaco.2018.open.platinum.disruption
+title: Disruption
+source: USACO
+contest: 2018 US Open Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=842
+editorialUrl: https://usaco.org/current/data/sol_disrupt_platinum_open18.html
+techniques:
+    - trees.heavy-light-decomposition
+    - range-queries.segment-tree
+    - trees.lca
+prerequisites:
+    - trees.heavy-light-decomposition
+    - range-queries.segment-tree
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - Fifty thousand pastures, and a cow may walk any path, so the paths have to be represented compactly rather than one edge at a time.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Each traveling cow damages every pathway on the path she walks, and the question asks for the smallest damage value among the cows that cross each pathway.
+    - So the pathways are the elements of a range structure, and each cow contributes her value to a path.
+    - A path in a tree is a union of a logarithmic number of ranges once the tree is decomposed into chains, so each cow produces a logarithmic number of range updates.
+    - The range structure has to support a range minimum update and a point query, and the updates can be processed in increasing order of value.
+discussion: >-
+    The elements being queried are pathways and the updates are paths, so the two have to be put in the same domain, and a heavy-light decomposition is what turns a path into a logarithmic number of ranges on a linear array. A segment tree that supports a range minimum update with a point query then answers the question, and sorting the cows by their value makes the updates monotone. The tree decomposition is the whole difficulty of the problem.
+related:
+    - usaco.2019.feb.gold.cow-land
+    - usaco.2019.dec.gold.milk-visits
