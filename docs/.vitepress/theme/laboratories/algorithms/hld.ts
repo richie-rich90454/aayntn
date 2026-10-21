@@ -95,6 +95,11 @@ function parse(input: string): Parsed {
     return { labels, children, queries };
 }
 
+/** "1 vertex" or "3 vertices". */
+function countOf(count: number, word: string): string {
+    return `${count} ${count === 1 ? word : `${word}s`}`;
+}
+
 function build(input: string): LabEvent[] {
     const { labels, children, queries } = parse(input);
     const events: LabEvent[] = [];
@@ -208,7 +213,7 @@ function build(input: string): LabEvent[] {
         events.push({
             type: "build",
             operation: "compute-subtree-sizes",
-            narration: `The subtree of ${labels[vertex]} holds ${size[vertex]} vertices, because every child subtree is counted once.`,
+            narration: `The subtree of ${labels[vertex]} holds ${countOf(size[vertex]!, "vertex")}, because every child subtree is counted once.`,
             state: snapshot(
                 `The subtree of ${labels[vertex]} holds ${size[vertex]} vertices.`,
                 `size(${labels[vertex]}) = ${size[vertex]}`,
@@ -229,7 +234,7 @@ function build(input: string): LabEvent[] {
         events.push({
             type: "build",
             operation: "pick-heavy-child",
-            narration: `The heavy child of ${labels[vertex]} is ${labels[heavy[vertex]!]}, because its subtree of ${size[heavy[vertex]!]} vertices is the largest.`,
+            narration: `The heavy child of ${labels[vertex]} is ${labels[heavy[vertex]!]}, because its subtree of ${countOf(size[heavy[vertex]!], "vertex")} is the largest.`,
             state: snapshot(
                 `The heavy child of ${labels[vertex]} is ${labels[heavy[vertex]!]}.`,
                 `heavy(${labels[vertex]}) = ${labels[heavy[vertex]!]}`,
@@ -332,7 +337,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const hld: LabDefinition = {
+export const definition: LabDefinition = {
     id: "trees.heavy-light-decomposition",
     title: "Heavy-light decomposition",
     scene: "tree",
