@@ -392,4 +392,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The ordering that removes the need for repeated passes when the graph is acyclic is [topological sort](/algorithms/graphs/topological-sort).
 - The traversal that shares the relaxation idea but not the purpose is [depth-first search](/algorithms/graphs/dfs).
 - The structure that answers the reachability questions that come up in practice is the [disjoint set union](/algorithms/graphs/dsu).
-- Every listing of the shortest-path family is collected on the [Dijkstra source page](/implementations/graphs-dijkstra).
+- Every listing of the shortest-path family is collected on the [Dijkstra source page](/implementations/graphs-dijkstra/).
