@@ -1,0 +1,19 @@
+# The lowest common ancestor demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: trees.lca
+title: Lowest common ancestor
+algorithm: trees.lca
+scene: tree
+preset: siblings
+storyboard:
+    - title: The table of ancestors
+      description: A breadth-first walk gives every vertex a depth, and the table records the ancestor of every vertex.
+    - title: The deeper vertex is lifted
+      description: The query first lifts the deeper vertex until both stand at the same depth.
+    - title: Both climb together
+      description: From the largest jump downwards, both vertices move as long as their ancestors differ.
+    - title: The answer is one step up
+      description: The two vertices now stand directly below their common ancestor, so the answer is their shared parent.
