@@ -4,7 +4,7 @@ import CodeViewer from "./components/code/CodeViewer.vue";
 import AlgorithmSummary from "./components/articles/AlgorithmSummary.vue";
 import MathPanel from "./components/mathematics/MathPanel.vue";
 import PrerequisiteGraph from "./components/PrerequisiteGraph.vue";
-import PracticeCatalogue from "./components/problems/PracticeCatalogue.vue";
+import PracticeCatalog from "./components/problems/PracticeCatalog.vue";
 import ProgressDashboard from "./components/progress/ProgressDashboard.vue";
 import Synonyms from "./components/Synonyms.vue";
 import Figure from "./components/Figure.vue";
@@ -27,7 +27,7 @@ export default {
         app.component("AlgorithmSummary", AlgorithmSummary);
         app.component("MathPanel", MathPanel);
         app.component("PrerequisiteGraph", PrerequisiteGraph);
-        app.component("PracticeCatalogue", PracticeCatalogue);
+        app.component("PracticeCatalog", PracticeCatalog);
         app.component("ProgressDashboard", ProgressDashboard);
         app.component("Synonyms", Synonyms);
         app.component("Figure", Figure);
