@@ -1,6 +1,6 @@
 algorithm: dynamic-programming.0-1-knapsack
 title: "0/1 knapsack"
-summary: Maximise the total value of a subset of items whose total weight fits in a capacity, with every item usable at most once.
+summary: Maximize the total value of a subset of items whose total weight fits in a capacity, with every item usable at most once.
 subject: dynamic-programming
 divisions: [gold]
 importance: common-contest-technique
