@@ -1,0 +1,30 @@
+id: usaco.2021.jan.bronze.just-stalling
+title: Just Stalling
+source: USACO
+contest: 2021 January Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1085
+editorialUrl: https://usaco.org/current/data/sol_prob3_bronze_jan21.html
+techniques:
+    - enumeration.subset-enumeration
+    - foundations.sorting
+prerequisites:
+    - foundations.sorting
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - There are at most twenty cows, so the answer can exceed a 32-bit integer.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A cow of height a fits in a stall of limit b exactly when a is at most b, and every cow needs a different stall.
+    - Sort the cows by height and the stalls by limit, and then the number of valid arrangements factors into a product of independent choices.
+    - After sorting, the shortest cow has the fewest possible stalls, so her number of choices is the count of stalls whose limit reaches her.
+    - Multiply the counts as you walk up the two sorted lists, and stop as soon as one of them is zero.
+discussion: >-
+    Once the cows and the stalls are sorted, the number of valid arrangements is a product of independent choices, because the number of options available to a cow depends only on the cows shorter than her. That is what makes the problem linear after the sort rather than a permanent. The edge cases are a cow who fits in no stall, which makes the product zero, and an answer that outgrows a 32-bit integer.
+related:
+    - usaco.2020.dec.bronze.daisy-chains
+    - usaco.2018.jan.bronze.out-of-place
