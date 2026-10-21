@@ -331,5 +331,5 @@ Answer these without looking back. If you cannot, revisit the section named in p
 
 ## Further reading
 
-- The "binary search on the answer" pattern, in the [interval scheduling](/algorithms/greedy/interval-scheduling/) article's neighbor pages, is the single most useful extension in contests.
-- The two-pointer and sliding-window techniques in [two pointers](/algorithms/searching/two-pointers/) solve many of the same problems in linear time, and are often the better answer.
+- The "binary search on the answer" pattern, in the [interval scheduling](/algorithms/greedy/interval-scheduling) article's neighbor pages, is the single most useful extension in contests.
+- The two-pointer and sliding-window techniques in [two pointers](/algorithms/searching/two-pointers) solve many of the same problems in linear time, and are often the better answer.
