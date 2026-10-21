@@ -487,7 +487,7 @@ When the generator finds a disagreement, the shrunk counterexample is the payoff
 
 **Worked example.** A solution uses a recursive depth-first search on a graph with $n = 10^5$ vertices. The tests include a graph that is a single path: vertex $1$ connected to $2$, $2$ to $3$, and so on. The recursion depth becomes $10^5$. In C++ this is near the stack limit and may survive; in Java it throws `StackOverflowError`; in CPython it hits the recursion limit of $1000$ and raises `RecursionError`. The algorithm is $O(V + E)$ and entirely correct, and the submission fails with a run-time error on the test the judge chose.
 
-The fix is not a better algorithm. It is an explicit stack, or a larger recursion budget combined with a proof that the depth is bounded. Module 5.10 of the [language transition part](/start/from-ap-csa/part-5-language-transition/) gives the per-language limits and the iterative rewrite.
+The fix is not a better algorithm. It is an explicit stack, or a larger recursion budget combined with a proof that the depth is bounded. Module 5.10 of the [language transition part](/start/from-ap-csa/part-5-language-transition) gives the per-language limits and the iterative rewrite.
 
 **What you must get right.** Construct the legal-but-nastiest input you can for the solution you have written, and run it. An adversarial input that makes your program slow or crash tells you to fix it now, when there is still time, rather than in the contest, when there is not.
 
@@ -534,8 +534,8 @@ The fix is not a better algorithm. It is an explicit stack, or a larger recursio
 
 - **The invariant.** A statement about the program's state that holds at the start of every loop iteration and is preserved by the loop body. The preservation argument is the proof. The Fenwick tree article uses this form.
 - **Induction.** For a recursive algorithm or one that processes items in order: the claim holds for the first $k$ items, and the step from $k$ to $k+1$ preserves it.
-- **The exchange argument.** Take an optimal solution, find the place where it disagrees with your greedy choice, swap the two, and show the result is still feasible and no worse. The [interval scheduling article](/algorithms/greedy/interval-scheduling/) develops this form in full.
-- **Contradiction.** Assume the algorithm fails, derive that some quantity is simultaneously larger and smaller than itself, or that a known count is exceeded. The [pigeonhole principle](/start/from-ap-csa/part-3-discrete-mathematics/) is the contradiction argument in its most common form.
+- **The exchange argument.** Take an optimal solution, find the place where it disagrees with your greedy choice, swap the two, and show the result is still feasible and no worse. The [interval scheduling article](/algorithms/greedy/interval-scheduling) develops this form in full.
+- **Contradiction.** Assume the algorithm fails, derive that some quantity is simultaneously larger and smaller than itself, or that a known count is exceeded. The [pigeonhole principle](/start/from-ap-csa/part-3-discrete-mathematics) is the contradiction argument in its most common form.
 
 **The shape to use under a clock.** One paragraph, three sentences, in this order:
 
@@ -706,7 +706,7 @@ You are ready for the contest tracks when you can answer the following without c
 
 ## The pre-contest checklist
 
-The full checklist, with the reason behind each item, is on the [pre-contest checklist page](/reference/contest-checklist/). The short version is:
+The full checklist, with the reason behind each item, is on the [pre-contest checklist page](/reference/contest-checklist). The short version is:
 
 - Verify the official contest rules and the supported language versions.
 - Prepare an authorized local development environment.
