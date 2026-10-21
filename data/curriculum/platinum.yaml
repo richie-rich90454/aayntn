@@ -1,0 +1,21 @@
+id: curriculum.platinum
+title: The Platinum track
+summary: Graph and tree decompositions, advanced range structures, dynamic-programming optimization, and the techniques that separate finalists from qualifiers.
+division: platinum
+lessons:
+    - start.discrete-mathematics
+    - start.data-structures
+    - trees.heavy-light-decomposition
+    - trees.lca
+    - trees.tree-dp
+    - range-queries.fenwick-tree
+    - range-queries.segment-tree
+    - range-queries.sparse-table
+    - arrays.two-dimensional-prefix-sums
+    - strings.kmp
+    - geometry.convex-hull
+    - dynamic-programming.convex-hull-trick
+    - dynamic-programming.longest-increasing-subsequence
+    - advanced.parallel-binary-search
+    - number-theory.modular-arithmetic
+    - combinatorics.binomial-coefficients
