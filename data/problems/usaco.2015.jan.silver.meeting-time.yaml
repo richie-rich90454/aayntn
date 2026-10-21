@@ -1,0 +1,30 @@
+id: usaco.2015.jan.silver.meeting-time
+title: Meeting Time
+source: USACO
+contest: 2015 January Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=513
+editorialUrl: https://usaco.org/current/data/sol_meeting_silver.html
+techniques:
+    - graphs.representation
+    - graphs.dfs
+prerequisites:
+    - graphs.representation
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - There are ten thousand fields, so running a traversal from every field is ten thousand traversals.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Model the farm as a graph whose vertices are fields and whose edges are the paths, and the travel time of a cow is the length of the path she takes.
+    - The two cows meet only when they travel the same path, so a pair meets exactly when the unique path between the two fields is used by both.
+    - Each pair of fields has at most one path between them, so a single traversal from one field reaches every other field along that unique path.
+    - Traverse from each starting field and record the distance to every other field, then compare with the traversal from the other end of the pair.
+discussion: >-
+    The farm is a forest, since a unique path between every pair is what the statement guarantees, and the meeting time of a pair is the length of the path between them. Because the path is unique, one traversal from each field is enough and no shortest-path algorithm is needed. The cost is one traversal per pair, which is what the constraint allows.
+related:
+    - usaco.2015.jan.bronze.cow-routing
+    - usaco.2016.jan.silver.build-gates
