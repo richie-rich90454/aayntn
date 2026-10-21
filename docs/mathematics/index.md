@@ -26,8 +26,8 @@ A **set** is a collection of distinct objects. Contest problems describe collect
 
 A **relation** on a set $S$ is a subset of $S \times S$, that is, a set of ordered pairs. It says which pairs are related. The relations that appear most often are:
 
-- An **equivalence relation**, which is reflexive, symmetric, and transitive. Reflexive means every element is related to itself; symmetric means if $a$ relates to $b$ then $b$ relates to $a$; transitive means if $a$ relates to $b$ and $b$ relates to $c$ then $a$ relates to $c$. Equivalence classes are the disjoint sets maintained by the [disjoint set union](/algorithms/graphs/dsu/), and the partition induced by a relation is exactly what that structure computes.
-- A **partial order**, which is reflexive, antisymmetric, and transitive. A directed acyclic graph defines one by making $a < b$ when there is a path from $a$ to $b$, and the [topological sort](/algorithms/graphs/topological-sort/) computes a linear extension of it.
+- An **equivalence relation**, which is reflexive, symmetric, and transitive. Reflexive means every element is related to itself; symmetric means if $a$ relates to $b$ then $b$ relates to $a$; transitive means if $a$ relates to $b$ and $b$ relates to $c$ then $a$ relates to $c$. Equivalence classes are the disjoint sets maintained by the [disjoint set union](/algorithms/graphs/dsu), and the partition induced by a relation is exactly what that structure computes.
+- A **partial order**, which is reflexive, antisymmetric, and transitive. A directed acyclic graph defines one by making $a < b$ when there is a path from $a$ to $b$, and the [topological sort](/algorithms/graphs/topological-sort) computes a linear extension of it.
 - A **total order**, in which every pair is comparable. A sorted array is a sequence in a total order.
 
 A **function** from $A$ to $B$ assigns to each element of $A$ exactly one element of $B$. Two properties decide whether a mapping is invertible, and they decide it for a reason:
@@ -37,7 +37,7 @@ A **function** from $A$ to $B$ assigns to each element of $A$ exactly one elemen
 
 A function that is both injective and surjective is a **bijection**, and a bijection is the strongest counting tool in this page, because counting a set by finding a bijection to a set you can count gives the answer immediately.
 
-**Where this applies.** The [disjoint set union](/algorithms/graphs/dsu/) maintains an equivalence relation. The [topological sort](/algorithms/graphs/topological-sort/) computes a linear extension of a partial order. The [prefix sums](/algorithms/arrays/prefix-sums/) article uses a mapping from a range to a difference of two prefix values.
+**Where this applies.** The [disjoint set union](/algorithms/graphs/dsu) maintains an equivalence relation. The [topological sort](/algorithms/graphs/topological-sort) computes a linear extension of a partial order. The [prefix sums](/algorithms/arrays/prefix-sums) article uses a mapping from a range to a difference of two prefix values.
 
 ## Logic, implication, equivalence and quantifiers
 
@@ -66,7 +66,7 @@ $$\neg\left(\exists x \in S,\ P(x)\right) \;\equiv\; \forall x \in S,\ \neg P(x)
 
 The derivation is a matter of counting witnesses. "Every element fails $P$" is witnessed by at least one element, because the statement asserts that all elements exist; "no element satisfies $P$" asserts that every element fails it. The rule is why a proof by contradiction typically starts by negating a universal claim and ends by producing one witness.
 
-**Where this applies.** The [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics/) develops this material in the order a contest solution needs it, and the [correctness proofs](/start/from-ap-csa/part-6-contest-literacy/) in part 6 are written in exactly this vocabulary.
+**Where this applies.** The [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics) develops this material in the order a contest solution needs it, and the [correctness proofs](/start/from-ap-csa/part-6-contest-literacy) in part 6 are written in exactly this vocabulary.
 
 ## Proof techniques
 
@@ -78,13 +78,13 @@ A **proof** is an argument that a claim follows from stated assumptions. In a co
 
 **Proof by contradiction.** Assume the claim is false, derive a contradiction, and conclude the claim is true. This is the right form when the negation of the claim is easier to work with than the claim itself, and it is the engine of the counting arguments below.
 
-**Invariant argument.** Find a statement about the program's state that holds before a loop and is preserved by each iteration, and show that the answer follows from it at the end. The invariant is the statement that makes the correctness of a data structure checkable, and the [Fenwick tree](/algorithms/range-queries/fenwick-tree/) article is written in this form.
+**Invariant argument.** Find a statement about the program's state that holds before a loop and is preserved by each iteration, and show that the answer follows from it at the end. The invariant is the statement that makes the correctness of a data structure checkable, and the [Fenwick tree](/algorithms/range-queries/fenwick-tree) article is written in this form.
 
-**Exchange argument.** Take an optimal solution, find the place where it disagrees with the greedy choice, swap the two, and show the result is still feasible and no worse. This is the proof that makes a [greedy algorithm](/algorithms/greedy/) correct rather than merely plausible, and the [interval scheduling article](/algorithms/greedy/interval-scheduling/) develops it in full.
+**Exchange argument.** Take an optimal solution, find the place where it disagrees with the greedy choice, swap the two, and show the result is still feasible and no worse. This is the proof that makes a [greedy algorithm](/algorithms/greedy/) correct rather than merely plausible, and the [interval scheduling article](/algorithms/greedy/interval-scheduling) develops it in full.
 
-**The pigeonhole principle.** If $n$ objects are placed into $k$ boxes and $n > k$, then some box contains at least two objects. The generalization says that some box contains at least $\lceil n / k \rceil$ objects, which follows because if every box held at most $q$ objects then $kq \ge n$, so $q \ge \lceil n/k \rceil$. The principle is the counting core of the statement "there exist two objects with the same value", which appears constantly in contest problems. It is derived in the [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics/).
+**The pigeonhole principle.** If $n$ objects are placed into $k$ boxes and $n > k$, then some box contains at least two objects. The generalization says that some box contains at least $\lceil n / k \rceil$ objects, which follows because if every box held at most $q$ objects then $kq \ge n$, so $q \ge \lceil n/k \rceil$. The principle is the counting core of the statement "there exist two objects with the same value", which appears constantly in contest problems. It is derived in the [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics).
 
-**Where this applies.** The [contest problem-solving literacy part](/start/from-ap-csa/part-6-contest-literacy/) shows how to write each of these in three sentences under a clock.
+**Where this applies.** The [contest problem-solving literacy part](/start/from-ap-csa/part-6-contest-literacy) shows how to write each of these in three sentences under a clock.
 
 ## Summation and series
 
@@ -92,7 +92,7 @@ The **summation notation** $\sum_{i=1}^{n} a_i$ means $a_1 + a_2 + \cdots + a_n$
 
 **Counting the terms.** The sum $\sum_{i=1}^{n} a_i$ contains exactly $n$ terms. Off-by-one errors in a summation are the most common algebraic mistake in a contest solution, and the check is to count the terms before doing anything else with the formula.
 
-**Splitting a sum.** $\sum_{i=1}^{n} (a_i + b_i) = \sum_{i=1}^{n} a_i + \sum_{i=1}^{n} b_i$, because the right side has exactly the same terms as the left, rearranged. This is what lets a [prefix sum](/algorithms/arrays/prefix-sums/) answer a range question by subtraction.
+**Splitting a sum.** $\sum_{i=1}^{n} (a_i + b_i) = \sum_{i=1}^{n} a_i + \sum_{i=1}^{n} b_i$, because the right side has exactly the same terms as the left, rearranged. This is what lets a [prefix sum](/algorithms/arrays/prefix-sums) answer a range question by subtraction.
 
 **The arithmetic series.** For $a, a+d, a+2d, \ldots, a+(n-1)d$, the sum is
 
@@ -108,7 +108,7 @@ $$\sum_{i=0}^{n-1} ar^i = a\frac{r^{n} - 1}{r - 1} \quad \text{for } r \ne 1$$
 
 The derivation multiplies the sum by $r$ and subtracts: $rS - S = ar^n - a$, and dividing by $r - 1$ gives the formula. The condition $r \ne 1$ is essential, because when $r = 1$ the sum is $na$ instead. Geometric series are what turn a repeated doubling of a quantity into a closed form, which is how problems with exponential structure are counted.
 
-**Where this applies.** The [prefix sums article](/algorithms/arrays/prefix-sums/) is the computational form of the arithmetic series, and the [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics/) develops both series with their derivations.
+**Where this applies.** The [prefix sums article](/algorithms/arrays/prefix-sums) is the computational form of the arithmetic series, and the [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics) develops both series with their derivations.
 
 ## Counting
 
@@ -142,7 +142,7 @@ $$|A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |
 
 with the triple intersection added back because it was subtracted three times and should be counted once. In general, one alternates the signs by the size of the intersection. The formula counts a set of configurations by subtracting the ones that violate a condition, and it is the standard tool for "at least one" and "none of" constraints.
 
-**Where this applies.** The [combinatorics subject](/algorithms/combinatorics/) gives the computational forms, and the [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics/) derives each of these formulas from first principles.
+**Where this applies.** The [combinatorics subject](/algorithms/combinatorics/) gives the computational forms, and the [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics) derives each of these formulas from first principles.
 
 ## Modular arithmetic
 
@@ -172,7 +172,7 @@ $$x \equiv a \cdot n \cdot n^{-1} + b \cdot m \cdot m^{-1} \pmod{mn}$$
 
 where $n^{-1}$ is the inverse of $n$ modulo $m$, and $m^{-1}$ is the inverse of $m$ modulo $n$. The derivation is that the first term is congruent to $a$ modulo $m$ (because $n \cdot n^{-1} \equiv 1$ there) and to $0$ modulo $n$, while the second term is the mirror image, so their sum satisfies both congruences. The coprimality condition is what makes the two inverses exist, and it is also what makes the solution unique modulo $mn$.
 
-**Where this applies.** The [number theory subject](/algorithms/number-theory/) is the computational treatment, and the [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics/) derives the congruence rules, the inverse condition, and Fermat's little theorem.
+**Where this applies.** The [number theory subject](/algorithms/number-theory/) is the computational treatment, and the [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics) derives the congruence rules, the inverse condition, and Fermat's little theorem.
 
 ## Number theory
 
@@ -192,7 +192,7 @@ which is Bézout's identity. The coefficients are updated along with the remaind
 
 **The sieve of Eratosthenes.** Mark the multiples of every prime up to $n$, starting from the square of the prime. It produces all primes up to $n$ in $O(n \log \log n)$ time and $O(n)$ space, because the number of marking operations is $\sum_{p \le n} n/p$ over primes $p$, and the sum of the reciprocals of the primes grows like $\log \log n$. The trial-division alternative costs $O(\sqrt n)$ per primality test, so a single test is cheap and a million tests are not.
 
-**Where this applies.** The [number theory subject](/algorithms/number-theory/) is the computational treatment, and the [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics/) covers the gcd, the extended Euclidean algorithm, the sieve, and the primes.
+**Where this applies.** The [number theory subject](/algorithms/number-theory/) is the computational treatment, and the [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics) covers the gcd, the extended Euclidean algorithm, the sieve, and the primes.
 
 ## Probability and expected value
 
@@ -210,7 +210,7 @@ $$\mathbb{E}\left[\sum_{i=1}^{k} X_i\right] = \sum_{i=1}^{k} \mathbb{E}[X_i]$$
 
 The condition is that the expectation exists, and no independence is required. The proof is that the definition of expectation is a sum, and the sum of the sums can be rearranged. The absence of an independence requirement is what makes this the most useful tool in competitive analysis: in the quicksort argument, the pivot position is not independent of the subarray sizes, and the expectation is still computed by counting each element's expected number of comparisons separately.
 
-**Where this applies.** The [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics/) develops probability and expected value, and the [advanced algorithms subject](/algorithms/advanced/) is where randomized techniques appear.
+**Where this applies.** The [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics) develops probability and expected value, and the [advanced algorithms subject](/algorithms/advanced/) is where randomized techniques appear.
 
 ## Geometry formulas
 
@@ -250,4 +250,4 @@ $$A = \frac{1}{2}\left|\sum_{i=1}^{n} \left(p_{i,x} p_{i+1,y} - p_{i+1,x} p_{i,y
 
 where the index $n+1$ is $1$. The derivation is that each term contributes the signed area of the triangle formed by the origin and the edge from $p_i$ to $p_{i+1}$, and for a polygon enclosing the origin these signed areas sum to the polygon's area. The absolute value is needed because the sum is signed: it is negative when the vertices are listed clockwise. The formula works for a non-convex polygon, and it gives zero for a self-intersecting one, which is not a polygon.
 
-**Where this applies.** The [computational geometry subject](/algorithms/geometry/) is the algorithmic treatment, and the [binary representation part](/start/from-ap-csa/part-1-computational-foundations/) covers the exact integer arithmetic the cross product needs.
+**Where this applies.** The [computational geometry subject](/algorithms/geometry/) is the algorithmic treatment, and the [binary representation part](/start/from-ap-csa/part-1-computational-foundations) covers the exact integer arithmetic the cross product needs.
