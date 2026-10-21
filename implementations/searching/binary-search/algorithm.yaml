@@ -1,0 +1,247 @@
+algorithm: searching.binary-search
+title: Binary search
+summary: Halve a sorted array until the target is either found or ruled out, which locates one element in logarithmic time.
+subject: searching
+divisions: [silver, gold]
+importance: common-contest-technique
+complexity:
+    time: "O(log n)"
+    space: "O(1)"
+assumptions:
+    - The array is sorted in non-decreasing order.
+reviewed: false
+variants:
+    - id: minimal
+      language: c
+      file: c/minimal.c
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the 0-based index of the target in a sorted array, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A sorted array of values and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "The array must be sorted in non-decreasing order and the search interval is inclusive on both ends, so an empty array is the only base case. The function allocates nothing and frees nothing: the caller keeps ownership of the array."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the 0-based index of the target in a sorted array, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A sorted vector of values and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "The vector must be sorted in non-decreasing order and the search interval is inclusive on both ends, so an empty vector is the only base case. The function takes the vector by const reference and allocates nothing of its own."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: minimal
+      language: java
+      file: java/Program.java
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the 0-based index of the target in a sorted array, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A sorted array of values and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "The array must be sorted in non-decreasing order and the search interval is inclusive on both ends, so an empty array is the only base case. The function allocates nothing: the caller keeps ownership of the array."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: minimal
+      language: javascript
+      file: javascript/minimal.js
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the 0-based index of the target in a sorted array, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A sorted array of values and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The array must be sorted in non-decreasing order and the search interval is inclusive on both ends, so an empty array is the only base case. The function does not copy the array."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: minimal
+      language: pascal
+      file: pascal/minimal.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the 0-based index of the target in a sorted array, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A sorted array of values and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The array must be sorted in non-decreasing order and the search interval is inclusive on both ends, so an empty array is the only base case. The routine allocates nothing: the caller keeps ownership of the array."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: minimal
+      language: python
+      file: python/minimal.py
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the 0-based index of the target in a sorted array, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A sorted sequence of values and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "The sequence must be sorted in non-decreasing order and the search interval is inclusive on both ends, so an empty sequence is the only base case. The function does not copy the sequence: the caller keeps ownership of it."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, a sorted run of integers and the target from standard input and prints the 0-based index of the target, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target value."
+      outputs: "The 0-based index of the target, or -1 when the target is absent."
+      notes: "The program buffers the input tokens, so it holds O(n) values; the search itself needs O(1) extra space. The target is the last token of the input, so a header that disagrees with the data cannot swallow it, and n = 0 prints -1."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, a sorted run of integers and the target from standard input and prints the 0-based index of the target, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target value."
+      outputs: "The 0-based index of the target, or -1 when the target is absent."
+      notes: "The program buffers the input tokens, so it holds O(n) values; the search itself needs O(1) extra space. The target is the last token of the input, so a header that disagrees with the data cannot swallow it, and n = 0 prints -1."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, a sorted run of integers and the target from standard input and prints the 0-based index of the target, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target value."
+      outputs: "The 0-based index of the target, or -1 when the target is absent."
+      notes: "The class is named Main so the file can be submitted to a judge unchanged. The program buffers the input tokens, so it holds O(n) values; the search itself needs O(1) extra space. The target is the last token of the input, so a header that disagrees with the data cannot swallow it, and n = 0 prints -1."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, a sorted run of integers and the target from standard input and prints the 0-based index of the target, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target value."
+      outputs: "The 0-based index of the target, or -1 when the target is absent."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The program buffers the input tokens, so it holds O(n) values; the search itself needs O(1) extra space. The target is the last token of the input, so a header that disagrees with the data cannot swallow it, and n = 0 prints -1."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, a sorted run of integers and the target from standard input and prints the 0-based index of the target, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target value."
+      outputs: "The 0-based index of the target, or -1 when the target is absent."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program buffers the input tokens, so it holds O(n) values; the search itself needs O(1) extra space. The target is the last token of the input, so a header that disagrees with the data cannot swallow it, and n = 0 prints -1."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, a sorted run of integers and the target from standard input and prints the 0-based index of the target, or -1 when the target is absent."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target value."
+      outputs: "The 0-based index of the target, or -1 when the target is absent."
+      notes: "The program buffers the input tokens, so it holds O(n) values; the search itself needs O(1) extra space. The target is the last token of the input, so a header that disagrees with the data cannot swallow it, and n = 0 prints -1."
+      operations: [compute-mid, discard-left, discard-right]
+    - id: recursive
+      language: c
+      file: c/recursive.c
+      kind: minimal
+      recommended: conditional
+      reason: "The same search written recursively. Every call halves the interval, so the call stack holds one frame per halving and the depth grows with the array size; the iterative form is preferred when that depth is uncertain."
+      time: "O(log n)"
+      auxiliarySpace: "O(log n)"
+      status: unverified
+      inputs: "A sorted array of values, the inclusive bounds of the search interval and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "The array must be sorted in non-decreasing order and the interval is inclusive on both ends, so an empty interval is the only base case. The function allocates nothing: the caller keeps ownership of the array."
+      operations: [compute-mid, discard-left, discard-right, narrow]
+    - id: recursive
+      language: cpp17
+      file: cpp17/recursive.cpp
+      kind: minimal
+      recommended: conditional
+      reason: "The same search written recursively. Every call halves the interval, so the call stack holds one frame per halving and the depth grows with the array size; the iterative form is preferred when that depth is uncertain."
+      time: "O(log n)"
+      auxiliarySpace: "O(log n)"
+      status: unverified
+      inputs: "A sorted vector of values, the inclusive bounds of the search interval and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "The vector must be sorted in non-decreasing order and the interval is inclusive on both ends, so an empty interval is the only base case. The function takes the vector by const reference and allocates nothing of its own."
+      operations: [compute-mid, discard-left, discard-right, narrow]
+    - id: recursive
+      language: java
+      file: java/Recursive.java
+      kind: minimal
+      recommended: conditional
+      reason: "The same search written recursively. Every call halves the interval, so the call stack holds one frame per halving and the depth grows with the array size; the iterative form is preferred when that depth is uncertain."
+      time: "O(log n)"
+      auxiliarySpace: "O(log n)"
+      status: unverified
+      inputs: "A sorted array of values, the inclusive bounds of the search interval and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "The array must be sorted in non-decreasing order and the interval is inclusive on both ends, so an empty interval is the only base case. The function allocates nothing: the caller keeps ownership of the array."
+      operations: [compute-mid, discard-left, discard-right, narrow]
+    - id: recursive
+      language: javascript
+      file: javascript/recursive.js
+      kind: minimal
+      recommended: conditional
+      reason: "The same search written recursively. Every call halves the interval, so the call stack holds one frame per halving and the depth grows with the array size; the iterative form is preferred when that depth is uncertain."
+      time: "O(log n)"
+      auxiliarySpace: "O(log n)"
+      status: unverified
+      inputs: "A sorted array of values, the inclusive bounds of the search interval and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The array must be sorted in non-decreasing order and the interval is inclusive on both ends, so an empty interval is the only base case. The function does not copy the array."
+      operations: [compute-mid, discard-left, discard-right, narrow]
+    - id: recursive
+      language: pascal
+      file: pascal/recursive.pas
+      kind: minimal
+      recommended: conditional
+      reason: "The same search written recursively. Every call halves the interval, so the call stack holds one frame per halving and the depth grows with the array size; the iterative form is preferred when that depth is uncertain."
+      time: "O(log n)"
+      auxiliarySpace: "O(log n)"
+      status: unverified
+      inputs: "A sorted array of values, the inclusive bounds of the search interval and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The array must be sorted in non-decreasing order and the interval is inclusive on both ends, so an empty interval is the only base case. The routine allocates nothing: the caller keeps ownership of the array."
+      operations: [compute-mid, discard-left, discard-right, narrow]
+    - id: recursive
+      language: python
+      file: python/recursive.py
+      kind: minimal
+      recommended: conditional
+      reason: "The same search written recursively. Every call halves the interval, so the call stack holds one frame per halving and the depth grows with the array size; the iterative form is preferred when that depth is uncertain."
+      time: "O(log n)"
+      auxiliarySpace: "O(log n)"
+      status: unverified
+      inputs: "A sorted sequence of values, the inclusive bounds of the search interval and the target value."
+      outputs: "The 0-based index of a matching element, or -1 when the target is absent."
+      notes: "The sequence must be sorted in non-decreasing order and the interval is inclusive on both ends, so an empty interval is the only base case. The function does not copy the sequence: the caller keeps ownership of it."
+      operations: [compute-mid, discard-left, discard-right, narrow]
