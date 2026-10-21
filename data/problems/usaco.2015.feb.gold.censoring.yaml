@@ -1,0 +1,28 @@
+id: usaco.2015.feb.gold.censoring
+title: Censoring (Gold)
+source: USACO
+contest: 2015 February Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=533
+editorialUrl: https://usaco.org/current/data/sol_censor_gold.html
+techniques:
+    - strings.kmp
+prerequisites:
+    - strings.kmp
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The text can be a million characters long, so rescanning after every replacement is quadratic in the worst case.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The censored word is removed as soon as it appears, and a removal can create a new occurrence that spans the seam, so the text has to be processed from left to right.
+    - A naive solution removes the word every time it is found, and each removal can force a rescan of everything that follows.
+    - Keep the surviving text in a buffer and a table that says, for each state, how much of the censored word has been matched so far.
+    - That table is exactly the failure function of the censored word, and the buffer tells you where to cut when a full match appears.
+discussion: >-
+    The difficulty is the interaction between the removal and the search, because a removal can expose a new occurrence, so a single left-to-right pass has to carry enough state to resume the match after a cut. The failure function of the censored word provides exactly that state, and the surviving prefix is kept in a stack-like buffer, which makes the cut constant time. The whole solution is one linear scan with a precomputed table.
+related:
+    - usaco.2017.jan.silver.secret-cow-code
+    - usaco.2023.dec.silver.cycle-correspondence
