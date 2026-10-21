@@ -10,6 +10,8 @@ docs/.vitepress/dist/
 docs/.vitepress/data/generated/
 docs/public/search-index.json
 docs/public/implementations/
+docs/public/ornaments/
+docs/public/diagrams/
 docs/implementations/
 
 # Scratch directories used by the validation tooling
