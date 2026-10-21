@@ -1,50 +1,53 @@
 {
-  "name": "aayntn",
-  "version": "1.0.0",
-  "description": "aayntn — All Algorithms You Need to Know. A static, Markdown-authored competitive programming encyclopedia for USACO preparation.",
-  "private": true,
-  "type": "module",
-  "license": "AGPL-3.0-only",
-  "author": "Richard Jiang",
-  "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "preview": "vitepress preview docs",
-    "generate": "tsx tools/generate-indexes/index.ts",
-    "validate": "tsx tools/validate-content/index.ts",
-    "validate:code": "tsx tools/validate-code/index.ts",
-    "check:links": "tsx tools/check-links/index.ts",
-    "scaffold": "tsx tools/scaffold/index.ts",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "prebuild": "pnpm run generate && pnpm run validate && pnpm run check:links"
-  },
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "12.14.0",
-      "onFail": "download"
+    "name": "aayntn",
+    "version": "1.0.0",
+    "description": "aayntn — All Algorithms You Need to Know. A static, Markdown-authored competitive programming encyclopedia for USACO preparation.",
+    "private": true,
+    "type": "module",
+    "license": "AGPL-3.0-only",
+    "author": "Richard Jiang",
+    "scripts": {
+        "dev": "vitepress dev docs",
+        "build": "vitepress build docs",
+        "preview": "vitepress preview docs",
+        "generate": "tsx tools/generate-indexes/index.ts",
+        "format": "oxfmt",
+        "format:check": "oxfmt --check",
+        "validate": "tsx tools/validate-content/index.ts",
+        "validate:code": "tsx tools/validate-code/index.ts",
+        "check:links": "tsx tools/check-links/index.ts",
+        "scaffold": "tsx tools/scaffold/index.ts",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "prebuild": "pnpm run generate && pnpm run format && pnpm run validate && pnpm run check:links"
+    },
+    "devEngines": {
+        "packageManager": {
+            "name": "pnpm",
+            "version": "12.14.0",
+            "onFail": "download"
+        }
+    },
+    "packageManager": "pnpm@12.14.0",
+    "engines": {
+        "node": ">=20"
+    },
+    "dependencies": {
+        "@mdit/plugin-katex": "^1.1.3",
+        "katex": "^0.19.0",
+        "minisearch": "^7.2.0",
+        "vue": "^3.5.13"
+    },
+    "devDependencies": {
+        "@types/node": "^22.13.1",
+        "fast-glob": "^3.3.3",
+        "oxfmt": "0.74.0",
+        "shiki": "^2.1.0",
+        "tsx": "^4.19.2",
+        "typescript": "^5.7.3",
+        "vitepress": "^1.6.4",
+        "vitest": "^2.1.9",
+        "yaml": "^2.7.0",
+        "zod": "^3.24.1"
     }
-  },
-  "packageManager": "pnpm@12.14.0",
-  "engines": {
-    "node": ">=20"
-  },
-  "dependencies": {
-    "@mdit/plugin-katex": "^1.1.3",
-    "katex": "^0.19.0",
-    "minisearch": "^7.2.0",
-    "vue": "^3.5.13"
-  },
-  "devDependencies": {
-    "@types/node": "^22.13.1",
-    "fast-glob": "^3.3.3",
-    "shiki": "^2.1.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.3",
-    "vitepress": "^1.6.4",
-    "vitest": "^2.1.9",
-    "yaml": "^2.7.0",
-    "zod": "^3.24.1"
-  }
 }
