@@ -1,0 +1,19 @@
+# The 0/1 knapsack demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: dynamic-programming.0-1-knapsack
+title: 0/1 knapsack
+algorithm: dynamic-programming.0-1-knapsack
+scene: matrix
+preset: classic
+storyboard:
+    - title: An empty table
+      description: With no items considered, every budget holds the value zero.
+    - title: One item, two candidates
+      description: Each cell is the larger of the best value without the item and the best value with the item.
+    - title: The sweep runs backwards
+      description: The budget is filled from the largest to the smallest, so that no item is ever used twice.
+    - title: The last cell is the answer
+      description: The cell in the last row and the last column holds the best value that fits in the budget.
