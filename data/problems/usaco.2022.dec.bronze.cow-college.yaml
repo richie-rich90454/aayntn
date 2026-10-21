@@ -1,0 +1,30 @@
+id: usaco.2022.dec.bronze.cow-college
+title: Cow College
+source: USACO
+contest: 2022 December Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1251
+editorialUrl: https://usaco.org/current/data/sol_prob1_bronze_dec22.html
+techniques:
+    - searching.binary-search
+    - foundations.sorting
+prerequisites:
+    - searching.binary-search
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - The revenue can reach ten to the eleventh, so the answer needs a 64-bit integer.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - If you charge a tuition of t, exactly the cows whose maximum is at least t will enroll, so the revenue is t times the number of those cows.
+    - Sort the maximum tuitions, and then for a fixed tuition the number of enrolling cows is the length of a suffix of the sorted array.
+    - For each candidate tuition the best revenue is that tuition times the number of cows willing to pay it, so you can scan the sorted maxima directly.
+    - Take the best revenue over all the candidates, and break ties by the larger tuition.
+discussion: >-
+    The revenue for a tuition is that tuition times a suffix length of the sorted maxima, so the answer is a scan over the sorted values rather than a search over all possible tuitions. The tie-break is the part that trips people up, because two tuitions can give the same revenue and the statement demands a specific one. Sorting the maxima is the only preprocessing needed.
+related:
+    - usaco.2018.jan.bronze.out-of-place
+    - usaco.2020.jan.silver.loan-repayment
