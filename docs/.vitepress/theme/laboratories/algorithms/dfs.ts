@@ -142,11 +142,11 @@ function build(input: string): LabEvent[] {
 
         const vertex = stack.pop()!;
 
-        if (state[vertex] === "completed" || state[vertex] === "discovered") {
+        if (state[vertex] === "completed") {
             events.push({
                 type: "pop",
                 operation: "skip-visited",
-                narration: `Pop ${labels[vertex]}; it has already been discovered, so skip it.`,
+                narration: `Pop ${labels[vertex]}; it has already been visited, so skip it.`,
                 state: snapshot(`Pop ${labels[vertex]} (already visited).`),
             });
             continue;
