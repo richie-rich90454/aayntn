@@ -105,6 +105,11 @@ function layoutForest(parent: number[]): Map<number, { x: number; y: number }> {
     return positions;
 }
 
+/** "1 element" or "3 elements". */
+function countOf(count: number, word: string): string {
+    return `${count} ${count === 1 ? word : `${word}s`}`;
+}
+
 function build(input: string): LabEvent[] {
     const { count, operations } = parse(input);
     const events: LabEvent[] = [];
@@ -175,7 +180,7 @@ function build(input: string): LabEvent[] {
     events.push({
         type: "init",
         operation: "init",
-        narration: `There are ${count} elements, and every element starts in a set of its own.`,
+        narration: `There are ${countOf(count, "element")}, and every element starts in a set of its own.`,
         state: snapshot("Every element is its own representative.", null, `${count} sets`),
     });
 
@@ -277,7 +282,7 @@ function build(input: string): LabEvent[] {
         events.push({
             type: "unite",
             operation: "unite",
-            narration: `The set of ${loser} holds ${size[loser]!} elements and the set of ${winner} holds ${before}, so the smaller set is attached below the larger one.`,
+            narration: `The set of ${loser} holds ${countOf(size[loser]!, "element")} and the set of ${winner} holds ${countOf(before, "element")}, so the set of ${loser} is attached below the set of ${winner}, which keeps the trees shallow.`,
             state: snapshot(
                 `The set of ${loser} is attached below the set of ${winner}.`,
                 loser,
@@ -297,7 +302,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const dsu: LabDefinition = {
+export const definition: LabDefinition = {
     id: "graphs.dsu",
     title: "Disjoint set union",
     scene: "hybrid",
