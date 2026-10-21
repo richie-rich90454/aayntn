@@ -37,12 +37,12 @@ aayntn/
 │   ├── progress/               local progress dashboard
 │   ├── reference/              rules, checklists, glossary
 │   ├── about.md
-│   ├── public/                 static assets (fonts, generated source, search index)
+│   ├── public/                 published assets (fonts, search index)
 │   └── .vitepress/             theme, config, generated data
 ├── implementations/            one directory per algorithm
 ├── templates/                  reusable contest templates, one directory per language
-├── data/                       curriculum, problems, synonyms, visualizations
-├── diagrams/                   handcrafted SVG sources and storyboards
+├── data/                       algorithms, curriculum, problems, synonyms, visualizations
+├── diagrams/source/            handcrafted SVG sources, published by the build
 ├── tools/                      build-time validation and generation
 ├── tests/                      unit, differential, content and accessibility tests
 └── .github/workflows/          CI
