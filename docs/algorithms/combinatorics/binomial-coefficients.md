@@ -509,4 +509,6 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The dynamic program that counts the increasing subsequences, whose count must usually be reduced, is in [longest increasing subsequence](/algorithms/dynamic-programming/longest-increasing-subsequence).
 - The dynamic program whose answer is a count over the items, and is usually reported modulo a prime, is in [0/1 knapsack](/algorithms/dynamic-programming/0-1-knapsack).
 - The string search whose prefix function counts the occurrences of a pattern inside itself, which is the same counting idea applied to strings, is in [KMP](/algorithms/strings/kmp).
-- The subject overview, which places this technique among the others, is [the combinatorics](/algorithms/combinatorics/).
+- The number of lattice points inside a polygon is counted from its hull and from a congruence, so the geometry of the subject meets this counting in [convex hull](/algorithms/geometry/convex-hull).
+- A count that depends on a monotone condition over many candidates is often found by an offline batch of binary searches, which is in [parallel binary search](/algorithms/advanced/parallel-binary-search).
+- The subject index lists this technique, [binomial coefficients](/algorithms/combinatorics/binomial-coefficients), beside the counting arguments it does not yet cover: [the combinatorics](/algorithms/combinatorics/).
