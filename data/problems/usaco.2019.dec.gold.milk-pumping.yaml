@@ -1,0 +1,31 @@
+id: usaco.2019.dec.gold.milk-pumping
+title: Milk Pumping
+source: USACO
+contest: 2019 December Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=969
+editorialUrl: https://usaco.org/current/data/sol_pump_gold_dec19.html
+techniques:
+    - arrays.prefix-sums
+    - searching.sliding-window
+    - range-queries.sparse-table
+prerequisites:
+    - arrays.prefix-sums
+    - searching.sliding-window
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - A hundred thousand stations, and the routes can be long, so the number of candidate windows is quadratic in the number of stations.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A route is a contiguous stretch of stations from the first to the last, and the milk collected is the sum over the stations actually passed, including the endpoints.
+    - Between two consecutive stations where the route turns, the set of stations on the route is fixed, so the sum is a difference of prefix sums.
+    - The route may pass through only a limited number of stations, which turns the condition into a window constraint on the positions of the turning points.
+    - Sweep the window of turning points and keep the best sum, using a structure that gives the extreme prefix sum inside the window in constant time.
+discussion: >-
+    The route is described by the stations at which it turns, and the stations in between are forced, so the amount of milk on a route is a difference of two prefix sums over the turning points. The number of stations on the route is a window constraint on those turning points, which makes the whole problem a sliding window over an array of prefix sums. The maximum over the window is what the sparse table provides.
+related:
+    - usaco.2017.open.gold.bovine-genomics
+    - usaco.2019.dec.gold.moortal-cowmbat
