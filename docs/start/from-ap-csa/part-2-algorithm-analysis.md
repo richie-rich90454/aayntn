@@ -598,4 +598,4 @@ You are ready for part 3 when you can answer the following without consulting th
 - Take a constraint of $n \le 3 \times 10^5$ and list the complexity classes that are still viable and the ones that are not.
 - Compute the memory of a `vector<vector<int>>` holding the adjacency list of a graph with $10^5$ vertices and $3 \times 10^5$ edges, and say what a flat representation would cost instead.
 
-Next: [Discrete mathematics](/start/from-ap-csa/part-3-discrete-mathematics/).
+Next: [Discrete mathematics](/start/from-ap-csa/part-3-discrete-mathematics).
