@@ -25,7 +25,7 @@ reviewed: true
 
 ## At a glance
 
-|  |  |
+| Property | Value |
 | --- | --- |
 | **Problem** | Find a value in a sorted array, or the boundary at which a monotone predicate changes |
 | **Time** | $O(\log n)$ |
