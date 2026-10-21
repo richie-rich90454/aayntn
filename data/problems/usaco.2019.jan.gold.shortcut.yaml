@@ -1,0 +1,29 @@
+id: usaco.2019.jan.gold.shortcut
+title: Shortcut
+source: USACO
+contest: 2019 January Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=899
+editorialUrl: https://usaco.org/current/data/sol_shortcut_gold_jan19.html
+techniques:
+    - graphs.dijkstra
+    - graphs.representation
+prerequisites:
+    - graphs.dijkstra
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - Ten thousand fields, so the graph is small enough for a priority queue, but the trails that may be used only once are the part of the statement that carries the difficulty.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The cows live at the fields and the barn is at field one, so the core of the problem is a shortest-path computation from field one with positive trail lengths.
+    - The trails are bidirectional, so the graph is undirected and the lengths never need a special case.
+    - There are also special trails that a cow may use only once, and those are what make this more than a plain shortest-path problem.
+    - Run Dijkstra to get the distances, then handle the special trails by considering them in increasing order of their length.
+discussion: >-
+    The distances to the barn are a standard Dijkstra computation, and the difficulty is the extra trails that may be used only once. Those trails can be handled by ordering them and reasoning about which of them can appear on a shortest route, which keeps the whole computation in the same weighted-graph language. The graph is small enough that a priority queue is comfortable.
+related:
+    - usaco.2022.feb.gold.moo-network
+    - usaco.2023.dec.gold.flight-routes
