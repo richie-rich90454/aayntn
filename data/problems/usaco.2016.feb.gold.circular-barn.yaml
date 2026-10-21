@@ -1,0 +1,31 @@
+id: usaco.2016.feb.gold.circular-barn
+title: Circular Barn (Gold)
+source: USACO
+contest: 2016 February Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=621
+editorialUrl: https://usaco.org/current/data/sol_cbarn_gold_feb16.html
+techniques:
+    - greedy.interval-scheduling
+    - arrays.prefix-sums
+prerequisites:
+    - greedy.interval-scheduling
+    - arrays.prefix-sums
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - A hundred thousand rooms, so the cows have to be placed by a rule rather than one at a time.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Each cow has to reach a distinct room, and moving it costs the distance it travels around the ring.
+    - Think of each room as a position on a circle and each cow as a point that may only travel clockwise to its destination.
+    - The optimal assignment is a cyclic shift of the sorted cows, and the cost of a shift is a fixed expression over the doubled circle.
+    - Compute the cost of every cyclic shift with prefix sums and take the smallest one.
+discussion: >-
+    Because a cow may only move clockwise, the feasible assignments are exactly the cyclic shifts of the sorted list, and the cost of each shift is a fixed expression over the doubled circle. Prefix sums make each cost a constant-time query, and the number of shifts equals the number of rooms. The interesting part is recognizing that the matching is forced by the direction of travel rather than chosen.
+related:
+    - usaco.2022.dec.silver.circular-barn
+    - usaco.2016.feb.platinum.circular-barn
