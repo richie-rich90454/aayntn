@@ -10,11 +10,15 @@
         "skipLibCheck": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "verbatimModuleSyntax": false,
+        "verbatimModuleSyntax": true,
         "allowJs": true,
         "allowImportingTsExtensions": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noUncheckedIndexedAccess": true,
+        "noPropertyAccessFromIndexSignature": true,
         "types": ["node", "vite/client"],
-        "baseUrl": ".",
         "paths": {
             "@theme/*": ["./docs/.vitepress/theme/*"],
             "@data/*": ["./docs/.vitepress/data/*"]
@@ -22,11 +26,18 @@
     },
     "include": [
         "docs/.vitepress/**/*.ts",
+        "docs/.vitepress/**/*.tsx",
         "docs/.vitepress/**/*.vue",
-        "docs/.vitepress/theme/**/*.ts",
         "tools/**/*.ts",
         "tests/**/*.ts",
         "vitest.config.ts"
     ],
-    "exclude": ["node_modules", "docs/.vitepress/cache", "docs/.vitepress/dist"]
+    "exclude": [
+        "node_modules",
+        "docs/.vitepress/cache",
+        "docs/.vitepress/dist",
+        "docs/.vitepress/data/generated",
+        "docs/public",
+        ".tmp"
+    ]
 }
