@@ -6,11 +6,13 @@ import MathPanel from "./components/mathematics/MathPanel.vue";
 import PrerequisiteGraph from "./components/PrerequisiteGraph.vue";
 import PracticeCatalog from "./components/problems/PracticeCatalog.vue";
 import ProgressDashboard from "./components/progress/ProgressDashboard.vue";
+import LearnNext from "./components/progress/LearnNext.vue";
 import Synonyms from "./components/Synonyms.vue";
 import Figure from "./components/Figure.vue";
 import Ornament from "./components/Ornament.vue";
 import Banner from "./components/Banner.vue";
 import AlgorithmPlayer from "./laboratories/core/AlgorithmPlayer.vue";
+import { registerServiceWorker } from "./composables/useServiceWorker";
 
 import "katex/dist/katex.min.css";
 import "./styles/index.css";
@@ -34,10 +36,12 @@ export default {
         // against the older name still resolves.
         app.component("PracticeCatalogue", PracticeCatalog);
         app.component("ProgressDashboard", ProgressDashboard);
+        app.component("LearnNext", LearnNext);
         app.component("Synonyms", Synonyms);
         app.component("Figure", Figure);
         app.component("Ornament", Ornament);
         app.component("Banner", Banner);
         app.component("AlgorithmPlayer", AlgorithmPlayer);
+        registerServiceWorker();
     },
 } satisfies Theme;
