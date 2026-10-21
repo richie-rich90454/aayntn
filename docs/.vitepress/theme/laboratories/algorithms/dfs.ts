@@ -193,7 +193,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const dfs: LabDefinition = {
+export const definition: LabDefinition = {
     id: "graphs.dfs",
     title: "Depth-first search",
     scene: "graph",
