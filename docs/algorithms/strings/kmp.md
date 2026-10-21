@@ -263,7 +263,11 @@ After the loop, either $j = 0$ or $P[j] = T[i]$. In the second case the text suf
 
 **Every report is an occurrence.** The search reports a position only when the state reaches $m$. At that moment the last $m$ characters of the text equal $P[0..m-1]$, that is, $P$, and they end at index $i$, so they start at index $i-m+1$. The reported index is therefore the start of a genuine occurrence.
 
-**Every occurrence is reported.** Let an occurrence start at index $s$ and end at index $s+m-1$. Before the character at index $s$ is read, the state is some $j$. Each of the characters $T[s], T[s+1], \ldots, T[s+m-1]$ equals the corresponding pattern character. The fallback loop can only reduce the state to a value $j'$ for which the text suffix of length $j'$ is a prefix of the pattern, by the lemma, and since $T[s]$ equals $P[0]$ the state cannot fall below $1$ while reading $T[s]$: the fallback from state $1$ goes to $\pi[0] = 0$, and $P[0] = T[s]$ then extends the state to $1$. More generally, at each of the $m$ characters the state is at least the number of characters of the occurrence read so far, so after reading $T[s+m-1]$ the state is at least $m$, and since the state never exceeds $m$, it is exactly $m$, and the occurrence is reported.
+**Every occurrence is reported.** Let an occurrence start at index $s$ and end at index $s+m-1$. Each of the characters $T[s], T[s+1], \ldots, T[s+m-1]$ equals the corresponding pattern character. We show by induction that the state after reading $T[s+i]$ is at least $i+1$.
+
+Before $T[s]$ is read the state is some $j \ge 0$, and the text suffix of length $i = 0$ is the empty string, so the claim holds trivially. Now suppose the state before reading $T[s+i]$ is $j \ge i$. The last $j$ characters of the text read so far equal $P[0..j-1]$, so the last $i$ of them equal $P[0..i-1]$, and therefore $i$ is a border length of $P[0..j-1]$. The fallback chain $j, \pi[j-1], \pi[\pi[j-1]-1], \ldots$ enumerates the border lengths of $P[0..j-1]$ in decreasing order, so it cannot drop below $i$ without reaching $i$ exactly, and at $i$ the comparison $P[i] = T[s+i]$ succeeds because the occurrence matches. The fallback therefore stops at a state at least $i$, and the extension makes the state at least $i+1$.
+
+After reading $T[s+m-1]$ the state is at least $m$, and the state never exceeds $m$, because a state of $m$ is reported and reset at once. The state is therefore exactly $m$ and the occurrence is reported.
 
 **Each text character is read once.** The loop index increases by one on every iteration, and the inner fallback loop reads only $T[i]$ again. Each text character therefore costs $O(1)$ comparisons apart from the fallback steps, and the amortized argument bounds the fallback steps by $n$. The total is $O(n + m)$. $\square$
 </MathPanel>
@@ -445,11 +449,13 @@ Answer these without looking back. If you cannot, revisit the section named in p
 
 ## Further reading
 
-- The subject overview, which places this technique among the others, is [the strings](/algorithms/strings/).
+- The subject index lists this technique, [Knuth-Morris-Pratt](/algorithms/strings/kmp), beside the techniques the subject does not yet cover: [the strings](/algorithms/strings/).
 - The general idea of searching an ordered structure, and the predicate that makes it valid, is in [binary search](/algorithms/searching/binary-search).
 - The discrete mathematics behind the divisibility and the periodicity argument of Problem 3 is in [discrete mathematics](/start/from-ap-csa/part-3-discrete-mathematics).
 - The counting argument that answers "how many ways" questions, which is the other way to avoid enumerating, is in [binomial coefficients](/algorithms/combinatorics/binomial-coefficients).
 - The arithmetic that reduces a huge count modulo a prime is in [modular arithmetic](/algorithms/number-theory/modular-arithmetic).
+- The prefix function is a table of borders, in the same way that the tails array of the longest increasing subsequence is a table of minimum endings and the convex hull is a list of the extreme points of a set. The geometric version is in [convex hull](/algorithms/geometry/convex-hull).
+- The offline version of the same idea, applied to binary searches rather than to character comparisons, is in [parallel binary search](/algorithms/advanced/parallel-binary-search).
 - The search over a tree of choices, which is what you reach for when the pattern is not a contiguous block, is in [backtracking](/algorithms/enumeration/backtracking).
 - The monotone subsequence problem, which looks similar and is solved by a different structure, is in [longest increasing subsequence](/algorithms/dynamic-programming/longest-increasing-subsequence).
 - The dynamic program that replaces an exponential search when the constraints involve a sum is in [0/1 knapsack](/algorithms/dynamic-programming/0-1-knapsack).
