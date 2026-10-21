@@ -1,0 +1,29 @@
+id: usaco.2024.open.silver.painting-fence-posts
+title: Painting Fence Posts
+source: USACO
+contest: 2024 US Open Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1423
+editorialUrl: https://usaco.org/current/data/sol_prob2_silver_open24.html
+techniques:
+    - range-queries.fenwick-tree
+    - graphs.dsu
+prerequisites:
+    - range-queries.fenwick-tree
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - Two hundred thousand posts, and the cows walk around the fence, so the order in which the posts are visited is not the order in which they are indexed.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Each cow walks a stretch of the fence and repaints every post on that stretch, so the question is which stretches overlap.
+    - The stretches are determined by a permutation of the posts, so the walk of a cow is a range in the order of the cows rather than in the order of the posts.
+    - Two stretches that share a post have to be combined, and the union of a set of intervals is found by merging them, which is what a disjoint set union over the cows expresses.
+    - With the groups of overlapping stretches known, a Fenwick tree over the post positions answers how many repaints each post received.
+discussion: >-
+    The geometry of the fence gives a linear order of the posts and a permutation that says which stretches each cow walks, and the grouping of overlapping stretches is a classic interval merge that a disjoint set union expresses naturally. The counts themselves are prefix sums over the post positions, so a Fenwick tree answers them. The hard part of the problem is the interaction between the two orders, not either structure.
+related:
+    - usaco.2019.open.silver.fence-planning
+    - usaco.2018.jan.gold.mootube
