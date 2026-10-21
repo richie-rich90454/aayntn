@@ -73,7 +73,7 @@ function stateFor(values: number[], prefix: number[], computed: number, shot: Sn
             sublabel: index === 0 ? "empty" : `a${index} = ${values[index - 1]}`,
         })),
         structures: [],
-        annotations: [{ x: 30, y: 30, text: shot.note, emphasis: "accent" }],
+        annotations: [{ x: 90, y: 30, text: shot.note, emphasis: "accent" }],
         data: { prefix: [...prefix] },
         formula: shot.formula,
     };
