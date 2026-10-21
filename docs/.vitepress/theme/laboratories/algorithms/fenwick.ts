@@ -190,7 +190,7 @@ function build(input: string): LabEvent[] {
         state: snapshot("Every block is empty.", "tree[i] = 0"),
     });
 
-    const insert = (index: number, delta: number, operation: string): void => {
+    const insert = (index: number, delta: number, building: boolean): void => {
         const visited: number[] = [];
         for (let block = index; block <= count; block += lowbit(block)) {
             visited.push(block);
@@ -199,11 +199,10 @@ function build(input: string): LabEvent[] {
         touched = visited;
         events.push({
             type: "add",
-            operation,
-            narration:
-                operation === "build"
-                    ? `The value ${delta} at position ${index} is inserted, so the blocks ${visited.join(", ")} rise by ${delta}.`
-                    : `Adding ${delta} at position ${index} raises the blocks ${visited.join(", ")}, because those are the blocks that contain the position.`,
+            operation: "add",
+            narration: building
+                ? `The value ${delta} at position ${index} is inserted, so the blocks ${visited.join(", ")} rise by ${delta}.`
+                : `Adding ${delta} at position ${index} raises the blocks ${visited.join(", ")}, because those are the blocks that contain the position.`,
             state: snapshot(
                 `The blocks ${visited.join(", ")} hold the position ${index}.`,
                 `the blocks ${visited.join(", ")} each rise by ${delta}`,
@@ -214,7 +213,7 @@ function build(input: string): LabEvent[] {
 
     values.forEach((value, index) => {
         data[index + 1] = value;
-        insert(index + 1, value, "build");
+        insert(index + 1, value, true);
     });
 
     const prefixWalk = (index: number): number => {
@@ -241,7 +240,7 @@ function build(input: string): LabEvent[] {
     for (const operation of operations) {
         if (operation.kind === "add") {
             data[operation.index] = data[operation.index]! + operation.delta!;
-            insert(operation.index, operation.delta!, "add");
+            insert(operation.index, operation.delta!, false);
             continue;
         }
 
