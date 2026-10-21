@@ -534,4 +534,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - When the values must be added under changing constraints, the structure that supports updates is the [Fenwick tree](/algorithms/range-queries/fenwick-tree).
 - The graph that the knapsack recurrence really searches is a layered graph, and the traversal of such a graph is in [graph representation](/algorithms/graphs/representation).
 - The technique for finding the smallest capacity that reaches a target is [binary search](/algorithms/searching/binary-search) applied to the answer.
-- Every listing in this article, in all six languages, is collected on the [0/1 knapsack source page](/implementations/dynamic-programming-0-1-knapsack).
+- Every listing in this article, in all six languages, is collected on the [0/1 knapsack source page](/implementations/dynamic-programming-0-1-knapsack/).
