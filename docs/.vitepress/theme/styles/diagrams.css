@@ -231,7 +231,7 @@ html.dark .aayntn-lab__head {
     line-height: 1;
 }
 
-/* Graph state colours (shared with the SVG scenes). */
+/* Graph state colors (shared with the SVG scenes). */
 .state-unvisited {
     background: var(--color-white);
     border-color: var(--color-cobalt);
