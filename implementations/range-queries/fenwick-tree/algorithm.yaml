@@ -1,0 +1,169 @@
+algorithm: range-queries.fenwick-tree
+title: Fenwick tree
+summary: A binary indexed tree keeps the prefix sums of a 1-indexed array up to date, so point updates and range sum queries both take logarithmic time.
+subject: range-queries
+divisions: [gold, platinum]
+importance: common-contest-technique
+complexity:
+    time: "O(log n) per operation"
+    space: "O(n)"
+assumptions:
+    - The underlying operation is addition, which is invertible, so a prefix sum can be subtracted from another prefix sum.
+reviewed: false
+variants:
+    - id: minimal
+      language: c
+      file: c/minimal.c
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable struct with an explicit init/destroy pair supporting point addition, prefix sums and range sums over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: "A tree of n positions and a 1-based index for every update and query."
+      outputs: "The prefix sum of positions 1..index and the sum of the inclusive range left..right."
+      notes: "tree[i] holds the sum of the positions in the block (i - lowbit(i), i], so add walks up the blocks that contain the index while prefix_sum walks down the disjoint blocks that partition 1..index, and a range sum is the difference of two prefix sums. The C variant owns its storage through an explicit init/destroy pair: init allocates and destroy frees, so every successful init must be matched by exactly one destroy and the tree must not be used afterwards."
+      operations: [add, prefix-sum, range-sum]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class supporting point addition, prefix sums and range sums over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: "A tree of n positions and a 1-based index for every update and query."
+      outputs: "The prefix sum of positions 1..index and the sum of the inclusive range left..right."
+      notes: "tree[i] holds the sum of the positions in the block (i - lowbit(i), i], so add walks up the blocks that contain the index while prefix_sum walks down the disjoint blocks that partition 1..index, and a range sum is the difference of two prefix sums. The C++ variant keeps the same array in a std::vector, so the constructor allocates it and the destructor releases it without any explicit destroy call."
+      operations: [add, prefix-sum, range-sum]
+    - id: minimal
+      language: java
+      file: java/Program.java
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class supporting point addition, prefix sums and range sums over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: "A tree of n positions and a 1-based index for every update and query."
+      outputs: "The prefix sum of positions 1..index and the sum of the inclusive range left..right."
+      notes: "tree[i] holds the sum of the positions in the block (i - lowbit(i), i], so add walks up the blocks that contain the index while prefix_sum walks down the disjoint blocks that partition 1..index, and a range sum is the difference of two prefix sums. The Java variant keeps the array on the heap and leaves the reclamation to the garbage collector."
+      operations: [add, prefix-sum, range-sum]
+    - id: minimal
+      language: javascript
+      file: javascript/minimal.js
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class supporting point addition, prefix sums and range sums over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: "A tree of n positions and a 1-based index for every update and query."
+      outputs: "The prefix sum of positions 1..index and the sum of the inclusive range left..right."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. tree[i] holds the sum of the positions in the block (i - lowbit(i), i], so add walks up the blocks that contain the index while prefix_sum walks down the disjoint blocks that partition 1..index, and a range sum is the difference of two prefix sums. The JavaScript variant models the tree as a class, so the instance owns its array."
+      operations: [add, prefix-sum, range-sum]
+    - id: minimal
+      language: pascal
+      file: pascal/minimal.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class supporting point addition, prefix sums and range sums over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: "A tree of n positions and a 1-based index for every update and query."
+      outputs: "The prefix sum of positions 1..index and the sum of the inclusive range left..right."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Tree[i] holds the sum of the positions in the block (i - lowbit(i), i], so Add walks up the blocks that contain the index while PrefixSum walks down the disjoint blocks that partition 1..Index, and a range sum is the difference of two prefix sums. The Pascal variant is a class whose constructor allocates the tree and whose destructor releases it, so the caller owns the instance and must free it."
+      operations: [add, prefix-sum, range-sum]
+    - id: minimal
+      language: python
+      file: python/minimal.py
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class supporting point addition, prefix sums and range sums over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: "A tree of n positions and a 1-based index for every update and query."
+      outputs: "The prefix sum of positions 1..index and the sum of the inclusive range left..right."
+      notes: "tree[i] holds the sum of the positions in the block (i - lowbit(i), i], so add walks up the blocks that contain the index while prefix_sum walks down the disjoint blocks that partition 1..index, and a range sum is the difference of two prefix sums. The Python variant models the tree as a class, so the instance owns its list."
+      operations: [add, prefix-sum, range-sum]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every update touches O(log n) blocks and every query costs two prefix sums, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add, prefix-sum, range-sum]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every update touches O(log n) blocks and every query costs two prefix sums, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add, prefix-sum, range-sum]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every update touches O(log n) blocks and every query costs two prefix sums, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add, prefix-sum, range-sum]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Every update touches O(log n) blocks and every query costs two prefix sums, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add, prefix-sum, range-sum]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Every update touches O(log n) blocks and every query costs two prefix sums, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add, prefix-sum, range-sum]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of n + 1 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every update touches O(log n) blocks and every query costs two prefix sums, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add, prefix-sum, range-sum]
