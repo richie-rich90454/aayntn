@@ -1,0 +1,327 @@
+/**
+ * Code presentation.
+ *
+ * The architectural frame carries the visual weight; the code surface stays
+ * quiet so that long listings remain readable. Monospace only, never justified,
+ * horizontal scrolling instead of wrapping.
+ */
+
+.aayntn-code {
+    margin: var(--space-8) 0;
+    border: var(--rule-ink);
+    background: var(--surface-code);
+    box-shadow: var(--shadow-panel);
+}
+
+.aayntn-code__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-black);
+    color: var(--color-white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+html.dark .aayntn-code__head {
+    background: #0d1015;
+}
+
+.aayntn-code__file {
+    font-family: var(--font-code);
+    font-size: var(--text-meta);
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.aayntn-code__lang {
+    padding: 2px 8px;
+    border: 1px solid var(--color-gold);
+    border-radius: 3px;
+    color: var(--color-gold);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.aayntn-code__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: var(--text-meta);
+    font-weight: 600;
+}
+
+.aayntn-code__status--verified {
+    background: rgba(34, 91, 69, 0.22);
+    border: 1px solid var(--color-emerald);
+    color: #7fd3b3;
+}
+
+.aayntn-code__status--unverified {
+    background: rgba(198, 61, 50, 0.2);
+    border: 1px solid var(--color-vermilion);
+    color: #f0a49d;
+}
+
+.aayntn-code__status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.aayntn-code__actions {
+    display: flex;
+    gap: var(--space-2);
+    margin-left: auto;
+}
+
+.aayntn-code__action {
+    padding: 3px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: var(--text-meta);
+    font-weight: 500;
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.aayntn-code__action:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--color-white);
+}
+
+.aayntn-code__body {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+.aayntn-code__body pre {
+    margin: 0;
+    padding: var(--space-4) 0;
+    background: transparent !important;
+    font-size: var(--text-code);
+    line-height: 1.65;
+    tab-size: 4;
+}
+
+.aayntn-code__body pre code {
+    display: block;
+    min-width: max-content;
+    padding: 0 var(--space-4);
+}
+
+/* Line numbers live outside the selectable code content: a pseudo-element is
+   rendered in the margin and is never part of a copied selection. */
+.aayntn-code--numbered .aayntn-code__body pre code {
+    counter-reset: aayntn-line;
+}
+
+.aayntn-code--numbered .aayntn-code__body pre code .line::before {
+    counter-increment: aayntn-line;
+    content: counter(aayntn-line);
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    display: inline-block;
+    width: 3.2em;
+    margin-right: 1.1em;
+    padding-right: 0.6em;
+    border-right: 1px solid var(--border-subtle);
+    background: var(--surface-code);
+    color: #767e8d;
+    text-align: right;
+    user-select: none;
+}
+
+html.dark .aayntn-code--numbered .aayntn-code__body pre code .line::before {
+    color: #5c6472;
+    background: var(--surface-code);
+}
+
+.aayntn-code__loading {
+    margin: 0;
+    padding: var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--text-secondary-copy);
+}
+
+/* Line highlighting used by the animation / code synchronisation. */
+.aayntn-code__line--highlight {
+    background: #fff0bd;
+    box-shadow: inset 3px 0 0 var(--color-gold);
+}
+
+html.dark .aayntn-code__line--highlight {
+    background: rgba(232, 184, 74, 0.16);
+}
+
+.aayntn-code__line--error {
+    background: #fce1e0;
+    box-shadow: inset 3px 0 0 var(--color-vermilion);
+}
+
+/* Inline code fences in Markdown (outside the code viewer). */
+.vp-doc div[class*="language-"] {
+    margin: var(--space-6) 0;
+    border: var(--rule-ink);
+    background: var(--surface-code);
+    overflow-x: auto;
+}
+
+.vp-doc div[class*="language-"] pre {
+    margin: 0;
+    padding: var(--space-4);
+    background: transparent !important;
+    font-size: var(--text-code);
+    line-height: 1.65;
+}
+
+.vp-doc div[class*="language-"] code {
+    display: block;
+    min-width: max-content;
+}
+
+/* -------------------------------------------------------------------- */
+/* Code viewer controls                                                */
+/* -------------------------------------------------------------------- */
+
+.aayntn-code-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.aayntn-tablist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border: var(--rule-ink);
+    background: var(--surface-page);
+}
+
+.aayntn-tab {
+    padding: var(--space-2) var(--space-4);
+    border-right: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    font-size: var(--text-secondary-copy);
+    font-weight: 500;
+    white-space: nowrap;
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.aayntn-tab:last-child {
+    border-right: none;
+}
+
+.aayntn-tab:hover {
+    background: var(--surface-sunken);
+    color: var(--text-primary);
+}
+
+.aayntn-tab[aria-selected="true"] {
+    background: var(--color-cobalt);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.aayntn-tab[aria-selected="true"]:hover {
+    background: var(--color-cobalt);
+}
+
+.aayntn-tab__badge {
+    margin-left: 6px;
+    padding: 0 5px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.24);
+    font-size: 0.6875rem;
+    font-weight: 700;
+}
+
+.aayntn-tab:not([aria-selected="true"]) .aayntn-tab__badge {
+    background: var(--color-gold);
+    color: var(--color-black);
+}
+
+.aayntn-variant-note {
+    margin: var(--space-4) 0;
+    padding: var(--space-4);
+    border-left: 3px solid var(--color-cobalt);
+    background: var(--surface-sunken);
+    font-size: var(--text-secondary-copy);
+    line-height: 1.6;
+}
+
+.aayntn-variant-note__label {
+    display: block;
+    margin-bottom: var(--space-1);
+    color: var(--color-cobalt);
+    font-size: var(--text-meta);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.aayntn-variant-note__label--conditional {
+    color: var(--color-gold);
+}
+
+.aayntn-variant-note__label--not-applicable {
+    color: var(--color-vermilion);
+}
+
+/* Expanded (distraction-free) source view. */
+.aayntn-code-expanded {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-page);
+}
+
+.aayntn-code-expanded__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-black);
+    color: var(--color-white);
+}
+
+.aayntn-code-expanded__body {
+    flex: 1;
+    overflow: auto;
+    padding: var(--space-6);
+    background: var(--surface-code);
+}
+
+.aayntn-code-expanded__body pre {
+    margin: 0;
+    background: transparent !important;
+    font-size: var(--text-code);
+    line-height: 1.65;
+}
+
+/* Copy feedback */
+.aayntn-copy-feedback {
+    position: absolute;
+    right: var(--space-4);
+    bottom: var(--space-4);
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-emerald);
+    color: var(--color-white);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    border-radius: var(--radius);
+}
