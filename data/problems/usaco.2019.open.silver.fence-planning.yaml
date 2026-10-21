@@ -1,0 +1,30 @@
+id: usaco.2019.open.silver.fence-planning
+title: Fence Planning
+source: USACO
+contest: 2019 US Open Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=944
+editorialUrl: https://usaco.org/current/data/sol_fenceplan_silver_open19.html
+techniques:
+    - graphs.dsu
+    - foundations.sorting
+prerequisites:
+    - graphs.dsu
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - A hundred thousand cows, so the number of groups can be large and every group has to be accounted for.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The moo networks are the connected components of the friendship graph, so a disjoint set union computes them directly.
+    - For each component, the fence that encloses its cows is an axis-aligned rectangle, and the answer is the smallest such rectangle for each component.
+    - So each component needs only its minimum and maximum x-coordinate and its minimum and maximum y-coordinate.
+    - Merge the components with the disjoint set union while tracking the four extremes, then report the smallest rectangle area over the components.
+discussion: >-
+    The grouping is pure connectivity, so a disjoint set union with the four coordinate extremes attached to each root does everything in one pass. The smallest enclosing rectangle of a set of points is determined by its extremes, which is why no convex hull is needed. The remaining trap is that the components have to be finalized before the areas are compared, since a later merge changes the extremes.
+related:
+    - usaco.2018.jan.gold.mootube
+    - usaco.2024.open.silver.painting-fence-posts
