@@ -1,0 +1,19 @@
+# The binary search demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: searching.binary-search
+title: Binary search
+algorithm: searching.binary-search
+scene: array
+preset: found
+storyboard:
+    - title: The whole array is a candidate
+      description: The search starts with every position still able to hold the target.
+    - title: The midpoint is compared
+      description: The middle of the interval is the only position that is examined, and the comparison with the target decides the next half.
+    - title: Half of the interval is discarded
+      description: The comparison is monotone, so the answer cannot lie in the half that was ruled out, and that half is grayed out.
+    - title: The interval empties or the target is found
+      description: The search ends when the target is met in a cell, or when the interval becomes empty and the target is absent.
