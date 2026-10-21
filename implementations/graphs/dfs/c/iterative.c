@@ -19,7 +19,7 @@ typedef struct {
  * not O(V).
  *
  * adj     adjacency list of the graph
- * n       number of vertices, labelled 0..n-1
+ * n       number of vertices, labeled 0..n-1
  * source  the start vertex
  * order   receives the visited vertices in visit order; room for n entries
  * returns the number of vertices visited, or 0 when source is out of range
