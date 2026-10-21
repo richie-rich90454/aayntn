@@ -224,9 +224,9 @@ $$
 s_{O_j} \ge e_{O_{j-1}} \ge e_{O_1} \ge e_{I^*},
 $$
 
-where the middle inequality holds because the finish times increase along the schedule and the last holds because $e_{I^_} \le e\_{O_1}$. So $I^_$ ends before each of $O_2, \ldots, O_k$ begins, and $O'$ is a schedule.
+where the middle inequality holds because the finish times increase along the schedule and the last holds because $e_{I^{\star}} \le e\_{O_1}$. So $I^{\star}$ ends before each of $O_2, \ldots, O_k$ begins, and $O'$ is a schedule.
 
-The schedule $O'$ has exactly $k$ intervals, and $k$ is the size of an optimal schedule, so $O'$ is optimal. It contains $I^_$. Therefore an optimal schedule containing $I^_$ exists. $\square$
+The schedule $O'$ has exactly $k$ intervals, and $k$ is the size of an optimal schedule, so $O'$ is optimal. It contains $I^{\star}$. Therefore an optimal schedule containing $I^{\star}$ exists. $\square$
 </MathPanel>
 
 <MathPanel type="proof" title="Proof">
@@ -235,9 +235,9 @@ intervals.
 
 If there are no available intervals, the greedy algorithm returns the empty schedule, which is trivially optimal.
 
-Otherwise, let $I^_$ be the available interval with the earliest finish time. By the exchange lemma there is an optimal schedule $O$ that contains $I^_$. Every other interval of $O$ starts at or after $e_{I^_}$, so the intervals of $O$ other than $I^_$ form a schedule of the sub-problem consisting of the intervals that start at or after $e_{I^*}$.
+Otherwise, let $I^{\star}$ be the available interval with the earliest finish time. By the exchange lemma there is an optimal schedule $O$ that contains $I^{\star}$. Every other interval of $O$ starts at or after $e_{I^{\star}}$, so the intervals of $O$ other than $I^{\star}$ form a schedule of the sub-problem consisting of the intervals that start at or after $e_{I^*}$.
 
-That sub-problem has fewer available intervals than the original, so by the induction hypothesis the greedy algorithm applied to it produces an optimal schedule of it. The greedy algorithm takes $I^_$ first, because $I^_$ is the compatible interval with the earliest finish time, and then proceeds on exactly that sub-problem. Its schedule therefore has $1 + \text{(the size of the optimal schedule of the sub-problem)}$ intervals, which is the size of the optimal schedule $O$.
+That sub-problem has fewer available intervals than the original, so by the induction hypothesis the greedy algorithm applied to it produces an optimal schedule of it. The greedy algorithm takes $I^{\star}$ first, because $I^{\star}$ is the compatible interval with the earliest finish time, and then proceeds on exactly that sub-problem. Its schedule therefore has $1 + \text{(the size of the optimal schedule of the sub-problem)}$ intervals, which is the size of the optimal schedule $O$.
 
 Therefore the greedy algorithm is optimal. $\square$
 </MathPanel>
