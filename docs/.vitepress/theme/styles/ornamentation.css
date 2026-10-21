@@ -1,0 +1,113 @@
+/**
+ * Ornamentation.
+ *
+ * Every ornament is an original vector construction: corner frames, double
+ * rules, mathematical rosettes and axis patterns. Ornament is always
+ * distinguishable from instructional diagrams — it is drawn in the ink or gold
+ * palette and never carries data.
+ */
+
+.aayntn-ornament {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+}
+
+.aayntn-ornament--corner {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    color: var(--color-gold);
+    opacity: 0.85;
+}
+
+.aayntn-ornament--corner-tl {
+    top: 8px;
+    left: 8px;
+}
+.aayntn-ornament--corner-tr {
+    top: 8px;
+    right: 8px;
+    transform: scaleX(-1);
+}
+.aayntn-ornament--corner-bl {
+    bottom: 8px;
+    left: 8px;
+    transform: scaleY(-1);
+}
+.aayntn-ornament--corner-br {
+    bottom: 8px;
+    right: 8px;
+    transform: scale(-1, -1);
+}
+
+/* Double rule used under chapter titles. */
+.aayntn-double-rule {
+    height: 4px;
+    border-top: 1px solid var(--border-ink);
+    border-bottom: 1px solid var(--border-ink);
+    background: var(--color-gold);
+}
+
+/* Axis pattern used as a band separator. */
+.aayntn-axis-band {
+    height: 26px;
+    color: var(--border-ink);
+}
+
+.aayntn-axis-band svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Rosette medallion used in section headers. */
+.aayntn-rosette {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.aayntn-rosette__mark {
+    width: 28px;
+    height: 28px;
+    color: var(--color-cobalt);
+}
+
+html.dark .aayntn-rosette__mark {
+    color: var(--color-gold);
+}
+
+/* Division insignia. */
+.aayntn-insignia {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border: 1px solid currentColor;
+    font-family: var(--font-code);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+/* Laurel-inspired curve used beside quoted passages. */
+.aayntn-laurel {
+    width: 22px;
+    height: 22px;
+    color: var(--color-emerald);
+    flex: 0 0 auto;
+}
+
+/* Graph medallion. */
+.aayntn-medallion {
+    width: 44px;
+    height: 44px;
+    color: var(--color-cobalt);
+}
+
+html.dark .aayntn-medallion {
+    color: var(--color-gold);
+}
