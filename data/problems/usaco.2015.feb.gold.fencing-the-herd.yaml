@@ -1,0 +1,30 @@
+id: usaco.2015.feb.gold.fencing-the-herd
+title: Fencing the Herd
+source: USACO
+contest: 2015 February Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=534
+editorialUrl: https://usaco.org/current/data/sol_fencing_gold.html
+techniques:
+    - searching.binary-search
+    - geometry.convex-hull
+prerequisites:
+    - searching.binary-search
+    - foundations.sorting
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - Fifty thousand queries against fifty thousand points, so each query has to be answered in logarithmic time rather than by scanning the herd.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A fence is usable when the whole herd is on one side of its line, so the answer for a line depends on the extreme cows in the direction perpendicular to it.
+    - For a fixed slope the best line is determined by the cows that are extreme in that direction, and there are only a few of them.
+    - Sweep the slope over all possible values and the extreme cow changes only a few times, which is where the convex hull of the herd comes in.
+    - Binary search over the slope for each query, and use the hull to find the extreme cow in that direction.
+discussion: >-
+    The problem is a query about extreme points, and the extreme point in a given direction lies on the convex hull of the herd, so the hull reduces the search to its vertices. The query asks whether a given line separates the herd, which is a comparison against the extreme cow in the direction perpendicular to the line, and a binary search over the slope finds the boundary case. The hull and the binary search are the two halves of the solution.
+related:
+    - usaco.2022.jan.platinum.multiple-choice-test
+    - usaco.2019.feb.platinum.mowing-mischief
