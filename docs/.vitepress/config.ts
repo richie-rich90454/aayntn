@@ -1,6 +1,7 @@
 import { defineConfig } from "vitepress";
 import { katex } from "@mdit/plugin-katex";
 import type { DefaultTheme } from "vitepress";
+import type { LanguageInput } from "shiki";
 import { aayntnDark, aayntnLight } from "./theme/shiki-theme";
 import { katexMacros } from "./theme/katex-macros";
 
@@ -274,6 +275,8 @@ export default defineConfig({
             light: aayntnLight,
             dark: aayntnDark,
         },
+        // The bundled language identifiers are accepted as plain strings at run time;
+        // the published type only describes a language registration object.
         languages: [
             "c",
             "cpp",
@@ -287,7 +290,7 @@ export default defineConfig({
             "powershell",
             "text",
             "diff",
-        ] as const,
+        ] as unknown as LanguageInput[],
     },
 
     themeConfig: {
