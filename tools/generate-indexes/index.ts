@@ -1,10 +1,10 @@
 /**
- * Generate every derived artefact in the site.
+ * Generate every derived artifact in the site.
  *
  * Sources of truth:
  *   docs (recursive)               editorial content and lesson frontmatter
  *   implementations (recursive)    implementation manifests
- *   data/problems (one dir)       problem catalogue
+ *   data/problems (one dir)       problem catalog
  *   data/visualizations (one dir) laboratory registry
  *   data/curriculum (one dir)     division tracks
  *   data/synonyms (one dir)       search synonym expansion
