@@ -1,0 +1,30 @@
+id: usaco.2019.feb.platinum.mowing-mischief
+title: Mowing Mischief
+source: USACO
+contest: 2019 February Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=926
+editorialUrl: https://usaco.org/current/data/sol_mowing_platinum_feb19.html
+techniques:
+    - dynamic-programming.convex-hull-trick
+    - geometry.convex-hull
+prerequisites:
+    - dynamic-programming.convex-hull-trick
+    - geometry.convex-hull
+difficulty: 5
+estimatedMinutes: 55
+specialConstraints:
+    - The field can be huge and the number of chosen points large, so both the transition and the geometry have to be handled in near-linear time.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Each of the two paths is a monotone staircase of lattice points, and the grass that is cut is the area between the two staircases.
+    - So the two paths have to be chosen to minimize the enclosed area, and the cost of a pair of points is the rectangle between them.
+    - The points on each path must be increasing in both coordinates, which makes this a dynamic program over the points with a dominance restriction on the transitions.
+    - The transition is a minimum over a range of earlier points, and after the algebra the candidates are lines, so a convex hull of the points and a hull trick on the lines do the work.
+discussion: >-
+    The cost of a pair of paths is the area between them, and since both paths are monotone the problem is a chain of points with a rectangle cost between consecutive ones, which makes it a dynamic program with a dominance restriction. The transition minimizes a linear expression over a set of earlier points, and the convex hull of the points keeps only the candidates that can ever be extremal. The hull trick on the resulting lines removes the logarithmic factor from the range minimum.
+related:
+    - usaco.2020.jan.platinum.falling-portals
+    - usaco.2015.feb.gold.fencing-the-herd
