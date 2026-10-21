@@ -12,6 +12,9 @@ export async function loadImplementationHtml(
     language: string,
     variant: string,
 ): Promise<string | null> {
+    // The server-side pass has no origin to resolve the path against, so the
+    // panel is rendered as a shell and filled in by the browser.
+    if (typeof window === "undefined") return null;
     const response = await fetch(`${BASE}/${algorithm}/${language}.${variant}.html`);
     if (!response.ok) return null;
     return response.text();
