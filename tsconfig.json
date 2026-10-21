@@ -12,7 +12,8 @@
         "isolatedModules": true,
         "verbatimModuleSyntax": false,
         "allowJs": true,
-        "types": ["node"],
+        "allowImportingTsExtensions": true,
+        "types": ["node", "vite/client"],
         "baseUrl": ".",
         "paths": {
             "@theme/*": ["./docs/.vitepress/theme/*"],
