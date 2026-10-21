@@ -1,22 +1,23 @@
 /**
- * Laboratory registry.
+ * The laboratory registry.
  *
- * Every interactive demonstration in the encyclopedia is a `LabDefinition`
- * registered here. The registry is imported statically so that a page which
- * uses `<AlgorithmPlayer />` only pulls in the algorithms it actually shows.
+ * Every interactive demonstration in the encyclopedia is a `LabDefinition`.
+ * The registry imports them statically so that the test suite can exercise
+ * all of them in one process; the theme uses the lazy registry instead, so
+ * that a reader only downloads the demonstration a page actually shows.
  */
-import { binarySearch } from "./binary-search";
-import { bfs } from "./bfs";
-import { cht } from "./cht";
-import { dfs } from "./dfs";
-import { dijkstra } from "./dijkstra";
-import { dsu } from "./dsu";
-import { fenwick } from "./fenwick";
-import { hld } from "./hld";
-import { knapsack } from "./knapsack";
-import { lca } from "./lca";
-import { prefixSums } from "./prefix-sums";
-import { segmentTree } from "./segment-tree";
+import { definition as binarySearch } from "./binary-search";
+import { definition as bfs } from "./bfs";
+import { definition as cht } from "./cht";
+import { definition as dfs } from "./dfs";
+import { definition as dijkstra } from "./dijkstra";
+import { definition as dsu } from "./dsu";
+import { definition as fenwick } from "./fenwick";
+import { definition as hld } from "./hld";
+import { definition as knapsack } from "./knapsack";
+import { definition as lca } from "./lca";
+import { definition as prefixSums } from "./prefix-sums";
+import { definition as segmentTree } from "./segment-tree";
 import type { LabDefinition } from "../core/types";
 
 const registry: Record<string, LabDefinition> = {
