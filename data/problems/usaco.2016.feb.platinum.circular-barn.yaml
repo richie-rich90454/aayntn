@@ -1,0 +1,30 @@
+id: usaco.2016.feb.platinum.circular-barn
+title: Circular Barn (Platinum)
+source: USACO
+contest: 2016 February Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=626
+editorialUrl: https://usaco.org/current/data/sol_cbarn_platinum_feb16.html
+techniques:
+    - dynamic-programming.convex-hull-trick
+    - dynamic-programming.0-1-knapsack
+prerequisites:
+    - dynamic-programming.0-1-knapsack
+    - arrays.prefix-sums
+difficulty: 5
+estimatedMinutes: 55
+specialConstraints:
+    - A thousand rooms and up to seven doors, so the number of ways to cut the circle into arcs is manageable, but the transition has to be evaluated quickly.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - With the doors chosen, the circle is cut into arcs, and each cow walks to the first door at or after her room, so the cost of a cut is a sum over the rooms in the arc.
+    - Since a cow always moves forward, the cost of an arc from one door to the next is determined by the two endpoints and the prefix sums of the room counts.
+    - So the problem becomes partitioning the circle into a fixed number of arcs, which is a dynamic program over the doubled array.
+    - The transition takes a minimum over a range of earlier cut positions, and the values that enter the transition form a line, so the range minimum can be answered with a convex hull trick.
+discussion: >-
+    Unlocking a set of doors turns the circle into a set of arcs, and because the cows only move forward the cost of an arc is a fixed expression over the prefix sums, so the geometry disappears. What remains is partitioning the circle into a fixed number of arcs, which is a layered dynamic program over the doubled array. The transition is a minimum over a range of earlier cuts, and the cost of a cut is linear in the new cut position, so the hull trick makes the whole thing linear in the number of rooms.
+related:
+    - usaco.2016.feb.gold.circular-barn
+    - usaco.2022.dec.silver.circular-barn
