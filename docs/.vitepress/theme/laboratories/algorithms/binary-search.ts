@@ -195,7 +195,7 @@ export const binarySearch: LabDefinition = {
         { id: "single", label: "Single element", input: "42 42" },
     ],
     notes: [
-        "Grey cells have been discarded: they cannot contain the answer.",
+        "Gray cells have been discarded: they cannot contain the answer.",
         "The gold cell is the midpoint currently being compared.",
         "Binary search needs a sorted array; the comparison must be monotone.",
     ],
