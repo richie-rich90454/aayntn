@@ -406,6 +406,40 @@ function checkCurriculum(
 }
 
 /**
+ * The registry lists the algorithm manifests. Every entry must name a manifest
+ * that exists, and every manifest must be listed, so that the index cannot
+ * drift away from the code.
+ */
+async function checkAlgorithmRegistry(manifests: AlgorithmManifestInfo[]) {
+    const path = join(ROOT, "data", "algorithms", "registry.yaml");
+    if (!existsSync(path)) {
+        fail("data/algorithms/registry.yaml is missing");
+        return;
+    }
+    const raw = parseYaml(await readFile(path, "utf8")) as {
+        algorithms?: { id: string; manifest: string }[];
+    };
+    const listed = raw.algorithms ?? [];
+    const known = new Set(manifests.map((manifest) => manifest.algorithm));
+
+    for (const entry of listed) {
+        if (!known.has(entry.id)) {
+            fail(`data/algorithms/registry.yaml: "${entry.id}" has no registered manifest`);
+        }
+        if (!existsSync(join(ROOT, entry.manifest))) {
+            fail(`data/algorithms/registry.yaml: "${entry.manifest}" does not exist`);
+        }
+    }
+    for (const manifest of manifests) {
+        if (!listed.some((entry) => entry.id === manifest.algorithm)) {
+            fail(
+                `data/algorithms/registry.yaml does not list the manifest for "${manifest.algorithm}"`,
+            );
+        }
+    }
+}
+
+/**
  * Every dollar-delimited expression must compile. A formula that KaTeX
  * cannot parse is a broken page, and the failure is invisible to the author.
  */
@@ -536,6 +570,7 @@ async function main() {
     checkVisualizations(lessons, visualizations);
     checkProblems(lessons, problems);
     checkCurriculum(tracks, known);
+    await checkAlgorithmRegistry(manifests);
     await checkLinks(lessons);
     checkMathematics(lessons);
     checkArticleSections(lessons);
