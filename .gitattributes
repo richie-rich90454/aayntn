@@ -1,0 +1,17 @@
+# Normalize line endings so that the repository is byte-deterministic.
+#
+# Text files are stored with LF in the index and checked out with LF in the
+# working tree. The aayntn implementation files must produce identical output
+# bytes on every platform, so the line-ending policy has to be fixed rather
+# than left to each contributor's Git configuration.
+* text=auto eol=lf
+
+# Binary assets are never converted.
+*.woff2 binary
+*.woff binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
