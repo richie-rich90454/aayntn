@@ -1,0 +1,36 @@
+import type { Theme } from "vitepress";
+import Layout from "./Layout.vue";
+import CodeViewer from "./components/code/CodeViewer.vue";
+import AlgorithmSummary from "./components/articles/AlgorithmSummary.vue";
+import MathPanel from "./components/mathematics/MathPanel.vue";
+import PrerequisiteGraph from "./components/PrerequisiteGraph.vue";
+import PracticeCatalogue from "./components/problems/PracticeCatalogue.vue";
+import ProgressDashboard from "./components/progress/ProgressDashboard.vue";
+import Synonyms from "./components/Synonyms.vue";
+import Figure from "./components/Figure.vue";
+import AlgorithmPlayer from "./laboratories/core/AlgorithmPlayer.vue";
+
+import "katex/dist/katex.min.css";
+import "./styles/index.css";
+
+/**
+ * aayntn theme.
+ *
+ * A completely bespoke interface built on VitePress's data layer. Markdown
+ * remains the canonical form of every lesson; the components below only
+ * render things that are described in metadata.
+ */
+export default {
+    Layout,
+    enhanceApp({ app }) {
+        app.component("CodeViewer", CodeViewer);
+        app.component("AlgorithmSummary", AlgorithmSummary);
+        app.component("MathPanel", MathPanel);
+        app.component("PrerequisiteGraph", PrerequisiteGraph);
+        app.component("PracticeCatalogue", PracticeCatalogue);
+        app.component("ProgressDashboard", ProgressDashboard);
+        app.component("Synonyms", Synonyms);
+        app.component("Figure", Figure);
+        app.component("AlgorithmPlayer", AlgorithmPlayer);
+    },
+} satisfies Theme;
