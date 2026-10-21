@@ -106,7 +106,7 @@ function build(input: string): LabEvent[] {
     const heavy = new Array<number>(count).fill(-1);
     const head = new Array<number>(count).fill(0);
     const position = new Array<number>(count).fill(0);
-    const positions = treeLayout(children, 0, 720, 460);
+    const positions = treeLayout(children, 0, 720, 380);
 
     /** The flattened array and its prefix sums. */
     const flat: number[] = [];
@@ -203,18 +203,36 @@ function build(input: string): LabEvent[] {
         const vertex = order[index]!;
         for (const child of children[vertex]!) {
             size[vertex] = size[vertex]! + size[child]!;
-            if (heavy[vertex] === -1 || size[child]! > size[heavy[vertex]!]!) {
-                heavy[vertex] = child;
-            }
         }
         active = [vertex];
         events.push({
             type: "build",
-            operation: "build",
-            narration: `The subtree of ${labels[vertex]} holds ${size[vertex]} vertices, and its heavy child is ${heavy[vertex] === -1 ? "none, because it is a leaf" : labels[heavy[vertex]!]}.`,
+            operation: "compute-subtree-sizes",
+            narration: `The subtree of ${labels[vertex]} holds ${size[vertex]} vertices, because every child subtree is counted once.`,
             state: snapshot(
                 `The subtree of ${labels[vertex]} holds ${size[vertex]} vertices.`,
                 `size(${labels[vertex]}) = ${size[vertex]}`,
+            ),
+        });
+    }
+    active = [];
+
+    // The heavy child of a vertex is the child with the largest subtree.
+    for (const vertex of order) {
+        for (const child of children[vertex]!) {
+            if (heavy[vertex] === -1 || size[child]! > size[heavy[vertex]!]!) {
+                heavy[vertex] = child;
+            }
+        }
+        if (heavy[vertex] === -1) continue;
+        active = [vertex, heavy[vertex]!];
+        events.push({
+            type: "build",
+            operation: "pick-heavy-child",
+            narration: `The heavy child of ${labels[vertex]} is ${labels[heavy[vertex]!]}, because its subtree of ${size[heavy[vertex]!]} vertices is the largest.`,
+            state: snapshot(
+                `The heavy child of ${labels[vertex]} is ${labels[heavy[vertex]!]}.`,
+                `heavy(${labels[vertex]}) = ${labels[heavy[vertex]!]}`,
             ),
         });
     }
