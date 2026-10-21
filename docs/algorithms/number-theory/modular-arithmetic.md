@@ -486,4 +486,6 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The dynamic program whose answer usually has to be reduced is in [0/1 knapsack](/algorithms/dynamic-programming/0-1-knapsack).
 - The search over a tree of choices, which replaces a modular count when the constraints are local rather than global, is in [backtracking](/algorithms/enumeration/backtracking).
 - The string search whose prefix function is the same border structure that makes the extended Euclidean algorithm's coefficients fall into place is in [KMP](/algorithms/strings/kmp).
-- The subject overview, which places this technique among the others, is [the number theory](/algorithms/number-theory/).
+- The number of lattice points inside a polygon is counted from its hull and from a congruence, so the geometry of this subject meets this arithmetic in [convex hull](/algorithms/geometry/convex-hull).
+- A count that must be reduced and a search over many candidates at once are frequently the same problem, and the offline search is in [parallel binary search](/algorithms/advanced/parallel-binary-search).
+- The subject index lists this technique, [modular arithmetic](/algorithms/number-theory/modular-arithmetic), beside the arithmetic it does not yet cover: [the number theory](/algorithms/number-theory/).
