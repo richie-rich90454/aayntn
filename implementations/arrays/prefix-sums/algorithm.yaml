@@ -1,0 +1,169 @@
+algorithm: arrays.prefix-sums
+title: Prefix sums
+summary: Precompute the running totals of an array once, so that every later range sum is a single subtraction.
+subject: arrays
+divisions: [silver]
+importance: core-prerequisite
+complexity:
+    time: "O(n + q)"
+    space: "O(n)"
+assumptions:
+    - Queries are given after the array, so the prefix sums can be precomputed once.
+reviewed: false
+variants:
+    - id: minimal
+      language: c
+      file: c/minimal.c
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that fills a prefix-sum array, so a range sum becomes the difference of two prefix entries."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "An array of n values and a caller-provided buffer."
+      outputs: "A prefix-sum array of n+1 entries: prefix[0] = 0 and prefix[i] = prefix[i-1] + a[i-1]."
+      notes: "The function performs no I/O. The caller owns the output buffer, which must have room for n+1 elements, and the function allocates nothing and frees nothing. The sums are 64-bit because the documented range reaches |sum| = 10^15."
+      operations: [accumulate-prefix]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that builds the prefix sums of a vector, so a range sum becomes the difference of two prefix entries."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "A vector of n values."
+      outputs: "A prefix-sum vector of n+1 entries: prefix[0] = 0 and prefix[i] = prefix[i-1] + a[i-1]."
+      notes: "The function performs no I/O and returns a fresh vector, so the caller keeps ownership of it. The sums are 64-bit because the documented range reaches |sum| = 10^15."
+      operations: [accumulate-prefix]
+    - id: minimal
+      language: java
+      file: java/Program.java
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that builds the prefix sums of an array, so a range sum becomes the difference of two prefix entries."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "An array of n values."
+      outputs: "A prefix-sum array of n+1 entries: prefix[0] = 0 and prefix[i] = prefix[i-1] + a[i-1]."
+      notes: "The function performs no I/O and returns a fresh array, so the caller keeps ownership of it. The sums are 64-bit because the documented range reaches |sum| = 10^15."
+      operations: [accumulate-prefix]
+    - id: minimal
+      language: javascript
+      file: javascript/minimal.js
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that builds the prefix sums of an array, so a range sum becomes the difference of two prefix entries."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "An array of n values."
+      outputs: "A prefix-sum array of n+1 entries: prefix[0] = 0 and prefix[i] = prefix[i-1] + a[i-1]."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The function performs no I/O and returns a fresh array, so the caller keeps ownership of it. The sums are BigInt because the documented range reaches |sum| = 10^15 and a double would lose the low bits."
+      operations: [accumulate-prefix]
+    - id: minimal
+      language: pascal
+      file: pascal/minimal.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable procedure that fills a prefix-sum array, so a range sum becomes the difference of two prefix entries."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "An array of n values and a caller-provided buffer."
+      outputs: "A prefix-sum array of n+1 entries: prefix[0] = 0 and prefix[i] = prefix[i-1] + a[i-1]."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The procedure performs no I/O. The caller owns the output buffer, which must have room for n+1 elements, and the procedure allocates nothing and frees nothing. The sums are 64-bit because the documented range reaches |sum| = 10^15."
+      operations: [accumulate-prefix]
+    - id: minimal
+      language: python
+      file: python/minimal.py
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that builds the prefix sums of a sequence, so a range sum becomes the difference of two prefix entries."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "A sequence of n values."
+      outputs: "A prefix-sum list of n+1 entries: prefix[0] = 0 and prefix[i] = prefix[i-1] + a[i-1]."
+      notes: "The function performs no I/O and returns a fresh list, so the caller keeps ownership of it. Python integers are unbounded, so the sums stay exact over the whole documented range."
+      operations: [accumulate-prefix]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from standard input and prints one range sum per line."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the sum of a[l] through a[r]."
+      notes: "The prefix array is built once, before the first query, so each query costs O(1). The sums are 64-bit because the documented range reaches |sum| = 10^15."
+      operations: [accumulate-prefix, subtract-prefix-bounds]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from standard input and prints one range sum per line."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the sum of a[l] through a[r]."
+      notes: "The prefix array is built once, before the first query, so each query costs O(1). The sums are 64-bit because the documented range reaches |sum| = 10^15."
+      operations: [accumulate-prefix, subtract-prefix-bounds]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from standard input and prints one range sum per line."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the sum of a[l] through a[r]."
+      notes: "The class is named Main so the file can be submitted to a judge unchanged. The prefix array is built once, before the first query, so each query costs O(1). The sums are 64-bit because the documented range reaches |sum| = 10^15."
+      operations: [accumulate-prefix, subtract-prefix-bounds]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from standard input and prints one range sum per line."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the sum of a[l] through a[r]."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The prefix array is built once, before the first query, so each query costs O(1). The sums are BigInt because the documented range reaches |sum| = 10^15 and a double would lose the low bits."
+      operations: [accumulate-prefix, subtract-prefix-bounds]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from standard input and prints one range sum per line."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the sum of a[l] through a[r]."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The prefix array is built once, before the first query, so each query costs O(1). The sums are 64-bit because the documented range reaches |sum| = 10^15."
+      operations: [accumulate-prefix, subtract-prefix-bounds]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from standard input and prints one range sum per line."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the sum of a[l] through a[r]."
+      notes: "The prefix array is built once, before the first query, so each query costs O(1). Python integers are unbounded, so the sums stay exact over the whole documented range."
+      operations: [accumulate-prefix, subtract-prefix-bounds]
