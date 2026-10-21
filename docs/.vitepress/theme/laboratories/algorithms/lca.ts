@@ -96,6 +96,23 @@ function parse(input: string): Parsed {
     return { labels, children, queries };
 }
 
+/** "1 edge" or "4 edges". */
+function edges(count: number): string {
+    return `${count} ${count === 1 ? "edge" : "edges"}`;
+}
+
+/** The name of a power of two, written out. */
+function power(count: number): string {
+    const words: Record<number, string> = {
+        1: "one",
+        2: "two",
+        4: "four",
+        8: "eight",
+        16: "sixteen",
+    };
+    return words[count] ?? String(count);
+}
+
 function build(input: string): LabEvent[] {
     const { labels, children, queries } = parse(input);
     const events: LabEvent[] = [];
@@ -206,9 +223,9 @@ function build(input: string): LabEvent[] {
         events.push({
             type: "build",
             operation: "build-table",
-            narration: `The row of the ${1 << level}-th ancestors is filled from the row of the ${1 << (level - 1)}-th ancestors, so every jump of ${1 << level} edges is one lookup.`,
+            narration: `The row for jumps of ${edges(1 << level)} is filled from the row for jumps of ${edges(1 << (level - 1))}, so every jump of ${power(1 << level)} edges is one lookup.`,
             state: snapshot(
-                `The row for jumps of ${1 << level} edges is ready.`,
+                `The row for jumps of ${edges(1 << level)} is ready.`,
                 `up[${level}][v] = up[${level - 1}][up[${level - 1}][v]]`,
             ),
         });
@@ -233,7 +250,7 @@ function build(input: string): LabEvent[] {
             events.push({
                 type: "lift",
                 operation: "lift",
-                narration: `${labels[u]} is ${difference} edges deeper than ${labels[v]}, so it is lifted until both stand at the same depth.`,
+                narration: `${labels[u]} is ${edges(difference)} deeper than ${labels[v]}, so it is lifted until both stand at the same depth.`,
                 state: snapshot(
                     `The depth difference is ${difference}.`,
                     `depth(${labels[u]}) - depth(${labels[v]}) = ${difference}`,
@@ -248,9 +265,9 @@ function build(input: string): LabEvent[] {
             events.push({
                 type: "lift",
                 operation: "lift",
-                narration: `A jump of ${1 << level} edges takes ${labels[u]} to ${labels[target]}, which is one lookup in the table.`,
+                narration: `A jump of ${edges(1 << level)} takes ${labels[u]} to ${labels[target]}, which is one lookup in the table.`,
                 state: snapshot(
-                    `${labels[u]} is lifted by ${1 << level} edges.`,
+                    `${labels[u]} is lifted by ${edges(1 << level)}.`,
                     `up[${level}][${labels[u]}] = ${labels[target]}`,
                 ),
             });
@@ -279,9 +296,9 @@ function build(input: string): LabEvent[] {
             events.push({
                 type: "lift",
                 operation: "lift",
-                narration: `The ${1 << level}-th ancestors of ${labels[u]} and ${labels[v]} are ${labels[ancestorU]} and ${labels[ancestorV]}, which differ, so both vertices are lifted by ${1 << level} edges.`,
+                narration: `The ancestors of ${labels[u]} and ${labels[v]} that are ${edges(1 << level)} up are ${labels[ancestorU]} and ${labels[ancestorV]}, which differ, so both vertices are lifted by ${edges(1 << level)}.`,
                 state: snapshot(
-                    `Both vertices are lifted by ${1 << level} edges.`,
+                    `Both vertices are lifted by ${edges(1 << level)}.`,
                     `up[${level}][${labels[u]}] = ${labels[ancestorU]}`,
                 ),
             });
@@ -312,7 +329,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const lca: LabDefinition = {
+export const definition: LabDefinition = {
     id: "trees.lca",
     title: "Lowest common ancestor",
     scene: "tree",
