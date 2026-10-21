@@ -148,21 +148,6 @@ the smallest position satisfying that inequality, so $k^\ast \le mid$.
 If $P_i(mid)$ is false, then $f(mid, y_i) < x_i$. Suppose $k^\ast \le mid$. Since $k^\ast$ is the smallest position with $f(k^\ast, y_i) \ge x_i$ and $f$ is non-decreasing, every position from $k^\ast$ to $mid$ also satisfies the inequality, in particular $f(mid, y_i) \ge x_i$, which is a contradiction. Therefore $k^\ast > mid$. $\square$
 </MathPanel>
 
-<MathPanel type="theorem" title="Theorem">
-The parallel binary search returns the correct answer for every query.
-</MathPanel>
-
-<MathPanel type="proof" title="Proof">
-Maintain the invariant that the range $[lo_i, hi_i]$ of query $i$ contains
-its answer $k^\ast_i$.
-
-The invariant holds at the start, because the range of every query begins as $[1, N]$ and $k^\ast_i \in [1, N+1]$, with $N+1$ handled by an explicit check.
-
-In a round, the midpoint $mid_i$ of query $i$'s range is computed, and the predicate is evaluated at $mid_i$. By the lemma, $P_i(mid_i)$ being true means $k^\ast_i \le mid_i$, and being false means $k^\ast_i > mid_i$. The query's range is narrowed accordingly to $[lo_i, mid_i]$ or $[mid_i + 1, hi_i]$, so the invariant is preserved.
-
-Every range shrinks by at least a factor of two each round, so after at most $\lceil \log_2 N \rceil$ rounds every non-empty range is a single point, and the lemma forces that point to be $k^\ast_i$. The query whose predicate is false at every position is reported as having no answer. $\square$
-</MathPanel>
-
 ## Algorithm derivation
 
 The algorithm is a breadth-first traversal of the recursion tree over the answer range. Each query carries its own range, and every round does the same three things.
@@ -252,6 +237,23 @@ The tree was written four times and read four times. The independent searches wo
 The answers are $1$, $3$, $3$ and $4$, which agree with the table above.
 
 Note the second row of round 2. B and C share the same midpoint $3$ and the same node, and the checks are read against the tree in the state each of them needs. Two different states of the same structure, read in order, cost two Fenwick queries and no rebuilds.
+
+## Correctness proof
+
+<MathPanel type="theorem" title="Theorem">
+The parallel binary search returns the correct answer for every query.
+</MathPanel>
+
+<MathPanel type="proof" title="Proof">
+Maintain the invariant that the range $[lo_i, hi_i]$ of query $i$ contains
+its answer $k^\ast_i$.
+
+The invariant holds at the start, because the range of every query begins as $[1, N]$ and $k^\ast_i \in [1, N+1]$, with $N+1$ handled by an explicit check.
+
+In a round, the midpoint $mid_i$ of query $i$'s range is computed, and the predicate is evaluated at $mid_i$. By the lemma, $P_i(mid_i)$ being true means $k^\ast_i \le mid_i$, and being false means $k^\ast_i > mid_i$. The query's range is narrowed accordingly to $[lo_i, mid_i]$ or $[mid_i + 1, hi_i]$, so the invariant is preserved.
+
+Every range shrinks by at least a factor of two each round, so after at most $\lceil \log_2 N \rceil$ rounds every non-empty range is a single point, and the lemma forces that point to be $k^\ast_i$. The query whose predicate is false at every position is reported as having no answer. $\square$
+</MathPanel>
 
 ## Complexity analysis
 
@@ -438,7 +440,7 @@ Answer these without looking back. If you cannot, revisit the section named in p
 
 ## Further reading
 
-- The subject overview, which places this technique among the others, is [the advanced algorithms](/algorithms/advanced/).
+- The subject index lists this technique, [parallel binary search](/algorithms/advanced/parallel-binary-search), beside the offline techniques it does not yet cover: [the advanced algorithms](/algorithms/advanced/).
 - The binary search that every one of these searches is a run of is in [binary search](/algorithms/searching/binary-search).
 - The Fenwick tree that the checks read is in [the Fenwick tree](/algorithms/range-queries/fenwick-tree).
 - The disjoint set union that the rollback variant replaces the Fenwick tree with is in [the disjoint set union](/algorithms/graphs/dsu).
