@@ -422,11 +422,12 @@ function checkMathematics(lessons: Awaited<ReturnType<typeof loadLessons>>) {
         const withoutBlocks = prose.replace(displayPattern, "");
         for (const match of prose.matchAll(displayPattern)) {
             try {
-                katex.renderToString(match[1]!.trim(), {
+                const html = katex.renderToString(match[1]!.trim(), {
                     throwOnError: true,
                     strict: false,
                     macros: katexMacros,
                 });
+                checkRenderedMarkup(lesson.file, html, match[1]!);
             } catch (error) {
                 fail(
                     `${lesson.file}: KaTeX cannot render "$$${match[1]}$$" — ${(error as Error).message}`,
@@ -435,17 +436,36 @@ function checkMathematics(lessons: Awaited<ReturnType<typeof loadLessons>>) {
         }
         for (const match of withoutBlocks.matchAll(inlinePattern)) {
             try {
-                katex.renderToString(match[1]!.trim(), {
+                const html = katex.renderToString(match[1]!.trim(), {
                     throwOnError: true,
                     strict: false,
                     macros: katexMacros,
                 });
+                checkRenderedMarkup(lesson.file, html, match[1]!);
             } catch (error) {
                 fail(
                     `${lesson.file}: KaTeX cannot render "$${match[1]}$" — ${(error as Error).message}`,
                 );
             }
         }
+    }
+}
+
+/**
+ * The page compiler reads the rendered page, so anything in the mathematics
+ * that renders as a double brace becomes an interpolation and breaks the build
+ * with a message that points at the wrong place.
+ *
+ * A set of sets, written as `\{\{a,b\},\{c\}\}`, is the usual way to run
+ * into it. The check below names the expression and the file, which is far
+ * more useful than a character offset.
+ */
+function checkRenderedMarkup(file: string, html: string, expression: string) {
+    if (html.includes("{{")) {
+        fail(
+            `${file}: the expression "${expression}" renders as a double brace, which the page compiler reads as an interpolation. ` +
+                "Write the braces separately, for example as two sets rather than as a set of sets.",
+        );
     }
 }
 
