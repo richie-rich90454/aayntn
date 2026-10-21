@@ -1,0 +1,29 @@
+id: usaco.2018.dec.platinum.sort-it-out
+title: Sort It Out
+source: USACO
+contest: 2018 December Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=865
+editorialUrl: https://usaco.org/current/data/sol_itout_platinum_dec18.html
+techniques:
+    - dynamic-programming.longest-increasing-subsequence
+    - range-queries.fenwick-tree
+prerequisites:
+    - dynamic-programming.longest-increasing-subsequence
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - A hundred thousand cows, and the number of longest increasing subsequences can be astronomically large.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The cows Farmer John does not yell at have to be in increasing order already, so the cows that stay form an increasing subsequence.
+    - He yells at as few cows as possible, so the cows that stay form a longest increasing subsequence, and the problem also asks how many such subsequences there are.
+    - The length of the longest increasing subsequence ending at each position is the usual dynamic program, and the count of the ones that achieve it is carried along with it.
+    - The count for a position is the sum of the counts at the earlier positions that can precede it, which is a range sum over the values and a Fenwick tree answers it.
+discussion: >-
+    The cows that are left alone have to be in increasing order, so the answer is the length of a longest increasing subsequence together with the number of ways to choose one. The counting is the hard part, since each position carries a count that has to be summed over the range of values that can precede it, and a Fenwick tree over the values performs that sum in logarithmic time. The order in which the cows are given is also worth checking, because the statement lists them in the opposite order.
+related:
+    - usaco.2020.jan.gold.springboards
+    - usaco.2022.jan.platinum.multiple-choice-test
