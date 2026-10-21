@@ -1,5 +1,5 @@
 /**
- * Authoritative, validated schemas for every machine-readable artefact in
+ * Authoritative, validated schemas for every machine-readable artifact in
  * aayntn. These are the contracts that `tools/validate-content` enforces
  * before the site is allowed to build.
  *
