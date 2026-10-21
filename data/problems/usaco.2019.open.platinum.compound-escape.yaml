@@ -1,0 +1,29 @@
+id: usaco.2019.open.platinum.compound-escape
+title: Compound Escape
+source: USACO
+contest: 2019 US Open Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=949
+editorialUrl: https://usaco.org/current/data/sol_escape_platinum_open19.html
+techniques:
+    - graphs.mst
+    - graphs.dsu
+prerequisites:
+    - graphs.dsu
+difficulty: 5
+estimatedMinutes: 55
+specialConstraints:
+    - Thirty thousand rows and only six columns, so the graph is a narrow strip and the number of distinct connection states stays small even though the graph is large.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The gates have costs, opening a set of them costs their sum, and all the cows must be able to gather in one cell, so the opened gates must connect the whole grid.
+    - The cheapest way to connect a weighted graph is a minimum spanning tree, so the cost of the best plan is the weight of a minimum spanning tree.
+    - But the question also asks how many minimum-cost plans there are, and the number of spanning trees of a graph is not something a greedy algorithm counts.
+    - The width of the grid is small, so the connection state of a cut through the grid is a partition of the columns, and a dynamic program over that partition counts the trees.
+discussion: >-
+    The minimum cost is a minimum spanning tree of the grid, which is easy, but the number of minimum-cost plans is a count of minimum spanning trees, and that is what makes the problem hard. A narrow grid can be processed row by row, and the state of a cut is the partition of the columns into components, which has only a handful of possibilities when the width is six. The dynamic program over those states both optimizes and counts.
+related:
+    - usaco.2019.open.gold.i-would-walk-500-miles
+    - usaco.2023.dec.platinum.a-graph-problem
