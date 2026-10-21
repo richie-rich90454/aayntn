@@ -1,0 +1,181 @@
+algorithm: graphs.dijkstra
+title: Dijkstra's algorithm
+summary: Single-source shortest paths in a graph with nonnegative edge weights, settled in order of increasing distance with a binary min-heap.
+subject: graphs
+divisions: [gold]
+importance: common-contest-technique
+complexity:
+    time: "O((V + E) log V)"
+    space: "O(V + E)"
+assumptions:
+    - All edge weights are nonnegative.
+reviewed: false
+variants:
+    - id: minimal
+      language: c
+      file: c/minimal.c
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the distance from a source to every vertex of a graph with nonnegative edge weights, using a binary min-heap and -1 for the vertices the source cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "An adjacency list of weighted edges, the number of vertices and the start vertex."
+      outputs: "The distance from the source to every vertex, written into the array of the caller, and -1 for the vertices the source cannot reach."
+      notes: "The heap is a binary min-heap of (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the heap holds at most O(E) entries. The distances are 64-bit integers, because a shortest path may be far longer than a single weight. Ownership: the caller allocates the distance array and the routine only fills it, so it must have room for one entry per vertex."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the distance from a source to every vertex of a graph with nonnegative edge weights, using a binary min-heap and -1 for the vertices the source cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "An adjacency list of weighted edges and the start vertex."
+      outputs: "The distance from the source to every vertex, and -1 for the vertices the source cannot reach."
+      notes: "The priority queue holds (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the queue holds at most O(E) entries. The distances are 64-bit integers, because a shortest path may be far longer than a single weight."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
+    - id: minimal
+      language: java
+      file: java/Program.java
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the distance from a source to every vertex of a graph with nonnegative edge weights, using a binary min-heap and -1 for the vertices the source cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "An adjacency list of weighted edges and the start vertex."
+      outputs: "The distance from the source to every vertex, and -1 for the vertices the source cannot reach."
+      notes: "The priority queue holds (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the queue holds at most O(E) entries. The distances are 64-bit integers, because a shortest path may be far longer than a single weight."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
+    - id: minimal
+      language: javascript
+      file: javascript/minimal.js
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. Reusable function that returns the distance from a source to every vertex of a graph with nonnegative edge weights, using a binary min-heap and -1 for the vertices the source cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "An adjacency list of weighted edges and the start vertex."
+      outputs: "The distance from the source to every vertex, and -1 for the vertices the source cannot reach."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The heap holds (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the heap holds at most O(E) entries. The distances are numbers, so a shortest path longer than 2^53 would lose precision."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
+    - id: minimal
+      language: pascal
+      file: pascal/minimal.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. Reusable function that returns the distance from a source to every vertex of a graph with nonnegative edge weights, using a binary min-heap and -1 for the vertices the source cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "An adjacency list of weighted edges and the start vertex."
+      outputs: "The distance from the source to every vertex, and -1 for the vertices the source cannot reach."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The heap holds (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the heap holds at most O(E) entries. The distances are 64-bit integers, because a shortest path may be far longer than a single weight."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
+    - id: minimal
+      language: python
+      file: python/minimal.py
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the distance from a source to every vertex of a graph with nonnegative edge weights, using a binary min-heap and -1 for the vertices the source cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "An adjacency list of weighted edges and the start vertex."
+      outputs: "The distance from the source to every vertex, and -1 for the vertices the source cannot reach."
+      notes: "The heap holds (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the heap holds at most O(E) entries. The distances are arbitrary precision integers, so a shortest path never overflows."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a weighted graph from stdin and prints the distance from the start vertex to every vertex, and -1 for the vertices the start cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected edges and nonnegative weights, then the start vertex s."
+      outputs: "One line with the distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The heap is a binary min-heap of (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the heap holds at most O(E) entries and the run takes O((V + E) log V) time. An edge that names a vertex outside 0..n-1 or a negative weight is ignored. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a weighted graph from stdin and prints the distance from the start vertex to every vertex, and -1 for the vertices the start cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected edges and nonnegative weights, then the start vertex s."
+      outputs: "One line with the distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The heap is a binary min-heap of (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the heap holds at most O(E) entries and the run takes O((V + E) log V) time. An edge that names a vertex outside 0..n-1 or a negative weight is ignored. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a weighted graph from stdin and prints the distance from the start vertex to every vertex, and -1 for the vertices the start cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected edges and nonnegative weights, then the start vertex s."
+      outputs: "One line with the distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The heap is a binary min-heap of (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the heap holds at most O(E) entries and the run takes O((V + E) log V) time. An edge that names a vertex outside 0..n-1 or a negative weight is ignored. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it parses a weighted graph from stdin and prints the distance from the start vertex to every vertex, and -1 for the vertices the start cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected edges and nonnegative weights, then the start vertex s."
+      outputs: "One line with the distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The heap is a binary min-heap of (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the heap holds at most O(E) entries and the run takes O((V + E) log V) time. An edge that names a vertex outside 0..n-1 or a negative weight is ignored. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it parses a weighted graph from stdin and prints the distance from the start vertex to every vertex, and -1 for the vertices the start cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected edges and nonnegative weights, then the start vertex s."
+      outputs: "One line with the distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The heap is a binary min-heap of (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the heap holds at most O(E) entries and the run takes O((V + E) log V) time. An edge that names a vertex outside 0..n-1 or a negative weight is ignored. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a weighted graph from stdin and prints the distance from the start vertex to every vertex, and -1 for the vertices the start cannot reach."
+      time: "O((V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the distance array and the heap of at most O(E) entries"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected edges and nonnegative weights, then the start vertex s."
+      outputs: "One line with the distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The heap holds (distance, vertex) pairs. A shorter path to a vertex pushes a second entry instead of decreasing the key of the first one, and the stale entry is discarded when it surfaces, so the heap holds at most O(E) entries and the run takes O((V + E) log V) time. An edge that names a vertex outside 0..n-1 or a negative weight is ignored. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [push-start, extract-min, relax-edge, reject-relaxation, discard-stale, complete-vertex]
