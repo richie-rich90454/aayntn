@@ -56,9 +56,11 @@ pnpm test              # the unit, differential and content tests
 docs/              the site: Markdown lessons, the theme, the generated data
 implementations/   one directory per algorithm, with one file per language
 templates/         reusable contest preparation patterns
-data/              the problem catalogue, the curriculum tracks and the synonyms
+data/              the algorithm registry, the curriculum tracks, the problem
+                   catalogue and the search synonyms
+diagrams/source/   the handcrafted SVG sources, published by the build
 tools/             the build-time generators and validators
-tests/             the unit, differential and content tests
+tests/             the unit, differential, content and accessibility tests
 ```
 
 Read **[CONTRIBUTING.md](CONTRIBUTING.md)** for the contract: the frontmatter schema, the manifest format, the code style rules and the list of checks a pull request must pass.
