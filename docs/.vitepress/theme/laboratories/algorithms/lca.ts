@@ -103,7 +103,7 @@ function build(input: string): LabEvent[] {
     const count = labels.length;
     const parent = new Array<number>(count).fill(0);
     const depth = new Array<number>(count).fill(-1);
-    const positions = treeLayout(children, 0, 720, 460);
+    const positions = treeLayout(children, 0, 720, 380);
 
     let levels = 1;
     while (1 << levels <= count) levels += 1;
@@ -182,7 +182,7 @@ function build(input: string): LabEvent[] {
         active = [vertex];
         events.push({
             type: "build",
-            operation: "build",
+            operation: "build-table",
             narration:
                 vertex === 0
                     ? `The root ${labels[0]} has depth 0 and is its own ancestor.`
@@ -205,7 +205,7 @@ function build(input: string): LabEvent[] {
         active = [0];
         events.push({
             type: "build",
-            operation: "build",
+            operation: "build-table",
             narration: `The row of the ${1 << level}-th ancestors is filled from the row of the ${1 << (level - 1)}-th ancestors, so every jump of ${1 << level} edges is one lookup.`,
             state: snapshot(
                 `The row for jumps of ${1 << level} edges is ready.`,
