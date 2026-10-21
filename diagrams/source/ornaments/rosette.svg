@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Symmetrical mathematical rosette">
+  <title>Symmetrical mathematical rosette</title>
+  <g fill="none" stroke="#2847B8" stroke-width="1.2">
+    <circle cx="32" cy="32" r="26"/>
+    <circle cx="32" cy="32" r="19" stroke-width="0.7" opacity="0.7"/>
+    <path d="M32 6 A26 26 0 0 1 58 32"/>
+    <path d="M58 32 A26 26 0 0 1 32 58"/>
+    <path d="M32 58 A26 26 0 0 1 6 32"/>
+    <path d="M6 32 A26 26 0 0 1 32 6"/>
+    <path d="M32 13 A19 19 0 0 1 51 32" stroke-width="0.8" opacity="0.8"/>
+    <path d="M32 51 A19 19 0 0 1 13 32" stroke-width="0.8" opacity="0.8"/>
+  </g>
+  <g fill="#E8B84A">
+    <rect x="30" y="30" width="4" height="4"/>
+    <rect x="14" y="30" width="4" height="4"/>
+    <rect x="46" y="30" width="4" height="4"/>
+    <rect x="30" y="14" width="4" height="4"/>
+    <rect x="30" y="46" width="4" height="4"/>
+  </g>
+</svg>
