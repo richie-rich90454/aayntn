@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72" role="img" aria-label="Graph-shaped decorative medallion">
+  <title>Graph-shaped decorative medallion</title>
+  <circle cx="36" cy="36" r="33" fill="none" stroke="#2847B8" stroke-width="1.2"/>
+  <circle cx="36" cy="36" r="27" fill="none" stroke="#2847B8" stroke-width="0.6" opacity="0.6"/>
+  <g fill="none" stroke="#2847B8" stroke-width="1.1">
+    <path d="M36 12 L18 30 M36 12 L54 30 M18 30 L36 48 M54 30 L36 48 M18 30 L54 30"/>
+    <path d="M36 12 L36 48" stroke-dasharray="3 3" opacity="0.6"/>
+  </g>
+  <g fill="#E8B84A">
+    <circle cx="36" cy="12" r="3.4"/>
+    <circle cx="18" cy="30" r="3.4"/>
+    <circle cx="54" cy="30" r="3.4"/>
+    <circle cx="36" cy="48" r="3.4"/>
+  </g>
+</svg>
