@@ -1,0 +1,30 @@
+id: usaco.2016.jan.bronze.promotion-counting
+title: Promotion Counting
+source: USACO
+contest: 2016 January Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=591
+editorialUrl: https://usaco.org/current/data/sol_promote_bronze_jan16.html
+techniques:
+    - arrays.two-dimensional-prefix-sums
+    - arrays.prefix-sums
+prerequisites:
+    - arrays.prefix-sums
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - The grid can be a thousand rows by a thousand columns, so scanning the four quadrants once per cow is far too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - For each cow, the cows above it are the ones in the same column with a smaller row index, and likewise for the other three directions.
+    - Counting the cows in each of the four quadrants separately is the right shape, but doing it by scanning is quadratic in the size of the grid.
+    - A two-dimensional prefix sum answers the question of how many cows lie in rows one to r and columns one to c in constant time, and each quadrant is a difference of four such queries.
+    - Build the prefix table once, then answer the four quadrant queries for every cow.
+discussion: >-
+    Each direction around a cow is a rectangle anchored at that cow's position, and the four rectangle queries are differences of prefix sums. The construction is the standard one, where a value at row i and column j is the cow at that cell plus the two prefix values above and to the left, minus the diagonal one. The whole problem is that observation plus a careful index convention.
+related:
+    - usaco.2015.feb.silver.cow-hopscotch
+    - usaco.2019.feb.silver.painting-the-barn
