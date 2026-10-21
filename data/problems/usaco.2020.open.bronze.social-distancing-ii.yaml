@@ -1,0 +1,30 @@
+id: usaco.2020.open.bronze.social-distancing-ii
+title: Social Distancing II
+source: USACO
+contest: 2020 US Open Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1036
+editorialUrl: https://usaco.org/current/data/sol_socdist2_bronze_open20.html
+techniques:
+    - arrays.difference-arrays
+    - foundations.sorting
+prerequisites:
+    - arrays.prefix-sums
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - A thousand cows spread over a line a billion units long, so the positions cannot be used as array indices.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Every cow within the radius of an infected cow becomes infected, and the infection spreads, so the infected set is a union of intervals.
+    - Sort the cows by position, and the infected set becomes a set of intervals, each running from an infected cow to the right by two radii.
+    - When two such intervals overlap they merge, so a single pass from left to right with a running right endpoint counts the infected cows.
+    - Count the cows that fall outside every interval, and report that number.
+discussion: >-
+    The infected region is a union of intervals, and once the cows are sorted, merging those intervals is a single pass from left to right with a running right endpoint. Nothing here needs an array indexed by position, which matters because the coordinates are huge. The trick is noticing that the spread is captured by the reach of each infected cow rather than by a day-by-day simulation.
+related:
+    - usaco.2019.feb.silver.painting-the-barn
+    - usaco.2020.dec.bronze.daisy-chains
