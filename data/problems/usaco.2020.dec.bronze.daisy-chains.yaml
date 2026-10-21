@@ -1,0 +1,31 @@
+id: usaco.2020.dec.bronze.daisy-chains
+title: Daisy Chains
+source: USACO
+contest: 2020 December Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1060
+editorialUrl: https://usaco.org/current/data/sol_prob2_bronze_dec20.html
+techniques:
+    - enumeration.subset-enumeration
+    - arrays.prefix-sums
+prerequisites:
+    - enumeration.subset-enumeration
+    - arrays.prefix-sums
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - There are only a hundred flowers, so there are about five thousand blocks, and each one has to be tested in constant time.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A photograph is of a contiguous block of flowers, so the objects to consider are the intervals rather than arbitrary subsets.
+    - An interval is good when every flower in it has the same number of petals, so the test is that the maximum equals the minimum.
+    - A prefix sum of the petal counts and a prefix sum of their squares test that in constant time, because equal values satisfy a fixed identity.
+    - For each of the roughly five thousand intervals, compare the two prefix sums and count the good ones.
+discussion: >-
+    The enumeration is over intervals, and the work per interval has to be constant, which rules out scanning the block. Comparing the sum of the values with the sum of their squares detects a block whose values are all equal, because a mixed block makes the two disagree in a way that a constant block cannot. The two prefix arrays are the whole solution, and the interval count is small enough to enumerate.
+related:
+    - usaco.2021.jan.bronze.uddered-but-not-herd
+    - usaco.2020.open.bronze.social-distancing-ii
