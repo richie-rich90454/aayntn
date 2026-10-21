@@ -1,0 +1,30 @@
+id: usaco.2016.jan.silver.build-gates
+title: Build Gates
+source: USACO
+contest: 2016 January Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=596
+editorialUrl: https://usaco.org/current/data/sol_gates_silver_jan16.html
+techniques:
+    - graphs.bfs
+    - graphs.representation
+prerequisites:
+    - graphs.representation
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - Farmer John may walk over the same point many times, and only the distinct segments he laid count.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The trail is a walk on the integer lattice, and the fence consists of the unit segments the walk used at least once.
+    - So the first step is to recover the set of used segments. The set of visited lattice points on its own is not enough.
+    - Mark every unit segment the walk crosses in a set, and then look at the lattice points the fence visits.
+    - The minimum fence enclosing all the visited points is the boundary of their region, and a flood fill from outside marks exactly the exterior.
+discussion: >-
+    The walk lays a set of unit segments, and the fence that is needed is the outer boundary of the region those segments enclose, so the segments have to be recovered exactly. A flood fill from outside the region then separates the segments that touch the exterior from the ones buried inside, and the total length of the exposed ones is the answer. The subtlety is that a segment laid twice still counts once, so the reconstruction uses a set rather than a count.
+related:
+    - usaco.2017.open.bronze.modern-art
+    - usaco.2015.jan.silver.meeting-time
