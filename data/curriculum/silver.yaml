@@ -1,0 +1,19 @@
+id: curriculum.silver
+title: The Silver track
+summary: Named techniques that replace the double loop, and the first graph algorithms.
+division: silver
+lessons:
+    - start.algorithm-analysis
+    - start.data-structures
+    - foundations.complexity
+    - foundations.sorting
+    - searching.binary-search
+    - searching.two-pointers
+    - searching.sliding-window
+    - arrays.prefix-sums
+    - arrays.difference-arrays
+    - greedy.interval-scheduling
+    - graphs.representation
+    - graphs.bfs
+    - graphs.dfs
+    - graphs.dsu
