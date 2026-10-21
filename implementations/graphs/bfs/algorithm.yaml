@@ -1,0 +1,169 @@
+algorithm: graphs.bfs
+title: Breadth-first search
+summary: Explore a graph level by level from a start vertex, which turns the traversal order into shortest-path distances.
+subject: graphs
+divisions: [silver, gold]
+importance: common-contest-technique
+complexity:
+    time: "O(V + E)"
+    space: "O(V + E)"
+assumptions:
+    - Every edge has unit cost, so the BFS distance is the true shortest-path distance.
+reviewed: false
+variants:
+    - id: minimal
+      language: c
+      file: c/minimal.c
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the distance from a source to every vertex of an unweighted graph."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The function has no I/O of its own: it takes an adjacency list and a source and fills a distance array, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the distance from a source to every vertex of an unweighted graph."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The function has no I/O of its own: it takes an adjacency list and a source and returns the distance to every vertex, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+    - id: minimal
+      language: java
+      file: java/Program.java
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the distance from a source to every vertex of an unweighted graph."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The function has no I/O of its own: it takes an adjacency list and a source and returns the distance to every vertex, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+    - id: minimal
+      language: javascript
+      file: javascript/minimal.js
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the distance from a source to every vertex of an unweighted graph."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The function has no I/O of its own: it takes an adjacency list and a source and returns the distance to every vertex, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+    - id: minimal
+      language: pascal
+      file: pascal/minimal.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the distance from a source to every vertex of an unweighted graph."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The function has no I/O of its own: it takes an adjacency list and a source and returns the distance to every vertex, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+    - id: minimal
+      language: python
+      file: python/minimal.py
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the distance from a source to every vertex of an unweighted graph."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The function has no I/O of its own: it takes an adjacency list and a source and returns the distance to every vertex, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the distance from the start vertex to every vertex."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the distance from the start vertex to every vertex."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the distance from the start vertex to every vertex."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the distance from the start vertex to every vertex."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the distance from the start vertex to every vertex."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the distance from the start vertex to every vertex."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
+      notes: "The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
+      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
