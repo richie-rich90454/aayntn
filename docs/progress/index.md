@@ -37,6 +37,8 @@ The dashboard distinguishes three states for a lesson, and the distinction is th
 
 This is deliberate. An automated signal of mastery would be a number that looks meaningful and is not, and it would replace the only thing that actually works, which is the reader deciding honestly whether the material is understood. The checklists at the end of each lesson are written so that the decision has something to be based on.
 
+<LearnNext />
+
 ## Export and import
 
 Two buttons sit at the bottom of the dashboard, and they are the only way to move your history between devices.
