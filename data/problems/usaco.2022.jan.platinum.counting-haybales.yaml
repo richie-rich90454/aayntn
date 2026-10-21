@@ -1,0 +1,29 @@
+id: usaco.2022.jan.platinum.counting-haybales
+title: Counting Haybales
+source: USACO
+contest: 2022 January Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1189
+editorialUrl: https://usaco.org/current/data/sol_prob2_platinum_jan22.html
+techniques:
+    - combinatorics.binomial-coefficients
+    - number-theory.modular-arithmetic
+prerequisites:
+    - combinatorics.binomial-coefficients
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - Five thousand stacks with heights up to a billion, and the count is taken modulo a prime.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A move transfers a haybale from a taller stack to a shorter one when the two heights differ by exactly one, so the heights never change by more than one at a time.
+    - What the moves preserve is the total height and something about the order of the heights, so the reachable configurations are constrained by an invariant.
+    - The invariant turns the question into a count of orderings that satisfy a simple numeric condition, and those are counted with binomial coefficients.
+    - All the arithmetic is done modulo a prime, with factorials and inverse factorials so that each coefficient costs constant time.
+discussion: >-
+    The moves look local but they preserve a global invariant, and once the invariant is identified the reachable configurations are exactly the orderings that satisfy it, which is a counting problem rather than a search. The counts that appear are binomial coefficients over the stack heights, and the answer is taken modulo a prime, so the coefficients are built from factorials and inverse factorials. The height bound is what keeps the invariant simple.
+related:
+    - usaco.2024.feb.silver.moorbles
+    - usaco.2019.dec.gold.moortal-cowmbat
