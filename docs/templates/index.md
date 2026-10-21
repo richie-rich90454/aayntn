@@ -24,17 +24,17 @@ There is a second reason to write them in advance, and it is the one the contest
 | Category | What the template provides | Where it is discussed |
 | --- | --- | --- |
 | Starting programs | The complete skeleton of a solution in each language, from the includes to the return | The six [language centers](/languages/) |
-| Fast input and output | Buffered readers, stream flags, bulk reads, and the one-write output habit | [Language transition](/start/from-ap-csa/part-5-language-transition/) |
+| Fast input and output | Buffered readers, stream flags, bulk reads, and the one-write output habit | [Language transition](/start/from-ap-csa/part-5-language-transition) |
 | Containers | The declaration of each standard container in each language, with its cost | [Language comparison](/languages/) |
-| Number theory | Sieve, extended Euclidean algorithm, modular exponentiation, factorial tables | [Discrete mathematics](/start/from-ap-csa/part-3-discrete-mathematics/) |
-| Graph foundations | Adjacency lists, edge lists, traversal scaffolding, integer widths | [Graph representation](/algorithms/graphs/representation/) |
+| Number theory | Sieve, extended Euclidean algorithm, modular exponentiation, factorial tables | [Discrete mathematics](/start/from-ap-csa/part-3-discrete-mathematics) |
+| Graph foundations | Adjacency lists, edge lists, traversal scaffolding, integer widths | [Graph representation](/algorithms/graphs/representation) |
 | Graph algorithms | Priority queue, distance arrays, topological order, union-find scaffolding | [Graphs](/algorithms/graphs/) |
 | Range queries | Fenwick tree, segment tree, sparse table construction | [Range query structures](/algorithms/range-queries/) |
 | Dynamic programming structures | Flattened tables, row offsets, in-place update loops | [Dynamic programming](/algorithms/dynamic-programming/) |
 | Geometry | The point type, the cross and dot products, the orientation test, exact integer arithmetic | [Computational geometry](/algorithms/geometry/) |
-| Debugging | Assertions on invariants, timing scaffolding, a brute-force comparison harness | [Contest problem-solving literacy](/start/from-ap-csa/part-6-contest-literacy/) |
-| Testing | Generators for boundary inputs, a shrinker, an exact-output comparator | [Contest problem-solving literacy](/start/from-ap-csa/part-6-contest-literacy/) |
-| Historical input | The file-based reading and writing convention used by older problems | [USACO rules](/reference/usaco-rules/) |
+| Debugging | Assertions on invariants, timing scaffolding, a brute-force comparison harness | [Contest problem-solving literacy](/start/from-ap-csa/part-6-contest-literacy) |
+| Testing | Generators for boundary inputs, a shrinker, an exact-output comparator | [Contest problem-solving literacy](/start/from-ap-csa/part-6-contest-literacy) |
+| Historical input | The file-based reading and writing convention used by older problems | [USACO rules](/reference/usaco-rules) |
 
 Only the first two categories are genuinely reusable across every problem. The rest are patterns that you write once and then recognize when you need them, and the encyclopedia's articles are the better place to learn them, because each article explains why the code takes the shape it does.
 
