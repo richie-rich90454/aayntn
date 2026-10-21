@@ -1,0 +1,30 @@
+id: usaco.2019.open.gold.i-would-walk-500-miles
+title: I Would Walk 500 Miles
+source: USACO
+contest: 2019 US Open Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=946
+editorialUrl: https://usaco.org/current/data/sol_walk_gold_open19.html
+techniques:
+    - graphs.mst
+    - graphs.dijkstra
+prerequisites:
+    - graphs.dsu
+    - graphs.dijkstra
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - Seven thousand five hundred cows, so the complete graph has about twenty-eight million edges and cannot be built explicitly.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The distance between two cows has a closed form that does not depend on their order, and the smallest such distance between two groups is what has to be maximized.
+    - So the problem is to find a partition into groups such that the shortest edge crossing the partition is as long as possible.
+    - That is exactly the definition of a minimum spanning tree, where the smallest edge of any spanning tree is as large as possible.
+    - Compute the minimum spanning tree and take its smallest edge, handling the required number of groups separately.
+discussion: >-
+    Maximizing the shortest distance between two groups is the same as maximizing the smallest edge of any spanning tree, so the problem is a minimum spanning tree with the answer taken from its lightest edge. The complete graph is too large to build, so the closed form for the distance between two cows is used to find the lightest edges without enumerating all of them. The number of groups is handled by a separate argument about how the tree can be cut.
+related:
+    - usaco.2015.feb.silver.superbull
+    - usaco.2022.feb.gold.moo-network
