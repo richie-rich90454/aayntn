@@ -1,0 +1,30 @@
+id: usaco.2025.feb.bronze.making-mexes
+title: Making Mexes
+source: USACO
+contest: 2025 February Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1492
+editorialUrl: https://usaco.org/current/data/sol_prob2_bronze_feb25.html
+techniques:
+    - arrays.prefix-sums
+    - foundations.complexity
+prerequisites:
+    - arrays.prefix-sums
+difficulty: 3
+estimatedMinutes: 25
+specialConstraints:
+    - The answer is requested for every value from zero to N, so recomputing each one from scratch is too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - To make the mex equal i, the values zero through i minus one must all be present and the value i must be absent.
+    - The number of operations needed is the number of missing values below i, plus one more if i itself is present and has to be removed.
+    - So the answer is a running count of how many values below i are missing, and that count only changes when i is a value that does not occur.
+    - Precompute which values occur, then sweep i from zero upward and print the running answer.
+discussion: >-
+    The requirement decomposes into a condition on presence below i and a condition on the value i itself, and both are captured by counts that can be swept in one pass. The subtle point is that removing i costs an extra operation exactly when i occurs, while a value that does not occur costs nothing to remove. Everything is linear because the answers are produced in increasing order of i.
+related:
+    - usaco.2021.jan.bronze.just-stalling
+    - usaco.2016.jan.bronze.promotion-counting
