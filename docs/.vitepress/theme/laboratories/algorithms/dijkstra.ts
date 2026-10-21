@@ -233,7 +233,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const dijkstra: LabDefinition = {
+export const definition: LabDefinition = {
     id: "graphs.dijkstra",
     title: "Dijkstra's algorithm",
     scene: "graph",
