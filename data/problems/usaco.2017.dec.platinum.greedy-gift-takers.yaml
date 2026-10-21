@@ -1,0 +1,30 @@
+id: usaco.2017.dec.platinum.greedy-gift-takers
+title: Greedy Gift Takers
+source: USACO
+contest: 2017 December Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=770
+editorialUrl: https://usaco.org/current/data/sol_greedy_platinum_dec17.html
+techniques:
+    - searching.binary-search
+    - range-queries.fenwick-tree
+prerequisites:
+    - searching.binary-search
+    - range-queries.fenwick-tree
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - A hundred thousand cows, so the answer cannot be found by testing each candidate in turn.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The cows are in a queue, and each of them wants a certain number of gifts before she will take one, and the cow at the front keeps taking gifts until she is satisfied.
+    - Fix the number of gifts available and ask how many cows can be satisfied with it, and then find the smallest number for which that works.
+    - As the number of gifts grows the set of satisfied cows only grows, so the number can be found by binary search.
+    - The test for a fixed number has to be answered quickly, and the cows that become satisfied are the ones with a large enough demand, which a Fenwick tree over the positions can find.
+discussion: >-
+    The statement has a monotone quantity, the number of cows that can be satisfied with a given supply of gifts, and monotonicity is what makes a binary search on the answer possible. The test itself is the hard part, because the cows are served from the front of the queue and the demand of a cow decides when she is satisfied. A Fenwick tree over the positions of the cows turns that test into a logarithmic computation.
+related:
+    - usaco.2020.jan.silver.loan-repayment
+    - usaco.2023.feb.platinum.problem-setting
