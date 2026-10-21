@@ -1,0 +1,19 @@
+# The segment tree demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: range-queries.segment-tree
+title: Segment tree
+algorithm: range-queries.segment-tree
+scene: hybrid
+preset: build
+storyboard:
+    - title: Leaves first
+      description: The build starts at the leaves, which hold the values of the array.
+    - title: Every node caches a sum
+      description: An internal node holds the sum of its two children, so the range it covers is answered without reading the array.
+    - title: A query splits the range
+      description: The nodes that lie inside the range are read from the cache, and the ones that only partly overlap are split.
+    - title: An update walks one path
+      description: Only the nodes on the path to the changed leaf hold a new value.
