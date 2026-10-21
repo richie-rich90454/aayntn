@@ -22,16 +22,16 @@ export interface GraphInput {
 
 /** Place `count` vertices evenly on a circle. */
 export function circleLayout(count: number, width = 720, height = 460): Point[] {
-    const centreX = width / 2;
-    const centreY = height / 2;
+    const centerX = width / 2;
+    const centerY = height / 2;
     const radiusX = width / 2 - 70;
     const radiusY = height / 2 - 60;
     const points: Point[] = [];
     for (let index = 0; index < count; index += 1) {
         const angle = (2 * Math.PI * index) / count - Math.PI / 2;
         points.push({
-            x: Math.round(centreX + radiusX * Math.cos(angle)),
-            y: Math.round(centreY + radiusY * Math.sin(angle)),
+            x: Math.round(centerX + radiusX * Math.cos(angle)),
+            y: Math.round(centerY + radiusY * Math.sin(angle)),
         });
     }
     return points;
