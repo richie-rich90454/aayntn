@@ -1,0 +1,181 @@
+/**
+ * Minimal reset. The aayntn theme ships no third-party CSS framework; every
+ * rule here exists because a browser default would otherwise leak into the
+ * design.
+ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + var(--space-6));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--surface-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variant-numeric: tabular-nums;
+    text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-weight: 700;
+    line-height: var(--leading-heading);
+    color: var(--text-primary);
+}
+
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+    margin: 0;
+}
+
+ul,
+ol {
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: var(--text-link);
+    text-decoration: none;
+    text-underline-offset: 0.18em;
+}
+
+a:hover {
+    color: var(--text-link-hover);
+    text-decoration: underline;
+}
+
+button,
+input,
+select,
+textarea {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+img,
+svg,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+code,
+kbd,
+samp,
+pre {
+    font-family: var(--font-code);
+    font-size: var(--text-code);
+    font-variant-ligatures: none;
+}
+
+hr {
+    height: 0;
+    margin: var(--space-8) 0;
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+}
+
+::selection {
+    background: var(--color-gold);
+    color: var(--color-black);
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-cobalt);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+html.dark :focus-visible {
+    outline-color: var(--color-gold);
+}
+
+/* Screen-reader-only text that remains available to search indexing. */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: var(--space-4);
+    z-index: 200;
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-cobalt);
+    color: var(--color-white);
+    font-weight: 600;
+    border-radius: var(--radius);
+    transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+    top: var(--space-3);
+    color: var(--color-white);
+    text-decoration: none;
+}
