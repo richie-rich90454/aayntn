@@ -1,0 +1,29 @@
+id: usaco.2019.dec.gold.milk-visits
+title: Milk Visits
+source: USACO
+contest: 2019 December Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=970
+editorialUrl: https://usaco.org/current/data/sol_milkvisits_gold_dec19.html
+techniques:
+    - trees.heavy-light-decomposition
+    - graphs.representation
+prerequisites:
+    - trees.heavy-light-decomposition
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - A hundred thousand farms and a hundred thousand queries, so each query has to be answered without walking the tree.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The farms form a tree, and a visit is valid when the route between the two farms contains a farm of every one of the three types.
+    - So a route fails only if it misses one of the three types entirely, and the number of valid visits is the total minus the routes that miss a type.
+    - For a fixed type, the farms that have it are marked, and a route misses them exactly when both endpoints lie in the same region of the tree with the marked farms removed.
+    - For each of the three types, count the pairs inside each region and subtract them from the total, and the regions come from a traversal of the tree.
+discussion: >-
+    Counting the routes that contain every type is easier as the complement, because a route is invalid exactly when it misses some type, and the routes that miss a fixed type are the pairs of endpoints in the same component of the tree once the farms of that type are removed. The answer is therefore a total minus three counts, each of which is a sum of squares over component sizes. The tree structure and the per-type marking are what make the components computable.
+related:
+    - usaco.2019.feb.gold.cow-land
+    - usaco.2018.open.platinum.disruption
