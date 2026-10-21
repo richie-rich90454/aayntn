@@ -8,7 +8,7 @@ import { aayntnDark, aayntnLight } from "./theme/shiki-theme";
  *
  * A statically generated competitive-programming encyclopedia. Every editorial
  * page is an ordinary Markdown file; every implementation is a real source file
- * in the language it claims to be; every interactive visualisation is driven by
+ * in the language it claims to be; every interactive visualization is driven by
  * deterministic TypeScript reference code.
  */
 
@@ -167,7 +167,7 @@ const sidebar: ThemeConfig["sidebar"] = {
         {
             text: "Practice",
             collapsed: false,
-            items: [{ text: "Problem catalogue", link: "/practice/" }],
+            items: [{ text: "Problem catalog", link: "/practice/" }],
         },
     ],
     "/laboratory/": [
