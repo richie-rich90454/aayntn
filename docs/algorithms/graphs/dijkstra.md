@@ -495,4 +495,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The ordering of a directed acyclic graph, which is the right frame for a weighted graph that cannot contain a cycle, is [topological sort](/algorithms/graphs/topological-sort).
 - The traversal that shares the shape but not the purpose is [depth-first search](/algorithms/graphs/dfs).
 - The graph representation the search assumes, and the difference between an adjacency list and an adjacency matrix, are covered in [data structures and modeling](/start/from-ap-csa/part-4-data-structures-and-modeling).
-- Every listing in this article, in all six languages, is collected on the [Dijkstra source page](/implementations/graphs-dijkstra).
+- Every listing in this article, in all six languages, is collected on the [Dijkstra source page](/implementations/graphs-dijkstra/).
