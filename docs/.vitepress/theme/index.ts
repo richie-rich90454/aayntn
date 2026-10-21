@@ -8,6 +8,8 @@ import PracticeCatalog from "./components/problems/PracticeCatalog.vue";
 import ProgressDashboard from "./components/progress/ProgressDashboard.vue";
 import Synonyms from "./components/Synonyms.vue";
 import Figure from "./components/Figure.vue";
+import Ornament from "./components/Ornament.vue";
+import Banner from "./components/Banner.vue";
 import AlgorithmPlayer from "./laboratories/core/AlgorithmPlayer.vue";
 
 import "katex/dist/katex.min.css";
@@ -28,9 +30,14 @@ export default {
         app.component("MathPanel", MathPanel);
         app.component("PrerequisiteGraph", PrerequisiteGraph);
         app.component("PracticeCatalog", PracticeCatalog);
+        // The British spelling is kept as an alias so that a page written
+        // against the older name still resolves.
+        app.component("PracticeCatalogue", PracticeCatalog);
         app.component("ProgressDashboard", ProgressDashboard);
         app.component("Synonyms", Synonyms);
         app.component("Figure", Figure);
+        app.component("Ornament", Ornament);
+        app.component("Banner", Banner);
         app.component("AlgorithmPlayer", AlgorithmPlayer);
     },
 } satisfies Theme;
