@@ -1,0 +1,31 @@
+id: usaco.2020.feb.platinum.delegation
+title: Delegation
+source: USACO
+contest: 2020 February Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1020
+editorialUrl: https://usaco.org/current/data/sol_deleg_platinum_feb20.html
+techniques:
+    - trees.tree-dp
+    - graphs.dsu
+    - enumeration.backtracking
+prerequisites:
+    - trees.tree-dp
+    - enumeration.backtracking
+difficulty: 5
+estimatedMinutes: 55
+specialConstraints:
+    - A hundred thousand pastures, so the search for a valid partition has to be done with pruning rather than by trying every split.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The farm is a tree, and the goal is to split the cows at each node into groups that can each be sent off to form a valid group somewhere.
+    - So for each node you need to know which sizes of leftover group it can send upward, and the answer at a node depends on the answers at its children.
+    - The children each contribute some groups and one leftover, and the leftover has to be merged with the others, so the states have to be combined carefully.
+    - The search over which leftover to keep grows exponentially in the number of children, so the partitions are enumerated with backtracking and pruned as soon as a state fails.
+discussion: >-
+    The tree is read from the leaves upward, and each node computes the set of leftover sizes it can pass to its parent, which is a small set rather than a single value. The hard part is combining the children, since the groups they contribute have to be paired up and the number of ways to do that is exponential in the number of children, so the combination is an enumerative search with pruning. The result is a state set per node rather than a single number, which is what makes it a tree dynamic program and not a plain computation.
+related:
+    - usaco.2017.dec.gold.barn-painting
+    - usaco.2023.feb.silver.moo-route-ii
