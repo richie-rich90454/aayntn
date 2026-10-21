@@ -108,7 +108,7 @@ static int heap_pop(min_heap *heap, heap_entry *entry) {
  * holds O(E) entries.
  *
  * adj       adjacency list of the graph
- * n         number of vertices, labelled 0..n-1
+ * n         number of vertices, labeled 0..n-1
  * source    the start vertex
  * distance  receives the distance from source to every vertex and -1 for the
  *           vertices source cannot reach; room for n entries, owned by the
