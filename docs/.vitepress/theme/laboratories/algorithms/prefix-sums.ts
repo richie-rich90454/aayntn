@@ -161,7 +161,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const prefixSums: LabDefinition = {
+export const definition: LabDefinition = {
     id: "arrays.prefix-sums",
     title: "Prefix sums",
     scene: "array",
