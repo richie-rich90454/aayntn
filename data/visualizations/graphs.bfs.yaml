@@ -1,0 +1,19 @@
+# The breadth-first search demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: graphs.bfs
+title: Breadth-first search
+algorithm: graphs.bfs
+scene: graph
+preset: path
+storyboard:
+    - title: The queue is empty
+      description: The traversal begins with every vertex unvisited and an empty queue.
+    - title: The first level is filled
+      description: The start vertex is enqueued at distance zero, and every neighbor it reaches is enqueued at distance one.
+    - title: The levels are drained in order
+      description: Because the queue is first-in-first-out, vertices are expanded in non-decreasing distance, so each level is finished before the next one begins.
+    - title: Every reachable vertex holds its true distance
+      description: The queue empties, and the distance written under each vertex is the length of a shortest path to it.
