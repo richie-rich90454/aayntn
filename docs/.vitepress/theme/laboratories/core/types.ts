@@ -163,8 +163,13 @@ export interface LabDefinition {
     scene: string;
     description: string;
     presets: LabPreset[];
-    /** Build the event stream for a given preset. */
-    build: (preset: LabPreset) => LabEvent[];
+    /**
+     * Build the event stream for one input.
+     *
+     * The function takes the raw input text rather than a preset, so that the
+     * reader can type their own and get exactly the same treatment.
+     */
+    build: (input: string) => LabEvent[];
     /** Extra guidance shown next to the controls. */
     notes?: string[];
     /** Maximum number of characters the custom input may contain. */
