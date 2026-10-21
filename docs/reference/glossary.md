@@ -17,7 +17,7 @@ The encyclopedia uses a specific vocabulary, and a reader who does not know a wo
 
 Terms are listed alphabetically. Where the encyclopedia does not yet have an article on a technique, the entry says so and points at the subject page that describes it, rather than pretending the technique is covered.
 
-Where a term is taught in the [mathematical reference](/mathematics/), the link points there; where it is taught in an algorithm article, the link points at that article; and where it belongs to the contest process rather than to an algorithm, the link points at [Contest problem-solving literacy](/start/from-ap-csa/part-6-contest-literacy/).
+Where a term is taught in the [mathematical reference](/mathematics/), the link points there; where it is taught in an algorithm article, the link points at that article; and where it belongs to the contest process rather than to an algorithm, the link points at [Contest problem-solving literacy](/start/from-ap-csa/part-6-contest-literacy).
 
 <dl>
 <dt>Adjacency list</dt>
