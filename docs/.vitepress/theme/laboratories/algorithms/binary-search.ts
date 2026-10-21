@@ -181,7 +181,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const binarySearch: LabDefinition = {
+export const definition: LabDefinition = {
     id: "searching.binary-search",
     title: "Binary search",
     scene: "array",
