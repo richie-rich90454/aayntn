@@ -1,0 +1,19 @@
+# The Dijkstra demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: graphs.dijkstra
+title: Dijkstra's algorithm
+algorithm: graphs.dijkstra
+scene: graph
+preset: classic
+storyboard:
+    - title: Every distance is infinite
+      description: The tentative distance of every vertex starts at infinity, and the source is set to zero.
+    - title: The cheapest candidate is taken
+      description: The priority queue hands over the vertex with the smallest tentative distance, and no later route can be cheaper, so that distance is final.
+    - title: The outgoing edges are relaxed
+      description: Each edge is tested, and a shorter route writes a smaller tentative distance and puts the vertex back into the queue.
+    - title: Stale entries are discarded
+      description: A vertex can be reached twice, so the queue can hold an entry that is no longer the best one. It is popped, recognized, and thrown away.
