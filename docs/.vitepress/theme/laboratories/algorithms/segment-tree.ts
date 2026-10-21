@@ -346,7 +346,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const segmentTree: LabDefinition = {
+export const definition: LabDefinition = {
     id: "range-queries.segment-tree",
     title: "Segment tree",
     scene: "hybrid",
