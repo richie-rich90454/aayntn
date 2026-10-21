@@ -12,7 +12,7 @@ import type { SearchEntry } from "../../../data/types";
  * looking for explanations, not for the inside of a reference implementation.
  *
  * The index carries a synonym expansion so that "DSU" finds "disjoint set
- * union", and every record declares its kind so results can be labelled.
+ * union", and every record declares its kind so results can be labeled.
  */
 
 const open = ref(false);
