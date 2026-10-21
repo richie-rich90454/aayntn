@@ -557,4 +557,4 @@ You are ready for part 2 when you can answer the following without consulting th
 - Decide, for a problem needing 64-bit counters, what type to use in Java, C++, and Python, and say what each language does when the counter exceeds its range.
 - Explain why `0.1 + 0.2 != 0.3` in double precision, and state the condition under which a double represents an integer exactly.
 
-Next: [Algorithm analysis](/start/from-ap-csa/part-2-algorithm-analysis/).
+Next: [Algorithm analysis](/start/from-ap-csa/part-2-algorithm-analysis).
