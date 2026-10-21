@@ -20,7 +20,7 @@ const columns = computed(() => [
             { text: "Algorithm encyclopedia", href: "/algorithms/" },
             { text: "Interactive laboratory", href: "/laboratory/" },
             { text: "Mathematics", href: "/mathematics/" },
-            { text: "Practice catalogue", href: "/practice/" },
+            { text: "Practice catalog", href: "/practice/" },
         ],
     },
     {
