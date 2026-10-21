@@ -1,0 +1,29 @@
+id: usaco.2023.dec.silver.cycle-correspondence
+title: Cycle Correspondence
+source: USACO
+contest: 2023 December Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1351
+editorialUrl: https://usaco.org/current/data/sol_prob2_silver_dec23.html
+techniques:
+    - strings.kmp
+    - searching.binary-search
+prerequisites:
+    - strings.kmp
+difficulty: 4
+estimatedMinutes: 35
+specialConstraints:
+    - Half a million barns, so the two cycles have to be compared with a linear-time string algorithm rather than by trying every rotation.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Both orderings describe a cycle, so the question is how many labels can be matched while keeping the cyclic order in both.
+    - A rotation of a cycle describes the same cycle, so the two orderings have to be compared under rotation, and possibly under reversal as well.
+    - Trying every rotation is a quadratic number of comparisons, so instead build the pattern matcher and use it to find the rotations that agree.
+    - Match one cycle against the other repeated twice, and read the positions of the matches to recover the best overlap.
+discussion: >-
+    The key observation is that a cycle and a rotation of it describe the same arrangement, so the comparison has to be made between strings that are each repeated, which turns a rotation into a substring. Once the strings are prepared that way, a linear-time pattern matcher finds every alignment at once instead of testing them one by one. The direction of the cycle and the choice of the starting label are the two extra degrees of freedom that have to be handled.
+related:
+    - usaco.2017.jan.silver.secret-cow-code
+    - usaco.2015.feb.gold.censoring
