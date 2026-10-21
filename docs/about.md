@@ -39,7 +39,7 @@ Every substantial article follows the same structure, listed in full in the cont
 
 aayntn is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
 
-Nothing on this site is an official document, an official rule, or an official interpretation of a rule. The competition's rules belong to the competition, and the [official instructions](https://usaco.org/index.php?page=instructions) are the only statement of them. The [rules page](/reference/usaco-rules/) summarizes them in the encyclopedia's own words, with a link to the original, and it says plainly that they must be re-read before every contest because they change.
+Nothing on this site is an official document, an official rule, or an official interpretation of a rule. The competition's rules belong to the competition, and the [official instructions](https://usaco.org/index.php?page=instructions) are the only statement of them. The [rules page](/reference/usaco-rules) summarizes them in the encyclopedia's own words, with a link to the original, and it says plainly that they must be re-read before every contest because they change.
 
 ## License and attribution
 
