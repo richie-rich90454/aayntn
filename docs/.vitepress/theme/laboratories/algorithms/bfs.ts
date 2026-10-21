@@ -185,7 +185,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const bfs: LabDefinition = {
+export const definition: LabDefinition = {
     id: "graphs.bfs",
     title: "Breadth-first search",
     scene: "graph",
