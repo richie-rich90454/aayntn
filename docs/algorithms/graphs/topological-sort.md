@@ -413,4 +413,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The shortest-path algorithm that a topological order replaces when the weights are arbitrary is [Dijkstra](/algorithms/graphs/dijkstra).
 - The relaxation that a topological order makes possible in one pass is the one in [Bellman-Ford](/algorithms/graphs/bellman-ford).
 - The structure that answers the connectivity questions that come up alongside scheduling is the [disjoint set union](/algorithms/graphs/dsu).
-- Every listing of the traversal family is collected on the [depth-first search source page](/implementations/graphs-dfs).
+- Every listing of the traversal family is collected on the [depth-first search source page](/implementations/graphs-dfs/).
