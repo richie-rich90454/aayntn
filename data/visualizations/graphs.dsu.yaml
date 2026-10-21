@@ -1,0 +1,19 @@
+# The disjoint set union demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: graphs.dsu
+title: Disjoint set union
+algorithm: graphs.dsu
+scene: hybrid
+preset: merges
+storyboard:
+    - title: Every element alone
+      description: The structure starts with one set per element, so every element is its own representative.
+    - title: A union attaches the smaller set
+      description: The representative of the smaller set is attached below the representative of the larger one.
+    - title: The path is compressed
+      description: After a lookup, every element on the path points straight at the representative.
+    - title: Membership is a comparison
+      description: Two elements share a set exactly when their representatives are the same vertex.
