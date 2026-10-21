@@ -79,6 +79,16 @@ function stateFor(values: number[], prefix: number[], computed: number, shot: Sn
     };
 }
 
+/** "1 value" or "3 values". */
+function countOf(count: number, word: string): string {
+    return `${count} ${count === 1 ? word : `${word}s`}`;
+}
+
+/** A sum that keeps a negative number readable. */
+function sum(left: number, right: number): string {
+    return right < 0 ? `${left} + (${right})` : `${left} + ${right}`;
+}
+
 function build(input: string): LabEvent[] {
     const { values, queries } = parse(input);
     const events: LabEvent[] = [];
@@ -89,7 +99,7 @@ function build(input: string): LabEvent[] {
     events.push({
         type: "init",
         operation: "init",
-        narration: `The array holds ${values.length} values. The prefix array starts with a single zero, because the sum of the first zero elements is zero.`,
+        narration: `The array holds ${countOf(values.length, "value")}. The prefix array starts with a single zero, because the sum of the first zero elements is zero.`,
         state: stateFor(values, prefix, computed, {
             note: "The prefix array is empty apart from its first zero.",
             formula: "P[0] = 0",
@@ -103,10 +113,10 @@ function build(input: string): LabEvent[] {
         computed = index;
         events.push({
             type: "add",
-            operation: "add",
-            narration: `prefix[${index}] = prefix[${index - 1}] + a[${index}] = ${previous} + ${value} = ${prefix[index]}, so the running total after ${index} values is ${prefix[index]}.`,
+            operation: "accumulate-prefix",
+            narration: `prefix[${index}] = prefix[${index - 1}] + a[${index}] = ${sum(previous, value)} = ${prefix[index]}, so the running total after ${countOf(index, "value")} is ${prefix[index]}.`,
             state: stateFor(values, prefix, computed, {
-                note: `prefix[${index}] = ${previous} + ${value} = ${prefix[index]}`,
+                note: `prefix[${index}] = ${sum(previous, value)} = ${prefix[index]}`,
                 formula: `P[${index}] = P[${index - 1}] + a[${index}] = ${prefix[index]}`,
                 active: index,
             }),
@@ -119,7 +129,7 @@ function build(input: string): LabEvent[] {
         events.push({
             type: "lookup",
             operation: "prefix-sum",
-            narration: `The sum of the first ${right} values is prefix[${right}] = ${high}, and the sum of the first ${left - 1} values is prefix[${left - 1}] = ${low}.`,
+            narration: `The sum of the first ${right} values is prefix[${right}] = ${high}, and the sum of the first ${countOf(left - 1, "value")} is prefix[${left - 1}] = ${low}.`,
             state: stateFor(values, prefix, computed, {
                 note: `prefix[${right}] = ${high} and prefix[${left - 1}] = ${low}`,
                 formula: `sum(${left}, ${right}) = prefix[${right}] - prefix[${left - 1}]`,
@@ -128,7 +138,7 @@ function build(input: string): LabEvent[] {
         });
         events.push({
             type: "query",
-            operation: "range-sum",
+            operation: "subtract-prefix-bounds",
             narration: `The sum of the range ${left}..${right} is prefix[${right}] - prefix[${left - 1}] = ${high} - ${low} = ${high - low}.`,
             state: stateFor(values, prefix, computed, {
                 note: `sum(${left}, ${right}) = ${high} - ${low} = ${high - low}`,
