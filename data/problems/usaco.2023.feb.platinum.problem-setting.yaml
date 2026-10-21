@@ -1,0 +1,30 @@
+id: usaco.2023.feb.platinum.problem-setting
+title: Problem Setting
+source: USACO
+contest: 2023 February Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1309
+editorialUrl: https://usaco.org/current/data/sol_prob2_platinum_feb23.html
+techniques:
+    - advanced.parallel-binary-search
+    - range-queries.fenwick-tree
+prerequisites:
+    - advanced.parallel-binary-search
+    - range-queries.fenwick-tree
+difficulty: 5
+estimatedMinutes: 55
+specialConstraints:
+    - A hundred thousand problems and only twenty solvers, so the number of distinct rating patterns is small even though the number of problems is large.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Each problem has a rating from every solver, and a valid set has to be ordered so that no solver finds a later problem easier than an earlier one.
+    - So the ordering is forced by the ratings, and the question is how large a set can be, which means finding the longest chain.
+    - The candidates for each problem form a small set of states because there are only twenty solvers, and the chains are counted with a sweep over those states.
+    - The thresholds between the consecutive ratings are found by a parallel binary search, so the sweep can be repeated for all the queries at once.
+discussion: >-
+    The ordering requirement turns the problem into a longest-chain computation over the problems, with the state determined by which of the twenty solvers have already met an easy problem. Because the number of solvers is small, the number of states is manageable even with a hundred thousand problems, and the states can be swept in order. The thresholds at which a state changes are found by running all the searches in parallel, so the whole computation is logarithmic in the number of thresholds.
+related:
+    - usaco.2023.feb.silver.moo-route-ii
+    - usaco.2017.dec.platinum.greedy-gift-takers
