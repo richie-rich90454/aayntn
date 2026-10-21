@@ -1,0 +1,29 @@
+id: usaco.2018.jan.silver.rental-service
+title: Rental Service
+source: USACO
+contest: 2018 January Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=787
+editorialUrl: https://usaco.org/current/data/sol_rental_silver_jan18.html
+techniques:
+    - greedy.interval-scheduling
+    - foundations.sorting
+prerequisites:
+    - foundations.sorting
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - A hundred thousand cows and a hundred thousand stores, so the pairing has to be made by sorting rather than by trying combinations.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A cow earns from two sources, the milk she produces and the rent paid by a neighboring farmer.
+    - The farmers who rent cows pay by the day and want the cow for as long as possible, and the cows have a rental rate that the farmers compare against the daily milk production.
+    - Sort the cows by rental rate and the farmers by the amount they are willing to pay per day of milk, and match the most valuable cows to the most valuable farmers first.
+    - Once the pairings are fixed, the daily income is the sum of the cows' production plus the rent from each matched pair, and the arrangement survives for a limited number of days.
+discussion: >-
+    The pairing between cows and farmers is made by sorting both sides by value and matching greedily, and the exchange argument is that a better cow paired with a better farmer can never be worse than the crossed pairing. Once the matching is fixed, the daily income and the number of days it persists are simple sums over the sorted lists. The constraint is what forces the sort-based matching rather than a search over pairings.
+related:
+    - usaco.2023.feb.bronze.hungry-cow
+    - usaco.2016.feb.gold.circular-barn
