@@ -1,0 +1,29 @@
+id: usaco.2020.jan.silver.loan-repayment
+title: Loan Repayment
+source: USACO
+contest: 2020 January Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=991
+editorialUrl: https://usaco.org/current/data/sol_loan_silver_jan20.html
+techniques:
+    - searching.binary-search
+prerequisites:
+    - foundations.complexity
+difficulty: 4
+estimatedMinutes: 35
+specialConstraints:
+    - The loan can be a trillion gallons and the period a trillion days, so both a day-by-day simulation and a linear scan over the days are too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The size of the daily payment grows as the square root of the amount still owed, so the number of days at a given payment size can be computed directly.
+    - Rather than simulating each day, find how many days can pass before the payment size changes, and skip over them in one step.
+    - The two variables are the number of days already simulated and the number of days still available, and the choice of how far to jump is a division.
+    - Jump forward, pay the loan off outright once the remaining amount is small enough, and stop when the days are exhausted.
+discussion: >-
+    The payment is determined by the amount owed, so the process has a monotone structure that lets whole stretches of days be skipped. The key is to compute the length of a stretch with a constant payment size rather than to iterate over the days, because the day count is astronomically large. The final phase, where the loan is small enough to be repaid outright, has to be handled separately from the geometric phase.
+related:
+    - usaco.2022.dec.bronze.cow-college
+    - usaco.2017.dec.platinum.greedy-gift-takers
