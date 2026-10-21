@@ -1,0 +1,95 @@
+/**
+ * The architectural banner.
+ *
+ * A monumental section heading, wrapped in the frame that gives the
+ * encyclopedia its identity. The ornament is decoration only: it carries no
+ * data and it is hidden from assistive technology.
+ */
+.aayntn-banner {
+    position: relative;
+    margin: var(--space-16) 0 var(--space-8);
+    padding: var(--space-8) var(--space-6) var(--space-4);
+    border-top: var(--rule-ink);
+    border-bottom: var(--rule-ink);
+}
+
+.aayntn-banner__ornament {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    display: flex;
+    gap: var(--space-1);
+    color: var(--color-gold);
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.aayntn-banner__ornament .aayntn-ornament {
+    width: 34px;
+    height: 34px;
+}
+
+.aayntn-banner__ornament .aayntn-ornament--flip {
+    transform: scaleX(-1);
+}
+
+.aayntn-banner__body {
+    padding: 0 var(--space-8);
+}
+
+.aayntn-banner__eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+    color: var(--text-muted);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.aayntn-banner__title {
+    margin: 0;
+    font-size: var(--text-section);
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    line-height: 1.2;
+}
+
+.aayntn-banner--level-2 .aayntn-banner__title {
+    font-size: var(--text-chapter);
+    letter-spacing: -0.02em;
+}
+
+.aayntn-banner__lede {
+    max-width: 62ch;
+    margin-top: var(--space-3);
+    color: var(--text-secondary);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+}
+
+.aayntn-banner__rule {
+    margin-top: var(--space-4);
+    color: var(--color-gold);
+}
+
+.aayntn-banner__rule .aayntn-ornament {
+    height: 12px;
+}
+
+@media (max-width: 640px) {
+    .aayntn-banner {
+        padding: var(--space-6) var(--space-3) var(--space-3);
+    }
+
+    .aayntn-banner__body {
+        padding: 0 var(--space-4);
+    }
+
+    .aayntn-banner__ornament {
+        display: none;
+    }
+}
