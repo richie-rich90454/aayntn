@@ -1,0 +1,30 @@
+id: usaco.2019.dec.platinum.bessies-snow-cow
+title: Bessie's Snow Cow
+source: USACO
+contest: 2019 December Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=973
+editorialUrl: https://usaco.org/current/data/sol_snowcow_platinum_dec19.html
+techniques:
+    - trees.heavy-light-decomposition
+    - range-queries.segment-tree
+prerequisites:
+    - trees.heavy-light-decomposition
+    - range-queries.segment-tree
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - A hundred thousand snowballs, and one update can affect the whole subtree of a node, so the updates have to be batched rather than applied one at a time.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Coloring a snowball colors its whole subtree, so a query asks whether any colored node lies on the path from the root to the queried snowball.
+    - Equivalently, a node is uncolored exactly when no ancestor of it is colored, so the colored set is upward closed and the subtrees of colored nodes are nested.
+    - So a query is about whether the node's position in the tree is covered by one of those subtrees, and the subtrees are ranges in a traversal order.
+    - The difficulty is that the subtrees overlap, so they have to be merged, and a decomposition of the tree gives a logarithmic number of ranges per node.
+discussion: >-
+    Coloring a node colors its descendants, so the colored set is a union of nested subtrees, and the observation that makes the problem work is that a colored node makes all of its descendants colored, which means the effective colored set is always a union of disjoint subtrees. The queries are then interval membership tests in a traversal order, and the merges are what need a decomposition of the tree, because a single node's subtree can be many ranges otherwise. The updates are amortized rather than individually applied.
+related:
+    - usaco.2019.feb.gold.cow-land
+    - usaco.2018.open.platinum.disruption
