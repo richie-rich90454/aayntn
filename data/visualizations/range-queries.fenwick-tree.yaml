@@ -1,0 +1,19 @@
+# The Fenwick tree demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: range-queries.fenwick-tree
+title: Fenwick tree
+algorithm: range-queries.fenwick-tree
+scene: hybrid
+preset: simple
+storyboard:
+    - title: An empty tree
+      description: Every block sum starts at zero, because the tree holds nothing yet.
+    - title: The blocks are inserted
+      description: Inserting a value raises every block that contains its position.
+    - title: A prefix is tiled by blocks
+      description: A prefix sum walks the blocks that cover the prefix, and they never overlap.
+    - title: A range is a difference
+      description: The sum of a range is the difference of the two prefix sums that bound it.
