@@ -68,8 +68,10 @@ function parse(input: string): Parsed {
 
 /** The equation of a line, written the way a reader would say it. */
 function equation(line: Line): string {
+    const slope = line.slope === 1 ? "x" : line.slope === -1 ? "-x" : `${line.slope}x`;
+    if (line.intercept === 0) return `y = ${slope}`;
     const sign = line.intercept < 0 ? "-" : "+";
-    return `y = ${line.slope}x ${sign} ${Math.abs(line.intercept)}`;
+    return `y = ${slope} ${sign} ${Math.abs(line.intercept)}`;
 }
 
 /**
@@ -235,7 +237,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const cht: LabDefinition = {
+export const definition: LabDefinition = {
     id: "dynamic-programming.convex-hull-trick",
     title: "Convex hull trick",
     scene: "hybrid",
