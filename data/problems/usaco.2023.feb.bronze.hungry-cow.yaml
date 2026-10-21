@@ -1,0 +1,30 @@
+id: usaco.2023.feb.bronze.hungry-cow
+title: Hungry Cow
+source: USACO
+contest: 2023 February Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1299
+editorialUrl: https://usaco.org/current/data/sol_prob1_bronze_feb23.html
+techniques:
+    - greedy.interval-scheduling
+    - foundations.sorting
+prerequisites:
+    - foundations.sorting
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - A delivery can arrive on a day as large as ten to the fourteenth, so the days cannot be simulated one at a time.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Bessie eats one haybale a day whenever there is one, so the only thing that matters is the moment the barn runs empty.
+    - A delivery of b haybales arriving on day d extends the supply until the day the current supply runs out, plus b days.
+    - Process the deliveries in order of arrival day, carrying the day on which the barn next becomes empty.
+    - Cap the total at the number of days in the period, and watch the arithmetic when the supply extends past the end.
+discussion: >-
+    The greedy rule is that Bessie always eats whenever she can, so the supply is consumed continuously and the deliveries are just a sequence of extensions. That reduces the problem to a scan over the deliveries in day order, carrying a single running timestamp of when the barn empties. The size of the day numbers rules out a day-by-day simulation, and the arithmetic at the boundary is where the off-by-one lives.
+related:
+    - usaco.2020.open.bronze.social-distancing-ii
+    - usaco.2018.jan.silver.rental-service
