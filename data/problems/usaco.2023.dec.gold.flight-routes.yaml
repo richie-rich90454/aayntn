@@ -1,0 +1,31 @@
+id: usaco.2023.dec.gold.flight-routes
+title: Flight Routes
+source: USACO
+contest: 2023 December Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1353
+editorialUrl: https://usaco.org/current/data/sol_prob1_gold_dec23.html
+techniques:
+    - graphs.dijkstra
+    - dynamic-programming.0-1-knapsack
+    - graphs.topological-sort
+prerequisites:
+    - graphs.dijkstra
+    - dynamic-programming.0-1-knapsack
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - Seven hundred fifty cities, so the number of layers times the number of edges has to be watched.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Every flight goes from a lower-numbered city to a higher-numbered one, so the graph is acyclic and the routes have a natural order.
+    - A route is a chain of exactly a fixed number of flights, so the state has to include how many flights have been used so far.
+    - The state space is therefore a layered graph, and the layers can be processed one at a time because every edge goes from one layer to the next.
+    - Compute the cheapest cost in each layer and count how many ways reach that cost, so the count can be reported as well.
+discussion: >-
+    The number of flights is part of the state, so the problem lives on a layered graph whose layers are processed in order, and the acyclicity of the city numbering is what makes that order natural. The cost of a route is a sum over the layers, and the count of the cheapest routes is carried along with the costs. The layer count times the edge count is what sets the time limit.
+related:
+    - usaco.2019.jan.gold.shortcut
+    - usaco.2020.feb.gold.timeline
