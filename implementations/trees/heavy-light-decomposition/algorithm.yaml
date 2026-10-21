@@ -1,0 +1,169 @@
+algorithm: trees.heavy-light-decomposition
+title: Heavy-light decomposition
+summary: Split the tree into chains that follow the child with the largest subtree, flatten the chains into one array, and answer a path query in a logarithmic number of chain segments.
+subject: trees
+divisions: [platinum]
+importance: advanced-technique
+complexity:
+    time: "O(n) to build, O(log^2 n) per path query"
+    space: "O(n)"
+assumptions:
+    - "The tree is static: no node is added, removed or reweighted after the decomposition is built."
+reviewed: false
+variants:
+    - id: minimal
+      language: c
+      file: c/minimal.c
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable struct with an explicit init/destroy pair that computes the subtree sizes, picks the heavy child of every vertex, flattens the chains into one array and answers a path sum between two vertices; no I/O."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the parent, depth, subtree size, heavy child, chain head and position arrays and the flattened array with its prefix sums"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1, the root of the tree and the value of every vertex."
+      outputs: "The sum of the values of the vertices on the path from one vertex to the other, both endpoints included."
+      notes: "A breadth-first walk from the root fixes the parents and the depths, the subtree sizes are then known from the leaves upwards, and the heavy child of a vertex is the child with the largest subtree. The flattened array holds one chain after the other, so the vertices of a chain occupy a contiguous range of indices. The prefix sums over the flattened array turn a chain segment into a single subtraction, so a query costs one step per chain instead of the O(log^2 n) of a segment tree walk over the same array. The number of chains on a path is logarithmic, because a light edge at least halves the size of the subtree. The C variant owns its storage through an explicit init/destroy pair: init allocates and destroy frees, so every successful init must be matched by exactly one destroy and the decomposition must not be used afterwards. The adjacency list and the values array belong to the caller and are only read while the decomposition is built."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class that computes the subtree sizes, picks the heavy child of every vertex, flattens the chains into one array and answers a path sum between two vertices; no I/O."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the parent, depth, subtree size, heavy child, chain head and position arrays and the flattened array with its prefix sums"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1, the root of the tree and the value of every vertex."
+      outputs: "The sum of the values of the vertices on the path from one vertex to the other, both endpoints included."
+      notes: "A breadth-first walk from the root fixes the parents and the depths, the subtree sizes are then known from the leaves upwards, and the heavy child of a vertex is the child with the largest subtree. The flattened array holds one chain after the other, so the vertices of a chain occupy a contiguous range of indices. The prefix sums over the flattened array turn a chain segment into a single subtraction, so a query costs one step per chain instead of the O(log^2 n) of a segment tree walk over the same array. The number of chains on a path is logarithmic, because a light edge at least halves the size of the subtree. The C++ variant keeps the tables in std::vectors, so the constructor allocates them and the destructor releases them without any explicit destroy call."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
+    - id: minimal
+      language: java
+      file: java/Program.java
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class that computes the subtree sizes, picks the heavy child of every vertex, flattens the chains into one array and answers a path sum between two vertices; no I/O."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the parent, depth, subtree size, heavy child, chain head and position arrays and the flattened array with its prefix sums"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1, the root of the tree and the value of every vertex."
+      outputs: "The sum of the values of the vertices on the path from one vertex to the other, both endpoints included."
+      notes: "A breadth-first walk from the root fixes the parents and the depths, the subtree sizes are then known from the leaves upwards, and the heavy child of a vertex is the child with the largest subtree. The flattened array holds one chain after the other, so the vertices of a chain occupy a contiguous range of indices. The prefix sums over the flattened array turn a chain segment into a single subtraction, so a query costs one step per chain instead of the O(log^2 n) of a segment tree walk over the same array. The number of chains on a path is logarithmic, because a light edge at least halves the size of the subtree. The Java variant keeps the tables on the heap and leaves the reclamation to the garbage collector."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
+    - id: minimal
+      language: javascript
+      file: javascript/minimal.js
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. Reusable class that computes the subtree sizes, picks the heavy child of every vertex, flattens the chains into one array and answers a path sum between two vertices; no I/O."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the parent, depth, subtree size, heavy child, chain head and position arrays and the flattened array with its prefix sums"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1, the root of the tree and the value of every vertex."
+      outputs: "The sum of the values of the vertices on the path from one vertex to the other, both endpoints included."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. A breadth-first walk from the root fixes the parents and the depths, the subtree sizes are then known from the leaves upwards, and the heavy child of a vertex is the child with the largest subtree. The flattened array holds one chain after the other, so the vertices of a chain occupy a contiguous range of indices. The prefix sums over the flattened array turn a chain segment into a single subtraction, so a query costs one step per chain instead of the O(log^2 n) of a segment tree walk over the same array. The JavaScript variant models the decomposition as a class, so the instance owns its arrays, and the sums are numbers, so a total beyond 2^53 would lose precision."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
+    - id: minimal
+      language: pascal
+      file: pascal/minimal.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. Reusable class that computes the subtree sizes, picks the heavy child of every vertex, flattens the chains into one array and answers a path sum between two vertices; no I/O."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the parent, depth, subtree size, heavy child, chain head and position arrays and the flattened array with its prefix sums"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1, the root of the tree and the value of every vertex."
+      outputs: "The sum of the values of the vertices on the path from one vertex to the other, both endpoints included."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. A breadth-first walk from the root fixes the parents and the depths, the subtree sizes are then known from the leaves upwards, and the heavy child of a vertex is the child with the largest subtree. The flattened array holds one chain after the other, so the vertices of a chain occupy a contiguous range of indices. The prefix sums over the flattened array turn a chain segment into a single subtraction, so a query costs one step per chain instead of the O(log^2 n) of a segment tree walk over the same array. The Pascal variant is a class whose constructor allocates the tables and whose destructor releases them, so the caller owns the instance and must free it."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
+    - id: minimal
+      language: python
+      file: python/minimal.py
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class that computes the subtree sizes, picks the heavy child of every vertex, flattens the chains into one array and answers a path sum between two vertices; no I/O."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the parent, depth, subtree size, heavy child, chain head and position arrays and the flattened array with its prefix sums"
+      status: unverified
+      inputs: "An adjacency list of the tree on the vertices 0..n-1, the root of the tree and the value of every vertex."
+      outputs: "The sum of the values of the vertices on the path from one vertex to the other, both endpoints included."
+      notes: "A breadth-first walk from the root fixes the parents and the depths, the subtree sizes are then known from the leaves upwards, and the heavy child of a vertex is the child with the largest subtree. The flattened array holds one chain after the other, so the vertices of a chain occupy a contiguous range of indices. The prefix sums over the flattened array turn a chain segment into a single subtraction, so a query costs one step per chain instead of the O(log^2 n) of a segment tree walk over the same array. The Python variant models the decomposition as a class, so the instance owns its lists, and the sums are arbitrary precision integers, so a total never overflows."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a tree from stdin and prints the sum of the values on the path of every queried pair of vertices."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the decomposition and the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the sum of the values of the vertices on the path, both endpoints included."
+      notes: "The root is the vertex 0 and the value of the vertex i is i + 1, so the value of the vertex 0 is 1. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with 0, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a tree from stdin and prints the sum of the values on the path of every queried pair of vertices."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the decomposition and the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the sum of the values of the vertices on the path, both endpoints included."
+      notes: "The root is the vertex 0 and the value of the vertex i is i + 1, so the value of the vertex 0 is 1. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with 0, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a tree from stdin and prints the sum of the values on the path of every queried pair of vertices."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the decomposition and the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the sum of the values of the vertices on the path, both endpoints included."
+      notes: "The root is the vertex 0 and the value of the vertex i is i + 1, so the value of the vertex 0 is 1. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with 0, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it parses a tree from stdin and prints the sum of the values on the path of every queried pair of vertices."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the decomposition and the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the sum of the values of the vertices on the path, both endpoints included."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The root is the vertex 0 and the value of the vertex i is i + 1, so the value of the vertex 0 is 1. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with 0, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it parses a tree from stdin and prints the sum of the values on the path of every queried pair of vertices."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the decomposition and the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the sum of the values of the vertices on the path, both endpoints included."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The root is the vertex 0 and the value of the vertex i is i + 1, so the value of the vertex 0 is 1. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with 0, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a tree from stdin and prints the sum of the values on the path of every queried pair of vertices."
+      time: "O(n) to build, O(log n) per path query, because the prefix sums over the flattened array answer a chain segment in constant time"
+      auxiliarySpace: "O(n) for the decomposition and the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then q, then q lines u v with the queried pair of vertices."
+      outputs: "One line per query, holding the sum of the values of the vertices on the path, both endpoints included."
+      notes: "The root is the vertex 0 and the value of the vertex i is i + 1, so the value of the vertex 0 is 1. An edge that names a vertex outside 0..n-1 is ignored and a query that names such a vertex is answered with 0, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [compute-subtree-sizes, pick-heavy-child, flatten, path-sum]
