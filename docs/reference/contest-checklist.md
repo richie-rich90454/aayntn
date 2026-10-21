@@ -19,7 +19,7 @@ Work through the list once per contest, before the clock starts. A checklist rea
 
 ## 1. Verify the official rules and the supported language versions
 
-Read the [official instructions](/reference/usaco-rules/) and confirm two things: which languages are accepted for submission right now, and which compiler or interpreter versions the judge is using.
+Read the [official instructions](/reference/usaco-rules) and confirm two things: which languages are accepted for submission right now, and which compiler or interpreter versions the judge is using.
 
 The rules change between seasons, and language support has changed before: Pascal was accepted for years and then discontinued. A version mismatch is a silent failure that costs a whole problem, because the code compiles at home and fails on the judge. If the instructions say Python 3.6 and your laptop has 3.12, your f-strings and your `match` statement are not available to you, and nothing will tell you until the submission comes back.
 
@@ -43,7 +43,7 @@ Before writing an algorithm, convert the constraints into an operation count. An
 
 Do the same for memory. A `std::vector<long long>` of $10^6$ elements is 8 MB; a Python list of $10^6$ small integers costs roughly 8 MB of pointers plus the objects themselves; a Java `ArrayList<Integer>` of $10^6$ elements costs about 24 MB because of boxing. The memory limit is a constraint in exactly the way the time limit is.
 
-The technique is in the [algorithm analysis part](/start/from-ap-csa/part-2-algorithm-analysis/), and the per-language costs are in the [language centers](/languages/).
+The technique is in the [algorithm analysis part](/start/from-ap-csa/part-2-algorithm-analysis), and the per-language costs are in the [language centers](/languages/).
 
 ## 5. Test the minimal input and the maximal input
 
@@ -67,7 +67,7 @@ If your solution recurses, compute the maximum depth the input can force, and co
 
 A path-shaped graph gives a depth-first search a depth equal to the number of vertices, so an $O(V + E)$ recursive traversal is not automatically safe. C++ gives roughly $10^5$ frames before the stack overflows. Java throws a `StackOverflowError`, which is an `Error` and not an `Exception`, so `catch (Exception e)` will not catch it. CPython hits its recursion limit of 1000 first, and raising the counter with `sys.setrecursionlimit` does not make deep recursion safe, because each Python-level call still consumes a C stack frame underneath.
 
-The per-language numbers and the iterative rewrite are in the [language transition part](/start/from-ap-csa/part-5-language-transition/).
+The per-language numbers and the iterative rewrite are in the [language transition part](/start/from-ap-csa/part-5-language-transition).
 
 ## 8. Understand the input and output formatting exactly
 
@@ -97,4 +97,4 @@ Restating the rule plainly, because it is the one that matters most and the one 
 
 **This page is preparation material, not a resource to keep open during a contest.** Close it, along with every other reference, before the timer starts. The checklist exists so that the knowledge is in your head and in your fingers, not so that you can consult a list while the clock runs.
 
-The rules are the competition's. Re-read the [official instructions](/reference/usaco-rules/) before every contest, because they change.
+The rules are the competition's. Re-read the [official instructions](/reference/usaco-rules) before every contest, because they change.
