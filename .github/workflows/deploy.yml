@@ -1,0 +1,63 @@
+name: Build and deploy
+
+# The site is a set of static files. The build regenerates every derived
+# artefact, renders the pages, and publishes the result to GitHub Pages.
+
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+concurrency:
+    group: pages
+    cancel-in-progress: true
+
+jobs:
+    build:
+        name: Build the static site
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 12.14.0
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: pnpm
+
+            - name: Install the dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Generate, validate and build
+              run: pnpm run build
+
+            - name: Measure the bundle
+              run: |
+                  echo "The largest published assets:"
+                  find docs/.vitepress/dist/assets -type f -printf '%s %p\n' | sort -rn | head -10 |
+                    awk '{ printf "  %8.1f kB  %s\n", $1/1024, $2 }'
+
+            - uses: actions/configure-pages@v5
+
+            - uses: actions/upload-pages-artifact@v3
+              with:
+                  path: docs/.vitepress/dist
+
+    deploy:
+        name: Deploy to GitHub Pages
+        needs: build
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - id: deployment
+              uses: actions/deploy-pages@v4
