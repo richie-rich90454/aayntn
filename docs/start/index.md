@@ -36,13 +36,13 @@ Start with a language center, not with algorithms. Pick one of the six languages
 
 The fastest route to feeling competent is to write a small program that reads one line and prints its tokens reversed. The next is to write one that counts how often the most frequent token appears. Both are small, both finish in an afternoon, and both teach the loop, the map, and the input conventions that everything later assumes.
 
-Once you can write that kind of program without looking things up, start with [Computational foundations](/start/from-ap-csa/part-1-computational-foundations/), then [Algorithm analysis](/start/from-ap-csa/part-2-algorithm-analysis/).
+Once you can write that kind of program without looking things up, start with [Computational foundations](/start/from-ap-csa/part-1-computational-foundations), then [Algorithm analysis](/start/from-ap-csa/part-2-algorithm-analysis).
 
 ### If you are an experienced competitor
 
 You know the standard techniques. What you probably lack is the ability to derive a technique you have never seen, and the habit of proving that your solution is correct before you submit it.
 
-Two gaps are worth closing first. The first is amortized analysis, which explains why the standard `push` into a growing array is fast even though the worst individual operation copies the whole array. The second is the practice of writing a short correctness proof before coding, which is the subject of [Contest problem-solving literacy](/start/from-ap-csa/part-6-contest-literacy/).
+Two gaps are worth closing first. The first is amortized analysis, which explains why the standard `push` into a growing array is fast even though the worst individual operation copies the whole array. The second is the practice of writing a short correctness proof before coding, which is the subject of [Contest problem-solving literacy](/start/from-ap-csa/part-6-contest-literacy).
 
 After that, use the division tracks rather than the academy. The academy explains why the algorithms work; the tracks decide what to learn next.
 
