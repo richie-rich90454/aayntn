@@ -1,0 +1,30 @@
+id: usaco.2023.dec.platinum.a-graph-problem
+title: A Graph Problem
+source: USACO
+contest: 2023 December Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1357
+editorialUrl: https://usaco.org/current/data/sol_prob2_platinum_dec23.html
+techniques:
+    - graphs.mst
+    - graphs.dsu
+prerequisites:
+    - graphs.dsu
+    - graphs.mst
+difficulty: 5
+estimatedMinutes: 55
+specialConstraints:
+    - Two hundred thousand vertices and four hundred thousand edges, and the process is repeated from every starting vertex, so a separate traversal per vertex is impossible.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The process grows a set one vertex at a time, always taking the endpoint of the smallest labeled edge that leaves the set, which is exactly how a minimum spanning tree is built.
+    - So the vertices are added in the order a spanning tree would add them, and the answer for a starting vertex is a hash of the labels of the edges that were chosen.
+    - The edges are chosen by label rather than by weight, so the tree is the one that is lexicographically smallest in the sorted order of its edges.
+    - The whole computation for all starting vertices has to be shared, and the structure of the graph lets the answers be derived together rather than one vertex at a time.
+discussion: >-
+    The described process is a spanning tree algorithm, so the answer for each starting vertex is a function of the edges that algorithm would pick, and the edge labels rather than weights are what is being minimized. The hard part is that the process is run from every vertex, and a separate traversal per vertex is far too slow, so the structure of the graph has to be exploited to answer all of them together. The disjoint set union is the tool for reasoning about which edges a greedy process would take.
+related:
+    - usaco.2019.open.gold.i-would-walk-500-miles
+    - usaco.2019.open.platinum.compound-escape
