@@ -122,7 +122,7 @@ $$
 x^*_{12} \;=\; \frac{b_1 - b_2}{m_2 - m_1},
 $$
 
-and the line with the larger slope is the smaller one for every $x < x^_$ and the larger one for every $x > x^_$.
+and the line with the larger slope is the smaller one for every $x < x^{\star}$ and the larger one for every $x > x^{\star}$.
 
 **The redundancy test.** Take three lines with $m_1 < m_2 < m_3$. The middle line $L_2$ is smaller than $L_1$ exactly when $x < x^*_{12}$, and smaller than $L_3$ exactly when $x > x^*_{23}$. So $L_2$ is the smallest of the three somewhere exactly when there is an $x$ with $x^*_{23} < x < x^*_{12}$, which happens exactly when $x^*_{12} > x^*_{23}$.
 
