@@ -220,7 +220,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const knapsack: LabDefinition = {
+export const definition: LabDefinition = {
     id: "dynamic-programming.0-1-knapsack",
     title: "0/1 knapsack",
     scene: "matrix",
