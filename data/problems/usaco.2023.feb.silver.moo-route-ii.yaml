@@ -1,0 +1,30 @@
+id: usaco.2023.feb.silver.moo-route-ii
+title: Moo Route II
+source: USACO
+contest: 2023 February Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1304
+editorialUrl: https://usaco.org/current/data/sol_prob3_silver_feb23.html
+techniques:
+    - advanced.parallel-binary-search
+    - graphs.representation
+prerequisites:
+    - searching.binary-search
+    - graphs.representation
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - Two hundred thousand airports and two hundred thousand flights, so a separate search per airport would be far too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - For each airport you want the earliest time at which a flight can be taken from it, and that answer is a search over time.
+    - A flight is usable from an airport only after it has arrived, so the release time of an airport depends on the answer you are looking for.
+    - Instead of searching once per airport, do all the searches together. Round by round, fix a candidate time for every airport and check all the flights at once.
+    - Each round is a linear sweep over the flights and the candidate times are narrowed in parallel, so the whole run is logarithmic in the size of the time range.
+discussion: >-
+    The departure time from an airport depends on where you came from, so the answers are interdependent and cannot be found one at a time. Running all the binary searches in parallel fixes that, since every airport keeps a candidate arrival time and one pass over the flights updates all of them consistently before each candidate is narrowed. The number of rounds is logarithmic in the size of the time range, and each round is linear in the number of flights.
+related:
+    - usaco.2023.feb.platinum.problem-setting
+    - usaco.2020.jan.gold.springboards
