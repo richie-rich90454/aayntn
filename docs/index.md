@@ -1,6 +1,8 @@
 ---
+id: home
 layout: false
 title: aayntn
+summary: All Algorithms You Need to Know — a complete competitive programming encyclopedia from AP Computer Science A through USACO Platinum and beyond.
 description: All Algorithms You Need to Know — a complete competitive programming encyclopedia from AP Computer Science A through USACO Platinum and beyond.
 ---
 
