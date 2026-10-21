@@ -1,0 +1,29 @@
+id: usaco.2021.jan.bronze.uddered-but-not-herd
+title: Uddered but not Herd
+source: USACO
+contest: 2021 January Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1083
+editorialUrl: https://usaco.org/current/data/sol_prob1_bronze_jan21.html
+techniques:
+    - enumeration.subset-enumeration
+    - foundations.binary-representation
+prerequisites:
+    - foundations.binary-representation
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The string has at most twenty characters but the alphabet has twenty-six letters, so a mask over the letters is too large while a mask over the positions is not.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The answer is the smallest number of blocks the string can be cut into so that each block lists its letters in the order of the unknown cowphabet.
+    - Within one block the relative order of the letters is fixed, so a block is valid exactly when no letter appears after a smaller-ranked letter inside it.
+    - Guess the order of the letters that actually occur. There are at most twenty of them, and the number of orders is a factorial, which is far too many to try.
+    - Instead, use a bitmask over the positions of the string. For each set of letters already placed, keep the earliest position where the next letter may go, and extend the set by one letter at a time.
+discussion: >-
+    The cowphabet is a permutation of the alphabet, and only the relative order of the letters that appear matters. A mask over the letters would need a table of size two to the power of twenty-six, while a mask over the positions of the string has only twenty bits, and the state can be the set of letters already placed together with the earliest position at which the next one may go. The transition then costs constant time and the whole table fits in memory.
+related:
+    - usaco.2020.dec.bronze.daisy-chains
+    - usaco.2015.jan.bronze.what-base
