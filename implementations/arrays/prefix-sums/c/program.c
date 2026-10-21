@@ -31,7 +31,7 @@ int main(void)
     }
 
     /* calloc zeroes the values, so a truncated input leaves zeros behind
-       instead of reading uninitialised memory. */
+       instead of reading uninitialized memory. */
     long long *a = calloc((size_t)n + 1, sizeof *a);
     long long *prefix = calloc((size_t)n + 1, sizeof *prefix);
     if (a == NULL || prefix == NULL) {
