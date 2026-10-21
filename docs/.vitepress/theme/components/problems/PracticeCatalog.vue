@@ -4,7 +4,7 @@ import problems from "../../../data/generated/problems.json";
 import type { ProblemEntry } from "../../../data/types";
 
 /**
- * Practice catalogue.
+ * Practice catalog.
  *
  * Problems are filtered by technique, division and difficulty, and each one
  * carries a progressive hint ladder that the reader opens deliberately. A
