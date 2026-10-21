@@ -133,6 +133,22 @@ function layoutBlocks(count: number): Map<number, { x: number; y: number }> {
     return positions;
 }
 
+/** "the block 4" or "the blocks 1, 2 and 4". */
+function blocksOf(list: number[]): string {
+    if (list.length === 1) return `the block ${list[0]}`;
+    return `the blocks ${list.slice(0, -1).join(", ")} and ${list[list.length - 1]}`;
+}
+
+/** The verb that agrees with the subject above. */
+function risesOf(list: number[]): string {
+    return list.length === 1 ? "rises" : "rise";
+}
+
+/** A sentence that begins with a capital letter. */
+function capitalize(text: string): string {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 function build(input: string): LabEvent[] {
     const { count, values, operations } = parse(input);
     const events: LabEvent[] = [];
@@ -201,11 +217,11 @@ function build(input: string): LabEvent[] {
             type: "add",
             operation: "add",
             narration: building
-                ? `The value ${delta} at position ${index} is inserted, so the blocks ${visited.join(", ")} rise by ${delta}.`
-                : `Adding ${delta} at position ${index} raises the blocks ${visited.join(", ")}, because those are the blocks that contain the position.`,
+                ? `The value ${delta} at position ${index} is inserted, so ${blocksOf(visited)} ${risesOf(visited)} by ${delta}.`
+                : `Adding ${delta} at position ${index} raises ${blocksOf(visited)}, because those are the blocks that contain the position.`,
             state: snapshot(
-                `The blocks ${visited.join(", ")} hold the position ${index}.`,
-                `the blocks ${visited.join(", ")} each rise by ${delta}`,
+                `${capitalize(blocksOf(visited))} holds the position ${index}.`,
+                `${capitalize(blocksOf(visited))} rises by ${delta}`,
             ),
         });
         touched = [];
@@ -282,7 +298,7 @@ function build(input: string): LabEvent[] {
     return events;
 }
 
-export const fenwick: LabDefinition = {
+export const definition: LabDefinition = {
     id: "range-queries.fenwick-tree",
     title: "Fenwick tree",
     scene: "hybrid",
