@@ -1,0 +1,29 @@
+id: usaco.2024.feb.silver.moorbles
+title: Moorbles
+source: USACO
+contest: 2024 February Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1400
+editorialUrl: https://usaco.org/current/data/sol_prob3_silver_feb24.html
+techniques:
+    - combinatorics.binomial-coefficients
+    - number-theory.modular-arithmetic
+prerequisites:
+    - combinatorics.binomial-coefficients
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The answer is a probability and must be given modulo a prime, so the divisions have to be replaced by modular inverses.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The game is a sequence of bets on the parity of a running total, and a round ends when a player runs out of marbles.
+    - The amount at stake grows in expectation on each turn, so the number of turns before someone loses is governed by a geometric argument and the probability of a given outcome is a sum.
+    - Each turn's outcome depends on the parity of the current total, and the totals reachable from a given start are counted by a binomial coefficient.
+    - Compute the coefficients with factorials and inverse factorials modulo the prime, so each term of the sum costs constant time.
+discussion: >-
+    The two quantities in the statement, the number of turns and the chance that a particular player wins, both reduce to counts of reachable parity patterns, and those counts are binomial coefficients. Everything is then evaluated modulo a prime, with the divisions carried out by multiplying by modular inverses computed from factorials. The geometric structure of the game is what makes the sum finite and the answer a closed form.
+related:
+    - usaco.2022.jan.platinum.counting-haybales
+    - usaco.2019.dec.gold.moortal-cowmbat
