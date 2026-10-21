@@ -381,4 +381,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The version that accepts negative weights is [Bellman-Ford](/algorithms/graphs/bellman-ford).
 - The traversal that shares the shape but not the purpose is [depth-first search](/algorithms/graphs/dfs).
 - The monotonic search that finds a boundary rather than a distance is [binary search](/algorithms/searching/binary-search).
-- Every listing of the search in this article is collected with the other shortest-path implementations on the [Dijkstra source page](/implementations/graphs-dijkstra).
+- Every listing of the search in this article is collected with the other shortest-path implementations on the [Dijkstra source page](/implementations/graphs-dijkstra/).
