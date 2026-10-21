@@ -497,4 +497,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The shortest path algorithms, which need a different structure altogether, are in [Dijkstra's algorithm](/algorithms/graphs/dijkstra) and [Bellman-Ford](/algorithms/graphs/bellman-ford).
 - Why a queue and a stack are the two shapes that a graph algorithm takes is covered in [data structures and modeling](/start/from-ap-csa/part-4-data-structures-and-modeling).
 - The rollback union-find, which is what the deletion case needs, is built on the segment tree in [segment tree](/algorithms/range-queries/segment-tree).
-- Every listing in this article, in all six languages, is collected on the [disjoint set union source page](/implementations/graphs-dsu).
+- Every listing in this article, in all six languages, is collected on the [disjoint set union source page](/implementations/graphs-dsu/).
