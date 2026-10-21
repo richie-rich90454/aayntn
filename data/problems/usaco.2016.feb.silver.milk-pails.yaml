@@ -1,0 +1,30 @@
+id: usaco.2016.feb.silver.milk-pails
+title: Milk Pails
+source: USACO
+contest: 2016 February Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=620
+editorialUrl: https://usaco.org/current/data/sol_pails_silver_feb16.html
+techniques:
+    - graphs.bfs
+    - enumeration.subset-enumeration
+prerequisites:
+    - graphs.representation
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The number of reachable states is the product of the two pail sizes, which can be ten thousand states.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A state is the amount of milk in the first pail and the amount in the second, and there are only a hundred by a hundred such states.
+    - Fill, empty, and pour are the moves, and a pour stops when the source empties or the target fills, so every move is a deterministic transition.
+    - The reachable states therefore form a small graph, and a breadth-first search over it finds which totals are achievable.
+    - Then scan the achievable totals and take the one closest to the requested amount.
+discussion: >-
+    The two pail sizes are small, so the joint amount in the pails is a state space of at most ten thousand points, and every move is a deterministic transition between two of them. Breadth-first search over that graph finds exactly which totals can be produced, and the answer is the closest reachable total to the target. The number of operations matters only as a limit, which is why the shortest path is the natural thing to compute.
+related:
+    - usaco.2022.jan.bronze.non-transitive-dice
+    - usaco.2016.jan.silver.build-gates
