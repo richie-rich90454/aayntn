@@ -621,4 +621,4 @@ You are ready for part 6 when you can answer the following without consulting th
 - State the recursion depth limits of C++, Java, CPython and JavaScript, and say what `sys.setrecursionlimit` does and does not change.
 - List three reasons not to use `bits/stdc++.h` outside a GCC-only environment, and write the standards-compliant include list for a program that uses vectors, sorting and fast input.
 
-Next: [Contest problem-solving literacy](/start/from-ap-csa/part-6-contest-literacy/).
+Next: [Contest problem-solving literacy](/start/from-ap-csa/part-6-contest-literacy).
