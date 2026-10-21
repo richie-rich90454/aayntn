@@ -570,4 +570,4 @@ You are ready for part 5 when you can answer the following without consulting th
 - Describe how a grid becomes an implicit graph, and give the memory of the visited set for a $1000 \times 1000$ grid.
 - Lay out the four questions you ask when choosing a representation, and apply them to a problem with $10^5$ cities and $4 \times 10^5$ roads.
 
-Next: [Programming language transition](/start/from-ap-csa/part-5-language-transition/).
+Next: [Programming language transition](/start/from-ap-csa/part-5-language-transition).
