@@ -5,7 +5,7 @@ node_modules/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
 
-# Generated artefacts. These are rebuilt deterministically by
+# Generated artifacts. These are rebuilt deterministically by
 # `pnpm run generate` before every build, so they are never committed.
 docs/.vitepress/data/generated/
 docs/public/search-index.json
