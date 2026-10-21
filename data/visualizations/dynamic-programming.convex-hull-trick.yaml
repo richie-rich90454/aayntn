@@ -1,0 +1,19 @@
+# The convex hull trick demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: dynamic-programming.convex-hull-trick
+title: Convex hull trick
+algorithm: dynamic-programming.convex-hull-trick
+scene: hybrid
+preset: pruning
+storyboard:
+    - title: The hull is empty
+      description: The structure starts with no lines at all, and every query answers zero.
+    - title: A line is added
+      description: A new line joins the hull, whose slopes increase from the bottom of the stack to the top.
+    - title: A redundant line is dropped
+      description: A line that never holds the minimum is removed as soon as it is added.
+    - title: The query walks the stack
+      description: As the point of the query moves to the right, the lines it has passed are dropped for good.
