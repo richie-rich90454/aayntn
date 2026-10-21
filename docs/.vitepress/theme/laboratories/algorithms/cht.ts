@@ -124,7 +124,7 @@ function build(input: string): LabEvent[] {
                 },
             ],
         })),
-        annotations: [{ x: 30, y: 30, text: note, emphasis: "accent" }],
+        annotations: [{ x: 30, y: 130, text: note, emphasis: "accent" }],
         data: { hull: hull.map((line) => ({ ...line })), point },
         formula,
     });
