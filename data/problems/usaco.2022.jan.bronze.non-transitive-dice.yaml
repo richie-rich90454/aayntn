@@ -1,0 +1,29 @@
+id: usaco.2022.jan.bronze.non-transitive-dice
+title: Non-Transitive Dice
+source: USACO
+contest: 2022 January Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1180
+editorialUrl: https://usaco.org/current/data/sol_prob2_bronze_jan22.html
+techniques:
+    - enumeration.backtracking
+    - foundations.complexity
+prerequisites:
+    - enumeration.backtracking
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - Each die has six faces, so the number of orderings of those faces is six to the sixth.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The winner of a match between two dice is decided by how many of the thirty-six face pairs favor each, with ties thrown away and replayed.
+    - So one die beats another exactly when it wins strictly more than half of the face pairs, and the comparison is a simple count.
+    - The question is whether a cycle of three dice exists, so only the three relationships among three dice matter at a time.
+    - Enumerate the orderings of the six faces of each die, and count the winning face pairs for each pair of dice.
+discussion: >-
+    The probability comparison reduces to counting the thirty-six equally likely face pairs, and one die beats another exactly when it wins more than half of them. What makes the problem interesting is that the faces of a die can appear in any order, so the six orderings have to be enumerated for each die. The rest is a careful three-way comparison.
+related:
+    - usaco.2021.jan.bronze.uddered-but-not-herd
+    - usaco.2016.feb.silver.milk-pails
