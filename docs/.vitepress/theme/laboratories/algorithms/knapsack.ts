@@ -126,7 +126,7 @@ function build(input: string): LabEvent[] {
 
     events.push({
         type: "init",
-        operation: "init",
+        operation: "init-table",
         narration: `The budget is ${capacity} and there are ${items.length} items. Before any item is considered, every capacity holds the value zero.`,
         state: tableState(rows, {
             note: "Row 0 holds the answer when no item may be used.",
@@ -147,7 +147,7 @@ function build(input: string): LabEvent[] {
         if (item.weight > capacity) {
             events.push({
                 type: "skip-item",
-                operation: "skip-item",
+                operation: "update-row",
                 narration: `The item weighs ${item.weight}, which is more than the budget of ${capacity}, so it cannot be taken and the row is unchanged.`,
                 state: tableState(rows, {
                     note: `Item ${row} does not fit in the budget.`,
