@@ -3,7 +3,7 @@
  *
  * Each scene turns a `LabState` into SVG markup. The functions are pure:
  * given the same state they always produce the same string, which is what
- * makes the visualisation testable outside a browser.
+ * makes the visualization testable outside a browser.
  */
 import type {
     LabCell,
@@ -202,7 +202,7 @@ function renderNode(node: LabNode): string {
         );
     }
 
-    // A non-colour cue: the state name is always written next to the shape.
+    // A non-color cue: the state name is always written next to the shape.
     if (node.marker) {
         parts.push(
             `<text x="${x + r + 4}" y="${y - r + 6}" font-size="9" font-family="Noto Sans, sans-serif" fill="${PALETTE.muted}">${escapeXml(node.marker)}</text>`,
