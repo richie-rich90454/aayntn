@@ -1,0 +1,420 @@
+/**
+ * Article-level components: algorithm summaries, mathematical panels,
+ * prerequisite graphs, practice catalogues, progress dashboards.
+ */
+
+/* -------------------------------------------------------------------- */
+/* Algorithm summary banner                                             */
+/* -------------------------------------------------------------------- */
+
+.aayntn-summary {
+    margin: var(--space-8) 0;
+    border: var(--rule-ink);
+    background: var(--surface-raised);
+    box-shadow: var(--shadow-panel);
+}
+
+.aayntn-summary__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-black);
+    color: var(--color-white);
+}
+
+html.dark .aayntn-summary__head {
+    background: #0d1015;
+}
+
+.aayntn-summary__title {
+    font-size: var(--text-secondary-copy);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.aayntn-summary__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    border-bottom: var(--rule-ink);
+}
+
+.aayntn-summary__cell {
+    padding: var(--space-4);
+    border-right: 1px solid var(--border-subtle);
+}
+
+.aayntn-summary__cell:last-child {
+    border-right: none;
+}
+
+.aayntn-summary__label {
+    color: var(--text-muted);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.aayntn-summary__value {
+    margin-top: var(--space-1);
+    font-family: var(--font-code);
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+
+.aayntn-summary__rows {
+    padding: var(--space-4);
+}
+
+.aayntn-summary__row {
+    display: grid;
+    grid-template-columns: 12rem minmax(0, 1fr);
+    gap: var(--space-4);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: var(--text-secondary-copy);
+}
+
+.aayntn-summary__row:last-child {
+    border-bottom: none;
+}
+
+.aayntn-summary__row dt {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.aayntn-summary__row dd {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* -------------------------------------------------------------------- */
+/* Mathematical panels                                                  */
+/* -------------------------------------------------------------------- */
+
+.aayntn-math {
+    margin: var(--space-6) 0;
+    padding: var(--space-4) var(--space-6);
+    border-left: 3px solid var(--color-cobalt);
+    background: var(--surface-raised);
+}
+
+.aayntn-math__label {
+    display: block;
+    margin-bottom: var(--space-2);
+    color: var(--color-cobalt);
+    font-size: var(--text-meta);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.aayntn-math--lemma {
+    border-left-color: var(--color-oxblood);
+    border-top: 1px solid var(--border-subtle);
+    border-right: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.aayntn-math--lemma .aayntn-math__label {
+    color: var(--color-oxblood);
+}
+
+.aayntn-math--theorem {
+    border: 3px double var(--border-ink);
+}
+
+.aayntn-math--proof {
+    border-left: 1px solid var(--border-ink);
+    background: var(--surface-sunken);
+}
+
+.aayntn-math--proof .aayntn-math__label {
+    color: var(--text-primary);
+}
+
+.aayntn-math--invariant {
+    border: none;
+    background: var(--color-emerald);
+    color: var(--color-white);
+}
+
+.aayntn-math--invariant .aayntn-math__label {
+    color: var(--color-gold);
+}
+
+.aayntn-math--recurrence {
+    border-left-color: var(--color-gold);
+    background: linear-gradient(90deg, rgba(232, 184, 74, 0.14), transparent 60%);
+}
+
+.aayntn-math--recurrence .aayntn-math__label {
+    color: #9a7415;
+}
+
+html.dark .aayntn-math--recurrence .aayntn-math__label {
+    color: var(--color-gold);
+}
+
+.aayntn-math--counterexample {
+    border-left-color: var(--color-vermilion);
+    background: rgba(198, 61, 50, 0.06);
+}
+
+.aayntn-math--counterexample .aayntn-math__label {
+    color: var(--color-vermilion);
+}
+
+.aayntn-math--complexity {
+    display: inline-block;
+    margin: var(--space-3) 0;
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-ultramarine);
+    color: var(--color-white);
+    font-family: var(--font-code);
+    font-size: 0.9375rem;
+}
+
+.aayntn-math--complexity .aayntn-math__label {
+    color: var(--color-gold);
+}
+
+.aayntn-math__body > :last-child {
+    margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------------- */
+/* Prerequisite graph                                                   */
+/* -------------------------------------------------------------------- */
+
+.aayntn-prereq {
+    margin: var(--space-8) 0;
+    border: var(--rule-ink);
+    background: var(--surface-raised);
+}
+
+.aayntn-prereq__head {
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-black);
+    color: var(--color-white);
+    font-size: var(--text-secondary-copy);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+html.dark .aayntn-prereq__head {
+    background: #0d1015;
+}
+
+.aayntn-prereq__body {
+    padding: var(--space-4);
+    overflow-x: auto;
+}
+
+.aayntn-prereq__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    font-size: var(--text-meta);
+}
+
+.aayntn-prereq__legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.aayntn-prereq__swatch {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--border-ink);
+}
+
+/* -------------------------------------------------------------------- */
+/* Practice catalogue                                                   */
+/* -------------------------------------------------------------------- */
+
+.aayntn-practice {
+    margin: var(--space-8) 0;
+    border: var(--rule-ink);
+    background: var(--surface-raised);
+}
+
+.aayntn-practice__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface-sunken);
+}
+
+.aayntn-filter {
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    background: var(--surface-page);
+    color: var(--text-secondary);
+    font-size: var(--text-meta);
+    font-weight: 600;
+}
+
+.aayntn-filter[aria-pressed="true"] {
+    background: var(--color-cobalt);
+    border-color: var(--color-cobalt);
+    color: var(--color-white);
+}
+
+.aayntn-practice__list {
+    display: grid;
+    gap: 1px;
+    background: var(--border-subtle);
+}
+
+.aayntn-problem {
+    padding: var(--space-4);
+    background: var(--surface-raised);
+}
+
+.aayntn-problem__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-3);
+}
+
+.aayntn-problem__title {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.aayntn-problem__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+    color: var(--text-muted);
+    font-size: var(--text-meta);
+}
+
+.aayntn-problem__techniques {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: var(--space-3);
+}
+
+.aayntn-hint {
+    margin-top: var(--space-3);
+}
+
+.aayntn-hint__toggle {
+    color: var(--color-cobalt);
+    font-size: var(--text-meta);
+    font-weight: 600;
+}
+
+.aayntn-hint__body {
+    margin-top: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-left: 2px solid var(--color-gold);
+    background: var(--surface-sunken);
+    color: var(--text-secondary);
+    font-size: var(--text-secondary-copy);
+    line-height: 1.6;
+}
+
+.aayntn-difficulty {
+    display: inline-flex;
+    gap: 2px;
+}
+
+.aayntn-difficulty__pip {
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--border-ink);
+}
+
+.aayntn-difficulty__pip--on {
+    background: var(--color-cobalt);
+}
+
+html.dark .aayntn-difficulty__pip--on {
+    background: var(--color-gold);
+}
+
+/* -------------------------------------------------------------------- */
+/* Progress dashboard                                                   */
+/* -------------------------------------------------------------------- */
+
+.aayntn-progress {
+    display: grid;
+    gap: var(--space-6);
+}
+
+.aayntn-progress__card {
+    padding: var(--space-6);
+    border: var(--rule-ink);
+    background: var(--surface-raised);
+}
+
+.aayntn-progress__card h2 {
+    margin: 0 0 var(--space-4);
+    padding-bottom: var(--space-2);
+    border-bottom: var(--rule-ink);
+    font-size: 1.125rem;
+}
+
+.aayntn-progress__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.aayntn-progress__row:last-child {
+    border-bottom: none;
+}
+
+.aayntn-progress__title {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--text-secondary-copy);
+    font-weight: 500;
+}
+
+.aayntn-progress__bar {
+    width: 160px;
+    height: 8px;
+    border: 1px solid var(--border-ink);
+    background: var(--surface-sunken);
+}
+
+.aayntn-progress__bar-fill {
+    height: 100%;
+    background: var(--color-cobalt);
+}
+
+html.dark .aayntn-progress__bar-fill {
+    background: var(--color-gold);
+}
+
+.aayntn-progress__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.aayntn-progress__empty {
+    color: var(--text-muted);
+    font-size: var(--text-secondary-copy);
+}
