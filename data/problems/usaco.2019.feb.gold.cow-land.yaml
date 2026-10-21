@@ -1,0 +1,31 @@
+id: usaco.2019.feb.gold.cow-land
+title: Cow Land
+source: USACO
+contest: 2019 February Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=921
+editorialUrl: https://usaco.org/current/data/sol_cowland_gold_feb19.html
+techniques:
+    - trees.lca
+    - trees.heavy-light-decomposition
+    - range-queries.fenwick-tree
+prerequisites:
+    - trees.lca
+    - range-queries.fenwick-tree
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - A hundred thousand attractions and a hundred thousand value changes, so the tree cannot be walked once per query.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The attractions form a tree, and the enjoyment of a route is the exclusive-or of the values on the path between the two attractions.
+    - The exclusive-or of a path can be written as the exclusive-or of two root paths, so the answer is a pair of prefix exclusive-ors combined.
+    - When a point value changes, every route that passes through that attraction changes, and those are exactly the routes through the attraction in the rooted tree.
+    - Use a heavy-light decomposition so that the affected root paths become a logarithmic number of ranges, and keep the values in a structure that does a range exclusive-or and a point update.
+discussion: >-
+    The path query is a classic tree prefix sum, and it becomes a range query once the tree is decomposed into chains, so a heavy-light decomposition turns every path into a logarithmic number of ranges. The updates are point updates at the attraction and range updates over the root paths that pass through it, which a Fenwick tree over the chain positions absorbs. The exclusive-or is the reason a Fenwick tree works here as well as it would for a sum.
+related:
+    - usaco.2019.dec.gold.milk-visits
+    - usaco.2018.open.platinum.disruption
