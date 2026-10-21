@@ -1,6 +1,6 @@
 /**
  * Article-level components: algorithm summaries, mathematical panels,
- * prerequisite graphs, practice catalogues, progress dashboards.
+ * prerequisite graphs, practice catalogs, progress dashboards.
  */
 
 /* -------------------------------------------------------------------- */
@@ -239,7 +239,7 @@ html.dark .aayntn-prereq__head {
 }
 
 /* -------------------------------------------------------------------- */
-/* Practice catalogue                                                   */
+/* Practice catalog                                                   */
 /* -------------------------------------------------------------------- */
 
 .aayntn-practice {
