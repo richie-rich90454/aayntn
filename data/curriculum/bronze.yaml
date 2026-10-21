@@ -1,0 +1,16 @@
+id: curriculum.bronze
+title: The Bronze track
+summary: Simulation, careful modeling, complete enumeration, and the discipline of reading a specification exactly.
+division: bronze
+lessons:
+    - start.from-ap-csa
+    - start.computational-foundations
+    - foundations.complexity
+    - foundations.recursion
+    - foundations.sorting
+    - foundations.binary-representation
+    - enumeration.subset-enumeration
+    - enumeration.backtracking
+    - searching.binary-search
+    - arrays.prefix-sums
+    - greedy.interval-scheduling
