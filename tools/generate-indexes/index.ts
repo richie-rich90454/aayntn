@@ -358,11 +358,18 @@ async function main() {
     ]);
 
     const lessonById = new Map(lessons.map((lesson) => [lesson.id, lesson]));
+    // A lesson declares the algorithm it documents; the join runs the other way.
+    const lessonByAlgorithm = new Map(
+        lessons
+            .filter((lesson) => lesson.implementations)
+            .map((lesson) => [lesson.implementations!, lesson]),
+    );
 
     /* Algorithms -------------------------------------------------------- */
     const algorithms: AlgorithmEntry[] = [];
     for (const { manifest } of located) {
-        const lesson = lessonById.get(manifest.implementations ?? manifest.algorithm);
+        const lesson =
+            lessonByAlgorithm.get(manifest.algorithm) ?? lessonById.get(manifest.algorithm);
         algorithms.push({
             id: manifest.algorithm,
             title: manifest.title,
