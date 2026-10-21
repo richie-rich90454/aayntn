@@ -367,7 +367,7 @@ The mistake that survives review most often is using a disjoint set union for a 
 
 Consider three people, $a$, $b$ and $c$, with a friendship between $a$ and $b$ and one between $b$ and $c$. The structure says that all three are in one group, and `same(a, c)` is true.
 
-Now the friendship between $b$ and $c$ is canceled. The question "are $a$ and $c$ in the same group" must now be answered _no_. But the structure has no way to express this. The union of $\{a, b\}$ and $\{b, c\}$ is $\{a, b, c\}$, and a union-find can only ever make sets larger. There is no operation "split these two elements apart", and no sequence of unions can produce the partition $\{\{a,b\}, \{c\}\}$ once the union of $\{a,b,c\}$ has been performed.
+Now the friendship between $b$ and $c$ is canceled. The question "are $a$ and $c$ in the same group" must now be answered _no_. But the structure has no way to express this. The union of $\{a, b\}$ and $\{b, c\}$ is $\{a, b, c\}$, and a union-find can only ever make sets larger. There is no operation "split these two elements apart", and no sequence of unions can produce the partition into the blocks $\{a,b\}$ and $\{c\}$ once the union of $\{a,b,c\}$ has been performed.
 
 The smallest counterexample needs only two elements and one edge: the elements $a$ and $b$ are unioned, so `same(a, b)` is true, and then the edge is removed, so the correct answer is false. The structure still answers true, and it will answer true forever.
 
