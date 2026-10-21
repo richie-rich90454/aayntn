@@ -1,0 +1,19 @@
+# The heavy-light decomposition demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: trees.heavy-light-decomposition
+title: Heavy-light decomposition
+algorithm: trees.heavy-light-decomposition
+scene: tree
+preset: two-chains
+storyboard:
+    - title: The tree is measured
+      description: A breadth-first walk gives every vertex a depth, and a pass from the leaves upwards gives every subtree a size.
+    - title: The heavy child is chosen
+      description: Each vertex marks the child with the largest subtree as its heavy child.
+    - title: The chains are flattened
+      description: Each chain of heavy edges is written into the array as a contiguous range.
+    - title: A path is a few ranges
+      description: The path is broken into chain segments, and each segment is an ordinary range of the flattened array.
