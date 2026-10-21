@@ -1,0 +1,32 @@
+id: usaco.2018.jan.gold.mootube
+title: MooTube
+source: USACO
+contest: 2018 January Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=789
+editorialUrl: https://usaco.org/current/data/sol_mootube_gold_jan18.html
+techniques:
+    - range-queries.fenwick-tree
+    - graphs.dsu
+    - graphs.bfs
+prerequisites:
+    - graphs.dsu
+    - range-queries.fenwick-tree
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - A hundred thousand videos and a hundred thousand queries over a graph with a million edges, so the edges cannot be rescanned for every query.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A video reaches another when the path between them uses only edges whose value is at least the threshold, so the answer is a component size in a filtered graph.
+    - If the queries are processed in decreasing order of the threshold, then edges are only ever added, and the components only ever grow.
+    - With a disjoint set union, adding an edge merges two components, and the size of a component answers the query about any video inside it.
+    - The sizes have to be recorded at the moment a query is answered, because later merges would change them.
+discussion: >-
+    Processing the queries in decreasing order of the threshold turns the filtered graph into a graph that only grows, so a disjoint set union can maintain the components directly and the answer is the size of the component. The subtlety is that the answers must be recorded at the moment each query is processed, since later merges change the sizes. The quadratic version of the same idea needs a Fenwick tree, and that is the variant that appears at the next level.
+related:
+    - usaco.2019.open.silver.fence-planning
+    - usaco.2024.open.silver.painting-fence-posts
