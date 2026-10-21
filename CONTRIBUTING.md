@@ -14,7 +14,7 @@ This document is the contract between the editorial content, the executable impl
 | Executable code | `implementations/**`, `templates/**` | **Yes** — real source files in their own languages |
 | Machine-readable metadata | YAML frontmatter, `algorithm.yaml`, `data/**/*.yaml` | **Yes** |
 | Presentation | `docs/.vitepress/theme/**` | No — it renders metadata, it never contains content |
-| Derived artefacts | `docs/.vitepress/data/generated/**`, `docs/public/**` | **No** — never edit these by hand |
+| Derived artifacts | `docs/.vitepress/data/generated/**`, `docs/public/**` | **No** — never edit these by hand |
 
 The build regenerates everything derived. If you find yourself editing a file under `docs/.vitepress/data/generated/`, you are doing it wrong.
 
@@ -32,7 +32,7 @@ aayntn/
 │   ├── languages/              six language centers
 │   ├── templates/              template library
 │   ├── mathematics/            mathematical reference
-│   ├── practice/               problem catalogue page
+│   ├── practice/               problem catalog page
 │   ├── laboratory/             interactive demonstrations index
 │   ├── progress/               local progress dashboard
 │   ├── reference/              rules, checklists, glossary
@@ -171,7 +171,7 @@ For complex algorithms, the comments should identify the maintained invariant, t
 
 1. Be real, compilable code in the declared language and standard.
 2. Document its input assumptions.
-3. Match the mathematical behaviour of the algorithm.
+3. Match the mathematical behavior of the algorithm.
 4. Handle empty and boundary cases where they can occur.
 5. Use no library outside the language's standard library.
 6. Have meaningful names and readable control flow.
@@ -187,7 +187,7 @@ For complex algorithms, the comments should identify the maintained invariant, t
 | Java | Java 17 | Public class `Main` for judge submission; a `FastScanner` for large input. |
 | Python | Python 3.6+ | No syntax newer than 3.6 in examples that claim to target the published judge version. |
 | Pascal | Free Pascal 3.x | `program` mode, `{$mode objfpc}{$H+}`. Educational reference only. |
-| JavaScript | Node.js 18+ | CommonJS. Educational reference only — never labelled a USACO submission solution. |
+| JavaScript | Node.js 18+ | CommonJS. Educational reference only — never labeled a USACO submission solution. |
 
 **USACO submission languages are C, C++, Java and Python.** Pascal and JavaScript are educational reference implementations and must be marked as such wherever they appear.
 
@@ -244,7 +244,7 @@ The implementation viewer and the animation are inserted by identifier, not by h
 
 ## 7. Writing rules
 
-- Sentence case for every title. No uppercase-only headings. No centred-dot separators.
+- Sentence case for every title. No uppercase-only headings. No centered-dot separators.
 - No serif interface fonts. No letterspacing on long paragraphs.
 - One idea per paragraph. The reading measure is 68–76 characters.
 - Never state a complexity bound without saying which implementation it assumes.
@@ -271,8 +271,8 @@ CI runs the same commands. A pull request that fails the build does not merge.
 
 ---
 
-## 9. Licence
+## 9. License
 
-The project is licensed under **AGPL-3.0-only**. Original lessons, implementations and artwork are covered by it. Contributed code must be your own or compatible with it; the webfonts under `docs/public/fonts` are covered by the SIL Open Font License 1.1, and the manifest of every implementation records its licence and provenance.
+The project is licensed under **AGPL-3.0-only**. Original lessons, implementations and artwork are covered by it. Contributed code must be your own or compatible with it; the webfonts under `docs/public/fonts` are covered by the SIL Open Font License 1.1, and the manifest of every implementation records its license and provenance.
 
 `aayntn` is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
