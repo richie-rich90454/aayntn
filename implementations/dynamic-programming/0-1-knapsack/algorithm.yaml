@@ -1,0 +1,169 @@
+algorithm: dynamic-programming.0-1-knapsack
+title: "0/1 knapsack"
+summary: Maximise the total value of a subset of items whose total weight fits in a capacity, with every item usable at most once.
+subject: dynamic-programming
+divisions: [gold]
+importance: common-contest-technique
+complexity:
+    time: "O(nW)"
+    space: "O(W)"
+assumptions:
+    - Each item may be taken at most once.
+reviewed: false
+variants:
+    - id: minimal
+      language: c
+      file: c/minimal.c
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that fills a caller-provided table with the best value reachable for every capacity at most W and returns the maximum; no I/O."
+      time: "O(nW)"
+      auxiliarySpace: "O(W) for the table of capacity + 1 entries"
+      status: unverified
+      inputs: "n items with a weight and a value each, and a capacity W."
+      outputs: "The maximum total value of a subset of the items whose total weight is at most W."
+      notes: "table[c] holds the best value reachable with total weight at most c, so the answer is table[capacity]. The capacity loop runs downwards so that table[c - weight] still describes the items before the current one; an upwards sweep would read a cell that already contains the current item, which is exactly the unbounded-knapsack mistake. The C variant takes the table as a caller-provided buffer so that the algorithm itself never allocates."
+      operations: [init-table, update-row, take-item, skip-item]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the maximum total value of a subset whose total weight is at most W, using one table of capacity + 1 entries filled in descending capacity order; no I/O."
+      time: "O(nW)"
+      auxiliarySpace: "O(W) for the table of capacity + 1 entries"
+      status: unverified
+      inputs: "n items with a weight and a value each, and a capacity W."
+      outputs: "The maximum total value of a subset of the items whose total weight is at most W."
+      notes: "table[c] holds the best value reachable with total weight at most c, so the answer is table[capacity]. The capacity loop runs downwards so that table[c - weight] still describes the items before the current one; an upwards sweep would read a cell that already contains the current item, which is exactly the unbounded-knapsack mistake. The C++ variant keeps the table in a std::vector that is released when the function returns."
+      operations: [init-table, update-row, take-item, skip-item]
+    - id: minimal
+      language: java
+      file: java/Program.java
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the maximum total value of a subset whose total weight is at most W, using one table of capacity + 1 entries filled in descending capacity order; no I/O."
+      time: "O(nW)"
+      auxiliarySpace: "O(W) for the table of capacity + 1 entries"
+      status: unverified
+      inputs: "n items with a weight and a value each, and a capacity W."
+      outputs: "The maximum total value of a subset of the items whose total weight is at most W."
+      notes: "table[c] holds the best value reachable with total weight at most c, so the answer is table[capacity]. The capacity loop runs downwards so that table[c - weight] still describes the items before the current one; an upwards sweep would read a cell that already contains the current item, which is exactly the unbounded-knapsack mistake. The Java variant allocates the table on the heap and leaves it to the garbage collector."
+      operations: [init-table, update-row, take-item, skip-item]
+    - id: minimal
+      language: javascript
+      file: javascript/minimal.js
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the maximum total value of a subset whose total weight is at most W, using one table of capacity + 1 entries filled in descending capacity order; no I/O."
+      time: "O(nW)"
+      auxiliarySpace: "O(W) for the table of capacity + 1 entries"
+      status: unverified
+      inputs: "n items with a weight and a value each, and a capacity W."
+      outputs: "The maximum total value of a subset of the items whose total weight is at most W."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. table[c] holds the best value reachable with total weight at most c, so the answer is table[capacity]. The capacity loop runs downwards so that table[c - weight] still describes the items before the current one; an upwards sweep would read a cell that already contains the current item, which is exactly the unbounded-knapsack mistake."
+      operations: [init-table, update-row, take-item, skip-item]
+    - id: minimal
+      language: pascal
+      file: pascal/minimal.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the maximum total value of a subset whose total weight is at most W, using one table of capacity + 1 entries filled in descending capacity order; no I/O."
+      time: "O(nW)"
+      auxiliarySpace: "O(W) for the table of capacity + 1 entries"
+      status: unverified
+      inputs: "n items with a weight and a value each, and a capacity W."
+      outputs: "The maximum total value of a subset of the items whose total weight is at most W."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Table[c] holds the best value reachable with total weight at most c, so the answer is Table[Capacity]. The capacity loop runs downwards so that Table[C - Weight] still describes the items before the current one; an upwards sweep would read a cell that already contains the current item, which is exactly the unbounded-knapsack mistake."
+      operations: [init-table, update-row, take-item, skip-item]
+    - id: minimal
+      language: python
+      file: python/minimal.py
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable function that returns the maximum total value of a subset whose total weight is at most W, using one table of capacity + 1 entries filled in descending capacity order; no I/O."
+      time: "O(nW)"
+      auxiliarySpace: "O(W) for the table of capacity + 1 entries"
+      status: unverified
+      inputs: "n items with a weight and a value each, and a capacity W."
+      outputs: "The maximum total value of a subset of the items whose total weight is at most W."
+      notes: "table[c] holds the best value reachable with total weight at most c, so the answer is table[capacity]. The capacity loop runs downwards so that table[c - weight] still describes the items before the current one; an upwards sweep would read a cell that already contains the current item, which is exactly the unbounded-knapsack mistake."
+      operations: [init-table, update-row, take-item, skip-item]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses the items and the capacity from stdin and prints the maximum achievable total value."
+      time: "O(nW)"
+      auxiliarySpace: "O(n + W) for the items and the table"
+      status: unverified
+      inputs: "n W, then n lines w v with an integer weight and value per item."
+      outputs: "The maximum achievable total value, on one line."
+      notes: "The descending capacity order is what keeps every item usable at most once, and the single canonical line makes the six language versions byte-identical."
+      operations: [init-table, update-row, take-item, skip-item]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses the items and the capacity from stdin and prints the maximum achievable total value."
+      time: "O(nW)"
+      auxiliarySpace: "O(n + W) for the items and the table"
+      status: unverified
+      inputs: "n W, then n lines w v with an integer weight and value per item."
+      outputs: "The maximum achievable total value, on one line."
+      notes: "The descending capacity order is what keeps every item usable at most once, and the single canonical line makes the six language versions byte-identical."
+      operations: [init-table, update-row, take-item, skip-item]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses the items and the capacity from stdin and prints the maximum achievable total value."
+      time: "O(nW)"
+      auxiliarySpace: "O(n + W) for the items and the table"
+      status: unverified
+      inputs: "n W, then n lines w v with an integer weight and value per item."
+      outputs: "The maximum achievable total value, on one line."
+      notes: "The descending capacity order is what keeps every item usable at most once, and the single canonical line makes the six language versions byte-identical."
+      operations: [init-table, update-row, take-item, skip-item]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses the items and the capacity from stdin and prints the maximum achievable total value."
+      time: "O(nW)"
+      auxiliarySpace: "O(n + W) for the items and the table"
+      status: unverified
+      inputs: "n W, then n lines w v with an integer weight and value per item."
+      outputs: "The maximum achievable total value, on one line."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The descending capacity order is what keeps every item usable at most once, and the single canonical line makes the six language versions byte-identical."
+      operations: [init-table, update-row, take-item, skip-item]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses the items and the capacity from stdin and prints the maximum achievable total value."
+      time: "O(nW)"
+      auxiliarySpace: "O(n + W) for the items and the table"
+      status: unverified
+      inputs: "n W, then n lines w v with an integer weight and value per item."
+      outputs: "The maximum achievable total value, on one line."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The descending capacity order is what keeps every item usable at most once, and the single canonical line makes the six language versions byte-identical."
+      operations: [init-table, update-row, take-item, skip-item]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses the items and the capacity from stdin and prints the maximum achievable total value."
+      time: "O(nW)"
+      auxiliarySpace: "O(n + W) for the items and the table"
+      status: unverified
+      inputs: "n W, then n lines w v with an integer weight and value per item."
+      outputs: "The maximum achievable total value, on one line."
+      notes: "The descending capacity order is what keeps every item usable at most once, and the single canonical line makes the six language versions byte-identical."
+      operations: [init-table, update-row, take-item, skip-item]
