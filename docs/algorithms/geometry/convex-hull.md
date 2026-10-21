@@ -147,35 +147,6 @@ product is the sign of $h(b_x) - b_y$, and $b$ lies on or above the line
 exactly when $h(b_x) - b_y \ge 0$. $\square$
 </MathPanel>
 
-<MathPanel type="theorem" title="Theorem">
-The monotone chain algorithm returns the convex hull of its input, in
-counterclockwise order, starting at the point with the smallest $x$ and
-then the smallest $y$.
-</MathPanel>
-
-<MathPanel type="proof" title="Proof">
-Let the points be sorted by $x$ and then by $y$, and let the sweep build
-the chain `lower`.
-
-**The invariant.** After the sweep has processed the first $t$ points:
-
-1. `lower` is a convex chain, that is, every three consecutive points make a strict left turn.
-2. Every one of the first $t$ points lies on or above the chain.
-3. Every vertex of `lower` is a vertex of the lower hull of the first $t$ points.
-
-**Initialization.** For $t = 1$ the chain has one point and every claim is trivially true.
-
-**Maintenance.** Suppose the invariant holds and the next point $p$ is added. While the last three points of the chain do not make a strict left turn, the middle one of those three is removed.
-
-Let those three points be $a$, $b$, $c$, where $b$ is the last point of the chain and $c = p$. They are in sorted order, so $a_x \le b_x \le c_x$, and by the lemma $\operatorname{cross}(a, b, c) \le 0$ means that $b$ lies on or above the segment from $a$ to $c$. The segment from $a$ to $c$ is contained in the region below the old chain at that point, so removing $b$ keeps every processed point on or above the chain, which preserves claim 2. It also keeps the chain convex, because the only new triple is the one formed by the point before $a$, $a$ and $c$, and the loop continues until that triple turns left. Finally, $b$ lies on or above the segment from $a$ to $c$, so $b$ is inside the convex hull of the remaining points and is not an extreme point, which preserves claim 3. The loop terminates because each removal shortens the chain.
-
-When the loop stops, the triple formed by the last two points of the chain and $p$ turns left, so the chain is still convex after $p$ is appended. This proves the maintenance.
-
-**Termination.** At the end of the sweep, claim 1 says the chain is convex, claim 2 says every input point lies on or above it, and claim 3 says every vertex of the chain is a vertex of the lower hull. A convex chain from the leftmost point to the rightmost point with every point on or above it is exactly the lower hull: any lower boundary must be convex, must start and end at the extreme points, and must lie below or on every input point, and there is exactly one such chain. So `lower` is the lower hull.
-
-The same argument applied to the reversed order produces the upper hull. Joining the two chains, with the shared endpoints removed so that they are not counted twice, gives the boundary of the convex hull, traversed counterclockwise. $\square$
-</MathPanel>
-
 ## Algorithm derivation
 
 The algorithm has four lines of substance, and each of them is the consequence of one of the statements above.
@@ -249,6 +220,37 @@ $$
 $$
 
 That is a triangle, traversed counterclockwise, and the other three points are inside it. The point $(1,1)$ is above the segment from $(0,0)$ to $(2,3)$ but below the segment from $(4,0)$ to $(2,3)$, so it is inside; the point $(3,1)$ is below the segment from $(4,0)$ to $(2,3)$ and below the segment from $(2,3)$ to $(0,0)$'s line, so it is inside as well.
+
+## Correctness proof
+
+<MathPanel type="theorem" title="Theorem">
+The monotone chain algorithm returns the convex hull of its input, in
+counterclockwise order, starting at the point with the smallest $x$ and
+then the smallest $y$.
+</MathPanel>
+
+<MathPanel type="proof" title="Proof">
+Let the points be sorted by $x$ and then by $y$, and let the sweep build
+the chain `lower`.
+
+**The invariant.** After the sweep has processed the first $t$ points:
+
+1. `lower` is a convex chain, that is, every three consecutive points make a strict left turn.
+2. Every one of the first $t$ points lies on or above the chain.
+3. Every vertex of `lower` is a vertex of the lower hull of the first $t$ points.
+
+**Initialization.** For $t = 1$ the chain has one point and every claim is trivially true.
+
+**Maintenance.** Suppose the invariant holds and the next point $p$ is added. While the last three points of the chain do not make a strict left turn, the middle one of those three is removed.
+
+Let those three points be $a$, $b$, $c$, where $b$ is the last point of the chain and $c = p$. They are in sorted order, so $a_x \le b_x \le c_x$, and by the lemma $\operatorname{cross}(a, b, c) \le 0$ means that $b$ lies on or above the segment from $a$ to $c$. The segment from $a$ to $c$ is contained in the region below the old chain at that point, so removing $b$ keeps every processed point on or above the chain, which preserves claim 2. It also keeps the chain convex, because the only new triple is the one formed by the point before $a$, $a$ and $c$, and the loop continues until that triple turns left. Finally, $b$ lies on or above the segment from $a$ to $c$, so $b$ is inside the convex hull of the remaining points and is not an extreme point, which preserves claim 3. The loop terminates because each removal shortens the chain.
+
+When the loop stops, the triple formed by the last two points of the chain and $p$ turns left, so the chain is still convex after $p$ is appended. This proves the maintenance.
+
+**Termination.** At the end of the sweep, claim 1 says the chain is convex, claim 2 says every input point lies on or above it, and claim 3 says every vertex of the chain is a vertex of the lower hull. A convex chain from the leftmost point to the rightmost point with every point on or above it is exactly the lower hull: any lower boundary must be convex, must start and end at the extreme points, and must lie below or on every input point, and there is exactly one such chain. So `lower` is the lower hull.
+
+The same argument applied to the reversed order produces the upper hull. Joining the two chains, with the shared endpoints removed so that they are not counted twice, gives the boundary of the convex hull, traversed counterclockwise. $\square$
+</MathPanel>
 
 ## Complexity analysis
 
@@ -445,8 +447,9 @@ Answer these without looking back. If you cannot, revisit the section named in p
 
 ## Further reading
 
-- The subject overview, which places this technique among the others, is [the computational geometry](/algorithms/geometry/).
+- The subject index lists this technique, [convex hull](/algorithms/geometry/convex-hull), beside the geometry it does not yet cover: [the computational geometry](/algorithms/geometry/).
 - The sorting that the monotone chain begins with is described in [sorting](/algorithms/foundations/sorting).
+- A boundary is the subject of more than one field. The prefix function of [KMP](/algorithms/strings/kmp) is a table of the borders of a string, and it is the string version of the same idea that this page applies to a set of points.
 - The binary search that answers a point-in-convex-polygon query in logarithmic time is in [binary search](/algorithms/searching/binary-search).
 - The convex hull trick, which is a different technique that shares the name, is in [convex hull trick](/algorithms/dynamic-programming/convex-hull-trick).
 - The offline sweep that resembles a hull sweep, and the technique that answers many questions at once, is in [parallel binary search](/algorithms/advanced/parallel-binary-search).
