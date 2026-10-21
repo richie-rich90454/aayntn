@@ -1,27 +1,27 @@
 /**
- * Lazy loader for the Shiki-highlighted implementation fragments.
+ * The loader for the highlighted implementation fragments.
  *
- * The fragments live under `docs/.vitepress/data/generated/src/` and are
- * code-split by Vite, so a reader only downloads the implementation they
- * actually open.
+ * The fragments are published as plain static files by the build, so a reader
+ * downloads only the listing they actually open, and the bundler never has to
+ * carry a hundred and fifty source listings in the module graph.
  */
-const modules = import.meta.glob("./generated/src/**/*.html", { query: "?raw", import: "default" });
+const BASE = "/implementations";
 
 export async function loadImplementationHtml(
     algorithm: string,
     language: string,
     variant: string,
 ): Promise<string | null> {
-    const key = `./generated/src/${algorithm}/${language}.${variant}.html`;
-    const loader = modules[key] as (() => Promise<string>) | undefined;
-    if (!loader) return null;
-    return loader();
+    const response = await fetch(`${BASE}/${algorithm}/${language}.${variant}.html`);
+    if (!response.ok) return null;
+    return response.text();
 }
 
-export function hasImplementationHtml(
+export function implementationSourceUrl(
     algorithm: string,
     language: string,
     variant: string,
-): boolean {
-    return Boolean(modules[`./generated/src/${algorithm}/${language}.${variant}.html`]);
+    extension: string,
+): string {
+    return `${BASE}/${algorithm}/${language}.${variant}.${extension}`;
 }
