@@ -1,0 +1,29 @@
+id: usaco.2020.feb.gold.timeline
+title: Timeline
+source: USACO
+contest: 2020 February Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1017
+editorialUrl: https://usaco.org/current/data/sol_timeline_gold_feb20.html
+techniques:
+    - range-queries.segment-tree
+    - graphs.topological-sort
+prerequisites:
+    - range-queries.segment-tree
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - A hundred thousand sessions and a billion days, so the days cannot be enumerated.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Each session has a lower bound on its day, and each memory says that one session happened at least a fixed number of days after another.
+    - The earliest possible day of a session is the largest of its own lower bound and all the days forced on it by the memories, propagated through the constraints.
+    - The constraints form a directed acyclic graph, so they can be processed in topological order, and a session's day is settled once all of its predecessors are known.
+    - The propagation asks for a maximum over a set of sessions of a value that keeps changing, which is what a range structure over the session order provides.
+discussion: >-
+    The problem is a longest-path computation in a constraint graph whose edges carry offsets, and the topological order of the graph is what makes the propagation well defined. The difficulty is that the day of a session is the maximum over all the sessions that constrain it, and those values are not final when the constraint is first seen. A range structure over the session order lets each session ask for the maximum constraint applied to it so far, in logarithmic time.
+related:
+    - usaco.2020.jan.gold.springboards
+    - usaco.2023.dec.gold.flight-routes
