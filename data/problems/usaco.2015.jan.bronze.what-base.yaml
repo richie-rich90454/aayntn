@@ -1,0 +1,29 @@
+id: usaco.2015.jan.bronze.what-base
+title: It's All About the Base
+source: USACO
+contest: 2015 January Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=509
+editorialUrl: https://usaco.org/current/data/sol_whatbase_bronze.html
+techniques:
+    - foundations.binary-representation
+prerequisites:
+    - foundations.binary-representation
+difficulty: 1
+estimatedMinutes: 15
+specialConstraints:
+    - The converted value can exceed the range of a 32-bit integer, so the running total has to be wide.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The value of a digit depends on the base you choose, so the same string of digits means a different number in each base.
+    - Read the digits from the right. The rightmost digit has weight one, the next has weight equal to the base, and the next the square of the base.
+    - So each digit contributes the digit times the current power of the base, and the power is multiplied by the base after every step.
+    - Compute the value in both bases and print the difference, keeping the running total in a type that can hold it.
+discussion: >-
+    The only idea is positional notation, where the weight of a digit is a power of the base, so converting a string is a scan that multiplies an accumulator by the base and adds the next digit. The trap is integer width, because a short string in base ten already exceeds what a 32-bit integer holds. Nothing else in the problem is surprising, which makes it a good exercise in following a specification exactly.
+related:
+    - usaco.2021.jan.bronze.uddered-but-not-herd
+    - usaco.2025.feb.bronze.making-mexes
