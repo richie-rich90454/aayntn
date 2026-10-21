@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 12" width="240" height="12" role="img" aria-label="Layered double border rule">
+  <title>Layered double border rule</title>
+  <g stroke="#161616" fill="none">
+    <path d="M0 1 H240" stroke-width="1.4"/>
+    <path d="M0 5 H240" stroke-width="0.7" opacity="0.7"/>
+    <path d="M0 10 H240" stroke-width="1.4"/>
+  </g>
+  <g fill="#E8B84A">
+    <rect x="112" y="-2" width="16" height="16"/>
+    <rect x="116" y="2" width="8" height="8" fill="#161616"/>
+  </g>
+</svg>
