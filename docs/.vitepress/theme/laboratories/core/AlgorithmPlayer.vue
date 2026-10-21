@@ -41,10 +41,10 @@ const error = ref("");
 
 let timer: number | undefined;
 
-function rebuild(preset: LabPreset) {
+function rebuild(input: string) {
     error.value = "";
     try {
-        events.value = definition.value?.build(preset) ?? [];
+        events.value = definition.value?.build(input) ?? [];
     } catch (err) {
         events.value = [];
         error.value = (err as Error).message;
@@ -64,7 +64,7 @@ watch(
         if (!value) return;
         presetId.value = value.presets[0]?.id ?? "";
         customInput.value = value.presets[0]?.input ?? "";
-        rebuild(value.presets[0]!);
+        rebuild(value.presets[0]!.input);
     },
     { immediate: true },
 );
@@ -155,21 +155,16 @@ watch(speed, () => {
 function applyPreset(preset: LabPreset) {
     presetId.value = preset.id;
     customInput.value = preset.input;
-    rebuild(preset);
+    rebuild(preset.input);
 }
 
 function applyCustomInput() {
-    const preset: LabPreset = {
-        id: "custom",
-        label: "Custom",
-        input: customInput.value,
-    };
-    rebuild(preset);
+    rebuild(customInput.value);
 }
 
 function reset() {
     const preset = activePreset.value;
-    if (preset) rebuild(preset);
+    if (preset) rebuild(preset.input);
 }
 
 function onKeydown(event: KeyboardEvent) {
