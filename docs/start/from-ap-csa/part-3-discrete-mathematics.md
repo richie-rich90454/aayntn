@@ -799,4 +799,4 @@ You are ready for part 4 when you can answer the following without consulting th
 - Apply the pigeonhole principle to show that any $n+1$ integers contain two whose difference is divisible by $n$.
 - Use linearity of expectation to bound the expected cost of a randomised algorithm, and say which algebraic rule you may not use.
 
-Next: [Data structures and modeling](/start/from-ap-csa/part-4-data-structures-and-modeling/).
+Next: [Data structures and modeling](/start/from-ap-csa/part-4-data-structures-and-modeling).
