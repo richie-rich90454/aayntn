@@ -42,14 +42,32 @@ function parse(input: string): Parsed {
         const name = (head ?? "").trim();
         if (!name) continue;
         const from = indexOf(name);
-        for (const token of rest
+
+        // Each neighbour is written as a name followed by its weight, so the
+        // tokens are read in pairs: "B 4 C 2" is the neighbour B of weight 4
+        // and the neighbour C of weight 2.
+        const tokens = rest
             .join(" ")
             .split(/[\s,]+/)
-            .filter(Boolean)) {
-            const match = /^([^\s]+)\s*\(?(-?\d+)\)?$/.exec(token);
-            if (!match) throw new Error(`Expected "neighbour weight", found "${token}".`);
-            const to = indexOf(match[1]!);
-            pending.push({ from, to, weight: Number(match[2]) });
+            .filter(Boolean);
+        for (let position = 0; position < tokens.length; position += 1) {
+            const token = tokens[position]!;
+            const match = /^([^\s(]+)\s*\(\s*(-?\d+)\s*\)$/.exec(token);
+            if (match) {
+                // The name and the weight arrived as one token, as in "B(4)".
+                pending.push({
+                    from,
+                    to: indexOf(match[1]!),
+                    weight: Number(match[2]),
+                });
+                continue;
+            }
+            const weightToken = tokens[position + 1];
+            if (weightToken === undefined || !/^-?\d+$/.test(weightToken)) {
+                throw new Error(`Expected "neighbour weight", found "${token}".`);
+            }
+            pending.push({ from, to: indexOf(token), weight: Number(weightToken) });
+            position += 1;
         }
     }
 
