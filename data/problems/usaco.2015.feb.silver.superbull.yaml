@@ -1,0 +1,30 @@
+id: usaco.2015.feb.silver.superbull
+title: Superbull
+source: USACO
+contest: 2015 February Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=531
+editorialUrl: https://usaco.org/current/data/sol_superbull_silver.html
+techniques:
+    - graphs.mst
+    - graphs.dijkstra
+prerequisites:
+    - graphs.dsu
+    - graphs.dijkstra
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - There are two thousand teams, so the complete graph has about two million edges. The edges can be generated on the fly rather than stored.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Every game is an edge between two teams, and the weight of that edge is the total score of the game.
+    - The tournament eliminates one team at a time, and a team can only play a team that is still in the tournament, so the games that are played form a tree.
+    - The score of the tournament is the sum of the weights of the games played, and you want the best possible tree rather than the best possible path.
+    - So this is a maximum spanning tree problem. Sort the games by score and add each one that joins two different components.
+discussion: >-
+    The elimination structure forces the games that are played to form a spanning tree of the complete graph on the teams, and the score to be the sum of the edge weights. The objective is therefore to maximize the weight of a spanning tree, which is the same problem as minimizing it with the order of the edges reversed. Kruskal's algorithm with a disjoint set union handles the two million edges comfortably.
+related:
+    - usaco.2019.open.gold.i-would-walk-500-miles
+    - usaco.2022.feb.gold.moo-network
