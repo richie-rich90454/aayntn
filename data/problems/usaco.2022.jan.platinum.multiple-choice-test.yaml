@@ -1,0 +1,29 @@
+id: usaco.2022.jan.platinum.multiple-choice-test
+title: Multiple Choice Test
+source: USACO
+contest: 2022 January Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1190
+editorialUrl: https://usaco.org/current/data/sol_prob3_platinum_jan22.html
+techniques:
+    - geometry.convex-hull
+    - searching.binary-search
+prerequisites:
+    - geometry.convex-hull
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - Two hundred thousand vectors in total, and the answer is a distance, so the comparison has to be exact rather than approximate.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - You pick one vector from each group and want the sum to be as far from the origin as possible, so the answer is the direction in which the sum is largest.
+    - For a fixed direction, the best choice in each group is the vector that is extreme in that direction, so only the convex hull of each group matters.
+    - The groups are independent once the direction is fixed, and the direction has to be one of finitely many candidates.
+    - Sweep the direction around the circle, updating the choice in each group when the direction crosses an edge of its hull, and find the direction where the total is largest.
+discussion: >-
+    The objective is a distance, so the problem is really about a direction, and for a fixed direction each group contributes its extreme vector, which means only the convex hull of each group matters. As the direction rotates, each group changes its choice only when the direction crosses one of its hull edges, so the total can be maintained with a sweep over those events. The discrete set of candidate directions is what makes the answer exact rather than approximate.
+related:
+    - usaco.2015.feb.gold.fencing-the-herd
+    - usaco.2019.feb.platinum.mowing-mischief
