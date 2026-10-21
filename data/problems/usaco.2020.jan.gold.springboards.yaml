@@ -1,0 +1,29 @@
+id: usaco.2020.jan.gold.springboards
+title: Springboards
+source: USACO
+contest: 2020 January Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=995
+editorialUrl: https://usaco.org/current/data/sol_boards_gold_jan20.html
+techniques:
+    - range-queries.segment-tree
+    - graphs.representation
+prerequisites:
+    - range-queries.segment-tree
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The grid is a billion by a billion, so the coordinates are the only thing that can be stored.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Bessie only walks up and to the right, and a springboard teleports her forward, so the useful data is the set of springboards and their endpoints.
+    - A springboard is only worth taking if no other springboard lands in the region it covers, because then the walk would already have been free.
+    - So the candidate springboards are the ones whose landing region is not dominated by another, and they can be ordered by their start coordinates.
+    - Sweep the springboards in order of their start, keeping the best distance at each height with a structure that supports a range update and a point query.
+discussion: >-
+    The grid is far too large to search, so the solution works on the springboards alone. A springboard whose target region is contained in another springboard's region is never worth using, which prunes the set and makes the remaining ones sortable by position. A sweep over the pruned set with a range structure over the second coordinate turns the whole thing into a linear number of updates and queries.
+related:
+    - usaco.2020.feb.gold.timeline
+    - usaco.2023.feb.silver.moo-route-ii
