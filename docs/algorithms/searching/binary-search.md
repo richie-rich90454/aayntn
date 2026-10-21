@@ -23,6 +23,20 @@ reviewed: true
 
 <AlgorithmSummary algorithm="searching.binary-search" />
 
+## At a glance
+
+|  |  |
+| --- | --- |
+| **Problem** | Find a value in a sorted array, or the boundary at which a monotone predicate changes |
+| **Time** | $O(\log n)$ |
+| **Auxiliary space** | $O(1)$ iterative, $O(\log n)$ recursive |
+| **Requires** | A sorted array, and a comparison that is monotone |
+| **Fails when** | The array is not sorted, or the predicate changes truth value more than once |
+| **Primary technique** | Halving, driven by a monotone predicate |
+| **Implementations** | Six languages, in an iterative and a recursive form |
+
+The rest of this article derives the technique, proves it, and shows the counterexample that breaks it.
+
 ## Problem motivation
 
 You are given a sorted array of one million integers and a target value. Scanning the array takes a million comparisons. Halving the interval takes twenty.
