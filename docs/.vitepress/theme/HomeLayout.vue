@@ -8,9 +8,9 @@ import type { AlgorithmEntry, VisualizationEntry } from "../data/types";
 /**
  * The homepage.
  *
- * A strongly colour-blocked entrance that explains the product immediately and
+ * A strongly color-blocked entrance that explains the product immediately and
  * then routes the reader into the four division tracks, the encyclopedia, the
- * laboratory and the practice catalogue. The information hierarchy is carried
+ * laboratory and the practice catalog. The information hierarchy is carried
  * by typography and grid; ornament refines it without changing it.
  */
 
@@ -22,7 +22,7 @@ const divisions = [
         id: "bronze",
         name: "Bronze",
         focus: "Foundations",
-        copy: "Simulation, careful modeling, complete enumeration, and elementary reasoning. The discipline of reading a specification and modelling it exactly.",
+        copy: "Simulation, careful modeling, complete enumeration, and elementary reasoning. The discipline of reading a specification and modeling it exactly.",
         href: "/curriculum/bronze/",
     },
     {
@@ -161,7 +161,7 @@ const languages = [
             </aside>
         </section>
 
-        <section class="aayntn-home__band" aria-labelledby="home-divisions">
+        <section class="aayntn-home__band" aria-labeledby="home-divisions">
             <div class="aayntn-home__band-inner">
                 <div class="aayntn-section__head">
                     <h2 id="home-divisions" class="aayntn-section__title">The algorithm atlas</h2>
@@ -183,7 +183,7 @@ const languages = [
             </div>
         </section>
 
-        <section class="aayntn-home__band aayntn-band--ink" aria-labelledby="home-how">
+        <section class="aayntn-home__band aayntn-band--ink" aria-labeledby="home-how">
             <div class="aayntn-home__band-inner">
                 <div class="aayntn-section__head">
                     <div>
@@ -242,7 +242,7 @@ const languages = [
                     </div>
                     <div class="aayntn-feature">
                         <div class="aayntn-feature__kicker">06 · Transfer</div>
-                        <div class="aayntn-feature__title">Where to practise</div>
+                        <div class="aayntn-feature__title">Where to practice</div>
                         <p class="aayntn-feature__copy">
                             Problems arranged as recognition, direct application, adaptation,
                             combination, challenge and transfer — not sorted by a guessed
@@ -253,7 +253,7 @@ const languages = [
             </div>
         </section>
 
-        <section class="aayntn-section" aria-labelledby="home-featured">
+        <section class="aayntn-section" aria-labeledby="home-featured">
             <div class="aayntn-section__inner">
                 <div class="aayntn-section__head">
                     <div>
@@ -288,7 +288,7 @@ const languages = [
             </div>
         </section>
 
-        <section class="aayntn-section aayntn-band--ink" aria-labelledby="home-lab">
+        <section class="aayntn-section aayntn-band--ink" aria-labeledby="home-lab">
             <div class="aayntn-section__inner">
                 <div class="aayntn-section__head">
                     <div>
@@ -321,13 +321,13 @@ const languages = [
             </div>
         </section>
 
-        <section class="aayntn-section" aria-labelledby="home-subjects">
+        <section class="aayntn-section" aria-labeledby="home-subjects">
             <div class="aayntn-section__inner">
                 <div class="aayntn-section__head">
                     <div>
                         <h2 id="home-subjects" class="aayntn-section__title">Browse by subject</h2>
                         <p class="aayntn-section__lede">
-                            The encyclopedia is organised by conceptual subject rather than by
+                            The encyclopedia is organized by conceptual subject rather than by
                             contest division, so related techniques stay together.
                         </p>
                     </div>
@@ -349,7 +349,7 @@ const languages = [
             </div>
         </section>
 
-        <section class="aayntn-section" aria-labelledby="home-languages">
+        <section class="aayntn-section" aria-labeledby="home-languages">
             <div class="aayntn-section__inner">
                 <div class="aayntn-section__head">
                     <div>
@@ -378,7 +378,7 @@ const languages = [
             </div>
         </section>
 
-        <section class="aayntn-section aayntn-band--ink" aria-labelledby="home-stats">
+        <section class="aayntn-section aayntn-band--ink" aria-labeledby="home-stats">
             <div class="aayntn-section__inner">
                 <div class="aayntn-section__head">
                     <h2 id="home-stats" class="aayntn-section__title">What is published</h2>
