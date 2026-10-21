@@ -1,5 +1,5 @@
 import { ref, watch } from "vue";
-import type { LanguageId } from "../data/types";
+import type { LanguageId } from "../../data/types";
 
 /**
  * Reading preferences.
