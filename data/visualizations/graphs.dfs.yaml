@@ -1,0 +1,19 @@
+# The depth-first search demonstration.
+#
+# The storyboard is the static fallback: a reader without JavaScript still
+# gets the four frames that the animation walks through.
+
+id: graphs.dfs
+title: Depth-first search
+algorithm: graphs.dfs
+scene: graph
+preset: path
+storyboard:
+    - title: The stack is empty
+      description: The traversal begins with nothing discovered and an empty stack.
+    - title: A branch is followed to its end
+      description: A vertex is marked when it is popped, and its unvisited neighbors are pushed onto the stack, so the search runs as deep as it can before it comes back.
+    - title: The traversal backtracks
+      description: When a vertex has no unvisited neighbor left, the search returns to the vertex below it on the stack.
+    - title: Every reachable vertex is visited
+      description: The stack empties, and the visited vertices are exactly the vertices that the start can reach.
