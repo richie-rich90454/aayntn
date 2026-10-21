@@ -1,0 +1,30 @@
+id: usaco.2017.dec.gold.barn-painting
+title: Barn Painting
+source: USACO
+contest: 2017 December Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=766
+editorialUrl: https://usaco.org/current/data/sol_barnpainting_gold_dec17.html
+techniques:
+    - trees.tree-dp
+    - graphs.representation
+prerequisites:
+    - trees.tree-dp
+    - graphs.representation
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - A hundred thousand barns, so the count of colorings is a product over a traversal rather than a search.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The connections between barns form a forest, because there is at most one path between any two barns, so the problem is on a tree.
+    - Three colors are available and adjacent barns must differ, so once the color of a barn is fixed the number of ways to color its children depends only on that color.
+    - Root the tree and compute, for each barn and each of the three colors, the number of valid colorings of its subtree when the barn has that color.
+    - Multiply the three counts at each barn, and the answer is the count at the root of each tree.
+discussion: >-
+    Because the connections form a forest, the coloring count is a tree dynamic program with three states per node, one for each color the node might take. The transition multiplies the counts of the children that are compatible with the node's color, and a node that is already painted collapses its count to a single choice. The constraint is what rules out a search, since there are three to the power of the number of barns colorings.
+related:
+    - usaco.2020.feb.platinum.delegation
+    - usaco.2015.feb.gold.censoring
