@@ -1,0 +1,247 @@
+algorithm: graphs.dfs
+title: Depth-first search
+summary: Explore every vertex reachable from a start vertex, following each branch to its end before backtracking.
+subject: graphs
+divisions: [silver, gold]
+importance: common-contest-technique
+complexity:
+    time: "O(V + E)"
+    space: "O(V + E)"
+assumptions:
+    - The graph is undirected.
+reviewed: false
+variants:
+    - id: iterative
+      language: c
+      file: c/iterative.c
+      kind: minimal
+      recommended: recommended
+      reason: "Avoids call-stack overflow on graphs whose depth can approach V."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The traversal marks a vertex when it is popped from the stack, so a vertex can be pushed once per incident edge and the stack holds O(V + E) entries rather than O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
+    - id: iterative
+      language: cpp17
+      file: cpp17/iterative.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Avoids call-stack overflow on graphs whose depth can approach V."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The traversal marks a vertex when it is popped from the stack, so a vertex can be pushed once per incident edge and the stack holds O(V + E) entries rather than O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
+    - id: iterative
+      language: java
+      file: java/Iterative.java
+      kind: minimal
+      recommended: recommended
+      reason: "Avoids call-stack overflow on graphs whose depth can approach V."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The traversal marks a vertex when it is popped from the stack, so a vertex can be pushed once per incident edge and the stack holds O(V + E) entries rather than O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
+    - id: iterative
+      language: javascript
+      file: javascript/iterative.js
+      kind: minimal
+      recommended: recommended
+      reason: "Avoids call-stack overflow on graphs whose depth can approach V."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The traversal marks a vertex when it is popped from the stack, so a vertex can be pushed once per incident edge and the stack holds O(V + E) entries rather than O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
+    - id: iterative
+      language: pascal
+      file: pascal/iterative.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Avoids call-stack overflow on graphs whose depth can approach V."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The traversal marks a vertex when it is popped from the stack, so a vertex can be pushed once per incident edge and the stack holds O(V + E) entries rather than O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
+    - id: iterative
+      language: python
+      file: python/iterative.py
+      kind: minimal
+      recommended: recommended
+      reason: "Avoids call-stack overflow on graphs whose depth can approach V."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The traversal marks a vertex when it is popped from the stack, so a vertex can be pushed once per incident edge and the stack holds O(V + E) entries rather than O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
+    - id: recursive
+      language: c
+      file: c/recursive.c
+      kind: minimal
+      recommended: conditional
+      reason: "The call stack can grow to the depth of the graph, which overflows in C++ and Java on a long chain."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The traversal marks a vertex on entry to the recursive call, so every vertex is entered at most once and the auxiliary space is the visited array plus one stack frame per vertex on the current path: O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [visit-vertex, complete-vertex]
+    - id: recursive
+      language: cpp17
+      file: cpp17/recursive.cpp
+      kind: minimal
+      recommended: conditional
+      reason: "The call stack can grow to the depth of the graph, which overflows in C++ and Java on a long chain."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The traversal marks a vertex on entry to the recursive call, so every vertex is entered at most once and the auxiliary space is the visited array plus one stack frame per vertex on the current path: O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [visit-vertex, complete-vertex]
+    - id: recursive
+      language: java
+      file: java/Recursive.java
+      kind: minimal
+      recommended: conditional
+      reason: "The call stack can grow to the depth of the graph, which overflows in C++ and Java on a long chain."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The traversal marks a vertex on entry to the recursive call, so every vertex is entered at most once and the auxiliary space is the visited array plus one stack frame per vertex on the current path: O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [visit-vertex, complete-vertex]
+    - id: recursive
+      language: javascript
+      file: javascript/recursive.js
+      kind: minimal
+      recommended: conditional
+      reason: "The call stack can grow to the depth of the graph, which overflows in C++ and Java on a long chain."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The traversal marks a vertex on entry to the recursive call, so every vertex is entered at most once and the auxiliary space is the visited array plus one stack frame per vertex on the current path: O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [visit-vertex, complete-vertex]
+    - id: recursive
+      language: pascal
+      file: pascal/recursive.pas
+      kind: minimal
+      recommended: conditional
+      reason: "The call stack can grow to the depth of the graph, which overflows in C++ and Java on a long chain."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The traversal marks a vertex on entry to the recursive call, so every vertex is entered at most once and the auxiliary space is the visited array plus one stack frame per vertex on the current path: O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [visit-vertex, complete-vertex]
+    - id: recursive
+      language: python
+      file: python/recursive.py
+      kind: minimal
+      recommended: conditional
+      reason: "The call stack can grow to the depth of the graph, which overflows in C++ and Java on a long chain."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The traversal marks a vertex on entry to the recursive call, so every vertex is entered at most once and the auxiliary space is the visited array plus one stack frame per vertex on the current path: O(V). The file exposes the traversal as a reusable function over an adjacency list and then demonstrates it on the standard input."
+      operations: [visit-vertex, complete-vertex]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the reachable set in an order that does not depend on the traversal."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The program runs the iterative traversal, so a long chain cannot overflow the call stack. The output is canonical: the reachable vertices are listed in increasing index order, which makes the six language versions byte-identical even though the two traversal styles visit the vertices in different orders."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the reachable set in an order that does not depend on the traversal."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The program runs the iterative traversal, so a long chain cannot overflow the call stack. The output is canonical: the reachable vertices are listed in increasing index order, which makes the six language versions byte-identical even though the two traversal styles visit the vertices in different orders."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the reachable set in an order that does not depend on the traversal."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The program runs the iterative traversal, so a long chain cannot overflow the call stack. The output is canonical: the reachable vertices are listed in increasing index order, which makes the six language versions byte-identical even though the two traversal styles visit the vertices in different orders."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the reachable set in an order that does not depend on the traversal."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The program runs the iterative traversal, so a long chain cannot overflow the call stack. The output is canonical: the reachable vertices are listed in increasing index order, which makes the six language versions byte-identical even though the two traversal styles visit the vertices in different orders."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the reachable set in an order that does not depend on the traversal."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program runs the iterative traversal, so a long chain cannot overflow the call stack. The output is canonical: the reachable vertices are listed in increasing index order, which makes the six language versions byte-identical even though the two traversal styles visit the vertices in different orders."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses a graph from stdin and prints the reachable set in an order that does not depend on the traversal."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E)"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
+      outputs: "The number of vertices reachable from s, then the reachable vertices in increasing index order."
+      notes: "The program runs the iterative traversal, so a long chain cannot overflow the call stack. The output is canonical: the reachable vertices are listed in increasing index order, which makes the six language versions byte-identical even though the two traversal styles visit the vertices in different orders."
+      operations: [push-neighbour, visit-vertex, complete-vertex, skip-visited]
