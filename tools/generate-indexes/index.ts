@@ -20,6 +20,7 @@
  * The output is deterministic: running the generator twice produces identical
  * files.
  */
+import { existsSync } from "node:fs";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { basename, join, relative } from "node:path";
 import fg from "fast-glob";
@@ -559,6 +560,21 @@ async function main() {
         JSON.stringify({ entries: searchDocuments }),
         "utf8",
     );
+
+    /* Publish the handcrafted diagrams. The sources live under
+       diagrams/source so that they are first-class, source-controlled assets
+       rather than something that only exists in the build output. */
+    const diagramRoot = join(ROOT, "diagrams", "source");
+    for (const group of ["ornaments", "diagrams"]) {
+        const sourceDir = join(diagramRoot, group);
+        if (!existsSync(sourceDir)) continue;
+        const targetDir = join(PUBLIC_DIR, group);
+        await rm(targetDir, { recursive: true, force: true });
+        await mkdir(targetDir, { recursive: true });
+        for (const file of await fg("*.svg", { cwd: sourceDir, absolute: true, onlyFiles: true })) {
+            await writeFile(join(targetDir, basename(file)), await readFile(file, "utf8"), "utf8");
+        }
+    }
 
     /* Write the index documents ----------------------------------------- */
     await mkdir(GENERATED_DIR, { recursive: true });
