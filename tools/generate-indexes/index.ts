@@ -68,6 +68,15 @@ const SHIKI_LANG: Record<string, string> = {
     javascript: "javascript",
 };
 
+const LANGUAGE_LABEL: Record<string, string> = {
+    c: "C",
+    cpp17: "C++17",
+    java: "Java",
+    python: "Python",
+    pascal: "Pascal",
+    javascript: "JavaScript",
+};
+
 const FILE_EXTENSION: Record<string, string> = {
     c: "c",
     cpp17: "cpp",
@@ -451,12 +460,20 @@ async function main() {
                 ],
             });
 
-            const outDir = join(srcDir, manifest.algorithm);
-            await mkdir(outDir, { recursive: true });
-            await writeFile(join(outDir, `${variant.language}.${variant.id}.html`), html, "utf8");
-
             const publicDir = join(publicImplDir, manifest.algorithm);
             await mkdir(publicDir, { recursive: true });
+
+            /*
+             * The highlighted fragment is published as a plain file rather
+             * than bundled, so that a reader downloads only the listing they
+             * actually open.
+             */
+            await writeFile(
+                join(publicDir, `${variant.language}.${variant.id}.html`),
+                html,
+                "utf8",
+            );
+
             const publicName = `${variant.language}.${variant.id}.${FILE_EXTENSION[variant.language]}`;
             await writeFile(join(publicDir, publicName), source, "utf8");
 
@@ -628,45 +645,91 @@ async function main() {
     }
 
     /* Stable per-algorithm source pages ---------------------------------- */
+    /*
+     * One page per variant rather than one page per algorithm. A page that
+     * carries every listing of an algorithm is several hundred kilobytes of
+     * markup, which the client-side router then has to carry as a script.
+     * Splitting them keeps every page small and gives each listing its own
+     * address, which is what a reader who wants to copy one implementation
+     * actually wants.
+     */
     const implPagesDir = join(DOCS_DIR, "implementations");
     await rm(implPagesDir, { recursive: true, force: true });
     await mkdir(implPagesDir, { recursive: true });
 
     for (const { algorithm, files } of sourcePages) {
-        const lines: string[] = [];
-        lines.push("---");
-        lines.push(`id: implementation.${algorithm.id}`);
-        lines.push(`title: ${algorithm.title} — source`);
-        lines.push(`summary: Every implementation of ${algorithm.title} in aayntn.`);
-        lines.push("subjects:");
-        lines.push(`  - ${algorithm.subject}`);
-        lines.push("importance: extended-reference");
-        lines.push("reviewed: false");
-        lines.push("---");
-        lines.push("");
-        lines.push(`# ${algorithm.title} — source`);
-        lines.push("");
-        lines.push(algorithm.summary);
-        lines.push("");
-        lines.push(
-            "The listings below are the real source files used by the encyclopedia. Every one of them is compiled and executed against shared fixtures by the test suite in CI.",
+        const algorithmDir = join(implPagesDir, algorithm.id.replace(/\./g, "-"));
+        await mkdir(algorithmDir, { recursive: true });
+
+        const index: string[] = [];
+        index.push("---");
+        index.push(`id: implementation.${algorithm.id}`);
+        index.push(`title: ${algorithm.title} — source`);
+        index.push(`summary: Every implementation of ${algorithm.title} in aayntn.`);
+        index.push("subjects:");
+        index.push(`  - ${algorithm.subject}`);
+        index.push("importance: extended-reference");
+        index.push("reviewed: false");
+        index.push("---");
+        index.push("");
+        index.push(`# ${algorithm.title} — source`);
+        index.push("");
+        index.push(algorithm.summary);
+        index.push("");
+        index.push(
+            "The listings below are the real source files used by the encyclopedia. Every one of them is compiled and executed against shared fixtures by the test suite in continuous integration.",
         );
-        lines.push("");
+        index.push("");
+
         for (const file of files) {
-            lines.push(`## ${file.language} — ${file.variant}`);
-            lines.push("");
-            lines.push(`Source file: \`${file.sourcePath}\``);
-            lines.push("");
-            lines.push("```" + (SHIKI_LANG[file.language] ?? "text"));
-            lines.push(file.source.trimEnd());
-            lines.push("```");
-            lines.push("");
+            const slug = `${file.language}-${file.variant}`;
+            const label = `${LANGUAGE_LABEL[file.language] ?? file.language} — ${file.variant}`;
+
+            index.push(
+                `- [${label}](/implementations/${algorithm.id.replace(/\./g, "-")}/${slug})`,
+            );
         }
-        await writeFile(
-            join(implPagesDir, `${algorithm.id.replace(/\./g, "-")}.md`),
-            lines.join("\n"),
-            "utf8",
-        );
+        index.push("");
+
+        await writeFile(join(algorithmDir, "index.md"), index.join("\n"), "utf8");
+
+        for (const file of files) {
+            const slug = `${file.language}-${file.variant}`;
+            const label = `${LANGUAGE_LABEL[file.language] ?? file.language} — ${file.variant}`;
+            const page: string[] = [];
+            page.push("---");
+            page.push(`id: implementation.${algorithm.id}.${file.variant}.${file.language}`);
+            page.push(`title: ${algorithm.title} — ${label}`);
+            page.push(
+                `summary: The ${LANGUAGE_LABEL[file.language] ?? file.language} ${file.variant} implementation of ${algorithm.title}.`,
+            );
+            page.push("subjects:");
+            page.push(`  - ${algorithm.subject}`);
+            page.push("importance: extended-reference");
+            page.push("reviewed: false");
+            page.push("---");
+            page.push("");
+            page.push(`# ${algorithm.title} — ${label}`);
+            page.push("");
+            page.push(algorithm.summary);
+            page.push("");
+            page.push(
+                "This is the real source file used by the encyclopedia. It is compiled and executed against the shared fixtures by the test suite in continuous integration, and it is required to produce the same output as the other five languages.",
+            );
+            page.push("");
+            page.push(`Source file: \`${file.sourcePath}\``);
+            page.push("");
+            page.push("```" + (SHIKI_LANG[file.language] ?? "text"));
+            page.push(file.source.trimEnd());
+            page.push("```");
+            page.push("");
+            page.push(
+                `Back to [the ${algorithm.title} source index](/implementations/${algorithm.id.replace(/\./g, "-")}/).`,
+            );
+            page.push("");
+
+            await writeFile(join(algorithmDir, `${slug}.md`), page.join("\n"), "utf8");
+        }
     }
 
     process.stdout.write(
