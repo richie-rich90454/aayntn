@@ -1,0 +1,169 @@
+algorithm: range-queries.segment-tree
+title: Segment tree
+summary: A binary tree over the array keeps the sum of every range in a node, so a point assignment and an inclusive range sum both take logarithmic time.
+subject: range-queries
+divisions: [gold, platinum]
+importance: common-contest-technique
+complexity:
+    time: "O(log n) per operation"
+    space: "O(n)"
+assumptions:
+    - The combining operation is associative, which is what lets a node cache the result of merging its two children.
+reviewed: false
+variants:
+    - id: minimal
+      language: c
+      file: c/minimal.c
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable struct with an explicit init/destroy pair supporting a point assignment and an inclusive range sum over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: "A tree of n positions built from the values of the positions 1..n, a 1-based index for every assignment and an inclusive range for every query."
+      outputs: "The sum of the positions left..right, both inclusive."
+      notes: "tree[node] holds the sum of the range the node covers, so a node caches the result of merging its two children. An assignment walks down to the leaf and merges the two children on the way back up, and a query descends into the children that overlap the range and adds the sums of the nodes that are fully covered. The C variant owns its storage through an explicit init/destroy pair: init allocates and destroy frees, so every successful init must be matched by exactly one destroy and the tree must not be used afterwards. The values array belongs to the caller and is only read while the tree is built."
+      operations: [build, point-update, range-query, merge]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class supporting a point assignment and an inclusive range sum over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: "A tree of n positions built from the values of the positions 1..n, a 1-based index for every assignment and an inclusive range for every query."
+      outputs: "The sum of the positions left..right, both inclusive."
+      notes: "tree_[node] holds the sum of the range the node covers, so a node caches the result of merging its two children. An assignment walks down to the leaf and merges the two children on the way back up, and a query descends into the children that overlap the range and adds the sums of the nodes that are fully covered. The C++ variant keeps the same array in a std::vector, so the constructor allocates it and the destructor releases it without any explicit destroy call."
+      operations: [build, point-update, range-query, merge]
+    - id: minimal
+      language: java
+      file: java/Program.java
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class supporting a point assignment and an inclusive range sum over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: "A tree of n positions built from the values of the positions 1..n, a 1-based index for every assignment and an inclusive range for every query."
+      outputs: "The sum of the positions left..right, both inclusive."
+      notes: "tree[node] holds the sum of the range the node covers, so a node caches the result of merging its two children. An assignment walks down to the leaf and merges the two children on the way back up, and a query descends into the children that overlap the range and adds the sums of the nodes that are fully covered. The Java variant keeps the array on the heap and leaves the reclamation to the garbage collector."
+      operations: [build, point-update, range-query, merge]
+    - id: minimal
+      language: javascript
+      file: javascript/minimal.js
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. Reusable class supporting a point assignment and an inclusive range sum over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: "A tree of n positions built from the values of the positions 1..n, a 1-based index for every assignment and an inclusive range for every query."
+      outputs: "The sum of the positions left..right, both inclusive."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. tree[node] holds the sum of the range the node covers, so a node caches the result of merging its two children. The JavaScript variant models the tree as a class, so the instance owns its array, and the sums are numbers, so a total beyond 2^53 would lose precision."
+      operations: [build, point-update, range-query, merge]
+    - id: minimal
+      language: pascal
+      file: pascal/minimal.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. Reusable class supporting a point assignment and an inclusive range sum over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: "A tree of n positions built from the values of the positions 1..n, a 1-based index for every assignment and an inclusive range for every query."
+      outputs: "The sum of the positions left..right, both inclusive."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Tree[node] holds the sum of the range the node covers, so a node caches the result of merging its two children. The Pascal variant is a class whose constructor allocates the tree and whose destructor releases it, so the caller owns the instance and must free it."
+      operations: [build, point-update, range-query, merge]
+    - id: minimal
+      language: python
+      file: python/minimal.py
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class supporting a point assignment and an inclusive range sum over a 1-indexed array; no I/O."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: "A tree of n positions built from the values of the positions 1..n, a 1-based index for every assignment and an inclusive range for every query."
+      outputs: "The sum of the positions left..right, both inclusive."
+      notes: "tree[node] holds the sum of the range the node covers, so a node caches the result of merging its two children. The Python variant models the tree as a class, so the instance owns its list, and the sums are arbitrary precision integers, so a total never overflows."
+      operations: [build, point-update, range-query, merge]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i v" assigns the value v to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every position starts at zero, because the input carries no initial values. An assignment outside 1..n is ignored and a range that is empty after the clamping to the array sums to zero, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build, point-update, range-query, merge]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i v" assigns the value v to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every position starts at zero, because the input carries no initial values. An assignment outside 1..n is ignored and a range that is empty after the clamping to the array sums to zero, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build, point-update, range-query, merge]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i v" assigns the value v to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every position starts at zero, because the input carries no initial values. An assignment outside 1..n is ignored and a range that is empty after the clamping to the array sums to zero, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build, point-update, range-query, merge]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i v" assigns the value v to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Every position starts at zero, because the input carries no initial values. An assignment outside 1..n is ignored and a range that is empty after the clamping to the array sums to zero, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build, point-update, range-query, merge]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i v" assigns the value v to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Every position starts at zero, because the input carries no initial values. An assignment outside 1..n is ignored and a range that is empty after the clamping to the array sums to zero, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build, point-update, range-query, merge]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per operation"
+      auxiliarySpace: "O(n) for the tree of 4n + 4 entries"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i v" assigns the value v to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every position starts at zero, because the input carries no initial values. An assignment outside 1..n is ignored and a range that is empty after the clamping to the array sums to zero, and the output is one canonical line per query so the six language versions are byte-identical."
+      operations: [build, point-update, range-query, merge]
