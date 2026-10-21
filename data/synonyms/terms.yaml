@@ -1,0 +1,135 @@
+# Search synonyms
+#
+# Every entry maps a canonical term to the other names a reader might use.
+# The search index expands these automatically, so searching for "DSU" finds
+# "disjoint set union" and vice versa.
+
+DSU:
+    - disjoint set union
+    - union find
+    - mergeable sets
+
+LCA:
+    - lowest common ancestor
+    - common ancestor
+
+Dijkstra:
+    - single source shortest path
+    - nonnegative weighted graph
+
+Bellman-Ford:
+    - shortest path with negative weights
+    - negative edge weights
+
+0-1 BFS:
+    - binary weight shortest path
+
+Fenwick:
+    - binary indexed tree
+    - BIT
+
+segment tree:
+    - range tree
+    - range query tree
+
+HLD:
+    - heavy light decomposition
+    - heavy path decomposition
+
+knapsack:
+    - 0/1 knapsack
+    - subset sum
+
+prefix sums:
+    - cumulative sum
+    - running sum
+
+two pointers:
+    - sliding window
+    - two sum
+
+topological sort:
+    - toposort
+    - Kahn's algorithm
+
+MST:
+    - minimum spanning tree
+    - Kruskal
+    - Prim
+
+CHT:
+    - convex hull trick
+    - line container
+    - dynamic lower hull
+
+rolling hash:
+    - polynomial hash
+    - string hashing
+
+suffix array:
+    - suffix sorting
+    - SA
+
+KMP:
+    - Knuth Morris Pratt
+    - prefix function
+
+Z algorithm:
+    - Z function
+    - extended KMP
+
+bitmask DP:
+    - subset DP
+    - travelling salesman DP
+
+expected value:
+    - expectation
+    - linearity of expectation
+
+flow:
+    - max flow
+    - minimum cut
+    - Dinic
+
+matching:
+    - bipartite matching
+    - Hopcroft Karp
+    - Kuhn's algorithm
+
+CDQ:
+    - divide and conquer on queries
+    - CDQ divide and conquer
+
+sweep line:
+    - sweepline
+    - line sweep
+
+convex hull:
+    - Andrew's monotone chain
+    - monotone chain
+
+rotating calipers:
+    - calipers
+    - two pointer on hull
+
+matrix exponentiation:
+    - matrix power
+    - binary matrix exponentiation
+
+Euler tour:
+    - euler tour
+    - DFS order
+    - flatten the tree
+
+rerooting:
+    - reroot DP
+    - re-rooting
+
+small to large:
+    - DSU on tree
+    - sack technique
+    - merging maps
+
+persistent segment tree:
+    - persistent structure
+    - Chairman tree
