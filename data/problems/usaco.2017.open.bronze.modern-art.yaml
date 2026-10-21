@@ -1,0 +1,29 @@
+id: usaco.2017.open.bronze.modern-art
+title: Modern Art
+source: USACO
+contest: 2017 US Open Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=737
+editorialUrl: https://usaco.org/current/data/sol_art_bronze_open17.html
+techniques:
+    - graphs.bfs
+    - graphs.representation
+prerequisites:
+    - graphs.representation
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - Nine rectangles are drawn, so the number of orders to consider is small, but the canvas itself can hold a million cells.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Each color is used exactly once, so the order in which the nine rectangles were drawn is unknown and every order has to be considered.
+    - The final color of a cell is the color of the last rectangle that covers it, so the canvas for one fixed order is easy to paint.
+    - Only a small window of cells has to look right, because a rectangle that is completely covered by a later one leaves no trace at all.
+    - Enumerate the orders, paint the canvas for each, and check the small windows, stopping as soon as an order fails.
+discussion: >-
+    The insight is that the answer is determined by a tiny sample of the canvas, because a rectangle that is completely covered by a later one leaves no trace. That reduces the check to a small block per color, and the nine rectangles can be permuted freely, so a complete enumeration of orders is affordable. The remaining work is painting the canvas efficiently for one order and noticing when to stop early.
+related:
+    - usaco.2016.jan.silver.build-gates
+    - usaco.2015.jan.bronze.cow-routing
