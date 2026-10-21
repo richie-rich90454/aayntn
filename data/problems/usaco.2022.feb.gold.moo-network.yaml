@@ -1,0 +1,31 @@
+id: usaco.2022.feb.gold.moo-network
+title: Moo Network
+source: USACO
+contest: 2022 February Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1211
+editorialUrl: https://usaco.org/current/data/sol_prob3_gold_feb22.html
+techniques:
+    - graphs.mst
+    - graphs.dijkstra
+    - number-theory.modular-arithmetic
+prerequisites:
+    - graphs.mst
+    - number-theory.modular-arithmetic
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The vertical coordinates are bounded by ten while the horizontal ones are not, which is what keeps the graph small after the reduction.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Building a network so that every cow can reach every other cow means the links that are opened have to connect all the cows.
+    - The cost of a link is the squared distance, so the cheapest way to connect everything is a minimum spanning tree of the complete graph on the cows.
+    - The complete graph has a quadratic number of edges, and the squared distance has a useful structure, since the edge between two cows is the sum of a horizontal part and a vertical part.
+    - That structure lets the candidate edges be found in a sweep over the horizontal coordinate, and the expected cost is then computed with the modular inverse of a factorial.
+discussion: >-
+    The network question is a minimum spanning tree of a complete graph, and the difficulty is that the graph is far too large to build. The squared distance separates into a horizontal and a vertical part, and the vertical coordinates are bounded, so a sweep keeps only a small number of candidate edges per cow. The expectation in the output is a separate counting step, done with factorials and modular inverses.
+related:
+    - usaco.2019.open.gold.i-would-walk-500-miles
+    - usaco.2015.feb.silver.superbull
