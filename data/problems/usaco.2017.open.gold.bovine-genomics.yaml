@@ -1,0 +1,30 @@
+id: usaco.2017.open.gold.bovine-genomics
+title: Bovine Genomics
+source: USACO
+contest: 2017 US Open Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=741
+editorialUrl: https://usaco.org/current/data/sol_cownomics_gold_open17.html
+techniques:
+    - searching.sliding-window
+    - foundations.sorting
+prerequisites:
+    - searching.sliding-window
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - A hundred thousand positions in each of two rows, so every position has to be handled in constant time.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A position is a match when the letter in the spotted row equals the letter in the unspotted row at the same column.
+    - Comparing the two rows column by column gives a boolean array, and the question is about the columns that lie between two matches.
+    - Collect the positions of the matches, and the length of the run between consecutive matches is a difference of two of them.
+    - The answer is the largest such run, so one pass over the collected positions is enough.
+discussion: >-
+    Once the columns where the two rows agree are found, the problem becomes a question about the gaps between consecutive agreements, and the largest gap is the answer. The work per column has to be constant, so the row is scanned once and the agreement positions are collected in a list. The bound on the coordinates is what keeps the number of positions manageable.
+related:
+    - usaco.2019.dec.gold.milk-pumping
+    - usaco.2019.dec.gold.moortal-cowmbat
