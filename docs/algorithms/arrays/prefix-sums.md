@@ -453,4 +453,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The structure to reach for when the array does change is the [Fenwick tree](/algorithms/range-queries/fenwick-tree), and the [segment tree](/algorithms/range-queries/segment-tree) generalizes it to non-additive quantities.
 - The two-pointer technique, which often removes the need for prefix sums entirely, is in [two pointers](/algorithms/searching/two-pointers) and [sliding window](/algorithms/searching/sliding-window).
 - Why an array must be sorted before it can be binary searched, which is the assumption the prefix array does _not_ satisfy, is in [binary search](/algorithms/searching/binary-search).
-- Every listing in this article, in all six languages, is collected on the [prefix sums source page](/implementations/arrays-prefix-sums).
+- Every listing in this article, in all six languages, is collected on the [prefix sums source page](/implementations/arrays-prefix-sums/).
