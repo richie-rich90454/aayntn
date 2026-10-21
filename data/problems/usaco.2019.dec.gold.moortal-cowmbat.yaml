@@ -1,0 +1,29 @@
+id: usaco.2019.dec.gold.moortal-cowmbat
+title: Moortal Cowmbat
+source: USACO
+contest: 2019 December Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=971
+editorialUrl: https://usaco.org/current/data/sol_cowmbat_gold_dec19.html
+techniques:
+    - combinatorics.binomial-coefficients
+    - searching.sliding-window
+prerequisites:
+    - combinatorics.binomial-coefficients
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - A hundred thousand characters and twenty-six letters, so the number of substrings cannot be enumerated.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A substring is valid when the number of occurrences of every letter is a multiple of a fixed number.
+    - So the count vector of the substring is congruent to zero in every coordinate, and the question is how many substrings have that property.
+    - Give each prefix its count vector reduced modulo that number, and two substrings match exactly when their prefix vectors agree.
+    - So hash the vectors and count equal pairs, which is a sliding window over the prefix positions with a map from hash to count.
+discussion: >-
+    The condition that every letter count is a multiple of a fixed number is exactly a congruence on the prefix count vectors, so two substrings are valid together when their prefix vectors are equal modulo that number. The problem becomes counting equal pairs among the prefix vectors, and hashing makes the vectors comparable in constant time. The sliding window is what restricts the pairs to substrings of the permitted length.
+related:
+    - usaco.2024.feb.silver.moorbles
+    - usaco.2019.dec.gold.milk-pumping
