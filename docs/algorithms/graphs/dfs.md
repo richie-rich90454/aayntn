@@ -479,4 +479,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - Stacks and queues, and why the choice between them is a statement about the problem, are covered in [data structures and modeling](/start/from-ap-csa/part-4-data-structures-and-modeling).
 - The finish times of a depth-first search are the raw material of a [topological sort](/algorithms/graphs/topological-sort).
 - The recursive form of the same idea, with an explicit stack discipline, is the subject of [backtracking](/algorithms/enumeration/backtracking).
-- Every listing in this article, in all six languages, is collected on the [depth-first search source page](/implementations/graphs-dfs).
+- Every listing in this article, in all six languages, is collected on the [depth-first search source page](/implementations/graphs-dfs/).
