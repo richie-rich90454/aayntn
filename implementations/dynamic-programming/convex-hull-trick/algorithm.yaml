@@ -1,0 +1,170 @@
+algorithm: dynamic-programming.convex-hull-trick
+title: Convex hull trick
+summary: Keep the lower envelope of a set of lines in a stack, so that the smallest value at a point is found in constant amortised time per added line and per query.
+subject: dynamic-programming
+divisions: [platinum]
+importance: advanced-technique
+complexity:
+    time: "O(n + q) amortised"
+    space: "O(n)"
+assumptions:
+    - Lines are added with non-decreasing slope.
+    - Queries arrive with non-decreasing x.
+reviewed: false
+variants:
+    - id: minimal
+      language: c
+      file: c/minimal.c
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable struct with an explicit init/destroy pair that adds the lines y = m * x + b with a non-decreasing slope and answers the smallest value at a non-decreasing x; no I/O."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "The lines y = m * x + b, added with a non-decreasing slope, and the query points x, which must not decrease."
+      outputs: "The smallest value of the lines added so far at every query point."
+      notes: "Both monotonicity requirements are what make the cost constant per operation. The hull is a stack of lines with increasing slopes, and the line on top of the stack is the one that is smallest for the smallest x. A new line pops the lines it makes redundant, which are the lines that never hold the minimum because the switch points of the neighbours have to decrease along the stack, and a query walks down the stack as the x grows and drops the line it walks past, because that line has the larger slope and stays the worse of the two for every larger x. Every line is pushed once and popped at most once, so n lines and q queries cost O(n + q). The comparison of the switch points is done on the switch points themselves and not on the products of the coefficients, so the differences of the coefficients have to fit in 64 bits. The C variant owns its storage through an explicit init/destroy pair: init allocates and destroy frees, so every successful init must be matched by exactly one destroy and the hull must not be used afterwards."
+      operations: [add-line, query, prune-redundant]
+    - id: minimal
+      language: cpp17
+      file: cpp17/minimal.cpp
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class that adds the lines y = m * x + b with a non-decreasing slope and answers the smallest value at a non-decreasing x; no I/O."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "The lines y = m * x + b, added with a non-decreasing slope, and the query points x, which must not decrease."
+      outputs: "The smallest value of the lines added so far at every query point."
+      notes: "Both monotonicity requirements are what make the cost constant per operation. The hull is a stack of lines with increasing slopes, and the line on top of the stack is the one that is smallest for the smallest x. A new line pops the lines it makes redundant, which are the lines that never hold the minimum because the switch points of the neighbours have to decrease along the stack, and a query walks down the stack as the x grows and drops the line it walks past, because that line has the larger slope and stays the worse of the two for every larger x. Every line is pushed once and popped at most once, so n lines and q queries cost O(n + q). The comparison of the switch points is done on the switch points themselves and not on the products of the coefficients, so the differences of the coefficients have to fit in 64 bits. The C++ variant keeps the two stacks in std::vectors, so the constructor allocates them and the destructor releases them without any explicit destroy call."
+      operations: [add-line, query, prune-redundant]
+    - id: minimal
+      language: java
+      file: java/Program.java
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class that adds the lines y = m * x + b with a non-decreasing slope and answers the smallest value at a non-decreasing x; no I/O."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "The lines y = m * x + b, added with a non-decreasing slope, and the query points x, which must not decrease."
+      outputs: "The smallest value of the lines added so far at every query point."
+      notes: "Both monotonicity requirements are what make the cost constant per operation. The hull is a stack of lines with increasing slopes, and the line on top of the stack is the one that is smallest for the smallest x. A new line pops the lines it makes redundant, which are the lines that never hold the minimum because the switch points of the neighbours have to decrease along the stack, and a query walks down the stack as the x grows and drops the line it walks past, because that line has the larger slope and stays the worse of the two for every larger x. Every line is pushed once and popped at most once, so n lines and q queries cost O(n + q). The comparison of the switch points is done on the switch points themselves and not on the products of the coefficients, so the differences of the coefficients have to fit in 64 bits. The Java variant keeps the two stacks on the heap and leaves the reclamation to the garbage collector."
+      operations: [add-line, query, prune-redundant]
+    - id: minimal
+      language: javascript
+      file: javascript/minimal.js
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. Reusable class that adds the lines y = m * x + b with a non-decreasing slope and answers the smallest value at a non-decreasing x; no I/O."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "The lines y = m * x + b, added with a non-decreasing slope, and the query points x, which must not decrease."
+      outputs: "The smallest value of the lines added so far at every query point."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Both monotonicity requirements are what make the cost constant per operation. The hull is a stack of lines with increasing slopes, and the line on top of the stack is the one that is smallest for the smallest x. A new line pops the lines it makes redundant, which are the lines that never hold the minimum because the switch points of the neighbours have to decrease along the stack, and a query walks down the stack as the x grows and drops the line it walks past, because that line has the larger slope and stays the worse of the two for every larger x. Every line is pushed once and popped at most once, so n lines and q queries cost O(n + q). The JavaScript variant models the hull as a class, so the instance owns its arrays, and the values are numbers, so a product beyond 2^53 would lose precision."
+      operations: [add-line, query, prune-redundant]
+    - id: minimal
+      language: pascal
+      file: pascal/minimal.pas
+      kind: minimal
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. Reusable class that adds the lines y = m * x + b with a non-decreasing slope and answers the smallest value at a non-decreasing x; no I/O."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "The lines y = m * x + b, added with a non-decreasing slope, and the query points x, which must not decrease."
+      outputs: "The smallest value of the lines added so far at every query point."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Both monotonicity requirements are what make the cost constant per operation. The hull is a stack of lines with increasing slopes, and the line on top of the stack is the one that is smallest for the smallest x. A new line pops the lines it makes redundant, which are the lines that never hold the minimum because the switch points of the neighbours have to decrease along the stack, and a query walks down the stack as the x grows and drops the line it walks past, because that line has the larger slope and stays the worse of the two for every larger x. Every line is pushed once and popped at most once, so n lines and q queries cost O(n + q). The Pascal variant is a class whose constructor allocates the stacks and whose destructor releases them, so the caller owns the instance and must free it."
+      operations: [add-line, query, prune-redundant]
+    - id: minimal
+      language: python
+      file: python/minimal.py
+      kind: minimal
+      recommended: recommended
+      reason: "Reusable class that adds the lines y = m * x + b with a non-decreasing slope and answers the smallest value at a non-decreasing x; no I/O."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "The lines y = m * x + b, added with a non-decreasing slope, and the query points x, which must not decrease."
+      outputs: "The smallest value of the lines added so far at every query point."
+      notes: "Both monotonicity requirements are what make the cost constant per operation. The hull is a stack of lines with increasing slopes, and the line on top of the stack is the one that is smallest for the smallest x. A new line pops the lines it makes redundant, which are the lines that never hold the minimum because the switch points of the neighbours have to decrease along the stack, and a query walks down the stack as the x grows and drops the line it walks past, because that line has the larger slope and stays the worse of the two for every larger x. Every line is pushed once and popped at most once, so n lines and q queries cost O(n + q). The Python variant models the hull as a class, so the instance owns its lists, and the values are arbitrary precision integers, so a product never overflows."
+      operations: [add-line, query, prune-redundant]
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the lines and the queries from stdin and prints the smallest value of the lines for every query."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "n q, then n lines m b that add the line y = m * x + b, then q lines x that query the smallest value of the lines added so far."
+      outputs: "One line per query, holding the smallest value."
+      notes: "The slopes of the lines and the query points both have to be non-decreasing for the amortised cost to hold, and the evaluation of a line uses 64-bit arithmetic, because a product m * x can be far larger than a 32-bit integer. The output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add-line, query, prune-redundant]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the lines and the queries from stdin and prints the smallest value of the lines for every query."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "n q, then n lines m b that add the line y = m * x + b, then q lines x that query the smallest value of the lines added so far."
+      outputs: "One line per query, holding the smallest value."
+      notes: "The slopes of the lines and the query points both have to be non-decreasing for the amortised cost to hold, and the evaluation of a line uses 64-bit arithmetic, because a product m * x can be far larger than a 32-bit integer. The output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add-line, query, prune-redundant]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the lines and the queries from stdin and prints the smallest value of the lines for every query."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "n q, then n lines m b that add the line y = m * x + b, then q lines x that query the smallest value of the lines added so far."
+      outputs: "One line per query, holding the smallest value."
+      notes: "The slopes of the lines and the query points both have to be non-decreasing for the amortised cost to hold, and the evaluation of a line uses 64-bit arithmetic, because a product m * x can be far larger than a 32-bit integer. The output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add-line, query, prune-redundant]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads the lines and the queries from stdin and prints the smallest value of the lines for every query."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "n q, then n lines m b that add the line y = m * x + b, then q lines x that query the smallest value of the lines added so far."
+      outputs: "One line per query, holding the smallest value."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The slopes of the lines and the query points both have to be non-decreasing for the amortised cost to hold, and the values are numbers, so a product beyond 2^53 would lose precision. The output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add-line, query, prune-redundant]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads the lines and the queries from stdin and prints the smallest value of the lines for every query."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "n q, then n lines m b that add the line y = m * x + b, then q lines x that query the smallest value of the lines added so far."
+      outputs: "One line per query, holding the smallest value."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The slopes of the lines and the query points both have to be non-decreasing for the amortised cost to hold, and the evaluation of a line uses 64-bit arithmetic, because a product m * x can be far larger than a 32-bit integer. The output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add-line, query, prune-redundant]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the lines and the queries from stdin and prints the smallest value of the lines for every query."
+      time: "O(n + q) amortised"
+      auxiliarySpace: "O(n) for the slope and the intercept of every line on the hull"
+      status: unverified
+      inputs: "n q, then n lines m b that add the line y = m * x + b, then q lines x that query the smallest value of the lines added so far."
+      outputs: "One line per query, holding the smallest value."
+      notes: "The slopes of the lines and the query points both have to be non-decreasing for the amortised cost to hold, and the evaluation of a line uses 64-bit arithmetic, because a product m * x can be far larger than a 32-bit integer. The output is one canonical line per query so the six language versions are byte-identical."
+      operations: [add-line, query, prune-redundant]
