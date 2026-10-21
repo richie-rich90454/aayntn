@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { sceneFor } from "./registry";
-import { definitionFor } from "../algorithms";
+import { loadDefinition } from "./lazyRegistry";
 import type { LabDefinition, LabEvent, LabPreset, LabState } from "./types";
 
 /**
@@ -11,6 +11,9 @@ import type { LabDefinition, LabEvent, LabPreset, LabState } from "./types";
  * speed, presets, custom input, reset, annotation toggle, fullscreen, and
  * keyboard control. Backward navigation is exact because every event carries
  * the state that results from applying it.
+ *
+ * The demonstration itself is fetched on demand, so that a reader who only
+ * wants to read an article never downloads the algorithms that animate them.
  */
 
 const props = withDefaults(
@@ -23,7 +26,8 @@ const props = withDefaults(
     { hideImplementation: false },
 );
 
-const definition = computed<LabDefinition | undefined>(() => definitionFor(props.algorithm));
+const definition = ref<LabDefinition | undefined>(undefined);
+const loading = ref(false);
 
 /* ------------------------------------------------------------------ */
 /* Trace construction                                                  */
@@ -59,12 +63,22 @@ const activePreset = computed(
 );
 
 watch(
-    definition,
-    (value) => {
-        if (!value) return;
-        presetId.value = value.presets[0]?.id ?? "";
-        customInput.value = value.presets[0]?.input ?? "";
-        rebuild(value.presets[0]!.input);
+    () => props.algorithm,
+    async (id) => {
+        stop();
+        events.value = [];
+        definition.value = undefined;
+        loading.value = true;
+        const loaded = await loadDefinition(id);
+        loading.value = false;
+        definition.value = loaded;
+        if (!loaded) {
+            error.value = `No laboratory is registered for ${id}.`;
+            return;
+        }
+        presetId.value = loaded.presets[0]?.id ?? "";
+        customInput.value = loaded.presets[0]?.input ?? "";
+        rebuild(loaded.presets[0]!.input);
     },
     { immediate: true },
 );
@@ -208,7 +222,15 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <section v-if="definition" class="aayntn-lab" :class="{ 'aayntn-lab--fullscreen': fullscreen }">
+    <section v-if="loading" class="aayntn-lab">
+        <p class="aayntn-lab__narration">Loading the demonstration…</p>
+    </section>
+
+    <section
+        v-else-if="definition"
+        class="aayntn-lab"
+        :class="{ 'aayntn-lab--fullscreen': fullscreen }"
+    >
         <header class="aayntn-lab__head">
             <span class="aayntn-lab__title">{{ definition.title }}</span>
             <span class="aayntn-chip aayntn-chip--muted">{{ definition.scene }}</span>
