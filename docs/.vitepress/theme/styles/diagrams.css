@@ -1,0 +1,335 @@
+/**
+ * Diagram and laboratory presentation.
+ *
+ * Instructional diagrams carry a visible border and a caption so they are
+ * never confused with decorative ornament.
+ */
+
+.aayntn-figure {
+    margin: var(--space-8) 0;
+    border: var(--rule-ink);
+    background: var(--surface-raised);
+}
+
+.aayntn-figure__frame {
+    padding: var(--space-6);
+    overflow-x: auto;
+}
+
+.aayntn-figure__frame svg {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+
+.aayntn-figure--bare .aayntn-figure__frame {
+    padding: 0;
+    border-bottom: var(--rule-ink);
+}
+
+.aayntn-figure__caption {
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--border-subtle);
+    background: var(--surface-sunken);
+    color: var(--text-secondary);
+    font-size: var(--text-secondary-copy);
+    line-height: 1.6;
+}
+
+.aayntn-figure__caption strong {
+    color: var(--text-primary);
+}
+
+/* -------------------------------------------------------------------- */
+/* Laboratory workspace                                                 */
+/* -------------------------------------------------------------------- */
+
+.aayntn-lab {
+    margin: var(--space-8) 0;
+    border: var(--rule-ink);
+    background: var(--surface-raised);
+    box-shadow: var(--shadow-panel);
+}
+
+.aayntn-lab__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-black);
+    color: var(--color-white);
+}
+
+html.dark .aayntn-lab__head {
+    background: #0d1015;
+}
+
+.aayntn-lab__title {
+    font-size: var(--text-secondary-copy);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.aayntn-lab__stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 0;
+}
+
+.aayntn-lab__canvas {
+    padding: var(--space-6);
+    background: var(--surface-page);
+    overflow: hidden;
+}
+
+.aayntn-lab__canvas svg {
+    width: 100%;
+    height: auto;
+}
+
+.aayntn-lab__sidebar {
+    border-left: 1px solid var(--border-subtle);
+    background: var(--surface-sunken);
+    overflow-y: auto;
+    max-height: 560px;
+}
+
+.aayntn-lab__section {
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.aayntn-lab__section:last-child {
+    border-bottom: none;
+}
+
+.aayntn-lab__section-title {
+    margin-bottom: var(--space-3);
+    color: var(--text-muted);
+    font-size: var(--text-meta);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Transport controls ---------------------------------------------------- */
+
+.aayntn-transport {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-top: var(--rule-ink);
+    background: var(--surface-page);
+}
+
+.aayntn-transport__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 32px;
+    padding: 0 var(--space-2);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    background: var(--surface-page);
+    color: var(--text-secondary);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    transition:
+        border-color var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.aayntn-transport__button:hover:not(:disabled) {
+    border-color: var(--border-ink);
+    color: var(--text-primary);
+}
+
+.aayntn-transport__button:disabled {
+    opacity: 0.4;
+}
+
+.aayntn-transport__button--primary {
+    background: var(--color-cobalt);
+    border-color: var(--color-cobalt);
+    color: var(--color-white);
+}
+
+.aayntn-transport__button--primary:hover:not(:disabled) {
+    background: var(--color-ultramarine);
+    border-color: var(--color-ultramarine);
+    color: var(--color-white);
+}
+
+.aayntn-transport__scrub {
+    flex: 1;
+    min-width: 140px;
+    accent-color: var(--color-cobalt);
+}
+
+.aayntn-transport__counter {
+    min-width: 6.5ch;
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-size: var(--text-meta);
+    text-align: right;
+}
+
+.aayntn-transport__speed {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text-muted);
+    font-size: var(--text-meta);
+}
+
+/* Step narration -------------------------------------------------------- */
+
+.aayntn-lab__narration {
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--border-subtle);
+    background: var(--surface-page);
+    color: var(--text-secondary);
+    font-size: var(--text-secondary-copy);
+    line-height: 1.6;
+    min-height: 3.2em;
+}
+
+.aayntn-lab__narration strong {
+    color: var(--text-primary);
+}
+
+/* State legend ---------------------------------------------------------- */
+
+.aayntn-legend {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: var(--text-meta);
+}
+
+.aayntn-legend__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text-secondary);
+}
+
+.aayntn-legend__swatch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--border-ink);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Graph state colours (shared with the SVG scenes). */
+.state-unvisited {
+    background: var(--color-white);
+    border-color: var(--color-cobalt);
+}
+.state-discovered {
+    background: var(--color-cobalt);
+    border-color: var(--color-cobalt);
+    color: var(--color-white);
+}
+.state-active {
+    background: var(--color-gold);
+    border-color: var(--color-black);
+    color: var(--color-black);
+}
+.state-completed {
+    background: var(--color-emerald);
+    border-color: var(--color-emerald);
+    color: var(--color-white);
+}
+.state-invalid {
+    background: var(--color-vermilion);
+    border-color: var(--color-vermilion);
+    color: var(--color-white);
+}
+.state-selected {
+    background: var(--color-violet);
+    border-color: var(--color-violet);
+    color: var(--color-white);
+}
+
+/* Input controls -------------------------------------------------------- */
+
+.aayntn-lab__input {
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    background: var(--surface-page);
+    color: var(--text-primary);
+    font-family: var(--font-code);
+    font-size: var(--text-meta);
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.aayntn-lab__preset {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+}
+
+/* Fullscreen laboratory ------------------------------------------------- */
+
+.aayntn-lab--fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 130;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.aayntn-lab--fullscreen .aayntn-lab__stage {
+    flex: 1;
+}
+
+.aayntn-lab--fullscreen .aayntn-lab__canvas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Static storyboard ----------------------------------------------------- */
+
+.aayntn-storyboard {
+    display: grid;
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+}
+
+.aayntn-storyboard__frame {
+    border: 1px solid var(--border-subtle);
+    background: var(--surface-page);
+    padding: var(--space-4);
+}
+
+.aayntn-storyboard__frame svg {
+    width: 100%;
+    height: auto;
+}
+
+.aayntn-storyboard__caption {
+    margin-top: var(--space-3);
+    font-size: var(--text-secondary-copy);
+}
+
+.aayntn-storyboard__caption strong {
+    display: block;
+    color: var(--text-primary);
+}
