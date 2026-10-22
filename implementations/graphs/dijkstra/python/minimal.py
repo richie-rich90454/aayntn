@@ -13,7 +13,7 @@ import heapq
 def dijkstra(adj, source):
     """Return the distance from source to every vertex, -1 when unreachable.
 
-    adj is an adjacency list: adj[v] lists the (neighbour, weight) pairs of the
+    adj is an adjacency list: adj[v] lists the (neighbor, weight) pairs of the
     edges incident to v.
     """
     distance = [-1] * len(adj)
