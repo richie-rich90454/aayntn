@@ -41,7 +41,7 @@ test.describe("the reference pages", () => {
 
             // The page must have a title and a heading that a screen reader
             // would announce.
-            await expect(page).toHaveTitle(/aayntn/);
+            await expect(page).toHaveTitle(/A.A.Y.N.T.N./);
             await expect(page.locator("h1").first()).toBeVisible();
 
             await expect(page).toHaveScreenshot(`${reference.name}.png`, {
@@ -74,7 +74,7 @@ test.describe("the search", () => {
         await page.setViewportSize({ width: 1440, height: 900 });
         await page.goto("/algorithms/", { waitUntil: "networkidle" });
 
-        await page.getByLabel("Search aayntn").click();
+        await page.getByLabel("Search A.A.Y.N.T.N.").click();
         const field = page.getByLabel("Search query");
         await field.fill("disjoint set union");
         await expect(page.locator(".aayntn-search__result").first()).toBeVisible();
