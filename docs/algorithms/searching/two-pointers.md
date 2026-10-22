@@ -25,7 +25,7 @@ A two-pointer solution keeps two indices in an array and moves them in a fixed d
 
 There are two families, and the difference between them is which ends the pointers start at.
 
-The **opposite-end pattern** starts one pointer at the first index and one at the last, and moves them towards each other. It needs a monotone comparison on the sum or the difference of the two elements, and it is the right tool for a sorted array and a question about a pair: "do two elements sum to $T$?", "what is the largest $a_i + a_j$ with $i < j$?".
+The **opposite-end pattern** starts one pointer at the first index and one at the last, and moves them toward each other. It needs a monotone comparison on the sum or the difference of the two elements, and it is the right tool for a sorted array and a question about a pair: "do two elements sum to $T$?", "what is the largest $a_i + a_j$ with $i < j$?".
 
 The **same-direction pattern** starts both pointers at the first index, with one always ahead of the other, and moves both to the right. It needs a monotone running quantity, such as a window sum that never decreases when the window grows. It is the right tool for "what is the longest window whose sum is at most $K$?" and for partitioning problems.
 
