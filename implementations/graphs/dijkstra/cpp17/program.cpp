@@ -10,7 +10,7 @@
 #endif
 
 // A weighted adjacency list of a graph on vertices 0..n-1: adj[v] holds the
-// (neighbour, weight) pairs of the edges incident to v.
+// (neighbor, weight) pairs of the edges incident to v.
 using AdjacencyList = std::vector<std::vector<std::pair<int, long long>>>;
 
 /**
