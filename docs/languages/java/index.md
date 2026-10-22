@@ -70,7 +70,7 @@ final class Counter {
 }
 ```
 
-The published instructions also state the runtime. USACO compiles and executes Java with the OpenJDK Runtime Environment, version 11.0.10, and the aayntn implementations in this repository target Java 17. The code in this center is written to compile and run on both, so it uses no feature newer than Java 11: no `var`, no records, no switch expressions, no text blocks, and no pattern-matching `instanceof`.
+The published instructions also state the runtime. USACO compiles and executes Java with the OpenJDK Runtime Environment, version 11.0.10, and the A.A.Y.N.T.N. implementations in this repository target Java 17. The code in this center is written to compile and run on both, so it uses no feature newer than Java 11: no `var`, no records, no switch expressions, no text blocks, and no pattern-matching `instanceof`.
 
 The time limit is the other published detail. A USACO contest gives roughly four seconds per test case to a Java submission against two seconds for a C or C++ submission, with the caveat that each contest or problem may use slightly different limits.
 
