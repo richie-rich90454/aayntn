@@ -69,7 +69,6 @@ html.dark .aayntn-lab__head {
     font-size: var(--text-secondary-copy);
     font-weight: 700;
     letter-spacing: 0.04em;
-    text-transform: uppercase;
 }
 
 .aayntn-lab__stage {
@@ -111,7 +110,6 @@ html.dark .aayntn-lab__head {
     font-size: var(--text-meta);
     font-weight: 700;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
 }
 
 /* Transport controls ---------------------------------------------------- */
