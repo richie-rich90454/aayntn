@@ -23,7 +23,7 @@
  */
 class Lca {
     /**
-     * @param {number[][]} adj adjacency list; adj[v] lists the neighbours of
+     * @param {number[][]} adj adjacency list; adj[v] lists the neighbors of
      *   the vertex v
      * @param {number} root the root of the tree
      */
