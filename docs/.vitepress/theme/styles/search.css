@@ -152,7 +152,7 @@
     align-self: start;
     padding: 1px 6px;
     border: 1px solid var(--color-cobalt);
-    color: var(--color-cobalt);
+    color: var(--text-accent);
     font-size: 0.6875rem;
     font-weight: 700;
     letter-spacing: 0.05em;
