@@ -422,7 +422,7 @@ The same distinction explains hash tables: a lookup is $\O(1)$ in expectation un
     void push(std::vector<int>& v, int x) { v.push_back(x); }
     ```
 
-2. This lookup is performed millions of times on a table with $10^6$ entries. Give the expected cost and the worst-case cost, and say what input would realise the worst case.
+2. This lookup is performed millions of times on a table with $10^6$ entries. Give the expected cost and the worst-case cost, and say what input would realize the worst case.
 
 **Implementation.** Implement a dynamic array that doubles when it is full, counting the total number of elements copied across a sequence of $m$ appends. Verify that the count stays below $2m$ for $m$ up to $10^5$, and report the largest single-copy cost you observed.
 
@@ -459,7 +459,7 @@ The scale factors between languages are large:
 
 So an $\O(n \log n)$ sort in C++ can beat an $\O(n)$ scan in Python. This is a real and reproducible effect, and it is the reason contest advice usually says "use C++ when you can".
 
-Memory layout produces comparable effects. A C++ `vector<vector<int>>` stores each vertex's neighbour list in a separate allocation, so a traversal chases pointers across the heap and misses the cache. The same graph stored as two flat arrays, offsets and destinations, is contiguous and can be several times faster for exactly the same asymptotic work. That layout is called the compressed sparse row format, and it is the standard representation for large graph traversals.
+Memory layout produces comparable effects. A C++ `vector<vector<int>>` stores each vertex's neighbor list in a separate allocation, so a traversal chases pointers across the heap and misses the cache. The same graph stored as two flat arrays, offsets and destinations, is contiguous and can be several times faster for exactly the same asymptotic work. That layout is called the compressed sparse row format, and it is the standard representation for large graph traversals.
 
 <MathPanel type="complexity" title="When a constant decides">
 For two algorithms with costs $a\,f(n)$ and $b\,g(n)$, the larger
