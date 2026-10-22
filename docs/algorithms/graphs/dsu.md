@@ -24,6 +24,10 @@ reviewed: false
 
 <AlgorithmSummary algorithm="graphs.dsu" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="graphs.dsu" />
+
 A disjoint set union, also called a union-find, maintains a partition of $n$ elements into sets. It supports two operations: merging the sets of two elements, and asking whether two elements are in the same set. Both take amortized constant time.
 
 The structure is a forest of rooted trees stored in a flat array. Each element has a parent pointer; the root of a tree is the representative of its set, and two elements are in the same set exactly when their representatives are equal. Two optimizations make it fast: path compression points every element on a path directly at the root, and union by size attaches the smaller tree below the larger one.
@@ -271,9 +275,9 @@ The distinction in the first row is the one that matters. If the question is onl
 
 ## Reference implementations
 
-<CodeViewer algorithm="graphs.dsu" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
-The manifest publishes two variants. The `minimal` variant is a reusable class or structure offering `find`, `unite` and `same` over $n$ elements, with no input and output of its own; in C it owns its storage through an explicit `init` and `destroy` pair, so every successful `init` must be matched by exactly one `destroy`. The `program` variant reads $n$ and $q$, then $q$ operations of the form `1 u v` to merge and `2 u v` to query, and prints `yes` or `no` for each query. An operation that names an element outside $0 \ldots n-1$ is ignored, and such a query answers `no`.
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source. The manifest publishes two variants. The `minimal` variant is a reusable class or structure offering `find`, `unite` and `same` over $n$ elements, with no input and output of its own; in C it owns its storage through an explicit `init` and `destroy` pair, so every successful `init` must be matched by exactly one `destroy`. The `program` variant reads $n$ and $q$, then $q$ operations of the form `1 u v` to merge and `2 u v` to query, and prints `yes` or `no` for each query. An operation that names an element outside $0 \ldots n-1$ is ignored, and such a query answers `no`.
 
 ## Recursion decision
 
