@@ -1,4 +1,4 @@
-# aayntn
+# A.A.Y.N.T.N.
 
 **All Algorithms You Need to Know** — a complete, mathematically rigorous encyclopedia of competitive programming, from AP Computer Science A proficiency through USACO Platinum and beyond.
 
@@ -14,7 +14,7 @@ The site is a set of static files. Every lesson is an ordinary Markdown file, ev
 
 ## Reading order
 
-1. **[Start from AP Computer Science A](/start/from-ap-csa/)** if that is where you are, or **[how to use aayntn](/start/)** if you want the map.
+1. **[Start from AP Computer Science A](/start/from-ap-csa/)** if that is where you are, or **[how to use A.A.Y.N.T.N.](/start/)** if you want the map.
 2. **[The curriculum](/curriculum/)** gives four guided tracks from Bronze to Platinum.
 3. **[The encyclopedia](/algorithms/)** is organized by the idea behind a technique rather than by the contest it appeared in.
 4. **[The laboratory](/laboratory/)** shows the algorithms running.
@@ -22,7 +22,7 @@ The site is a set of static files. Every lesson is an ordinary Markdown file, ev
 
 ## Independence and integrity
 
-aayntn is an independent preparation resource. It is **not** affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
+A.A.Y.N.T.N. is an independent preparation resource. It is **not** affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
 
 The published contest instructions currently accept **C, C++, Java and Python** as submission languages. **Pascal support has been discontinued** and **JavaScript is not among the listed languages**, so the Pascal and JavaScript listings in this repository are educational reference implementations and are marked as such everywhere they appear.
 
