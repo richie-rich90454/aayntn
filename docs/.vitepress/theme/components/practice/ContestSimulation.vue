@@ -911,7 +911,6 @@ selectDivision("bronze");
     background: var(--surface-sunken);
     font-size: var(--text-meta);
     letter-spacing: 0.05em;
-    text-transform: uppercase;
 }
 
 .aayntn-contest__review {
