@@ -3,6 +3,8 @@ program minimal;
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
+uses SysUtils;
+
 type
   TIntArray = array of Integer;
   TInt64Array = array of Int64;
@@ -61,9 +63,12 @@ begin
   SetLength(FPrefix, FN + 1);
   for I := 0 to FN - 1 do
   begin
+    FParent[I] := 0;
     FDepth[I] := -1;
     FSize[I] := 1;
     FHeavy[I] := -1;
+    FHead[I] := 0;
+    FPos[I] := 0;
   end;
   if (FN <= 0) or (Root < 0) or (Root >= FN) then
     Exit;
