@@ -149,7 +149,7 @@ The cost of the arithmetic grows with the size of the numbers. Adding two $k$-di
 
 The two traps are these.
 
-**Integer division is not truncation.** In Python, `7 // 2` is `3` and `-7 // 2` is `-4`, because the floor division rounds towards negative infinity. In C and C++, integer division truncates towards zero, so `-7 / 2` is `-3` there. The same expression means different things in the two languages, and a program that was ported without checking will produce a different answer.
+**Integer division is not truncation.** In Python, `7 // 2` is `3` and `-7 // 2` is `-4`, because the floor division rounds toward negative infinity. In C and C++, integer division truncates toward zero, so `-7 / 2` is `-3` there. The same expression means different things in the two languages, and a program that was ported without checking will produce a different answer.
 
 **Floating point is not exact.** `0.1 + 0.2` is not `0.3` in Python, and it is not in any other language either, because a double holds 53 bits of mantissa and `0.1` has no exact binary representation. Use integers for every exact computation, and use `//` for a division that must be exact.
 
@@ -162,7 +162,7 @@ def main():
     big = 10 ** 30
     sys.stdout.write(str(big * big) + "\n")
 
-    # Floor division rounds towards negative infinity.
+    # Floor division rounds toward negative infinity.
     sys.stdout.write(str(-7 // 2) + "\n")
 
     # Exact division of integers needs no floating point.
