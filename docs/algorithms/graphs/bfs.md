@@ -24,6 +24,10 @@ reviewed: false
 
 <AlgorithmSummary algorithm="graphs.bfs" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="graphs.bfs" />
+
 A breadth-first search explores a graph in rings. It visits every vertex at distance one from the start, then every vertex at distance two, and so on, so the traversal order is an order by distance. That single property is why a breadth-first search answers shortest-path questions in an unweighted graph, and it is the only reason.
 
 The algorithm is a distance array and a first-in, first-out queue. The one rule that is not negotiable is that a vertex is marked when it is _enqueued_, not when it is dequeued. Marking on enqueue is what makes each vertex enter the queue exactly once, and it is what makes the recorded distance the first and only distance that vertex ever gets.
@@ -219,9 +223,9 @@ The two rows that matter most are the first and the sixth. They differ in one wo
 
 ## Reference implementations
 
-<CodeViewer algorithm="graphs.bfs" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
-The manifest publishes two variants. The `minimal` variant is a reusable function that takes an adjacency list and a source and returns the distance to every vertex, using $-1$ for the vertices the source cannot reach; it performs no input and output of its own. The `program` variant reads the graph from standard input and prints the distances. Both use the same queue discipline, so the two agree vertex for vertex.
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source. The manifest publishes two variants. The `minimal` variant is a reusable function that takes an adjacency list and a source and returns the distance to every vertex, using $-1$ for the vertices the source cannot reach; it performs no input and output of its own. The `program` variant reads the graph from standard input and prints the distances. Both use the same queue discipline, so the two agree vertex for vertex.
 
 ## Recursion decision
 
