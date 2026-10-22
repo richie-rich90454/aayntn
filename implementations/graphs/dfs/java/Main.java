@@ -21,7 +21,7 @@ public final class Main {
      * Depth-first search over an unweighted graph: the stack replaces the call
      * stack, so a chain of any length is traversed without recursion.
      *
-     * @param adj    adjacency list; adj.get(v) holds the neighbours of v
+     * @param adj    adjacency list; adj.get(v) holds the neighbors of v
      * @param source the start vertex
      * @return the visited vertices in visit order
      */
