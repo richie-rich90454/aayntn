@@ -33,9 +33,6 @@ export default {
         app.component("MathPanel", MathPanel);
         app.component("PrerequisiteGraph", PrerequisiteGraph);
         app.component("PracticeCatalog", PracticeCatalog);
-        // The British spelling is kept as an alias so that a page written
-        // against the older name still resolves.
-        app.component("PracticeCatalogue", PracticeCatalog);
         app.component("ContestSimulation", ContestSimulation);
         app.component("ProgressDashboard", ProgressDashboard);
         app.component("LearnNext", LearnNext);
