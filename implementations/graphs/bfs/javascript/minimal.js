@@ -16,7 +16,7 @@
 /**
  * Computes the distance from source to every vertex of an unweighted graph.
  *
- * @param {number[][]} adj adjacency list; adj[v] lists the neighbours of v
+ * @param {number[][]} adj adjacency list; adj[v] lists the neighbors of v
  * @param {number} source the start vertex
  * @returns {number[]} the distance from source to every vertex, -1 when
  *   unreachable
