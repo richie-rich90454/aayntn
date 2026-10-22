@@ -166,7 +166,7 @@ function renderEdge(edge: LabEdge, nodes: Map<string, LabNode>): string {
 
 function renderNode(node: LabNode): string {
     const state = node.state ?? "unvisited";
-    const style = NODE_STATE_STYLE[state] ?? NODE_STATE_STYLE.unvisited!;
+    const style = NODE_STATE_STYLE[state] ?? NODE_STATE_STYLE["unvisited"]!;
     const x = node.x ?? 0;
     const y = node.y ?? 0;
     const r = node.shape === "square" ? 18 : 22;
@@ -258,7 +258,7 @@ export function renderArray(state: LabState, options: RenderOptions): string {
 
     cells.forEach((cell, index) => {
         const x = originX + index * (cellWidth + gap);
-        const style = CELL_STATE_STYLE[cell.state ?? "idle"] ?? CELL_STATE_STYLE.idle!;
+        const style = CELL_STATE_STYLE[cell.state ?? "idle"] ?? CELL_STATE_STYLE["idle"]!;
         parts.push(
             `<rect x="${x}" y="${originY}" width="${cellWidth}" height="${cellHeight}" fill="${style.fill}" stroke="${style.stroke}" stroke-width="1.4" />`,
             `<text x="${x + cellWidth / 2}" y="${originY + 28}" text-anchor="middle" font-size="14" font-weight="600" font-family="Noto Sans Mono, monospace" fill="${style.text}">${escapeXml(cell.value)}</text>`,
@@ -318,7 +318,7 @@ export function renderStructures(state: LabState): string {
         );
 
         structure.items.forEach((item, index) => {
-            const style = CELL_STATE_STYLE[item.state ?? "idle"] ?? CELL_STATE_STYLE.idle!;
+            const style = CELL_STATE_STYLE[item.state ?? "idle"] ?? CELL_STATE_STYLE["idle"]!;
             const x = vertical ? offsetX : offsetX + index * (cellWidth + gap);
             const y = vertical ? 44 + index * (cellHeight + gap) : 44;
             parts.push(
@@ -384,7 +384,7 @@ export function renderTable(state: LabState): string {
     });
 
     for (const cell of table.cells) {
-        const style = CELL_STATE_STYLE[cell.state ?? "idle"] ?? CELL_STATE_STYLE.idle!;
+        const style = CELL_STATE_STYLE[cell.state ?? "idle"] ?? CELL_STATE_STYLE["idle"]!;
         const x = originX + cell.col * cellWidth;
         const y = originY + cell.row * cellHeight;
         parts.push(
