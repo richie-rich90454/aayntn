@@ -23,6 +23,8 @@ const nav: DefaultTheme.Config["nav"] = [
     { text: "Curriculum", link: "/curriculum/", activeMatch: "/curriculum/" },
     { text: "Algorithms", link: "/algorithms/", activeMatch: "/algorithms/" },
     { text: "Practice", link: "/practice/", activeMatch: "/practice/" },
+    { text: "Contest", link: "/contest/", activeMatch: "/contest/" },
+    { text: "Debugging", link: "/debugging/", activeMatch: "/debugging/" },
     { text: "Laboratory", link: "/laboratory/", activeMatch: "/laboratory/" },
     { text: "Languages", link: "/languages/", activeMatch: "/languages/" },
     { text: "Templates", link: "/templates/", activeMatch: "/templates/" },
@@ -167,7 +169,11 @@ const sidebar: DefaultTheme.Config["sidebar"] = {
         {
             text: "Practice",
             collapsed: false,
-            items: [{ text: "Problem catalog", link: "/practice/" }],
+            items: [
+                { text: "Problem catalog", link: "/practice/" },
+                { text: "Contest simulation", link: "/contest/" },
+                { text: "The debugging laboratory", link: "/debugging/" },
+            ],
         },
     ],
     "/laboratory/": [
@@ -204,10 +210,10 @@ const sidebar: DefaultTheme.Config["sidebar"] = {
 /* ------------------------------------------------------------------ */
 
 export default defineConfig({
-    title: "aayntn",
-    titleTemplate: ":title · aayntn",
+    title: "A.A.Y.N.T.N.",
+    titleTemplate: ":title — A.A.Y.N.T.N.",
     description:
-        "All Algorithms You Need to Know — a complete, mathematically rigorous competitive programming encyclopedia from AP Computer Science A through USACO Platinum and beyond.",
+        "A.A.Y.N.T.N. is All Algorithms You Need to Know — a complete, mathematically rigorous competitive programming encyclopedia from AP Computer Science A through USACO Platinum and beyond.",
     lang: "en-US",
     cleanUrls: true,
     lastUpdated: true,
