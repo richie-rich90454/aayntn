@@ -12,7 +12,7 @@ def dfs_reachable(adj, source):
     """Return the vertices reachable from source, in the order they were visited.
 
     The stack replaces the call stack, so a chain of any length is traversed
-    without recursion. adj is an adjacency list: adj[v] lists the neighbours
+    without recursion. adj is an adjacency list: adj[v] lists the neighbors
     of the vertex v.
     """
     if source < 0 or source >= len(adj):
