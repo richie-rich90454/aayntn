@@ -15,7 +15,7 @@ class Hld:
     def __init__(self, adj, root, values):
         """Build the decomposition of the tree whose adjacency list is adj.
 
-        adj[v] lists the neighbours of the vertex v and values[v] is the value
+        adj[v] lists the neighbors of the vertex v and values[v] is the value
         of the vertex v.
         """
         self.n = len(adj)
