@@ -1,5 +1,6 @@
 program PrefixSumsProgram;
 {$mode objfpc}{$H+}
+{$I-}
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
@@ -7,57 +8,6 @@ uses SysUtils;
 
 type
   TIntArray = array of Int64;
-  TTokens = array of string;
-
-{ Reads the whole standard input so that the tokens can be split without
-  depending on where the line breaks fall. }
-function ReadAllInput: string;
-var
-  Row: string;
-begin
-  Result := '';
-  while not EOF(Input) do
-  begin
-    ReadLn(Row);
-    Result := Result + Row + ' ';
-  end;
-end;
-
-function Tokenize(const Content: string): TTokens;
-var
-  I: Integer;
-  Start: Integer;
-begin
-  SetLength(Result, 0);
-  I := 1;
-  while I <= Length(Content) do
-  begin
-    while (I <= Length(Content)) and (Content[I] <= ' ') do
-      Inc(I);
-    if I > Length(Content) then
-      Break;
-    Start := I;
-    while (I <= Length(Content)) and (Content[I] > ' ') do
-      Inc(I);
-    SetLength(Result, Length(Result) + 1);
-    Result[High(Result)] := Copy(Content, Start, I - Start);
-  end;
-end;
-
-{ Parses a decimal integer token. Val reports a malformed token through its
-  error code, so the caller never has to guard the conversion. }
-function ParseInt(const Token: string; var Value: Int64): Boolean;
-var
-  ErrCode: Integer;
-begin
-  Result := False;
-  Value := 0;
-  if Token = '' then
-    Exit;
-  Val(Token, Value, ErrCode);
-  if ErrCode = 0 then
-    Result := True;
-end;
 
 { Prefix sums over an array of values.
 
@@ -79,66 +29,43 @@ begin
 end;
 
 var
-  Tokens: TTokens;
   N: Integer;
   Q: Integer;
   I: Integer;
-  Index: Integer;
-  L: Int64;
-  R: Int64;
+  L: Integer;
+  R: Integer;
   Value: Int64;
   A: TIntArray;
   Prefix: TIntArray;
   SumText: string;
 begin
-  Tokens := Tokenize(ReadAllInput);
-  if Length(Tokens) = 0 then
-    Halt(0);
-
-  if not ParseInt(Tokens[0], Value) then
-    Halt(0);
-  if Value < 0 then
-    Value := 0;
-  if Value > 2147483647 then
-    Value := 2147483647;
-  N := Integer(Value);
+  { The input is exactly the contract: n, the n values, q and the q ranges. }
+  N := 0;
+  Read(N);
 
   { The values start at zero, so a truncated input leaves zeros behind. }
   SetLength(A, N);
   for I := 0 to N - 1 do
   begin
-    A[I] := 0;
-    if I + 1 < Length(Tokens) then
-      if ParseInt(Tokens[I + 1], Value) then
-        A[I] := Value;
+    Value := 0;
+    Read(Value);
+    A[I] := Value;
   end;
 
   SetLength(Prefix, N + 1);
   PrefixSums(A, N, Prefix);
 
   Q := 0;
-  if N + 1 < Length(Tokens) then
-    if ParseInt(Tokens[N + 1], Value) then
-    begin
-      if Value < 0 then
-        Value := 0;
-      if Value > 2147483647 then
-        Value := 2147483647;
-      Q := Integer(Value);
-    end;
+  Read(Q);
+  if Q < 0 then
+    Q := 0;
 
-  Index := N + 2;
   for I := 0 to Q - 1 do
   begin
-    if Index + 1 >= Length(Tokens) then
-      Break;
-    if not ParseInt(Tokens[Index], Value) then
-      Break;
-    L := Value;
-    if not ParseInt(Tokens[Index + 1], Value) then
-      Break;
-    R := Value;
-    Inc(Index, 2);
+    L := 0;
+    R := 0;
+    Read(L);
+    Read(R);
 
     { A range that leaves the array is clipped, so the lookup stays in
       bounds; a range that is empty after clipping sums to zero. }
