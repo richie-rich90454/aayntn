@@ -11,6 +11,9 @@ keywords:
 prerequisites:
     required: [arrays.prefix-sums, foundations.complexity]
     recommended: [range-queries.segment-tree, range-queries.fenwick-tree]
+complexity:
+    time: "O(n log n) to build, O(1) per query"
+    space: "O(n log n)"
 assumptions:
     - The array never changes after the table is built.
     - The combining operation is idempotent, so that the two overlapping blocks of a query may be combined.
