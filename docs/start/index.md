@@ -1,6 +1,6 @@
 ---
 id: start.overview
-title: How to use aayntn
+title: How to use A.A.Y.N.T.N.
 summary: The four ways into the encyclopedia, what a lesson contains, and how the local progress record works.
 division: []
 subjects: [foundations]
@@ -14,7 +14,7 @@ reviewed: false
 draft: false
 ---
 
-aayntn is an encyclopedia rather than a course. It will not assign your week or tell you which problem to attempt on Tuesday. It does something narrower and, we hope, more durable: it collects the whole body of competitive programming knowledge into one fixed order, with the proofs and the complexity arguments that most explanations quietly omit.
+A.A.Y.N.T.N. is an encyclopedia rather than a course. It will not assign your week or tell you which problem to attempt on Tuesday. It does something narrower and, we hope, more durable: it collects the whole body of competitive programming knowledge into one fixed order, with the proofs and the complexity arguments that most explanations quietly omit.
 
 This page explains what is inside, how the pieces fit together, and how to enter from wherever you are starting.
 
@@ -64,7 +64,7 @@ The last third is practical. It lists the situations in which the algorithm is t
 
 ## What the division tracks mean
 
-aayntn organizes contest material into four tracks. The names follow the division convention used by USACO-style competitions: Bronze, Silver, Gold and Platinum. aayntn is an independent preparation resource and is not affiliated with, endorsed by, or supported by the United States Computing Olympiad.
+A.A.Y.N.T.N. organizes contest material into four tracks. The names follow the division convention used by USACO-style competitions: Bronze, Silver, Gold and Platinum. A.A.Y.N.T.N. is an independent preparation resource and is not affiliated with, endorsed by, or supported by the United States Computing Olympiad.
 
 The tracks describe skill, not age, school year, or hours spent. A rough description of each:
 
@@ -77,17 +77,17 @@ These tracks are covered by the curriculum pages. The academy you are reading no
 
 ## How the local progress record works
 
-aayntn tracks your reading in your own browser and nowhere else. The record is stored in IndexedDB, a database that lives inside the browser profile. There is no account, no server component, and no analytics script that observes which pages you open. Clearing your browser data destroys the record, and nothing can restore it.
+A.A.Y.N.T.N. tracks your reading in your own browser and nowhere else. The record is stored in IndexedDB, a database that lives inside the browser profile. There is no account, no server component, and no analytics script that observes which pages you open. Clearing your browser data destroys the record, and nothing can restore it.
 
 At the end of a lesson you can set a status from four values: not started, in progress, review, or mastered. "Mastered" is a claim you make yourself after satisfying the review checklist on that lesson. Reaching the bottom of a page never marks it, because scrolling is not understanding.
 
-Practice results are recorded by hand as well. aayntn is a static site; it cannot run a hidden judge against code you paste into it, and the interface says so rather than pretending otherwise. You submit to the official judge, read the verdict, and record the outcome here.
+Practice results are recorded by hand as well. A.A.Y.N.T.N. is a static site; it cannot run a hidden judge against code you paste into it, and the interface says so rather than pretending otherwise. You submit to the official judge, read the verdict, and record the outcome here.
 
 Because the record lives only in one browser, moving it between machines requires the export and import pair on the progress page. Export produces a JSON file containing your statuses; import reads one back.
 
 ## How the code panels are organized
 
-Reference implementations in aayntn are real source files that live outside the documentation tree, one directory per algorithm, each with a manifest describing its language, its input contract, its complexity, and whether it has been compiled and run against the shared fixtures.
+Reference implementations in A.A.Y.N.T.N. are real source files that live outside the documentation tree, one directory per algorithm, each with a manifest describing its language, its input contract, its complexity, and whether it has been compiled and run against the shared fixtures.
 
 Pages do not paste that code by hand. They refer to it by identifier, and the theme inserts the right panel at build time:
 
