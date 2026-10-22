@@ -22,7 +22,7 @@ const entry = computed<AlgorithmEntry | undefined>(() =>
 <template>
     <section v-if="entry" class="aayntn-summary">
         <header class="aayntn-summary__head">
-            <span class="aayntn-summary__title">At a glance</span>
+            <span class="aayntn-summary__title">Summary</span>
             <span
                 v-for="division in entry.divisions"
                 :key="division"
