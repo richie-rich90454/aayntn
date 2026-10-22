@@ -19,14 +19,16 @@ A problem that belongs to this subject rarely looks like a graph or a dynamic pr
 
 ## The techniques in this subject
 
-| Technique | Complexity | Prerequisite | Article |
-| --- | --- | --- | --- |
-| Complexity analysis | a method for deriving bounds | none | [Complexity](/algorithms/foundations/complexity) |
-| Recursion | $O(n)$ for linear recursion, $O(2^n)$ for the naive form | `foundations.complexity` | [Recursion](/algorithms/foundations/recursion) |
-| Sorting | $O(n \log n)$ for merge, quicksort, and heapsort | `foundations.complexity` | [Sorting](/algorithms/foundations/sorting) |
-| Binary representation | $O(1)$ per word operation | `foundations.complexity` | [Binary representation](/algorithms/foundations/binary-representation) |
+| Technique | Time | Space | Prerequisite | Article |
+| --- | --- | --- | --- | --- |
+| Complexity analysis | A method, not an algorithm | A method, not an algorithm | `start.computational-foundations` | [Complexity](/algorithms/foundations/complexity) |
+| Recursion | The cost of its recurrence | $O(d)$ for the call stack | `start.computational-foundations` | [Recursion](/algorithms/foundations/recursion) |
+| Sorting | $O(n \log n)$ | $O(n)$ for merge sort, $O(1)$ for heapsort | `foundations.complexity` | [Sorting](/algorithms/foundations/sorting) |
+| Binary representation | $O(1)$ per word operation | $O(1)$ | `foundations.complexity` | [Binary representation](/algorithms/foundations/binary-representation) |
 
-Complexity analysis is listed first because it is the tool that produces every bound in the other thirty-four articles of this encyclopedia. Read it before you read anything else here, and read it again when a technique feels too expensive to use.
+Complexity analysis is listed first because it is the tool that produces every bound in the other articles of this encyclopedia. Read it before you read anything else here, and read it again when a technique feels too expensive to use.
+
+The recursion row is the only one whose time cell is not a single bound, and that is deliberate. A recursive function costs the solution of its recurrence relation, so the article works three examples: $O(n \log n)$ for the divide-and-conquer form, $O(n^2)$ for the linear form with linear work per call, and $O(\varphi^n)$ for the naive Fibonacci form. Its space is the depth of the recursion, $O(d)$, which is a language limit as much as an algorithmic one.
 
 ## Recognition signals
 
@@ -67,6 +69,7 @@ The following belong to this subject and do not yet have an article of their own
 ## Related subjects
 
 - [Searching](/algorithms/searching/) assumes sorting, because binary search is only valid on ordered data.
+- [Enumeration](/algorithms/enumeration/) spends its whole budget on the bounds that this subject derives.
 - [Number theory](/algorithms/number-theory/) takes the overflow rules from binary representation and turns them into a method.
 - [Advanced algorithms](/algorithms/advanced/) assumes you can bound a technique precisely enough to notice that an offline version is faster.
-- The [academy](/start/) introduces all four techniques here as part of a six-part course; this subject is the compact version for readers who already write programs.
+- The [academy](/start/) introduces all four techniques here as part of a six-part course, and [From AP Computer Science A](/start/from-ap-csa/) is the route into it; this subject is the compact version for readers who already write programs.
