@@ -13,6 +13,7 @@ import { describe, expect, it } from "vitest";
 import { compile } from "@vue/compiler-dom";
 import { createMarkdownRenderer } from "vitepress";
 import { katex } from "@mdit/plugin-katex";
+import katexRender from "katex";
 import fg from "fast-glob";
 import { DOCS_DIR, ROOT } from "../../tools/lib/paths";
 import { katexMacros } from "../../docs/.vitepress/theme/katex-macros";
@@ -81,6 +82,32 @@ describe("the pages", () => {
                     /<\w/.test(expression),
                     `${page.file} has "${expression}", in which Markdown reads the sign as the start of a tag`,
                 ).toBe(false);
+            }
+        }
+    });
+
+    it("hold only mathematics that KaTeX can render", async () => {
+        for (const page of await sources()) {
+            const prose = page.source
+                .replace(/^---\r?\n[\s\S]*?\r?\n---/, "")
+                .replace(/```[\s\S]*?```/g, "")
+                .replace(/`[^`\n]*`/g, "");
+
+            for (const match of prose.matchAll(/\$([^$\n]+?)\$/g)) {
+                const expression = match[1]!;
+                let message = "";
+                try {
+                    katexRender.renderToString(expression, {
+                        displayMode: false,
+                        throwOnError: true,
+                        strict: false,
+                        trust: false,
+                        macros: katexMacros,
+                    });
+                } catch (error) {
+                    message = (error as Error).message;
+                }
+                expect(message, `${page.file} cannot render "${expression}": ${message}`).toBe("");
             }
         }
     });
