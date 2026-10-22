@@ -374,7 +374,7 @@ The negative case is not hypothetical. In C and C++ the remainder of a negative 
 | Using a 64-bit product with a large modulus | Silent overflow in the multiplication | Use a 128-bit intermediate |
 | Dividing instead of multiplying by an inverse | Wrong answer, or a division by zero | Never divide modulo $m$ |
 | Assuming a prime modulus when it is composite | The inverse does not exist for some values | Compute the gcd |
-| Cancelling a factor that is zero modulo $p$ | The cancellation is invalid | Check that the factor is nonzero before cancelling |
+| Canceling a factor that is zero modulo $p$ | The cancellation is invalid | Check that the factor is nonzero before canceling |
 
 ### Why this fails: Fermat's formula on a composite modulus
 
