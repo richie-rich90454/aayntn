@@ -10,6 +10,9 @@ keywords: [bellman-ford, negative weights, negative cycle, shortest path, relaxa
 prerequisites:
     required: [graphs.representation]
     recommended: [graphs.dijkstra, graphs.bfs]
+complexity:
+    time: "O(VE)"
+    space: "O(V)"
 assumptions:
     - Edge weights may be negative.
     - The graph has no negative cycle reachable from the source, unless detecting one is the goal.
