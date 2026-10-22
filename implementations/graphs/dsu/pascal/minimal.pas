@@ -3,6 +3,8 @@ program minimal;
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
+uses SysUtils;
+
 type
   { A disjoint set over the elements 0..n-1.
 
