@@ -720,13 +720,13 @@ The full checklist, with the reason behind each item, is on the [pre-contest che
 
 ## The rules of the competition
 
-The rules are the competition's, and they are not aayntn's. As last checked against the published official instructions on 21 October 2026, the following is what those instructions say, in substance:
+The rules are the competition's, and they are not A.A.Y.N.T.N.'s. As last checked against the published official instructions on 21 October 2026, the following is what those instructions say, in substance:
 
 - During an active contest, you may consult only references that cover the basic functionality of your programming language, such as syntax, library functions, and input and output.
 - Consulting algorithm resources is not permitted.
 - Using pre-written code or templates is not permitted.
 - Using generative artificial intelligence services is not permitted.
 
-aayntn is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad. Nothing on this site is a substitute for the official instructions, and the official instructions are the only authority on what is permitted during a contest.
+A.A.Y.N.T.N. is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad. Nothing on this site is a substitute for the official instructions, and the official instructions are the only authority on what is permitted during a contest.
 
 These rules change. Re-read the official instructions before every contest, and never keep this page, or any other reference page, open while a contest is running.
