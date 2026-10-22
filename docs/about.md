@@ -1,6 +1,6 @@
 ---
 id: about
-title: About aayntn
+title: About A.A.Y.N.T.N.
 summary: What this encyclopedia is for, the editorial standard it holds itself to, how it is licensed, and how it is built.
 division: []
 subjects: []
@@ -13,13 +13,13 @@ prerequisites:
 reviewed: false
 ---
 
-aayntn is an encyclopedia of competitive programming. It is not a course, and it will not assign your week or tell you which problem to attempt on Tuesday. It collects the body of competitive programming knowledge into one fixed order, with the proofs and the complexity arguments that most explanations quietly omit.
+A.A.Y.N.T.N. is an encyclopedia of competitive programming. It is not a course, and it will not assign your week or tell you which problem to attempt on Tuesday. It collects the body of competitive programming knowledge into one fixed order, with the proofs and the complexity arguments that most explanations quietly omit.
 
 ## What it is for
 
 The knowledge a competitor needs is not large. It is a few dozen techniques, a handful of mathematical facts, and one way of reading a problem. The difficulty is not in the size of the material but in the order of it, in the proofs that make each technique trustworthy, and in the fact that most explanations of a technique stop before the part that explains why it works.
 
-aayntn exists to write those parts down, once, in an order that a reader can follow from a passing grade in AP Computer Science A to the harder end of the Platinum division. It is a reference that happens to be readable, not a curriculum that happens to be accurate.
+A.A.Y.N.T.N. exists to write those parts down, once, in an order that a reader can follow from a passing grade in AP Computer Science A to the harder end of the Platinum division. It is a reference that happens to be readable, not a curriculum that happens to be accurate.
 
 The encyclopedia is deliberately explicit about the boundary of its own coverage. Every article states its complexity together with the implementation the bound assumes, every subject page ends with the list of techniques it implies and does not yet cover, and an article that has not been checked end to end is marked as unreviewed rather than presented as finished.
 
@@ -37,7 +37,7 @@ Every substantial article follows the same structure, listed in full in the cont
 
 ## Independence
 
-aayntn is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
+A.A.Y.N.T.N. is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
 
 Nothing on this site is an official document, an official rule, or an official interpretation of a rule. The competition's rules belong to the competition, and the [official instructions](https://usaco.org/index.php?page=instructions) are the only statement of them. The [rules page](/reference/usaco-rules) summarizes them in the encyclopedia's own words, with a link to the original, and it says plainly that they must be re-read before every contest because they change.
 
@@ -67,6 +67,6 @@ Contributions are welcome, and the contribution guide is the contract between th
 
 The guide specifies the frontmatter contract for every lesson, the manifest contract for every implementation, the code style expected in a listing, the article structure, the writing rules, and the commands that must pass before a change is accepted.
 
-The repository is at `github.com/aayntn/atlas`. The short version of the process is: write the Markdown, put the code in `implementations` with a manifest, run the validation and the test suite, and open a pull request. The same commands run in continuous integration, and a pull request that fails the build does not merge.
+The repository is at `github.com/A.A.Y.N.T.N./atlas`. The short version of the process is: write the Markdown, put the code in `implementations` with a manifest, run the validation and the test suite, and open a pull request. The same commands run in continuous integration, and a pull request that fails the build does not merge.
 
 Two things are worth knowing before you start. Every implementation must be real, compilable code in the language it claims to be, and it must pass the shared fixtures. And an article that claims more than it delivers is worse than a missing article, so an unfinished topic should be marked unfinished.
