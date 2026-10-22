@@ -1,48 +1,51 @@
-# name: Visual regression
+name: Visual regression
 
-# # The design has to survive a code-heavy page. These screenshots are taken of
-# # the pages that are most likely to break: a long implementation, a long
-# # proof, a table, and a laboratory.
+# The design has to survive every width that a reader may bring to it. These
+# checks open the pages that are most likely to break — a code-heavy article,
+# a long proof, a table, and a laboratory — at five widths from a phone to a
+# screen wider than a desk, and measure whether the page scrolls sideways,
+# whether anything stands past the edge, and whether the search control is
+# still on the screen.
 
-# on:
-#     pull_request:
-#     workflow_dispatch:
+on:
+    pull_request:
+    workflow_dispatch:
 
-# concurrency:
-#     group: visual-${{ github.ref }}
-#     cancel-in-progress: true
+concurrency:
+    group: visual-${{ github.ref }}
+    cancel-in-progress: true
 
-# jobs:
-#     screenshots:
-#         name: Capture the reference pages
-#         runs-on: ubuntu-latest
-#         steps:
-#             - uses: actions/checkout@v4
+jobs:
+    layout:
+        name: Measure the layout of the reference pages
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
 
-#             - uses: pnpm/action-setup@v4
-#               with:
-#                   version: 12.14.0
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 12.14.0
 
-#             - uses: actions/setup-node@v4
-#               with:
-#                   node-version: 22
-#                   cache: pnpm
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: pnpm
 
-#             - name: Install the dependencies
-#               run: pnpm install --frozen-lockfile
+            - name: Install the dependencies
+              run: pnpm install --frozen-lockfile
 
-#             - name: Build the site
-#               run: pnpm run build
+            - name: Build the site
+              run: pnpm run build
 
-#             - name: Install the browser
-#               run: pnpm exec playwright install --with-deps chromium
+            - name: Install the browser
+              run: pnpm exec playwright install --with-deps chromium
 
-#             - name: Capture the screenshots
-#               run: pnpm exec playwright test
+            - name: Measure the pages
+              run: pnpm exec playwright test
 
-#             - uses: actions/upload-artifact@v4
-#               if: always()
-#               with:
-#                   name: visual-regression
-#                   path: tests/visual/__screenshots__
-#                   retention-days: 7
+            - uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: layout-report
+                  path: playwright-report/
+                  retention-days: 7
