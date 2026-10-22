@@ -442,14 +442,14 @@ The cheapest adjacency list in C is an array of arrays, one per vertex, each all
 #include <stdlib.h>
 
 typedef struct {
-    int *neighbours;
+    int *neighbors;
     int degree;
 } adjacency_list;
 
-/* Cleanup path: free(adj[v].neighbours) for every v, then free(adj). */
+/* Cleanup path: free(adj[v].neighbors) for every v, then free(adj). */
 static void adjacency_list_free(adjacency_list *adj, int n) {
     for (int v = 0; v < n; v++) {
-        free(adj[v].neighbours);
+        free(adj[v].neighbors);
     }
     free(adj);
 }
@@ -501,8 +501,8 @@ int main(void) {
     for (int v = 0; v < n; v++) {
         adj[v].degree = degree[v];
         if (degree[v] > 0) {
-            adj[v].neighbours = malloc((size_t)degree[v] * sizeof(int));
-            if (adj[v].neighbours == NULL) {
+            adj[v].neighbors = malloc((size_t)degree[v] * sizeof(int));
+            if (adj[v].neighbors == NULL) {
                 adjacency_list_free(adj, n);
                 free(edge_u);
                 free(edge_v);
@@ -514,14 +514,14 @@ int main(void) {
     for (int i = 0; i < kept; i++) {
         const int u = edge_u[i];
         const int v = edge_v[i];
-        adj[u].neighbours[cursor[u]++] = v;
-        adj[v].neighbours[cursor[v]++] = u;
+        adj[u].neighbors[cursor[u]++] = v;
+        adj[v].neighbors[cursor[v]++] = u;
     }
 
     for (int v = 0; v < n; v++) {
         printf("%d:", v);
         for (int i = 0; i < adj[v].degree; i++) {
-            printf(" %d", adj[v].neighbours[i]);
+            printf(" %d", adj[v].neighbors[i]);
         }
         putchar('\n');
     }
@@ -580,7 +580,7 @@ The safe pattern is an explicit stack, as in the iterative depth-first search us
 #include <stdlib.h>
 
 /* One frame per vertex on the current path, holding the vertex and the
-   index of the next neighbour to examine. This mirrors a recursive call
+   index of the next neighbor to examine. This mirrors a recursive call
    exactly, so the visit order is the same, and the stack holds at most n
    frames because every frame belongs to a distinct visited vertex. */
 typedef struct {
@@ -588,7 +588,7 @@ typedef struct {
     int next;
 } dfs_frame;
 
-static int reachable_count(const int *const *neighbours, const int *degree,
+static int reachable_count(const int *const *neighbors, const int *degree,
                             int n, int source) {
     if (n <= 0 || source < 0 || source >= n) {
         return 0;
@@ -611,7 +611,7 @@ static int reachable_count(const int *const *neighbours, const int *degree,
     while (top > 0) {
         dfs_frame *frame = &stack[top - 1];
         if (frame->next < degree[frame->vertex]) {
-            const int w = neighbours[frame->vertex][frame->next];
+            const int w = neighbors[frame->vertex][frame->next];
             frame->next++;
             if (visited[w]) {
                 continue;
@@ -673,26 +673,26 @@ int main(void) {
         source = 0;
     }
 
-    int **neighbours = calloc((size_t)n, sizeof *neighbours);
+    int **neighbors = calloc((size_t)n, sizeof *neighbors);
     int *cursor = calloc((size_t)n, sizeof *cursor);
-    if (neighbours == NULL || cursor == NULL) {
+    if (neighbors == NULL || cursor == NULL) {
         for (int v = 0; v < n; v++) {
-            free(neighbours[v]);
+            free(neighbors[v]);
         }
-        free(neighbours);
+        free(neighbors);
         free(edge_u);
         free(edge_v);
         free(degree);
         return 0;
     }
     for (int v = 0; v < n; v++) {
-        neighbours[v] =
+        neighbors[v] =
             malloc((size_t)(degree[v] > 0 ? degree[v] : 1) * sizeof(int));
-        if (neighbours[v] == NULL) {
+        if (neighbors[v] == NULL) {
             for (int u = 0; u < n; u++) {
-                free(neighbours[u]);
+                free(neighbors[u]);
             }
-            free(neighbours);
+            free(neighbors);
             free(edge_u);
             free(edge_v);
             free(degree);
@@ -700,17 +700,17 @@ int main(void) {
         }
     }
     for (int i = 0; i < kept; i++) {
-        neighbours[edge_u[i]][cursor[edge_u[i]]++] = edge_v[i];
-        neighbours[edge_v[i]][cursor[edge_v[i]]++] = edge_u[i];
+        neighbors[edge_u[i]][cursor[edge_u[i]]++] = edge_v[i];
+        neighbors[edge_v[i]][cursor[edge_v[i]]++] = edge_u[i];
     }
 
-    printf("%d\n", reachable_count((const int *const *)neighbours, degree, n,
+    printf("%d\n", reachable_count((const int *const *)neighbors, degree, n,
                                    source));
 
     for (int v = 0; v < n; v++) {
-        free(neighbours[v]);
+        free(neighbors[v]);
     }
-    free(neighbours);
+    free(neighbors);
     free(edge_u);
     free(edge_v);
     free(degree);
@@ -782,13 +782,13 @@ int main(void) {
 #include <stdlib.h>
 
 typedef struct {
-    int *neighbours;
+    int *neighbors;
     int degree;
 } adjacency_list;
 
 static void adjacency_list_free(adjacency_list *adj, int n) {
     for (int v = 0; v < n; v++) {
-        free(adj[v].neighbours);
+        free(adj[v].neighbors);
     }
     free(adj);
 }
@@ -847,8 +847,8 @@ int main(void) {
     for (int v = 0; v < n; v++) {
         adj[v].degree = degree[v];
         if (degree[v] > 0) {
-            adj[v].neighbours = malloc((size_t)degree[v] * sizeof(int));
-            if (adj[v].neighbours == NULL) {
+            adj[v].neighbors = malloc((size_t)degree[v] * sizeof(int));
+            if (adj[v].neighbors == NULL) {
                 adjacency_list_free(adj, n);
                 free(edge_u);
                 free(edge_v);
@@ -860,8 +860,8 @@ int main(void) {
     for (int i = 0; i < kept; i++) {
         const int u = edge_u[i];
         const int v = edge_v[i];
-        adj[u].neighbours[cursor[u]++] = v;
-        adj[v].neighbours[cursor[v]++] = u;
+        adj[u].neighbors[cursor[u]++] = v;
+        adj[v].neighbors[cursor[v]++] = u;
     }
 
     /* Solve the problem here, using adj and source. */
