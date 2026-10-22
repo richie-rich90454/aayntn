@@ -11,6 +11,9 @@ keywords:
 prerequisites:
     required: [foundations.sorting]
     recommended: [foundations.complexity, searching.binary-search]
+complexity:
+    time: "O(n log n)"
+    space: "O(n)"
 assumptions:
     - The coordinates are integers small enough that the cross product of two difference vectors fits in the chosen integer type.
     - Points are distinct, or duplicates are removed before the algorithm runs.
