@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
 
-// Adjacency list of a graph on vertices 0..n-1: adj[v] holds the neighbours
+// Adjacency list of a graph on vertices 0..n-1: adj[v] holds the neighbors
 // of v.
 using AdjacencyList = std::vector<std::vector<int>>;
 
 /*
- * Marks v as visited and recurses into the neighbours that are still
+ * Marks v as visited and recurses into the neighbors that are still
  * unvisited. The frame of this call stays on the stack for as long as the
  * subtree of v is explored, so the recursion depth equals the depth of the
  * current path.
