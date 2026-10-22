@@ -94,7 +94,7 @@ export function treeLayout(children: number[][], root = 0, width = 720, height =
         };
     }
 
-    // Pull each child towards the midpoint between its parent's slots.
+    // Pull each child toward the midpoint between its parent's slots.
     for (const parent of order) {
         const kids = children[parent] ?? [];
         if (kids.length === 0) continue;
