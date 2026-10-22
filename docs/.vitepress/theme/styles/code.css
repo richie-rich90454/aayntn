@@ -191,6 +191,23 @@ html.dark .aayntn-code__line--highlight {
     min-width: max-content;
 }
 
+/* A listing that is fetched from the published source carries the colors of
+   both appearances, and the style sheet decides which of the two is shown.
+   The listing of a page of Markdown is switched by the rules of VitePress. */
+.aayntn-code__body .shiki,
+.aayntn-code__body .shiki span,
+.aayntn-code-expanded__body .shiki,
+.aayntn-code-expanded__body .shiki span {
+    color: var(--shiki-light);
+}
+
+html.dark .aayntn-code__body .shiki,
+html.dark .aayntn-code__body .shiki span,
+html.dark .aayntn-code-expanded__body .shiki,
+html.dark .aayntn-code-expanded__body .shiki span {
+    color: var(--shiki-dark);
+}
+
 /* -------------------------------------------------------------------- */
 /* Controls                                                             */
 /* -------------------------------------------------------------------- */
@@ -251,6 +268,12 @@ html.dark .aayntn-code__line--highlight {
 .aayntn-tab:not([aria-selected="true"]) .aayntn-tab__badge {
     background: var(--color-gold);
     color: var(--color-black);
+}
+
+/* The badge of the chosen tab stands on the cobalt, so its ground is a
+   shadow rather than a light, and the white of the letter stays legible. */
+.aayntn-tab[aria-selected="true"] .aayntn-tab__badge {
+    background: rgba(0, 0, 0, 0.28);
 }
 
 .aayntn-variant-note {
