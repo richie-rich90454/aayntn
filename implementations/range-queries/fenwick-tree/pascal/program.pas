@@ -1,13 +1,12 @@
 program FenwickProgram;
 {$mode objfpc}{$H+}
+{$I-}
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
 uses SysUtils;
 
 type
-  TTokens = array of string;
-
   { A Fenwick tree (binary indexed tree) over a 1-indexed array: Tree[i] holds
     the sum of the positions in the block (i - lowbit(i), i], where lowbit(i)
     is the largest power of two that divides i.
@@ -26,49 +25,17 @@ type
     function RangeSum(Left, Right: Integer): Int64;
   end;
 
-{ Reads the whole standard input so that the tokens can be split without
-  depending on where the line breaks fall. }
-function ReadAllInput: string;
-var
-  Row: string;
-begin
-  Result := '';
-  while not EOF(Input) do
-  begin
-    ReadLn(Row);
-    Result := Result + Row + ' ';
-  end;
-end;
-
-function Tokenize(const Content: string): TTokens;
+constructor TFenwick.Create(N: Integer);
 var
   I: Integer;
-  Start: Integer;
-begin
-  SetLength(Result, 0);
-  I := 1;
-  while I <= Length(Content) do
-  begin
-    while (I <= Length(Content)) and (Content[I] <= ' ') do
-      Inc(I);
-    if I > Length(Content) then
-      Break;
-    Start := I;
-    while (I <= Length(Content)) and (Content[I] > ' ') do
-      Inc(I);
-    SetLength(Result, Length(Result) + 1);
-    Result[High(Result)] := Copy(Content, Start, I - Start);
-  end;
-end;
-
-constructor TFenwick.Create(N: Integer);
 begin
   inherited Create;
   if N < 0 then
     N := 0;
   FN := N;
   SetLength(FTree, N + 1);
-  FillChar(FTree[0], (N + 1) * SizeOf(Int64), 0);
+  for I := 0 to N do
+    FTree[I] := 0;
 end;
 
 destructor TFenwick.Destroy;
@@ -117,51 +84,36 @@ begin
 end;
 
 var
-  Tokens: TTokens;
   N: Integer;
   Q: Integer;
   K: Integer;
-  Index: Integer;
   Kind: Integer;
   A: Integer;
-  B: Integer;
+  B: Int64;
   Tree: TFenwick;
 begin
-  Tokens := Tokenize(ReadAllInput);
-  if Length(Tokens) < 2 then
-    Halt(0);
-
-  N := StrToIntDef(Tokens[0], 0);
-  Q := StrToIntDef(Tokens[1], 0);
-  if N < 0 then
-    N := 0;
-  if Q < 0 then
-    Q := 0;
+  { The input is exactly the contract: n, q and the q operations. }
+  N := 0;
+  Read(N);
+  Q := 0;
+  Read(Q);
 
   Tree := TFenwick.Create(N);
 
-  Index := 2;
-  for K := 1 to Q do
+  for K := 0 to Q - 1 do
   begin
-    if Index >= Length(Tokens) then
-      Break;
-    Kind := StrToIntDef(Tokens[Index], 0);
-    Inc(Index);
+    Kind := 0;
+    Read(Kind);
     if (Kind <> 1) and (Kind <> 2) then
       Break;
-    if Index + 1 >= Length(Tokens) then
-      Break;
-    A := StrToIntDef(Tokens[Index], 0);
-    B := StrToIntDef(Tokens[Index + 1], 0);
-    Inc(Index, 2);
+    A := 0;
+    B := 0;
+    Read(A);
+    Read(B);
     if Kind = 1 then
-    begin
-      Tree.Add(A, B);
-    end
+      Tree.Add(A, B)
     else
-    begin
-      WriteLn(Tree.RangeSum(A, B));
-    end;
+      WriteLn(IntToStr(Tree.RangeSum(A, B)));
   end;
 
   Tree.Free;
