@@ -24,6 +24,10 @@ reviewed: false
 
 <AlgorithmSummary algorithm="range-queries.segment-tree" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="range-queries.segment-tree" />
+
 A segment tree is a complete binary tree laid over the array. Every node covers one contiguous range of positions and stores the result of combining the values in that range. The root covers everything, its two children cover the two halves, and the leaves hold the values themselves.
 
 The two operations are mirror images. An assignment walks down to a leaf and merges the two children on the way back up. A query walks down into the children that overlap the range and merges the sums of the nodes that are fully covered. Both walks have length $O(\log n)$, and both merge $O(\log n)$ cached values.
@@ -295,9 +299,9 @@ The fourth row is the one this article exists for. The decision hinges on one pr
 
 ## Reference implementations
 
-<CodeViewer algorithm="range-queries.segment-tree" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
-The manifest publishes two variants. The `minimal` variant is a reusable class with a constructor that builds the tree from an array of values, a `set` that assigns a position, and a `range_sum` that answers an inclusive range. The `program` variant reads `n q` and then $q$ operations, where `1 i v` assigns a value and `2 l r` prints the range sum. Every position starts at zero, because the input carries no initial values.
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source. The manifest publishes two variants. The `minimal` variant is a reusable class with a constructor that builds the tree from an array of values, a `set` that assigns a position, and a `range_sum` that answers an inclusive range. The `program` variant reads `n q` and then $q$ operations, where `1 i v` assigns a value and `2 l r` prints the range sum. Every position starts at zero, because the input carries no initial values.
 
 The assignment in the reference implementation replaces the value. A version that adds a delta to a position is the same code with `+=` in place of `=`, and it is the version the [Fenwick tree](/algorithms/range-queries/fenwick-tree) needs.
 
