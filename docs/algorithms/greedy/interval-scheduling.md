@@ -18,6 +18,9 @@ keywords:
 prerequisites:
     required: [foundations.sorting, foundations.complexity]
     recommended: [searching.binary-search, arrays.prefix-sums]
+complexity:
+    time: "O(n log n)"
+    space: "O(n)"
 assumptions:
     - Each interval has a start time and an end time, and two intervals are compatible when they do not overlap.
 reviewed: false
