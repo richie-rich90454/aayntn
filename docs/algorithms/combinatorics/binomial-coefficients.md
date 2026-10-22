@@ -19,6 +19,9 @@ keywords:
 prerequisites:
     required: [foundations.complexity]
     recommended: [foundations.binary-representation, foundations.recursion]
+complexity:
+    time: "O(min(k, n-k)) per value"
+    space: "O(1) per value, O(k) for a Pascal table"
 assumptions:
     - The $n$ items are distinct, so that the count depends only on $n$ and $k$ and not on the items themselves.
     - A modular answer is computed with a modulus that is prime, so that every value that has to be inverted is invertible.
