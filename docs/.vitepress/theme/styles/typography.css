@@ -142,7 +142,7 @@
 
 .aayntn-prose ol > li::marker,
 .vp-doc ol > li::marker {
-    color: var(--color-cobalt);
+    color: var(--text-accent);
     font-weight: 700;
 }
 
@@ -183,7 +183,9 @@
     background: var(--surface-code);
     color: var(--color-oxblood);
     font-size: 0.875em;
-    overflow-wrap: anywhere;
+    /* The word is broken only when it cannot fit on a line of its own, so
+       that an identifier keeps its name whole in a narrow cell. */
+    overflow-wrap: break-word;
 }
 
 html.dark .aayntn-prose :not(pre) > code,
@@ -220,7 +222,7 @@ html.dark .vp-doc :not(pre) > code {
 .aayntn-prose th,
 .vp-doc th {
     padding: var(--space-2) var(--space-4);
-    background: var(--color-black);
+    background: var(--surface-inverse);
     color: var(--color-white);
     font-weight: 700;
     text-align: left;
@@ -240,7 +242,9 @@ html.dark .vp-doc th {
     border-bottom: 1px solid var(--border-subtle);
     border-right: 1px solid var(--border-subtle);
     vertical-align: top;
-    overflow-wrap: anywhere;
+    /* A cell keeps the width of the longest word in it, so that an
+       identifier in the cell is not broken in two. */
+    overflow-wrap: break-word;
 }
 
 .aayntn-prose tr:last-child td,
