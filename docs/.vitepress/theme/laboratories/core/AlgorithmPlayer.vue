@@ -2,6 +2,8 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { sceneFor } from "./registry";
 import { loadDefinition } from "./lazyRegistry";
+import { refreshPalette } from "./scenes";
+import { useAppearance } from "../../composables/useTheme";
 import type { LabDefinition, LabEvent, LabPreset, LabState } from "./types";
 
 /**
@@ -87,8 +89,16 @@ const state = computed<LabState | undefined>(() => events.value[current.value]?.
 
 const scene = computed(() => sceneFor(definition.value?.scene ?? "graph"));
 
+/* The picture is drawn in the colors of the page, so it is drawn again when
+   the page changes its appearance. */
+const appearance = useAppearance();
+
 const svgMarkup = computed(() => {
     if (!state.value) return "";
+    // The picture is drawn in the colors of the page, so the colors are read
+    // again every time it is drawn.
+    void appearance.value;
+    refreshPalette();
     return scene.value.render(state.value, {
         width: 720,
         height: 460,
