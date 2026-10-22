@@ -13,7 +13,7 @@ class Lca:
     def __init__(self, adj, root):
         """Build the table of the tree whose adjacency list is adj.
 
-        adj[v] lists the neighbours of the vertex v.
+        adj[v] lists the neighbors of the vertex v.
         """
         self.n = len(adj)
         levels = 1
