@@ -15,7 +15,7 @@ reviewed: false
 
 This is the subject-based encyclopedia. It collects the techniques a competitor needs, and it arranges them by the idea that makes each one work rather than by the contest the technique first appeared in.
 
-There are fourteen subjects, thirty-five techniques, and one method for reading every article. The index below is the map. Pick the subject that matches the idea you are looking for, read the subject page, and follow the technique from there.
+There are fourteen subjects, more than seventy techniques, and one method for reading every article. The index below is the map. Pick the subject that matches the idea you are looking for, read the subject page, and follow the technique from there.
 
 ## Why the organization is by subject
 
@@ -29,66 +29,117 @@ A second reason runs deeper. The recognition of a problem is what actually fails
 
 ## The fourteen subjects
 
+<!-- aayntn:subjects:start -->
+
 | Subject | Techniques it contains | Page |
 | --- | --- | --- |
-| Foundations and complexity | Complexity analysis, recursion, sorting, binary representation | [Foundations](/algorithms/foundations/) |
-| Enumeration and searching | Subset enumeration, backtracking | [Enumeration](/algorithms/enumeration/) |
-| Searching | Binary search, two pointers, sliding window | [Searching](/algorithms/searching/) |
-| Greedy methods | Interval scheduling | [Greedy](/algorithms/greedy/) |
-| Arrays and sequences | Prefix sums, two-dimensional prefix sums, difference arrays | [Arrays](/algorithms/arrays/) |
-| Range query structures | Fenwick tree, segment tree, sparse table | [Range queries](/algorithms/range-queries/) |
-| Graphs and shortest paths | Representation, depth-first search, breadth-first search, disjoint set union, Dijkstra, 0-1 BFS, Bellman-Ford, topological sort, minimum spanning tree | [Graphs](/algorithms/graphs/) |
-| Trees and decompositions | Lowest common ancestor, heavy-light decomposition, tree dynamic programming | [Trees](/algorithms/trees/) |
-| Dynamic programming | 0/1 knapsack, longest increasing subsequence | [Dynamic programming](/algorithms/dynamic-programming/) |
-| Strings | Knuth-Morris-Pratt | [Strings](/algorithms/strings/) |
-| Number theory | Modular arithmetic | [Number theory](/algorithms/number-theory/) |
-| Combinatorics | Binomial coefficients | [Combinatorics](/algorithms/combinatorics/) |
-| Computational geometry | Convex hull | [Geometry](/algorithms/geometry/) |
-| Advanced algorithms and special techniques | Parallel binary search | [Advanced](/algorithms/advanced/) |
+| Foundations and complexity | Binary representation, Complexity analysis, Recursion, Sorting | [Foundations and complexity](/algorithms/foundations/) |
+| Enumeration and searching | Backtracking, Branch and bound, Permutations, Subset enumeration | [Enumeration and searching](/algorithms/enumeration/) |
+| Searching | Binary search on the answer, Binary search, Sliding window, Ternary search, Two pointers | [Searching](/algorithms/searching/) |
+| Greedy methods | Interval scheduling | [Greedy methods](/algorithms/greedy/) |
+| Arrays and sequences | Coordinate compression, Difference arrays, Monotonic queue, Monotonic stack, Prefix sums, Subarray sums, Two-dimensional prefix sums, Two pointers on an array, Sliding window maximum | [Arrays and sequences](/algorithms/arrays/) |
+| Range query structures | Fenwick tree, Segment tree, Sparse table | [Range query structures](/algorithms/range-queries/) |
+| Graphs and shortest paths | 0-1 BFS, Articulation points, Bellman-Ford, Breadth-first search, Bipartite matching, Bridges, Depth-first search, Dijkstra's algorithm, Disjoint set union, Euler tours in graphs, Minimum cut, Minimum spanning tree, Graph representation, Strongly connected components, Topological sort | [Graphs and shortest paths](/algorithms/graphs/) |
+| Trees and decompositions | Binary lifting, Centroid decomposition, Euler tour for trees, Heavy-light decomposition, Lowest common ancestor, Rerooting, Tree dynamic programming | [Trees and decompositions](/algorithms/trees/) |
+| Dynamic programming | 0/1 knapsack, Bitmask dynamic programming, Convex hull trick, Dynamic programming on a directed acyclic graph, Digit dynamic programming, Interval dynamic programming, Longest increasing subsequence | [Dynamic programming](/algorithms/dynamic-programming/) |
+| Strings | Knuth-Morris-Pratt, The Manacher algorithm, Rolling hash, Suffix array, Trie, The Z algorithm | [Strings](/algorithms/strings/) |
+| Number theory | Chinese remainder theorem, The extended Euclidean algorithm, Matrix exponentiation, Modular arithmetic, Prime factorization, Sieve of Eratosthenes | [Number theory](/algorithms/number-theory/) |
+| Combinatorics | Binomial coefficients, Counting dynamic programming, Generating functions, Inclusion and exclusion, Stars and bars | [Combinatorics](/algorithms/combinatorics/) |
+| Computational geometry | Closest pair, Convex hull, Point in polygon, Rotating calipers, Sweep line | [Computational geometry](/algorithms/geometry/) |
+| Advanced algorithms and special techniques | Parallel binary search | [Advanced algorithms and special techniques](/algorithms/advanced/) |
+
+<!-- aayntn:subjects:end -->
 
 ## The core algorithms
 
 Every technique in the encyclopedia appears below with the bound it achieves, the lesson that must come first, and the article that derives it.
 
+<!-- aayntn:core:start -->
+
 | Technique | Time | Space | Requires | Article |
 | --- | --- | --- | --- | --- |
-| Complexity analysis | a method, not an algorithm | a method, not an algorithm | none | [Complexity](/algorithms/foundations/complexity) |
-| Recursion | $O(n)$ for linear recursion | $O(n)$ for the call stack | `foundations.complexity` | [Recursion](/algorithms/foundations/recursion) |
-| Sorting | $O(n \log n)$ | $O(n)$ for merge sort | `foundations.complexity` | [Sorting](/algorithms/foundations/sorting) |
-| Binary representation | $O(1)$ per word operation | $O(1)$ | `foundations.complexity` | [Binary representation](/algorithms/foundations/binary-representation) |
-| Subset enumeration | $O(2^n)$ | $O(n)$ per subset | `foundations.recursion` | [Subset enumeration](/algorithms/enumeration/subset-enumeration) |
-| Backtracking | $O(n!)$ in the worst case | $O(n)$ for the current path | `foundations.recursion` | [Backtracking](/algorithms/enumeration/backtracking) |
-| Binary search | $O(\log n)$ | $O(1)$ | `searching.two-pointers` | [Binary search](/algorithms/searching/binary-search) |
-| Two pointers | $O(n)$ | $O(1)$ | `foundations.complexity` | [Two pointers](/algorithms/searching/two-pointers) |
-| Sliding window | $O(n)$ | $O(1)$ | `searching.two-pointers` | [Sliding window](/algorithms/searching/sliding-window) |
-| Interval scheduling | $O(n \log n)$ | $O(n)$ | `foundations.sorting` | [Interval scheduling](/algorithms/greedy/interval-scheduling) |
-| Prefix sums | $O(n + q)$ | $O(n)$ | `foundations.complexity` | [Prefix sums](/algorithms/arrays/prefix-sums) |
-| Two-dimensional prefix sums | $O(nm + q)$ | $O(nm)$ | `arrays.prefix-sums` | [Two-dimensional prefix sums](/algorithms/arrays/two-dimensional-prefix-sums) |
-| Difference arrays | $O(n + q)$ | $O(n)$ | `arrays.prefix-sums` | [Difference arrays](/algorithms/arrays/difference-arrays) |
-| Fenwick tree | $O(\log n)$ per operation | $O(n)$ | `arrays.prefix-sums` | [Fenwick tree](/algorithms/range-queries/fenwick-tree) |
-| Segment tree | $O(\log n)$ per operation | $O(n)$ | `arrays.prefix-sums` | [Segment tree](/algorithms/range-queries/segment-tree) |
-| Sparse table | $O(n \log n)$ to build, $O(1)$ per query | $O(n \log n)$ | `foundations.sorting` | [Sparse table](/algorithms/range-queries/sparse-table) |
-| Graph representation | $O(V + E)$ to build | $O(V + E)$ | `foundations.complexity` | [Representation](/algorithms/graphs/representation) |
-| Depth-first search | $O(V + E)$ | $O(V + E)$ | `graphs.representation` | [Depth-first search](/algorithms/graphs/dfs) |
-| Breadth-first search | $O(V + E)$ | $O(V + E)$ | `graphs.representation` | [Breadth-first search](/algorithms/graphs/bfs) |
-| Disjoint set union | $O(\alpha(n))$ amortized | $O(n)$ | `graphs.representation` | [Disjoint set union](/algorithms/graphs/dsu) |
-| Dijkstra's algorithm | $O((V + E) \log V)$ | $O(V + E)$ | `graphs.representation` | [Dijkstra](/algorithms/graphs/dijkstra) |
-| 0-1 BFS | $O(V + E)$ | $O(V + E)$ | `graphs.bfs` | [0-1 BFS](/algorithms/graphs/0-1-bfs) |
-| Bellman-Ford | $O(VE)$ | $O(V)$ | `graphs.dijkstra` | [Bellman-Ford](/algorithms/graphs/bellman-ford) |
-| Topological sort | $O(V + E)$ | $O(V)$ | `graphs.representation` | [Topological sort](/algorithms/graphs/topological-sort) |
-| Minimum spanning tree | $O(E \log E)$ | $O(V + E)$ | `graphs.dsu` | [Minimum spanning tree](/algorithms/graphs/mst) |
-| Lowest common ancestor | $O(n \log n)$ to build, $O(\log n)$ per query | $O(n \log n)$ | `graphs.representation` | [Lowest common ancestor](/algorithms/trees/lca) |
-| Heavy-light decomposition | $O(n)$ to build, $O(\log^2 n)$ per path query | $O(n)$ | `trees.lca` | [Heavy-light decomposition](/algorithms/trees/heavy-light-decomposition) |
-| Tree dynamic programming | $O(n)$ | $O(n)$ | `graphs.dfs` | [Tree dynamic programming](/algorithms/trees/tree-dp) |
-| 0/1 knapsack | $O(nW)$ | $O(W)$ | `foundations.complexity` | [0/1 knapsack](/algorithms/dynamic-programming/0-1-knapsack) |
-| Longest increasing subsequence | $O(n \log n)$ | $O(n)$ | `foundations.sorting` | [Longest increasing subsequence](/algorithms/dynamic-programming/longest-increasing-subsequence) |
-| Knuth-Morris-Pratt | $O(n + m)$ | $O(m)$ | `foundations.complexity` | [KMP](/algorithms/strings/kmp) |
-| Modular arithmetic | $O(\log m)$ per operation | $O(1)$ | `foundations.complexity` | [Modular arithmetic](/algorithms/number-theory/modular-arithmetic) |
-| Binomial coefficients | $O(\min(k, n-k))$ per value | $O(n)$ | `foundations.complexity` | [Binomial coefficients](/algorithms/combinatorics/binomial-coefficients) |
-| Convex hull | $O(n \log n)$ | $O(n)$ | `foundations.sorting` | [Convex hull](/algorithms/geometry/convex-hull) |
-| Parallel binary search | $O((n + q) \log^2 n)$ | $O(n + q)$ | `searching.binary-search` | [Parallel binary search](/algorithms/advanced/parallel-binary-search) |
+| Parallel binary search | O((N + Q) log^2 N) | O(N + Q) | `searching.binary-search` | [Parallel binary search](/algorithms/advanced/parallel-binary-search) |
+| Coordinate compression | O(n log n + q log n) | O(n) | `foundations.sorting` | [Coordinate compression](/algorithms/arrays/coordinate-compression) |
+| Difference arrays | O(n + q) | O(n) | `arrays.prefix-sums` | [Difference arrays](/algorithms/arrays/difference-arrays) |
+| Monotonic queue | O(n) amortized | O(k) for a window of size k, O(n) without a window | `foundations.complexity` | [Monotonic queue](/algorithms/arrays/monotonic-queue) |
+| Monotonic stack | O(n) | O(n) in the worst case | `foundations.complexity` | [Monotonic stack](/algorithms/arrays/monotonic-stack) |
+| Prefix sums | O(n + q) | O(n) | `foundations.complexity` | [Prefix sums](/algorithms/arrays/prefix-sums) |
+| Subarray sums | O(n) expected with a frequency map, O(n log n) without one | O(n) | `arrays.prefix-sums` | [Subarray sums](/algorithms/arrays/subarray-sums) |
+| Two-dimensional prefix sums | O(RC + q) | O(RC) | `arrays.prefix-sums` | [Two-dimensional prefix sums](/algorithms/arrays/two-dimensional-prefix-sums) |
+| Two pointers on an array | O(n) | O(1) in place, O(n) when a frequency map is needed | `foundations.complexity` | [Two pointers on an array](/algorithms/arrays/two-pointers) |
+| Sliding window maximum | O(n) | O(k) besides the output | `foundations.complexity` | [Sliding window maximum](/algorithms/arrays/window-maximum) |
+| Binomial coefficients | O(min(k, n-k)) per value | O(1) per value, O(k) for a Pascal table | `foundations.complexity` | [Binomial coefficients](/algorithms/combinatorics/binomial-coefficients) |
+| Counting dynamic programming | O(S * T) | O(S) | `dynamic-programming.0-1-knapsack` | [Counting dynamic programming](/algorithms/combinatorics/counting-dp) |
+| Generating functions | O(nk) for the dynamic program | O(n) | `combinatorics.binomial-coefficients` | [Generating functions](/algorithms/combinatorics/generating-functions) |
+| Inclusion and exclusion | O(2^m) | O(1) to O(m) | `combinatorics.binomial-coefficients` | [Inclusion and exclusion](/algorithms/combinatorics/inclusion-exclusion) |
+| Stars and bars | O(min(k-1, n)) | O(1) | `combinatorics.binomial-coefficients` | [Stars and bars](/algorithms/combinatorics/stars-and-bars) |
+| 0/1 knapsack | O(nW) | O(W) | `foundations.complexity` | [0/1 knapsack](/algorithms/dynamic-programming/0-1-knapsack) |
+| Bitmask dynamic programming | O(n 2^n) | O(2^n) | `foundations.complexity` | [Bitmask dynamic programming](/algorithms/dynamic-programming/bitmask-dp) |
+| Convex hull trick | O(n + q) amortized | O(n) | `foundations.complexity` | [Convex hull trick](/algorithms/dynamic-programming/convex-hull-trick) |
+| Dynamic programming on a directed acyclic graph | O(V + E) | O(V) | `graphs.topological-sort` | [Dynamic programming on a directed acyclic graph](/algorithms/dynamic-programming/dag-dp) |
+| Digit dynamic programming | O(D * S * b) | O(D * S) | `foundations.complexity` | [Digit dynamic programming](/algorithms/dynamic-programming/digit-dp) |
+| Interval dynamic programming | O(n^3) | O(n^2) | `foundations.complexity` | [Interval dynamic programming](/algorithms/dynamic-programming/interval-dp) |
+| Longest increasing subsequence | O(n log n) | O(n) | `foundations.sorting` | [Longest increasing subsequence](/algorithms/dynamic-programming/longest-increasing-subsequence) |
+| Backtracking | O(b^d * t) in the worst case, far less with pruning | O(d + s) | `foundations.recursion` | [Backtracking](/algorithms/enumeration/backtracking) |
+| Branch and bound | O(b * V), where V is the number of surviving nodes | O(n) | `enumeration.backtracking` | [Branch and bound](/algorithms/enumeration/branch-and-bound) |
+| Permutations | O(n * n!) | O(n) | `enumeration.backtracking` | [Permutations](/algorithms/enumeration/permutations) |
+| Subset enumeration | O(2^n) per mask, O(n 2^n) with the subsets materialized | O(1) per mask, O(n) per subset | `foundations.binary-representation` | [Subset enumeration](/algorithms/enumeration/subset-enumeration) |
+| Binary representation | O(1) per word operation | O(1) | `start.computational-foundations` | [Binary representation](/algorithms/foundations/binary-representation) |
+| Complexity analysis | a method, not an algorithm | a method, not an algorithm | `start.computational-foundations` | [Complexity analysis](/algorithms/foundations/complexity) |
+| Recursion | the cost of its recurrence | O(d) for the call stack | `start.computational-foundations` | [Recursion](/algorithms/foundations/recursion) |
+| Sorting | O(n log n) | O(n) for merge sort, O(1) for heapsort | `foundations.complexity` | [Sorting](/algorithms/foundations/sorting) |
+| Closest pair | O(n log n) | O(n) | `geometry.convex-hull` | [Closest pair](/algorithms/geometry/closest-pair) |
+| Convex hull | O(n log n) | O(n) | `foundations.sorting` | [Convex hull](/algorithms/geometry/convex-hull) |
+| Point in polygon | O(n) per query | O(1) per query | `geometry.convex-hull` | [Point in polygon](/algorithms/geometry/point-in-polygon) |
+| Rotating calipers | O(n log n) for the whole algorithm | O(n) | `geometry.convex-hull` | [Rotating calipers](/algorithms/geometry/rotating-calipers) |
+| Sweep line | O(n log n) for the decision version | O(n) | `geometry.convex-hull` | [Sweep line](/algorithms/geometry/sweep-line) |
+| 0-1 BFS | O(V + E) | O(V + E) | `graphs.bfs` | [0-1 BFS](/algorithms/graphs/0-1-bfs) |
+| Articulation points | O(V + E) | O(V) | `graphs.representation` | [Articulation points](/algorithms/graphs/articulation-points) |
+| Bellman-Ford | O(VE) | O(V) | `graphs.representation` | [Bellman-Ford](/algorithms/graphs/bellman-ford) |
+| Breadth-first search | O(V + E) | O(V + E) | `graphs.representation` | [Breadth-first search](/algorithms/graphs/bfs) |
+| Bipartite matching | O(E sqrt{V}) | O(V) beyond the adjacency list | `graphs.representation` | [Bipartite matching](/algorithms/graphs/bipartite-matching) |
+| Bridges | O(V + E) | O(V) | `graphs.representation` | [Bridges](/algorithms/graphs/bridges) |
+| Depth-first search | O(V + E) | O(V + E) | `graphs.representation` | [Depth-first search](/algorithms/graphs/dfs) |
+| Dijkstra's algorithm | O((V + E) log V) | O(V + E) | `graphs.representation` | [Dijkstra's algorithm](/algorithms/graphs/dijkstra) |
+| Disjoint set union | O((n + q) alpha(n)) | O(n) | `foundations.recursion` | [Disjoint set union](/algorithms/graphs/dsu) |
+| Euler tours in graphs | O(V + E) | O(V) beyond the adjacency list and the output | `graphs.representation` | [Euler tours in graphs](/algorithms/graphs/euler-tour) |
+| Minimum cut | O(V E^2) for Edmonds-Karp, O(V^2 E) for Dinic | O(V + E) | `graphs.representation` | [Minimum cut](/algorithms/graphs/minimum-cut) |
+| Minimum spanning tree | O(E log E) | O(V + E) | `graphs.representation` | [Minimum spanning tree](/algorithms/graphs/mst) |
+| Graph representation | O(V + E) to build | O(V + E) for an adjacency list | `foundations.complexity` | [Graph representation](/algorithms/graphs/representation) |
+| Strongly connected components | O(V + E) | O(V) for Tarjan, O(V + E) for Kosaraju | `graphs.representation` | [Strongly connected components](/algorithms/graphs/strongly-connected-components) |
+| Topological sort | O(V + E) | O(V) | `graphs.representation` | [Topological sort](/algorithms/graphs/topological-sort) |
+| Interval scheduling | O(n log n) | O(n) | `foundations.sorting` | [Interval scheduling](/algorithms/greedy/interval-scheduling) |
+| Chinese remainder theorem | O(k log M) | O(1) | `number-theory.modular-arithmetic` | [Chinese remainder theorem](/algorithms/number-theory/chinese-remainder) |
+| The extended Euclidean algorithm | O(log min(a, b)) | O(1) | `foundations.complexity` | [The extended Euclidean algorithm](/algorithms/number-theory/extended-euclidean) |
+| Matrix exponentiation | O(n^3 log k) | O(n^2) | `number-theory.modular-arithmetic` | [Matrix exponentiation](/algorithms/number-theory/matrix-exponentiation) |
+| Modular arithmetic | O(log m) per operation | O(1) | `foundations.complexity` | [Modular arithmetic](/algorithms/number-theory/modular-arithmetic) |
+| Prime factorization | O(sqrt{n}) | O(1) | `foundations.complexity` | [Prime factorization](/algorithms/number-theory/prime-factorization) |
+| Sieve of Eratosthenes | O(n log log n) | O(n) | `foundations.complexity` | [Sieve of Eratosthenes](/algorithms/number-theory/sieve) |
+| Fenwick tree | O(log n) per operation | O(n) | `arrays.prefix-sums` | [Fenwick tree](/algorithms/range-queries/fenwick-tree) |
+| Segment tree | O(log n) per operation | O(n) | `arrays.prefix-sums` | [Segment tree](/algorithms/range-queries/segment-tree) |
+| Sparse table | O(n log n) to build, O(1) per query | O(n log n) | `arrays.prefix-sums` | [Sparse table](/algorithms/range-queries/sparse-table) |
+| Binary search on the answer | O(c log R) | O(1) beyond the check's own working space | `searching.binary-search` | [Binary search on the answer](/algorithms/searching/binary-search-on-answer) |
+| Binary search | O(log n) | O(1) | `foundations.complexity` | [Binary search](/algorithms/searching/binary-search) |
+| Sliding window | O(n) | O(1) for a running sum, O(sigma) for a frequency map | `searching.two-pointers` | [Sliding window](/algorithms/searching/sliding-window) |
+| Ternary search | O(log_{3/2}(L / varepsilon)) iterations, each costing two evaluations | O(1) | `foundations.complexity` | [Ternary search](/algorithms/searching/ternary-search) |
+| Two pointers | O(n) | O(1) | `foundations.complexity` | [Two pointers](/algorithms/searching/two-pointers) |
+| Knuth-Morris-Pratt | O(n + m) | O(m) | `foundations.complexity` | [Knuth-Morris-Pratt](/algorithms/strings/kmp) |
+| The Manacher algorithm | O(n) | O(n) | `foundations.complexity` | [The Manacher algorithm](/algorithms/strings/manacher) |
+| Rolling hash | O(n) to build, O(1) per substring query | O(n) for the two tables | `foundations.complexity` | [Rolling hash](/algorithms/strings/rolling-hash) |
+| Suffix array | O(n log n) | O(n) | `foundations.sorting` | [Suffix array](/algorithms/strings/suffix-array) |
+| Trie | O(L) per word | O(N) nodes, plus one pointer per alphabet symbol per node when the children are stored densely | `foundations.complexity` | [Trie](/algorithms/strings/trie) |
+| The Z algorithm | O(n) to build, O(n + m) for a search | O(n) | `foundations.complexity` | [The Z algorithm](/algorithms/strings/z-algorithm) |
+| Binary lifting | O(n log n) to build, O(log n) per query | O(n log n) | `graphs.bfs` | [Binary lifting](/algorithms/trees/binary-lifting) |
+| Centroid decomposition | O(n log n) | O(n) | `graphs.dfs` | [Centroid decomposition](/algorithms/trees/centroid-decomposition) |
+| Euler tour for trees | O(n) to build, O(log n) per query with a Fenwick tree | O(n) | `graphs.dfs` | [Euler tour for trees](/algorithms/trees/euler-tour) |
+| Heavy-light decomposition | O(n) to build, O(log n) per path query | O(n) | `graphs.bfs` | [Heavy-light decomposition](/algorithms/trees/heavy-light-decomposition) |
+| Lowest common ancestor | O((n + m) log n) to build, O(log n) per query | O(n log n) | `graphs.bfs` | [Lowest common ancestor](/algorithms/trees/lca) |
+| Rerooting | O(n) | O(n) | `graphs.dfs` | [Rerooting](/algorithms/trees/rerooting) |
+| Tree dynamic programming | O(n) | O(n) | `graphs.bfs` | [Tree dynamic programming](/algorithms/trees/tree-dp) |
 
-The first row is the odd one out, and it is the most important. Complexity analysis is not a technique you apply to a problem; it is the tool that tells you which technique you can afford. Every bound in the other thirty-four rows was produced by it.
+<!-- aayntn:core:end -->
+
+The first row is the odd one out, and it is the most important. Complexity analysis is not a technique you apply to a problem; it is the tool that tells you which technique you can afford. Every bound in the other rows was produced by it.
 
 ## Choosing an algorithm
 
