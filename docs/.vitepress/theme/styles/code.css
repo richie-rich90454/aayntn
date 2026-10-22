@@ -1,92 +1,92 @@
 /**
  * Code presentation.
  *
- * The architectural frame carries the visual weight; the code surface stays
- * quiet so that long listings remain readable. Monospace only, never justified,
- * horizontal scrolling instead of wrapping.
+ * The architectural frame carries the visual weight: an ink-black header
+ * with a gold hairline, the language set in a solid block, and the listing
+ * itself on a quiet canvas. The code never competes with the frame.
  */
 
 .aayntn-code {
     margin: var(--space-8) 0;
-    border: var(--rule-ink);
+    border: 1px solid var(--border-ink);
     background: var(--surface-code);
-    box-shadow: var(--shadow-panel);
 }
 
 .aayntn-code__head {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
+    align-items: stretch;
+    gap: 0;
     background: var(--color-black);
     color: var(--color-white);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-}
-
-html.dark .aayntn-code__head {
-    background: #0d1015;
-}
-
-.aayntn-code__file {
-    font-family: var(--font-code);
-    font-size: var(--text-meta);
-    color: rgba(255, 255, 255, 0.72);
+    border-bottom: 2px solid var(--color-gold);
 }
 
 .aayntn-code__lang {
-    padding: 2px 8px;
-    border: 1px solid var(--color-gold);
-    border-radius: 3px;
-    color: var(--color-gold);
+    display: flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-cobalt);
+    color: var(--color-white);
     font-size: var(--text-meta);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+.aayntn-code__file {
+    display: flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-4);
+    font-family: var(--font-code);
+    font-size: var(--text-meta);
+    color: rgba(255, 255, 255, 0.74);
+    overflow-wrap: anywhere;
 }
 
 .aayntn-code__status {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 2px 8px;
-    border-radius: 3px;
+    margin: auto 0 auto var(--space-3);
+    padding: 2px 9px;
+    border: 1px solid currentColor;
     font-size: var(--text-meta);
-    font-weight: 600;
+    font-weight: 700;
+    white-space: nowrap;
 }
 
 .aayntn-code__status--verified {
-    background: rgba(34, 91, 69, 0.22);
-    border: 1px solid var(--color-emerald);
     color: #7fd3b3;
 }
 
 .aayntn-code__status--unverified {
-    background: rgba(198, 61, 50, 0.2);
-    border: 1px solid var(--color-vermilion);
     color: #f0a49d;
 }
 
 .aayntn-code__status-dot {
     width: 6px;
     height: 6px;
-    border-radius: 50%;
     background: currentColor;
 }
 
 .aayntn-code__actions {
     display: flex;
-    gap: var(--space-2);
+    align-items: stretch;
     margin-left: auto;
 }
 
 .aayntn-code__action {
-    padding: 3px 10px;
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    border-radius: 3px;
-    color: rgba(255, 255, 255, 0.82);
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-4);
+    border: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
     font-size: var(--text-meta);
-    font-weight: 500;
+    font-weight: 600;
+    white-space: nowrap;
     transition:
         background var(--transition-fast),
         color var(--transition-fast);
@@ -107,7 +107,7 @@ html.dark .aayntn-code__head {
     padding: var(--space-4) 0;
     background: transparent !important;
     font-size: var(--text-code);
-    line-height: 1.65;
+    line-height: 1.68;
     tab-size: 4;
 }
 
@@ -117,8 +117,8 @@ html.dark .aayntn-code__head {
     padding: 0 var(--space-4);
 }
 
-/* Line numbers live outside the selectable code content: a pseudo-element is
-   rendered in the margin and is never part of a copied selection. */
+/* The line numbers are drawn in a pseudo-element, so they never enter a
+   copied selection and never shift the code column. */
 .aayntn-code--numbered .aayntn-code__body pre code {
     counter-reset: aayntn-line;
 }
@@ -132,7 +132,7 @@ html.dark .aayntn-code__head {
     display: inline-block;
     width: 3.2em;
     margin-right: 1.1em;
-    padding-right: 0.6em;
+    padding-right: 0.7em;
     border-right: 1px solid var(--border-subtle);
     background: var(--surface-code);
     color: #767e8d;
@@ -142,7 +142,21 @@ html.dark .aayntn-code__head {
 
 html.dark .aayntn-code--numbered .aayntn-code__body pre code .line::before {
     color: #5c6472;
-    background: var(--surface-code);
+}
+
+/* The highlighted row, used when the animation synchronizes with the source. */
+.aayntn-code__line--highlight {
+    background: #fff0bd;
+    box-shadow: inset 3px 0 0 var(--color-gold);
+}
+
+html.dark .aayntn-code__line--highlight {
+    background: rgba(232, 184, 74, 0.18);
+}
+
+.aayntn-code__line--error {
+    background: #fce1e0;
+    box-shadow: inset 3px 0 0 var(--color-vermilion);
 }
 
 .aayntn-code__loading {
@@ -152,25 +166,11 @@ html.dark .aayntn-code--numbered .aayntn-code__body pre code .line::before {
     font-size: var(--text-secondary-copy);
 }
 
-/* Line highlighting used by the animation / code synchronisation. */
-.aayntn-code__line--highlight {
-    background: #fff0bd;
-    box-shadow: inset 3px 0 0 var(--color-gold);
-}
-
-html.dark .aayntn-code__line--highlight {
-    background: rgba(232, 184, 74, 0.16);
-}
-
-.aayntn-code__line--error {
-    background: #fce1e0;
-    box-shadow: inset 3px 0 0 var(--color-vermilion);
-}
-
-/* Inline code fences in Markdown (outside the code viewer). */
+/* Inline code fences in Markdown, outside the viewer. */
 .vp-doc div[class*="language-"] {
     margin: var(--space-6) 0;
-    border: var(--rule-ink);
+    border: 1px solid var(--border-ink);
+    border-left: 3px solid var(--color-cobalt);
     background: var(--surface-code);
     overflow-x: auto;
 }
@@ -180,7 +180,7 @@ html.dark .aayntn-code__line--highlight {
     padding: var(--space-4);
     background: transparent !important;
     font-size: var(--text-code);
-    line-height: 1.65;
+    line-height: 1.68;
 }
 
 .vp-doc div[class*="language-"] code {
@@ -189,7 +189,7 @@ html.dark .aayntn-code__line--highlight {
 }
 
 /* -------------------------------------------------------------------- */
-/* Code viewer controls                                                */
+/* Controls                                                             */
 /* -------------------------------------------------------------------- */
 
 .aayntn-code-controls {
@@ -204,16 +204,18 @@ html.dark .aayntn-code__line--highlight {
     display: flex;
     flex-wrap: wrap;
     gap: 0;
-    border: var(--rule-ink);
+    border: 1px solid var(--border-ink);
     background: var(--surface-page);
 }
 
 .aayntn-tab {
     padding: var(--space-2) var(--space-4);
+    border: none;
     border-right: 1px solid var(--border-subtle);
+    background: transparent;
     color: var(--text-secondary);
     font-size: var(--text-secondary-copy);
-    font-weight: 500;
+    font-weight: 600;
     white-space: nowrap;
     transition:
         background var(--transition-fast),
@@ -232,18 +234,13 @@ html.dark .aayntn-code__line--highlight {
 .aayntn-tab[aria-selected="true"] {
     background: var(--color-cobalt);
     color: var(--color-white);
-    font-weight: 600;
-}
-
-.aayntn-tab[aria-selected="true"]:hover {
-    background: var(--color-cobalt);
 }
 
 .aayntn-tab__badge {
     margin-left: 6px;
     padding: 0 5px;
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.24);
+    background: rgba(255, 255, 255, 0.28);
+    color: inherit;
     font-size: 0.6875rem;
     font-weight: 700;
 }
@@ -255,7 +252,7 @@ html.dark .aayntn-code__line--highlight {
 
 .aayntn-variant-note {
     margin: var(--space-4) 0;
-    padding: var(--space-4);
+    padding: var(--space-3) var(--space-4);
     border-left: 3px solid var(--color-cobalt);
     background: var(--surface-sunken);
     font-size: var(--text-secondary-copy);
@@ -268,11 +265,14 @@ html.dark .aayntn-code__line--highlight {
     color: var(--color-cobalt);
     font-size: var(--text-meta);
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
 .aayntn-variant-note__label--conditional {
+    color: #8a6410;
+}
+
+html.dark .aayntn-variant-note__label--conditional {
     color: var(--color-gold);
 }
 
@@ -280,7 +280,7 @@ html.dark .aayntn-code__line--highlight {
     color: var(--color-vermilion);
 }
 
-/* Expanded (distraction-free) source view. */
+/* The expanded, distraction-free view. */
 .aayntn-code-expanded {
     position: fixed;
     inset: 0;
@@ -297,6 +297,7 @@ html.dark .aayntn-code__line--highlight {
     padding: var(--space-3) var(--space-6);
     background: var(--color-black);
     color: var(--color-white);
+    border-bottom: 2px solid var(--color-gold);
 }
 
 .aayntn-code-expanded__body {
@@ -310,18 +311,5 @@ html.dark .aayntn-code__line--highlight {
     margin: 0;
     background: transparent !important;
     font-size: var(--text-code);
-    line-height: 1.65;
-}
-
-/* Copy feedback */
-.aayntn-copy-feedback {
-    position: absolute;
-    right: var(--space-4);
-    bottom: var(--space-4);
-    padding: var(--space-2) var(--space-4);
-    background: var(--color-emerald);
-    color: var(--color-white);
-    font-size: var(--text-meta);
-    font-weight: 600;
-    border-radius: var(--radius);
+    line-height: 1.68;
 }
