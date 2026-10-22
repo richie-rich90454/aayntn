@@ -18,6 +18,9 @@ keywords:
 prerequisites:
     required: [graphs.bfs, foundations.complexity]
     recommended: [trees.lca, start.data-structures]
+complexity:
+    time: "O(n)"
+    space: "O(n)"
 assumptions:
     - "The tree is static: no vertex is added or removed while the dynamic program runs."
 reviewed: false
