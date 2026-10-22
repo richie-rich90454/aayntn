@@ -1,5 +1,5 @@
 /**
- * Download the self-hosted webfonts used by aayntn and rewrite the Google Fonts
+ * Download the self-hosted webfonts used by A.A.Y.N.T.N. and rewrite the Google Fonts
  * stylesheet to point at local copies.
  *
  * Run after changing the font list:  pnpm exec tsx tools/fonts-sync.ts
@@ -25,7 +25,7 @@ const SOURCE_CSS =
 const UA =
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
-/** Only the subsets aayntn actually needs to ship. */
+/** Only the subsets A.A.Y.N.T.N. actually needs to ship. */
 const KEEP_SUBSETS = new Set(["latin", "latin-ext"]);
 
 /** Weight ranges covered by each variable font. */
@@ -91,7 +91,7 @@ async function main() {
         );
     }
 
-    const header = `/* aayntn self-hosted webfonts.
+    const header = `/* A.A.Y.N.T.N. self-hosted webfonts.
  * Noto Sans and Noto Sans Mono — SIL Open Font License 1.1.
  * See ./OFL.txt for the full license text. */
 `;
