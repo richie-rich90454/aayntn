@@ -59,6 +59,25 @@ import type {
     VisualizationEntry,
 } from "../../docs/.vitepress/data/types.ts";
 
+const SUBJECT_LABELS: Record<string, string> = {
+    foundations: "Foundations and complexity",
+    enumeration: "Enumeration and searching",
+    searching: "Searching",
+    greedy: "Greedy methods",
+    arrays: "Arrays and sequences",
+    "range-queries": "Range query structures",
+    graphs: "Graphs and shortest paths",
+    trees: "Trees and decompositions",
+    "dynamic-programming": "Dynamic programming",
+    strings: "Strings",
+    "number-theory": "Number theory",
+    combinatorics: "Combinatorics",
+    geometry: "Computational geometry",
+    advanced: "Advanced algorithms and special techniques",
+};
+
+const SUBJECTS = Object.keys(SUBJECT_LABELS) as Subject[];
+
 const SHIKI_LANG: Record<string, string> = {
     c: "c",
     cpp17: "cpp",
@@ -114,11 +133,11 @@ function toRoute(relativePath: string): string {
     const withIndex = withoutExtension.endsWith("/index")
         ? withoutExtension.slice(0, -"/index".length)
         : withoutExtension;
-    return withIndex === "" ? "/" : withIndex;
+    return withIndex === "" ? "/" : `/${withIndex}`;
 }
 
 function collectKeywords(data: Record<string, unknown>): string[] {
-    const raw = data.keywords;
+    const raw = data["keywords"];
     if (Array.isArray(raw)) return raw.filter((item): item is string => typeof item === "string");
     return [];
 }
@@ -520,7 +539,7 @@ async function main() {
             title: problem.title,
             summary: [problem.source, problem.contest, problem.techniques.join(", ")]
                 .filter(Boolean)
-                .join(" · "),
+                .join(" — "),
             href: problem.url ?? "/practice/",
             kind: "problem",
             keywords: expandSynonyms(problem.techniques, synonyms),
@@ -665,7 +684,7 @@ async function main() {
         index.push("---");
         index.push(`id: implementation.${algorithm.id}`);
         index.push(`title: ${algorithm.title} — source`);
-        index.push(`summary: Every implementation of ${algorithm.title} in aayntn.`);
+        index.push(`summary: Every implementation of ${algorithm.title} in A.A.Y.N.T.N..`);
         index.push("subjects:");
         index.push(`  - ${algorithm.subject}`);
         index.push("importance: extended-reference");
@@ -732,11 +751,73 @@ async function main() {
         }
     }
 
+    /* Fill the generated regions of the encyclopedia index. ------------- */
+    await fillGeneratedRegions(DOCS_DIR, lessons, algorithms);
+
     process.stdout.write(
         `generated ${lessons.length} lessons, ${algorithms.length} algorithms, ` +
             `${stats.variants} implementations, ${problems.length} problems, ` +
             `${visualizations.length} visualizations\n`,
     );
+}
+
+/**
+ * Replace the marked regions of a page with tables built from the metadata.
+ *
+ * The encyclopedia index carries a table of the subjects and a table of every
+ * technique. Both are generated, so that neither can drift away from the
+ * articles they describe.
+ */
+async function fillGeneratedRegions(
+    dir: string,
+    lessons: LoadedLesson[],
+    algorithms: AlgorithmEntry[],
+): Promise<void> {
+    const index = join(dir, "algorithms", "index.md");
+    if (!existsSync(index)) return;
+
+    const source = await readFile(index, "utf8");
+
+    const subjectRows = SUBJECTS.map((subject) => {
+        const techniques = lessons
+            .filter(
+                (lesson) =>
+                    lesson.subjects.includes(subject) &&
+                    lesson.href.startsWith(`/algorithms/${subject}/`) &&
+                    lesson.href !== `/algorithms/${subject}`,
+            )
+            .map((lesson) => lesson.title);
+        const list = techniques.length === 0 ? "no technique yet" : techniques.join(", ");
+        return `| ${SUBJECT_LABELS[subject]} | ${list} | [${SUBJECT_LABELS[subject]}](/algorithms/${subject}/) |`;
+    }).join("\n");
+
+    const coreRows = lessons
+        .filter(
+            (lesson) =>
+                lesson.href.startsWith("/algorithms/") &&
+                // A subject page has one segment after the subject; a technique
+                // article has at least two.
+                lesson.href.split("/").length > 3,
+        )
+        .map((lesson) => {
+            const algorithm = algorithms.find((entry) => entry.id === lesson.implementations);
+            const time = lesson.complexity?.time ?? algorithm?.complexity.time ?? "varies";
+            const space = lesson.complexity?.space ?? algorithm?.complexity.space ?? "varies";
+            const requires = lesson.prerequisites.required[0] ?? "none";
+            return `| ${lesson.title} | ${time} | ${space} | \`${requires}\` | [${lesson.title}](${lesson.href}) |`;
+        })
+        .join("\n");
+
+    let updated = source.replace(
+        /<!-- aayntn:subjects:start -->[\s\S]*?<!-- aayntn:subjects:end -->/,
+        `<!-- aayntn:subjects:start -->\n| Subject | Techniques it contains | Page |\n| --- | --- | --- |\n${subjectRows}\n<!-- aayntn:subjects:end -->`,
+    );
+    updated = updated.replace(
+        /<!-- aayntn:core:start -->[\s\S]*?<!-- aayntn:core:end -->/,
+        `<!-- aayntn:core:start -->\n| Technique | Time | Space | Requires | Article |\n| --- | --- | --- | --- | --- |\n${coreRows}\n<!-- aayntn:core:end -->`,
+    );
+
+    if (updated !== source) await writeFile(index, updated, "utf8");
 }
 
 main().catch((error) => {
