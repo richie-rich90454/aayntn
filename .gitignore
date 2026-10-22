@@ -19,6 +19,11 @@ docs/implementations/
 tmp/
 *.tmp
 
+# The output of the browser suite
+test-results/
+playwright-report/
+tests/visual/pages.spec.ts-snapshots/
+
 # Editor and operating-system noise
 .DS_Store
 Thumbs.db
