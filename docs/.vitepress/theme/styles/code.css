@@ -17,7 +17,7 @@
     flex-wrap: wrap;
     align-items: stretch;
     gap: 0;
-    background: var(--color-black);
+    background: var(--surface-inverse);
     color: var(--color-white);
     border-bottom: 2px solid var(--color-gold);
 }
@@ -265,7 +265,7 @@ html.dark .aayntn-code__line--highlight {
 .aayntn-variant-note__label {
     display: block;
     margin-bottom: var(--space-1);
-    color: var(--color-cobalt);
+    color: var(--text-accent);
     font-size: var(--text-meta);
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -298,7 +298,7 @@ html.dark .aayntn-variant-note__label--conditional {
     align-items: center;
     gap: var(--space-3);
     padding: var(--space-3) var(--space-6);
-    background: var(--color-black);
+    background: var(--surface-inverse);
     color: var(--color-white);
     border-bottom: 2px solid var(--color-gold);
 }
