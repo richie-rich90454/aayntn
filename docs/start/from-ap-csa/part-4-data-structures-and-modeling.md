@@ -310,13 +310,13 @@ A graph is **connected** if every pair of vertices is joined by a path. It is **
 
 There are two standard ways to store a graph in memory.
 
-**Adjacency list.** For each vertex, store the list of its neighbours. The memory is $O(V + E)$: one container per vertex plus one entry per directed edge, or two per undirected edge. Traversing the neighbours of a vertex costs $O(\deg(v))$, and a full traversal costs $O(V + E)$.
+**Adjacency list.** For each vertex, store the list of its neighbors. The memory is $O(V + E)$: one container per vertex plus one entry per directed edge, or two per undirected edge. Traversing the neighbors of a vertex costs $O(\deg(v))$, and a full traversal costs $O(V + E)$.
 
 **Adjacency matrix.** Store a table of $V \times V$ booleans or values. The memory is $O(V^2)$, and testing whether an edge exists costs $O(1)$.
 
 <MathPanel type="definition" title="Adjacency representations">
 An adjacency list stores, for every vertex $v$, the set of its
-neighbours. An adjacency matrix stores a table $M$ where $M[u][v]$ is
+neighbors. An adjacency matrix stores a table $M$ where $M[u][v]$ is
 the weight of the edge from $u$ to $v$, or a sentinel when there is no
 edge.
 </MathPanel>
@@ -327,12 +327,12 @@ The choice is forced by the density of the graph.
 | ------------------- | -------------- | ---------------- |
 | Memory              | $O(V + E)$     | $O(V^2)$         |
 | Edge existence test | $O(\deg(u))$   | $O(1)$           |
-| Neighbour iteration | $O(\deg(u))$   | $O(V)$           |
+| Neighbor iteration  | $O(\deg(u))$   | $O(V)$           |
 | Works for           | sparse graphs  | dense graphs     |
 
 A graph is sparse when $E = O(V)$ and dense when $E = O(V^2)$. With $V = 10^5$, an adjacency matrix needs $10^{10}$ entries, which does not fit in any contest memory limit, so every large contest graph uses adjacency lists.
 
-There is a third representation, the **edge list**: a flat array of $2E$ endpoints. It is compact and it is the natural input format for Kruskal's algorithm and for sorting edges. The **compressed sparse row** form is the flat version of an adjacency list: one array of offsets and one flat array of destinations, which removes a pointer chase per neighbour and is measurably faster.
+There is a third representation, the **edge list**: a flat array of $2E$ endpoints. It is compact and it is the natural input format for Kruskal's algorithm and for sorting edges. The **compressed sparse row** form is the flat version of an adjacency list: one array of offsets and one flat array of destinations, which removes a pointer chase per neighbor and is measurably faster.
 
 **Worked example.** A contest problem gives $n = 10^5$ vertices and $m = 3 \times 10^5$ edges. An adjacency matrix of `bool` needs $10^{10}$ bytes. An adjacency list of `vector<int>` needs $10^5$ vector headers of 24 bytes each, 2.4 MB, plus $6 \times 10^5$ integers at 4 bytes, 2.4 MB, plus allocator overhead: about 6 MB in total. A compressed sparse row representation needs the same 2.4 MB of destinations plus $10^5$ offsets, with no per-vertex allocation: about 2.8 MB and no pointer chasing.
 
@@ -342,7 +342,7 @@ There is a third representation, the **edge list**: a flat array of $2E$ endpoin
 
 **Conceptual.**
 
-1. Give the memory, the edge-existence cost and the neighbour-iteration cost of an adjacency list and an adjacency matrix.
+1. Give the memory, the edge-existence cost and the neighbor-iteration cost of an adjacency list and an adjacency matrix.
 2. Define sparse and dense, and say which representation each demands.
 3. Describe the compressed sparse row representation and give its two advantages over a vector of vectors.
 
@@ -406,7 +406,7 @@ A **connected component** is a maximal set of mutually reachable vertices. In an
 
 The alternative is **disjoint set union**, which processes edges in any order and merges the sets of their endpoints. It is not a traversal, so it cannot answer questions that depend on the shape of the graph, but it is extremely fast when the only question is "which vertices are connected".
 
-**Cycle detection** in an undirected graph uses depth-first search with parent tracking. When you encounter a visited neighbour that is not the parent of the current vertex, you have found a cycle. The parent exclusion is essential: without it, every edge back to your parent looks like a cycle, and the answer is always "yes".
+**Cycle detection** in an undirected graph uses depth-first search with parent tracking. When you encounter a visited neighbor that is not the parent of the current vertex, you have found a cycle. The parent exclusion is essential: without it, every edge back to your parent looks like a cycle, and the answer is always "yes".
 
 <MathPanel type="theorem" title="Cycle count in a forest">
 In an undirected graph with $V$ vertices, $E$ edges and $C$ connected
@@ -415,7 +415,7 @@ component of an acyclic graph is a tree, and a tree on $v$ vertices has
 $v - 1$ edges, so an acyclic graph has $V - C$ edges in total.
 </MathPanel>
 
-For **directed** graphs, cycle detection has a clean characterisation: a directed graph is acyclic exactly when a topological sort succeeds. The depth-first-search method, which colors vertices white, gray and black and reports a cycle when it finds a gray neighbour, is an alternative.
+For **directed** graphs, cycle detection has a clean characterisation: a directed graph is acyclic exactly when a topological sort succeeds. The depth-first-search method, which colors vertices white, gray and black and reports a cycle when it finds a gray neighbor, is an alternative.
 
 **Why it matters.** "How many groups are there?" and "can these tasks be ordered?" are both connectivity questions, and they appear constantly in problems that never mention graphs.
 
@@ -464,14 +464,14 @@ For **directed** graphs, cycle detection has a clean characterisation: a directe
 
 A grid is a graph you are never given explicitly. Each cell is a vertex, and the cells sharing a side are adjacent. The grid with $R$ rows and $C$ columns has $RC$ vertices and at most $4RC$ edges.
 
-**The implicit representation.** You never build the neighbour lists. You compute the four neighbours on demand using a direction array:
+**The implicit representation.** You never build the neighbor lists. You compute the four neighbors on demand using a direction array:
 
 ```cpp
 const int dr[4] = {-1, 1, 0, 0};
 const int dc[4] = {0, 0, -1, 1};
 ```
 
-For each cell $(r, c)$, the neighbours are $(r + dr[k], c + dc[k])$ for $k = 0, 1, 2, 3$, subject to bounds checking. The traversal cost is $O(RC)$ because each cell is visited once and generates four candidate neighbours.
+For each cell $(r, c)$, the neighbors are $(r + dr[k], c + dc[k])$ for $k = 0, 1, 2, 3$, subject to bounds checking. The traversal cost is $O(RC)$ because each cell is visited once and generates four candidate neighbors.
 
 The benefit is memory. Storing the visited set needs $RC$ bytes with a byte array, or $RC$ bits with a bitset. For $R = C = 1000$ that is 1 MB or 125 KB, against the 4 MB an `int` distance array would need.
 
@@ -481,13 +481,13 @@ The benefit is memory. Storing the visited set needs $RC$ bytes with a byte arra
 
 The same grid with the additional constraint that you may not step on certain cells changes the answer to $-1$ when the path is blocked, and the breadth-first search handles that naturally by never reaching the target.
 
-**What you must get right.** Bounds-check every neighbour before enqueueing it, and mark a cell visited _when you enqueue it_, not when you dequeue it. Marking on dequeue lets the same cell be enqueued many times, which turns an $O(RC)$ traversal into an exponential blow-up on open grids.
+**What you must get right.** Bounds-check every neighbor before enqueueing it, and mark a cell visited _when you enqueue it_, not when you dequeue it. Marking on dequeue lets the same cell be enqueued many times, which turns an $O(RC)$ traversal into an exponential blow-up on open grids.
 
 ### Checkpoint
 
 **Conceptual.**
 
-1. State the number of vertices and edges of an $R \times C$ grid, and explain why the neighbour lists are never stored.
+1. State the number of vertices and edges of an $R \times C$ grid, and explain why the neighbor lists are never stored.
 2. Explain the difference between marking a cell visited on enqueue and on dequeue, and give the complexity of each.
 3. Give the memory of the visited set for a $1000 \times 1000$ grid as a byte array and as a bitset.
 
@@ -531,7 +531,7 @@ Some worked combinations:
 | $V = 10^5$, $E = 10^5$, shortest paths         | adjacency list   | Dijkstra with a heap |
 | Only connectivity is asked, edges in any order | edge list        | Disjoint set union   |
 | Ordering with prerequisites                    | adjacency list   | topological sort     |
-| $V = 10^6$ cells, four neighbours              | implicit         | breadth-first search |
+| $V = 10^6$ cells, four neighbors               | implicit         | breadth-first search |
 
 The last row is worth emphasising. A grid with a million cells has two million edges, and materialising them as an adjacency list would cost 16 MB of destinations and a million allocations, for a graph whose structure you already know. The implicit representation is both smaller and faster, and it is available precisely because the adjacency rule is uniform.
 
