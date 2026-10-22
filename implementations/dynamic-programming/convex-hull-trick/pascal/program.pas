@@ -1,12 +1,12 @@
 program ConvexHullProgram;
 {$mode objfpc}{$H+}
+{$I-}
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
 uses SysUtils;
 
 type
-  TTokens = array of string;
   TInt64Array = array of Int64;
 
   { A monotone convex hull trick over the lines y = m * x + b: the lines are
@@ -14,8 +14,8 @@ type
     non-decreasing x, and the answer is the smallest value of the lines added
     so far.
 
-    The hull is a stack of lines with increasing slopes. The line on top of the
-    stack is the one that is smallest for the smallest x, and a query walks
+    The hull is a stack of lines with increasing slopes. The line on top of
+    the stack is the one that is smallest for the smallest x, and a query walks
     down the stack as the x grows.
 
     Ownership: the constructor allocates the arrays and the destructor releases
@@ -32,41 +32,6 @@ type
     procedure Add(M, B: Int64);
     function Query(X: Int64): Int64;
   end;
-
-{ Reads the whole standard input so that the tokens can be split without
-  depending on where the line breaks fall. }
-function ReadAllInput: string;
-var
-  Row: string;
-begin
-  Result := '';
-  while not EOF(Input) do
-  begin
-    ReadLn(Row);
-    Result := Result + Row + ' ';
-  end;
-end;
-
-function Tokenize(const Content: string): TTokens;
-var
-  I: Integer;
-  Start: Integer;
-begin
-  SetLength(Result, 0);
-  I := 1;
-  while I <= Length(Content) do
-  begin
-    while (I <= Length(Content)) and (Content[I] <= ' ') do
-      Inc(I);
-    if I > Length(Content) then
-      Break;
-    Start := I;
-    while (I <= Length(Content)) and (Content[I] > ' ') do
-      Inc(I);
-    SetLength(Result, Length(Result) + 1);
-    Result[High(Result)] := Copy(Content, Start, I - Start);
-  end;
-end;
 
 { True when the middle line of the three never holds the minimum: the switch
   points of the neighbours have to decrease along the stack, and the
@@ -148,48 +113,36 @@ begin
 end;
 
 var
-  Tokens: TTokens;
   N: Integer;
   Q: Integer;
   I: Integer;
   M: Int64;
   B: Int64;
   X: Int64;
-  Index: Integer;
   Hull: TConvexHull;
 begin
-  Tokens := Tokenize(ReadAllInput);
-  if Length(Tokens) < 2 then
-    Halt(0);
-
-  N := StrToIntDef(Tokens[0], 0);
-  Q := StrToIntDef(Tokens[1], 0);
-  if N < 0 then
-    N := 0;
-  if Q < 0 then
-    Q := 0;
+  { The input is exactly the contract: n, q, the n lines and the q queries. }
+  N := 0;
+  Read(N);
+  Q := 0;
+  Read(Q);
 
   Hull := TConvexHull.Create(N);
 
-  Index := 2;
-  for I := 1 to N do
+  for I := 0 to N - 1 do
   begin
-    if Index + 1 >= Length(Tokens) then
-      Break;
-    M := StrToInt64Def(Tokens[Index], 0);
-    B := StrToInt64Def(Tokens[Index + 1], 0);
-    Inc(Index, 2);
+    M := 0;
+    B := 0;
+    Read(M);
+    Read(B);
     Hull.Add(M, B);
   end;
 
-  for I := 1 to Q do
+  for I := 0 to Q - 1 do
   begin
-    if Index >= Length(Tokens) then
-      Break;
-    X := StrToInt64Def(Tokens[Index], 0);
-    Inc(Index);
-    { An explicit line feed keeps the output identical on every platform. }
-    Write(IntToStr(Hull.Query(X)), #10);
+    X := 0;
+    Read(X);
+    WriteLn(IntToStr(Hull.Query(X)));
   end;
 
   Hull.Free;
