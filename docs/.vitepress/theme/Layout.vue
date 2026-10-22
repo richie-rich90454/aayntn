@@ -11,7 +11,7 @@ import { sidebarOpen } from "./composables/useSidebarToggle";
 import { LANGUAGE_IDS } from "../data/types";
 
 /**
- * Root layout.
+ * The root layout.
  *
  * `layout: false` in the frontmatter hands the whole page to the bespoke
  * homepage; every other page uses the standard article frame.
@@ -29,7 +29,13 @@ initPreferences(LANGUAGE_IDS);
 </script>
 
 <template>
-    <HomeLayout v-if="isHome" />
+    <div v-if="isHome" class="aayntn-shell">
+        <SiteHeader />
+        <main id="main">
+            <HomeLayout />
+        </main>
+        <SiteFooter />
+    </div>
 
     <div v-else class="aayntn-shell">
         <a class="skip-link" href="#main">Skip to content</a>
