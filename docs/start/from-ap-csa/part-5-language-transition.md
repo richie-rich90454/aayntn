@@ -1,7 +1,7 @@
 ---
 id: start.language-transition
 title: Programming language transition
-summary: Moving between the six languages aayntn covers, with the Java to C++17 equivalence table and the warnings that save a contest.
+summary: Moving between the six languages A.A.Y.N.T.N. covers, with the Java to C++17 equivalence table and the warnings that save a contest.
 division: []
 subjects: [foundations]
 level: introductory
@@ -510,7 +510,7 @@ Every contest language needs a fast reader, and the standard library's default i
 
 **C++.** `std::cin` is synchronized with the C stdio functions by default, which is slow; call `std::ios::sync_with_stdio(false)` and `std::cin.tie(nullptr)` first. That alone is usually enough. For very large inputs, write a reader that pulls 64 KB blocks with `fread` and parses integers by hand.
 
-**Java.** `java.util.Scanner` parses tokens with regular expressions and is far slower than a buffered reader, by roughly an order of magnitude on an input of millions of tokens. Use `BufferedInputStream` with a manual byte scanner, or `java.io.BufferedReader` with `String.split` when the input is moderate. The aayntn reference implementations all use a hand-written `FastScanner` over a 64 KB buffer.
+**Java.** `java.util.Scanner` parses tokens with regular expressions and is far slower than a buffered reader, by roughly an order of magnitude on an input of millions of tokens. Use `BufferedInputStream` with a manual byte scanner, or `java.io.BufferedReader` with `String.split` when the input is moderate. The A.A.Y.N.T.N. reference implementations all use a hand-written `FastScanner` over a 64 KB buffer.
 
 **Python.** `sys.stdin.buffer.read().split()` reads the whole input as bytes and splits it on whitespace in one pass. It is the fastest available approach and it costs the memory of the whole input, which for $10^7$ tokens is a serious consideration. `input()` in a loop is much slower because it makes one call and one decode per line.
 
