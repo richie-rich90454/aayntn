@@ -66,6 +66,9 @@ async function ensureIndex(): Promise<void> {
         });
         miniSearch.addAll(payload.entries as unknown as Record<string, unknown>[]);
         loading.value = false;
+        // A reader who typed while the index was still loading must not be
+        // left with an empty list.
+        runSearch();
     })();
     return indexPromise;
 }
@@ -167,7 +170,7 @@ defineExpose({ open: openSearch });
         <button
             class="aayntn-search__button"
             type="button"
-            aria-label="Search aayntn"
+            aria-label="Search A.A.Y.N.T.N."
             @click="openSearch"
         >
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
@@ -196,7 +199,7 @@ defineExpose({ open: openSearch });
                 class="aayntn-search__dialog"
                 role="dialog"
                 aria-modal="true"
-                aria-label="Search aayntn"
+                aria-label="Search A.A.Y.N.T.N."
             >
                 <div class="aayntn-search__field">
                     <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true">
