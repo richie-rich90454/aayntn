@@ -167,7 +167,8 @@ html.dark .aayntn-code__line--highlight {
 }
 
 /* Inline code fences in Markdown, outside the viewer. */
-.vp-doc div[class*="language-"] {
+.vp-doc div[class*="language-"],
+.aayntn-prose div[class*="language-"] {
     margin: var(--space-6) 0;
     border: 1px solid var(--border-ink);
     border-left: 3px solid var(--color-cobalt);
@@ -175,7 +176,8 @@ html.dark .aayntn-code__line--highlight {
     overflow-x: auto;
 }
 
-.vp-doc div[class*="language-"] pre {
+.vp-doc div[class*="language-"] pre,
+.aayntn-prose div[class*="language-"] pre {
     margin: 0;
     padding: var(--space-4);
     background: transparent !important;
@@ -183,7 +185,8 @@ html.dark .aayntn-code__line--highlight {
     line-height: 1.68;
 }
 
-.vp-doc div[class*="language-"] code {
+.vp-doc div[class*="language-"] code,
+.aayntn-prose div[class*="language-"] code {
     display: block;
     min-width: max-content;
 }
