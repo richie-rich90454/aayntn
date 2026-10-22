@@ -73,5 +73,5 @@ export const scenes: Record<string, LabScene> = {
 };
 
 export function sceneFor(id: string): LabScene {
-    return scenes[id] ?? scenes.graph!;
+    return scenes[id] ?? scenes["graph"]!;
 }
