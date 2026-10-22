@@ -20,6 +20,9 @@ keywords:
 prerequisites:
     required: [foundations.complexity, start.data-structures]
     recommended: [foundations.sorting, graphs.dsu]
+complexity:
+    time: "O(V + E) to build"
+    space: "O(V + E) for an adjacency list"
 assumptions:
     - The graph does not change while the algorithms run, unless the article says otherwise.
 reviewed: false
