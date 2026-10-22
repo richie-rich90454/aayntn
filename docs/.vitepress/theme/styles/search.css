@@ -43,7 +43,9 @@
     white-space: nowrap;
 }
 
-@media (max-width: 1180px) {
+/* The hint of the keyboard and the word beside the glass are a courtesy.
+   When the navigation needs the room, they go first. */
+@media (max-width: 1320px) {
     .aayntn-search__label,
     .aayntn-search__kbd {
         display: none;
