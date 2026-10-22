@@ -235,7 +235,7 @@ function checkPrerequisites(
     const edges: { from: string; to: string }[] = [];
 
     for (const lesson of lessons) {
-        const prerequisites = (lesson.data.prerequisites ?? {}) as {
+        const prerequisites = (lesson.data["prerequisites"] ?? {}) as {
             required?: string[];
             recommended?: string[];
         };
@@ -356,7 +356,7 @@ function checkImplementations(manifests: AlgorithmManifestInfo[], known: Map<str
     // A lesson that claims an implementation must name a registered algorithm.
     for (const [id, file] of known) {
         const lesson = lessonsById.get(id);
-        const claimed = (lesson?.data.implementations ?? null) as string | null;
+        const claimed = (lesson?.data["implementations"] ?? null) as string | null;
         if (claimed && !manifests.some((manifest) => manifest.algorithm === claimed)) {
             fail(
                 `${file}: declares implementations "${claimed}", which has no registered manifest`,
@@ -371,7 +371,7 @@ function checkVisualizations(
 ) {
     const known = new Set(visualizations.map((entry) => entry.id));
     for (const lesson of lessons) {
-        const claimed = (lesson.data.visualization ?? null) as string | null;
+        const claimed = (lesson.data["visualization"] ?? null) as string | null;
         if (claimed && !known.has(claimed)) {
             fail(`${lesson.file}: declares visualization "${claimed}", which is not registered`);
         }
@@ -381,7 +381,7 @@ function checkVisualizations(
 function checkProblems(lessons: Awaited<ReturnType<typeof loadLessons>>, problems: Problem[]) {
     const known = new Set(problems.map((entry) => entry.id));
     for (const lesson of lessons) {
-        const claimed = (lesson.data.problems ?? []) as string[];
+        const claimed = (lesson.data["problems"] ?? []) as string[];
         for (const id of claimed) {
             if (!known.has(id)) {
                 fail(`${lesson.file}: references problem "${id}", which is not in the catalogue`);
@@ -504,6 +504,32 @@ function checkRenderedMarkup(file: string, html: string, expression: string) {
 }
 
 /**
+ * The page compiler reads the rendered page, so anything in the mathematics
+ * that renders as a raw tag breaks the build with a message that points at the
+ * wrong place.
+ *
+ * The usual cause is a less-than sign immediately followed by a letter, which
+ * Markdown reads as the start of an HTML tag. A space between the two is
+ * enough to stop it.
+ */
+function checkMathematicsMarkup(lessons: Awaited<ReturnType<typeof loadLessons>>) {
+    const mathSpan = /\$([^$\n]+?)\$/g;
+
+    for (const lesson of lessons) {
+        const prose = lesson.body.replace(/```[\s\S]*?```/g, "").replace(/`[^`\n]*`/g, "");
+
+        for (const match of prose.matchAll(mathSpan)) {
+            const expression = match[1]!;
+            const tag = /<\w/.exec(expression);
+            if (!tag) continue;
+            fail(
+                `${lesson.file}: the expression "${expression}" contains "<${tag[0].slice(1)}", which Markdown reads as the start of an HTML tag. Put a space between the sign and the letter.`,
+            );
+        }
+    }
+}
+
+/**
  * A substantial algorithm article must carry the sections it promises.
  * A missing "Why this fails" section is a missing teaching moment.
  */
@@ -528,7 +554,7 @@ const REQUIRED_SECTIONS = [
 
 function checkArticleSections(lessons: Awaited<ReturnType<typeof loadLessons>>) {
     for (const lesson of lessons) {
-        const claimsImplementation = Boolean(lesson.data.implementations);
+        const claimsImplementation = Boolean(lesson.data["implementations"]);
         if (!claimsImplementation) continue;
 
         const headings = [...lesson.body.matchAll(/^#{2,3}\s+(.+)$/gm)].map((match) =>
@@ -573,6 +599,7 @@ async function main() {
     await checkAlgorithmRegistry(manifests);
     await checkLinks(lessons);
     checkMathematics(lessons);
+    checkMathematicsMarkup(lessons);
     checkArticleSections(lessons);
 
     for (const message of warnings) process.stdout.write(`warning: ${message}\n`);
