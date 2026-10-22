@@ -1,5 +1,6 @@
 program DijkstraProgram;
 {$mode objfpc}{$H+}
+{$I-}
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
@@ -13,7 +14,6 @@ type
   TEdgeArray = array of TWeightedEdge;
   TAdjList = array of TEdgeArray;
   TInt64Array = array of Int64;
-  TTokens = array of string;
 
   { A binary min-heap of (distance, vertex) pairs ordered by distance. Ties are
     broken by the heap layout, which cannot change the result: the shortest
@@ -23,41 +23,6 @@ type
     Vertex: Integer;
   end;
   TMinHeap = array of THeapEntry;
-
-{ Reads the whole standard input so that the tokens can be split without
-  depending on where the line breaks fall. }
-function ReadAllInput: string;
-var
-  Row: string;
-begin
-  Result := '';
-  while not EOF(Input) do
-  begin
-    ReadLn(Row);
-    Result := Result + Row + ' ';
-  end;
-end;
-
-function Tokenize(const Content: string): TTokens;
-var
-  I: Integer;
-  Start: Integer;
-begin
-  SetLength(Result, 0);
-  I := 1;
-  while I <= Length(Content) do
-  begin
-    while (I <= Length(Content)) and (Content[I] <= ' ') do
-      Inc(I);
-    if I > Length(Content) then
-      Break;
-    Start := I;
-    while (I <= Length(Content)) and (Content[I] > ' ') do
-      Inc(I);
-    SetLength(Result, Length(Result) + 1);
-    Result[High(Result)] := Copy(Content, Start, I - Start);
-  end;
-end;
 
 { Appends an undirected edge to the adjacency list. }
 procedure AddEdge(var Adj: TAdjList; U, V: Integer; Weight: Int64);
@@ -178,7 +143,6 @@ begin
 end;
 
 var
-  Tokens: TTokens;
   N: Integer;
   M: Integer;
   I: Integer;
@@ -186,22 +150,18 @@ var
   V: Integer;
   W: Int64;
   Source: Integer;
-  Index: Integer;
   Adj: TAdjList;
   Distance: TInt64Array;
   Row: string;
 begin
-  Tokens := Tokenize(ReadAllInput);
-  if Length(Tokens) < 2 then
-    Halt(0);
-
-  N := StrToIntDef(Tokens[0], 0);
-  M := StrToIntDef(Tokens[1], 0);
-  if N <= 0 then
-  begin
-    Write(#10);
-    Halt(0);
-  end;
+  { The input is exactly the contract: n, m, the m weighted edges and the
+    source. }
+  N := 0;
+  Read(N);
+  if N < 0 then
+    N := 0;
+  M := 0;
+  Read(M);
   if M < 0 then
     M := 0;
 
@@ -209,23 +169,21 @@ begin
   for I := 0 to N - 1 do
     SetLength(Adj[I], 0);
 
-  Index := 2;
   for I := 0 to M - 1 do
   begin
-    if Index + 2 >= Length(Tokens) then
-      Break;
-    U := StrToIntDef(Tokens[Index], -1);
-    V := StrToIntDef(Tokens[Index + 1], -1);
-    W := StrToInt64Def(Tokens[Index + 2], -1);
-    Inc(Index, 3);
+    U := 0;
+    V := 0;
+    W := 0;
+    Read(U);
+    Read(V);
+    Read(W);
     if (U < 0) or (U >= N) or (V < 0) or (V >= N) or (W < 0) then
       Continue;
     AddEdge(Adj, U, V, W);
   end;
 
-  Source := -1;
-  if Index < Length(Tokens) then
-    Source := StrToIntDef(Tokens[Index], -1);
+  Source := 0;
+  Read(Source);
 
   Distance := DijkstraDistances(Adj, Source);
 
@@ -236,6 +194,5 @@ begin
       Row := Row + ' ';
     Row := Row + IntToStr(Distance[I]);
   end;
-  { An explicit line feed keeps the output identical on every platform. }
-  Write(Row, #10);
+  WriteLn(Row);
 end.
