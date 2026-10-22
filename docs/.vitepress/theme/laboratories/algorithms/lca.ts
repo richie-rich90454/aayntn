@@ -76,15 +76,15 @@ function parse(input: string): Parsed {
     parent[0] = 0;
     for (let index = 0; index < order.length; index += 1) {
         const vertex = order[index]!;
-        for (const neighbour of adjacency[vertex]!) {
-            if (parent[neighbour] !== -1) continue;
-            parent[neighbour] = vertex;
-            order.push(neighbour);
+        for (const neighbor of adjacency[vertex]!) {
+            if (parent[neighbor] !== -1) continue;
+            parent[neighbor] = vertex;
+            order.push(neighbor);
         }
     }
     for (const vertex of order) {
-        for (const neighbour of adjacency[vertex]!) {
-            if (parent[neighbour] === vertex) children[vertex]!.push(neighbour);
+        for (const neighbor of adjacency[vertex]!) {
+            if (parent[neighbor] === vertex) children[vertex]!.push(neighbor);
         }
     }
 
