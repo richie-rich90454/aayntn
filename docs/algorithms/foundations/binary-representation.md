@@ -21,6 +21,9 @@ keywords:
 prerequisites:
     required: [start.computational-foundations]
     recommended: [foundations.complexity]
+complexity:
+    time: "O(1) per word operation"
+    space: "O(1)"
 assumptions:
     - The integers under discussion have a fixed width, so that the set of bit patterns is finite and known.
     - The machine is binary, so that a machine word is a sequence of bits.
