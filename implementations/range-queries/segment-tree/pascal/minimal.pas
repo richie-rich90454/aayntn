@@ -3,6 +3,8 @@ program minimal;
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
+uses SysUtils;
+
 type
   { A segment tree over a 1-indexed array of n values: Tree[node] holds the
     sum of the values of the range that the node covers, so every node caches
@@ -81,12 +83,15 @@ begin
 end;
 
 constructor TSegmentTree.Create(const Values: array of Int64);
+var
+  I: Integer;
 begin
   inherited Create;
   FN := Length(Values);
   { A binary tree over n leaves fits in 4n nodes when the root is the 1. }
   SetLength(FTree, 4 * FN + 4);
-  FillChar(FTree[0], Length(FTree) * SizeOf(Int64), 0);
+  for I := 0 to High(FTree) do
+    FTree[I] := 0;
   if FN > 0 then
     Build(1, 1, FN, Values);
 end;
