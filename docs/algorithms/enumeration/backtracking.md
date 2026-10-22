@@ -10,6 +10,9 @@ keywords: [backtracking, search tree, pruning, branch and bound, recursion, stat
 prerequisites:
     required: [foundations.recursion, foundations.complexity]
     recommended: [enumeration.subset-enumeration, foundations.sorting]
+complexity:
+    time: "O(b^d * t) in the worst case, far less with pruning"
+    space: "O(d + s)"
 assumptions:
     - The mutable state that the search changes can be restored exactly when a branch is abandoned.
     - A partial solution that already violates a constraint can be detected and discarded before it is completed.
