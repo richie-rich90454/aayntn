@@ -10,7 +10,7 @@ type
   TIntArray = array of Integer;
   TAdjList = array of TIntArray;
 
-{ Marks V as visited and recurses into the neighbours that are still
+{ Marks V as visited and recurses into the neighbors that are still
   unvisited. The frame of this call stays on the stack for as long as the
   subtree of V is explored, so the recursion depth equals the depth of the
   current path. }
