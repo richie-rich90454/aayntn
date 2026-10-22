@@ -23,7 +23,7 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "The function has no I/O of its own: it takes an adjacency list and a source and fills a distance array, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
     - id: minimal
       language: cpp17
       file: cpp17/minimal.cpp
@@ -36,7 +36,7 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "The function has no I/O of its own: it takes an adjacency list and a source and returns the distance to every vertex, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
     - id: minimal
       language: java
       file: java/Program.java
@@ -49,7 +49,7 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "The function has no I/O of its own: it takes an adjacency list and a source and returns the distance to every vertex, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
     - id: minimal
       language: javascript
       file: javascript/minimal.js
@@ -62,7 +62,7 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "Educational reference implementation: JavaScript is not a USACO submission language. The function has no I/O of its own: it takes an adjacency list and a source and returns the distance to every vertex, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
     - id: minimal
       language: pascal
       file: pascal/minimal.pas
@@ -75,7 +75,7 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "Educational reference implementation: Pascal is not a USACO submission language. The function has no I/O of its own: it takes an adjacency list and a source and returns the distance to every vertex, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
     - id: minimal
       language: python
       file: python/minimal.py
@@ -88,7 +88,7 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "The function has no I/O of its own: it takes an adjacency list and a source and returns the distance to every vertex, using -1 for the vertices the source cannot reach. The file adds a driver that reads the standard input format and prints the distances, so the implementation can be run and compared with the program variant."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
     - id: program
       language: c
       file: c/program.c
@@ -101,7 +101,7 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
     - id: program
       language: cpp17
       file: cpp17/program.cpp
@@ -114,7 +114,7 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
     - id: program
       language: java
       file: java/Main.java
@@ -127,7 +127,7 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
     - id: program
       language: javascript
       file: javascript/program.js
@@ -140,7 +140,7 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "Educational reference implementation: JavaScript is not a USACO submission language. The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
     - id: program
       language: pascal
       file: pascal/program.pas
@@ -153,7 +153,7 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "Educational reference implementation: Pascal is not a USACO submission language. The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
     - id: program
       language: python
       file: python/program.py
@@ -166,4 +166,4 @@ variants:
       inputs: "n m, then m lines u v with 0-based undirected edges, then the start vertex s."
       outputs: "The distance from s to every vertex, separated by spaces, and -1 for the vertices s cannot reach."
       notes: "The queue holds the frontier, so the vertices leave it in order of increasing distance and the first distance recorded for a vertex is a shortest-path distance. The output is canonical, which makes the six language versions byte-identical."
-      operations: [enqueue-start, dequeue, discover-neighbour, complete-vertex]
+      operations: [enqueue-start, dequeue, discover-neighbor, complete-vertex]
