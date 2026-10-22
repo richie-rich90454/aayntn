@@ -24,6 +24,10 @@ reviewed: false
 
 <AlgorithmSummary algorithm="graphs.dijkstra" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="graphs.dijkstra" />
+
 Dijkstra's algorithm computes the distance from one source vertex to every other vertex of a graph whose edge weights are all nonnegative. It does so by repeatedly taking the vertex whose tentative distance is smallest, declaring that distance final, and relaxing the edges that leave it.
 
 The whole algorithm is a distance array and a min-priority queue. The one rule that is not negotiable is that a vertex is _settled_ when it is extracted with the smallest tentative distance, and that once it is settled its distance is never revised. That rule is what the nonnegative assumption buys, and it is the rule that breaks the moment an edge has a negative weight.
@@ -292,9 +296,9 @@ Read the table from the bottom up when choosing. Floyd-Warshall answers more que
 
 ## Reference implementations
 
-<CodeViewer algorithm="graphs.dijkstra" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
-The manifest publishes two variants in each of the six languages. The `minimal` variant is a reusable function that takes an adjacency list of weighted edges and a source, and writes the distance to every vertex into the caller's array, using $-1$ for the vertices the source cannot reach. The `program` variant parses a graph from standard input and prints the same distances, one line of space-separated numbers.
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source. The manifest publishes two variants in each of the six languages. The `minimal` variant is a reusable function that takes an adjacency list of weighted edges and a source, and writes the distance to every vertex into the caller's array, using $-1$ for the vertices the source cannot reach. The `program` variant parses a graph from standard input and prints the same distances, one line of space-separated numbers.
 
 Both variants use a binary min-heap of $(d, v)$ pairs and both discard stale entries, so they agree on every input. The C version grows the heap buffer by doubling it, so the cost of a push is amortized constant apart from the sift; the C++ version uses `std::priority_queue` with the same ordering, and the Java version uses a `PriorityQueue` of a small `QueueEntry` class whose `compareTo` orders the entries by the distance field. Ties may be broken differently by different languages, which changes the order in which the distances are discovered but never the distances themselves.
 
