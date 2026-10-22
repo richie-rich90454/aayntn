@@ -224,7 +224,7 @@ const rawHref = computed(() => {
 
         <div v-if="activeVariant" class="aayntn-variant-note">
             <span class="aayntn-variant-note__label" :class="recommendationClass">
-                {{ recommendationLabel }} · {{ activeVariant.time }} time ·
+                {{ recommendationLabel }} — {{ activeVariant.time }} time —
                 {{ activeVariant.auxiliarySpace }}
                 auxiliary space
             </span>
