@@ -66,7 +66,7 @@ The constraint values that rule the technique in and out are worth stating plain
 | $n \le 10^3$ and the graph is dense | A matrix of $10^6$ booleans is acceptable and can be faster |
 | The graph changes between queries | A single search is not enough; the graph must be re-searched or a dynamic structure is needed |
 
-Two words in a problem statement are strong signals. "Reachable", "connected" and "component" all point at a search. "Fewest", "shortest" and "minimum" point away from it and towards breadth-first search or Dijkstra, because those questions are about the size of a path rather than about membership.
+Two words in a problem statement are strong signals. "Reachable", "connected" and "component" all point at a search. "Fewest", "shortest" and "minimum" point away from it and toward breadth-first search or Dijkstra, because those questions are about the size of a path rather than about membership.
 
 <Synonyms terms="depth-first search, dfs, depth first search, backtracking search, recursive graph traversal" />
 
