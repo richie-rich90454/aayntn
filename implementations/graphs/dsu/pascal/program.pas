@@ -1,13 +1,12 @@
 program DsuProgram;
 {$mode objfpc}{$H+}
+{$I-}
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
 uses SysUtils;
 
 type
-  TTokens = array of string;
-
   { A disjoint set over the elements 0..n-1.
 
     Union by size keeps the trees shallow and path compression flattens them,
@@ -98,74 +97,32 @@ begin
   Result := Find(A) = Find(B);
 end;
 
-{ Reads the whole standard input so that the tokens can be split without
-  depending on where the line breaks fall. }
-function ReadAllInput: string;
 var
-  Row: string;
-begin
-  Result := '';
-  while not EOF(Input) do
-  begin
-    ReadLn(Row);
-    Result := Result + Row + ' ';
-  end;
-end;
-
-function Tokenize(const Content: string): TTokens;
-var
-  I: Integer;
-  Start: Integer;
-begin
-  SetLength(Result, 0);
-  I := 1;
-  while I <= Length(Content) do
-  begin
-    while (I <= Length(Content)) and (Content[I] <= ' ') do
-      Inc(I);
-    if I > Length(Content) then
-      Break;
-    Start := I;
-    while (I <= Length(Content)) and (Content[I] > ' ') do
-      Inc(I);
-    SetLength(Result, Length(Result) + 1);
-    Result[High(Result)] := Copy(Content, Start, I - Start);
-  end;
-end;
-
-var
-  Tokens: TTokens;
   N: Integer;
   Q: Integer;
   I: Integer;
-  Index: Integer;
   Op: Integer;
   U: Integer;
   V: Integer;
   Valid: Boolean;
   Groups: TDisjointSet;
-  Row: string;
 begin
-  Tokens := Tokenize(ReadAllInput);
-  if Length(Tokens) < 2 then
-    Halt(0);
-
-  N := StrToIntDef(Tokens[0], 0);
-  Q := StrToIntDef(Tokens[1], 0);
-  if Q < 0 then
-    Q := 0;
+  { The input is exactly the contract: n, q and the q operations. }
+  N := 0;
+  Read(N);
+  Q := 0;
+  Read(Q);
 
   Groups := TDisjointSet.Create(N);
 
-  Index := 2;
   for I := 0 to Q - 1 do
   begin
-    if Index + 2 >= Length(Tokens) then
-      Break;
-    Op := StrToIntDef(Tokens[Index], -1);
-    U := StrToIntDef(Tokens[Index + 1], -1);
-    V := StrToIntDef(Tokens[Index + 2], -1);
-    Inc(Index, 3);
+    Op := 0;
+    U := 0;
+    V := 0;
+    Read(Op);
+    Read(U);
+    Read(V);
     Valid := (U >= 0) and (U < N) and (V >= 0) and (V < N);
     if Op = 1 then
     begin
@@ -175,13 +132,11 @@ begin
     else if Op = 2 then
     begin
       if Valid and Groups.Same(U, V) then
-        Row := Row + 'yes' + #10
+        WriteLn('yes')
       else
-        Row := Row + 'no' + #10;
+        WriteLn('no');
     end;
   end;
 
   Groups.Free;
-  { An explicit line feed keeps the output identical on every platform. }
-  Write(Row);
 end.
