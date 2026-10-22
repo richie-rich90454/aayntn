@@ -18,6 +18,9 @@ keywords:
 prerequisites:
     required: [arrays.prefix-sums, foundations.complexity]
     recommended: [range-queries.fenwick-tree, arrays.difference-arrays]
+complexity:
+    time: "O(RC + q)"
+    space: "O(RC)"
 assumptions:
     - The grid never changes after the table is built.
     - Every query asks for the sum over an axis-aligned rectangle.
