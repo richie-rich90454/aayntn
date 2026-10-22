@@ -14,7 +14,7 @@ def bfs_distances(adj, source):
     The queue holds the frontier, so the vertices leave it in order of
     increasing distance from source: the first time a vertex is discovered
     its distance is already the length of a shortest path to it. adj is an
-    adjacency list: adj[v] lists the neighbours of the vertex v.
+    adjacency list: adj[v] lists the neighbors of the vertex v.
     """
     distance = [-1] * len(adj)
     if source < 0 or source >= len(adj):
