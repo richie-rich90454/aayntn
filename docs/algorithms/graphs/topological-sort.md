@@ -10,6 +10,9 @@ keywords: [topological sort, toposort, "Kahn's algorithm", dag, scheduling, cycl
 prerequisites:
     required: [graphs.representation]
     recommended: [graphs.dfs, graphs.bfs]
+complexity:
+    time: "O(V + E)"
+    space: "O(V)"
 assumptions:
     - The graph is directed.
     - The graph has no directed cycle, unless detecting a cycle is the goal.
