@@ -89,8 +89,8 @@ function build(input: string): LabEvent[] {
                         ? "done"
                         : undefined,
         })),
-        edges: adjacency.flatMap((neighbours, from) =>
-            neighbours.map((to, order) => ({
+        edges: adjacency.flatMap((neighbors, from) =>
+            neighbors.map((to, order) => ({
                 from: String(from),
                 to: String(to),
                 state:
@@ -100,8 +100,7 @@ function build(input: string): LabEvent[] {
                     distance[to] >= 0
                         ? ("done" as const)
                         : ("idle" as const),
-                curve:
-                    neighbours.length > 1 ? (order - (neighbours.length - 1) / 2) * 26 : undefined,
+                curve: neighbors.length > 1 ? (order - (neighbors.length - 1) / 2) * 26 : undefined,
             })),
         ),
         cells: [],
@@ -156,18 +155,16 @@ function build(input: string): LabEvent[] {
             state: snapshot(`Dequeue ${labels[vertex]}.`),
         });
 
-        for (const neighbour of [...adjacency[vertex]!].sort((a, b) => a - b)) {
-            if (distance[neighbour] !== -1) continue;
-            distance[neighbour] = distance[vertex]! + 1;
-            state[neighbour] = "discovered";
-            queue.push(neighbour);
+        for (const neighbor of [...adjacency[vertex]!].sort((a, b) => a - b)) {
+            if (distance[neighbor] !== -1) continue;
+            distance[neighbor] = distance[vertex]! + 1;
+            state[neighbor] = "discovered";
+            queue.push(neighbor);
             events.push({
                 type: "enqueue",
-                operation: "discover-neighbour",
-                narration: `${labels[neighbour]} is unvisited, so it is discovered at distance ${distance[neighbour]} and enqueued.`,
-                state: snapshot(
-                    `Discover ${labels[neighbour]} at distance ${distance[neighbour]}.`,
-                ),
+                operation: "discover-neighbor",
+                narration: `${labels[neighbor]} is unvisited, so it is discovered at distance ${distance[neighbor]} and enqueued.`,
+                state: snapshot(`Discover ${labels[neighbor]} at distance ${distance[neighbor]}.`),
             });
         }
 
@@ -175,7 +172,7 @@ function build(input: string): LabEvent[] {
         events.push({
             type: "complete",
             operation: "complete-vertex",
-            narration: `All neighbours of ${labels[vertex]} have been examined.`,
+            narration: `All neighbors of ${labels[vertex]} have been examined.`,
             state: snapshot(`Complete ${labels[vertex]}.`),
         });
     }
