@@ -19,6 +19,9 @@ keywords:
 prerequisites:
     required: [foundations.complexity]
     recommended: [foundations.binary-representation, foundations.recursion]
+complexity:
+    time: "O(log m) per operation"
+    space: "O(1)"
 assumptions:
     - The modulus is a positive integer, and reducing a value modulo the modulus never changes the required answer.
     - Every intermediate value is reduced modulo the modulus before it is used again, so that no intermediate exceeds the width of the type holding it.
