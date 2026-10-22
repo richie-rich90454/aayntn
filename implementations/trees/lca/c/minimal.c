@@ -1,11 +1,11 @@
 #include <stdlib.h>
 
 /*
- * An adjacency list of a tree on the vertices 0..n-1: neighbours lists the
+ * An adjacency list of a tree on the vertices 0..n-1: neighbors lists the
  * adjacent vertex indices and degree is their count.
  */
 typedef struct {
-    int *neighbours;
+    int *neighbors;
     int degree;
 } adjacency_list;
 
@@ -66,7 +66,7 @@ int lca_init(lca_table *table, const adjacency_list *adj, int n, int root) {
     while (head < tail) {
         const int u = queue[head++];
         for (int i = 0; i < adj[u].degree; i++) {
-            const int w = adj[u].neighbours[i];
+            const int w = adj[u].neighbors[i];
             if (table->depth[w] != -1) {
                 /* The vertex was already reached through another edge. */
                 continue;
@@ -166,21 +166,21 @@ int lca_query(const lca_table *table, int u, int v) {
  * asserts the documented contract instead of reading input.
  */
 int main(void) {
-    int neighbours_of_0[] = {1, 2};
-    int neighbours_of_1[] = {0, 3, 4};
-    int neighbours_of_2[] = {0};
-    int neighbours_of_3[] = {1};
-    int neighbours_of_4[] = {1};
+    int neighbors_of_0[] = {1, 2};
+    int neighbors_of_1[] = {0, 3, 4};
+    int neighbors_of_2[] = {0};
+    int neighbors_of_3[] = {1};
+    int neighbors_of_4[] = {1};
     adjacency_list adj[5];
-    adj[0].neighbours = neighbours_of_0;
+    adj[0].neighbors = neighbors_of_0;
     adj[0].degree = 2;
-    adj[1].neighbours = neighbours_of_1;
+    adj[1].neighbors = neighbors_of_1;
     adj[1].degree = 3;
-    adj[2].neighbours = neighbours_of_2;
+    adj[2].neighbors = neighbors_of_2;
     adj[2].degree = 1;
-    adj[3].neighbours = neighbours_of_3;
+    adj[3].neighbors = neighbors_of_3;
     adj[3].degree = 1;
-    adj[4].neighbours = neighbours_of_4;
+    adj[4].neighbors = neighbors_of_4;
     adj[4].degree = 1;
 
     lca_table table;
