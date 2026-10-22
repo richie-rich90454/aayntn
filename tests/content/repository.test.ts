@@ -49,6 +49,12 @@ const BRITISH = [
     "programme",
     "favour",
     "emphasise",
+    "neighbour",
+    "towards",
+    "cancelling",
+    "utilis",
+    "prioritis",
+    "authoris",
 ];
 
 async function markdownFiles(): Promise<string[]> {
@@ -128,6 +134,32 @@ describe("the source code", () => {
                 "optimis",
                 "analyse",
                 "centre",
+                "neighbour",
+            ]) {
+                expect(
+                    source.includes(spelling),
+                    `${file.replace(ROOT + "\\", "")}: "${spelling}"`,
+                ).toBe(false);
+            }
+        }
+    });
+
+    it("is written in American English in the theme as well", async () => {
+        const files = await fg("**/*.{ts,vue,css}", {
+            cwd: join(ROOT, "docs/.vitepress/theme"),
+            absolute: true,
+            onlyFiles: true,
+        });
+        for (const file of files) {
+            const source = (await readFile(file, "utf8")).toLowerCase();
+            for (const spelling of [
+                "behaviour",
+                "colour",
+                "initialis",
+                "optimis",
+                "analyse",
+                "centre",
+                "neighbour",
             ]) {
                 expect(
                     source.includes(spelling),
