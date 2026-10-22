@@ -10,6 +10,9 @@ keywords: [minimum spanning tree, mst, kruskal, prim, disjoint set union]
 prerequisites:
     required: [graphs.representation, graphs.dsu]
     recommended: [graphs.dijkstra, greedy.interval-scheduling]
+complexity:
+    time: "O(E log E)"
+    space: "O(V + E)"
 assumptions:
     - The graph is undirected.
     - The edge weights may be negative, which Kruskal's algorithm and Prim's algorithm both tolerate.
