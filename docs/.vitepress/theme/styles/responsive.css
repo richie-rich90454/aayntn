@@ -122,6 +122,19 @@
     }
 }
 
+/* The outline is a column of its own, and the text needs the room. Below
+   this width the text takes all of it, and the outline is taken away
+   rather than allowed to squeeze the measure of the page. */
+@media (max-width: 1200px) {
+    .aayntn-content {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .aayntn-outline {
+        display: none;
+    }
+}
+
 @media (max-width: 720px) {
     .aayntn-divisions {
         grid-template-columns: minmax(0, 1fr);
