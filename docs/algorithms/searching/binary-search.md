@@ -23,6 +23,10 @@ reviewed: true
 
 <AlgorithmSummary algorithm="searching.binary-search" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="searching.binary-search" />
+
 ## At a glance
 
 | Property | Value |
@@ -192,7 +196,7 @@ The last row is worth remembering: sorting once and then answering $q$ queries w
 
 ## Reference implementations
 
-<CodeViewer algorithm="searching.binary-search" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
 ## Recursion decision
 
