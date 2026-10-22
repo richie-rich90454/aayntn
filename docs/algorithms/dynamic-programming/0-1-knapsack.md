@@ -25,6 +25,10 @@ reviewed: false
 
 <AlgorithmSummary algorithm="dynamic-programming.0-1-knapsack" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="dynamic-programming.0-1-knapsack" />
+
 The 0/1 knapsack problem asks for the most valuable subset of items whose total weight does not exceed a given capacity. Every item is a single physical object, so it is either in the knapsack or it is not. It cannot be in there twice. That last clause is the whole difficulty of the problem, and it is the clause that a careless implementation breaks.
 
 The answer comes from a table with one row per item and one column per capacity. Each cell holds the best value reachable with the items above it and the capacity to its left. The update for a cell is a maximum of two candidates: the value of the cell above it, which skips the current item, and the value of the cell above and to the left, plus the value of the current item, which takes it.
@@ -342,9 +346,9 @@ The last two rows are the ones that separate a mechanical solution from a clever
 
 ## Reference implementations
 
-<CodeViewer algorithm="dynamic-programming.0-1-knapsack" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
-The manifest publishes two variants in each of the six languages. The `minimal` variant is a reusable function that takes the weights, the values and the capacity and returns the maximum value; it performs no input and output, and in C and Pascal it fills a caller-provided buffer so that the algorithm itself never allocates. The `program` variant reads `n W` and then $n$ lines of `w v` from standard input and prints one number: the maximum achievable total value.
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source. The manifest publishes two variants in each of the six languages. The `minimal` variant is a reusable function that takes the weights, the values and the capacity and returns the maximum value; it performs no input and output, and in C and Pascal it fills a caller-provided buffer so that the algorithm itself never allocates. The `program` variant reads `n W` and then $n$ lines of `w v` from standard input and prints one number: the maximum achievable total value.
 
 ## Recursion decision
 
