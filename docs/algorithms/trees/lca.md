@@ -24,6 +24,10 @@ reviewed: false
 
 <AlgorithmSummary algorithm="trees.lca" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="trees.lca" />
+
 The lowest common ancestor of two vertices is the deepest vertex that is an ancestor of both. The technique for answering queries about it is binary lifting: a table that stores, for every vertex and every $k$, the ancestor of that vertex which lies $2^k$ edges above it.
 
 The table is built in $O(n \log n)$ from a single traversal of the tree, and every query is answered in $O(\log n)$ by two phases. The first phase lifts the deeper vertex until the two stand at the same depth. The second phase descends from the largest jump, moving both vertices up whenever the jump keeps them apart, and stops with the two vertices directly beneath their common ancestor.
@@ -297,9 +301,9 @@ The last row is worth a note, because it is the case in which the simplest appro
 
 ## Reference implementations
 
-<CodeViewer algorithm="trees.lca" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
-The manifest publishes two variants. The `minimal` variant is a reusable class whose constructor takes an adjacency list and a root, builds the table, and exposes the ancestor at a given power of two, the depth of a vertex, and the lowest common ancestor of a pair. The `program` variant reads `n m`, then the edges, then the queries, and prints one answer per query. The root is the vertex $0$, and a query that names a vertex outside the array is answered with $-1$.
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source. The manifest publishes two variants. The `minimal` variant is a reusable class whose constructor takes an adjacency list and a root, builds the table, and exposes the ancestor at a given power of two, the depth of a vertex, and the lowest common ancestor of a pair. The `program` variant reads `n m`, then the edges, then the queries, and prints one answer per query. The root is the vertex $0$, and a query that names a vertex outside the array is answered with $-1$.
 
 ## Recursion decision
 
