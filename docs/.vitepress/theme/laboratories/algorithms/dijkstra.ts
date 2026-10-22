@@ -43,9 +43,9 @@ function parse(input: string): Parsed {
         if (!name) continue;
         const from = indexOf(name);
 
-        // Each neighbour is written as a name followed by its weight, so the
-        // tokens are read in pairs: "B 4 C 2" is the neighbour B of weight 4
-        // and the neighbour C of weight 2.
+        // Each neighbor is written as a name followed by its weight, so the
+        // tokens are read in pairs: "B 4 C 2" is the neighbor B of weight 4
+        // and the neighbor C of weight 2.
         const tokens = rest
             .join(" ")
             .split(/[\s,]+/)
@@ -64,7 +64,7 @@ function parse(input: string): Parsed {
             }
             const weightToken = tokens[position + 1];
             if (weightToken === undefined || !/^-?\d+$/.test(weightToken)) {
-                throw new Error(`Expected "neighbour weight", found "${token}".`);
+                throw new Error(`Expected "neighbor weight", found "${token}".`);
             }
             pending.push({ from, to: indexOf(token), weight: Number(weightToken) });
             position += 1;
@@ -106,14 +106,13 @@ function build(input: string): LabEvent[] {
                         ? "tentative"
                         : undefined,
         })),
-        edges: adjacency.flatMap((neighbours, from) =>
-            neighbours.map((entry, order) => ({
+        edges: adjacency.flatMap((neighbors, from) =>
+            neighbors.map((entry, order) => ({
                 from: String(from),
                 to: String(entry.to),
                 label: String(entry.weight),
                 state: state[from] === "active" ? ("active" as const) : ("idle" as const),
-                curve:
-                    neighbours.length > 1 ? (order - (neighbours.length - 1) / 2) * 26 : undefined,
+                curve: neighbors.length > 1 ? (order - (neighbors.length - 1) / 2) * 26 : undefined,
             })),
         ),
         cells: [],
