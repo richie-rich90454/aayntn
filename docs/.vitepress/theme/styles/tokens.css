@@ -26,6 +26,9 @@
     --color-white: #ffffff;
     --color-code: #f5f7fc;
     --color-border: #d5d9e4;
+    /* The two soft fields that the laboratories paint a row or a cell with. */
+    --color-highlight: #fff0bd;
+    --color-invalid-soft: #fce1e0;
 
     /* Semantic roles ---------------------------------------------------- */
     --color-primary: var(--color-cobalt);
@@ -48,6 +51,10 @@
     --surface-parchment: var(--color-parchment);
     --surface-header: var(--color-white);
     --surface-overlay: rgba(22, 22, 22, 0.62);
+    /* The column of the text and the column of the navigation. On paper they
+       are the paper itself, so that the page reads as one sheet. */
+    --surface-content: var(--color-white);
+    --surface-rail: var(--color-white);
 
     --text-primary: var(--color-black);
     --text-secondary: #414957;
@@ -55,6 +62,10 @@
     --text-inverse: var(--color-white);
     --text-link: var(--color-cobalt);
     --text-link-hover: var(--color-ultramarine);
+    /* A word that names the accent of the design. The cobalt is a field and
+       not a letter, so the letter takes a lighter form on a dark page. */
+    --text-accent: var(--color-cobalt);
+    --text-accent-hover: var(--color-ultramarine);
 
     --border-subtle: var(--color-border);
     --border-strong: #aeb5c4;
@@ -121,36 +132,51 @@
 /* Dark mode                                                            */
 /* -------------------------------------------------------------------- */
 
+/* The dark appearance is not the light one with the lights turned off. It
+   is a different room: a desk of near-black, a sheet of text laid on it, a
+   recess for the navigation, and a band of the deepest black for the frames
+   that carry the architecture. Every surface has a different value, so that
+   the structure of the page survives the change of appearance. */
 html.dark {
-    --surface-page: #101216;
-    --surface-raised: #171b21;
-    --surface-sunken: #0b0d11;
-    --surface-code: #14181e;
-    --surface-inverse: #06070a;
-    --surface-header: #0b0d11;
-    --surface-overlay: rgba(0, 0, 0, 0.72);
+    --surface-page: #0b0d11;
+    --surface-raised: #1a1f28;
+    --surface-sunken: #080a0d;
+    --surface-code: #0f1319;
+    --surface-inverse: #05060a;
+    --surface-parchment: #2a2419;
+    --surface-header: #05060a;
+    --surface-overlay: rgba(3, 4, 6, 0.82);
+    --surface-content: #14181e;
+    --surface-rail: #090b0f;
 
-    --text-primary: #f2f4f8;
-    --text-secondary: #b8bfcb;
+    --text-primary: #eef1f6;
+    --text-secondary: #b5bdcb;
     --text-muted: #8a94a6;
-    --text-inverse: var(--color-black);
-    --text-link: #93abf2;
-    --text-link-hover: #b6c7f8;
+    --text-inverse: var(--color-white);
+    --text-link: #8fadf5;
+    --text-link-hover: #b6c8fb;
+    --text-accent: #8fadf5;
+    --text-accent-hover: #b6c8fb;
 
-    --border-subtle: #2a3038;
-    --border-strong: #3c434e;
+    --border-subtle: #222831;
+    --border-strong: #3b4451;
+    /* The ink rule becomes a light hairline, because a black rule on a black
+       page is not a rule at all. */
+    --border-ink: #3b4451;
 
-    /* The architectural fields keep their hue but lose their intensity, so
-       that the text on them stays legible. */
-    --color-primary: #6d8ee0;
-    --color-primary-strong: #4f74d4;
-    --color-gold: #e0b761;
+    /* The architectural fields keep their hue and their depth, because the
+       white text that stands on them has to stay legible. */
+    --color-primary: #4a6ac9;
+    --color-primary-strong: #3a58a8;
+    --color-gold: #e8bd63;
     --color-vermilion: #e07a70;
     --color-emerald: #4f9b7c;
     --color-oxblood: #b2688a;
     --color-violet: #9d84de;
     --color-parchment: #2a2419;
-    --color-code: #14181e;
+    --color-code: #0f1319;
+    --color-highlight: #3d3115;
+    --color-invalid-soft: #3d1a19;
 }
 
 /* -------------------------------------------------------------------- */
@@ -165,8 +191,8 @@ html {
 }
 
 html.dark {
-    --division-bronze: #e08a5c;
-    --division-silver: #aab3c2;
-    --division-gold: #e0b761;
-    --division-platinum: #9d84de;
+    --division-bronze: #b3551f;
+    --division-silver: #6a7383;
+    --division-gold: #b8860c;
+    --division-platinum: #6639ad;
 }
