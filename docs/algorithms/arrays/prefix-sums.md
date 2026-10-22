@@ -24,6 +24,10 @@ reviewed: false
 
 <AlgorithmSummary algorithm="arrays.prefix-sums" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="arrays.prefix-sums" />
+
 Prefix sums are a way of spending $O(n)$ once so that every later question about a range of the array costs $O(1)$. The technique is to store the running total of the array: the sum of the first element, the sum of the first two, and so on. The sum of any range is then the difference of two stored totals.
 
 The whole idea is one subtraction, and the whole difficulty is in the conventions around it: whether the array is indexed from zero or from one, whether the stored array has $n$ entries or $n + 1$, and whether the accumulator is wide enough for the largest value the statement allows.
@@ -275,9 +279,9 @@ The last two rows are worth a note. A sliding window computes the sum of the cur
 
 ## Reference implementations
 
-<CodeViewer algorithm="arrays.prefix-sums" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
-The manifest publishes two variants. The `minimal` variant is a reusable function that takes the values and returns a fresh array of $n + 1$ prefix sums; it performs no input and output, and in C and Pascal it writes into a caller-provided buffer instead of allocating, so the caller owns the storage. The `program` variant reads the values, then the number of queries, then the queries themselves, and prints one sum per line.
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source. The manifest publishes two variants. The `minimal` variant is a reusable function that takes the values and returns a fresh array of $n + 1$ prefix sums; it performs no input and output, and in C and Pascal it writes into a caller-provided buffer instead of allocating, so the caller owns the storage. The `program` variant reads the values, then the number of queries, then the queries themselves, and prints one sum per line.
 
 ## Recursion decision
 
