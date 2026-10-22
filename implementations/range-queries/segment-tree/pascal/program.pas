@@ -1,12 +1,12 @@
 program SegmentTreeProgram;
 {$mode objfpc}{$H+}
+{$I-}
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
 uses SysUtils;
 
 type
-  TTokens = array of string;
   TInt64Array = array of Int64;
 
   { A segment tree over a 1-indexed array of n values: Tree[node] holds the
@@ -28,41 +28,6 @@ type
     procedure SetValue(Index: Integer; Value: Int64);
     function RangeSum(Left, Right: Integer): Int64;
   end;
-
-{ Reads the whole standard input so that the tokens can be split without
-  depending on where the line breaks fall. }
-function ReadAllInput: string;
-var
-  Row: string;
-begin
-  Result := '';
-  while not EOF(Input) do
-  begin
-    ReadLn(Row);
-    Result := Result + Row + ' ';
-  end;
-end;
-
-function Tokenize(const Content: string): TTokens;
-var
-  I: Integer;
-  Start: Integer;
-begin
-  SetLength(Result, 0);
-  I := 1;
-  while I <= Length(Content) do
-  begin
-    while (I <= Length(Content)) and (Content[I] <= ' ') do
-      Inc(I);
-    if I > Length(Content) then
-      Break;
-    Start := I;
-    while (I <= Length(Content)) and (Content[I] > ' ') do
-      Inc(I);
-    SetLength(Result, Length(Result) + 1);
-    Result[High(Result)] := Copy(Content, Start, I - Start);
-  end;
-end;
 
 { Fills the subtree of Node, which covers the positions Lo..Hi. }
 procedure TSegmentTree.Build(Node, Lo, Hi: Integer; const Values: array of Int64);
@@ -121,12 +86,15 @@ begin
 end;
 
 constructor TSegmentTree.Create(const Values: array of Int64);
+var
+  I: Integer;
 begin
   inherited Create;
   FN := Length(Values);
   { A binary tree over n leaves fits in 4n nodes when the root is the 1. }
   SetLength(FTree, 4 * FN + 4);
-  FillChar(FTree[0], Length(FTree) * SizeOf(Int64), 0);
+  for I := 0 to High(FTree) do
+    FTree[I] := 0;
   if FN > 0 then
     Build(1, 1, FN, Values);
 end;
@@ -161,7 +129,6 @@ begin
 end;
 
 var
-  Tokens: TTokens;
   Values: TInt64Array;
   N: Integer;
   Q: Integer;
@@ -170,19 +137,13 @@ var
   Kind: Integer;
   A: Integer;
   B: Int64;
-  Index: Integer;
   Tree: TSegmentTree;
 begin
-  Tokens := Tokenize(ReadAllInput);
-  if Length(Tokens) < 2 then
-    Halt(0);
-
-  N := StrToIntDef(Tokens[0], 0);
-  Q := StrToIntDef(Tokens[1], 0);
-  if N < 0 then
-    N := 0;
-  if Q < 0 then
-    Q := 0;
+  { The input is exactly the contract: n, q and the q operations. }
+  N := 0;
+  Read(N);
+  Q := 0;
+  Read(Q);
 
   { Every position starts at zero, because the input carries no values. }
   SetLength(Values, N);
@@ -190,27 +151,20 @@ begin
     Values[I] := 0;
   Tree := TSegmentTree.Create(Values);
 
-  Index := 2;
-  for K := 1 to Q do
+  for K := 0 to Q - 1 do
   begin
-    if Index >= Length(Tokens) then
-      Break;
-    Kind := StrToIntDef(Tokens[Index], 0);
-    Inc(Index);
+    Kind := 0;
+    Read(Kind);
     if (Kind <> 1) and (Kind <> 2) then
       Break;
-    if Index + 1 >= Length(Tokens) then
-      Break;
-    A := StrToIntDef(Tokens[Index], 0);
-    B := StrToInt64Def(Tokens[Index + 1], 0);
-    Inc(Index, 2);
+    A := 0;
+    B := 0;
+    Read(A);
+    Read(B);
     if Kind = 1 then
       Tree.SetValue(A, B)
     else
-    begin
-      { An explicit line feed keeps the output identical on every platform. }
-      Write(IntToStr(Tree.RangeSum(A, B)), #10);
-    end;
+      WriteLn(IntToStr(Tree.RangeSum(A, B)));
   end;
 
   Tree.Free;
