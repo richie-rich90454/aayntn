@@ -11,7 +11,7 @@ import sys
 def dfs_iterative(adj, source):
     """Return the vertices reachable from source, in the order they were visited.
 
-    adj is an adjacency list: adj[v] lists the neighbours of the vertex v.
+    adj is an adjacency list: adj[v] lists the neighbors of the vertex v.
     """
     if source < 0 or source >= len(adj):
         return []
