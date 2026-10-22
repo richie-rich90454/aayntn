@@ -19,13 +19,21 @@ The subject divides in two. One half answers questions about a path: what is the
 
 ## The techniques in this subject
 
-| Technique | Complexity | Prerequisite | Article |
-| --- | --- | --- | --- |
-| Lowest common ancestor | $O(n \log n)$ to build, $O(\log n)$ per query | `graphs.representation` | [Lowest common ancestor](/algorithms/trees/lca) |
-| Heavy-light decomposition | $O(n)$ to build, $O(\log^2 n)$ per path query | `trees.lca` | [Heavy-light decomposition](/algorithms/trees/heavy-light-decomposition) |
-| Tree dynamic programming | $O(n)$ | `graphs.dfs` | [Tree dynamic programming](/algorithms/trees/tree-dp) |
+| Technique | Time | Space | Prerequisite | Article |
+| --- | --- | --- | --- | --- |
+| Lowest common ancestor | $O((n + m) \log n)$ to build, $O(\log n)$ per query | $O(n \log n)$ | `graphs.bfs` | [Lowest common ancestor](/algorithms/trees/lca) |
+| Heavy-light decomposition | $O(n)$ to build, $O(\log n)$ per path query | $O(n)$ | `trees.lca` | [Heavy-light decomposition](/algorithms/trees/heavy-light-decomposition) |
+| Tree dynamic programming | $O(n)$ | $O(n)$ | `graphs.bfs` | [Tree dynamic programming](/algorithms/trees/tree-dp) |
+| Euler tour of a tree | $O(n)$ to flatten | $O(n)$ | `graphs.dfs` | [Euler tour of a tree](/algorithms/trees/euler-tour) |
+| Binary lifting | $O(n \log n)$ to build, $O(\log n)$ per query | $O(n \log n)$ | `graphs.bfs` | [Binary lifting](/algorithms/trees/binary-lifting) |
+| Rerooting | $O(n)$ | $O(n)$ | `trees.tree-dp` | [Rerooting](/algorithms/trees/rerooting) |
+| Centroid decomposition | $O(n \log n)$ | $O(n)$ | `graphs.dfs` | [Centroid decomposition](/algorithms/trees/centroid-decomposition) |
 
-The three build on each other. The lowest common ancestor is the primitive: it answers "which vertex is the deepest common ancestor of these two". Heavy-light decomposition uses it to answer a general path question by splitting the path into a logarithmic number of segments. Tree dynamic programming does not need either, and is the more useful of the three in practice.
+The first four build on each other. The lowest common ancestor is the primitive: it answers "which vertex is the deepest common ancestor of these two". Binary lifting is the table that answers it, and the [lowest common ancestor article](/algorithms/trees/lca) derives it in full. Heavy-light decomposition uses the ancestor structure to answer a general path question by splitting the path into a logarithmic number of segments. The Euler tour turns a subtree into a contiguous interval, which is what lets a range structure answer a subtree question.
+
+Tree dynamic programming does not need any of them, and it is the most useful of the seven in practice. Rerooting is its second pass, and the centroid decomposition is the one technique here that is about the shape of the tree rather than about a path.
+
+The heavy-light row states the prefix-sum bound, which is what the reference implementation achieves. The same decomposition over a segment tree answers a path query in $O(\log^2 n)$, and the article gives both numbers.
 
 ## Recognition signals
 
@@ -35,6 +43,8 @@ The three build on each other. The lowest common ancestor is the primitive: it a
 - **"each node has a value"**, **"each node carries some weight"**, and the question asks for a maximum or a sum over a path.
 - **"in every subtree"**, **"for each node, consider its subtree"**, **"choose some nodes so that no two are adjacent"**. This is the tree dynamic programming signal, and it is the one that appears most often in Gold and Platinum problems.
 - **"the parent of"**, **"the children of"**, **"the root of the tree"**, and a statement that gives the parent of every node rather than the edges.
+- **"if the root were somewhere else"**, **"for every node, treat it as the root"**. That is rerooting, and it is the difference between one dynamic program and two.
+- **"the number of pairs of nodes whose path passes through"**, **"count the paths of length $k$"**. That is the centroid decomposition, and it is the standard answer to "count the paths through a node" in near-linear time.
 
 The signal that rules the subject out is "the shortest path" on a graph that is not stated to be a tree. The machinery here depends on there being exactly one path, and a general graph does not have that.
 
@@ -44,22 +54,25 @@ The signal that rules the subject out is "the shortest path" on a graph that is 
 | --- | --- |
 | The deepest common ancestor of two nodes | [Lowest common ancestor](/algorithms/trees/lca) |
 | The distance between two nodes | The lowest common ancestor, with depths |
+| The ancestor of a node $k$ levels above it | [Binary lifting](/algorithms/trees/binary-lifting) |
 | The sum or maximum on a path | [Heavy-light decomposition](/algorithms/trees/heavy-light-decomposition) |
-| The best value achievable in every subtree | [Tree dynamic programming](/algorithms/trees/tree-dp) |
-| A value on a path, and the tree is static with many queries | Heavy-light decomposition, or a Fenwick tree over an Euler tour |
+| A value on a path, and the tree is static with many queries | Heavy-light decomposition, or a Fenwick tree over an [Euler tour](/algorithms/trees/euler-tour) |
 | A value on a path, and the tree changes | A link-cut tree, which is not covered yet |
-| The answer depends on every pair of nodes | The quadratic tree dynamic program, rerooted in $O(n)$ |
+| The best value achievable in every subtree | [Tree dynamic programming](/algorithms/trees/tree-dp) |
+| The answer depends on every pair of nodes | [Rerooting](/algorithms/trees/rerooting), which is the quadratic tree program in $O(n)$ |
+| The answer for every subtree of a tree that is built one node at a time | An [Euler tour](/algorithms/trees/euler-tour) with a Fenwick tree |
+| Count the paths whose length is exactly $k$ | [Centroid decomposition](/algorithms/trees/centroid-decomposition) |
 | A path in a general graph, not a tree | [Graphs](/algorithms/graphs/) |
+
+The rerooting row is worth reading twice. The naive way to answer "for every node, treat it as the root" is to run the tree dynamic program once per root, which costs $O(n^2)$. The two-pass rerooting runs it once downward and once upward, with the sibling exclusion done in constant time, and it costs $O(n)$.
 
 ## What this subject implies but does not yet cover
 
-- **The Euler tour.** A numbering of the vertices in which every subtree occupies a contiguous interval, which turns a subtree query into a range query and a path query into two range queries. It is the foundation under the [Fenwick tree](/algorithms/range-queries/fenwick-tree) solution to tree path problems, and it has no article of its own.
-- **Binary lifting.** The ancestor table that answers a lowest common ancestor query in $O(\log n)$. It is derived in full inside the [lowest common ancestor article](/algorithms/trees/lca), including the $O(n \log n)$ construction, but it does not have a page of its own.
-- **Rerooting.** Running the tree dynamic program once in each direction so that every vertex can be treated as the root. It appears as a variant in the [tree dynamic programming article](/algorithms/trees/tree-dp), and the general two-pass rerooting technique does not have an article.
-- **Centroid decomposition.** Splitting a tree at its centroid so that every recursive subproblem has at most half the vertices, which turns many "count the paths through a node" problems into $O(n \log n)$ searches.
 - **Small-to-large merging.** Merging the children of a node by always merging the smallest structure into the largest, which gives $O(n \log n)$ for problems that attach a multiset to every node.
 - **Virtual trees.** Compressing a tree down to the nodes that matter for one query, so that a query about $k$ marked nodes takes $O(k \log k)$ rather than $O(n)$.
 - **Dynamic trees.** Link-cut trees and top trees, which support structural changes to a tree while answering path queries, and which are the right answer when the tree is not static.
+- **Tree hashing.** Hashing the shape of a subtree so that two subtrees can be compared in constant time, which answers "are these two subtrees isomorphic" in near-linear time.
+- **The top-tree and rake-compress formulation.** The single data structure that subsumes link-cut trees, static top trees, and dynamic trees, and the subject's natural endpoint for anyone who wants one structure for all of it.
 
 ## Related subjects
 
@@ -67,3 +80,4 @@ The signal that rules the subject out is "the shortest path" on a graph that is 
 - [Range query structures](/algorithms/range-queries/) supply the Fenwick tree and the segment tree that answer the range questions the Euler tour creates.
 - [Dynamic programming](/algorithms/dynamic-programming/) is the general form of what the tree dynamic programming article specializes.
 - [Advanced algorithms](/algorithms/advanced/) contains the offline techniques that a tree problem sometimes needs instead.
+- The [academy](/start/) introduces the tree as the structure with one path between two nodes, and [From AP Computer Science A](/start/from-ap-csa/) is the route into it.
