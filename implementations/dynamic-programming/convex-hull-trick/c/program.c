@@ -57,7 +57,7 @@ static void convex_hull_destroy(convex_hull *h) {
 
 /*
  * True when the middle line of the three never holds the minimum: the
- * switch points of the neighbours have to decrease along the stack, and the
+ * switch points of the neighbors have to decrease along the stack, and the
  * comparison is done on the switch points, so the products of the
  * coefficients never enter the arithmetic.
  */
