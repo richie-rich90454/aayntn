@@ -17,7 +17,7 @@ public final class Program {
     private Program() {
     }
 
-    /** An edge of the adjacency list: a neighbour and the weight of the edge. */
+    /** An edge of the adjacency list: a neighbor and the weight of the edge. */
     public static final class Edge {
         public final int to;
         public final long weight;
