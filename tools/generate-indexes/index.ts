@@ -822,11 +822,11 @@ async function fillGeneratedRegions(
 
     let updated = source.replace(
         /<!-- aayntn:subjects:start -->[\s\S]*?<!-- aayntn:subjects:end -->/,
-        `<!-- aayntn:subjects:start -->\n| Subject | Techniques it contains | Page |\n| --- | --- | --- |\n${subjectRows}\n<!-- aayntn:subjects:end -->`,
+        `<!-- aayntn:subjects:start -->\n\n| Subject | Techniques it contains | Page |\n| --- | --- | --- |\n${subjectRows}\n\n<!-- aayntn:subjects:end -->`,
     );
     updated = updated.replace(
         /<!-- aayntn:core:start -->[\s\S]*?<!-- aayntn:core:end -->/,
-        `<!-- aayntn:core:start -->\n| Technique | Time | Space | Requires | Article |\n| --- | --- | --- | --- | --- |\n${coreRows}\n<!-- aayntn:core:end -->`,
+        `<!-- aayntn:core:start -->\n\n| Technique | Time | Space | Requires | Article |\n| --- | --- | --- | --- | --- |\n${coreRows}\n\n<!-- aayntn:core:end -->`,
     );
 
     if (updated !== source) await writeFile(index, updated, "utf8");
