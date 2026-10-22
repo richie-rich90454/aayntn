@@ -50,7 +50,7 @@
 }
 
 .aayntn-field--ink {
-    background: var(--color-black);
+    background: var(--surface-inverse);
 }
 
 .aayntn-field--gold {
@@ -104,7 +104,7 @@
     inset: 0 0 auto 0;
     z-index: 60;
     height: var(--header-height);
-    background: var(--color-black);
+    background: var(--surface-inverse);
     color: var(--color-white);
     border-bottom: 2px solid var(--color-gold);
 }
@@ -289,21 +289,34 @@
     background: var(--surface-page);
 }
 
+/* The page is a navigation rail on the left and a group on the right. The
+   group holds the text and the outline, and it is centered in the space that
+   the rail leaves, so that the margin of the page is the same on both
+   sides. */
 .aayntn-body {
     display: grid;
-    grid-template-columns: var(--navigation-width) minmax(0, 1fr) var(--outline-width);
+    grid-template-columns: var(--navigation-width) minmax(0, 1fr);
     gap: var(--space-8);
     max-width: 1720px;
     margin: 0 auto;
     padding: 0 var(--space-6);
 }
 
-.aayntn-body--no-outline {
-    grid-template-columns: var(--navigation-width) minmax(0, 1fr);
-}
-
 .aayntn-body--no-sidebar {
     grid-template-columns: minmax(0, 1fr);
+}
+
+.aayntn-content {
+    display: grid;
+    grid-template-columns: minmax(0, var(--content-width)) var(--outline-width);
+    gap: var(--space-8);
+    justify-content: center;
+    min-width: 0;
+}
+
+/* A page without headings gives the whole width to the text. */
+.aayntn-content--no-outline {
+    grid-template-columns: minmax(0, var(--content-width));
 }
 
 /* -------------------------------------------------------------------- */
@@ -318,6 +331,7 @@
     padding: var(--space-8) var(--space-4) var(--space-12) 0;
     overflow-y: auto;
     overscroll-behavior: contain;
+    background: var(--surface-rail);
     border-right: 1px solid var(--border-subtle);
     scrollbar-width: thin;
 }
@@ -360,7 +374,7 @@
 .aayntn-sidebar__link.is-active {
     background: var(--surface-sunken);
     border-left-color: var(--color-cobalt);
-    color: var(--color-cobalt);
+    color: var(--text-accent);
     font-weight: 700;
 }
 
@@ -370,7 +384,8 @@
 
 .aayntn-main {
     min-width: 0;
-    padding: var(--space-12) 0 var(--space-24);
+    padding: var(--space-8) 0 var(--space-16);
+    background: var(--surface-content);
 }
 
 .aayntn-article {
@@ -379,8 +394,8 @@
 
 .aayntn-article__header {
     position: relative;
-    margin-bottom: var(--space-12);
-    padding: var(--space-6) 0 var(--space-6);
+    margin-bottom: 0;
+    padding: var(--space-4) 0 var(--space-6);
     border-top: 3px solid var(--border-ink);
     border-bottom: 1px solid var(--color-gold);
 }
@@ -455,7 +470,7 @@
 }
 
 .aayntn-outline__link.is-active {
-    color: var(--color-cobalt);
+    color: var(--text-accent);
     border-left-color: var(--color-cobalt);
     font-weight: 600;
 }
@@ -471,7 +486,7 @@
 
 .aayntn-footer {
     border-top: 3px solid var(--color-gold);
-    background: var(--color-black);
+    background: var(--surface-inverse);
     color: var(--color-white);
 }
 
@@ -679,7 +694,7 @@
 .aayntn-hero__panel {
     position: relative;
     padding: var(--space-6);
-    background: var(--color-black);
+    background: var(--surface-inverse);
     color: var(--color-white);
     border: 1px solid var(--color-gold);
 }
@@ -758,7 +773,7 @@
 }
 
 .aayntn-button--ink {
-    background: var(--color-black);
+    background: var(--surface-inverse);
     border-color: var(--color-black);
     color: var(--color-white);
 }
@@ -888,13 +903,13 @@
     font-size: var(--text-secondary-copy);
     font-weight: 700;
     white-space: nowrap;
-    color: var(--color-cobalt);
+    color: var(--text-accent);
 }
 
 /* The ink band reverses the figure for the section that explains the
    method, and it is the one place where the page goes fully dark. */
 .aayntn-band--ink {
-    background: var(--color-black);
+    background: var(--surface-inverse);
     color: var(--color-white);
 }
 
@@ -938,7 +953,7 @@
 }
 
 .aayntn-feature__kicker {
-    color: var(--color-cobalt);
+    color: var(--text-accent);
     font-size: var(--text-meta);
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -975,7 +990,7 @@
 }
 
 .aayntn-band--ink .aayntn-feature {
-    background: var(--color-black);
+    background: var(--surface-inverse);
 }
 
 .aayntn-band--ink .aayntn-feature:hover {
