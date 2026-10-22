@@ -18,6 +18,9 @@ keywords:
 prerequisites:
     required: [searching.binary-search]
     recommended: [range-queries.fenwick-tree, foundations.complexity, graphs.dsu]
+complexity:
+    time: "O((N + Q) log^2 N)"
+    space: "O(N + Q)"
 assumptions:
     - Every query is independent of the answers of the other queries, so that all of them may be reordered and answered together.
     - The predicate of each query is monotone in the position being searched, so that a binary search over the positions is valid.
