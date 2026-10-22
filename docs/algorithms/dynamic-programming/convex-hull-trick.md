@@ -34,6 +34,10 @@ reviewed: false
 
 <AlgorithmSummary algorithm="dynamic-programming.convex-hull-trick" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="dynamic-programming.convex-hull-trick" />
+
 The convex hull trick turns a quadratic dynamic program into a linear one. The dynamic program has the form
 
 $$
@@ -315,9 +319,9 @@ The second and third rows are the fallbacks. The monotone hull relies on the que
 
 ## Reference implementations
 
-<CodeViewer algorithm="dynamic-programming.convex-hull-trick" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
-The manifest publishes two variants. The `minimal` variant is a reusable class with an `add` for a line and a `query` for a point, and it performs no input and output. The `program` variant reads `n q`, then $n$ lines `m b` that add the line $y = mx + b$, then $q$ points `x` that ask for the smallest value, and prints one answer per line.
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source. The manifest publishes two variants. The `minimal` variant is a reusable class with an `add` for a line and a `query` for a point, and it performs no input and output. The `program` variant reads `n q`, then $n$ lines `m b` that add the line $y = mx + b$, then $q$ points `x` that ask for the smallest value, and prints one answer per line.
 
 The program variant reads all the lines before all the queries, which matches the monotone formulation: the lines of the dynamic program are generated one at a time as the states are computed, and each one is immediately used as a query.
 
@@ -449,7 +453,7 @@ Under contest pressure, the mistakes above are what cost points, and each of the
 
 **Naive baseline.** The quadratic dynamic program, at a cost of $O(n^2)$.
 
-**Insight.** The transition $\text{dp}[i] = \min_{j<i}(\text{dp}[j] + m_j(x_i - x_j) + b_j)$ is the minimum of the lines $L_j(x) = m_j x + (\text{dp}[j] + b_j - m_j x_j)$ at $x = x_i$.
+**Insight.** The transition $\text{dp}[i] = \min_{j < i}(\text{dp}[j] + m_j(x_i - x_j) + b_j)$ is the minimum of the lines $L_j(x) = m_j x + (\text{dp}[j] + b_j - m_j x_j)$ at $x = x_i$.
 
 **Derivation.** Process the checkpoints in order. When checkpoint $j$ is reached, add the line with slope $m_j$ and intercept $\text{dp}[j] + b_j - m_j x_j$. When checkpoint $i$ is reached, query the hull at $x_i$ and that is $\text{dp}[i]$.
 
