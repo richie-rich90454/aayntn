@@ -10,7 +10,7 @@ The site is a set of static files. Every lesson is an ordinary Markdown file, ev
 - **A subject-based algorithm encyclopedia** with a derivation, a formal model, a correctness proof, a complexity analysis, a counterexample, worked problems and a review checklist for every technique.
 - **Six real implementations** of every algorithm — C, C++17, Java, Python, Pascal and JavaScript — each compiled and executed by the test suite, and each required to agree byte for byte with the other five.
 - **An interactive laboratory** in which a reference implementation emits an event trace and a pure SVG scene renders it, so the picture cannot drift away from the mathematics.
-- **A template library**, a **mathematical reference**, a **problem catalogue** with progressive hints, and a **local progress dashboard** that needs no account.
+- **A template library**, a **mathematical reference**, a **problem catalog** with progressive hints, and a **local progress dashboard** that needs no account.
 
 ## Reading order
 
@@ -57,7 +57,7 @@ docs/              the site: Markdown lessons, the theme, the generated data
 implementations/   one directory per algorithm, with one file per language
 templates/         reusable contest preparation patterns
 data/              the algorithm registry, the curriculum tracks, the problem
-                   catalogue and the search synonyms
+                   catalog and the search synonyms
 diagrams/source/   the handcrafted SVG sources, published by the build
 tools/             the build-time generators and validators
 tests/             the unit, differential, content and accessibility tests
@@ -77,4 +77,4 @@ Three rules keep the encyclopedia maintainable.
 
 Licensed under **AGPL-3.0-only**. The original lessons, the implementations and the artwork are covered by it. The webfonts under `docs/public/fonts` are Noto Sans and Noto Sans Mono, licensed under the SIL Open Font License 1.1, whose text ships beside the binaries.
 
-Third-party problem statements and editorials are **not** reproduced here. The catalogue links to the original statements and the worked solutions are written independently.
+Third-party problem statements and editorials are **not** reproduced here. The catalog links to the original statements and the worked solutions are written independently.
