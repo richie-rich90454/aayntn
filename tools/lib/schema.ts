@@ -1,6 +1,6 @@
 /**
  * Authoritative, validated schemas for every machine-readable artifact in
- * aayntn. These are the contracts that `tools/validate-content` enforces
+ * A.A.Y.N.T.N.. These are the contracts that `tools/validate-content` enforces
  * before the site is allowed to build.
  *
  * Keep this file in sync with `docs/.vitepress/data/types.ts`; the two are
