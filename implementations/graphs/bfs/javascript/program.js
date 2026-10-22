@@ -20,7 +20,7 @@
  * increasing distance from source: the first time a vertex is discovered its
  * distance is already the length of a shortest path to it.
  *
- * @param {number[][]} adj adjacency list; adj[v] lists the neighbours of v
+ * @param {number[][]} adj adjacency list; adj[v] lists the neighbors of v
  * @param {number} source the start vertex
  * @returns {number[]} the distance from source to every vertex, -1 when
  *   unreachable
