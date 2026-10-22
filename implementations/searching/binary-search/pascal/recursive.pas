@@ -1,7 +1,9 @@
-program BinarySearchRecursive;
+program recursive;
 {$mode objfpc}{$H+}
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
+
+uses SysUtils;
 
 { Recursive binary search.
 
