@@ -509,7 +509,7 @@ The stack in that program is sized at the number of vertices, and a vertex is ma
 
 Free Pascal has more runtime checking than most languages, and the switches are off by default, which means a program that works on your machine may be reading out of bounds without telling you.
 
-Turn them on while you develop. `{$R+}` turns on range checking, so an array access outside the declared range raises runtime error 201 instead of reading a neighbouring variable. `{$Q+}` turns on overflow checking, so an integer computation that overflows raises runtime error 215 instead of wrapping around silently. `{$I+}` turns on input and output checking, so a `ReadLn` that fails reports the problem instead of continuing with a stale value.
+Turn them on while you develop. `{$R+}` turns on range checking, so an array access outside the declared range raises runtime error 201 instead of reading a neighboring variable. `{$Q+}` turns on overflow checking, so an integer computation that overflows raises runtime error 215 instead of wrapping around silently. `{$I+}` turns on input and output checking, so a `ReadLn` that fails reports the problem instead of continuing with a stale value.
 
 `Assert` checks an invariant that should hold by construction, and it costs nothing in a release build when it is disabled.
 
