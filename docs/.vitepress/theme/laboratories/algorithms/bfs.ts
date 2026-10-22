@@ -76,7 +76,10 @@ function build(input: string): LabEvent[] {
             x: positions[index]!.x,
             y: positions[index]!.y,
             state: state[index],
-            value: distance[index] >= 0 ? `d=${distance[index]}` : undefined,
+            value:
+                distance[index] !== undefined && distance[index] >= 0
+                    ? `d=${distance[index]}`
+                    : undefined,
             marker:
                 state[index] === "active"
                     ? "active"
@@ -91,7 +94,10 @@ function build(input: string): LabEvent[] {
                 from: String(from),
                 to: String(to),
                 state:
-                    distance[from] >= 0 && distance[to] >= 0
+                    distance[from] !== undefined &&
+                    distance[from] >= 0 &&
+                    distance[to] !== undefined &&
+                    distance[to] >= 0
                         ? ("done" as const)
                         : ("idle" as const),
                 curve:
