@@ -11,7 +11,7 @@ import sys
 def bfs_distances(adj, source):
     """Return the distance from source to every vertex, -1 when unreachable.
 
-    adj is an adjacency list: adj[v] lists the neighbours of the vertex v.
+    adj is an adjacency list: adj[v] lists the neighbors of the vertex v.
     """
     distance = [-1] * len(adj)
     if source < 0 or source >= len(adj):
