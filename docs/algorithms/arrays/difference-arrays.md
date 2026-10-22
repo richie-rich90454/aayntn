@@ -11,6 +11,9 @@ keywords:
 prerequisites:
     required: [arrays.prefix-sums, foundations.complexity]
     recommended: [range-queries.fenwick-tree, searching.two-pointers]
+complexity:
+    time: "O(n + q)"
+    space: "O(n)"
 assumptions:
     - Every update is a range update that adds a constant to every element of the range.
     - The values are read after the updates, or the queries can be reordered.
