@@ -176,6 +176,20 @@ const sidebar: DefaultTheme.Config["sidebar"] = {
             ],
         },
     ],
+    "/contest/": [
+        {
+            text: "Contest",
+            collapsed: false,
+            items: [{ text: "Contest simulation", link: "/contest/" }],
+        },
+    ],
+    "/debugging/": [
+        {
+            text: "Debugging",
+            collapsed: false,
+            items: [{ text: "The debugging laboratory", link: "/debugging/" }],
+        },
+    ],
     "/laboratory/": [
         {
             text: "Laboratory",
