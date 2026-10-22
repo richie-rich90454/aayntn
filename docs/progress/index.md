@@ -13,7 +13,7 @@ prerequisites:
 reviewed: false
 ---
 
-The dashboard records what you have read and what you have solved. It is the one part of aayntn that keeps state, and the fact that it keeps state at all is unusual for a static site, so it is worth explaining exactly where that state lives and what it means.
+The dashboard records what you have read and what you have solved. It is the one part of A.A.Y.N.T.N. that keeps state, and the fact that it keeps state at all is unusual for a static site, so it is worth explaining exactly where that state lives and what it means.
 
 ## The history lives in your browser
 
