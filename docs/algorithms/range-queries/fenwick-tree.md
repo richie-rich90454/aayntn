@@ -24,6 +24,10 @@ reviewed: false
 
 <AlgorithmSummary algorithm="range-queries.fenwick-tree" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="range-queries.fenwick-tree" />
+
 A Fenwick tree, also called a binary indexed tree, keeps a set of running totals for an array in a single array of $n + 1$ entries. Each entry holds the total of one block of positions, and the blocks are chosen by the binary representation of their indices.
 
 The whole structure is three lines of arithmetic per operation. An update walks up the tree by repeatedly adding the lowest set bit of the index. A prefix query walks down by repeatedly subtracting it. A range query is the difference of two prefix queries.
@@ -320,9 +324,9 @@ The third and fourth rows are the decision that this article exists for. When th
 
 ## Reference implementations
 
-<CodeViewer algorithm="range-queries.fenwick-tree" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
-The manifest publishes two variants. The `minimal` variant is a reusable structure with an `add`, a `prefix_sum` and a `range_sum`, and it performs no input and output. In C and Pascal it owns its storage through an explicit init and destroy pair, so every successful init must be matched by exactly one destroy. The `program` variant reads `n q` and then $q$ operations, where `1 i delta` adds a delta and `2 l r` prints the range sum.
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source. The manifest publishes two variants. The `minimal` variant is a reusable structure with an `add`, a `prefix_sum` and a `range_sum`, and it performs no input and output. In C and Pascal it owns its storage through an explicit init and destroy pair, so every successful init must be matched by exactly one destroy. The `program` variant reads `n q` and then $q$ operations, where `1 i delta` adds a delta and `2 l r` prints the range sum.
 
 ## Recursion decision
 
