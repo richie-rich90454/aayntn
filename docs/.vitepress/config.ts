@@ -281,6 +281,9 @@ export default defineConfig({
         // KaTeX is the only mathematics renderer; MathJax must stay off.
         math: false,
         lineNumbers: false,
+        // The outline of a page is built from the headings that the Markdown
+        // carries, so that the two can never disagree.
+        headers: true,
         config(md) {
             md.use(katex as never, {
                 delimiters: "dollars",
