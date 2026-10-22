@@ -20,6 +20,9 @@ keywords:
 prerequisites:
     required: [start.computational-foundations]
     recommended: [foundations.complexity, graphs.dfs]
+complexity:
+    time: "the cost of its recurrence"
+    space: "O(d) for the call stack"
 assumptions:
     - The recursion is over a well-founded order, so that every chain of recursive calls ends.
     - The depth of the recursion is known to be within the call stack limit of the language in use.
