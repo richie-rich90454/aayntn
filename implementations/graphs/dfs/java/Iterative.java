@@ -25,7 +25,7 @@ public final class Iterative {
     /**
      * Visits every vertex reachable from source.
      *
-     * @param adj    adjacency list; adj.get(v) holds the neighbours of v
+     * @param adj    adjacency list; adj.get(v) holds the neighbors of v
      * @param source the start vertex
      * @return the visited vertices in visit order
      */
