@@ -18,6 +18,13 @@
     pointer-events: none;
 }
 
+/* The small square that the rule of the ornament is cut out of is the color
+   of the field that the ornament stands on, so that it reads as a hole in
+   either appearance. */
+.aayntn-ornament__hole {
+    fill: var(--surface-page);
+}
+
 .aayntn-ornament--corner {
     position: absolute;
     width: 46px;
@@ -77,7 +84,7 @@
 .aayntn-rosette__mark {
     width: 28px;
     height: 28px;
-    color: var(--color-cobalt);
+    color: var(--text-accent);
 }
 
 html.dark .aayntn-rosette__mark {
@@ -109,7 +116,7 @@ html.dark .aayntn-rosette__mark {
 .aayntn-medallion {
     width: 44px;
     height: 44px;
-    color: var(--color-cobalt);
+    color: var(--text-accent);
 }
 
 html.dark .aayntn-medallion {
