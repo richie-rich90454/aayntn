@@ -168,6 +168,15 @@ interface LoadedLesson {
     relativePath: string;
 }
 
+/**
+ * How much of the prose of a lesson goes into the search index.
+ *
+ * The whole of it makes the index heavy enough that the reader waits for the
+ * search, and the opening of a lesson carries the terms that a reader would
+ * search for.
+ */
+const SEARCH_BODY_LIMIT = 1200;
+
 async function loadLessons(): Promise<LoadedLesson[]> {
     const files = await fg("**/*.md", { cwd: DOCS_DIR, absolute: true, onlyFiles: true });
     const lessons: LoadedLesson[] = [];
@@ -584,10 +593,13 @@ async function main() {
     }
 
     /* Search bodies: lesson prose is indexable as a separate field so that a
-     query matches the explanation, not only the title. */
+     query matches the explanation, not only the title. The prose is cut
+     short, because the whole of it makes the index heavy enough that the
+     reader waits for it, and the opening of a lesson carries the terms that
+     a reader would search for. */
     const searchDocuments = search.map((entry) => {
         const lesson = lessons.find((item) => `lesson:${item.id}` === entry.id);
-        return { ...entry, body: lesson?.body ?? "" };
+        return { ...entry, body: (lesson?.body ?? "").slice(0, SEARCH_BODY_LIMIT) };
     });
 
     await mkdir(PUBLIC_DIR, { recursive: true });
