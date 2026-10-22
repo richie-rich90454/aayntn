@@ -3,6 +3,8 @@ program minimal;
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
+uses SysUtils;
+
 type
   TIntArray = array of Integer;
   TAdjList = array of TIntArray;
@@ -51,6 +53,9 @@ begin
   for I := 0 to FN - 1 do
     FDepth[I] := -1;
   SetLength(FUp, Levels * FN);
+  { The root is its own ancestor, so every entry of the table is defined. }
+  for I := 0 to Levels * FN - 1 do
+    FUp[I] := Root;
 
   if (FN <= 0) or (Root < 0) or (Root >= FN) then
     Exit;
