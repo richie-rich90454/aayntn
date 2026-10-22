@@ -54,7 +54,9 @@ h6 {
     margin: 0;
     font-weight: 700;
     line-height: var(--leading-heading);
-    color: var(--text-primary);
+    /* The heading takes the color of the field it stands on, so that a
+       heading on a saturated field keeps the text of that field. */
+    color: inherit;
 }
 
 p,
