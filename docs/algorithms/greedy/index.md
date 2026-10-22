@@ -19,11 +19,13 @@ The difficulty of greedy is never the implementation. A greedy algorithm is usua
 
 ## The techniques in this subject
 
-| Technique | Complexity | Prerequisite | Article |
-| --- | --- | --- | --- |
-| Interval scheduling | $O(n \log n)$ | `foundations.sorting` | [Interval scheduling](/algorithms/greedy/interval-scheduling) |
+| Technique | Time | Space | Prerequisite | Article |
+| --- | --- | --- | --- | --- |
+| Interval scheduling | $O(n \log n)$ | $O(n)$ | `foundations.sorting` | [Interval scheduling](/algorithms/greedy/interval-scheduling) |
 
-The interval scheduling article is the worked example of the subject. It shows the full shape of a greedy argument: sort by the end time, take the first interval, discard everything that overlaps it, and prove by exchange that each choice is safe.
+The interval scheduling article is the worked example of the subject. It shows the full shape of a greedy argument: sort by the end time, take the first interval, discard everything that overlaps it, and prove by exchange that each choice is safe. It is also the subject's one article, which is worth saying plainly. Greedy is not a small technique with many variants; it is one proof pattern that has to be re-derived for each problem.
+
+The $O(n \log n)$ is the sort by finish time, and the scan itself is $O(n)$. When the intervals arrive already in that order, the whole thing is $O(n)$.
 
 ## Recognition signals
 
@@ -34,6 +36,7 @@ Greedy problems share a recognizable vocabulary, because the statement has to pr
 - **"no two events may happen at the same time"**, **"the rooms must not conflict"**, **"the route must not revisit"**. These are conflict rules, and a conflict structure is what makes an interval overlap check meaningful.
 - **"the values are non-negative"** or **"all weights are positive"**. Non-negativity is what allows a local maximum to be a global maximum.
 - **"sort by"** appearing implicitly in the goal: "schedule as many meetings as possible", "use the fewest machines", "finish the fewest tasks last".
+- **"at most $k$"**, **"at least $k$"**, or **"the smallest total"**, where the choice is made by taking the most extreme remaining value rather than by exploring alternatives.
 
 The signal that rules greedy out is a statement whose goal is a _combination_ whose parts interact in a way that makes the ordering of choices matter. If choosing the largest item first can leave a smaller item that could have been paired with it, greedy is wrong and you need [dynamic programming](/algorithms/dynamic-programming/).
 
@@ -49,6 +52,8 @@ The signal that rules greedy out is a statement whose goal is a _combination_ wh
 | The local choice can exclude a large item | Not greedy; use [dynamic programming](/algorithms/dynamic-programming/) |
 | The order of choices can change what is available later | Not greedy; the problem is usually a graph |
 
+The proof is the deliverable, and there is a shape for it that works almost everywhere: take an optimal solution, find the place where it disagrees with the greedy choice, swap the two, and show the result is still feasible and no worse. The [interval scheduling article](/algorithms/greedy/interval-scheduling) writes that argument out in full, and it is the argument to imitate in every other greedy solution.
+
 ## What this subject implies but does not yet cover
 
 - **The exchange argument as a general tool.** The proof that the greedy article develops for one specific problem: take an optimal solution, find the place where it disagrees with the greedy choice, swap the two, and show the result is still feasible and no worse. Written up once, it applies to most greedy problems. This is the single most valuable missing lesson in the encyclopedia.
@@ -62,3 +67,4 @@ The signal that rules greedy out is a statement whose goal is a _combination_ wh
 - [Searching](/algorithms/searching/) is where a greedy solution often lands: "the earliest time this can be scheduled" is usually found by a sliding window and a binary search.
 - [Dynamic programming](/algorithms/dynamic-programming/) is the alternative whenever the exchange argument fails, and comparing the two is the fastest way to decide which to write.
 - [Foundations](/algorithms/foundations/) supplies the sort that almost every greedy algorithm begins with.
+- The [academy](/start/) introduces the local-choice idea before the encyclopedia does, and [From AP Computer Science A](/start/from-ap-csa/) is the route into it.
