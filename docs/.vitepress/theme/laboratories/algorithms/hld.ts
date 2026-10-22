@@ -234,7 +234,7 @@ function build(input: string): LabEvent[] {
         events.push({
             type: "build",
             operation: "pick-heavy-child",
-            narration: `The heavy child of ${labels[vertex]} is ${labels[heavy[vertex]!]}, because its subtree of ${countOf(size[heavy[vertex]!], "vertex")} is the largest.`,
+            narration: `The heavy child of ${labels[vertex]} is ${labels[heavy[vertex]!]}, because its subtree of ${countOf(size[heavy[vertex]!] ?? 0, "vertex")} is the largest.`,
             state: snapshot(
                 `The heavy child of ${labels[vertex]} is ${labels[heavy[vertex]!]}.`,
                 `heavy(${labels[vertex]}) = ${labels[heavy[vertex]!]}`,
