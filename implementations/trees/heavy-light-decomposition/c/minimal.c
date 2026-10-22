@@ -1,11 +1,11 @@
 #include <stdlib.h>
 
 /*
- * An adjacency list of a tree on the vertices 0..n-1: neighbours lists the
+ * An adjacency list of a tree on the vertices 0..n-1: neighbors lists the
  * adjacent vertex indices and degree is their count.
  */
 typedef struct {
-    int *neighbours;
+    int *neighbors;
     int degree;
 } adjacency_list;
 
@@ -74,7 +74,7 @@ int hld_init(hld_table *h, const adjacency_list *adj, int n, int root,
     while (head < tail) {
         const int u = order[head++];
         for (int i = 0; i < adj[u].degree; i++) {
-            const int w = adj[u].neighbours[i];
+            const int w = adj[u].neighbors[i];
             if (h->depth[w] != -1) {
                 /* The vertex was already reached through another edge. */
                 continue;
@@ -92,7 +92,7 @@ int hld_init(hld_table *h, const adjacency_list *adj, int n, int root,
     for (int i = tail - 1; i >= 0; i--) {
         const int u = order[i];
         for (int j = 0; j < adj[u].degree; j++) {
-            const int w = adj[u].neighbours[j];
+            const int w = adj[u].neighbors[j];
             if (w == u || h->parent[w] != u) {
                 /* The vertex is not a child of u. */
                 continue;
@@ -193,18 +193,18 @@ long long hld_path_sum(const hld_table *h, int u, int v) {
  */
 int main(void) {
     /* The tree 0-1, 1-2, 1-3 with the value of the vertex i equal to i + 1. */
-    int neighbours_of_0[] = {1};
-    int neighbours_of_1[] = {0, 2, 3};
-    int neighbours_of_2[] = {1};
-    int neighbours_of_3[] = {1};
+    int neighbors_of_0[] = {1};
+    int neighbors_of_1[] = {0, 2, 3};
+    int neighbors_of_2[] = {1};
+    int neighbors_of_3[] = {1};
     adjacency_list adj[4];
-    adj[0].neighbours = neighbours_of_0;
+    adj[0].neighbors = neighbors_of_0;
     adj[0].degree = 1;
-    adj[1].neighbours = neighbours_of_1;
+    adj[1].neighbors = neighbors_of_1;
     adj[1].degree = 3;
-    adj[2].neighbours = neighbours_of_2;
+    adj[2].neighbors = neighbors_of_2;
     adj[2].degree = 1;
-    adj[3].neighbours = neighbours_of_3;
+    adj[3].neighbors = neighbors_of_3;
     adj[3].degree = 1;
 
     const long long values[4] = {1, 2, 3, 4};
