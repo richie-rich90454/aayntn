@@ -24,6 +24,10 @@ reviewed: false
 
 <AlgorithmSummary algorithm="trees.heavy-light-decomposition" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="trees.heavy-light-decomposition" />
+
 A heavy-light decomposition cuts a tree into chains. At every vertex, one child is designated **heavy**: the child whose subtree holds the most vertices. The chain follows heavy edges downward, so each chain is a path from a vertex down to a leaf or to a light edge. The chains are then flattened into one array, and the vertices of each chain occupy a contiguous range of it.
 
 The payoff is that a path in the tree crosses only a logarithmic number of chains. The reason is a single inequality: a **light** edge, which is any edge that is not heavy, at least halves the size of the subtree it leads into. A path from the root to a leaf therefore contains at most $\lfloor \log_2 n \rfloor$ light edges, and each chain segment of the path is one contiguous range of the flattened array.
@@ -303,9 +307,9 @@ The first three rows are the standard division of the tree-query toolkit. Binary
 
 ## Reference implementations
 
-<CodeViewer algorithm="trees.heavy-light-decomposition" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
-The manifest publishes two variants. The `minimal` variant is a reusable class whose constructor takes an adjacency list, a root, and the value of every vertex. It computes the subtree sizes, the heavy children, the chain heads and the positions, and it exposes the size of a subtree, the heavy child of a vertex, the head of a chain, the position of a vertex, and the sum of the values on a path. The `program` variant reads the tree, then the queries, and prints one path sum per line. The value of the vertex $i$ is $i + 1$.
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source. The manifest publishes two variants. The `minimal` variant is a reusable class whose constructor takes an adjacency list, a root, and the value of every vertex. It computes the subtree sizes, the heavy children, the chain heads and the positions, and it exposes the size of a subtree, the heavy child of a vertex, the head of a chain, the position of a vertex, and the sum of the values on a path. The `program` variant reads the tree, then the queries, and prints one path sum per line. The value of the vertex $i$ is $i + 1$.
 
 ## Recursion decision
 
