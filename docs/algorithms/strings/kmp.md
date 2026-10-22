@@ -11,6 +11,9 @@ keywords:
 prerequisites:
     required: [foundations.complexity]
     recommended: [foundations.recursion, foundations.sorting]
+complexity:
+    time: "O(n + m)"
+    space: "O(m)"
 assumptions:
     - The pattern and the text are sequences of comparable symbols, so testing whether two symbols are equal takes constant time.
     - The whole text is available before the answer is required, so the search may read the text more than once.
