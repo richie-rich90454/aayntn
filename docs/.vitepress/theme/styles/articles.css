@@ -19,7 +19,7 @@
     align-items: center;
     gap: var(--space-2);
     padding: var(--space-2) var(--space-4);
-    background: var(--color-black);
+    background: var(--surface-inverse);
     color: var(--color-white);
     border-bottom: 2px solid var(--color-gold);
 }
@@ -52,9 +52,9 @@
 .aayntn-summary__value {
     margin-top: var(--space-1);
     font-family: var(--font-code);
-    font-size: 0.9375rem;
+    font-size: var(--text-code);
     font-weight: 500;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
 }
 
 .aayntn-summary__rows {
@@ -103,7 +103,7 @@
 .aayntn-math__label {
     display: block;
     margin-bottom: var(--space-2);
-    color: var(--color-cobalt);
+    color: var(--text-accent);
     font-size: var(--text-meta);
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -204,7 +204,7 @@ html.dark .aayntn-math--recurrence .aayntn-math__label {
 
 .aayntn-prereq__head {
     padding: var(--space-2) var(--space-4);
-    background: var(--color-black);
+    background: var(--surface-inverse);
     color: var(--color-white);
     border-bottom: 2px solid var(--color-gold);
     font-size: var(--text-meta);
@@ -237,6 +237,50 @@ html.dark .aayntn-math--recurrence .aayntn-math__label {
     width: 12px;
     height: 12px;
     border: 1px solid var(--border-ink);
+}
+
+.aayntn-prereq__swatch--required {
+    background: var(--color-cobalt);
+}
+
+.aayntn-prereq__swatch--recommended {
+    background: repeating-linear-gradient(90deg, var(--border-strong) 0 4px, transparent 4px 7px);
+}
+
+/* The map is drawn in the colors of the appearance, so that the picture
+   reads on a dark page as well as on a light one. */
+.aayntn-prereq__arrow--required {
+    fill: var(--color-cobalt);
+}
+
+.aayntn-prereq__arrow--recommended {
+    fill: var(--border-strong);
+}
+
+.aayntn-prereq__edge--required {
+    stroke: var(--color-cobalt);
+}
+
+.aayntn-prereq__edge--recommended {
+    stroke: var(--border-strong);
+}
+
+.aayntn-prereq__node--focused {
+    fill: var(--color-cobalt);
+    stroke: var(--color-ultramarine);
+}
+
+.aayntn-prereq__node--plain {
+    fill: var(--surface-raised);
+    stroke: var(--border-strong);
+}
+
+.aayntn-prereq__text--focused {
+    fill: var(--color-white);
+}
+
+.aayntn-prereq__text--plain {
+    fill: var(--text-primary);
 }
 
 /* -------------------------------------------------------------------- */
@@ -317,7 +361,7 @@ html.dark .aayntn-math--recurrence .aayntn-math__label {
 }
 
 .aayntn-hint__toggle {
-    color: var(--color-cobalt);
+    color: var(--text-accent);
     font-size: var(--text-meta);
     font-weight: 700;
 }
