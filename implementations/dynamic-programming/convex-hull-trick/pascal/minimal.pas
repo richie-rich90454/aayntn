@@ -3,6 +3,8 @@ program minimal;
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
+uses SysUtils;
+
 type
   TInt64Array = array of Int64;
 
