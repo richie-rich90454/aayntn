@@ -23,7 +23,7 @@ public final class Recursive {
     /**
      * Visits every vertex reachable from source.
      *
-     * @param adj    adjacency list; adj.get(v) holds the neighbours of v
+     * @param adj    adjacency list; adj.get(v) holds the neighbors of v
      * @param source the start vertex
      * @return the visited vertices in visit order
      */
@@ -39,7 +39,7 @@ public final class Recursive {
     }
 
     /**
-     * Marks v as visited and recurses into the neighbours that are still
+     * Marks v as visited and recurses into the neighbors that are still
      * unvisited. The frame of this call stays on the stack for as long as the
      * subtree of v is explored, so the recursion depth equals the depth of the
      * current path.
