@@ -57,7 +57,7 @@
     align-items: center;
     gap: var(--space-3);
     padding: var(--space-3) var(--space-4);
-    background: var(--color-black);
+    background: var(--surface-inverse);
     color: var(--color-white);
 }
 
