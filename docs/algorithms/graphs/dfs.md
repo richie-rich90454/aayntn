@@ -24,6 +24,10 @@ reviewed: false
 
 <AlgorithmSummary algorithm="graphs.dfs" />
 
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="graphs.dfs" />
+
 A depth-first search explores a graph by following one branch as far as it goes and only then backtracking to the most recent vertex that still has an unexplored neighbor. The whole algorithm is a visited array and a container that hands back the most recently discovered vertex.
 
 Two decisions matter before you write a line of code: whether that container is a stack or a queue, and whether a vertex is marked when it is discovered or when it is expanded. The first choice decides whether you get a depth-first or a breadth-first traversal. The second choice decides how much memory the traversal needs.
@@ -277,9 +281,9 @@ The last two rows matter as much as the first. Depth-first search is a waste of 
 
 ## Reference implementations
 
-<CodeViewer algorithm="graphs.dfs" />
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source.
 
-The manifest for this algorithm publishes three variants. The `iterative` variant marks a vertex when it is popped, needs $O(V + E)$ auxiliary space, and is the recommended form. The `recursive` variant marks a vertex on entry, needs $O(V)$ auxiliary space, and is recommended only when the depth of the graph is known to be small. The `program` variant runs the iterative traversal and prints the reachable set in increasing index order, so that the six language versions produce identical output.
+The six implementations are listed above, with the language and the variant selectors, the recommendation for each, the verification status and a link to the raw source. The manifest for this algorithm publishes three variants. The `iterative` variant marks a vertex when it is popped, needs $O(V + E)$ auxiliary space, and is the recommended form. The `recursive` variant marks a vertex on entry, needs $O(V)$ auxiliary space, and is recommended only when the depth of the graph is known to be small. The `program` variant runs the iterative traversal and prints the reachable set in increasing index order, so that the six language versions produce identical output.
 
 ## Recursion decision
 
