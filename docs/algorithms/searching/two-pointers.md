@@ -11,6 +11,9 @@ keywords:
 prerequisites:
     required: [foundations.complexity]
     recommended: [searching.binary-search, searching.sliding-window]
+complexity:
+    time: "O(n)"
+    space: "O(1)"
 assumptions:
     - The condition that the pointers exploit is monotone, so that a discarded region is provably empty.
 reviewed: false
@@ -290,6 +293,32 @@ The linear bound is the whole point of the technique, and it is worth stating wh
 
 The fourth and last rows are the ones worth memorizing, because they are the cases where a two-pointer solution is silently wrong rather than merely slow.
 
+## Recursion decision
+
+The opposite-end scan is a loop, and the loop is the right form in every language. The window pattern is a loop too, and there is nothing in either of them that a call stack could hold better.
+
+The recursion question belongs to the alternative formulations. A divide-and-conquer pair sum splits the array in half, solves each half, and combines the answers; its depth is $O(\log n)$, which is safe in every language. A formulation that recurses once per _element_, such as one that tries the left end and then recurses on the remainder of the array, has depth $O(n)$ and crashes on a large array.
+
+| Language | Default stack | Practical depth | Recommendation |
+| --- | --- | --- | --- |
+| C and C++ | 8 MB on Linux | About $10^5$ frames | The loop; a recursive split at depth $\log_2 n$ is also fine |
+| Java | 512 KB to 1 MB per thread | About $10^4$ frames | The loop |
+| Python | Interpreter limit of 1000 | 1000 frames | The loop; raising the limit does not enlarge the C stack |
+| Pascal | The operating system stack | Depends on the platform | The loop |
+| JavaScript | The V8 engine limit | About $10^4$ frames | The loop |
+
+<MathPanel type="counterexample" title="Counterexample">
+A sorted array of $10^6$ elements searched with a recursive formulation that
+considers one end at every level makes $10^6$ nested calls. In C++ on Linux,
+with an 8 MB stack and a frame of roughly 64 bytes, the stack is exhausted
+after about $130\,000$ frames, so the program dies with a segmentation fault
+before it has examined $13\%$ of the array. The loop finishes the same array
+in at most $2 \cdot 10^5$ comparisons. The input is legal and the answer is
+well defined; only the choice of implementation is wrong.
+</MathPanel>
+
+The rule of thumb is simple: if the recursion depth would be proportional to the length of the array, write the loop.
+
 ## Common mistakes
 
 | Mistake | What happens | How to avoid |
@@ -404,7 +433,7 @@ Under contest pressure, the errors above are what cost points, and the decision 
 
 ## Review checklist
 
-Answer these without looking back. If you cannot, revisit the section named in parentheses).
+Answer these without looking back. If you cannot, revisit the section named in parentheses.
 
 1. What must be true of the array for the opposite-end pattern, and what breaks without it? (Key insight)
 2. State the elimination lemma for the case $a_l + a_r < T$. (Formal model)
