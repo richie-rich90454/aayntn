@@ -3,15 +3,15 @@ import { computed } from "vue";
 import stats from "../data/generated/stats.json";
 import algorithms from "../data/generated/algorithms.json";
 import visualizations from "../data/generated/visualizations.json";
-import type { AlgorithmEntry, VisualizationEntry } from "../data/types";
+import type { AlgorithmEntry, VisualizationEntry } from "./data/types";
 
 /**
  * The homepage.
  *
  * A strongly color-blocked entrance that explains the product immediately and
  * then routes the reader into the four division tracks, the encyclopedia, the
- * laboratory and the practice catalog. The information hierarchy is carried
- * by typography and grid; ornament refines it without changing it.
+ * laboratory and the practice catalog. The information hierarchy is carried by
+ * typography and by the grid; the ornament refines it without changing it.
  */
 
 const algorithmList = algorithms as AlgorithmEntry[];
@@ -43,7 +43,7 @@ const divisions = [
         id: "platinum",
         name: "Platinum",
         focus: "Advanced methods",
-        copy: "Graph and tree decompositions, advanced range structures, DP optimization, and the techniques that separate finalists from qualifiers.",
+        copy: "Graph and tree decompositions, advanced range structures, dynamic-programming optimization, and the techniques that separate finalists from qualifiers.",
         href: "/curriculum/platinum/",
     },
 ];
@@ -64,29 +64,68 @@ const featured = computed(() => {
 
 const featuredLabs = computed(() => visualizationList.slice(0, 6));
 
+const method = [
+    {
+        numeral: "01",
+        kicker: "Recognition",
+        title: "What to notice",
+        copy: "Every article opens with the problem shape that calls for the technique and the constraints that rule the alternatives in or out.",
+    },
+    {
+        numeral: "02",
+        kicker: "Derivation",
+        title: "Why it is correct",
+        copy: "Formal models, lemmas, invariants and exchange arguments, never the claim that something obviously works.",
+    },
+    {
+        numeral: "03",
+        kicker: "Code",
+        title: "Six real implementations",
+        copy: "Source files in the language they claim to be, each with a per-language recommendation and an honest note on recursion depth.",
+    },
+    {
+        numeral: "04",
+        kicker: "Motion",
+        title: "Deterministic animation",
+        copy: "A reference implementation emits an event trace and a scene renders it, so the picture cannot drift away from the mathematics.",
+    },
+    {
+        numeral: "05",
+        kicker: "Failure",
+        title: "Why this fails",
+        copy: "The smallest counterexample that breaks a plausible wrong approach, explained rather than merely mentioned.",
+    },
+    {
+        numeral: "06",
+        kicker: "Transfer",
+        title: "Where to practice",
+        copy: "Problems arranged as recognition, application, adaptation, combination, challenge and transfer, not sorted by a guessed difficulty.",
+    },
+];
+
 const subjects = [
     {
         href: "/algorithms/graphs/",
         kicker: "Graphs",
-        title: "From BFS to maximum flow",
+        title: "From breadth-first search to minimum cut",
         copy: "Representations, traversal, shortest paths, connectivity, and the reductions between them.",
     },
     {
         href: "/algorithms/dynamic-programming/",
         kicker: "Dynamic programming",
         title: "State design and proof",
-        copy: "Memoization, tabulation, knapsack families, DAG and tree DP, and the optimization techniques layered on top.",
+        copy: "Memoization, tabulation, knapsack families, directed acyclic graph and tree dynamic programming, and the optimization layered on top.",
     },
     {
         href: "/algorithms/range-queries/",
         kicker: "Range structures",
         title: "Fenwick, segment tree, sparse table",
-        copy: "Which algebraic property a structure needs, and how to choose the one your problem actually requires.",
+        copy: "Which algebraic property a structure needs, and how to choose the one the problem actually requires.",
     },
     {
         href: "/algorithms/trees/",
         kicker: "Trees",
-        title: "LCA, heavy-light, rerooting",
+        title: "Lowest common ancestor, heavy paths, rerooting",
         copy: "Rooting, binary lifting, path queries, and the decompositions that turn a tree into an array.",
     },
     {
@@ -98,7 +137,7 @@ const subjects = [
     {
         href: "/algorithms/strings/",
         kicker: "Strings",
-        title: "KMP, Z, suffix structures",
+        title: "KMP, the Z function, suffix structures",
         copy: "Pattern matching, rolling hashes, tries, and suffix arrays for long strings.",
     },
 ];
@@ -114,15 +153,15 @@ const languages = [
 </script>
 
 <template>
-    <div class="aayntn-home-shell">
+    <div class="aayntn-home">
         <a class="skip-link" href="#main">Skip to content</a>
 
         <section class="aayntn-hero">
             <div>
                 <p class="aayntn-hero__eyebrow">
-                    <span class="aayntn-chip aayntn-chip--accent">Encyclopedia</span>
-                    <span class="aayntn-chip aayntn-chip--muted">Six languages</span>
-                    <span class="aayntn-chip aayntn-chip--muted">Static, account-free</span>
+                    <span class="aayntn-chip">Encyclopedia</span>
+                    <span class="aayntn-chip">Six languages</span>
+                    <span class="aayntn-chip">No account, no backend</span>
                 </p>
                 <h1 class="aayntn-hero__title">
                     All algorithms
@@ -144,11 +183,11 @@ const languages = [
                 </div>
             </div>
 
-            <aside class="aayntn-hero__panel" aria-label="Example session">
+            <aside class="aayntn-hero__panel" aria-label="A worked session">
                 <div class="aayntn-hero__panel-title">A worked session</div>
                 <pre
                     class="aayntn-hero__panel-body"
-                ><code><span class="c">// problem: shortest path with nonnegative weights</span>
+                ><code><span class="c">// shortest paths, all weights nonnegative</span>
 <span class="k">while</span> (!pq.empty()) {
   <span class="k">auto</span> [d, u] = pq.top(); pq.pop();
   <span class="k">if</span> (d != dist[u]) <span class="k">continue</span>;  <span class="c">// stale</span>
@@ -161,11 +200,19 @@ const languages = [
             </aside>
         </section>
 
-        <section class="aayntn-home__band" aria-labeledby="home-divisions">
+        <section class="aayntn-home__band" aria-labelledby="home-divisions">
             <div class="aayntn-home__band-inner">
                 <div class="aayntn-section__head">
-                    <h2 id="home-divisions" class="aayntn-section__title">The algorithm atlas</h2>
-                    <a class="aayntn-section__more" href="/curriculum/">Full curriculum →</a>
+                    <div>
+                        <h2 id="home-divisions" class="aayntn-section__title">
+                            The algorithm atlas
+                        </h2>
+                        <p class="aayntn-section__lede">
+                            Four guided tracks through the same encyclopedia, organized by the idea
+                            behind a technique rather than by the contest it appeared in.
+                        </p>
+                    </div>
+                    <a class="aayntn-section__more" href="/curriculum/">The full curriculum</a>
                 </div>
             </div>
             <div class="aayntn-divisions">
@@ -183,8 +230,8 @@ const languages = [
             </div>
         </section>
 
-        <section class="aayntn-home__band aayntn-band--ink" aria-labeledby="home-how">
-            <div class="aayntn-home__band-inner">
+        <section class="aayntn-section aayntn-band--ink" aria-labelledby="home-how">
+            <div class="aayntn-section__inner">
                 <div class="aayntn-section__head">
                     <div>
                         <h2 id="home-how" class="aayntn-section__title">
@@ -200,60 +247,17 @@ const languages = [
                 </div>
 
                 <div class="aayntn-feature-grid">
-                    <div class="aayntn-feature">
-                        <div class="aayntn-feature__kicker">01 · Recognition</div>
-                        <div class="aayntn-feature__title">What to notice</div>
-                        <p class="aayntn-feature__copy">
-                            Every article opens with the problem shape that calls for the technique
-                            and the constraints that rule the alternatives in or out.
-                        </p>
-                    </div>
-                    <div class="aayntn-feature">
-                        <div class="aayntn-feature__kicker">02 · Derivation</div>
-                        <div class="aayntn-feature__title">Why it is correct</div>
-                        <p class="aayntn-feature__copy">
-                            Formal models, lemmas, invariants and exchange arguments — not "it
-                            obviously works".
-                        </p>
-                    </div>
-                    <div class="aayntn-feature">
-                        <div class="aayntn-feature__kicker">03 · Code</div>
-                        <div class="aayntn-feature__title">Six real implementations</div>
-                        <p class="aayntn-feature__copy">
-                            Source files in the language they claim to be, with a per-language
-                            recommendation and an honest note on recursion depth.
-                        </p>
-                    </div>
-                    <div class="aayntn-feature">
-                        <div class="aayntn-feature__kicker">04 · Motion</div>
-                        <div class="aayntn-feature__title">Deterministic animation</div>
-                        <p class="aayntn-feature__copy">
-                            A reference implementation emits an event trace; the scene renders it.
-                            Step backwards, scrub, and read the narration.
-                        </p>
-                    </div>
-                    <div class="aayntn-feature">
-                        <div class="aayntn-feature__kicker">05 · Failure</div>
-                        <div class="aayntn-feature__title">Why this fails</div>
-                        <p class="aayntn-feature__copy">
-                            The smallest counterexample that breaks a plausible wrong approach,
-                            explained rather than merely mentioned.
-                        </p>
-                    </div>
-                    <div class="aayntn-feature">
-                        <div class="aayntn-feature__kicker">06 · Transfer</div>
-                        <div class="aayntn-feature__title">Where to practice</div>
-                        <p class="aayntn-feature__copy">
-                            Problems arranged as recognition, direct application, adaptation,
-                            combination, challenge and transfer — not sorted by a guessed
-                            difficulty.
-                        </p>
+                    <div v-for="step in method" :key="step.numeral" class="aayntn-feature">
+                        <span class="aayntn-numeral">{{ step.numeral }}</span>
+                        <div class="aayntn-feature__kicker">{{ step.kicker }}</div>
+                        <div class="aayntn-feature__title">{{ step.title }}</div>
+                        <p class="aayntn-feature__copy">{{ step.copy }}</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="aayntn-section" aria-labeledby="home-featured">
+        <section class="aayntn-section" aria-labelledby="home-featured">
             <div class="aayntn-section__inner">
                 <div class="aayntn-section__head">
                     <div>
@@ -266,7 +270,7 @@ const languages = [
                             a tree query.
                         </p>
                     </div>
-                    <a class="aayntn-section__more" href="/algorithms/">All algorithms →</a>
+                    <a class="aayntn-section__more" href="/algorithms/">All algorithms</a>
                 </div>
 
                 <div class="aayntn-feature-grid">
@@ -280,27 +284,26 @@ const languages = [
                         <div class="aayntn-feature__title">{{ entry.title }}</div>
                         <p class="aayntn-feature__copy">{{ entry.summary }}</p>
                         <div class="aayntn-feature__meta">
-                            {{ entry.variants.length }} implementations ·
-                            {{ entry.complexity.space }} space
+                            {{ entry.variants.length }} implementations,
+                            {{ entry.complexity.space }} of space
                         </div>
                     </a>
                 </div>
             </div>
         </section>
 
-        <section class="aayntn-section aayntn-band--ink" aria-labeledby="home-lab">
+        <section class="aayntn-section" aria-labelledby="home-lab">
             <div class="aayntn-section__inner">
                 <div class="aayntn-section__head">
                     <div>
                         <h2 id="home-lab" class="aayntn-section__title">The laboratory</h2>
                         <p class="aayntn-section__lede">
-                            Interactive SVG demonstrations driven by a trusted TypeScript reference
-                            implementation. The same event stream that drives the picture also
-                            drives the narration, so the animation cannot drift away from the
-                            mathematics.
+                            Interactive demonstrations driven by a trusted reference implementation.
+                            The same event stream that draws the picture also drives the narration,
+                            so the animation cannot drift away from the mathematics.
                         </p>
                     </div>
-                    <a class="aayntn-section__more" href="/laboratory/">All laboratories →</a>
+                    <a class="aayntn-section__more" href="/laboratory/">All laboratories</a>
                 </div>
 
                 <div class="aayntn-feature-grid">
@@ -313,25 +316,26 @@ const languages = [
                         <div class="aayntn-feature__kicker">{{ lab.scene }}</div>
                         <div class="aayntn-feature__title">{{ lab.title }}</div>
                         <p class="aayntn-feature__copy">
-                            Step, scrub, change the input, and read the state narration. Every scene
-                            has a static fallback that works without JavaScript.
+                            Step, scrub, change the input, and read the state narration. Every
+                            laboratory has a static fallback that works without JavaScript.
                         </p>
                     </a>
                 </div>
             </div>
         </section>
 
-        <section class="aayntn-section" aria-labeledby="home-subjects">
+        <section class="aayntn-section aayntn-band--ink" aria-labelledby="home-subjects">
             <div class="aayntn-section__inner">
                 <div class="aayntn-section__head">
                     <div>
                         <h2 id="home-subjects" class="aayntn-section__title">Browse by subject</h2>
                         <p class="aayntn-section__lede">
-                            The encyclopedia is organized by conceptual subject rather than by
-                            contest division, so related techniques stay together.
+                            The encyclopedia is organized by conceptual subject, so that related
+                            techniques stay together and a reader can find the family a technique
+                            belongs to.
                         </p>
                     </div>
-                    <a class="aayntn-section__more" href="/algorithms/">All subjects →</a>
+                    <a class="aayntn-section__more" href="/algorithms/">All subjects</a>
                 </div>
 
                 <div class="aayntn-feature-grid">
@@ -349,7 +353,7 @@ const languages = [
             </div>
         </section>
 
-        <section class="aayntn-section" aria-labeledby="home-languages">
+        <section class="aayntn-section" aria-labelledby="home-languages">
             <div class="aayntn-section__inner">
                 <div class="aayntn-section__head">
                     <div>
@@ -358,11 +362,11 @@ const languages = [
                         </h2>
                         <p class="aayntn-section__lede">
                             Every algorithm is implemented in all six languages and tested against
-                            the same fixtures. C, C++17, Java and Python are accepted by USACO;
+                            the same fixtures. C, C++17, Java and Python are accepted by USACO.
                             Pascal and JavaScript are educational reference implementations.
                         </p>
                     </div>
-                    <a class="aayntn-section__more" href="/languages/">Compare languages →</a>
+                    <a class="aayntn-section__more" href="/languages/">Compare the languages</a>
                 </div>
 
                 <div class="aayntn-stats">
@@ -378,7 +382,7 @@ const languages = [
             </div>
         </section>
 
-        <section class="aayntn-section aayntn-band--ink" aria-labeledby="home-stats">
+        <section class="aayntn-section aayntn-band--ink" aria-labelledby="home-stats">
             <div class="aayntn-section__inner">
                 <div class="aayntn-section__head">
                     <h2 id="home-stats" class="aayntn-section__title">What is published</h2>
