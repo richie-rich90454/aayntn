@@ -763,13 +763,14 @@
 
 .aayntn-button--ghost {
     background: transparent;
-    color: var(--color-white);
+    border-color: currentColor;
+    color: inherit;
 }
 
 .aayntn-button--ghost:hover {
-    background: var(--color-white);
-    color: var(--color-cobalt);
-    border-color: var(--color-white);
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+    color: var(--color-black);
 }
 
 .aayntn-button--ink {
@@ -847,11 +848,11 @@
     margin-top: var(--space-4);
     font-size: var(--text-secondary-copy);
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--color-white);
 }
 
 .aayntn-division--gold .aayntn-division__copy {
-    color: rgba(22, 22, 22, 0.82);
+    color: #161616;
 }
 
 .aayntn-division__count {
@@ -1037,7 +1038,7 @@
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1;
-    color: var(--color-cobalt);
+    color: var(--text-accent);
 }
 
 .aayntn-stat__label {
