@@ -24,7 +24,7 @@ public final class Program {
     /**
      * Computes the distance from source to every vertex of an unweighted graph.
      *
-     * @param adj    adjacency list; adj.get(v) holds the neighbours of v
+     * @param adj    adjacency list; adj.get(v) holds the neighbors of v
      * @param source the start vertex
      * @return the distance from source to every vertex, -1 when unreachable
      */
