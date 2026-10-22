@@ -145,7 +145,6 @@ describe("the components", () => {
             "MathPanel",
             "Ornament",
             "PracticeCatalog",
-            "PracticeCatalogue",
             "PrerequisiteGraph",
             "ProgressDashboard",
             "Synonyms",
