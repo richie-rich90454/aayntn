@@ -1,53 +1,62 @@
-# name: Validate
+name: Validate
 
-# # The content checks: schemas, identifiers, the prerequisite graph, the
-# # internal links and the mathematics. Nothing is built until the content is
-# # sound, because a broken link in a technical reference is worse than a
-# # missing page.
+# The content checks: schemas, identifiers, the prerequisite graph, the
+# internal links and the mathematics. Nothing is built until the content is
+# sound, because a broken link in a technical reference is worse than a
+# missing page.
 
-# on:
-#     push:
-#         branches: [main]
-#     pull_request:
-#     workflow_dispatch:
+on:
+    push:
+        branches: [main]
+    pull_request:
+    workflow_dispatch:
 
-# concurrency:
-#     group: validate-${{ github.ref }}
-#     cancel-in-progress: true
+concurrency:
+    group: validate-${{ github.ref }}
+    cancel-in-progress: true
 
-# jobs:
-#     content:
-#         name: Content and links
-#         runs-on: ubuntu-latest
-#         steps:
-#             - uses: actions/checkout@v4
+jobs:
+    content:
+        name: Content and links
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
 
-#             - uses: pnpm/action-setup@v4
-#               with:
-#                   version: 12.14.0
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 12.14.0
 
-#             - uses: actions/setup-node@v4
-#               with:
-#                   node-version: 22
-#                   cache: pnpm
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: pnpm
 
-#             - name: Install the dependencies
-#               run: pnpm install --frozen-lockfile
+            - name: Install the dependencies
+              run: pnpm install --frozen-lockfile
 
-#             - name: Check the formatting
-#               run: pnpm run format:check
+            - name: Check the formatting
+              run: pnpm run format:check
 
-#             - name: Check the types
-#               run: pnpm exec tsc --noEmit
+            - name: Check the types
+              run: pnpm exec tsc --noEmit
 
-#             - name: Generate the indexes
-#               run: pnpm run generate
+            - name: Generate the indexes
+              run: pnpm run generate
 
-#             - name: Validate the content
-#               run: pnpm run validate
+            - name: Check that the generated files are the ones in the repository
+              run: |
+                  set -euo pipefail
+                  if ! git diff --quiet; then
+                    echo "The generator wrote something that the repository does not hold:"
+                    git diff --stat
+                    exit 1
+                  fi
 
-#             - name: Check the internal links
-#               run: pnpm run check:links
+            - name: Validate the content
+              run: pnpm run validate
 
-#             - name: Run the test suite
-#               run: pnpm test
+            - name: Check the internal links
+              run: pnpm run check:links
+
+            - name: Run the test suite
+              run: pnpm test
