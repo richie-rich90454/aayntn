@@ -18,6 +18,9 @@ keywords:
 prerequisites:
     required: [foundations.sorting, foundations.complexity]
     recommended: [searching.binary-search, foundations.recursion]
+complexity:
+    time: "O(n log n)"
+    space: "O(n)"
 assumptions:
     - The sequence is static, so that a value once read is never changed.
     - The comparison is a total order, so that "strictly less" is a transitive relation.
