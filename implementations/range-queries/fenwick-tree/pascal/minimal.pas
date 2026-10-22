@@ -25,13 +25,16 @@ type
   end;
 
 constructor TFenwick.Create(N: Integer);
+var
+  I: Integer;
 begin
   inherited Create;
   if N < 0 then
     N := 0;
   FN := N;
   SetLength(FTree, N + 1);
-  FillChar(FTree[0], (N + 1) * SizeOf(Int64), 0);
+  for I := 0 to N do
+    FTree[I] := 0;
 end;
 
 destructor TFenwick.Destroy;
