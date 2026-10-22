@@ -89,27 +89,27 @@ const sidebar: DefaultTheme.Config["sidebar"] = {
                 { text: "How to use aayntn", link: "/start/" },
                 { text: "From AP Computer Science A", link: "/start/from-ap-csa/" },
                 {
-                    text: "1 · Computational foundations",
+                    text: "1 — Computational foundations",
                     link: "/start/from-ap-csa/part-1-computational-foundations",
                 },
                 {
-                    text: "2 · Algorithm analysis",
+                    text: "2 — Algorithm analysis",
                     link: "/start/from-ap-csa/part-2-algorithm-analysis",
                 },
                 {
-                    text: "3 · Discrete mathematics",
+                    text: "3 — Discrete mathematics",
                     link: "/start/from-ap-csa/part-3-discrete-mathematics",
                 },
                 {
-                    text: "4 · Data structures and modeling",
+                    text: "4 — Data structures and modeling",
                     link: "/start/from-ap-csa/part-4-data-structures-and-modeling",
                 },
                 {
-                    text: "5 · Programming language transition",
+                    text: "5 — Programming language transition",
                     link: "/start/from-ap-csa/part-5-language-transition",
                 },
                 {
-                    text: "6 · Contest problem-solving literacy",
+                    text: "6 — Contest problem-solving literacy",
                     link: "/start/from-ap-csa/part-6-contest-literacy",
                 },
             ],
