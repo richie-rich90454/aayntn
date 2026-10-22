@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useData, useRoute } from "vitepress";
 import { useThemeToggle } from "../../composables/useTheme";
 import { sidebarOpen, toggleSidebar } from "../../composables/useSidebarToggle";
@@ -34,7 +34,7 @@ function isActive(item: { link?: string; activeMatch?: string }): boolean {
                 type="button"
                 :aria-expanded="sidebarOpen"
                 aria-controls="aayntn-sidebar"
-                aria-label="Toggle navigation"
+                aria-label="Open the section navigation"
                 @click="toggleSidebar"
             >
                 <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
@@ -49,7 +49,7 @@ function isActive(item: { link?: string; activeMatch?: string }): boolean {
             </button>
 
             <a class="aayntn-brand" href="/">
-                <span class="aayntn-brand__mark">aayntn</span>
+                <span class="aayntn-brand__mark">A.A.Y.N.T.N.</span>
                 <span class="aayntn-brand__tagline">All Algorithms You Need to Know</span>
             </a>
 
@@ -70,8 +70,8 @@ function isActive(item: { link?: string; activeMatch?: string }): boolean {
                 <button
                     class="aayntn-icon-button"
                     type="button"
-                    :aria-label="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
-                    :title="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
+                    :aria-label="isDark ? 'Switch to the light theme' : 'Switch to the dark theme'"
+                    :title="isDark ? 'Switch to the light theme' : 'Switch to the dark theme'"
                     @click="toggle"
                 >
                     <svg
