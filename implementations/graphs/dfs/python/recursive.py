@@ -16,7 +16,7 @@ sys.setrecursionlimit(10000)
 def dfs_recursive(adj, source):
     """Return the vertices reachable from source, in the order they were visited.
 
-    adj is an adjacency list: adj[v] lists the neighbours of the vertex v.
+    adj is an adjacency list: adj[v] lists the neighbors of the vertex v.
     """
     if source < 0 or source >= len(adj):
         return []
