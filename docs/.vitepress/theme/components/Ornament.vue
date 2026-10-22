@@ -56,7 +56,7 @@ withDefaults(defineProps<{ motif?: string; label?: string }>(), {
         </g>
         <g fill="currentColor">
             <rect x="112" y="-2" width="16" height="16" />
-            <rect x="116" y="2" width="8" height="8" fill="#161616" />
+            <rect class="aayntn-ornament__hole" x="116" y="2" width="8" height="8" />
         </g>
     </svg>
 
