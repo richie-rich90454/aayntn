@@ -27,7 +27,7 @@ Nothing here is a lesson. The lessons are in the [academy](/start/) and the [alg
 
 ## The independence disclaimer
 
-aayntn is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
+A.A.Y.N.T.N. is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
 
 Nothing in this section is an official document, an official rule, or an official interpretation of a rule. The rules of the competition belong to the competition, and the official instructions are the only statement of them. Where this section summarizes a rule, it summarizes it in the encyclopedia's own words and links to the original so that you can check the wording yourself.
 
