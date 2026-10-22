@@ -29,13 +29,39 @@ export interface BookmarkedTopic {
     addedAt: string;
 }
 
+export type AttemptResult =
+    | "accepted"
+    | "wrong-answer"
+    | "time-limit"
+    | "runtime-error"
+    | "not-attempted";
+
 export interface AttemptRecord {
     problemId: string;
     contest?: string;
     division?: string;
-    result: "accepted" | "wrong-answer" | "time-limit" | "runtime-error" | "not-attempted";
+    result: AttemptResult;
     attemptedAt: string;
     minutes?: number;
+    /** The contest session the attempt belongs to, when it came from one. */
+    sessionId?: string;
+}
+
+/**
+ * One contest simulation.
+ *
+ * The session holds the state of a single run: the division, the time limit
+ * that was chosen, and the verdict recorded for every problem. It is stored
+ * beside the flat attempt log rather than inside it, because the log is an
+ * append-only history and the session is the current state of a run.
+ */
+export interface ContestSession {
+    sessionId: string;
+    division: string;
+    limitMinutes: number;
+    startedAt: string;
+    finishedAt?: string;
+    attempts: AttemptRecord[];
 }
 
 export interface ProgressSnapshot {
@@ -45,6 +71,7 @@ export interface ProgressSnapshot {
     problems: ProblemProgress[];
     bookmarks: BookmarkedTopic[];
     attempts: AttemptRecord[];
+    sessions?: ContestSession[];
     preferences: { language?: string; variant?: string | null };
 }
 
@@ -54,6 +81,13 @@ const STORE = "progress";
 
 export const LESSON_STATUSES: LessonStatus[] = ["not-started", "in-progress", "review", "mastered"];
 export const PROBLEM_STATUSES: ProblemStatus[] = ["not-attempted", "attempted", "solved"];
+export const ATTEMPT_RESULTS: AttemptResult[] = [
+    "accepted",
+    "wrong-answer",
+    "time-limit",
+    "runtime-error",
+    "not-attempted",
+];
 
 let dbPromise: Promise<IDBDatabase> | null = null;
 
@@ -90,6 +124,7 @@ const LESSON_KEY = "lesson:";
 const PROBLEM_KEY = "problem:";
 const BOOKMARK_KEY = "bookmark:";
 const ATTEMPT_KEY = "attempt:";
+const SESSION_KEY = "session:";
 
 export async function saveLessonProgress(lessonId: string, status: LessonStatus) {
     const record: LessonProgress & { key: string } = {
@@ -138,6 +173,32 @@ export async function recordAttempt(attempt: AttemptRecord) {
     await withStore("readwrite", (store) => store.put({ ...attempt, key }) as IDBRequest<unknown>);
 }
 
+/** Write the current state of one contest session. */
+export async function saveContestSession(session: ContestSession) {
+    const key = SESSION_KEY + session.sessionId;
+    await withStore("readwrite", (store) => store.put({ ...session, key }) as IDBRequest<unknown>);
+}
+
+/** Every stored contest session, oldest first. */
+export async function readContestSessions(): Promise<ContestSession[]> {
+    const entries = await withStore("readonly", (store) => store.getAll() as IDBRequest<unknown[]>);
+    const sessions: ContestSession[] = [];
+    for (const entry of entries ?? []) {
+        const record = entry as Record<string, unknown> & { key?: string };
+        if (typeof record.key !== "string") continue;
+        if (record.key.startsWith(SESSION_KEY)) sessions.push(record as unknown as ContestSession);
+    }
+    return sessions.sort((a, b) => a.startedAt.localeCompare(b.startedAt));
+}
+
+/** Forget one contest session. */
+export async function clearContestSession(sessionId: string) {
+    await withStore(
+        "readwrite",
+        (store) => store.delete(SESSION_KEY + sessionId) as IDBRequest<unknown>,
+    );
+}
+
 export async function readAll(): Promise<{
     lessons: LessonProgress[];
     problems: ProblemProgress[];
@@ -165,6 +226,7 @@ export async function readAll(): Promise<{
 
 export async function exportSnapshot(): Promise<ProgressSnapshot> {
     const { lessons, problems, bookmarks, attempts } = await readAll();
+    const sessions = await readContestSessions();
     return {
         version: 1,
         exportedAt: new Date().toISOString(),
@@ -172,6 +234,7 @@ export async function exportSnapshot(): Promise<ProgressSnapshot> {
         problems,
         bookmarks,
         attempts,
+        sessions,
         preferences: {
             language: localStorage.getItem("aayntn:language") ?? undefined,
             variant: localStorage.getItem("aayntn:variant") ?? null,
@@ -198,6 +261,9 @@ export async function importSnapshot(snapshot: ProgressSnapshot): Promise<void> 
     }
     for (const attempt of snapshot.attempts ?? []) {
         await recordAttempt(attempt);
+    }
+    for (const session of snapshot.sessions ?? []) {
+        await saveContestSession(session);
     }
 }
 
