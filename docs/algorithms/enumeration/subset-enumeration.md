@@ -19,6 +19,9 @@ keywords:
 prerequisites:
     required: [foundations.binary-representation, foundations.complexity]
     recommended: [foundations.recursion, foundations.sorting]
+complexity:
+    time: "O(2^n) per mask, O(n 2^n) with the subsets materialized"
+    space: "O(1) per mask, O(n) per subset"
 assumptions:
     - The items are distinguishable by position, so two choices of different positions are counted separately unless the statement says otherwise.
     - The number of items is small enough that a mask fits in one machine word, or the mask is held in an arbitrary precision integer.
