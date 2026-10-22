@@ -94,8 +94,8 @@ describe("the depth-first search demonstration reaches exactly the reachable set
             }
 
             const lines = adjacency.map(
-                (neighbours, index) =>
-                    `${names[index]}: ${neighbours.map((n) => names[n]!).join(" ")}`,
+                (neighbors, index) =>
+                    `${names[index]}: ${neighbors.map((n) => names[n]!).join(" ")}`,
             );
             const numbering = numberingOf(lines);
             const byName = new Map(names.map((name, index) => [name, index]));
@@ -115,8 +115,8 @@ describe("the depth-first search demonstration reaches exactly the reachable set
                 const current = queue.shift()!;
                 if (reference.has(current)) continue;
                 reference.add(current);
-                for (const neighbour of adjacency[byName.get(current)!]!) {
-                    queue.push(names[neighbour]!);
+                for (const neighbor of adjacency[byName.get(current)!]!) {
+                    queue.push(names[neighbor]!);
                 }
             }
 
@@ -143,8 +143,8 @@ describe("the breadth-first search demonstration records the true distances", ()
             }
 
             const lines = adjacency.map(
-                (neighbours, index) =>
-                    `${names[index]}: ${neighbours.map((n) => names[n]!).join(" ")}`,
+                (neighbors, index) =>
+                    `${names[index]}: ${neighbors.map((n) => names[n]!).join(" ")}`,
             );
             const numbering = numberingOf(lines);
             const byName = new Map(names.map((name, index) => [name, index]));
@@ -158,10 +158,10 @@ describe("the breadth-first search demonstration records the true distances", ()
             const queue = [byName.get("v0")!];
             while (queue.length) {
                 const current = queue.shift()!;
-                for (const neighbour of adjacency[current]!) {
-                    if (reference[neighbour] !== -1) continue;
-                    reference[neighbour] = reference[current]! + 1;
-                    queue.push(neighbour);
+                for (const neighbor of adjacency[current]!) {
+                    if (reference[neighbor] !== -1) continue;
+                    reference[neighbor] = reference[current]! + 1;
+                    queue.push(neighbor);
                 }
             }
 
@@ -188,15 +188,15 @@ describe("the Dijkstra demonstration agrees with a reference shortest path", () 
             );
             const lines: string[] = [];
             for (let index = 0; index < count; index += 1) {
-                const neighbours: string[] = [];
+                const neighbors: string[] = [];
                 for (let edge = 0; edge < 3; edge += 1) {
                     const to = Math.floor(random() * count);
                     const weight = Math.floor(random() * 10);
                     if (to === index) continue;
                     adjacency[index]!.push({ to, weight });
-                    neighbours.push(`${names[to]} ${weight}`);
+                    neighbors.push(`${names[to]} ${weight}`);
                 }
-                lines.push(`${names[index]}: ${neighbours.join(" ")}`);
+                lines.push(`${names[index]}: ${neighbors.join(" ")}`);
             }
 
             const numbering = numberingOf(lines);
