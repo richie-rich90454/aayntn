@@ -5,6 +5,7 @@ import AlgorithmSummary from "./components/articles/AlgorithmSummary.vue";
 import MathPanel from "./components/mathematics/MathPanel.vue";
 import PrerequisiteGraph from "./components/PrerequisiteGraph.vue";
 import PracticeCatalog from "./components/problems/PracticeCatalog.vue";
+import ContestSimulation from "./components/practice/ContestSimulation.vue";
 import ProgressDashboard from "./components/progress/ProgressDashboard.vue";
 import LearnNext from "./components/progress/LearnNext.vue";
 import Synonyms from "./components/Synonyms.vue";
@@ -35,6 +36,7 @@ export default {
         // The British spelling is kept as an alias so that a page written
         // against the older name still resolves.
         app.component("PracticeCatalogue", PracticeCatalog);
+        app.component("ContestSimulation", ContestSimulation);
         app.component("ProgressDashboard", ProgressDashboard);
         app.component("LearnNext", LearnNext);
         app.component("Synonyms", Synonyms);
