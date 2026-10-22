@@ -3,6 +3,8 @@ program PrefixSumsMinimal;
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
+uses SysUtils;
+
 type
   TIntArray = array of Int64;
 
