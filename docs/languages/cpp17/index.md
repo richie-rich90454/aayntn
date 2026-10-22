@@ -507,7 +507,7 @@ The same rule applies to a `std::map` whose value you want to change. Use `it->s
 
 ## Recursive and iterative traversal
 
-The recursive form of a depth-first search is short, and the iterative form is safe. The two produce the same visit order if the iterative form pushes the neighbours in reverse order.
+The recursive form of a depth-first search is short, and the iterative form is safe. The two produce the same visit order if the iterative form pushes the neighbors in reverse order.
 
 ```cpp
 #include <iostream>
