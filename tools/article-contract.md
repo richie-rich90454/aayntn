@@ -1,6 +1,6 @@
 # The article contract
 
-Every algorithm article in aayntn follows one structure, so that knowing one algorithm tells the reader how to read the next one. This document is the contract; `docs/algorithms/searching/binary-search.md` is the worked exemplar that satisfies it.
+Every algorithm article in A.A.Y.N.T.N. follows one structure, so that knowing one algorithm tells the reader how to read the next one. This document is the contract; `docs/algorithms/searching/binary-search.md` is the worked exemplar that satisfies it.
 
 ## Frontmatter
 
