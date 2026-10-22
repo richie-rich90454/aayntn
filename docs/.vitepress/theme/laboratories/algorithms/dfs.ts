@@ -86,8 +86,8 @@ function build(input: string): LabEvent[] {
                         ? "done"
                         : undefined,
         })),
-        edges: adjacency.flatMap((neighbours, from) =>
-            neighbours.map((to, order) => ({
+        edges: adjacency.flatMap((neighbors, from) =>
+            neighbors.map((to, order) => ({
                 from: String(from),
                 to: String(to),
                 directed: false,
@@ -95,8 +95,7 @@ function build(input: string): LabEvent[] {
                     state[from] === "completed" && state[to] !== "unvisited"
                         ? ("done" as const)
                         : ("idle" as const),
-                curve:
-                    neighbours.length > 1 ? (order - (neighbours.length - 1) / 2) * 26 : undefined,
+                curve: neighbors.length > 1 ? (order - (neighbors.length - 1) / 2) * 26 : undefined,
             })),
         ),
         cells: [],
@@ -160,16 +159,16 @@ function build(input: string): LabEvent[] {
             state: snapshot(`Visit ${labels[vertex]}.`),
         });
 
-        const neighbours = [...adjacency[vertex]!].sort((a, b) => a - b);
-        for (const neighbour of neighbours) {
-            if (state[neighbour] === "unvisited") {
-                state[neighbour] = "discovered";
-                stack.push(neighbour);
+        const neighbors = [...adjacency[vertex]!].sort((a, b) => a - b);
+        for (const neighbor of neighbors) {
+            if (state[neighbor] === "unvisited") {
+                state[neighbor] = "discovered";
+                stack.push(neighbor);
                 events.push({
                     type: "push",
-                    operation: "push-neighbour",
-                    narration: `Push the unvisited neighbour ${labels[neighbour]}.`,
-                    state: snapshot(`Push ${labels[neighbour]}.`),
+                    operation: "push-neighbor",
+                    narration: `Push the unvisited neighbor ${labels[neighbor]}.`,
+                    state: snapshot(`Push ${labels[neighbor]}.`),
                 });
             }
         }
@@ -178,7 +177,7 @@ function build(input: string): LabEvent[] {
         events.push({
             type: "complete",
             operation: "complete-vertex",
-            narration: `All neighbours of ${labels[vertex]} have been considered, so the traversal backtracks.`,
+            narration: `All neighbors of ${labels[vertex]} have been considered, so the traversal backtracks.`,
             state: snapshot(`Complete ${labels[vertex]}.`),
         });
     }
@@ -218,7 +217,7 @@ export const definition: LabDefinition = {
         },
     ],
     notes: [
-        "Gold marks the active vertex; green marks a vertex whose neighbours are done.",
+        "Gold marks the active vertex; green marks a vertex whose neighbors are done.",
         "Blue marks a vertex that has been discovered but not yet expanded.",
         "The stack shows which vertex will be expanded next.",
     ],
