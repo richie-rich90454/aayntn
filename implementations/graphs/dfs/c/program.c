@@ -2,11 +2,11 @@
 #include <stdlib.h>
 
 /*
- * An adjacency list for a graph on vertices 0..n-1: neighbours lists the
+ * An adjacency list for a graph on vertices 0..n-1: neighbors lists the
  * adjacent vertex indices and degree is their count.
  */
 typedef struct {
-    int *neighbours;
+    int *neighbors;
     int degree;
 } adjacency_list;
 
@@ -53,7 +53,7 @@ static int dfs_reachable(const adjacency_list *adj, int n, int source, int *orde
         order[count++] = v;
 
         for (int i = 0; i < adj[v].degree; i++) {
-            const int w = adj[v].neighbours[i];
+            const int w = adj[v].neighbors[i];
             if (!visited[w]) {
                 stack[top++] = w;
             }
@@ -124,14 +124,14 @@ int main(void) {
     }
 
     for (int v = 0; v < n; v++) {
-        adj[v].neighbours = malloc((size_t)(degree[v] > 0 ? degree[v] : 1) * sizeof(int));
+        adj[v].neighbors = malloc((size_t)(degree[v] > 0 ? degree[v] : 1) * sizeof(int));
         adj[v].degree = degree[v];
     }
     for (int i = 0; i < kept; i++) {
         const int u = edge_u[i];
         const int v = edge_v[i];
-        adj[u].neighbours[cursor[u]++] = v;
-        adj[v].neighbours[cursor[v]++] = u;
+        adj[u].neighbors[cursor[u]++] = v;
+        adj[v].neighbors[cursor[v]++] = u;
     }
 
     const int count = dfs_reachable(adj, n, source, order);
@@ -154,7 +154,7 @@ int main(void) {
     putchar('\n');
 
     for (int v = 0; v < n; v++) {
-        free(adj[v].neighbours);
+        free(adj[v].neighbors);
     }
     free(adj);
     free(cursor);
