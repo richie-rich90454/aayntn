@@ -93,7 +93,7 @@ class MinHeap {
  * operation by at most one extra entry per successful relaxation, so the heap
  * holds O(E) entries.
  *
- * @param {number[][]} adj adjacency list; adj[v] lists the (neighbour, weight)
+ * @param {number[][]} adj adjacency list; adj[v] lists the (neighbor, weight)
  *   pairs of the edges incident to v
  * @param {number} source the start vertex
  * @returns {number[]} the distance from source to every vertex, -1 when
