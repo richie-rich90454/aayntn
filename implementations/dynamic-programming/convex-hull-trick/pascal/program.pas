@@ -34,7 +34,7 @@ type
   end;
 
 { True when the middle line of the three never holds the minimum: the switch
-  points of the neighbours have to decrease along the stack, and the
+  points of the neighbors have to decrease along the stack, and the
   comparison is done on the switch points, so the products of the coefficients
   never enter the arithmetic. }
 function TConvexHull.Redundant(M1, B1, M2, B2, M3, B3: Int64): Boolean;
