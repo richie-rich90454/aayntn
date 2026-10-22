@@ -19,6 +19,9 @@ keywords:
 prerequisites:
     required: [searching.two-pointers, foundations.complexity]
     recommended: [arrays.prefix-sums, searching.binary-search]
+complexity:
+    time: "O(n)"
+    space: "O(1) for a running sum, O(sigma) for a frequency map"
 assumptions:
     - The quantity that decides when the window moves is monotone, so that a window that fails can be repaired by moving one end only.
 reviewed: false
@@ -310,6 +313,32 @@ The bound on the left pointer is what makes the scan linear rather than quadrati
 
 The rows about negative values are the ones that catch people, and they are the reason the monotonicity assumption is stated in the frontmatter of this article rather than left implicit.
 
+## Recursion decision
+
+The window scan is a loop, and the loop is the right form in every language. There is no recursive formulation of a sliding window that improves on it, because the window's state is the whole story and the state does not fit on a call stack any better.
+
+The recursion question belongs to the alternatives. A segment tree that answers the same questions about arbitrary ranges is written recursively with a depth of $O(\log n)$, which is safe in every language. A formulation that recurses once per _element_, such as one that tries every possible left end for a given right end, has depth $O(n)$ and crashes on a large array.
+
+| Language | Default stack | Practical depth | Recommendation |
+| --- | --- | --- | --- |
+| C and C++ | 8 MB on Linux | About $10^5$ frames | The loop; a recursive segment tree at depth $\log_2 n$ is also fine |
+| Java | 512 KB to 1 MB per thread | About $10^4$ frames | The loop |
+| Python | Interpreter limit of 1000 | 1000 frames | The loop; raising the limit does not enlarge the C stack |
+| Pascal | The operating system stack | Depends on the platform | The loop |
+| JavaScript | The V8 engine limit | About $10^4$ frames | The loop |
+
+<MathPanel type="counterexample" title="Counterexample">
+A log of $10^6$ entries scanned with a recursive formulation that tries every
+possible left end for a given right end makes $10^6$ nested calls. In C++ on
+Linux, with an 8 MB stack and a frame of roughly 64 bytes, the stack is
+exhausted after about $130\,000$ frames, so the program dies with a
+segmentation fault before it has scanned $13\%$ of the log. The loop scans the
+same log in $10^6$ steps with a constant-size state. The input is legal and
+the answer is well defined; only the choice of implementation is wrong.
+</MathPanel>
+
+The rule of thumb is simple: if the recursion depth would be proportional to the length of the array, write the loop.
+
 ## Common mistakes
 
 | Mistake | What happens | How to avoid |
@@ -423,7 +452,7 @@ Under contest pressure, the errors above are what cost points, and each of them 
 
 ## Review checklist
 
-Answer these without looking back. If you cannot, revisit the section named in parentheses).
+Answer these without looking back. If you cannot, revisit the section named in parentheses.
 
 1. What does the frequency map hold, and what do the distinct and over counters hold? (Formal model)
 2. Why does each window update cost $O(1)$ even when the window contains many distinct values? (Key insight)
