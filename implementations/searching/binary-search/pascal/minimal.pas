@@ -3,6 +3,8 @@ program BinarySearchMinimal;
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
+uses SysUtils;
+
 { Binary search over a sorted array.
 
   Contract: A[0 .. High(A)] is sorted in non-decreasing order and the search
