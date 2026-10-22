@@ -7,11 +7,11 @@
 #endif
 
 /*
- * An adjacency list of a tree on the vertices 0..n-1: neighbours lists the
+ * An adjacency list of a tree on the vertices 0..n-1: neighbors lists the
  * adjacent vertex indices and degree is their count.
  */
 typedef struct {
-    int *neighbours;
+    int *neighbors;
     int degree;
 } adjacency_list;
 
@@ -72,7 +72,7 @@ static int lca_init(lca_table *table, const adjacency_list *adj, int n, int root
     while (head < tail) {
         const int u = queue[head++];
         for (int i = 0; i < adj[u].degree; i++) {
-            const int w = adj[u].neighbours[i];
+            const int w = adj[u].neighbors[i];
             if (table->depth[w] != -1) {
                 /* The vertex was already reached through another edge. */
                 continue;
@@ -145,10 +145,10 @@ static int lca_query(const lca_table *table, int u, int v) {
     return table->up[u];
 }
 
-/* Releases the neighbour lists of the adjacency list. */
+/* Releases the neighbor lists of the adjacency list. */
 static void adjacency_free(adjacency_list *adj, int n) {
     for (int v = 0; v < n; v++) {
-        free(adj[v].neighbours);
+        free(adj[v].neighbors);
     }
     free(adj);
 }
@@ -175,7 +175,7 @@ int main(void) {
         m = 0;
     }
 
-    /* The edges are read first, so every neighbour list is allocated once. */
+    /* The edges are read first, so every neighbor list is allocated once. */
     int *edge_u = malloc((size_t)(m > 0 ? m : 1) * sizeof *edge_u);
     int *edge_v = malloc((size_t)(m > 0 ? m : 1) * sizeof *edge_v);
     int *degree = calloc((size_t)(n > 0 ? n : 1), sizeof *degree);
@@ -216,10 +216,10 @@ int main(void) {
     for (int v = 0; v < n; v++) {
         adj[v].degree = degree[v];
         if (degree[v] > 0) {
-            adj[v].neighbours = malloc((size_t)degree[v] * sizeof(int));
-            if (adj[v].neighbours == NULL) {
+            adj[v].neighbors = malloc((size_t)degree[v] * sizeof(int));
+            if (adj[v].neighbors == NULL) {
                 for (int u = 0; u < n; u++) {
-                    free(adj[u].neighbours);
+                    free(adj[u].neighbors);
                 }
                 free(adj);
                 free(cursor);
@@ -233,8 +233,8 @@ int main(void) {
     for (int i = 0; i < kept; i++) {
         const int u = edge_u[i];
         const int v = edge_v[i];
-        adj[u].neighbours[cursor[u]++] = v;
-        adj[v].neighbours[cursor[v]++] = u;
+        adj[u].neighbors[cursor[u]++] = v;
+        adj[v].neighbors[cursor[v]++] = u;
     }
 
     lca_table table;
