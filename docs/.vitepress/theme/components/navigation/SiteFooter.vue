@@ -10,26 +10,26 @@ const columns = computed(() => [
         links: [
             { text: "Start here", href: "/start/" },
             { text: "From AP Computer Science A", href: "/start/from-ap-csa/" },
-            { text: "Curriculum", href: "/curriculum/" },
+            { text: "The curriculum", href: "/curriculum/" },
             { text: "Bronze to Platinum", href: "/curriculum/bronze/" },
         ],
     },
     {
         heading: "Reference",
         links: [
-            { text: "Algorithm encyclopedia", href: "/algorithms/" },
-            { text: "Interactive laboratory", href: "/laboratory/" },
-            { text: "Mathematics", href: "/mathematics/" },
-            { text: "Practice catalog", href: "/practice/" },
+            { text: "The encyclopedia", href: "/algorithms/" },
+            { text: "The laboratory", href: "/laboratory/" },
+            { text: "The mathematics", href: "/mathematics/" },
+            { text: "The practice catalog", href: "/practice/" },
         ],
     },
     {
         heading: "Build",
         links: [
-            { text: "Language centers", href: "/languages/" },
-            { text: "Template library", href: "/templates/" },
-            { text: "USACO rules", href: "/reference/usaco-rules" },
-            { text: "Contest checklist", href: "/reference/contest-checklist" },
+            { text: "The language centers", href: "/languages/" },
+            { text: "The template library", href: "/templates/" },
+            { text: "The competition rules", href: "/reference/usaco-rules" },
+            { text: "The pre-contest checklist", href: "/reference/contest-checklist" },
         ],
     },
 ]);
@@ -39,9 +39,9 @@ const columns = computed(() => [
     <footer class="aayntn-footer">
         <div class="aayntn-footer__inner">
             <div>
-                <div class="aayntn-footer__brand">aayntn</div>
+                <div class="aayntn-footer__brand">A.A.Y.N.T.N.</div>
                 <p class="aayntn-footer__tagline">
-                    All Algorithms You Need to Know — a competitive programming encyclopedia built
+                    All Algorithms You Need to Know. A competitive programming encyclopedia built
                     for USACO preparation, written in Markdown, proven in six languages, and
                     published as static files.
                 </p>
