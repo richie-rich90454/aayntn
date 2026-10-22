@@ -19,7 +19,7 @@ public final class Main {
     private Main() {
     }
 
-    /** An edge of the adjacency list: a neighbour and the weight of the edge. */
+    /** An edge of the adjacency list: a neighbor and the weight of the edge. */
     private static final class Edge {
         private final int to;
         private final long weight;
