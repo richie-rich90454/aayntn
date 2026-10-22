@@ -15,17 +15,21 @@ reviewed: false
 
 Searching is the subject of problems that ask you to find something in a collection too large to inspect exhaustively. The collection is usually an array, and the answer is usually a position, a count, or a pair of indices.
 
-Three techniques cover almost all of it, and they are all about the same idea: use the relationship between neighboring elements to avoid looking at all of them. Binary search uses the relationship between an element and its neighbors to halve the range. The two-pointer technique uses the relationship between two positions to close the gap between them. The sliding window uses the fact that most of a window's contents do not change when the window moves by one.
+Every technique in this subject is about the same idea: use the relationship between neighboring elements to avoid looking at all of them. Binary search uses the relationship between an element and its neighbors to halve the range. The two-pointer technique uses the relationship between two positions to close the gap between them. The sliding window uses the fact that most of a window's contents do not change when the window moves by one. Binary search on the answer applies the halving to a quantity that is not in the array at all.
 
 ## The techniques in this subject
 
-| Technique | Complexity | Prerequisite | Article |
-| --- | --- | --- | --- |
-| Binary search | $O(\log n)$ | `searching.two-pointers` | [Binary search](/algorithms/searching/binary-search) |
-| Two pointers | $O(n)$ | `foundations.complexity` | [Two pointers](/algorithms/searching/two-pointers) |
-| Sliding window | $O(n)$ | `searching.two-pointers` | [Sliding window](/algorithms/searching/sliding-window) |
+| Technique | Time | Space | Prerequisite | Article |
+| --- | --- | --- | --- | --- |
+| Binary search | $O(\log n)$ | $O(1)$ | `searching.two-pointers` | [Binary search](/algorithms/searching/binary-search) |
+| Two pointers | $O(n)$ | $O(1)$ | `foundations.complexity` | [Two pointers](/algorithms/searching/two-pointers) |
+| Sliding window | $O(n)$ | $O(1)$ for a running sum, $O(\sigma)$ for a frequency map | `searching.two-pointers` | [Sliding window](/algorithms/searching/sliding-window) |
+| Binary search on the answer | $O(c \log R)$ | $O(1)$ beyond the check | `searching.binary-search` | [Binary search on the answer](/algorithms/searching/binary-search-on-answer) |
+| Ternary search | $O(\log n)$ | $O(1)$ | `foundations.complexity` | [Ternary search](/algorithms/searching/ternary-search) |
 
-The order of the table is the order of dependence. The two-pointer technique is the simplest of the three, and the sliding window is the two-pointer technique with an explicit notion of a window. Binary search is listed last because it has the strictest precondition: the data must be sorted, and the predicate must be monotone.
+The order of the table is the order of dependence. The two-pointer technique is the simplest, and the sliding window is the two-pointer technique with an explicit notion of a window. Binary search is listed next because it has the strictest precondition: the data must be sorted, and the predicate must be monotone. Binary search on the answer relaxes that precondition by moving the search off the data and onto the answer, and ternary search relaxes it in the other direction by weakening monotone into unimodal.
+
+The $\sigma$ in the sliding window row is the number of distinct values in the data. A window over a running sum needs nothing but the sum itself; a window over a frequency map needs one counter per distinct value.
 
 ## Recognition signals
 
@@ -34,6 +38,8 @@ The order of the table is the order of dependence. The two-pointer technique is 
 - **"the largest value not exceeding"**, **"at most $k$"**, **"at least $k$"**. These are the boundary questions that the lower and upper bound variants of binary search answer.
 - **"two numbers whose sum is"**, **"a pair"**, **"a subarray with sum"**. These are two-pointer problems, and the array is usually sorted precisely so that the two pointers can move toward each other.
 - **"the longest run of"**, **"the longest window"**, **"the most consecutive"**, **"at most $k$ distinct"**. These are sliding-window problems, and the phrase "at most" is the standard signal that the window has a size limit rather than a fixed position.
+- **"the smallest $k$ such that"**, **"the minimum capacity"**, **"the least time"**, where the condition gets easier as $k$ grows. This is the signal for binary search on the answer, and it is invisible in the constraint values.
+- **"the maximum is at"**, **"the minimum is at"**, **"the function rises then falls"**. A peak-finding question over a unimodal sequence is a ternary search, and it is rare enough that the phrase is worth remembering.
 - **"$n \le 10^5$"** together with a nested loop over the same array. Two loops over the same collection is the shape of a two-pointer problem in disguise.
 
 The signal that rules the subject out is a query that depends on the whole collection rather than on a contiguous part of it, such as "how many pairs across the entire array have a difference of $k$". That is a frequency-counting problem, and it belongs to [arrays](/algorithms/arrays/) or [hash maps](/start/from-ap-csa/part-4-data-structures-and-modeling).
@@ -50,16 +56,18 @@ The signal that rules the subject out is a query that depends on the whole colle
 | You want the longest subarray with a property | [Sliding window](/algorithms/searching/sliding-window) |
 | You want the longest subarray with sum at most $k$ | [Sliding window](/algorithms/searching/sliding-window) with a running sum |
 | You want every subarray whose sum is exactly $k$ | [Prefix sums](/algorithms/arrays/prefix-sums) and a frequency map |
-| The predicate is monotone but the data is not sorted | Binary search over the _answer_, not over the data |
+| The predicate is monotone but the data is not sorted | [Binary search on the answer](/algorithms/searching/binary-search-on-answer) |
+| The array is unimodal and you want its peak | [Ternary search](/algorithms/searching/ternary-search) |
+| The data is neither sorted nor unimodal | A linear scan, and the hope that the constraint allows it |
 
-The last row is the one worth memorizing, and it is the subject's most useful trick. When a statement asks "what is the smallest $k$ such that something holds", and the condition only becomes easier as $k$ grows, you can binary search over $k$ and evaluate the condition with any linear-time method you like. The condition must be monotone in $k$, and that is the part that has to be argued rather than assumed.
+The binary search on the answer row is the one worth memorizing, and it is the subject's most useful trick. When a statement asks "what is the smallest $k$ such that something holds", and the condition only becomes easier as $k$ grows, you can binary search over $k$ and evaluate the condition with any linear-time method you like. The condition must be monotone in $k$, and that is the part that has to be argued rather than assumed. The cost is $O(c \log R)$, where $c$ is the cost of one check and $R$ is the width of the answer range, so the check is what has to be made cheap.
 
 ## What this subject implies but does not yet cover
 
-- **Binary search on the answer.** Searching over the value of the answer rather than over the data, with the monotonicity condition as the precondition. It is named as a variant in the [binary search article](/algorithms/searching/binary-search) and it is the standard tool for the "minimum capacity" and "minimum time" family of problems, but it does not have an article of its own.
 - **The individual two-pointer patterns.** Partitioning an array around a pivot, the three-sum problem, the container with most water, and the palindrome check by two pointers. The [two pointers article](/algorithms/searching/two-pointers) derives the general technique; each of these patterns is a worked example there rather than a separate lesson.
 - **The sliding window variants with a state machine.** Windows over a string with a variable number of distinct characters, the longest substring with $k$ distinct characters, and the minimum window that covers a set of characters. The general technique is in the [sliding window article](/algorithms/searching/sliding-window).
 - **Search over a sorted range of indices.** Binary searching a sub-range of an array, and binary searching a vector of intervals to find the one that contains a point. This is an interval tree query, and it is a common contest shape that no article currently collects.
+- **The parametric search generalization.** Searching for the point at which a predicate changes, when the predicate is monotone but the data cannot be sorted or scanned cheaply. The [binary search on the answer article](/algorithms/searching/binary-search-on-answer) is a special case of it.
 
 ## Related subjects
 
@@ -67,3 +75,4 @@ The last row is the one worth memorizing, and it is the subject's most useful tr
 - [Greedy methods](/algorithms/greedy/) often ends with a binary search, because "the earliest time a thing can happen" is usually the answer a sliding window computes and a binary search then locates.
 - [Advanced algorithms](/algorithms/advanced/) combines the two: parallel binary search runs many binary searches at once over a shared data structure.
 - [Foundations](/algorithms/foundations/) supplies sorting, without which binary search is not available.
+- The [academy](/start/) introduces the linear scan and the binary search as the two ends of the same idea, and [From AP Computer Science A](/start/from-ap-csa/) is the route into it.
