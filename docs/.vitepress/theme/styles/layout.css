@@ -168,6 +168,16 @@
     display: flex;
     align-items: stretch;
     margin-left: auto;
+    /* The search control and the theme toggle must never be pushed off the
+       edge of the screen. The navigation gives way first: it takes the
+       space that is left and scrolls inside it if it must. */
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.aayntn-nav::-webkit-scrollbar {
+    display: none;
 }
 
 .aayntn-nav__link {
@@ -195,6 +205,20 @@
     color: var(--color-white);
     font-weight: 600;
     box-shadow: inset 0 -3px 0 var(--color-gold);
+}
+
+/* The strapline of the brand and the width of the navigation cells are the
+   two things that give way when the screen is not wide enough for all of
+   them, and the strapline is the one that a reader can do without. */
+@media (max-width: 1620px) {
+    .aayntn-brand__tagline {
+        display: none;
+    }
+
+    .aayntn-nav__link {
+        padding: 0 var(--space-2);
+        font-size: 0.8125rem;
+    }
 }
 
 .aayntn-header__tools {
@@ -227,10 +251,21 @@
     display: none;
 }
 
+/* Below this width the navigation gives up its padding and the shell gives up
+   its margin, so that every destination stays on the screen. */
 @media (max-width: 1240px) {
-    .aayntn-nav__link {
+    .aayntn-header__inner {
         padding: 0 var(--space-3);
-        font-size: 0.8125rem;
+    }
+
+    .aayntn-brand {
+        padding-right: var(--space-3);
+        margin-right: var(--space-3);
+    }
+
+    .aayntn-nav__link {
+        padding: 0 var(--space-1);
+        font-size: 0.78125rem;
     }
 }
 
