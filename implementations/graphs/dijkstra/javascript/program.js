@@ -97,7 +97,7 @@ class MinHeap {
  * Dijkstra's algorithm from source over a graph whose edge weights are all
  * nonnegative.
  *
- * @param {number[][]} adj adjacency list; adj[v] lists the (neighbour, weight)
+ * @param {number[][]} adj adjacency list; adj[v] lists the (neighbor, weight)
  *   pairs of the edges incident to v
  * @param {number} source the start vertex
  * @returns {number[]} the distance from source to every vertex, -1 when
