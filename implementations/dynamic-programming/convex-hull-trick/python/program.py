@@ -76,7 +76,7 @@ class ConvexHull:
     def _redundant(m1, b1, m2, b2, m3, b3):
         """True when the middle line of the three never holds the minimum.
 
-        The switch points of the neighbours have to decrease along the stack,
+        The switch points of the neighbors have to decrease along the stack,
         and the comparison is done on the switch points, so the products of
         the coefficients never enter the arithmetic.
         """
