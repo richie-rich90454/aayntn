@@ -158,7 +158,10 @@ const layout = computed(() => {
                         markerHeight="6"
                         orient="auto-start-reverse"
                     >
-                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#2847B8" />
+                        <path
+                            class="aayntn-prereq__arrow aayntn-prereq__arrow--required"
+                            d="M 0 0 L 10 5 L 0 10 z"
+                        />
                     </marker>
                     <marker
                         id="aayntn-arrow-recommended"
@@ -169,7 +172,10 @@ const layout = computed(() => {
                         markerHeight="6"
                         orient="auto-start-reverse"
                     >
-                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#B4BAC9" />
+                        <path
+                            class="aayntn-prereq__arrow aayntn-prereq__arrow--recommended"
+                            d="M 0 0 L 10 5 L 0 10 z"
+                        />
                     </marker>
                 </defs>
 
@@ -178,7 +184,12 @@ const layout = computed(() => {
                         v-for="(edge, index) in layout.edges"
                         :key="`${edge.from}-${edge.to}-${index}`"
                         :d="edge.path"
-                        :stroke="edge.kind === 'required' ? '#2847B8' : '#B4BAC9'"
+                        :class="[
+                            'aayntn-prereq__edge',
+                            edge.kind === 'required'
+                                ? 'aayntn-prereq__edge--required'
+                                : 'aayntn-prereq__edge--recommended',
+                        ]"
                         :stroke-width="edge.kind === 'required' ? 1.8 : 1.2"
                         :stroke-dasharray="edge.kind === 'recommended' ? '4 3' : undefined"
                         :marker-end="
@@ -195,14 +206,23 @@ const layout = computed(() => {
                         :y="node.y"
                         width="210"
                         height="36"
-                        :fill="node.focused ? '#2847B8' : '#FFFFFF'"
-                        :stroke="node.focused ? '#203C91' : '#B4BAC9'"
+                        :class="[
+                            'aayntn-prereq__node',
+                            node.focused
+                                ? 'aayntn-prereq__node--focused'
+                                : 'aayntn-prereq__node--plain',
+                        ]"
                         stroke-width="1.2"
                     />
                     <text
                         :x="node.x + 10"
                         :y="node.y + 23"
-                        :fill="node.focused ? '#FFFFFF' : '#161616'"
+                        :class="[
+                            'aayntn-prereq__text',
+                            node.focused
+                                ? 'aayntn-prereq__text--focused'
+                                : 'aayntn-prereq__text--plain',
+                        ]"
                         font-family="Noto Sans, sans-serif"
                         font-size="12"
                     >
@@ -213,20 +233,11 @@ const layout = computed(() => {
         </div>
         <figcaption class="aayntn-prereq__legend">
             <span class="aayntn-prereq__legend-item">
-                <span class="aayntn-prereq__swatch" style="background: #2847b8" />
+                <span class="aayntn-prereq__swatch aayntn-prereq__swatch--required" />
                 Required
             </span>
             <span class="aayntn-prereq__legend-item">
-                <span
-                    class="aayntn-prereq__swatch"
-                    style="
-                        background: repeating-linear-gradient(
-                            90deg,
-                            #b4bac9 0 4px,
-                            transparent 4px 7px
-                        );
-                    "
-                />
+                <span class="aayntn-prereq__swatch aayntn-prereq__swatch--recommended" />
                 Recommended
             </span>
         </figcaption>
