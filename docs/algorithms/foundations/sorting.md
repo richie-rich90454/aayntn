@@ -21,6 +21,9 @@ keywords:
 prerequisites:
     required: [foundations.complexity]
     recommended: [foundations.recursion, searching.binary-search]
+complexity:
+    time: "O(n log n)"
+    space: "O(n) for merge sort, O(1) for heapsort"
 assumptions:
     - The comparison sorts in this article compare keys and never look inside the keys themselves.
     - The counting and radix sorts require keys that are integers of a bounded width.
