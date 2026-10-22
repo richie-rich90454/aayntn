@@ -17,13 +17,21 @@ import { LANGUAGE_IDS } from "../data/types";
  * homepage; every other page uses the standard article frame.
  */
 
-const { frontmatter } = useData();
+const { frontmatter, page } = useData();
 
 const isHome = computed(() => frontmatter.value.layout === false);
 const hasSidebar = computed(() => frontmatter.value.sidebar !== false && !isHome.value);
-const hasOutline = computed(
-    () => frontmatter.value.outline !== false && frontmatter.value.layout !== "page",
-);
+
+/**
+ * The outline is only given room when the page has headings to put in it.
+ * A column that is reserved and left empty is a band of nothing at the edge
+ * of the page, and it is the width of a third of the reading area.
+ */
+const hasOutline = computed(() => {
+    if (frontmatter.value.outline === false) return false;
+    if (frontmatter.value.layout === "page") return false;
+    return ((page.value.headers ?? []) as unknown[]).length > 0;
+});
 
 initPreferences(LANGUAGE_IDS);
 </script>
@@ -44,7 +52,6 @@ initPreferences(LANGUAGE_IDS);
         <div
             class="aayntn-body"
             :class="{
-                'aayntn-body--no-outline': !hasOutline,
                 'aayntn-body--no-sidebar': !hasSidebar,
             }"
         >
@@ -56,32 +63,37 @@ initPreferences(LANGUAGE_IDS);
                 @click="sidebarOpen = false"
             />
 
-            <main id="main" class="aayntn-main">
-                <article class="aayntn-article">
-                    <header v-if="frontmatter.title" class="aayntn-article__header">
-                        <div v-if="frontmatter.division?.length" class="aayntn-article__eyebrow">
-                            <span
-                                v-for="division in frontmatter.division"
-                                :key="division"
-                                class="aayntn-chip"
-                                :class="`aayntn-chip--${division}`"
+            <div class="aayntn-content" :class="{ 'aayntn-content--no-outline': !hasOutline }">
+                <main id="main" class="aayntn-main">
+                    <article class="aayntn-article">
+                        <header v-if="frontmatter.title" class="aayntn-article__header">
+                            <div
+                                v-if="frontmatter.division?.length"
+                                class="aayntn-article__eyebrow"
                             >
-                                {{ division }}
-                            </span>
+                                <span
+                                    v-for="division in frontmatter.division"
+                                    :key="division"
+                                    class="aayntn-chip"
+                                    :class="`aayntn-chip--${division}`"
+                                >
+                                    {{ division }}
+                                </span>
+                            </div>
+                            <h1 class="aayntn-article__title">{{ frontmatter.title }}</h1>
+                            <p v-if="frontmatter.summary" class="aayntn-article__summary">
+                                {{ frontmatter.summary }}
+                            </p>
+                        </header>
+
+                        <div class="aayntn-article__body aayntn-prose">
+                            <Content />
                         </div>
-                        <h1 class="aayntn-article__title">{{ frontmatter.title }}</h1>
-                        <p v-if="frontmatter.summary" class="aayntn-article__summary">
-                            {{ frontmatter.summary }}
-                        </p>
-                    </header>
+                    </article>
+                </main>
 
-                    <div class="aayntn-article__body aayntn-prose">
-                        <Content />
-                    </div>
-                </article>
-            </main>
-
-            <OutlineNav v-if="hasOutline" />
+                <OutlineNav v-if="hasOutline" />
+            </div>
         </div>
 
         <SiteFooter />
