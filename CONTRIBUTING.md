@@ -1,6 +1,6 @@
-# Contributing to aayntn
+# Contributing to A.A.Y.N.T.N.
 
-**aayntn** — _All Algorithms You Need to Know_ — is a static, Markdown-authored, mathematically rigorous encyclopedia of competitive programming, from AP Computer Science A proficiency through USACO Platinum and beyond.
+**A.A.Y.N.T.N.** — _All Algorithms You Need to Know_ — is a static, Markdown-authored, mathematically rigorous encyclopedia of competitive programming, from AP Computer Science A proficiency through USACO Platinum and beyond.
 
 This document is the contract between the editorial content, the executable implementations, and the build tooling. If you follow it, a new algorithm can be added without touching a single Vue component.
 
@@ -23,7 +23,7 @@ The build regenerates everything derived. If you find yourself editing a file un
 ## 2. Repository layout
 
 ```
-aayntn/
+A.A.Y.N.T.N./
 ├── docs/                       VitePress site
 │   ├── index.md                homepage (layout: false)
 │   ├── start/                  prerequisite academy
@@ -251,7 +251,7 @@ The implementation viewer and the animation are inserted by identifier, not by h
 - Every proof names its claim, its assumptions, and the logical reason the result follows. "Obviously optimal" is not a proof.
 - Show counterexamples. A wrong approach explained with the smallest counterexample is worth more than a paragraph of correct prose.
 - Do not reproduce copyrighted problem statements or editorials. Link to the original and write your own explanation.
-- Do not claim that a technique is "USACO-approved" or that a page is an official resource. aayntn is an independent preparation resource.
+- Do not claim that a technique is "USACO-approved" or that a page is an official resource. A.A.Y.N.T.N. is an independent preparation resource.
 
 ---
 
@@ -275,4 +275,4 @@ CI runs the same commands. A pull request that fails the build does not merge.
 
 The project is licensed under **AGPL-3.0-only**. Original lessons, implementations and artwork are covered by it. Contributed code must be your own or compatible with it; the webfonts under `docs/public/fonts` are covered by the SIL Open Font License 1.1, and the manifest of every implementation records its license and provenance.
 
-`aayntn` is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
+`A.A.Y.N.T.N.` is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
