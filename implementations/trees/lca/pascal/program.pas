@@ -1,12 +1,12 @@
 program LcaProgram;
 {$mode objfpc}{$H+}
+{$I-}
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
 uses SysUtils;
 
 type
-  TTokens = array of string;
   TIntArray = array of Integer;
   TAdjList = array of TIntArray;
 
@@ -26,45 +26,8 @@ type
   public
     constructor Create(const Adj: TAdjList; Root: Integer);
     destructor Destroy; override;
-    function Lift(V, K: Integer): Integer;
-    function DepthOf(V: Integer): Integer;
     function Query(U, V: Integer): Integer;
   end;
-
-{ Reads the whole standard input so that the tokens can be split without
-  depending on where the line breaks fall. }
-function ReadAllInput: string;
-var
-  Row: string;
-begin
-  Result := '';
-  while not EOF(Input) do
-  begin
-    ReadLn(Row);
-    Result := Result + Row + ' ';
-  end;
-end;
-
-function Tokenize(const Content: string): TTokens;
-var
-  I: Integer;
-  Start: Integer;
-begin
-  SetLength(Result, 0);
-  I := 1;
-  while I <= Length(Content) do
-  begin
-    while (I <= Length(Content)) and (Content[I] <= ' ') do
-      Inc(I);
-    if I > Length(Content) then
-      Break;
-    Start := I;
-    while (I <= Length(Content)) and (Content[I] > ' ') do
-      Inc(I);
-    SetLength(Result, Length(Result) + 1);
-    Result[High(Result)] := Copy(Content, Start, I - Start);
-  end;
-end;
 
 constructor TLca.Create(const Adj: TAdjList; Root: Integer);
 var
@@ -89,11 +52,13 @@ begin
   for I := 0 to FN - 1 do
     FDepth[I] := -1;
   SetLength(FUp, Levels * FN);
+  { The root is its own ancestor, so every entry of the table is defined. }
+  for I := 0 to Levels * FN - 1 do
+    FUp[I] := Root;
 
   if (FN <= 0) or (Root < 0) or (Root >= FN) then
     Exit;
 
-  { The root is its own ancestor, so the table stays defined everywhere. }
   FUp[Root] := Root;
   FDepth[Root] := 0;
 
@@ -188,40 +153,31 @@ begin
 end;
 
 var
-  Tokens: TTokens;
   N: Integer;
   M: Integer;
   Q: Integer;
   I: Integer;
   U: Integer;
   V: Integer;
-  Index: Integer;
   Adj: TAdjList;
   Lca: TLca;
 begin
-  Tokens := Tokenize(ReadAllInput);
-  if Length(Tokens) < 2 then
-    Halt(0);
-
-  N := StrToIntDef(Tokens[0], 0);
-  M := StrToIntDef(Tokens[1], 0);
-  if N < 0 then
-    N := 0;
-  if M < 0 then
-    M := 0;
+  { The input is exactly the contract: n, m, the m edges and the q queries. }
+  N := 0;
+  Read(N);
+  M := 0;
+  Read(M);
 
   SetLength(Adj, N);
   for I := 0 to N - 1 do
     SetLength(Adj[I], 0);
 
-  Index := 2;
-  for I := 1 to M do
+  for I := 0 to M - 1 do
   begin
-    if Index + 1 >= Length(Tokens) then
-      Break;
-    U := StrToIntDef(Tokens[Index], -1);
-    V := StrToIntDef(Tokens[Index + 1], -1);
-    Inc(Index, 2);
+    U := 0;
+    V := 0;
+    Read(U);
+    Read(V);
     if (U < 0) or (U >= N) or (V < 0) or (V >= N) then
       Continue;
     SetLength(Adj[U], Length(Adj[U]) + 1);
@@ -233,19 +189,15 @@ begin
   Lca := TLca.Create(Adj, 0);
 
   Q := 0;
-  if Index < Length(Tokens) then
-    Q := StrToIntDef(Tokens[Index], 0);
-  Inc(Index);
+  Read(Q);
 
-  for I := 1 to Q do
+  for I := 0 to Q - 1 do
   begin
-    if Index + 1 >= Length(Tokens) then
-      Break;
-    U := StrToIntDef(Tokens[Index], -1);
-    V := StrToIntDef(Tokens[Index + 1], -1);
-    Inc(Index, 2);
-    { An explicit line feed keeps the output identical on every platform. }
-    Write(IntToStr(Lca.Query(U, V)), #10);
+    U := -1;
+    V := -1;
+    Read(U);
+    Read(V);
+    WriteLn(Lca.Query(U, V));
   end;
 
   Lca.Free;
