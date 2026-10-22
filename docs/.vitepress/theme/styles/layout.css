@@ -12,7 +12,7 @@
 /* -------------------------------------------------------------------- */
 
 /* A panel that sits on the page like a plate: a hairline frame, a heavy top
-   rule, and a colour band that names the section. */
+   rule, and a color band that names the section. */
 .aayntn-plate {
     position: relative;
     border: var(--rule-ink);
@@ -29,7 +29,7 @@
     opacity: 0.16;
 }
 
-/* A field of saturated colour that carries a block of text. */
+/* A field of saturated color that carries a block of text. */
 .aayntn-field {
     position: relative;
     padding: var(--space-6);
