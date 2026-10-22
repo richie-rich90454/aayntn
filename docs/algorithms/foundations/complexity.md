@@ -20,6 +20,9 @@ keywords:
 prerequisites:
     required: [start.computational-foundations]
     recommended: [start.algorithm-analysis]
+complexity:
+    time: "a method, not an algorithm"
+    space: "a method, not an algorithm"
 assumptions:
     - A cost model is fixed before any bound is stated, so that "one unit of work" means the same thing in every claim.
     - Bounds describe growth rates, not the wall-clock time of one particular machine.
