@@ -12,7 +12,7 @@
 class Hld {
 public:
     /**
-     * @param adj    adjacency list; adj[v] lists the neighbours of the vertex v
+     * @param adj    adjacency list; adj[v] lists the neighbors of the vertex v
      * @param root   the root of the tree
      * @param values the value of every vertex, so values[v] is the value of
      *   the vertex v
