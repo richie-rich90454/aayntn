@@ -28,7 +28,7 @@ Six languages appear in this encyclopedia, and they are not six ways of writing 
 
 The Pascal center and the JavaScript center in this encyclopedia are therefore educational reference material. They exist so that you can read an algorithm expressed in those languages, and so that the ideas behind the implementations in the other four are visible from more than one direction. They are never presented as official submission solutions, and no program in this encyclopedia should be described to a judge as a Pascal or JavaScript submission.
 
-aayntn is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad. The submission status described above reflects the published USACO contest instructions, which were last checked on 21 October 2026.
+A.A.Y.N.T.N. is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad. The submission status described above reflects the published USACO contest instructions, which were last checked on 21 October 2026.
 
 ## What each language is good at
 
