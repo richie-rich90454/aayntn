@@ -11,7 +11,7 @@
 class Lca {
 public:
     /**
-     * @param adj  adjacency list; adj[v] lists the neighbours of the vertex v
+     * @param adj  adjacency list; adj[v] lists the neighbors of the vertex v
      * @param root the root of the tree
      */
     Lca(const std::vector<std::vector<int>>& adj, int root)
