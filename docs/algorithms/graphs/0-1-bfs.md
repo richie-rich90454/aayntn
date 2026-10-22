@@ -10,6 +10,9 @@ keywords: [0-1 BFS, binary weights, shortest path, deque]
 prerequisites:
     required: [graphs.bfs, graphs.representation]
     recommended: [graphs.dijkstra]
+complexity:
+    time: "O(V + E)"
+    space: "O(V + E)"
 assumptions:
     - Every edge weight is zero or one.
 reviewed: false
