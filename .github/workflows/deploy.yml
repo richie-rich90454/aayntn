@@ -1,7 +1,7 @@
 name: Build and deploy
 
 # The site is a set of static files. The build regenerates every derived
-# artefact, renders the pages, and publishes the result to GitHub Pages.
+# artifact, renders the pages, and publishes the result to GitHub Pages.
 
 on:
     push:
