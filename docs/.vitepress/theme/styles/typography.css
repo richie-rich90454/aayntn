@@ -1,9 +1,9 @@
 /**
  * Typography.
  *
- * All interface text is sans-serif. Sentence case everywhere. No letter-spacing
- * on running prose. The reading measure is capped so that a line never runs
- * past roughly 74 characters.
+ * All interface text is the bundled Noto face. Sentence case everywhere, no
+ * centered dot separators, and a reading measure that keeps a line under
+ * seventy-two characters.
  */
 
 .vp-doc,
@@ -22,30 +22,37 @@
 
 /* Headings ------------------------------------------------------------- */
 
-.aayntn-prose h1,
-.vp-doc h1 {
-    margin: 0 0 var(--space-6);
-    font-size: var(--text-article);
-    font-weight: 700;
-    line-height: 1.16;
-    letter-spacing: -0.018em;
-}
-
+/* Every second-level heading sits on a rule, with a small cobalt block at
+   the left, which is the one ornament the running prose gets. */
 .aayntn-prose h2,
 .vp-doc h2 {
+    position: relative;
     margin: var(--space-16) 0 var(--space-4);
-    padding-bottom: var(--space-2);
-    border-bottom: var(--rule-ink);
+    padding: 0 0 var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--border-ink);
     font-size: var(--text-section);
     font-weight: 700;
     letter-spacing: -0.012em;
 }
 
+.aayntn-prose h2::before,
+.vp-doc h2::before {
+    content: "";
+    position: absolute;
+    top: 0.15em;
+    left: 0;
+    width: 6px;
+    height: 1.05em;
+    background: var(--color-cobalt);
+}
+
 .aayntn-prose h3,
 .vp-doc h3 {
     margin: var(--space-12) 0 var(--space-3);
+    padding-left: var(--space-3);
+    border-left: 2px solid var(--color-gold);
     font-size: var(--text-subsection);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.006em;
 }
 
@@ -53,7 +60,7 @@
 .vp-doc h4 {
     margin: var(--space-8) 0 var(--space-2);
     font-size: 1.0625rem;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .aayntn-prose h2 + *,
@@ -62,11 +69,22 @@
     margin-top: 0;
 }
 
-/* Running prose -------------------------------------------------------- */
+.aayntn-prose h1,
+.vp-doc h1 {
+    margin: 0 0 var(--space-6);
+    font-size: var(--text-article);
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    line-height: 1.1;
+    text-wrap: balance;
+}
+
+/* Running prose --------------------------------------------------------- */
 
 .aayntn-prose p,
 .vp-doc p {
     margin: 0 0 var(--space-4);
+    overflow-wrap: break-word;
 }
 
 .aayntn-prose strong,
@@ -79,14 +97,14 @@
     font-style: italic;
 }
 
-/* Lists ---------------------------------------------------------------- */
+/* Lists ----------------------------------------------------------------- */
 
 .aayntn-prose ul,
 .aayntn-prose ol,
 .vp-doc ul,
 .vp-doc ol {
     margin: 0 0 var(--space-4);
-    padding-left: 1.35rem;
+    padding-left: 1.4rem;
 }
 
 .aayntn-prose ul,
@@ -135,19 +153,18 @@
     margin-top: var(--space-2);
 }
 
-/* Nested lists inside a list item inherit the paragraph rhythm. */
 .aayntn-prose li > p,
 .vp-doc li > p {
     margin-bottom: var(--space-2);
 }
 
-/* Blockquotes ---------------------------------------------------------- */
+/* Blockquotes ----------------------------------------------------------- */
 
 .aayntn-prose blockquote,
 .vp-doc blockquote {
     margin: var(--space-6) 0;
     padding: var(--space-4) var(--space-6);
-    border-left: 3px solid var(--color-gold);
+    border-left: 4px solid var(--color-gold);
     background: var(--surface-sunken);
     color: var(--text-secondary);
 }
@@ -157,17 +174,16 @@
     margin-bottom: 0;
 }
 
-/* Inline code ---------------------------------------------------------- */
+/* Inline code ------------------------------------------------------------ */
 
 .aayntn-prose :not(pre) > code,
 .vp-doc :not(pre) > code {
-    padding: 0.12em 0.36em;
+    padding: 0.1em 0.35em;
     border: 1px solid var(--border-subtle);
-    border-radius: 3px;
     background: var(--surface-code);
     color: var(--color-oxblood);
     font-size: 0.875em;
-    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 html.dark .aayntn-prose :not(pre) > code,
@@ -175,7 +191,7 @@ html.dark .vp-doc :not(pre) > code {
     color: #e6b3cb;
 }
 
-/* Figures and captions -------------------------------------------------- */
+/* Figures ---------------------------------------------------------------- */
 
 .aayntn-prose figure,
 .vp-doc figure {
@@ -189,7 +205,7 @@ html.dark .vp-doc :not(pre) > code {
     font-size: var(--text-secondary-copy);
 }
 
-/* Tables --------------------------------------------------------------- */
+/* Tables ----------------------------------------------------------------- */
 
 .aayntn-prose table,
 .vp-doc table {
@@ -197,8 +213,8 @@ html.dark .vp-doc :not(pre) > code {
     width: 100%;
     margin: var(--space-6) 0;
     font-size: var(--text-secondary-copy);
-    border: var(--rule-ink);
     border-collapse: collapse;
+    border: 1px solid var(--border-ink);
 }
 
 .aayntn-prose th,
@@ -206,10 +222,9 @@ html.dark .vp-doc :not(pre) > code {
     padding: var(--space-2) var(--space-4);
     background: var(--color-black);
     color: var(--color-white);
-    font-weight: 600;
+    font-weight: 700;
     text-align: left;
-    letter-spacing: 0.01em;
-    border-right: 1px solid rgba(255, 255, 255, 0.18);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 html.dark .aayntn-prose th,
@@ -225,6 +240,7 @@ html.dark .vp-doc th {
     border-bottom: 1px solid var(--border-subtle);
     border-right: 1px solid var(--border-subtle);
     vertical-align: top;
+    overflow-wrap: anywhere;
 }
 
 .aayntn-prose tr:last-child td,
@@ -244,7 +260,7 @@ html.dark .vp-doc th {
     background: var(--surface-sunken);
 }
 
-/* Numerals in tables are tabular so that columns align. */
+/* The figures in a table are tabular, so that the columns line up. */
 .aayntn-prose td,
 .vp-doc td,
 .aayntn-prose th,
@@ -252,25 +268,25 @@ html.dark .vp-doc th {
     font-variant-numeric: tabular-nums;
 }
 
-/* Small print ----------------------------------------------------------- */
+/* Small print -------------------------------------------------------------- */
 
 .aayntn-prose .aayntn-note,
 .vp-doc .aayntn-note {
     margin: var(--space-6) 0;
     padding: var(--space-4) var(--space-6);
-    background: var(--surface-parchment);
-    border-left: 3px solid var(--color-oxblood);
+    background: var(--color-parchment);
+    border-left: 4px solid var(--color-oxblood);
     color: #4a3a2a;
     font-size: var(--text-secondary-copy);
 }
 
 html.dark .aayntn-prose .aayntn-note,
 html.dark .vp-doc .aayntn-note {
-    background: rgba(123, 39, 75, 0.16);
+    background: rgba(123, 39, 75, 0.18);
     color: var(--text-secondary);
 }
 
-/* Accessibility --------------------------------------------------------- */
+/* Accessibility ------------------------------------------------------------- */
 
 .visually-hidden-focusable:not(:focus):not(:focus-within) {
     position: absolute !important;
