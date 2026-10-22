@@ -19,6 +19,14 @@ import type {
 /* Palette                                                             */
 /* ------------------------------------------------------------------ */
 
+/**
+ * The colors that the laboratories draw with.
+ *
+ * The fields are read from the design tokens of the page, so that a picture
+ * drawn on a dark page uses the colors of a dark page. The values are
+ * written back into this object before every drawing, which is why it is
+ * not frozen.
+ */
 export const PALETTE = {
     unvisitedFill: "#FFFFFF",
     unvisitedStroke: "#2847B8",
@@ -43,44 +51,112 @@ export const PALETTE = {
     grid: "#E3E6EE",
     accent: "#E8B84A",
     surface: "#FFFFFF",
-} as const;
-
-const NODE_STATE_STYLE: Record<string, { fill: string; stroke: string; text: string }> = {
-    unvisited: { fill: PALETTE.unvisitedFill, stroke: PALETTE.unvisitedStroke, text: PALETTE.text },
-    discovered: {
-        fill: PALETTE.discoveredFill,
-        stroke: PALETTE.discoveredStroke,
-        text: PALETTE.textInverse,
-    },
-    active: { fill: PALETTE.activeFill, stroke: PALETTE.activeStroke, text: PALETTE.text },
-    completed: {
-        fill: PALETTE.completedFill,
-        stroke: PALETTE.completedStroke,
-        text: PALETTE.textInverse,
-    },
-    invalid: {
-        fill: PALETTE.invalidFill,
-        stroke: PALETTE.invalidStroke,
-        text: PALETTE.textInverse,
-    },
-    selected: {
-        fill: PALETTE.selectedFill,
-        stroke: PALETTE.selectedStroke,
-        text: PALETTE.textInverse,
-    },
+    highlight: "#FFF0BD",
+    invalidSoft: "#FCE1E0",
 };
 
-const CELL_STATE_STYLE: Record<string, { fill: string; stroke: string; text: string }> = {
-    idle: { fill: PALETTE.surface, stroke: "#D5D9E4", text: PALETTE.text },
-    active: { fill: PALETTE.activeFill, stroke: PALETTE.text, text: PALETTE.text },
-    done: {
-        fill: PALETTE.discoveredFill,
-        stroke: PALETTE.discoveredStroke,
-        text: PALETTE.textInverse,
-    },
-    highlight: { fill: "#FFF0BD", stroke: PALETTE.accent, text: PALETTE.text },
-    invalid: { fill: "#FCE1E0", stroke: PALETTE.invalidFill, text: PALETTE.text },
+/** The token that each field of the palette takes its value from. */
+const PALETTE_TOKENS: Record<keyof typeof PALETTE, string> = {
+    unvisitedFill: "--surface-raised",
+    unvisitedStroke: "--color-cobalt",
+    discoveredFill: "--color-cobalt",
+    discoveredStroke: "--color-ultramarine",
+    activeFill: "--color-gold",
+    activeStroke: "--color-black",
+    completedFill: "--color-emerald",
+    completedStroke: "--color-emerald",
+    invalidFill: "--color-vermilion",
+    invalidStroke: "--color-vermilion",
+    selectedFill: "--color-violet",
+    selectedStroke: "--color-violet",
+    edgeIdle: "--border-strong",
+    edgeActive: "--text-primary",
+    edgeDone: "--color-emerald",
+    edgeInvalid: "--color-vermilion",
+    edgeTree: "--color-oxblood",
+    text: "--text-primary",
+    textInverse: "--color-white",
+    muted: "--text-muted",
+    grid: "--border-subtle",
+    accent: "--color-gold",
+    surface: "--surface-raised",
+    highlight: "--color-highlight",
+    invalidSoft: "--color-invalid-soft",
 };
+
+/**
+ * Read the palette from the page.
+ *
+ * The browser is the only place that knows which appearance is in force, so
+ * the tokens are read from the document rather than guessed at.
+ */
+export function refreshPalette(): void {
+    if (typeof document === "undefined") return;
+    const style = getComputedStyle(document.documentElement);
+    for (const [field, token] of Object.entries(PALETTE_TOKENS) as [
+        keyof typeof PALETTE,
+        string,
+    ][]) {
+        const value = style.getPropertyValue(token).trim();
+        if (value) PALETTE[field] = value;
+    }
+}
+
+/**
+ * The style of each state of a node.
+ *
+ * The table is built every time it is asked for, because the colors of the
+ * page change with the appearance and the table holds the colors of the page.
+ */
+function nodeStateStyle(): Record<string, { fill: string; stroke: string; text: string }> {
+    return {
+        unvisited: {
+            fill: PALETTE.unvisitedFill,
+            stroke: PALETTE.unvisitedStroke,
+            text: PALETTE.text,
+        },
+        discovered: {
+            fill: PALETTE.discoveredFill,
+            stroke: PALETTE.discoveredStroke,
+            text: PALETTE.textInverse,
+        },
+        active: {
+            fill: PALETTE.activeFill,
+            stroke: PALETTE.activeStroke,
+            text: PALETTE.text,
+        },
+        completed: {
+            fill: PALETTE.completedFill,
+            stroke: PALETTE.completedStroke,
+            text: PALETTE.textInverse,
+        },
+        invalid: {
+            fill: PALETTE.invalidFill,
+            stroke: PALETTE.invalidStroke,
+            text: PALETTE.textInverse,
+        },
+        selected: {
+            fill: PALETTE.selectedFill,
+            stroke: PALETTE.selectedStroke,
+            text: PALETTE.textInverse,
+        },
+    };
+}
+
+/** The style of each state of a cell. */
+function cellStateStyle(): Record<string, { fill: string; stroke: string; text: string }> {
+    return {
+        idle: { fill: PALETTE.surface, stroke: PALETTE.edgeIdle, text: PALETTE.text },
+        active: { fill: PALETTE.activeFill, stroke: PALETTE.text, text: PALETTE.text },
+        done: {
+            fill: PALETTE.discoveredFill,
+            stroke: PALETTE.discoveredStroke,
+            text: PALETTE.textInverse,
+        },
+        highlight: { fill: PALETTE.highlight, stroke: PALETTE.accent, text: PALETTE.text },
+        invalid: { fill: PALETTE.invalidSoft, stroke: PALETTE.invalidFill, text: PALETTE.text },
+    };
+}
 
 /* ------------------------------------------------------------------ */
 /* Escaping helpers                                                   */
@@ -166,7 +242,8 @@ function renderEdge(edge: LabEdge, nodes: Map<string, LabNode>): string {
 
 function renderNode(node: LabNode): string {
     const state = node.state ?? "unvisited";
-    const style = NODE_STATE_STYLE[state] ?? NODE_STATE_STYLE["unvisited"]!;
+    const styles = nodeStateStyle();
+    const style = styles[state] ?? styles["unvisited"]!;
     const x = node.x ?? 0;
     const y = node.y ?? 0;
     const r = node.shape === "square" ? 18 : 22;
@@ -258,7 +335,8 @@ export function renderArray(state: LabState, options: RenderOptions): string {
 
     cells.forEach((cell, index) => {
         const x = originX + index * (cellWidth + gap);
-        const style = CELL_STATE_STYLE[cell.state ?? "idle"] ?? CELL_STATE_STYLE["idle"]!;
+        const styles = cellStateStyle();
+        const style = styles[cell.state ?? "idle"] ?? styles["idle"]!;
         parts.push(
             `<rect x="${x}" y="${originY}" width="${cellWidth}" height="${cellHeight}" fill="${style.fill}" stroke="${style.stroke}" stroke-width="1.4" />`,
             `<text x="${x + cellWidth / 2}" y="${originY + 28}" text-anchor="middle" font-size="14" font-weight="600" font-family="Noto Sans Mono, monospace" fill="${style.text}">${escapeXml(cell.value)}</text>`,
@@ -318,7 +396,8 @@ export function renderStructures(state: LabState): string {
         );
 
         structure.items.forEach((item, index) => {
-            const style = CELL_STATE_STYLE[item.state ?? "idle"] ?? CELL_STATE_STYLE["idle"]!;
+            const styles = cellStateStyle();
+            const style = styles[item.state ?? "idle"] ?? styles["idle"]!;
             const x = vertical ? offsetX : offsetX + index * (cellWidth + gap);
             const y = vertical ? 44 + index * (cellHeight + gap) : 44;
             parts.push(
@@ -384,7 +463,8 @@ export function renderTable(state: LabState): string {
     });
 
     for (const cell of table.cells) {
-        const style = CELL_STATE_STYLE[cell.state ?? "idle"] ?? CELL_STATE_STYLE["idle"]!;
+        const styles = cellStateStyle();
+        const style = styles[cell.state ?? "idle"] ?? styles["idle"]!;
         const x = originX + cell.col * cellWidth;
         const y = originY + cell.row * cellHeight;
         parts.push(
