@@ -44,7 +44,7 @@ import {
     visualizationSchema,
     type AlgorithmManifest,
 } from "../lib/schema.ts";
-import { aayntnLight } from "../../docs/.vitepress/theme/shiki-theme.ts";
+import { aayntnDark, aayntnLight } from "../../docs/.vitepress/theme/shiki-theme.ts";
 import type {
     AlgorithmEntry,
     CurriculumTrack,
@@ -440,8 +440,11 @@ async function main() {
     }
 
     /* Highlighted source ------------------------------------------------ */
+    /* The fragment carries the colors of both appearances, so that the
+       listing reads on a dark page as well as on a light one. The style
+       sheet of the theme decides which of the two is shown. */
     const highlighter = await createHighlighter({
-        themes: [aayntnLight],
+        themes: [aayntnLight, aayntnDark],
         langs: ["c", "cpp", "java", "python", "pascal", "javascript"],
     });
 
@@ -477,7 +480,9 @@ async function main() {
             const lang = SHIKI_LANG[variant.language] ?? "text";
             const html = highlighter.codeToHtml(source, {
                 lang,
-                theme: "aayntn-light",
+                themes: { light: "aayntn-light", dark: "aayntn-dark" },
+                defaultColor: false,
+                cssVariablePrefix: "--shiki-",
                 transformers: [
                     {
                         name: "aayntn-line-numbers",
