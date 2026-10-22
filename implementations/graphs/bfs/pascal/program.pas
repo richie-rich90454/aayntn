@@ -1,5 +1,6 @@
 program BfsProgram;
 {$mode objfpc}{$H+}
+{$I-}
 { Educational reference implementation: Pascal is not a USACO submission
   language. }
 
@@ -8,42 +9,6 @@ uses SysUtils;
 type
   TIntArray = array of Integer;
   TAdjList = array of TIntArray;
-  TTokens = array of string;
-
-{ Reads the whole standard input so that the tokens can be split without
-  depending on where the line breaks fall. }
-function ReadAllInput: string;
-var
-  Row: string;
-begin
-  Result := '';
-  while not EOF(Input) do
-  begin
-    ReadLn(Row);
-    Result := Result + Row + ' ';
-  end;
-end;
-
-function Tokenize(const Content: string): TTokens;
-var
-  I: Integer;
-  Start: Integer;
-begin
-  SetLength(Result, 0);
-  I := 1;
-  while I <= Length(Content) do
-  begin
-    while (I <= Length(Content)) and (Content[I] <= ' ') do
-      Inc(I);
-    if I > Length(Content) then
-      Break;
-    Start := I;
-    while (I <= Length(Content)) and (Content[I] > ' ') do
-      Inc(I);
-    SetLength(Result, Length(Result) + 1);
-    Result[High(Result)] := Copy(Content, Start, I - Start);
-  end;
-end;
 
 { Breadth-first search from Source over an unweighted graph. The queue holds
   the frontier, so the vertices leave it in order of increasing distance from
@@ -94,11 +59,9 @@ begin
 end;
 
 var
-  Tokens: TTokens;
   N: Integer;
   M: Integer;
   Source: Integer;
-  Index: Integer;
   I: Integer;
   U: Integer;
   V: Integer;
@@ -106,33 +69,24 @@ var
   Distance: TIntArray;
   Row: string;
 begin
-  Tokens := Tokenize(ReadAllInput);
-  if Length(Tokens) < 2 then
-    Halt(0);
-
-  N := StrToIntDef(Tokens[0], 0);
-  M := StrToIntDef(Tokens[1], 0);
-  if N <= 0 then
-  begin
-    WriteLn('');
-    Halt(0);
-  end;
+  { The input is exactly the contract: n, m, the m edges and the source. }
+  N := 0;
+  Read(N);
+  if N < 0 then
+    N := 0;
+  M := 0;
+  Read(M);
 
   SetLength(Adj, N);
   for I := 0 to N - 1 do
     SetLength(Adj[I], 0);
 
-  Index := 2;
   for I := 0 to M - 1 do
   begin
-    if Index >= Length(Tokens) then
-      Break;
-    U := StrToIntDef(Tokens[Index], -1);
-    Inc(Index);
-    if Index >= Length(Tokens) then
-      Break;
-    V := StrToIntDef(Tokens[Index], -1);
-    Inc(Index);
+    U := 0;
+    V := 0;
+    Read(U);
+    Read(V);
     if (U < 0) or (U >= N) or (V < 0) or (V >= N) then
       Continue;
     SetLength(Adj[U], Length(Adj[U]) + 1);
@@ -141,9 +95,8 @@ begin
     Adj[V][High(Adj[V])] := U;
   end;
 
-  Source := -1;
-  if Index < Length(Tokens) then
-    Source := StrToIntDef(Tokens[Index], -1);
+  Source := 0;
+  Read(Source);
 
   Distance := BfsDistances(Adj, Source);
 
