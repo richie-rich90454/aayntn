@@ -367,7 +367,7 @@ The `--stack-size` command-line option raises the limit, in kilobytes, and it wo
  * The stack replaces the call stack, so a chain of any length is
  * traversed without recursion.
  *
- * @param {number[][]} adj adjacency list; adj[v] lists the neighbours of v
+ * @param {number[][]} adj adjacency list; adj[v] lists the neighbors of v
  * @param {number} source the start vertex
  * @returns {number[]} the visited vertices in visit order
  */
