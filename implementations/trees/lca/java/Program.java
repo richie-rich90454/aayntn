@@ -22,7 +22,7 @@ public final class Program {
         private final int[] up;
 
         /**
-         * @param adj  adjacency list; adj.get(v) lists the neighbours of the
+         * @param adj  adjacency list; adj.get(v) lists the neighbors of the
          *   vertex v
          * @param root the root of the tree
          */
