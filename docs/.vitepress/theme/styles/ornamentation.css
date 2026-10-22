@@ -1,10 +1,14 @@
 /**
- * Ornamentation.
+ * The architectural ornament.
  *
- * Every ornament is an original vector construction: corner frames, double
- * rules, mathematical rosettes and axis patterns. Ornament is always
- * distinguishable from instructional diagrams — it is drawn in the ink or gold
- * palette and never carries data.
+ * Every ornament is an original vector construction, drawn from geometric
+ * paths rather than downloaded or borrowed. The library holds seven motifs:
+ * an architectural corner frame, a layered border segment, a symmetrical
+ * mathematical rosette, a geometric laurel curve, a graph-shaped medallion,
+ * a mathematical axis pattern and a division insignia.
+ *
+ * The ornament stays in the ink and gold palette and it never carries data,
+ * so it can never be mistaken for an instructional diagram.
  */
 
 .aayntn-ornament {
@@ -26,31 +30,33 @@
     top: 8px;
     left: 8px;
 }
+
 .aayntn-ornament--corner-tr {
     top: 8px;
     right: 8px;
     transform: scaleX(-1);
 }
+
 .aayntn-ornament--corner-bl {
     bottom: 8px;
     left: 8px;
     transform: scaleY(-1);
 }
+
 .aayntn-ornament--corner-br {
     bottom: 8px;
     right: 8px;
     transform: scale(-1, -1);
 }
 
-/* Double rule used under chapter titles. */
+/* A rule with a gold hairline under it, used to close a section. */
 .aayntn-double-rule {
-    height: 4px;
-    border-top: 1px solid var(--border-ink);
-    border-bottom: 1px solid var(--border-ink);
-    background: var(--color-gold);
+    height: 5px;
+    border-top: 2px solid var(--border-ink);
+    border-bottom: 1px solid var(--color-gold);
 }
 
-/* Axis pattern used as a band separator. */
+/* An axis pattern, used as a band separator. */
 .aayntn-axis-band {
     height: 26px;
     color: var(--border-ink);
@@ -61,7 +67,7 @@
     height: 100%;
 }
 
-/* Rosette medallion used in section headers. */
+/* A rosette, used beside a section title. */
 .aayntn-rosette {
     display: inline-flex;
     align-items: center;
@@ -78,7 +84,7 @@ html.dark .aayntn-rosette__mark {
     color: var(--color-gold);
 }
 
-/* Division insignia. */
+/* A division insignia. */
 .aayntn-insignia {
     display: inline-flex;
     align-items: center;
@@ -89,11 +95,9 @@ html.dark .aayntn-rosette__mark {
     font-family: var(--font-code);
     font-size: 0.6875rem;
     font-weight: 700;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
 }
 
-/* Laurel-inspired curve used beside quoted passages. */
+/* A laurel curve, used beside a quoted passage. */
 .aayntn-laurel {
     width: 22px;
     height: 22px;
@@ -101,7 +105,7 @@ html.dark .aayntn-rosette__mark {
     flex: 0 0 auto;
 }
 
-/* Graph medallion. */
+/* A graph medallion. */
 .aayntn-medallion {
     width: 44px;
     height: 44px;
