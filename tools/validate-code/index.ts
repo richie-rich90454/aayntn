@@ -24,6 +24,7 @@ import fg from "fast-glob";
 import { parse as parseYaml } from "yaml";
 import { IMPLEMENTATIONS_DIR, ROOT, rel } from "../lib/paths.ts";
 import { algorithmManifestSchema } from "../lib/schema.ts";
+import { runPascalBatch, type PascalJob, type PascalResult } from "../pascal/runner.ts";
 import type { LanguageId } from "../../docs/.vitepress/data/types.ts";
 
 /* ------------------------------------------------------------------ */
@@ -269,12 +270,22 @@ async function main() {
         available.set(runner.id, await which(runner.toolchain));
     }
     for (const [language, present] of available) {
-        if (!present) {
+        if (!present && language !== "pascal") {
             process.stdout.write(
                 `skipping ${language}: the ${runners[language].toolchain} toolchain is not installed\n`,
             );
         }
     }
+
+    /*
+     * Pascal is handled separately. The Free Pascal compiler is a WebAssembly
+     * module published on npm, so it needs no installation, but the browser
+     * build of the compiler has no console input and no Halt, so the work is
+     * done in a batch by the Pascal runner.
+     */
+    const pascalJobs: PascalJob[] = [];
+    /** The fixture that each Pascal job belongs to, in the same order. */
+    const pascalCases: { manifest: ManifestEntry; variant: string; fixture: Fixture | null }[] = [];
 
     const failures: string[] = [];
     let compiled = 0;
@@ -285,6 +296,28 @@ async function main() {
         const cases = fixtures.get(manifest.algorithm) ?? [];
 
         for (const variant of manifest.variants) {
+            if (variant.language === "pascal") {
+                if (variant.kind === "program") {
+                    for (const fixture of cases) {
+                        pascalJobs.push({
+                            path: join(manifest.directory, variant.file),
+                            input: fixture.input,
+                        });
+                        pascalCases.push({ manifest, variant: variant.id, fixture });
+                    }
+                } else {
+                    // A reusable variant carries its own self-check, so it runs
+                    // once with an empty input and is only required not to fail.
+                    pascalJobs.push({
+                        path: join(manifest.directory, variant.file),
+                        input: "",
+                    });
+                    pascalCases.push({ manifest, variant: variant.id, fixture: null });
+                }
+                skipped += 1;
+                continue;
+            }
+
             const runner = runners[variant.language];
             if (!available.get(variant.language)) {
                 skipped += 1;
@@ -347,11 +380,14 @@ async function main() {
             }
         }
 
-        // Every language of a program variant must produce identical output.
+        /*
+         * Every language of a program variant must produce identical output.
+         */
         const programVariants = manifest.variants.filter((variant) => variant.kind === "program");
         for (const fixture of cases) {
             const outputs = new Map<string, string>();
             for (const variant of programVariants) {
+                if (variant.language === "pascal") continue;
                 if (!available.get(variant.language)) continue;
                 const source = join(manifest.directory, variant.file);
                 const workDir = join(
@@ -377,6 +413,100 @@ async function main() {
                 failures.push(
                     `${manifest.algorithm} produced different output across languages on case "${fixture.name}":\n${detail}`,
                 );
+            }
+        }
+    }
+
+    /*
+     * The Pascal listings run last, because the compiler is a WebAssembly
+     * module and the whole batch costs one process. The results come back in
+     * the order of the jobs, so the two lists line up.
+     */
+    if (pascalJobs.length > 0) {
+        let pascalResults: PascalResult[] = [];
+        try {
+            pascalResults = await runPascalBatch(pascalJobs);
+        } catch (error) {
+            failures.push(`the Pascal runner failed: ${(error as Error).message}`);
+        }
+
+        /*
+         * The results come back in the order of the jobs, so each one is
+         * checked against the fixture it belongs to.
+         */
+        const pascalOutput = new Map<string, string>();
+        for (let index = 0; index < pascalResults.length; index += 1) {
+            const result = pascalResults[index]!;
+            const owner = pascalCases[index];
+            if (!owner) continue;
+            if (!result.ok) {
+                failures.push(
+                    `${owner.manifest.file} [pascal.${owner.variant}] did not run on case "${owner.fixture?.name ?? "the self-check"}": ${result.error ?? "unknown error"}`,
+                );
+                continue;
+            }
+            compiled += 1;
+            const output = normalizeNewlines(result.output);
+            if (!owner.fixture) {
+                // A reusable variant only has to compile and to run its own
+                // self-check without failing.
+                continue;
+            }
+            pascalOutput.set(
+                `${owner.manifest.algorithm}|${owner.variant}|${owner.fixture.name}`,
+                output,
+            );
+            if (owner.fixture.expected !== undefined && output !== owner.fixture.expected) {
+                failures.push(
+                    `${owner.manifest.file} [pascal.${owner.variant}] produced the wrong output on case "${owner.fixture.name}".\n` +
+                        `  expected: ${JSON.stringify(owner.fixture.expected)}\n` +
+                        `  actual:   ${JSON.stringify(output)}`,
+                );
+            }
+        }
+
+        // Compare the Pascal output with the output of the other languages.
+        for (const manifest of manifests) {
+            const cases = fixtures.get(manifest.algorithm) ?? [];
+            const programVariants = manifest.variants.filter(
+                (variant) => variant.kind === "program",
+            );
+            for (const fixture of cases) {
+                const outputs = new Map<string, string>();
+                for (const variant of programVariants) {
+                    if (!available.get(variant.language)) continue;
+                    const source = join(manifest.directory, variant.file);
+                    const workDir = join(
+                        workRoot,
+                        manifest.algorithm.replace(/\./g, "_"),
+                        variant.language,
+                        variant.id,
+                    );
+                    const result = await runners[variant.language]!.execute(
+                        source,
+                        workDir,
+                        fixture.input,
+                    );
+                    if (result.code !== 0) continue;
+                    outputs.set(variant.language, normalizeNewlines(result.stdout));
+                }
+                for (const variant of programVariants) {
+                    if (variant.language !== "pascal") continue;
+                    const output = pascalOutput.get(
+                        `${manifest.algorithm}|${variant.id}|${fixture.name}`,
+                    );
+                    if (output !== undefined) outputs.set("pascal", output);
+                }
+                const distinct = new Set(outputs.values());
+                compared += 1;
+                if (distinct.size > 1) {
+                    const detail = [...outputs.entries()]
+                        .map(([language, output]) => `  ${language}: ${JSON.stringify(output)}`)
+                        .join("\n");
+                    failures.push(
+                        `${manifest.algorithm} produced different output across languages on case "${fixture.name}":\n${detail}`,
+                    );
+                }
             }
         }
     }
