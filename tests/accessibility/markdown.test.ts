@@ -148,6 +148,7 @@ describe("the components", () => {
             "PracticeCatalog",
             "PrerequisiteGraph",
             "ProgressDashboard",
+            "StyleGuide",
             "Synonyms",
         ]);
         for (const page of await pages()) {
