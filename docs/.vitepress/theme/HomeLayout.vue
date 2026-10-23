@@ -1,433 +1,273 @@
 <script setup lang="ts">
 import { withBase } from "vitepress";
-import { computed } from "vue";
 import stats from "../data/generated/stats.json";
-import algorithms from "../data/generated/algorithms.json";
+import lessons from "../data/generated/lessons.json";
 import visualizations from "../data/generated/visualizations.json";
-import type { AlgorithmEntry, VisualizationEntry } from "./data/types";
+import {
+    LANGUAGE_IDS,
+    LANGUAGE_LABELS,
+    SUBJECTS,
+    SUBJECT_LABELS,
+    isUsacoSubmittable,
+} from "../data/types";
+import type { LessonEntry, Subject, VisualizationEntry } from "../data/types";
+import { coveragePercent, taggingPercent, useCoverage } from "./composables/useCoverage";
 
 /**
  * The homepage.
  *
- * A strongly color-blocked entrance that explains the product immediately and
- * then routes the reader into the four division tracks, the encyclopedia, the
- * laboratory and the practice catalog. The information hierarchy is carried by
- * typography and by the grid; the ornament refines it without changing it.
+ * Five blocks, in the order a reader needs them: what this is, where to
+ * begin, what is actually finished, what subjects exist, and what the
+ * laboratory and the six languages contain. Every figure is read from the
+ * generated data, so the page cannot claim more than the build published.
  */
 
-const algorithmList = algorithms as AlgorithmEntry[];
-const visualizationList = visualizations as VisualizationEntry[];
+const lessonList = lessons as LessonEntry[];
+const laboratoryList = visualizations as VisualizationEntry[];
+const coverage = useCoverage();
 
-const divisions = [
+const coverageShare = coveragePercent(coverage);
+const taggingShare = taggingPercent(coverage);
+const hasCoverage = coverage.required > 0 || coverage.totalTasks > 0;
+
+const coverageSentence = hasCoverage
+    ? "These are the published figures, exactly as the coverage tooling reports them."
+    : "No coverage has been published yet, so the figures below are exactly the zeros the tooling reports.";
+
+const paths = [
     {
-        id: "bronze",
-        name: "Bronze",
-        focus: "Foundations",
-        copy: "Simulation, careful modeling, complete enumeration, and elementary reasoning. The discipline of reading a specification and modeling it exactly.",
+        index: "01",
+        title: "I have never programmed",
+        copy: "Start with the vocabulary an AP Computer Science A course assumes, then write your first loops and programs.",
+        first: "From AP Computer Science A",
+        href: withBase("/start/from-ap-csa/"),
+    },
+    {
+        index: "02",
+        title: "I am working on Bronze",
+        copy: "Learn to model a statement exactly, then simulate and enumerate it without guessing at an optimization.",
+        first: "The Bronze track",
         href: withBase("/curriculum/bronze/"),
     },
     {
-        id: "silver",
-        name: "Silver",
-        focus: "Core techniques",
-        copy: "Efficient searching, arrays, sorting, greedy patterns, and the first graph algorithms. Where brute force stops being good enough.",
-        href: withBase("/curriculum/silver/"),
-    },
-    {
-        id: "gold",
-        name: "Gold",
-        focus: "Optimization",
-        copy: "Dynamic programming, shortest paths, tree algorithms, combinatorics, and the data structures that make the right solution expressible.",
-        href: withBase("/curriculum/gold/"),
-    },
-    {
-        id: "platinum",
-        name: "Platinum",
-        focus: "Advanced methods",
-        copy: "Graph and tree decompositions, advanced range structures, dynamic-programming optimization, and the techniques that separate finalists from qualifiers.",
-        href: withBase("/curriculum/platinum/"),
+        index: "03",
+        title: "I know the basics",
+        copy: "Go straight to the subject index and read the derivation, the proof and the implementation you need.",
+        first: "The subject index",
+        href: withBase("/algorithms/"),
     },
 ];
 
-const featured = computed(() => {
-    const ids = [
-        "searching.binary-search",
-        "graphs.dfs",
-        "graphs.dijkstra",
-        "range-queries.segment-tree",
-        "dynamic-programming.0-1-knapsack",
-        "trees.lca",
-    ];
-    return ids
-        .map((id) => algorithmList.find((entry) => entry.id === id))
-        .filter((entry): entry is AlgorithmEntry => Boolean(entry));
+const subjects = SUBJECTS.map((subject: Subject) => {
+    const prefix = `/algorithms/${subject}/`;
+    const count = lessonList.filter(
+        (lesson) =>
+            lesson.subjects.includes(subject) &&
+            lesson.href.startsWith(prefix) &&
+            lesson.href !== `/algorithms/${subject}`,
+    ).length;
+    return {
+        id: subject,
+        label: SUBJECT_LABELS[subject],
+        count,
+        href: withBase(prefix),
+    };
 });
 
-const featuredLabs = computed(() => visualizationList.slice(0, 6));
+const laboratories = laboratoryList.map((laboratory) => ({
+    id: laboratory.id,
+    title: laboratory.title,
+    scene: laboratory.scene,
+    href: withBase(laboratory.href),
+}));
 
-const method = [
-    {
-        numeral: "01",
-        kicker: "Recognition",
-        title: "What to notice",
-        copy: "Every article opens with the problem shape that calls for the technique and the constraints that rule the alternatives in or out.",
-    },
-    {
-        numeral: "02",
-        kicker: "Derivation",
-        title: "Why it is correct",
-        copy: "Formal models, lemmas, invariants and exchange arguments, never the claim that something obviously works.",
-    },
-    {
-        numeral: "03",
-        kicker: "Code",
-        title: "Six real implementations",
-        copy: "Source files in the language they claim to be, each with a per-language recommendation and an honest note on recursion depth.",
-    },
-    {
-        numeral: "04",
-        kicker: "Motion",
-        title: "Deterministic animation",
-        copy: "A reference implementation emits an event trace and a scene renders it, so the picture cannot drift away from the mathematics.",
-    },
-    {
-        numeral: "05",
-        kicker: "Failure",
-        title: "Why this fails",
-        copy: "The smallest counterexample that breaks a plausible wrong approach, explained rather than merely mentioned.",
-    },
-    {
-        numeral: "06",
-        kicker: "Transfer",
-        title: "Where to practice",
-        copy: "Problems arranged as recognition, application, adaptation, combination, challenge and transfer, not sorted by a guessed difficulty.",
-    },
+const languages = LANGUAGE_IDS.map((id) => ({
+    id,
+    label: LANGUAGE_LABELS[id],
+    submittable: isUsacoSubmittable(id),
+    href: withBase(`/languages/${id}/`),
+}));
+
+const figures = [
+    { value: stats.lessons, label: "Lessons" },
+    { value: stats.algorithms, label: "Algorithms" },
+    { value: stats.variants, label: "Tested implementations" },
+    { value: stats.problems, label: "Curated problems" },
 ];
 
-const subjects = [
-    {
-        href: withBase("/algorithms/graphs/"),
-        kicker: "Graphs",
-        title: "From breadth-first search to minimum cut",
-        copy: "Representations, traversal, shortest paths, connectivity, and the reductions between them.",
-    },
-    {
-        href: withBase("/algorithms/dynamic-programming/"),
-        kicker: "Dynamic programming",
-        title: "State design and proof",
-        copy: "Memoization, tabulation, knapsack families, directed acyclic graph and tree dynamic programming, and the optimization layered on top.",
-    },
-    {
-        href: withBase("/algorithms/range-queries/"),
-        kicker: "Range structures",
-        title: "Fenwick, segment tree, sparse table",
-        copy: "Which algebraic property a structure needs, and how to choose the one the problem actually requires.",
-    },
-    {
-        href: withBase("/algorithms/trees/"),
-        kicker: "Trees",
-        title: "Lowest common ancestor, heavy paths, rerooting",
-        copy: "Rooting, binary lifting, path queries, and the decompositions that turn a tree into an array.",
-    },
-    {
-        href: withBase("/algorithms/number-theory/"),
-        kicker: "Number theory",
-        title: "Modular arithmetic and counting",
-        copy: "Primes, inverses, exponentiation, combinatorics, and the counting arguments behind them.",
-    },
-    {
-        href: withBase("/algorithms/strings/"),
-        kicker: "Strings",
-        title: "KMP, the Z function, suffix structures",
-        copy: "Pattern matching, rolling hashes, tries, and suffix arrays for long strings.",
-    },
-];
-
-const languages = [
-    { id: "C", submittable: true, href: withBase("/languages/c/") },
-    { id: "C++17", submittable: true, href: withBase("/languages/cpp17/") },
-    { id: "Java", submittable: true, href: withBase("/languages/java/") },
-    { id: "Python", submittable: true, href: withBase("/languages/python/") },
-    { id: "Pascal", submittable: false, href: withBase("/languages/pascal/") },
-    { id: "JavaScript", submittable: false, href: withBase("/languages/javascript/") },
-];
+function openSearch(): void {
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true, bubbles: true }));
+}
 </script>
 
 <template>
     <div class="aayntn-home">
         <a class="skip-link" href="#main">Skip to content</a>
 
-        <section class="aayntn-hero">
-            <div>
-                <p class="aayntn-hero__eyebrow">
-                    <span class="aayntn-chip">Encyclopedia</span>
-                    <span class="aayntn-chip">Six languages</span>
-                    <span class="aayntn-chip">No account, no backend</span>
-                </p>
-                <h1 class="aayntn-hero__title">
-                    All algorithms
-                    <em>you need to know.</em>
+        <section class="home-hero" aria-labelledby="home-title">
+            <div class="home-hero__inner">
+                <h1 id="home-title" class="home-hero__title">
+                    <span class="home-hero__brand">A.A.Y.N.T.N.</span>
+                    <span class="home-hero__name">
+                        All algorithms
+                        <em>you need to know.</em>
+                    </span>
                 </h1>
-                <p class="aayntn-hero__lede">
-                    From AP Computer Science A to USACO Platinum. Mathematical derivations, real
-                    implementations in C, C++17, Java, Python, Pascal and JavaScript, and
-                    deterministic animated explanations of every algorithm that matters.
+                <p class="home-hero__lede">
+                    An encyclopedia of algorithms from AP Computer Science A through USACO Platinum,
+                    with derivations, tested implementations in six languages and deterministic
+                    animated explanations.
                 </p>
-                <div class="aayntn-hero__actions">
-                    <a class="aayntn-button" v-bind:href="withBase('/start/from-ap-csa/')">
-                        Start from AP CSA
+                <div class="home-hero__actions">
+                    <a
+                        class="home-button home-button--primary"
+                        v-bind:href="withBase('/start/from-ap-csa/')"
+                    >
+                        Start from the beginning
                     </a>
                     <a
-                        class="aayntn-button aayntn-button--ghost"
+                        class="home-button home-button--secondary"
                         v-bind:href="withBase('/algorithms/')"
                     >
                         Browse the encyclopedia
                     </a>
-                    <a
-                        class="aayntn-button aayntn-button--ghost"
-                        v-bind:href="withBase('/laboratory/')"
-                    >
+                    <button class="home-search" type="button" @click="openSearch">
+                        <span>Search the encyclopedia</span>
+                        <kbd>Ctrl K</kbd>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-section" aria-labelledby="home-paths">
+            <div class="home-section__inner">
+                <header class="home-section__head">
+                    <div>
+                        <h2 id="home-paths" class="home-section__title">Choose a starting point</h2>
+                        <p class="home-section__lede">
+                            Three routes into the same material, chosen by how much programming you
+                            have already done.
+                        </p>
+                    </div>
+                </header>
+
+                <div class="home-paths">
+                    <a v-for="path in paths" :key="path.href" class="home-path" :href="path.href">
+                        <span class="home-path__index">{{ path.index }}</span>
+                        <h3 class="home-path__title">{{ path.title }}</h3>
+                        <p class="home-path__copy">{{ path.copy }}</p>
+                        <span class="home-path__first">First read: {{ path.first }}</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-section home-coverage" aria-labelledby="home-coverage">
+            <div class="home-section__inner">
+                <header class="home-section__head">
+                    <div>
+                        <h2 id="home-coverage" class="home-section__title">Coverage</h2>
+                        <p class="home-section__lede">{{ coverageSentence }}</p>
+                    </div>
+                    <a class="home-section__link" v-bind:href="withBase('/coverage/')">
+                        Read the coverage report
+                    </a>
+                </header>
+
+                <dl class="home-coverage__figures">
+                    <div class="home-coverage__figure">
+                        <dt class="home-coverage__label">Required techniques complete</dt>
+                        <dd class="home-coverage__value">{{ coverageShare }}%</dd>
+                        <dd class="home-coverage__count">
+                            {{ coverage.complete }} of {{ coverage.required }}
+                        </dd>
+                    </div>
+                    <div class="home-coverage__figure">
+                        <dt class="home-coverage__label">Tasks tagged with a technique</dt>
+                        <dd class="home-coverage__value">{{ taggingShare }}%</dd>
+                        <dd class="home-coverage__count">
+                            {{ coverage.taggedTasks }} of {{ coverage.totalTasks }}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <section class="home-section" aria-labelledby="home-subjects">
+            <div class="home-section__inner">
+                <header class="home-section__head">
+                    <div>
+                        <h2 id="home-subjects" class="home-section__title">Subjects</h2>
+                        <p class="home-section__lede">
+                            All fourteen subjects, with the number of techniques each one currently
+                            publishes.
+                        </p>
+                    </div>
+                </header>
+
+                <nav class="home-subjects" aria-label="Subjects">
+                    <div class="home-subjects__grid">
+                        <a
+                            v-for="subject in subjects"
+                            :key="subject.id"
+                            class="home-subject"
+                            :href="subject.href"
+                        >
+                            <span class="home-subject__label">{{ subject.label }}</span>
+                            <span class="home-subject__count">{{ subject.count }}</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </section>
+
+        <section class="home-section home-labs" aria-labelledby="home-labs">
+            <div class="home-section__inner">
+                <header class="home-section__head">
+                    <div>
+                        <h2 id="home-labs" class="home-section__title">
+                            Laboratories and languages
+                        </h2>
+                        <p class="home-section__lede">
+                            Twelve interactive laboratories and six reference languages; C, C++17,
+                            Java and Python are submittable to USACO, while Pascal and JavaScript
+                            are educational.
+                        </p>
+                    </div>
+                    <a class="home-section__link" v-bind:href="withBase('/laboratory/')">
                         Open the laboratory
                     </a>
-                </div>
-            </div>
+                </header>
 
-            <aside class="aayntn-hero__panel" aria-label="A worked session">
-                <div class="aayntn-hero__panel-title">A worked session</div>
-                <pre
-                    class="aayntn-hero__panel-body"
-                ><code><span class="c">// shortest paths, all weights nonnegative</span>
-<span class="k">while</span> (!pq.empty()) {
-  <span class="k">auto</span> [d, u] = pq.top(); pq.pop();
-  <span class="k">if</span> (d != dist[u]) <span class="k">continue</span>;  <span class="c">// stale</span>
-  <span class="k">for</span> (<span class="k">auto</span> [v, w] : adj[u])
-    <span class="k">if</span> (dist[u] + w &lt; dist[v]) {
-      dist[v] = dist[u] + w;
-      pq.push({dist[v], v});
-    }
-}</code></pre>
-            </aside>
-        </section>
-
-        <section class="aayntn-home__band" aria-labelledby="home-divisions">
-            <div class="aayntn-home__band-inner">
-                <div class="aayntn-section__head">
-                    <div>
-                        <h2 id="home-divisions" class="aayntn-section__title">
-                            The algorithm atlas
-                        </h2>
-                        <p class="aayntn-section__lede">
-                            Four guided tracks through the same encyclopedia, organized by the idea
-                            behind a technique rather than by the contest it appeared in.
-                        </p>
-                    </div>
-                    <a class="aayntn-section__more" v-bind:href="withBase('/curriculum/')">
-                        The full curriculum
-                    </a>
-                </div>
-            </div>
-            <div class="aayntn-divisions">
-                <a
-                    v-for="division in divisions"
-                    :key="division.id"
-                    class="aayntn-division"
-                    :class="`aayntn-division--${division.id}`"
-                    :href="division.href"
-                >
-                    <div class="aayntn-division__name">{{ division.name }}</div>
-                    <div class="aayntn-division__focus">{{ division.focus }}</div>
-                    <p class="aayntn-division__copy">{{ division.copy }}</p>
-                </a>
-            </div>
-        </section>
-
-        <section class="aayntn-section aayntn-band--ink" aria-labelledby="home-how">
-            <div class="aayntn-section__inner">
-                <div class="aayntn-section__head">
-                    <div>
-                        <h2 id="home-how" class="aayntn-section__title">
-                            How this encyclopedia works
-                        </h2>
-                        <p class="aayntn-section__lede">
-                            Every topic follows one structure, so that knowing one algorithm tells
-                            you how to read the next one. Nothing is a link dump; every page carries
-                            a derivation, a proof, a worked example and code that was actually
-                            compiled and run.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="aayntn-feature-grid">
-                    <div v-for="step in method" :key="step.numeral" class="aayntn-feature">
-                        <span class="aayntn-numeral">{{ step.numeral }}</span>
-                        <div class="aayntn-feature__kicker">{{ step.kicker }}</div>
-                        <div class="aayntn-feature__title">{{ step.title }}</div>
-                        <p class="aayntn-feature__copy">{{ step.copy }}</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="aayntn-section" aria-labelledby="home-featured">
-            <div class="aayntn-section__inner">
-                <div class="aayntn-section__head">
-                    <div>
-                        <h2 id="home-featured" class="aayntn-section__title">
-                            Featured algorithms
-                        </h2>
-                        <p class="aayntn-section__lede">
-                            A cross-section of the encyclopedia: an array search, two graph
-                            traversals, a weighted shortest path, a range structure, a knapsack and
-                            a tree query.
-                        </p>
-                    </div>
-                    <a class="aayntn-section__more" v-bind:href="withBase('/algorithms/')">
-                        All algorithms
-                    </a>
-                </div>
-
-                <div class="aayntn-feature-grid">
+                <nav class="home-labs__strip" aria-label="Laboratories">
                     <a
-                        v-for="entry in featured"
-                        :key="entry.id"
-                        class="aayntn-feature"
-                        :href="
-                            withBase(entry.href ?? `/algorithms/${entry.id.replace(/\./g, '/')}`)
-                        "
+                        v-for="laboratory in laboratories"
+                        :key="laboratory.id"
+                        class="home-lab"
+                        :href="laboratory.href"
                     >
-                        <div class="aayntn-feature__kicker">{{ entry.complexity.time }}</div>
-                        <div class="aayntn-feature__title">{{ entry.title }}</div>
-                        <p class="aayntn-feature__copy">{{ entry.summary }}</p>
-                        <div class="aayntn-feature__meta">
-                            {{ entry.variants.length }} implementations,
-                            {{ entry.complexity.space }} of space
+                        <span class="home-lab__title">{{ laboratory.title }}</span>
+                        <span class="home-lab__scene">{{ laboratory.scene }}</span>
+                    </a>
+                </nav>
+
+                <div class="home-labs__columns">
+                    <ul class="home-languages" aria-label="Reference languages">
+                        <li v-for="language in languages" :key="language.id" class="home-language">
+                            <a :href="language.href">
+                                <span>{{ language.label }}</span>
+                                <span class="home-language__note">
+                                    {{ language.submittable ? "USACO" : "Educational" }}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="home-figures">
+                        <div v-for="figure in figures" :key="figure.label" class="home-figure">
+                            <span class="home-figure__value">{{ figure.value }}</span>
+                            <span class="home-figure__label">{{ figure.label }}</span>
                         </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="aayntn-section" aria-labelledby="home-lab">
-            <div class="aayntn-section__inner">
-                <div class="aayntn-section__head">
-                    <div>
-                        <h2 id="home-lab" class="aayntn-section__title">The laboratory</h2>
-                        <p class="aayntn-section__lede">
-                            Interactive demonstrations driven by a trusted reference implementation.
-                            The same event stream that draws the picture also drives the narration,
-                            so the animation cannot drift away from the mathematics.
-                        </p>
-                    </div>
-                    <a class="aayntn-section__more" v-bind:href="withBase('/laboratory/')">
-                        All laboratories
-                    </a>
-                </div>
-
-                <div class="aayntn-feature-grid">
-                    <a
-                        v-for="lab in featuredLabs"
-                        :key="lab.id"
-                        class="aayntn-feature"
-                        :href="withBase(lab.href)"
-                    >
-                        <div class="aayntn-feature__kicker">{{ lab.scene }}</div>
-                        <div class="aayntn-feature__title">{{ lab.title }}</div>
-                        <p class="aayntn-feature__copy">
-                            Step, scrub, change the input, and read the state narration. Every
-                            laboratory has a static fallback that works without JavaScript.
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="aayntn-section aayntn-band--ink" aria-labelledby="home-subjects">
-            <div class="aayntn-section__inner">
-                <div class="aayntn-section__head">
-                    <div>
-                        <h2 id="home-subjects" class="aayntn-section__title">Browse by subject</h2>
-                        <p class="aayntn-section__lede">
-                            The encyclopedia is organized by conceptual subject, so that related
-                            techniques stay together and a reader can find the family a technique
-                            belongs to.
-                        </p>
-                    </div>
-                    <a class="aayntn-section__more" v-bind:href="withBase('/algorithms/')">
-                        All subjects
-                    </a>
-                </div>
-
-                <div class="aayntn-feature-grid">
-                    <a
-                        v-for="subject in subjects"
-                        :key="subject.href"
-                        class="aayntn-feature"
-                        :href="subject.href"
-                    >
-                        <div class="aayntn-feature__kicker">{{ subject.kicker }}</div>
-                        <div class="aayntn-feature__title">{{ subject.title }}</div>
-                        <p class="aayntn-feature__copy">{{ subject.copy }}</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="aayntn-section" aria-labelledby="home-languages">
-            <div class="aayntn-section__inner">
-                <div class="aayntn-section__head">
-                    <div>
-                        <h2 id="home-languages" class="aayntn-section__title">
-                            Six languages, one contract
-                        </h2>
-                        <p class="aayntn-section__lede">
-                            Every algorithm is implemented in all six languages and tested against
-                            the same fixtures. C, C++17, Java and Python are accepted by USACO.
-                            Pascal and JavaScript are educational reference implementations.
-                        </p>
-                    </div>
-                    <a class="aayntn-section__more" v-bind:href="withBase('/languages/')">
-                        Compare the languages
-                    </a>
-                </div>
-
-                <div class="aayntn-stats">
-                    <div v-for="language in languages" :key="language.id" class="aayntn-stat">
-                        <div class="aayntn-stat__value" style="font-size: 1.375rem">
-                            <a :href="language.href" style="color: inherit">{{ language.id }}</a>
-                        </div>
-                        <div class="aayntn-stat__label">
-                            {{ language.submittable ? "USACO submittable" : "Educational only" }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="aayntn-section aayntn-band--ink" aria-labelledby="home-stats">
-            <div class="aayntn-section__inner">
-                <div class="aayntn-section__head">
-                    <h2 id="home-stats" class="aayntn-section__title">What is published</h2>
-                </div>
-                <div class="aayntn-stats">
-                    <div class="aayntn-stat">
-                        <div class="aayntn-stat__value">{{ stats.lessons }}</div>
-                        <div class="aayntn-stat__label">Lessons</div>
-                    </div>
-                    <div class="aayntn-stat">
-                        <div class="aayntn-stat__value">{{ stats.algorithms }}</div>
-                        <div class="aayntn-stat__label">Algorithms</div>
-                    </div>
-                    <div class="aayntn-stat">
-                        <div class="aayntn-stat__value">{{ stats.variants }}</div>
-                        <div class="aayntn-stat__label">Tested implementations</div>
-                    </div>
-                    <div class="aayntn-stat">
-                        <div class="aayntn-stat__value">{{ stats.problems }}</div>
-                        <div class="aayntn-stat__label">Curated problems</div>
-                    </div>
-                    <div class="aayntn-stat">
-                        <div class="aayntn-stat__value">{{ stats.visualizations }}</div>
-                        <div class="aayntn-stat__label">Animated laboratories</div>
                     </div>
                 </div>
             </div>
