@@ -1,0 +1,32 @@
+/* The coverage matrix and its progress figures. */
+
+.aayntn-coverage-matrix {
+    margin-block: 1.75rem;
+    overflow-x: auto;
+}
+
+.aayntn-coverage-matrix table {
+    margin: 0;
+}
+
+.aayntn-coverage-matrix caption {
+    caption-side: top;
+    padding-bottom: 0.6rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.aayntn-coverage-matrix tbody th[scope="row"] {
+    font-weight: 600;
+}
+
+.aayntn-coverage-matrix td:nth-child(n + 2) {
+    font-variant-numeric: tabular-nums;
+}
+
+.aayntn-coverage-matrix tfoot th,
+.aayntn-coverage-matrix tfoot td {
+    border-top: 2px solid var(--border-strong);
+    font-weight: 600;
+}
