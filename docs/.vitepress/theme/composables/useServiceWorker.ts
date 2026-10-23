@@ -12,8 +12,15 @@ export function registerServiceWorker(): void {
     if (!("serviceWorker" in navigator)) return;
 
     window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/sw.js").catch(() => {
-            // A reader whose browser refuses the worker simply reads online.
-        });
+        navigator.serviceWorker
+            .register(`${import.meta.env.BASE_URL}sw.js`, {
+                // The worker answers for the whole site, wherever it is
+                // published, so its reach is the base rather than its own
+                // directory.
+                scope: import.meta.env.BASE_URL,
+            })
+            .catch(() => {
+                // A reader whose browser refuses the worker simply reads online.
+            });
     });
 }
