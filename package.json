@@ -19,7 +19,7 @@
         "scaffold": "tsx tools/scaffold/index.ts",
         "test": "vitest run",
         "test:watch": "vitest",
-        "prebuild": "pnpm run generate && pnpm run format && pnpm run validate && pnpm run check:links && pnpm run coverage:check",
+        "prebuild": "pnpm run generate && pnpm run format && pnpm run validate && pnpm run check:links && pnpm run coverage:check && pnpm run book:render",
         "check:base": "tsx tools/check-base/index.ts",
         "book": "tsx tools/book/build.ts && tsx tools/book/print.ts",
         "book:render": "tsx tools/book/build.ts",
