@@ -37,9 +37,17 @@ Every substantial article follows the same structure, listed in full in the cont
 
 ## Independence
 
-A.A.Y.N.T.N. is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
+A.A.Y.N.T.N. is an independent preparation resource. It is not affiliated with, endorsed by, sponsored by, or supported by the United States of America Computing Olympiad, by the College Board, by any school, or by any teacher.
 
 Nothing on this site is an official document, an official rule, or an official interpretation of a rule. The competition's rules belong to the competition, and the [official instructions](https://usaco.org/index.php?page=instructions) are the only statement of them. The [rules page](/reference/usaco-rules) summarizes them in the encyclopedia's own words, with a link to the original, and it says plainly that they must be re-read before every contest because they change.
+
+## Names that belong to other people
+
+The examination, the competition and the programming language names that appear in this material are the trademarks or the registered marks of their owners. They are used here only to identify the things they name: to say which examination the curriculum starts from, which competition the catalog links to, and which language a listing is written in. **No permission has been granted, and none is claimed, for their use as the mark of this project.**
+
+The names concerned are those of the College Board, of the United States of America Computing Olympiad, of the ISO and IEC working groups that standardize C and C++, of Oracle America and Ecma International for Java and JavaScript, of the Python Software Foundation, and of the owners of the Noto typefaces, of VitePress, of KaTeX, of Shiki and of Playwright. The full list, with the way each name is used, is in `TRADEMARKS.md` in the repository.
+
+The examination material is not reproduced. The curriculum follows the _content_ of the course because that is the starting point of many readers, and no examination, practice examination, rubric or scoring guideline is copied here.
 
 ## License and attribution
 
@@ -67,6 +75,6 @@ Contributions are welcome, and the contribution guide is the contract between th
 
 The guide specifies the frontmatter contract for every lesson, the manifest contract for every implementation, the code style expected in a listing, the article structure, the writing rules, and the commands that must pass before a change is accepted.
 
-The repository is at `github.com/A.A.Y.N.T.N./atlas`. The short version of the process is: write the Markdown, put the code in `implementations` with a manifest, run the validation and the test suite, and open a pull request. The same commands run in continuous integration, and a pull request that fails the build does not merge.
+The repository is at `github.com/richie-rich90454/aayntn`. The short version of the process is: write the Markdown, put the code in `implementations` with a manifest, run the validation and the test suite, and open a pull request. The same commands run in continuous integration, and a pull request that fails the build does not merge.
 
 Two things are worth knowing before you start. Every implementation must be real, compilable code in the language it claims to be, and it must pass the shared fixtures. And an article that claims more than it delivers is worse than a missing article, so an unfinished topic should be marked unfinished.
