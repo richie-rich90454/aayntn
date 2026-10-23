@@ -145,7 +145,7 @@ const rawHref = computed(() => {
         pascal: "pas",
         javascript: "js",
     };
-    return `/implementations/${entry.value.id}/${variant.language}.${variant.id}.${extension[variant.language]}`;
+    return `${import.meta.env.BASE_URL}implementations/${entry.value.id}/${variant.language}.${variant.id}.${extension[variant.language]}`;
 });
 </script>
 
