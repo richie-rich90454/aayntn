@@ -35,12 +35,6 @@ jobs:
             - name: Install the dependencies
               run: pnpm install --frozen-lockfile
 
-            - name: Check the formatting
-              run: pnpm run format:check
-
-            - name: Check the types
-              run: pnpm exec tsc --noEmit
-
             - name: Generate the indexes
               run: pnpm run generate
 
@@ -52,6 +46,12 @@ jobs:
                     git diff --stat
                     exit 1
                   fi
+
+            - name: Check the formatting
+              run: pnpm run format:check
+
+            - name: Check the types
+              run: pnpm exec tsc --noEmit
 
             - name: Validate the content
               run: pnpm run validate
