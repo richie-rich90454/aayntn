@@ -101,8 +101,8 @@ const PAIRS: [string, string, number][] = [
 
 const light = await block(":root");
 const dark = await block("html.dark");
-const division = await block("html {");
-const divisionDark = await block("html.dark {\n    --division-bronze");
+const division = await block(".aayntn-appearance-light");
+const divisionDark = await block(".aayntn-appearance-dark");
 
 const appearances: [string, Record<string, string>][] = [
     ["light", { ...light, ...division }],
