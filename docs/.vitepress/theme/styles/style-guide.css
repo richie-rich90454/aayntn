@@ -619,3 +619,20 @@ html.dark .aayntn-sg-radius__slider,
         grid-template-columns: minmax(0, 1fr);
     }
 }
+
+/* A wide specimen scrolls inside its own frame rather than widening the page. */
+@media (max-width: 900px) {
+    .aayntn-sg-specimen {
+        overflow-x: auto;
+    }
+
+    .aayntn-sg-palette {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .aayntn-sg-palette th,
+    .aayntn-sg-palette td {
+        overflow-wrap: anywhere;
+    }
+}
