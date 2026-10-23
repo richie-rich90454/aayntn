@@ -1,0 +1,290 @@
+/* Paged media. The last sheet imported, so it overrides every screen rule. */
+
+@media print {
+    /*
+     * The paper is light in both appearances. Reassigning the tokens here,
+     * rather than repainting each component, is what keeps a dark session
+     * from printing near-white text on white paper.
+     */
+    :root,
+    html,
+    html.dark {
+        color-scheme: light;
+
+        --color-black: #161616;
+        --color-white: #161616;
+        --color-code: #ffffff;
+        --color-border: #767e8d;
+        --color-highlight: #ffffff;
+        --color-invalid-soft: #ffffff;
+        --color-parchment: #ffffff;
+        --color-cobalt: #ffffff;
+        --color-ultramarine: #ffffff;
+        --color-violet: #ffffff;
+        --color-violet-role: #ffffff;
+        --color-vermilion: #ffffff;
+        --color-emerald: #ffffff;
+        --color-oxblood: #ffffff;
+        --color-gold: #a8790a;
+        --color-gold-bright: #a8790a;
+
+        --color-primary: #ffffff;
+        --color-primary-strong: #ffffff;
+        --color-accent: #a8790a;
+        --color-error: #161616;
+        --color-success: #161616;
+        --color-rigor: #161616;
+        --color-observation: #a8790a;
+
+        --surface-page: #ffffff;
+        --surface-raised: #ffffff;
+        --surface-sunken: #ffffff;
+        --surface-code: #ffffff;
+        --surface-inverse: #ffffff;
+        --surface-parchment: #ffffff;
+        --surface-header: #ffffff;
+        --surface-overlay: transparent;
+        --surface-content: #ffffff;
+        --surface-rail: #ffffff;
+
+        --text-primary: #161616;
+        --text-secondary: #2b3038;
+        --text-muted: #414957;
+        --text-inverse: #161616;
+        --text-link: #161616;
+        --text-link-hover: #161616;
+        --text-accent: #161616;
+        --text-accent-hover: #161616;
+
+        --border-subtle: #767e8d;
+        --border-strong: #414957;
+        --border-ink: #161616;
+
+        --hover-surface: #ffffff;
+        --hover-surface-strong: #ffffff;
+        --hover-ink: #161616;
+        --hover-surface-inverse: #ffffff;
+        --hover-ink-inverse: #161616;
+        --visited-ink: #161616;
+        --focus-ring: #161616;
+        --state-selected-field: #ffffff;
+        --state-selected-ink: #161616;
+
+        --shadow-panel: none;
+        --shadow-overlay: none;
+    }
+
+    @page {
+        size: A4;
+        margin: 18mm 16mm 20mm;
+    }
+
+    html,
+    body {
+        background: #ffffff !important;
+        color: #161616 !important;
+    }
+
+    body {
+        widows: 3;
+        orphans: 3;
+    }
+
+    /* The reading chrome belongs to the screen. */
+    .aayntn-header,
+    .aayntn-sidebar,
+    .aayntn-outline,
+    .aayntn-footer,
+    .aayntn-scrim,
+    .aayntn-transport,
+    .aayntn-search,
+    .aayntn-search__button,
+    .aayntn-menu-button,
+    .aayntn-code__actions,
+    .aayntn-code__action,
+    .aayntn-header__tools,
+    .skip-link,
+    .vp-code-copy,
+    button.copy,
+    [class*="command-palette"] {
+        display: none !important;
+    }
+
+    /* The page is the sheet of paper, not a column on a screen. */
+    .aayntn-shell,
+    .aayntn-body,
+    .aayntn-content,
+    .aayntn-main,
+    .aayntn-article,
+    .aayntn-article__body,
+    .aayntn-prose {
+        display: block !important;
+        width: auto !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+    }
+
+    .aayntn-body {
+        grid-template-columns: none !important;
+    }
+
+    a,
+    a:visited {
+        color: #161616 !important;
+        text-decoration: underline;
+    }
+
+    /* A reader of the paper cannot follow a link, so the address is printed. */
+    .aayntn-prose a[href^="http"]::after,
+    .vp-doc a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        font-weight: 400;
+        overflow-wrap: anywhere;
+        word-break: break-all;
+    }
+
+    .aayntn-prose pre,
+    .aayntn-prose table,
+    .aayntn-prose figure,
+    .aayntn-prose img,
+    .aayntn-prose tr,
+    .vp-doc pre,
+    .vp-doc table,
+    .vp-doc figure,
+    .vp-doc tr,
+    .aayntn-code,
+    .aayntn-code__body,
+    .aayntn-code pre,
+    div[class*="language-"] {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .aayntn-code,
+    .aayntn-code__body,
+    .vp-doc div[class*="language-"],
+    .aayntn-prose div[class*="language-"] {
+        border: 1px solid #767e8d !important;
+        background: #ffffff !important;
+        box-shadow: none !important;
+    }
+
+    .aayntn-code__head,
+    .aayntn-code__head *,
+    .aayntn-code__file,
+    .aayntn-code__lang,
+    .aayntn-summary__head,
+    .aayntn-summary__head * {
+        background: #ffffff !important;
+        color: #161616 !important;
+        border-color: #767e8d !important;
+        text-shadow: none !important;
+    }
+
+    /* Shiki carries both appearances as custom properties. Paper takes the light one. */
+    html.dark .shiki span,
+    html.dark .vp-doc .shiki span,
+    html.dark .aayntn-prose .shiki span,
+    html.dark .aayntn-code .shiki span,
+    html.dark [class*="language-"] .shiki span {
+        color: var(--shiki-light) !important;
+    }
+
+    .shiki,
+    .shiki code {
+        background: #ffffff !important;
+        text-shadow: none !important;
+    }
+
+    .aayntn-prose pre,
+    .vp-doc pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        box-shadow: none !important;
+    }
+
+    .aayntn-prose table,
+    .vp-doc table {
+        border: 1px solid #414957 !important;
+    }
+
+    .aayntn-prose th,
+    .aayntn-prose td,
+    .vp-doc th,
+    .vp-doc td {
+        border: 1px solid #767e8d !important;
+        background: #ffffff !important;
+        color: #161616 !important;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    blockquote,
+    .aayntn-summary,
+    .aayntn-note,
+    .aayntn-lab {
+        border: 1px solid #767e8d !important;
+        background: #ffffff !important;
+        box-shadow: none !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        break-after: avoid;
+        page-break-after: avoid;
+        color: #161616 !important;
+    }
+
+    /* Every second-level section starts on a fresh sheet. */
+    h2 {
+        break-before: page;
+        page-break-before: always;
+    }
+
+    p,
+    li,
+    dd,
+    dt {
+        widows: 3;
+        orphans: 3;
+        color: #161616 !important;
+    }
+
+    code,
+    kbd,
+    samp {
+        color: #161616 !important;
+        background: #ffffff !important;
+        border-color: #767e8d !important;
+    }
+
+    /*
+     * Study mode hides code and hints on screen. On paper the reference must
+     * be complete, so the print sheet restores anything study mode removed.
+     */
+    html.aayntn-study .aayntn-prose .aayntn-code,
+    html.aayntn-study .aayntn-prose .aayntn-code__body,
+    html.aayntn-study .aayntn-prose .aayntn-lab,
+    html.aayntn-study .aayntn-prose [data-study-hide],
+    html.aayntn-study .aayntn-prose [class*="hint"] {
+        display: revert !important;
+        visibility: visible !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        text-shadow: none !important;
+        box-shadow: none !important;
+    }
+}
