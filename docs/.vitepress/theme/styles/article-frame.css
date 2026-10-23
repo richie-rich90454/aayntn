@@ -1,0 +1,483 @@
+/* The reading frame: breadcrumbs, the article header card, the section rail,
+   the lesson controls and the previous/next pair. */
+
+/* -------------------------------------------------------------------- */
+/* Breadcrumbs                                                          */
+/* -------------------------------------------------------------------- */
+
+.aayntn-crumbs {
+    margin-bottom: var(--space-3);
+}
+
+.aayntn-crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-meta);
+    line-height: 1.5;
+}
+
+.aayntn-crumbs li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+}
+
+.aayntn-crumbs li + li::before {
+    content: "/";
+    color: var(--text-muted);
+}
+
+.aayntn-crumbs a {
+    padding: 1px var(--space-2);
+    border-radius: var(--radius);
+    color: var(--text-secondary);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.aayntn-crumbs a:hover {
+    background: var(--hover-surface);
+    color: var(--hover-ink);
+    text-decoration: none;
+}
+
+.aayntn-crumbs [aria-current="page"] {
+    color: var(--text-primary);
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* -------------------------------------------------------------------- */
+/* The article header card                                              */
+/* -------------------------------------------------------------------- */
+
+.aayntn-article-meta {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+    padding: var(--space-4);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    background: var(--surface-sunken);
+}
+
+.aayntn-article-meta__chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.aayntn-article-meta__facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    margin: 0;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--border-subtle);
+}
+
+.aayntn-article-meta__fact {
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-page);
+    min-width: 0;
+}
+
+.aayntn-article-meta__fact dt {
+    color: var(--text-muted);
+    font-size: var(--text-meta);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.aayntn-article-meta__fact dd {
+    margin: var(--space-1) 0 0;
+    color: var(--text-primary);
+    font-family: var(--font-code);
+    font-size: var(--text-code);
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+.aayntn-article-meta__requirements {
+    display: grid;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.aayntn-article-meta__label {
+    color: var(--text-muted);
+    font-size: var(--text-meta);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.aayntn-article-meta__requirements ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.aayntn-article-meta__requirements li {
+    margin: 0;
+    min-width: 0;
+}
+
+.aayntn-article-meta__requirements a,
+.aayntn-article-meta__requirements li > span {
+    display: inline-block;
+    padding: 2px var(--space-2);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    background: var(--surface-page);
+    color: var(--text-secondary);
+    font-size: var(--text-secondary-copy);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.aayntn-article-meta__requirements a:hover {
+    background: var(--hover-surface);
+    color: var(--hover-ink);
+    text-decoration: none;
+}
+
+.aayntn-article-meta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-subtle);
+}
+
+/* -------------------------------------------------------------------- */
+/* The lesson status control                                            */
+/* -------------------------------------------------------------------- */
+
+.aayntn-status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+    min-width: 0;
+}
+
+.aayntn-status__label {
+    color: var(--text-muted);
+    font-size: var(--text-meta);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.aayntn-status__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    min-width: 0;
+}
+
+.aayntn-status__option {
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    background: var(--surface-page);
+    color: var(--text-secondary);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    line-height: 1.6;
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.aayntn-status__option:hover {
+    background: var(--hover-surface);
+    border-color: var(--border-strong);
+    color: var(--hover-ink);
+}
+
+.aayntn-status__option[aria-pressed="true"] {
+    border-color: var(--border-ink);
+    background: var(--surface-inverse);
+    color: var(--text-inverse);
+}
+
+.aayntn-status__announcement {
+    flex-basis: 100%;
+    color: var(--text-accent);
+    font-size: var(--text-meta);
+}
+
+/* -------------------------------------------------------------------- */
+/* Copy link                                                            */
+/* -------------------------------------------------------------------- */
+
+.aayntn-copy {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+}
+
+.aayntn-copy__button {
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    background: var(--surface-page);
+    color: var(--text-secondary);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    line-height: 1.6;
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.aayntn-copy__button:hover {
+    background: var(--hover-surface);
+    border-color: var(--border-strong);
+    color: var(--hover-ink);
+}
+
+.aayntn-copy__status {
+    color: var(--text-accent);
+    font-size: var(--text-meta);
+    font-weight: 600;
+}
+
+/* -------------------------------------------------------------------- */
+/* The section rail                                                     */
+/* -------------------------------------------------------------------- */
+
+.aayntn-rail {
+    position: sticky;
+    top: var(--header-height);
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-height: calc(100vh - var(--header-height));
+    padding: var(--space-12) 0 var(--space-12);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+}
+
+.aayntn-rail__actions {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    background: var(--surface-raised);
+}
+
+.aayntn-rail__action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    width: 100%;
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    background: var(--surface-page);
+    color: var(--text-secondary);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    line-height: 1.6;
+    text-align: left;
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.aayntn-rail__action:hover {
+    background: var(--hover-surface);
+    border-color: var(--border-strong);
+    color: var(--hover-ink);
+}
+
+.aayntn-rail__action[aria-pressed="true"] {
+    border-color: var(--border-ink);
+    background: var(--surface-inverse);
+    color: var(--text-inverse);
+}
+
+.aayntn-rail__state {
+    font-family: var(--font-code);
+    font-size: var(--text-meta);
+    font-weight: 500;
+}
+
+.aayntn-rail .aayntn-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-1);
+}
+
+.aayntn-rail .aayntn-copy__button {
+    width: 100%;
+    text-align: left;
+}
+
+.aayntn-rail__sections {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* The heading list keeps the geometry of the old outline, restated here so
+   the rail owns the whole column. */
+.aayntn-rail .aayntn-outline__title {
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--border-ink);
+    color: var(--text-primary);
+    font-size: var(--text-meta);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+.aayntn-rail .aayntn-outline__link {
+    display: block;
+    padding: 3px 0 3px var(--space-3);
+    border-left: 2px solid var(--border-subtle);
+    color: var(--text-muted);
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+    transition:
+        color var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.aayntn-rail .aayntn-outline__link:hover {
+    padding-right: var(--space-2);
+    background: var(--hover-surface);
+    border-left-color: var(--border-strong);
+    color: var(--hover-ink);
+    text-decoration: none;
+}
+
+.aayntn-rail .aayntn-outline__link.is-active {
+    color: var(--text-accent);
+    border-left-color: var(--text-accent);
+    font-weight: 600;
+}
+
+.aayntn-rail .aayntn-outline__link--depth-3 {
+    padding-left: var(--space-6);
+    font-size: 0.875rem;
+}
+
+/* -------------------------------------------------------------------- */
+/* Previous and next                                                    */
+/* -------------------------------------------------------------------- */
+
+.aayntn-pager {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-12);
+    padding-top: var(--space-6);
+    border-top: 3px double var(--border-ink);
+}
+
+.aayntn-pager__step {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+    padding: var(--space-4);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    background: var(--surface-raised);
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.aayntn-pager__step:hover {
+    background: var(--hover-surface);
+    border-color: var(--border-strong);
+    color: var(--hover-ink);
+    text-decoration: none;
+}
+
+.aayntn-pager__step--next {
+    text-align: right;
+}
+
+.aayntn-pager__kicker {
+    color: var(--text-muted);
+    font-size: var(--text-meta);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.aayntn-pager__title {
+    color: var(--text-primary);
+    font-size: var(--text-secondary-copy);
+    font-weight: 700;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.aayntn-pager__step:hover .aayntn-pager__title {
+    color: var(--hover-ink);
+}
+
+/* -------------------------------------------------------------------- */
+/* Study mode                                                           */
+/* -------------------------------------------------------------------- */
+
+html.aayntn-study .aayntn-code__body {
+    display: none;
+}
+
+html.aayntn-study .aayntn-hint,
+html.aayntn-study .aayntn-hint__body,
+html.aayntn-study .aayntn-hint-ladder,
+html.aayntn-study .aayntn-practice__hints {
+    display: none;
+}
+
+html.aayntn-study .aayntn-prose > * {
+    max-width: min(100%, calc(var(--measure) + 12ch));
+}
+
+/* -------------------------------------------------------------------- */
+/* Focus                                                                */
+/* -------------------------------------------------------------------- */
+
+.aayntn-crumbs a:focus-visible,
+.aayntn-article-meta__requirements a:focus-visible,
+.aayntn-status__option:focus-visible,
+.aayntn-copy__button:focus-visible,
+.aayntn-rail__action:focus-visible,
+.aayntn-rail .aayntn-outline__link:focus-visible,
+.aayntn-pager__step:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+}
