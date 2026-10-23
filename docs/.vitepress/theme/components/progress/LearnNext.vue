@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { withBase } from "vitepress";
 import { computed, onMounted, ref } from "vue";
 import graph from "../../../data/generated/prerequisites.json";
 import lessons from "../../../data/generated/lessons.json";
@@ -103,7 +104,9 @@ const blocked = computed(() => {
 
         <ul v-else class="aayntn-learn-next__list">
             <li v-for="lesson in candidates" :key="lesson.id" class="aayntn-learn-next__item">
-                <a class="aayntn-learn-next__title" :href="lesson.href">{{ lesson.title }}</a>
+                <a class="aayntn-learn-next__title" :href="withBase(lesson.href)">
+                    {{ lesson.title }}
+                </a>
                 <span class="aayntn-learn-next__summary">{{ lesson.summary }}</span>
                 <span class="aayntn-learn-next__meta">
                     <span
