@@ -27,7 +27,9 @@
         "book:card": "tsx tools/book/language-card.ts",
         "coverage:tag": "tsx tools/coverage/tag.ts",
         "coverage:summary": "tsx tools/coverage/summary.ts",
-        "coverage:check": "tsx tools/coverage/check.ts"
+        "coverage:check": "tsx tools/coverage/check.ts",
+        "clips": "tsx tools/clips/index.ts",
+        "og": "tsx tools/og/index.ts"
     },
     "devEngines": {
         "packageManager": {
