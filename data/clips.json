@@ -1,0 +1,74 @@
+[
+    {
+        "id": "arrays.prefix-sums",
+        "title": "Prefix sums",
+        "src": "/clips/arrays.prefix-sums.webm",
+        "href": "/laboratory/#arrays.prefix-sums"
+    },
+    {
+        "id": "dynamic-programming.0-1-knapsack",
+        "title": "0/1 knapsack",
+        "src": "/clips/dynamic-programming.0-1-knapsack.webm",
+        "href": "/laboratory/#dynamic-programming.0-1-knapsack"
+    },
+    {
+        "id": "dynamic-programming.convex-hull-trick",
+        "title": "Convex hull trick",
+        "src": "/clips/dynamic-programming.convex-hull-trick.webm",
+        "href": "/laboratory/#dynamic-programming.convex-hull-trick"
+    },
+    {
+        "id": "graphs.bfs",
+        "title": "Breadth-first search",
+        "src": "/clips/graphs.bfs.webm",
+        "href": "/laboratory/#graphs.bfs"
+    },
+    {
+        "id": "graphs.dfs",
+        "title": "Depth-first search",
+        "src": "/clips/graphs.dfs.webm",
+        "href": "/laboratory/#graphs.dfs"
+    },
+    {
+        "id": "graphs.dijkstra",
+        "title": "Dijkstra's algorithm",
+        "src": "/clips/graphs.dijkstra.webm",
+        "href": "/laboratory/#graphs.dijkstra"
+    },
+    {
+        "id": "graphs.dsu",
+        "title": "Disjoint set union",
+        "src": "/clips/graphs.dsu.webm",
+        "href": "/laboratory/#graphs.dsu"
+    },
+    {
+        "id": "range-queries.fenwick-tree",
+        "title": "Fenwick tree",
+        "src": "/clips/range-queries.fenwick-tree.webm",
+        "href": "/laboratory/#range-queries.fenwick-tree"
+    },
+    {
+        "id": "range-queries.segment-tree",
+        "title": "Segment tree",
+        "src": "/clips/range-queries.segment-tree.webm",
+        "href": "/laboratory/#range-queries.segment-tree"
+    },
+    {
+        "id": "searching.binary-search",
+        "title": "Binary search",
+        "src": "/clips/searching.binary-search.webm",
+        "href": "/laboratory/#searching.binary-search"
+    },
+    {
+        "id": "trees.heavy-light-decomposition",
+        "title": "Heavy-light decomposition",
+        "src": "/clips/trees.heavy-light-decomposition.webm",
+        "href": "/laboratory/#trees.heavy-light-decomposition"
+    },
+    {
+        "id": "trees.lca",
+        "title": "Lowest common ancestor",
+        "src": "/clips/trees.lca.webm",
+        "href": "/laboratory/#trees.lca"
+    }
+]
