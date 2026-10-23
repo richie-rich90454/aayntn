@@ -224,6 +224,61 @@ const sidebar: DefaultTheme.Config["sidebar"] = {
 /* Site configuration                                                  */
 /* ------------------------------------------------------------------ */
 
+/**
+ * The path under which the site is published, and the address of the site.
+ *
+ * Neither is written here. A publication under a path — a project site on
+ * GitHub Pages, for instance — passes the path in `AAYNTN_BASE`, and the
+ * address that the sitemap names is passed in `AAYNTN_HOSTNAME`. A build
+ * without either of them is a build for the root of a domain, and it writes
+ * no sitemap, because a sitemap that names the wrong host is worse than no
+ * sitemap at all.
+ */
+const BASE = process.env["AAYNTN_BASE"] ?? "/";
+const HOSTNAME = process.env["AAYNTN_HOSTNAME"] ?? "";
+
+/**
+ * The documents that every page carries in its head.
+ *
+ * The typefaces are named by the base because the page is served under it.
+ */
+const HEAD: [string, Record<string, string>][] = [
+    ["link", { rel: "stylesheet", href: `${BASE}fonts/fonts.css` }],
+    [
+        "link",
+        {
+            rel: "preload",
+            href: `${BASE}fonts/noto-sans-latin.woff2`,
+            as: "font",
+            type: "font/woff2",
+            crossorigin: "anonymous",
+        },
+    ],
+    [
+        "link",
+        {
+            rel: "preload",
+            href: `${BASE}fonts/noto-sans-mono-latin.woff2`,
+            as: "font",
+            type: "font/woff2",
+            crossorigin: "anonymous",
+        },
+    ],
+    ["meta", { name: "theme-color", content: "#2847b8" }],
+    ["meta", { property: "og:type", content: "website" }],
+    ["meta", { property: "og:site_name", content: "A.A.Y.N.T.N." }],
+    [
+        "meta",
+        {
+            name: "description",
+            content:
+                "A complete competitive programming encyclopedia: mathematical derivations, six-language implementations, and deterministic animated algorithms.",
+        },
+    ],
+];
+
+if (HOSTNAME) HEAD.push(["link", { rel: "sitemap", href: `${BASE}sitemap.xml` }]);
+
 export default defineConfig({
     title: "A.A.Y.N.T.N.",
     titleTemplate: ":title — A.A.Y.N.T.N.",
@@ -231,52 +286,30 @@ export default defineConfig({
         "A.A.Y.N.T.N. is All Algorithms You Need to Know — a complete, mathematically rigorous competitive programming encyclopedia from AP Computer Science A through USACO Platinum and beyond.",
     lang: "en-US",
     cleanUrls: true,
+    /*
+     * Every address that the site writes — the assets, the links, the
+     * listings that a reader opens, the search index and the service worker
+     * — starts from this base, so a publication under a path works without a
+     * second pass over the sources.
+     */
+    base: BASE,
     lastUpdated: true,
     ignoreDeadLinks: false,
     metaChunk: true,
 
-    head: [
-        ["link", { rel: "stylesheet", href: "/fonts/fonts.css" }],
-        [
-            "link",
-            {
-                rel: "preload",
-                href: "/fonts/noto-sans-latin.woff2",
-                as: "font",
-                type: "font/woff2",
-                crossorigin: "anonymous",
-            },
-        ],
-        [
-            "link",
-            {
-                rel: "preload",
-                href: "/fonts/noto-sans-mono-latin.woff2",
-                as: "font",
-                type: "font/woff2",
-                crossorigin: "anonymous",
-            },
-        ],
-        ["meta", { name: "theme-color", content: "#2847b8" }],
-        ["meta", { property: "og:type", content: "website" }],
-        ["meta", { property: "og:site_name", content: "aayntn" }],
-        [
-            "meta",
-            {
-                name: "description",
-                content:
-                    "A complete competitive programming encyclopedia: mathematical derivations, six-language implementations, and deterministic animated algorithms.",
-            },
-        ],
-        ["link", { rel: "sitemap", href: "/sitemap.xml" }],
-    ],
+    head: HEAD,
 
-    sitemap: {
-        hostname: "https://aayntn.org",
-        transformItems(items) {
-            return items.filter((item) => !item.url.includes("/implementations/"));
-        },
-    },
+    /* A sitemap is written only when the address of the site is known. */
+    ...(HOSTNAME
+        ? {
+              sitemap: {
+                  hostname: HOSTNAME,
+                  transformItems(items: { url: string }[]) {
+                      return items.filter((item) => !item.url.includes("/implementations/"));
+                  },
+              },
+          }
+        : {}),
 
     markdown: {
         // KaTeX is the only mathematics renderer; MathJax must stay off.
@@ -294,6 +327,27 @@ export default defineConfig({
                 trust: false,
                 macros: katexMacros,
             });
+
+            /*
+             * An address written in Markdown is rewritten by the site, but an
+             * address written in a raw HTML block — a definition list, a
+             * figure, a table — is not. This pass puts the base in front of
+             * every address that the page would otherwise ask for at the root
+             * of the domain.
+             */
+            const render = md.renderer.render.bind(md.renderer);
+            md.renderer.render = (tokens, options, env) => {
+                const html = render(tokens, options, env);
+                if (BASE === "/") return html;
+                return html.replace(
+                    /(href|src)="(\/[^"]*)"/g,
+                    (whole: string, attribute: string, value: string) => {
+                        if (value.startsWith("//")) return whole;
+                        if (value.startsWith(BASE)) return whole;
+                        return `${attribute}="${BASE}${value.slice(1)}"`;
+                    },
+                );
+            };
         },
         theme: {
             light: aayntnLight,
