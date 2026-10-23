@@ -140,6 +140,7 @@ describe("the components", () => {
             "Banner",
             "CodeViewer",
             "ContestSimulation",
+            "CoverageMatrix",
             "Figure",
             "LearnNext",
             "MathPanel",
