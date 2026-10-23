@@ -19,18 +19,115 @@ import { REPOSITORY_URL } from "./theme/repository";
 /* Navigation                                                          */
 /* ------------------------------------------------------------------ */
 
-const nav: DefaultTheme.Config["nav"] = [
-    { text: "Start here", link: "/start/", activeMatch: "/start/" },
-    { text: "Curriculum", link: "/curriculum/", activeMatch: "/curriculum/" },
-    { text: "Algorithms", link: "/algorithms/", activeMatch: "/algorithms/" },
-    { text: "Practice", link: "/practice/", activeMatch: "/practice/" },
-    { text: "Contest", link: "/contest/", activeMatch: "/contest/" },
-    { text: "Debugging", link: "/debugging/", activeMatch: "/debugging/" },
-    { text: "Laboratory", link: "/laboratory/", activeMatch: "/laboratory/" },
-    { text: "Languages", link: "/languages/", activeMatch: "/languages/" },
-    { text: "Templates", link: "/templates/", activeMatch: "/templates/" },
-    { text: "Mathematics", link: "/mathematics/", activeMatch: "/mathematics/" },
-    { text: "My progress", link: "/progress/", activeMatch: "/progress/" },
+export interface NavigationLink {
+    text: string;
+    description: string;
+    link: string;
+}
+
+export interface NavigationGroup {
+    text: string;
+    activeMatch?: string;
+    items: NavigationLink[];
+}
+
+const nav: NavigationGroup[] = [
+    {
+        text: "Learn",
+        items: [
+            {
+                text: "Start here",
+                description: "What this encyclopedia is and how to read it.",
+                link: "/start/",
+            },
+            {
+                text: "Curriculum",
+                description: "Bronze to Platinum, one division at a time.",
+                link: "/curriculum/",
+            },
+            {
+                text: "Practice",
+                description: "Problems sorted by technique and division.",
+                link: "/practice/",
+            },
+            {
+                text: "Contest",
+                description: "A timed simulation under contest rules.",
+                link: "/contest/",
+            },
+        ],
+    },
+    {
+        text: "Reference",
+        activeMatch: "/reference/",
+        items: [
+            {
+                text: "Algorithms",
+                description: "Every subject, with proofs and six-language code.",
+                link: "/algorithms/",
+            },
+            {
+                text: "Mathematics",
+                description: "The derivations that the algorithms rest on.",
+                link: "/mathematics/",
+            },
+            {
+                text: "Templates",
+                description: "Contest-ready code to adapt, not paste.",
+                link: "/templates/",
+            },
+            {
+                text: "Languages",
+                description: "One technique written in six languages.",
+                link: "/languages/",
+            },
+        ],
+    },
+    {
+        text: "Tools",
+        items: [
+            {
+                text: "Laboratory",
+                description: "Step through an algorithm one operation at a time.",
+                link: "/laboratory/",
+            },
+            {
+                text: "Debugging",
+                description: "Find the fault in a solution that fails quietly.",
+                link: "/debugging/",
+            },
+            {
+                text: "My progress",
+                description: "What you have read and what comes next.",
+                link: "/progress/",
+            },
+            {
+                text: "Coverage",
+                description: "Which subjects have a full lesson and which do not.",
+                link: "/coverage/",
+            },
+        ],
+    },
+    {
+        text: "About",
+        items: [
+            {
+                text: "About",
+                description: "Who writes this, and why it stays free.",
+                link: "/about",
+            },
+            {
+                text: "Download",
+                description: "Take the encyclopedia offline.",
+                link: "/download/",
+            },
+            {
+                text: "Glossary",
+                description: "Every term the lessons use, defined once.",
+                link: "/reference/glossary",
+            },
+        ],
+    },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -81,7 +178,28 @@ const algorithmsSidebar: DefaultTheme.SidebarItem[] = [
     },
 ];
 
+const aboutSidebar: DefaultTheme.SidebarItem[] = [
+    {
+        text: "About the project",
+        collapsed: false,
+        items: [
+            { text: "About this encyclopedia", link: "/about" },
+            { text: "Take it offline", link: "/download/" },
+            { text: "Glossary", link: "/reference/glossary" },
+        ],
+    },
+];
+
 const sidebar: DefaultTheme.Config["sidebar"] = {
+    "/about": aboutSidebar,
+    "/download/": aboutSidebar,
+    "/coverage/": [
+        {
+            text: "Coverage",
+            collapsed: false,
+            items: [{ text: "Coverage report", link: "/coverage/" }],
+        },
+    ],
     "/start/": [
         {
             text: "Prerequisite academy",
