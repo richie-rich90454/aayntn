@@ -11,6 +11,7 @@ import LearnNext from "./components/progress/LearnNext.vue";
 import CoverageMatrix from "./components/coverage/CoverageMatrix.vue";
 import StyleGuide from "./components/style-guide/StyleGuide.vue";
 import ChangelogList from "./components/changelog/ChangelogList.vue";
+import ClipGallery from "./components/laboratory/ClipGallery.vue";
 import Synonyms from "./components/Synonyms.vue";
 import Figure from "./components/Figure.vue";
 import Ornament from "./components/Ornament.vue";
@@ -42,6 +43,7 @@ export default {
         app.component("CoverageMatrix", CoverageMatrix);
         app.component("StyleGuide", StyleGuide);
         app.component("ChangelogList", ChangelogList);
+        app.component("ClipGallery", ClipGallery);
         app.component("Synonyms", Synonyms);
         app.component("Figure", Figure);
         app.component("Ornament", Ornament);
