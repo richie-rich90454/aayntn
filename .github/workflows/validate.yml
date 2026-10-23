@@ -61,3 +61,17 @@ jobs:
 
             - name: Run the test suite
               run: pnpm test
+
+            # A site that is published under a path breaks in a way that a
+            # local build cannot show, so it is built here the way a project
+            # site is published and every address on it is resolved.
+            - name: Build the site under a path, as a project site is published
+              run: pnpm run build
+              env:
+                  AAYNTN_BASE: /aayntn/
+                  AAYNTN_HOSTNAME: https://example.github.io
+
+            - name: Check that every address of the site carries its base
+              run: pnpm run check:base
+              env:
+                  AAYNTN_BASE: /aayntn/
