@@ -8,6 +8,7 @@ import PracticeCatalog from "./components/problems/PracticeCatalog.vue";
 import ContestSimulation from "./components/practice/ContestSimulation.vue";
 import ProgressDashboard from "./components/progress/ProgressDashboard.vue";
 import LearnNext from "./components/progress/LearnNext.vue";
+import CoverageMatrix from "./components/coverage/CoverageMatrix.vue";
 import Synonyms from "./components/Synonyms.vue";
 import Figure from "./components/Figure.vue";
 import Ornament from "./components/Ornament.vue";
@@ -36,6 +37,7 @@ export default {
         app.component("ContestSimulation", ContestSimulation);
         app.component("ProgressDashboard", ProgressDashboard);
         app.component("LearnNext", LearnNext);
+        app.component("CoverageMatrix", CoverageMatrix);
         app.component("Synonyms", Synonyms);
         app.component("Figure", Figure);
         app.component("Ornament", Ornament);
