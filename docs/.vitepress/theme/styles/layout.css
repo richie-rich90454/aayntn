@@ -4,7 +4,8 @@
  *
  * The identity comes from three things: monumental type, saturated rectangular
  * fields that define a section rather than decorate it, and a frame of thin
- * double rules and corner flourishes. Nothing is rounded and nothing floats.
+ * double rules and corner flourishes. One radius, five pixels, and nothing
+ * floats.
  */
 
 /* -------------------------------------------------------------------- */
@@ -806,7 +807,6 @@
 }
 
 .aayntn-division:hover {
-    filter: brightness(1.1);
     text-decoration: none;
 }
 
