@@ -22,7 +22,7 @@ const VIEWPORTS = [
 
 const GROUPS = ["Learn", "Reference", "Tools", "About"];
 
-const DESTINATION_COUNT = 15;
+const DESTINATION_COUNT = 16;
 
 const DOCS_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../docs");
 const BASE_PATH = (process.env["AAYNTN_BASE"] ?? "/").replace(/\/+$/, "");
