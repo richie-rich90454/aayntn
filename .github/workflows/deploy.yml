@@ -2,6 +2,18 @@ name: Build and deploy
 
 # The site is a set of static files. The build regenerates every derived
 # artifact, renders the pages, and publishes the result to GitHub Pages.
+#
+# Nothing about the address of the site is written into the sources. This
+# workflow works it out from the repository that is running it, so that the
+# same files publish correctly as a project site (under the name of the
+# repository), as a user site (at the root of the domain), and under a custom
+# domain. A repository variable overrides either part:
+#
+#   AAYNTN_HOSTNAME  the address of the published site, without a trailing
+#                    slash; defaults to https://<owner>.github.io
+#   AAYNTN_BASE      the path under which the site is published, with a
+#                    leading and a trailing slash; defaults to /<repo>/ for a
+#                    project site and / for a user site or a custom domain
 
 on:
     push:
@@ -24,6 +36,41 @@ jobs:
         steps:
             - uses: actions/checkout@v7
 
+            - name: Work out the address of the site
+              id: address
+              env:
+                  OVERRIDE_HOSTNAME: ${{ vars.AAYNTN_HOSTNAME }}
+                  OVERRIDE_BASE: ${{ vars.AAYNTN_BASE }}
+              run: |
+                  set -euo pipefail
+                  owner="${GITHUB_REPOSITORY_OWNER}"
+                  repo="${GITHUB_REPOSITORY#*/}"
+
+                  # A user site is published at the root; every other
+                  # repository is published under its name.
+                  if [ "${repo}" = "${owner}.github.io" ]; then
+                    base="/"
+                  else
+                    base="/${repo}/"
+                  fi
+                  hostname="https://${owner}.github.io"
+
+                  # A custom domain is published at the root unless the
+                  # repository says otherwise.
+                  if [ -n "${OVERRIDE_HOSTNAME}" ]; then
+                    hostname="${OVERRIDE_HOSTNAME}"
+                    if [ "${hostname}" != "https://${owner}.github.io" ]; then
+                      base="/"
+                    fi
+                  fi
+                  if [ -n "${OVERRIDE_BASE}" ]; then
+                    base="${OVERRIDE_BASE}"
+                  fi
+
+                  echo "base=${base}" >> "$GITHUB_OUTPUT"
+                  echo "hostname=${hostname}" >> "$GITHUB_OUTPUT"
+                  echo "The site is published at ${hostname}${base}"
+
             - uses: pnpm/action-setup@v6
 
             - uses: actions/setup-node@v7
@@ -36,6 +83,14 @@ jobs:
 
             - name: Generate, validate and build
               run: pnpm run build
+              env:
+                  AAYNTN_BASE: ${{ steps.address.outputs.base }}
+                  AAYNTN_HOSTNAME: ${{ steps.address.outputs.hostname }}
+
+            - name: Check that every address of the site carries its base
+              env:
+                  AAYNTN_BASE: ${{ steps.address.outputs.base }}
+              run: pnpm run check:base
 
             - name: Measure the bundle
               run: |
