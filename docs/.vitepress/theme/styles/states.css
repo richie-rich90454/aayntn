@@ -124,6 +124,16 @@ html.dark a.aayntn-chip--vermilion:visited,
 /* Focus                                                                */
 /* -------------------------------------------------------------------- */
 
+/* The base theme gives every button a four-pixel automatic ring, and its
+   selector is one class heavier than a bare :focus-visible. Naming the
+   interactive elements here keeps the token ring in charge. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible,
 :focus-visible {
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
