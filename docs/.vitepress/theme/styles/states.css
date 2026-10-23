@@ -1,0 +1,536 @@
+/* Interactive states: hover, focus, active, visited. One field and one ink
+   per surface, defined as tokens, applied here rather than per component. */
+
+/* -------------------------------------------------------------------- */
+/* Visited                                                              */
+/* -------------------------------------------------------------------- */
+
+/*
+ * A browser paints a visited link purple when no author rule says otherwise.
+ * This zero-specificity rule overtakes the browser default without overtaking
+ * the resting color that each component has chosen for itself.
+ */
+:where(a):visited {
+    color: var(--visited-ink);
+}
+
+.aayntn-brand:visited {
+    color: var(--color-white);
+}
+
+.aayntn-nav__link:visited {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.aayntn-nav__link.is-active:visited {
+    color: var(--color-white);
+}
+
+.aayntn-sidebar__link:visited {
+    color: var(--text-secondary);
+}
+
+.aayntn-sidebar__link.is-active:visited {
+    color: var(--text-primary);
+}
+
+.aayntn-outline__link:visited {
+    color: var(--text-muted);
+}
+
+.aayntn-outline__link.is-active:visited {
+    color: var(--text-accent);
+}
+
+.aayntn-footer__list a:visited {
+    color: rgba(255, 255, 255, 0.76);
+}
+
+.aayntn-footer__legal a:visited {
+    color: rgba(255, 255, 255, 0.58);
+}
+
+.skip-link:visited {
+    color: var(--color-white);
+}
+
+.aayntn-button:visited {
+    color: var(--color-black);
+}
+
+.aayntn-button--ghost:visited {
+    color: inherit;
+}
+
+.aayntn-button--ink:visited {
+    color: var(--color-white);
+}
+
+.aayntn-division:visited {
+    color: var(--color-white);
+}
+
+.aayntn-division--gold:visited {
+    color: var(--color-black);
+}
+
+.aayntn-feature:visited {
+    color: inherit;
+}
+
+.aayntn-section__more:visited {
+    color: var(--text-accent);
+}
+
+.aayntn-band--ink .aayntn-section__more:visited {
+    color: var(--color-gold);
+}
+
+.aayntn-search__result:visited {
+    color: inherit;
+}
+
+.aayntn-code__action:visited {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+a.aayntn-chip:visited {
+    color: var(--text-primary);
+}
+
+a.aayntn-chip--gold:visited {
+    color: var(--color-black);
+}
+
+a.aayntn-chip--bronze:visited,
+a.aayntn-chip--silver:visited,
+a.aayntn-chip--platinum:visited,
+a.aayntn-chip--accent:visited,
+a.aayntn-chip--emerald:visited,
+a.aayntn-chip--vermilion:visited {
+    color: var(--color-white);
+}
+
+a.aayntn-chip--muted:visited {
+    color: var(--text-muted);
+}
+
+html.dark a.aayntn-chip--vermilion:visited,
+.aayntn-appearance-dark a.aayntn-chip--vermilion:visited {
+    color: var(--color-black);
+}
+
+/* -------------------------------------------------------------------- */
+/* Focus                                                                */
+/* -------------------------------------------------------------------- */
+
+:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+}
+
+html.dark :focus-visible,
+.aayntn-appearance-dark :focus-visible {
+    outline-color: var(--focus-ring);
+}
+
+.aayntn-header :focus-visible,
+.aayntn-footer :focus-visible,
+.aayntn-code__head :focus-visible,
+.aayntn-band--ink :focus-visible {
+    outline-color: var(--focus-ring-inverse);
+}
+
+html .aayntn-search__input:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -2px;
+}
+
+.aayntn-search__field:focus-within {
+    border-bottom-color: var(--focus-ring);
+}
+
+.aayntn-division:focus-visible,
+.aayntn-feature:focus-visible {
+    outline-offset: -4px;
+}
+
+.aayntn-code__head :focus-visible,
+.aayntn-practice :focus-visible,
+.aayntn-lab :focus-visible {
+    outline-offset: -2px;
+}
+
+/* -------------------------------------------------------------------- */
+/* Header and other ink fields                                          */
+/* -------------------------------------------------------------------- */
+
+.aayntn-nav__link:hover {
+    background: var(--hover-surface-inverse);
+    color: var(--hover-ink-inverse);
+}
+
+.aayntn-nav__link.is-active:hover {
+    background: var(--hover-primary-field);
+    color: var(--hover-primary-ink);
+    box-shadow: inset 0 -3px 0 var(--color-gold);
+}
+
+.aayntn-icon-button:hover {
+    background: var(--hover-surface-inverse);
+    color: var(--hover-ink-inverse);
+}
+
+.aayntn-brand:hover {
+    color: var(--hover-ink-inverse);
+    text-decoration: none;
+}
+
+.aayntn-footer__list a {
+    color: rgba(255, 255, 255, 0.76);
+}
+
+.aayntn-footer__list a:hover {
+    color: var(--hover-ink-inverse);
+}
+
+.aayntn-footer__legal a {
+    color: rgba(255, 255, 255, 0.58);
+}
+
+.aayntn-footer__legal a:hover {
+    color: var(--hover-ink-inverse);
+}
+
+html .aayntn-search__button:hover {
+    background: var(--hover-primary-field);
+    color: var(--hover-primary-ink);
+}
+
+html .aayntn-code__action:hover {
+    background: var(--hover-surface-inverse);
+    color: var(--hover-ink-inverse);
+}
+
+/* -------------------------------------------------------------------- */
+/* Navigation rails                                                     */
+/* -------------------------------------------------------------------- */
+
+.aayntn-sidebar__link:hover {
+    background: var(--hover-surface);
+    border-left-color: var(--border-strong);
+    color: var(--hover-ink);
+    text-decoration: none;
+}
+
+.aayntn-sidebar__link.is-active:hover {
+    background: var(--hover-surface-strong);
+    border-left-color: var(--color-primary);
+    color: var(--text-accent);
+}
+
+.aayntn-outline__link:hover {
+    color: var(--hover-ink);
+    text-decoration: none;
+}
+
+.aayntn-outline__link.is-active:hover {
+    color: var(--text-accent);
+}
+
+/* -------------------------------------------------------------------- */
+/* Search results                                                       */
+/* -------------------------------------------------------------------- */
+
+html .aayntn-search__close:hover {
+    background: var(--hover-surface);
+    border-color: var(--hover-surface-strong);
+    color: var(--hover-ink);
+}
+
+html .aayntn-search__result:hover,
+html .aayntn-search__result.is-active {
+    background: var(--hover-surface);
+    color: var(--hover-ink);
+    text-decoration: none;
+}
+
+html .aayntn-search__result:hover .aayntn-search__title,
+html .aayntn-search__result.is-active .aayntn-search__title,
+html .aayntn-search__result:hover .aayntn-search__summary,
+html .aayntn-search__result.is-active .aayntn-search__summary {
+    color: var(--hover-ink);
+}
+
+/* -------------------------------------------------------------------- */
+/* Buttons                                                              */
+/* -------------------------------------------------------------------- */
+
+.aayntn-button:hover {
+    background: var(--hover-accent-field);
+    border-color: var(--hover-accent-field);
+    color: var(--hover-accent-ink);
+}
+
+.aayntn-button--ghost:hover {
+    background: var(--hover-accent-field);
+    border-color: var(--hover-accent-field);
+    color: var(--hover-accent-ink);
+}
+
+.aayntn-button--ink:hover {
+    background: var(--hover-primary-field);
+    border-color: var(--hover-primary-field);
+    color: var(--hover-primary-ink);
+}
+
+.aayntn-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+/* -------------------------------------------------------------------- */
+/* Chips                                                                */
+/* -------------------------------------------------------------------- */
+
+a.aayntn-chip {
+    text-decoration: none;
+}
+
+/* The vermilion field is light in the dark appearance, so its ink turns
+   dark. The hover below is declared after it and replaces both values. */
+html.dark .aayntn-chip--vermilion,
+.aayntn-appearance-dark .aayntn-chip--vermilion {
+    color: var(--color-black);
+}
+
+a.aayntn-chip:hover {
+    background: var(--hover-surface);
+    border-color: var(--hover-surface-strong);
+    color: var(--hover-ink);
+    text-decoration: none;
+}
+
+/* The dark vermilion ink above is more specific than the neutral hover, so
+   the hover is restated at the same weight. */
+html.dark a.aayntn-chip--vermilion:hover,
+.aayntn-appearance-dark a.aayntn-chip--vermilion:hover {
+    background: var(--hover-surface);
+    border-color: var(--hover-surface-strong);
+    color: var(--hover-ink);
+}
+
+/* -------------------------------------------------------------------- */
+/* Tabs and transport controls                                          */
+/* -------------------------------------------------------------------- */
+
+html .aayntn-tab:hover {
+    background: var(--hover-surface);
+    color: var(--hover-ink);
+}
+
+html .aayntn-tab[aria-selected="true"]:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+html .aayntn-transport__button:hover:not(:disabled) {
+    background: var(--hover-surface);
+    border-color: var(--border-strong);
+    color: var(--hover-ink);
+}
+
+html .aayntn-transport__button--primary:hover:not(:disabled) {
+    background: var(--hover-primary-field);
+    border-color: var(--hover-primary-field);
+    color: var(--hover-primary-ink);
+}
+
+.aayntn-filter:hover {
+    background: var(--hover-surface);
+    border-color: var(--hover-surface-strong);
+    color: var(--hover-ink);
+}
+
+.aayntn-hint__toggle:hover {
+    color: var(--text-link-hover);
+}
+
+/* -------------------------------------------------------------------- */
+/* Fields                                                               */
+/* -------------------------------------------------------------------- */
+
+/* The vermilion field is light in the dark appearance, so its ink turns
+   dark; the cobalt field is lighter there too, so its copy is plain white. */
+.aayntn-field--vermilion .aayntn-field__copy {
+    color: var(--color-white);
+}
+
+html.dark .aayntn-field--vermilion,
+.aayntn-appearance-dark .aayntn-field--vermilion {
+    color: var(--color-black);
+}
+
+html.dark .aayntn-field--vermilion .aayntn-field__copy,
+.aayntn-appearance-dark .aayntn-field--vermilion .aayntn-field__copy {
+    color: rgba(22, 22, 22, 0.82);
+}
+
+html.dark .aayntn-field:not(.aayntn-field--gold):not(.aayntn-field--vermilion) .aayntn-field__copy,
+.aayntn-appearance-dark
+    .aayntn-field:not(.aayntn-field--gold):not(.aayntn-field--vermilion)
+    .aayntn-field__copy {
+    color: var(--color-white);
+}
+
+/* -------------------------------------------------------------------- */
+/* Cards and links                                                      */
+/* -------------------------------------------------------------------- */
+
+.aayntn-feature:hover {
+    background: var(--hover-surface);
+    color: var(--hover-ink);
+    text-decoration: none;
+}
+
+.aayntn-feature:hover .aayntn-feature__title,
+.aayntn-feature:hover .aayntn-feature__copy {
+    color: var(--hover-ink);
+}
+
+.aayntn-feature:hover .aayntn-feature__meta {
+    border-top-color: var(--border-subtle);
+    color: var(--text-secondary);
+}
+
+.aayntn-feature:hover .aayntn-feature__kicker {
+    color: var(--text-accent);
+}
+
+.aayntn-band--ink .aayntn-feature:hover {
+    background: var(--hover-surface-inverse);
+    color: var(--hover-ink-inverse);
+}
+
+.aayntn-band--ink .aayntn-feature:hover .aayntn-feature__title {
+    color: var(--hover-ink-inverse);
+}
+
+.aayntn-band--ink .aayntn-feature:hover .aayntn-feature__copy,
+.aayntn-band--ink .aayntn-feature:hover .aayntn-feature__meta {
+    color: var(--hover-ink-inverse);
+}
+
+.aayntn-band--ink .aayntn-feature:hover .aayntn-feature__kicker {
+    color: var(--color-gold);
+}
+
+.aayntn-division:hover {
+    filter: none;
+    text-decoration: none;
+}
+
+.aayntn-division--bronze:hover {
+    background: var(--division-bronze-hover);
+    color: var(--division-bronze-hover-ink);
+}
+
+.aayntn-division--silver:hover {
+    background: var(--division-silver-hover);
+    color: var(--division-silver-hover-ink);
+}
+
+.aayntn-division--gold:hover {
+    background: var(--division-gold-hover);
+    color: var(--division-gold-hover-ink);
+}
+
+.aayntn-division--platinum:hover {
+    background: var(--division-platinum-hover);
+    color: var(--division-platinum-hover-ink);
+}
+
+.aayntn-division:hover .aayntn-division__copy,
+.aayntn-division:hover .aayntn-division__focus,
+.aayntn-division:hover .aayntn-division__count {
+    color: inherit;
+}
+
+.aayntn-section__more:hover {
+    color: var(--text-link-hover);
+}
+
+.aayntn-band--ink .aayntn-section__more:hover {
+    color: var(--color-gold-bright);
+}
+
+.aayntn-progress__title:hover,
+.aayntn-learn-next__title:hover {
+    color: var(--text-link-hover);
+}
+
+/* -------------------------------------------------------------------- */
+/* Geometry                                                             */
+/* -------------------------------------------------------------------- */
+
+.aayntn-button,
+.aayntn-chip,
+.aayntn-filter,
+.aayntn-search__close,
+.aayntn-search__dialog,
+.aayntn-search__result,
+.aayntn-search__kind,
+.aayntn-tablist,
+.aayntn-transport__button,
+.aayntn-feature,
+.aayntn-plate,
+.aayntn-hero__panel,
+.aayntn-summary,
+.aayntn-prereq,
+.aayntn-practice,
+.aayntn-problem,
+.aayntn-progress__card,
+.aayntn-learn-next,
+.aayntn-figure,
+.aayntn-lab,
+.aayntn-code,
+.aayntn-code__status,
+.aayntn-storyboard__frame,
+.aayntn-math--lemma,
+.aayntn-math--theorem,
+.vp-doc div[class*="language-"],
+.aayntn-prose :not(pre) > code {
+    border-radius: var(--radius);
+}
+
+.aayntn-tab:first-child {
+    border-top-left-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
+}
+
+.aayntn-tab:last-child {
+    border-top-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+}
+
+.aayntn-feature-grid,
+.aayntn-divisions,
+.aayntn-stats,
+.aayntn-summary,
+.aayntn-prereq,
+.aayntn-practice,
+.aayntn-code {
+    overflow: hidden;
+}
+
+/* A table is a ruled grid, not a card: its cells stay square. */
+.aayntn-prose table,
+.vp-doc table,
+.aayntn-prose th,
+.vp-doc th,
+.aayntn-prose td,
+.vp-doc td {
+    border-radius: 0;
+}
