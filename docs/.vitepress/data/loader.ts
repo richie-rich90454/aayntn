@@ -4,8 +4,11 @@
  * The fragments are published as plain static files by the build, so a reader
  * downloads only the listing they actually open, and the bundler never has to
  * carry a hundred and fifty source listings in the module graph.
+ *
+ * Every address starts from the base of the site, because the site may be
+ * published under a path rather than at the root of a domain.
  */
-const BASE = "/implementations";
+const BASE = `${import.meta.env.BASE_URL}implementations`;
 
 export async function loadImplementationHtml(
     algorithm: string,
