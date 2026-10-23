@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import { useData, useRoute } from "vitepress";
+import { useData, useRoute, withBase } from "vitepress";
 import { useThemeToggle } from "../../composables/useTheme";
 import { sidebarOpen, toggleSidebar } from "../../composables/useSidebarToggle";
 import SearchOverlay from "./SearchOverlay.vue";
@@ -48,7 +48,7 @@ function isActive(item: { link?: string; activeMatch?: string }): boolean {
                 </svg>
             </button>
 
-            <a class="aayntn-brand" href="/">
+            <a class="aayntn-brand" v-bind:href="withBase('/')">
                 <span class="aayntn-brand__mark">A.A.Y.N.T.N.</span>
                 <span class="aayntn-brand__tagline">All Algorithms You Need to Know</span>
             </a>
@@ -59,7 +59,7 @@ function isActive(item: { link?: string; activeMatch?: string }): boolean {
                     :key="item.text"
                     class="aayntn-nav__link"
                     :class="{ 'is-active': isActive(item) }"
-                    :href="item.link"
+                    :href="withBase(item.link ?? '/')"
                 >
                     {{ item.text }}
                 </a>
