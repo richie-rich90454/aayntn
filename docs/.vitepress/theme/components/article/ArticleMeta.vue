@@ -40,17 +40,13 @@ const requirements = computed(() => {
 });
 
 const implementations = ref<number | null>(null);
-let implementationRequest = 0;
 
 watch(
     () => frontmatter.value.implementations as string | undefined,
-    async (id) => {
-        const request = ++implementationRequest;
+    (id) => {
         implementations.value = null;
         if (!id) return;
-        const module = await import("../../../data/generated/algorithms.json");
-        if (request !== implementationRequest) return;
-        const entry = (module.default as AlgorithmEntry[]).find((item) => item.id === id);
+        const entry = (algorithms as AlgorithmEntry[]).find((item) => item.id === id);
         implementations.value = entry ? entry.variants.length : null;
     },
     { immediate: true },
