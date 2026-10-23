@@ -3,6 +3,7 @@ import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { useData, useRoute, withBase } from "vitepress";
 import type { NavigationGroup } from "../../../config";
 import { useThemeToggle } from "../../composables/useTheme";
+import { pagePath } from "../../composables/useBasePath";
 import { sidebarOpen, toggleSidebar } from "../../composables/useSidebarToggle";
 import SearchTrigger from "./SearchTrigger.vue";
 
@@ -32,7 +33,7 @@ function menuId(index: number): string {
 }
 
 function isLinkActive(link: string): boolean {
-    const path = route.path;
+    const path = pagePath(route.path);
     if (path === link || path === `${link}/`) return true;
     return path.startsWith(link.endsWith("/") ? link : `${link}/`);
 }
@@ -44,7 +45,7 @@ const activeGroup = computed(() => {
     if (direct) return direct.text;
     return (
         navGroups.value.find(
-            (group) => group.activeMatch && route.path.startsWith(group.activeMatch),
+            (group) => group.activeMatch && pagePath(route.path).startsWith(group.activeMatch),
         )?.text ?? null
     );
 });
