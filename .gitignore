@@ -15,6 +15,7 @@ docs/public/diagrams/
 docs/implementations/
 # The generated book and the printed artifacts
 docs/public/book/
+docs/public/og/
 dist-book/
 
 # Scratch directories used by the validation tooling
