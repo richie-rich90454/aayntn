@@ -1,0 +1,59 @@
+name: Build the printable edition
+
+# The book is the same Markdown as the site, rendered once into a single
+# document and printed at five language presets. It is heavy — five PDFs of
+# about fourteen hundred pages — so it is built on a release rather than on
+# every push. The site itself renders the book entry page on every build; this
+# workflow produces the files that the download page links to.
+
+on:
+    release:
+        types: [published]
+    workflow_dispatch:
+
+permissions:
+    contents: write
+
+concurrency:
+    group: book
+    cancel-in-progress: true
+
+jobs:
+    book:
+        name: Print the book
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v7
+
+            - uses: pnpm/action-setup@v6
+
+            - uses: actions/setup-node@v7
+              with:
+                  node-version: 24
+                  cache: pnpm
+
+            - name: Install the dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Install the browser that prints the pages
+              run: pnpm exec playwright install --with-deps chromium
+
+            - name: Render the document and print the presets
+              run: pnpm run book
+              env:
+                  AAYNTN_BASE: /aayntn/
+
+            - name: Print the language card
+              run: pnpm run book:card
+
+            - name: Attach the files to the release
+              if: github.event_name == 'release'
+              run: gh release upload "${{ github.event.release.tag_name }}" dist-book/*.pdf --clobber
+              env:
+                  GH_TOKEN: ${{ github.token }}
+
+            - uses: actions/upload-artifact@v7
+              with:
+                  name: aayntn-book
+                  path: dist-book/*.pdf
+                  retention-days: 30
