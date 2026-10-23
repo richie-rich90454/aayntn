@@ -160,3 +160,9 @@ Give the tree in the form `root: child child`, then one query per line in the fo
 ## Where to go next
 
 A demonstration is the fastest way to see what an algorithm does, and it is not a substitute for the argument that it is correct. Each article in the [encyclopedia](/algorithms/) states the model, derives the update, proves the claim, and then shows the implementation in all six languages. Read the article first, and use the laboratory to check that the picture in your head matches the code on the page.
+
+## Watch the demonstrations
+
+The twelve recordings below are captured from the players above, not drawn by hand. They exist for the places where a running page cannot go: the README, a release note, a slide. Each clip shows the same operations, in the same order, with the same narration.
+
+<ClipGallery />
