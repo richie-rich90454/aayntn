@@ -255,9 +255,9 @@ html.dark .aayntn-lab__head {
     color: var(--color-white);
 }
 .state-selected {
-    background: var(--color-violet);
-    border-color: var(--color-violet);
-    color: var(--color-white);
+    background: var(--state-selected-field);
+    border-color: var(--state-selected-field);
+    color: var(--state-selected-ink);
 }
 
 /* Input controls -------------------------------------------------------- */
