@@ -4,6 +4,10 @@
 
 [![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](LICENSE) [![Accessibility](https://img.shields.io/badge/accessibility-WCAG%202.2%20AA-0b6b4a.svg)](ACCESSIBILITY.md) [![Code of Conduct](https://img.shields.io/badge/code%20of%20conduct-contributor%20covenant-blue.svg)](CODE_OF_CONDUCT.md) [![Security policy](https://img.shields.io/badge/security-policy-1f883d.svg)](SECURITY.md) [![Last commit](https://img.shields.io/github/last-commit/richie-rich90454/aayntn.svg)](https://github.com/richie-rich90454/aayntn/commits/main)
 
+[![Validate](https://github.com/richie-rich90454/aayntn/actions/workflows/validate.yml/badge.svg)](https://github.com/richie-rich90454/aayntn/actions/workflows/validate.yml) [![Build and deploy](https://github.com/richie-rich90454/aayntn/actions/workflows/deploy.yml/badge.svg)](https://github.com/richie-rich90454/aayntn/actions/workflows/deploy.yml) [![Printable edition](https://img.shields.io/badge/printable%20edition-A4%20PDF-c63d32.svg)](https://richie-rich90454.github.io/aayntn/download/) [![Coverage](https://img.shields.io/badge/coverage-published-2847b8.svg)](https://richie-rich90454.github.io/aayntn/coverage/)
+
+**Read it at [richie-rich90454.github.io/aayntn](https://richie-rich90454.github.io/aayntn/).** The whole encyclopedia is also a single A4 PDF, printed at five language presets, with bookmarks and page numbers: **[take it offline](https://richie-rich90454.github.io/aayntn/download/)**.
+
 The site is a set of static files. Every lesson is an ordinary Markdown file, every implementation is a real source file in the language it claims to be, and every interactive demonstration is driven by a deterministic TypeScript reference implementation rather than by hand-drawn animation.
 
 ## What is in the box
