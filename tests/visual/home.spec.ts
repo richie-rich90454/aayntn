@@ -16,9 +16,9 @@ test("renders exactly five sections", async ({ page }) => {
     await openHome(page);
 
     await expect(page.locator(".aayntn-home > section")).toHaveCount(5);
-    await expect(page.locator(".home-hero__title")).toContainText("A.A.Y.N.T.N.");
+    await expect(page.locator(".aayntn-home-hero__title")).toContainText("A.A.Y.N.T.N.");
 
-    const headings = await page.locator(".home-section__title").allTextContents();
+    const headings = await page.locator(".aayntn-home-section__title").allTextContents();
     expect(headings.map((heading) => heading.trim())).toEqual([
         "Choose a starting point",
         "Coverage",
@@ -30,7 +30,7 @@ test("renders exactly five sections", async ({ page }) => {
 test("offers the three starting points", async ({ page }) => {
     await openHome(page);
 
-    const cards = page.locator(".home-path");
+    const cards = page.locator(".aayntn-home-path");
     await expect(cards).toHaveCount(3);
 
     await expect(cards.nth(0)).toContainText("I have never programmed");
@@ -46,14 +46,14 @@ test("offers the three starting points", async ({ page }) => {
 test("renders the coverage figures and links to the report", async ({ page }) => {
     await openHome(page);
 
-    const figures = page.locator(".home-coverage__value");
+    const figures = page.locator(".aayntn-home-coverage__value");
     await expect(figures).toHaveCount(2);
 
     for (const text of await figures.allTextContents()) {
         expect(text.trim()).toMatch(/^\d+%$/);
     }
 
-    await expect(page.locator(".home-coverage__label").first()).toContainText(
+    await expect(page.locator(".aayntn-home-coverage__label").first()).toContainText(
         "Required techniques",
     );
     await expect(page.getByRole("link", { name: "Read the coverage report" })).toHaveAttribute(
@@ -65,10 +65,10 @@ test("renders the coverage figures and links to the report", async ({ page }) =>
 test("lists all fourteen subjects with technique counts", async ({ page }) => {
     await openHome(page);
 
-    const subjects = page.locator(".home-subject");
+    const subjects = page.locator(".aayntn-home-subject");
     await expect(subjects).toHaveCount(14);
 
-    for (const count of await page.locator(".home-subject__count").allTextContents()) {
+    for (const count of await page.locator(".aayntn-home-subject__count").allTextContents()) {
         expect(count.trim()).toMatch(/^\d+$/);
     }
 });
@@ -76,7 +76,7 @@ test("lists all fourteen subjects with technique counts", async ({ page }) => {
 test("opens the command palette from the search prompt", async ({ page }) => {
     await openHome(page);
 
-    await page.locator(".home-search").click();
+    await page.locator(".aayntn-home-search").click();
     await expect(page.locator(".aayntn-palette__dialog")).toBeVisible();
     await expect(page.getByLabel("Search query")).toBeVisible();
 });
