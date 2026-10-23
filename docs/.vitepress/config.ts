@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitepress";
 import { katex } from "@mdit/plugin-katex";
 import type { DefaultTheme } from "vitepress";
@@ -430,12 +432,29 @@ export default defineConfig({
             "A complete competitive programming encyclopedia with derivations, six-language implementations and deterministic animations.";
         const path = pageData.relativePath.replace(/(^|\/)index\.md$/, "$1").replace(/\.md$/, "");
         const url = `${HOSTNAME.replace(/\/+$/, "")}${BASE}${path}`;
-        return [
+        const publicDir = fileURLToPath(new URL("../public", import.meta.url));
+        const slug = pageData.relativePath.replace(/\.md$/, "").replace(/\//g, "-");
+        const card = existsSync(`${publicDir}/og/${slug}.png`)
+            ? `og/${slug}.png`
+            : existsSync(`${publicDir}/og-default.png`)
+              ? "og-default.png"
+              : null;
+        const head: [string, Record<string, string>][] = [
             ["meta", { property: "og:title", content: title }],
             ["meta", { property: "og:description", content: description }],
             ["meta", { property: "og:url", content: url }],
-            ["meta", { name: "twitter:card", content: "summary" }],
+            ["meta", { name: "twitter:card", content: card ? "summary_large_image" : "summary" }],
         ];
+        if (card) {
+            head.push([
+                "meta",
+                {
+                    property: "og:image",
+                    content: `${HOSTNAME.replace(/\/+$/, "")}${BASE}${card}`,
+                },
+            ]);
+        }
+        return head;
     },
 
     /* A sitemap is written only when the address of the site is known. */
