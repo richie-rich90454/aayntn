@@ -19,7 +19,8 @@
         "scaffold": "tsx tools/scaffold/index.ts",
         "test": "vitest run",
         "test:watch": "vitest",
-        "prebuild": "pnpm run generate && pnpm run format && pnpm run validate && pnpm run check:links"
+        "prebuild": "pnpm run generate && pnpm run format && pnpm run validate && pnpm run check:links",
+        "check:base": "tsx tools/check-base/index.ts"
     },
     "devEngines": {
         "packageManager": {
