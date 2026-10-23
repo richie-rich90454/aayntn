@@ -37,7 +37,7 @@
 .aayntn-search__kbd {
     padding: 1px 5px;
     border: 1px solid rgba(255, 255, 255, 0.45);
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--color-white);
     font-family: var(--font-code);
     font-size: 0.6875rem;
     white-space: nowrap;
