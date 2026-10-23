@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import RadiusControl from "./RadiusControl.vue";
 import StyleGuideStates from "./StyleGuideStates.vue";
+import { withBase } from "vitepress";
 
 interface TypeRow {
     name: string;
@@ -684,7 +685,7 @@ The invariant is the whole proof.</textarea>
                         ; the visited ink is the same.
                     </p>
                     <p style="margin: var(--space-4) 0 0">
-                        <a data-visited-link href="/style-guide/">A visited link</a>
+                        <a data-visited-link :href="withBase('/style-guide/')">A visited link</a>
                         <span aria-hidden="true">/</span>
                         <a data-resting-link href="#style-guide-unvisited">A resting link</a>
                     </p>
