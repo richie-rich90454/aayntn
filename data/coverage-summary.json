@@ -1,13 +1,41 @@
 {
-    "updated": null,
-    "required": 0,
-    "complete": 0,
-    "taggedTasks": 0,
-    "totalTasks": 0,
+    "updated": "2026-10-23",
+    "required": 34,
+    "complete": 12,
+    "taggedTasks": 57,
+    "totalTasks": 57,
     "divisions": [
-        { "id": "bronze", "label": "Bronze", "required": 0, "complete": 0, "taggedTasks": 0, "totalTasks": 0 },
-        { "id": "silver", "label": "Silver", "required": 0, "complete": 0, "taggedTasks": 0, "totalTasks": 0 },
-        { "id": "gold", "label": "Gold", "required": 0, "complete": 0, "taggedTasks": 0, "totalTasks": 0 },
-        { "id": "platinum", "label": "Platinum", "required": 0, "complete": 0, "taggedTasks": 0, "totalTasks": 0 }
+        {
+            "id": "bronze",
+            "label": "Bronze",
+            "required": 12,
+            "complete": 3,
+            "taggedTasks": 13,
+            "totalTasks": 13
+        },
+        {
+            "id": "silver",
+            "label": "Silver",
+            "required": 20,
+            "complete": 7,
+            "taggedTasks": 15,
+            "totalTasks": 15
+        },
+        {
+            "id": "gold",
+            "label": "Gold",
+            "required": 22,
+            "complete": 10,
+            "taggedTasks": 16,
+            "totalTasks": 16
+        },
+        {
+            "id": "platinum",
+            "label": "Platinum",
+            "required": 16,
+            "complete": 8,
+            "taggedTasks": 13,
+            "totalTasks": 13
+        }
     ]
 }
