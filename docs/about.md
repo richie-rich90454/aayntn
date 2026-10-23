@@ -1,6 +1,6 @@
 ---
 id: about
-title: About A.A.Y.N.T.N.
+title: About this encyclopedia
 summary: What this encyclopedia is for, the editorial standard it holds itself to, how it is licensed, and how it is built.
 division: []
 subjects: []
