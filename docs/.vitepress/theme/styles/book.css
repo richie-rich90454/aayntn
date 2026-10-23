@@ -1,0 +1,421 @@
+/*
+ * The book document.
+ *
+ * `tools/book/build.ts` inlines this sheet into the generated page, so the
+ * page is self-contained and the printed PDF and the browser view share one
+ * set of rules.
+ */
+
+@page {
+    size: A4;
+    margin: 18mm 16mm 20mm;
+}
+
+:root {
+    --book-ink: #161616;
+    --book-muted: #414957;
+    --book-rule: #767e8d;
+    --book-soft: #f3f5f9;
+    --book-accent: #2847b8;
+}
+
+body.book {
+    margin: 0;
+    background: #ffffff;
+    color: var(--book-ink);
+    font-family: "Noto Sans";
+    font-size: 10.5pt;
+    line-height: 1.58;
+}
+
+.book-controls {
+    border-bottom: 1px solid var(--book-rule);
+    background: var(--book-soft);
+    padding: 12px 20px;
+}
+
+.book-controls__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    max-width: 180mm;
+    margin: 0 auto;
+}
+
+.book-controls__group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+}
+
+.book-controls__title {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.book-controls label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.book-controls input {
+    accent-color: var(--book-accent);
+}
+
+.book-frontmatter,
+.book-chapter {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 180mm;
+    margin: 0 auto;
+}
+
+.book-frontmatter {
+    padding: 20mm 0 14mm;
+    break-after: page;
+}
+
+.book-cover {
+    display: flex;
+    min-height: 245mm;
+    flex-direction: column;
+    justify-content: center;
+    break-after: page;
+}
+
+.book-cover__mark {
+    margin: 0 0 8mm;
+    color: var(--book-accent);
+    font-size: 12pt;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+}
+
+.book-cover h1 {
+    margin: 0;
+    font-size: 34pt;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+}
+
+.book-cover__subtitle {
+    margin: 8mm 0 0;
+    max-width: 150mm;
+    color: var(--book-muted);
+    font-size: 13pt;
+    line-height: 1.45;
+}
+
+.book-cover__note {
+    margin: 18mm 0 0;
+    padding-top: 5mm;
+    border-top: 2px solid var(--book-ink);
+    max-width: 150mm;
+    font-size: 9.5pt;
+    line-height: 1.55;
+}
+
+.book-toc {
+    padding: 0 0 10mm;
+}
+
+.book-toc h2 {
+    margin: 0 0 6mm;
+    font-size: 20pt;
+}
+
+.book-toc ol {
+    margin: 0;
+    padding-left: 1.4em;
+}
+
+.book-toc li {
+    margin: 0 0 1.2mm;
+    font-size: 9.5pt;
+}
+
+.book-toc__section {
+    margin-top: 4mm;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.book-toc__section ol {
+    margin-top: 1.5mm;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.book-toc a {
+    color: var(--book-ink);
+    text-decoration: none;
+}
+
+.book-chapter {
+    padding: 0 0 12mm;
+    break-before: page;
+}
+
+.book-chapter > h1 {
+    margin: 0 0 3mm;
+    font-size: 24pt;
+    line-height: 1.14;
+    letter-spacing: -0.01em;
+}
+
+.book-chapter__summary {
+    margin: 0 0 8mm;
+    padding-bottom: 4mm;
+    border-bottom: 2px solid var(--book-ink);
+    color: var(--book-muted);
+    font-size: 10.5pt;
+}
+
+.book-chapter h2 {
+    margin: 9mm 0 3mm;
+    font-size: 16pt;
+    line-height: 1.2;
+}
+
+.book-chapter h3 {
+    margin: 7mm 0 2.5mm;
+    font-size: 12.5pt;
+}
+
+.book-chapter h4 {
+    margin: 6mm 0 2mm;
+    font-size: 11pt;
+}
+
+.book-chapter p,
+.book-chapter li {
+    orphans: 3;
+    widows: 3;
+}
+
+.book-chapter a,
+.book-chapter a:visited {
+    color: var(--book-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.book-chapter table {
+    width: 100%;
+    margin: 5mm 0;
+    border-collapse: collapse;
+    font-size: 8.5pt;
+    line-height: 1.4;
+}
+
+.book-chapter th,
+.book-chapter td {
+    padding: 1.5mm 2mm;
+    border: 1px solid var(--book-rule);
+    text-align: left;
+    vertical-align: top;
+}
+
+.book-chapter th {
+    background: var(--book-soft);
+    font-weight: 700;
+}
+
+.book-chapter thead {
+    display: table-header-group;
+}
+
+.book-chapter tr {
+    break-inside: avoid;
+}
+
+.book-chapter blockquote {
+    margin: 5mm 0;
+    padding: 3mm 4mm;
+    border-left: 3px solid var(--book-rule);
+    background: var(--book-soft);
+}
+
+.book-panel {
+    margin: 5mm 0;
+    padding: 3mm 4mm;
+    border: 1px solid var(--book-rule);
+    border-left: 3px solid var(--book-accent);
+    background: var(--book-soft);
+    break-inside: avoid;
+}
+
+.book-panel__label {
+    margin: 0 0 1mm;
+    color: var(--book-muted);
+    font-size: 7.5pt;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.book-panel__title {
+    margin: 0 0 2mm;
+    font-weight: 700;
+}
+
+.book-panel p:last-child {
+    margin-bottom: 0;
+}
+
+.book-note {
+    margin: 4mm 0;
+    padding: 2mm 3mm;
+    border-left: 2px solid var(--book-rule);
+    color: var(--book-muted);
+    font-size: 9pt;
+}
+
+.book-chapter pre {
+    margin: 4mm 0;
+    padding: 3mm;
+    border: 1px solid var(--book-rule);
+    background: #ffffff !important;
+    font-family: "Noto Sans Mono";
+    font-size: 8pt;
+    line-height: 1.38;
+    tab-size: 4;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    break-inside: avoid;
+}
+
+.book-chapter pre code {
+    font-size: inherit;
+}
+
+.book-chapter :not(pre) > code {
+    padding: 0.1em 0.3em;
+    border: 1px solid #d5d9e4;
+    background: var(--book-soft);
+    font-family: "Noto Sans Mono";
+    font-size: 0.88em;
+}
+
+.book-chapter img,
+.book-chapter figure {
+    max-width: 100%;
+    break-inside: avoid;
+}
+
+.book-chapter .katex-display {
+    margin: 4mm 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.book-chapter .katex {
+    font-size: 1.02em;
+}
+
+.book-chapter hr {
+    margin: 6mm 0;
+    border: 0;
+    border-top: 1px solid var(--book-rule);
+}
+
+.book-end {
+    max-width: 180mm;
+    margin: 0 auto;
+    padding: 8mm 0 12mm;
+    border-top: 2px solid var(--book-ink);
+    color: var(--book-muted);
+    font-size: 9pt;
+}
+
+/* Language chooser: a code block is shown only for a selected language. */
+.book-document pre[data-language] {
+    display: none;
+}
+
+.book-document pre[data-language="text"] {
+    display: block;
+}
+
+html[data-languages~="c"] .book-document pre[data-language="c"],
+html[data-languages~="cpp"] .book-document pre[data-language="cpp"],
+html[data-languages~="cpp17"] .book-document pre[data-language="cpp"],
+html[data-languages~="java"] .book-document pre[data-language="java"],
+html[data-languages~="python"] .book-document pre[data-language="python"],
+html[data-languages~="pascal"] .book-document pre[data-language="pascal"],
+html[data-languages~="javascript"] .book-document pre[data-language="javascript"] {
+    display: block;
+}
+
+/*
+ * Section chooser. `data-hidden-sections` is a space-separated list on the
+ * root element; every chapter and contents entry carries its section name.
+ */
+html[data-hidden-sections~="start"] [data-section="start"],
+html[data-hidden-sections~="curriculum"] [data-section="curriculum"],
+html[data-hidden-sections~="algorithms"] [data-section="algorithms"],
+html[data-hidden-sections~="mathematics"] [data-section="mathematics"],
+html[data-hidden-sections~="templates"] [data-section="templates"],
+html[data-hidden-sections~="languages"] [data-section="languages"],
+html[data-hidden-sections~="practice"] [data-section="practice"],
+html[data-hidden-sections~="contest"] [data-section="contest"],
+html[data-hidden-sections~="debugging"] [data-section="debugging"],
+html[data-hidden-sections~="laboratory"] [data-section="laboratory"],
+html[data-hidden-sections~="reference"] [data-section="reference"],
+html[data-hidden-sections~="about"] [data-section="about"] {
+    display: none !important;
+}
+
+@media screen {
+    body.book {
+        padding-bottom: 24px;
+    }
+}
+
+@media print {
+    .book-controls,
+    .book-end {
+        display: none !important;
+    }
+
+    .book-frontmatter,
+    .book-chapter,
+    .book-toc {
+        max-width: none;
+        padding: 0;
+    }
+
+    .book-cover {
+        min-height: 250mm;
+    }
+
+    .book-chapter a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        overflow-wrap: anywhere;
+        word-break: break-all;
+    }
+
+    .book-chapter pre,
+    .book-chapter table,
+    .book-chapter figure,
+    .book-chapter blockquote,
+    .book-panel {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .book-chapter h1,
+    .book-chapter h2,
+    .book-chapter h3 {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+}
