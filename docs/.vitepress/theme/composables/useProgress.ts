@@ -80,6 +80,15 @@ const DB_VERSION = 1;
 const STORE = "progress";
 
 export const LESSON_STATUSES: LessonStatus[] = ["not-started", "in-progress", "review", "mastered"];
+
+/** The three states the article control offers; a stored review reads as in progress. */
+export type LessonStatusView = "not-started" | "in-progress" | "mastered";
+
+export function lessonStatusView(status: LessonStatus | undefined): LessonStatusView {
+    if (status === "mastered") return "mastered";
+    if (status === "in-progress" || status === "review") return "in-progress";
+    return "not-started";
+}
 export const PROBLEM_STATUSES: ProblemStatus[] = ["not-attempted", "attempted", "solved"];
 export const ATTEMPT_RESULTS: AttemptResult[] = [
     "accepted",
