@@ -85,6 +85,14 @@ jobs:
             - name: Install the dependencies
               run: pnpm install --frozen-lockfile
 
+            # The cards read the generated lesson list and are drawn by a
+            # browser, so both must exist before they are rendered.
+            - name: Generate the derived data
+              run: pnpm run generate
+
+            - name: Install the browser that renders the cards
+              run: pnpm exec playwright install --with-deps chromium
+
             - name: Render the share cards
               run: pnpm run og
 
