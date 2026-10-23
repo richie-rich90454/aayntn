@@ -8,6 +8,10 @@
 @import "./reset.css";
 @import "./typography.css";
 @import "./layout.css";
+@import "./states.css";
+@import "./header.css";
+@import "./sidebar.css";
+@import "./footer.css";
 @import "./search.css";
 @import "./articles.css";
 @import "./code.css";
@@ -15,4 +19,10 @@
 @import "./ornamentation.css";
 @import "./banner.css";
 @import "./learn-next.css";
+@import "./article-frame.css";
+@import "./home.css";
+@import "./command-palette.css";
+@import "./style-guide.css";
+@import "./coverage.css";
 @import "./responsive.css";
+@import "./print.css";
