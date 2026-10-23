@@ -104,34 +104,34 @@ function openSearch(): void {
     <div class="aayntn-home">
         <a class="skip-link" href="#main">Skip to content</a>
 
-        <section class="home-hero" aria-labelledby="home-title">
-            <div class="home-hero__inner">
-                <h1 id="home-title" class="home-hero__title">
-                    <span class="home-hero__brand">A.A.Y.N.T.N.</span>
-                    <span class="home-hero__name">
+        <section class="aayntn-home-hero" aria-labelledby="aayntn-home-title">
+            <div class="aayntn-home-hero__inner">
+                <h1 id="aayntn-home-title" class="aayntn-home-hero__title">
+                    <span class="aayntn-home-hero__brand">A.A.Y.N.T.N.</span>
+                    <span class="aayntn-home-hero__name">
                         All algorithms
                         <em>you need to know.</em>
                     </span>
                 </h1>
-                <p class="home-hero__lede">
+                <p class="aayntn-home-hero__lede">
                     An encyclopedia of algorithms from AP Computer Science A through USACO Platinum,
                     with derivations, tested implementations in six languages and deterministic
                     animated explanations.
                 </p>
-                <div class="home-hero__actions">
+                <div class="aayntn-home-hero__actions">
                     <a
-                        class="home-button home-button--primary"
+                        class="aayntn-home-button aayntn-home-button--primary"
                         v-bind:href="withBase('/start/from-ap-csa/')"
                     >
                         Start from the beginning
                     </a>
                     <a
-                        class="home-button home-button--secondary"
+                        class="aayntn-home-button aayntn-home-button--secondary"
                         v-bind:href="withBase('/algorithms/')"
                     >
                         Browse the encyclopedia
                     </a>
-                    <button class="home-search" type="button" @click="openSearch">
+                    <button class="aayntn-home-search" type="button" @click="openSearch">
                         <span>Search the encyclopedia</span>
                         <kbd>Ctrl K</kbd>
                     </button>
@@ -139,53 +139,65 @@ function openSearch(): void {
             </div>
         </section>
 
-        <section class="home-section" aria-labelledby="home-paths">
-            <div class="home-section__inner">
-                <header class="home-section__head">
+        <section class="aayntn-home-section" aria-labelledby="aayntn-home-paths">
+            <div class="aayntn-home-section__inner">
+                <header class="aayntn-home-section__head">
                     <div>
-                        <h2 id="home-paths" class="home-section__title">Choose a starting point</h2>
-                        <p class="home-section__lede">
+                        <h2 id="aayntn-home-paths" class="aayntn-home-section__title">
+                            Choose a starting point
+                        </h2>
+                        <p class="aayntn-home-section__lede">
                             Three routes into the same material, chosen by how much programming you
                             have already done.
                         </p>
                     </div>
                 </header>
 
-                <div class="home-paths">
-                    <a v-for="path in paths" :key="path.href" class="home-path" :href="path.href">
-                        <span class="home-path__index">{{ path.index }}</span>
-                        <h3 class="home-path__title">{{ path.title }}</h3>
-                        <p class="home-path__copy">{{ path.copy }}</p>
-                        <span class="home-path__first">First read: {{ path.first }}</span>
+                <div class="aayntn-home-paths">
+                    <a
+                        v-for="path in paths"
+                        :key="path.href"
+                        class="aayntn-home-path"
+                        :href="path.href"
+                    >
+                        <span class="aayntn-home-path__index">{{ path.index }}</span>
+                        <h3 class="aayntn-home-path__title">{{ path.title }}</h3>
+                        <p class="aayntn-home-path__copy">{{ path.copy }}</p>
+                        <span class="aayntn-home-path__first">First read: {{ path.first }}</span>
                     </a>
                 </div>
             </div>
         </section>
 
-        <section class="home-section home-coverage" aria-labelledby="home-coverage">
-            <div class="home-section__inner">
-                <header class="home-section__head">
+        <section
+            class="aayntn-home-section aayntn-home-coverage"
+            aria-labelledby="aayntn-home-coverage"
+        >
+            <div class="aayntn-home-section__inner">
+                <header class="aayntn-home-section__head">
                     <div>
-                        <h2 id="home-coverage" class="home-section__title">Coverage</h2>
-                        <p class="home-section__lede">{{ coverageSentence }}</p>
+                        <h2 id="aayntn-home-coverage" class="aayntn-home-section__title">
+                            Coverage
+                        </h2>
+                        <p class="aayntn-home-section__lede">{{ coverageSentence }}</p>
                     </div>
-                    <a class="home-section__link" v-bind:href="withBase('/coverage/')">
+                    <a class="aayntn-home-section__link" v-bind:href="withBase('/coverage/')">
                         Read the coverage report
                     </a>
                 </header>
 
-                <dl class="home-coverage__figures">
-                    <div class="home-coverage__figure">
-                        <dt class="home-coverage__label">Required techniques complete</dt>
-                        <dd class="home-coverage__value">{{ coverageShare }}%</dd>
-                        <dd class="home-coverage__count">
+                <dl class="aayntn-home-coverage__figures">
+                    <div class="aayntn-home-coverage__figure">
+                        <dt class="aayntn-home-coverage__label">Required techniques complete</dt>
+                        <dd class="aayntn-home-coverage__value">{{ coverageShare }}%</dd>
+                        <dd class="aayntn-home-coverage__count">
                             {{ coverage.complete }} of {{ coverage.required }}
                         </dd>
                     </div>
-                    <div class="home-coverage__figure">
-                        <dt class="home-coverage__label">Tasks tagged with a technique</dt>
-                        <dd class="home-coverage__value">{{ taggingShare }}%</dd>
-                        <dd class="home-coverage__count">
+                    <div class="aayntn-home-coverage__figure">
+                        <dt class="aayntn-home-coverage__label">Tasks tagged with a technique</dt>
+                        <dd class="aayntn-home-coverage__value">{{ taggingShare }}%</dd>
+                        <dd class="aayntn-home-coverage__count">
                             {{ coverage.taggedTasks }} of {{ coverage.totalTasks }}
                         </dd>
                     </div>
@@ -193,80 +205,90 @@ function openSearch(): void {
             </div>
         </section>
 
-        <section class="home-section" aria-labelledby="home-subjects">
-            <div class="home-section__inner">
-                <header class="home-section__head">
+        <section class="aayntn-home-section" aria-labelledby="aayntn-home-subjects">
+            <div class="aayntn-home-section__inner">
+                <header class="aayntn-home-section__head">
                     <div>
-                        <h2 id="home-subjects" class="home-section__title">Subjects</h2>
-                        <p class="home-section__lede">
+                        <h2 id="aayntn-home-subjects" class="aayntn-home-section__title">
+                            Subjects
+                        </h2>
+                        <p class="aayntn-home-section__lede">
                             All fourteen subjects, with the number of techniques each one currently
                             publishes.
                         </p>
                     </div>
                 </header>
 
-                <nav class="home-subjects" aria-label="Subjects">
-                    <div class="home-subjects__grid">
+                <nav class="aayntn-home-subjects" aria-label="Subjects">
+                    <div class="aayntn-home-subjects__grid">
                         <a
                             v-for="subject in subjects"
                             :key="subject.id"
-                            class="home-subject"
+                            class="aayntn-home-subject"
                             :href="subject.href"
                         >
-                            <span class="home-subject__label">{{ subject.label }}</span>
-                            <span class="home-subject__count">{{ subject.count }}</span>
+                            <span class="aayntn-home-subject__label">{{ subject.label }}</span>
+                            <span class="aayntn-home-subject__count">{{ subject.count }}</span>
                         </a>
                     </div>
                 </nav>
             </div>
         </section>
 
-        <section class="home-section home-labs" aria-labelledby="home-labs">
-            <div class="home-section__inner">
-                <header class="home-section__head">
+        <section class="aayntn-home-section aayntn-home-labs" aria-labelledby="aayntn-home-labs">
+            <div class="aayntn-home-section__inner">
+                <header class="aayntn-home-section__head">
                     <div>
-                        <h2 id="home-labs" class="home-section__title">
+                        <h2 id="aayntn-home-labs" class="aayntn-home-section__title">
                             Laboratories and languages
                         </h2>
-                        <p class="home-section__lede">
+                        <p class="aayntn-home-section__lede">
                             Twelve interactive laboratories and six reference languages; C, C++17,
                             Java and Python are submittable to USACO, while Pascal and JavaScript
                             are educational.
                         </p>
                     </div>
-                    <a class="home-section__link" v-bind:href="withBase('/laboratory/')">
+                    <a class="aayntn-home-section__link" v-bind:href="withBase('/laboratory/')">
                         Open the laboratory
                     </a>
                 </header>
 
-                <nav class="home-labs__strip" aria-label="Laboratories">
+                <nav class="aayntn-home-labs__strip" aria-label="Laboratories">
                     <a
                         v-for="laboratory in laboratories"
                         :key="laboratory.id"
-                        class="home-lab"
+                        class="aayntn-home-lab"
                         :href="laboratory.href"
                     >
-                        <span class="home-lab__title">{{ laboratory.title }}</span>
-                        <span class="home-lab__scene">{{ laboratory.scene }}</span>
+                        <span class="aayntn-home-lab__title">{{ laboratory.title }}</span>
+                        <span class="aayntn-home-lab__scene">{{ laboratory.scene }}</span>
                     </a>
                 </nav>
 
-                <div class="home-labs__columns">
-                    <ul class="home-languages" aria-label="Reference languages">
-                        <li v-for="language in languages" :key="language.id" class="home-language">
+                <div class="aayntn-home-labs__columns">
+                    <ul class="aayntn-home-languages" aria-label="Reference languages">
+                        <li
+                            v-for="language in languages"
+                            :key="language.id"
+                            class="aayntn-home-language"
+                        >
                             <a :href="language.href">
                                 <span>{{ language.label }}</span>
-                                <span class="home-language__note">
+                                <span class="aayntn-home-language__note">
                                     {{ language.submittable ? "USACO" : "Educational" }}
                                 </span>
                             </a>
                         </li>
                     </ul>
 
-                    <div class="home-figures">
-                        <div v-for="figure in figures" :key="figure.label" class="home-figure">
-                            <span class="home-figure__value">{{ figure.value }}</span>
-                            <span class="home-figure__label">{{ figure.label }}</span>
+                    <div class="aayntn-home-figures">
+                        <div
+                            v-for="figure in figures"
+                            :key="figure.label"
+                            class="aayntn-home-figure"
+                        >
+                            <span class="aayntn-home-figure__value">{{ figure.value }}</span>
+                            <span class="aayntn-home-figure__label">{{ figure.label }}</span>
                         </div>
                     </div>
                 </div>
