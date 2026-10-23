@@ -139,6 +139,7 @@ describe("the components", () => {
             "AlgorithmPlayer",
             "Banner",
             "ChangelogList",
+            "ClipGallery",
             "CodeViewer",
             "ContestSimulation",
             "CoverageMatrix",
