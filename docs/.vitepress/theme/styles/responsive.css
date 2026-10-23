@@ -69,11 +69,15 @@
         border-right: 1px solid var(--border-ink);
         box-shadow: var(--shadow-overlay);
         transform: translateX(-102%);
-        transition: transform var(--transition-base);
+        visibility: hidden;
+        transition:
+            transform var(--transition-base),
+            visibility var(--transition-base);
     }
 
     .aayntn-sidebar.is-open {
         transform: translateX(0);
+        visibility: visible;
     }
 
     .aayntn-scrim {
