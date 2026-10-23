@@ -13,6 +13,9 @@ docs/public/implementations/
 docs/public/ornaments/
 docs/public/diagrams/
 docs/implementations/
+# The generated book and the printed artifacts
+docs/public/book/
+dist-book/
 
 # Scratch directories used by the validation tooling
 .tmp/
