@@ -2,7 +2,7 @@
 
 **All Algorithms You Need to Know** — a complete, mathematically rigorous encyclopedia of competitive programming, from AP Computer Science A proficiency through USACO Platinum and beyond.
 
-[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](LICENSE) [![Accessibility](https://img.shields.io/badge/accessibility-WCAG%202.2%20AA-0b6b4a.svg)](ACCESSIBILITY.md) [![Code of Conduct](https://img.shields.io/badge/code%20of%20conduct-contributor%20covenant-blue.svg)](CODE_OF_CONDUCT.md) [![Security policy](https://img.shields.io/badge/security-policy-1f883d.svg)](SECURITY.md) [![Last commit](https://img.shields.io/github/last-commit/richie-rich90454/aayntn.svg)](https://github.com/richie-rich90454/aayntn/commits/main) [![License](https://img.shields.io/github/license/richie-rich90454/aayntn.svg)](LICENSE)
+[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](LICENSE) [![Accessibility](https://img.shields.io/badge/accessibility-WCAG%202.2%20AA-0b6b4a.svg)](ACCESSIBILITY.md) [![Code of Conduct](https://img.shields.io/badge/code%20of%20conduct-contributor%20covenant-blue.svg)](CODE_OF_CONDUCT.md) [![Security policy](https://img.shields.io/badge/security-policy-1f883d.svg)](SECURITY.md) [![Last commit](https://img.shields.io/github/last-commit/richie-rich90454/aayntn.svg)](https://github.com/richie-rich90454/aayntn/commits/main)
 
 The site is a set of static files. Every lesson is an ordinary Markdown file, every implementation is a real source file in the language it claims to be, and every interactive demonstration is driven by a deterministic TypeScript reference implementation rather than by hand-drawn animation.
 
