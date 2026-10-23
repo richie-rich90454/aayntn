@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { withBase } from "vitepress";
 import { computed } from "vue";
 import stats from "../data/generated/stats.json";
 import algorithms from "../data/generated/algorithms.json";
@@ -23,28 +24,28 @@ const divisions = [
         name: "Bronze",
         focus: "Foundations",
         copy: "Simulation, careful modeling, complete enumeration, and elementary reasoning. The discipline of reading a specification and modeling it exactly.",
-        href: "/curriculum/bronze/",
+        href: withBase("/curriculum/bronze/"),
     },
     {
         id: "silver",
         name: "Silver",
         focus: "Core techniques",
         copy: "Efficient searching, arrays, sorting, greedy patterns, and the first graph algorithms. Where brute force stops being good enough.",
-        href: "/curriculum/silver/",
+        href: withBase("/curriculum/silver/"),
     },
     {
         id: "gold",
         name: "Gold",
         focus: "Optimization",
         copy: "Dynamic programming, shortest paths, tree algorithms, combinatorics, and the data structures that make the right solution expressible.",
-        href: "/curriculum/gold/",
+        href: withBase("/curriculum/gold/"),
     },
     {
         id: "platinum",
         name: "Platinum",
         focus: "Advanced methods",
         copy: "Graph and tree decompositions, advanced range structures, dynamic-programming optimization, and the techniques that separate finalists from qualifiers.",
-        href: "/curriculum/platinum/",
+        href: withBase("/curriculum/platinum/"),
     },
 ];
 
@@ -105,37 +106,37 @@ const method = [
 
 const subjects = [
     {
-        href: "/algorithms/graphs/",
+        href: withBase("/algorithms/graphs/"),
         kicker: "Graphs",
         title: "From breadth-first search to minimum cut",
         copy: "Representations, traversal, shortest paths, connectivity, and the reductions between them.",
     },
     {
-        href: "/algorithms/dynamic-programming/",
+        href: withBase("/algorithms/dynamic-programming/"),
         kicker: "Dynamic programming",
         title: "State design and proof",
         copy: "Memoization, tabulation, knapsack families, directed acyclic graph and tree dynamic programming, and the optimization layered on top.",
     },
     {
-        href: "/algorithms/range-queries/",
+        href: withBase("/algorithms/range-queries/"),
         kicker: "Range structures",
         title: "Fenwick, segment tree, sparse table",
         copy: "Which algebraic property a structure needs, and how to choose the one the problem actually requires.",
     },
     {
-        href: "/algorithms/trees/",
+        href: withBase("/algorithms/trees/"),
         kicker: "Trees",
         title: "Lowest common ancestor, heavy paths, rerooting",
         copy: "Rooting, binary lifting, path queries, and the decompositions that turn a tree into an array.",
     },
     {
-        href: "/algorithms/number-theory/",
+        href: withBase("/algorithms/number-theory/"),
         kicker: "Number theory",
         title: "Modular arithmetic and counting",
         copy: "Primes, inverses, exponentiation, combinatorics, and the counting arguments behind them.",
     },
     {
-        href: "/algorithms/strings/",
+        href: withBase("/algorithms/strings/"),
         kicker: "Strings",
         title: "KMP, the Z function, suffix structures",
         copy: "Pattern matching, rolling hashes, tries, and suffix arrays for long strings.",
@@ -143,12 +144,12 @@ const subjects = [
 ];
 
 const languages = [
-    { id: "C", submittable: true, href: "/languages/c/" },
-    { id: "C++17", submittable: true, href: "/languages/cpp17/" },
-    { id: "Java", submittable: true, href: "/languages/java/" },
-    { id: "Python", submittable: true, href: "/languages/python/" },
-    { id: "Pascal", submittable: false, href: "/languages/pascal/" },
-    { id: "JavaScript", submittable: false, href: "/languages/javascript/" },
+    { id: "C", submittable: true, href: withBase("/languages/c/") },
+    { id: "C++17", submittable: true, href: withBase("/languages/cpp17/") },
+    { id: "Java", submittable: true, href: withBase("/languages/java/") },
+    { id: "Python", submittable: true, href: withBase("/languages/python/") },
+    { id: "Pascal", submittable: false, href: withBase("/languages/pascal/") },
+    { id: "JavaScript", submittable: false, href: withBase("/languages/javascript/") },
 ];
 </script>
 
@@ -173,11 +174,19 @@ const languages = [
                     deterministic animated explanations of every algorithm that matters.
                 </p>
                 <div class="aayntn-hero__actions">
-                    <a class="aayntn-button" href="/start/from-ap-csa/">Start from AP CSA</a>
-                    <a class="aayntn-button aayntn-button--ghost" href="/algorithms/">
+                    <a class="aayntn-button" v-bind:href="withBase('/start/from-ap-csa/')">
+                        Start from AP CSA
+                    </a>
+                    <a
+                        class="aayntn-button aayntn-button--ghost"
+                        v-bind:href="withBase('/algorithms/')"
+                    >
                         Browse the encyclopedia
                     </a>
-                    <a class="aayntn-button aayntn-button--ghost" href="/laboratory/">
+                    <a
+                        class="aayntn-button aayntn-button--ghost"
+                        v-bind:href="withBase('/laboratory/')"
+                    >
                         Open the laboratory
                     </a>
                 </div>
@@ -212,7 +221,9 @@ const languages = [
                             behind a technique rather than by the contest it appeared in.
                         </p>
                     </div>
-                    <a class="aayntn-section__more" href="/curriculum/">The full curriculum</a>
+                    <a class="aayntn-section__more" v-bind:href="withBase('/curriculum/')">
+                        The full curriculum
+                    </a>
                 </div>
             </div>
             <div class="aayntn-divisions">
@@ -270,7 +281,9 @@ const languages = [
                             a tree query.
                         </p>
                     </div>
-                    <a class="aayntn-section__more" href="/algorithms/">All algorithms</a>
+                    <a class="aayntn-section__more" v-bind:href="withBase('/algorithms/')">
+                        All algorithms
+                    </a>
                 </div>
 
                 <div class="aayntn-feature-grid">
@@ -278,7 +291,9 @@ const languages = [
                         v-for="entry in featured"
                         :key="entry.id"
                         class="aayntn-feature"
-                        :href="entry.href ?? `/algorithms/${entry.id.replace(/\./g, '/')}`"
+                        :href="
+                            withBase(entry.href ?? `/algorithms/${entry.id.replace(/\./g, '/')}`)
+                        "
                     >
                         <div class="aayntn-feature__kicker">{{ entry.complexity.time }}</div>
                         <div class="aayntn-feature__title">{{ entry.title }}</div>
@@ -303,7 +318,9 @@ const languages = [
                             so the animation cannot drift away from the mathematics.
                         </p>
                     </div>
-                    <a class="aayntn-section__more" href="/laboratory/">All laboratories</a>
+                    <a class="aayntn-section__more" v-bind:href="withBase('/laboratory/')">
+                        All laboratories
+                    </a>
                 </div>
 
                 <div class="aayntn-feature-grid">
@@ -311,7 +328,7 @@ const languages = [
                         v-for="lab in featuredLabs"
                         :key="lab.id"
                         class="aayntn-feature"
-                        :href="lab.href"
+                        :href="withBase(lab.href)"
                     >
                         <div class="aayntn-feature__kicker">{{ lab.scene }}</div>
                         <div class="aayntn-feature__title">{{ lab.title }}</div>
@@ -335,7 +352,9 @@ const languages = [
                             belongs to.
                         </p>
                     </div>
-                    <a class="aayntn-section__more" href="/algorithms/">All subjects</a>
+                    <a class="aayntn-section__more" v-bind:href="withBase('/algorithms/')">
+                        All subjects
+                    </a>
                 </div>
 
                 <div class="aayntn-feature-grid">
@@ -366,7 +385,9 @@ const languages = [
                             Pascal and JavaScript are educational reference implementations.
                         </p>
                     </div>
-                    <a class="aayntn-section__more" href="/languages/">Compare the languages</a>
+                    <a class="aayntn-section__more" v-bind:href="withBase('/languages/')">
+                        Compare the languages
+                    </a>
                 </div>
 
                 <div class="aayntn-stats">
