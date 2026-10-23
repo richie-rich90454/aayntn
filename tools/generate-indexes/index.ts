@@ -21,6 +21,7 @@
  * files.
  */
 import { existsSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { basename, join, relative } from "node:path";
 import fg from "fast-glob";
@@ -631,6 +632,39 @@ async function main() {
 
     /* Write the index documents ----------------------------------------- */
     await mkdir(GENERATED_DIR, { recursive: true });
+
+    /* The changelog is read from the history rather than written by hand, so
+       a release note cannot fall behind the commits it describes. A shallow
+       checkout has no history; the page then says that instead of inventing
+       one. */
+    let changelog: { date: string; type: string; scope: string; title: string }[] = [];
+    try {
+        const log = execFileSync(
+            "git",
+            ["log", "--no-merges", "--date=short", "--pretty=format:%ad%x09%s", "-n", "240"],
+            { cwd: ROOT, encoding: "utf8" },
+        );
+        changelog = log
+            .split("\n")
+            .filter(Boolean)
+            .map((line) => {
+                const [date = "", subject = ""] = line.split("\t");
+                const match = subject.match(/^(\w+)(?:\(([^)]+)\))?!?: (.+)$/);
+                return {
+                    date,
+                    type: match?.[1] ?? "change",
+                    scope: match?.[2] ?? "",
+                    title: match?.[3] ?? subject,
+                };
+            });
+    } catch {
+        changelog = [];
+    }
+    await writeFile(
+        join(GENERATED_DIR, "changelog.json"),
+        JSON.stringify(changelog, null, 4) + "\n",
+        "utf8",
+    );
 
     const lessonEntries: LessonEntry[] = lessons.map((lesson) => ({
         id: lesson.id,
