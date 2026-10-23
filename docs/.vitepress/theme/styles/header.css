@@ -1,0 +1,292 @@
+/* The masthead: brand, group navigation, the appearance control and the
+   search trigger. Overrides the legacy header rules in layout.css. */
+
+.aayntn-header__tools {
+    margin-left: auto;
+}
+
+/* The group navigation is reachable at every width. The strip is the only
+   part that scrolls, so a long label never pushes the page sideways. */
+.aayntn-nav {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: stretch;
+    min-width: 0;
+    margin-left: var(--space-6);
+    overflow: visible;
+}
+
+.aayntn-nav__strip {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.aayntn-nav__strip::-webkit-scrollbar {
+    display: none;
+}
+
+.aayntn-nav__group {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.aayntn-nav__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 100%;
+    padding: 0 var(--space-3);
+    border: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.14);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.aayntn-nav__button:hover {
+    background: var(--hover-surface-inverse);
+    color: var(--hover-ink-inverse);
+}
+
+.aayntn-nav__button.is-open {
+    background: var(--hover-surface-inverse);
+    color: var(--hover-ink-inverse);
+}
+
+.aayntn-nav__button.is-active {
+    background: var(--color-primary);
+    color: var(--text-inverse);
+    box-shadow: inset 0 -3px 0 var(--color-gold);
+}
+
+.aayntn-nav__button:focus-visible {
+    outline: 2px solid var(--color-gold-bright);
+    outline-offset: -2px;
+}
+
+.aayntn-nav__label {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.aayntn-nav__chevron {
+    flex: 0 0 auto;
+    transition: transform var(--transition-fast);
+}
+
+.aayntn-nav__button.is-open .aayntn-nav__chevron {
+    transform: rotate(180deg);
+}
+
+/* One panel below the header holds the open group. It is fixed to the
+   viewport, so a menu can never be clipped by the strip that scrolls. */
+.aayntn-nav__panels {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    left: 0;
+    z-index: 59;
+}
+
+.aayntn-nav__menu {
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    background: var(--surface-inverse);
+    color: var(--text-inverse);
+    border-bottom: 2px solid var(--color-gold);
+    box-shadow: var(--shadow-overlay);
+    animation: aayntn-nav-menu-in var(--transition-fast) ease-out;
+}
+
+@keyframes aayntn-nav-menu-in {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.aayntn-nav__menu-inner {
+    display: grid;
+    grid-template-columns: minmax(160px, 240px) minmax(0, 1fr);
+    gap: var(--space-8);
+    max-width: 1720px;
+    margin: 0 auto;
+    padding: var(--space-6);
+}
+
+.aayntn-nav__menu-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    align-self: start;
+    padding-top: var(--space-2);
+    border-top: 2px solid var(--color-gold);
+}
+
+.aayntn-nav__menu-title {
+    color: var(--color-gold);
+    font-size: var(--text-meta);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.aayntn-nav__menu-count {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: var(--text-meta);
+}
+
+.aayntn-nav__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px var(--space-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.aayntn-nav__item {
+    display: grid;
+    gap: 2px;
+    padding: var(--space-3);
+    border-left: 2px solid transparent;
+    color: rgba(255, 255, 255, 0.88);
+    text-decoration: none;
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.aayntn-nav__item:hover {
+    background: var(--hover-surface-inverse);
+    border-left-color: var(--color-gold);
+    color: var(--hover-ink-inverse);
+    text-decoration: none;
+}
+
+.aayntn-nav__item.is-active {
+    background: var(--hover-surface-inverse);
+    border-left-color: var(--color-gold);
+    color: var(--text-inverse);
+}
+
+.aayntn-nav__item:focus-visible {
+    outline: 2px solid var(--color-gold-bright);
+    outline-offset: -2px;
+}
+
+.aayntn-nav__item-label {
+    font-size: var(--text-secondary-copy);
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.aayntn-nav__item-description {
+    color: rgba(255, 255, 255, 0.62);
+    font-size: var(--text-meta);
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.aayntn-nav__item.is-active .aayntn-nav__item-description {
+    color: rgba(255, 255, 255, 0.74);
+}
+
+/* Below the width of the full rail the navigation keeps its place: the menu
+   button opens the section drawer, and the four groups stay on screen. */
+@media (max-width: 1080px) {
+    .aayntn-nav {
+        display: flex;
+    }
+
+    .aayntn-nav__button {
+        padding: 0 var(--space-2);
+        font-size: 0.8125rem;
+    }
+}
+
+/* The header becomes two rows: brand and tools above, the group strip below.
+   A strip of its own gives every label the room it needs at 390 pixels. */
+@media (max-width: 900px) {
+    html:root {
+        --header-height: 104px;
+    }
+
+    .aayntn-header__inner {
+        flex-wrap: wrap;
+        align-content: flex-start;
+        padding: 0 var(--space-3);
+    }
+
+    .aayntn-menu-button {
+        display: inline-flex;
+        flex: 0 0 auto;
+        height: 62px;
+    }
+
+    .aayntn-brand {
+        order: 1;
+        flex: 1 1 auto;
+        height: 62px;
+        min-width: 0;
+        margin-right: 0;
+        padding-right: 0;
+        border-right: none;
+    }
+
+    .aayntn-header__tools {
+        order: 2;
+        flex: 0 0 auto;
+        height: 62px;
+    }
+
+    .aayntn-nav {
+        order: 3;
+        flex: 0 0 100%;
+        height: 40px;
+        margin-left: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .aayntn-nav__strip {
+        height: 100%;
+    }
+
+    .aayntn-nav__button {
+        padding: 0 var(--space-4);
+        border-left: none;
+    }
+
+    .aayntn-nav__group + .aayntn-nav__group {
+        border-left: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .aayntn-nav__menu-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-3);
+        padding: var(--space-4);
+    }
+
+    .aayntn-nav__list {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
