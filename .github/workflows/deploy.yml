@@ -85,6 +85,9 @@ jobs:
             - name: Install the dependencies
               run: pnpm install --frozen-lockfile
 
+            - name: Render the share cards
+              run: pnpm run og
+
             - name: Generate, validate and build
               run: pnpm run build
               env:
