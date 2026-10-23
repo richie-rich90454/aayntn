@@ -554,7 +554,17 @@ async function main(): Promise<void> {
 
     const output = join(PUBLIC_DIR, "book", "index.html");
     await mkdir(dirname(output), { recursive: true });
-    await writeFile(output, documentHtml(sections, bookCss, katexCss), "utf8");
+    const base = process.env["AAYNTN_BASE"] ?? "/";
+    const html = documentHtml(sections, bookCss, katexCss);
+    const published =
+        base === "/"
+            ? html
+            : html.replace(
+                  /(href|src)="\/(?!\/)([^"]*)"/g,
+                  (whole, attribute: string, value: string) =>
+                      value.startsWith(base.slice(1)) ? whole : `${attribute}="${base}${value}"`,
+              );
+    await writeFile(output, published, "utf8");
     process.stdout.write(
         `book: ${ordered.length} chapters, ${sections.length} sections, ${output}\n`,
     );
