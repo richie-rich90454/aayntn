@@ -126,6 +126,11 @@ const nav: NavigationGroup[] = [
                 description: "Every term the lessons use, defined once.",
                 link: "/reference/glossary",
             },
+            {
+                text: "Changelog",
+                description: "What changed, newest first.",
+                link: "/changelog/",
+            },
         ],
     },
 ];
@@ -416,6 +421,22 @@ export default defineConfig({
     metaChunk: true,
 
     head: HEAD,
+
+    transformHead({ pageData }) {
+        if (!HOSTNAME) return [];
+        const title = (pageData.frontmatter["title"] as string | undefined) ?? "A.A.Y.N.T.N.";
+        const description =
+            (pageData.frontmatter["summary"] as string | undefined) ??
+            "A complete competitive programming encyclopedia with derivations, six-language implementations and deterministic animations.";
+        const path = pageData.relativePath.replace(/(^|\/)index\.md$/, "$1").replace(/\.md$/, "");
+        const url = `${HOSTNAME.replace(/\/+$/, "")}${BASE}${path}`;
+        return [
+            ["meta", { property: "og:title", content: title }],
+            ["meta", { property: "og:description", content: description }],
+            ["meta", { property: "og:url", content: url }],
+            ["meta", { name: "twitter:card", content: "summary" }],
+        ];
+    },
 
     /* A sitemap is written only when the address of the site is known. */
     ...(HOSTNAME
