@@ -50,7 +50,7 @@ async function ensureIndex(): Promise<void> {
     if (indexPromise) return indexPromise;
     indexPromise = (async () => {
         loading.value = true;
-        const response = await fetch("/search-index.json");
+        const response = await fetch(`${import.meta.env.BASE_URL}search-index.json`);
         const payload = (await response.json()) as { entries: SearchEntry[] };
         for (const entry of payload.entries) entriesById.set(entry.id, entry);
 
