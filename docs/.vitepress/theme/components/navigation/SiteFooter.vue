@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useData } from "vitepress";
+import { repositoryFile } from "../../repository";
 
 const { theme } = useData();
 
@@ -30,6 +31,17 @@ const columns = computed(() => [
             { text: "The template library", href: "/templates/" },
             { text: "The competition rules", href: "/reference/usaco-rules" },
             { text: "The pre-contest checklist", href: "/reference/contest-checklist" },
+        ],
+    },
+    {
+        heading: "The project",
+        links: [
+            { text: "About this encyclopedia", href: "/about/" },
+            { text: "Contributing", href: repositoryFile("CONTRIBUTING.md") },
+            { text: "Code of conduct", href: repositoryFile("CODE_OF_CONDUCT.md") },
+            { text: "Accessibility", href: repositoryFile("ACCESSIBILITY.md") },
+            { text: "Trademarks and affiliation", href: repositoryFile("TRADEMARKS.md") },
+            { text: "Security policy", href: repositoryFile("SECURITY.md") },
         ],
     },
 ]);
