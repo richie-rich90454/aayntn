@@ -14,9 +14,15 @@ const RESULT = ".aayntn-palette__result";
 
 async function openPalette(page: Page): Promise<void> {
     await page.goto("/algorithms/", { waitUntil: "networkidle" });
+    // The index is fetched on the first open. Wait for the response and for
+    // the rendered list, because a filter applied before the index arrives
+    // filters nothing.
+    const index = page.waitForResponse((response) => response.url().endsWith("/search-index.json"));
     await page.keyboard.press("Control+K");
     await expect(page.locator(PALETTE)).toBeVisible();
+    await index;
     await expect(page.getByLabel("Search query")).toBeFocused();
+    await expect(page.locator(RESULT).first()).toBeVisible();
 }
 
 test.beforeEach(async ({ page }) => {
