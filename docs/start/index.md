@@ -1,6 +1,6 @@
 ---
 id: start.overview
-title: How to use A.A.Y.N.T.N.
+title: How to use this encyclopedia
 summary: The four ways into the encyclopedia, what a lesson contains, and how the local progress record works.
 division: []
 subjects: [foundations]
