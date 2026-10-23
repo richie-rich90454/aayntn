@@ -4,6 +4,7 @@ import type { DefaultTheme } from "vitepress";
 import type { LanguageInput } from "shiki";
 import { aayntnDark, aayntnLight } from "./theme/shiki-theme";
 import { katexMacros } from "./theme/katex-macros";
+import { REPOSITORY_URL } from "./theme/repository";
 
 /**
  * aayntn — All Algorithms You Need to Know
@@ -327,15 +328,15 @@ export default defineConfig({
         sidebarMenuLabel: "Menu",
         returnToTopLabel: "Back to top",
         externalLinkIcon: true,
-        socialLinks: [{ icon: "github", link: "https://github.com/aayntn/atlas" }],
+        socialLinks: [{ icon: "github", link: REPOSITORY_URL }],
         footer: {
             message:
-                "aayntn is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.",
+                "A.A.Y.N.T.N. is an independent preparation resource. It is not affiliated with, endorsed by, sponsored by, or supported by the United States of America Computing Olympiad, by the College Board, or by any school. The examination, competition and language names belong to their owners.",
             copyright:
-                "Licensed under AGPL-3.0-only. Original lessons, implementations and artwork.",
+                "Licensed under AGPL-3.0-only. Original lessons, implementations and artwork. The webfonts are Noto Sans and Noto Sans Mono under the SIL Open Font License 1.1.",
         },
         editLink: {
-            pattern: "https://github.com/aayntn/atlas/edit/main/docs/:path",
+            pattern: `${REPOSITORY_URL}/edit/main/docs/:path`,
             text: "Suggest an improvement to this page",
         },
     },
