@@ -19,20 +19,21 @@ concurrency:
     group: algorithms-${{ github.ref }}
     cancel-in-progress: true
 
+permissions:
+    contents: read
+
 jobs:
     implementations:
         name: Compile and run every implementation
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v7
 
-            - uses: pnpm/action-setup@v4
-              with:
-                  version: 12.14.0
+            - uses: pnpm/action-setup@v6
 
-            - uses: actions/setup-node@v4
+            - uses: actions/setup-node@v7
               with:
-                  node-version: 22
+                  node-version: 24
                   cache: pnpm
 
             - name: Install the dependencies
@@ -48,9 +49,9 @@ jobs:
                   sudo apt-get install --yes openjdk-17-jdk-headless
 
             - name: Install Python
-              uses: actions/setup-python@v5
+              uses: actions/setup-python@v7
               with:
-                  python-version: "3.12"
+                  python-version: "3.13"
 
             - name: Compile and run the implementations
               run: pnpm run validate:code
