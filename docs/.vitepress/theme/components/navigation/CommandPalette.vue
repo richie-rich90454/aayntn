@@ -105,7 +105,7 @@ function activate(item: SearchItem, event?: MouseEvent): void {
         window.location.assign(item.href);
         return;
     }
-    void router.go(item.href);
+    void router.go(hrefFor(item.href));
 }
 
 function activateActive(): void {
