@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useRoute } from "vitepress";
+import { useRoute, withBase } from "vitepress";
 import { useSidebar } from "vitepress/theme";
 
 /**
@@ -37,7 +37,7 @@ function isActive(item: SidebarItem): boolean {
                 <a
                     class="aayntn-sidebar__link"
                     :class="{ 'is-active': isActive(item) }"
-                    :href="item.link"
+                    :href="withBase(item.link ?? '/')"
                     :aria-current="isActive(item) ? 'page' : undefined"
                 >
                     {{ item.text }}
@@ -49,7 +49,7 @@ function isActive(item: SidebarItem): boolean {
                         class="aayntn-sidebar__link"
                         :class="{ 'is-active': isActive(child) }"
                         style="padding-left: 1.75rem; font-size: 0.875rem"
-                        :href="child.link"
+                        :href="withBase(child.link ?? '/')"
                     >
                         {{ child.text }}
                     </a>
