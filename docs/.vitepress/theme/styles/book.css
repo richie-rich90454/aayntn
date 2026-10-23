@@ -419,3 +419,19 @@ html[data-hidden-sections~="about"] [data-section="about"] {
         page-break-after: avoid;
     }
 }
+
+/* On a telephone the comparison tables scroll inside their own frame. The
+   print sheet is unaffected: this rule never applies to paper. */
+@media screen and (max-width: 760px) {
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+}
