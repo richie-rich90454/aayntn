@@ -1,0 +1,1264 @@
+# The technique taxonomy.
+#
+# One entry per technique the encyclopedia knows about. `status` is one of:
+#   published  the article exists under docs/algorithms/<subject>/<slug>.md
+#   missing    a subject index names it in "What this subject implies but does
+#              not yet cover"; there is no article
+#   beyond     deliberately outside the encyclopedia's scope
+#
+# `divisions` lists the curriculum tracks that teach the technique. It is empty
+# when no track claims it, which is honest rather than an omission.
+#
+# The taxonomy is the authority for technique identifiers. The corpus in
+# data/corpus/tasks.yaml may only name an id that appears here.
+
+techniques:
+    - id: advanced.berlekamp-massey
+      name: Berlekamp-Massey
+      subject: advanced
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: advanced.bitset-optimization
+      name: Bitset optimization
+      subject: advanced
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: advanced.matroids
+      name: Matroids
+      subject: advanced
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: advanced.offline-dynamic-connectivity
+      name: Offline dynamic connectivity
+      subject: advanced
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: advanced.parallel-binary-search
+      name: Parallel binary search
+      subject: advanced
+      synonyms: []
+      status: published
+      divisions:
+          - platinum
+    - id: advanced.persistent-data-structures
+      name: Persistent data structures
+      subject: advanced
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: advanced.quickselect
+      name: Quickselect and randomized selection
+      subject: advanced
+      synonyms:
+          - randomized selection
+      status: missing
+      divisions: []
+    - id: advanced.randomized-algorithms
+      name: Randomized algorithms
+      subject: advanced
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: advanced.rollback-dsu
+      name: The rollback disjoint set union
+      subject: advanced
+      synonyms:
+          - rollback DSU
+          - undoable union find
+      status: missing
+      divisions: []
+    - id: advanced.sprague-grundy
+      name: Game theory and Sprague-Grundy theory
+      subject: advanced
+      synonyms:
+          - Grundy numbers
+          - Nim theory
+      status: missing
+      divisions: []
+    - id: advanced.xor-bases
+      name: XOR bases
+      subject: advanced
+      synonyms:
+          - linear basis
+          - XOR basis
+      status: missing
+      divisions: []
+    - id: arrays.coordinate-compression
+      name: Coordinate compression
+      subject: arrays
+      synonyms:
+          - value compression
+      status: published
+      divisions:
+          - gold
+    - id: arrays.difference-arrays
+      name: Difference arrays
+      subject: arrays
+      synonyms:
+          - range update
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: arrays.monotonic-queue
+      name: Monotonic queue
+      subject: arrays
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+    - id: arrays.monotonic-stack
+      name: Monotonic stack
+      subject: arrays
+      synonyms:
+          - next greater element
+      status: published
+      divisions:
+          - gold
+    - id: arrays.prefix-sums
+      name: Prefix sums
+      subject: arrays
+      synonyms:
+          - cumulative sum
+          - running sum
+      status: published
+      divisions:
+          - silver
+    - id: arrays.prefix-sums-over-other-operators
+      name: Prefix sums over other operators
+      subject: arrays
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: arrays.range-hashing
+      name: Range hashing
+      subject: arrays
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: arrays.subarray-sums
+      name: Subarray sums
+      subject: arrays
+      synonyms: []
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: arrays.two-dimensional-difference-arrays
+      name: Two-dimensional difference arrays
+      subject: arrays
+      synonyms:
+          - 2D difference array
+      status: missing
+      divisions: []
+    - id: arrays.two-dimensional-prefix-sums
+      name: Two-dimensional prefix sums
+      subject: arrays
+      synonyms:
+          - 2D prefix sums
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: arrays.two-pointers
+      name: Two pointers on an array
+      subject: arrays
+      synonyms:
+          - two pointer
+          - two sum
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: arrays.window-maximum
+      name: Sliding window maximum
+      subject: arrays
+      synonyms:
+          - sliding window maximum
+      status: published
+      divisions:
+          - gold
+    - id: combinatorics.binomial-coefficients
+      name: Binomial coefficients
+      subject: combinatorics
+      synonyms:
+          - n choose k
+          - combinations
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: combinatorics.burnside-lemma
+      name: Burnside's lemma
+      subject: combinatorics
+      synonyms:
+          - Burnside lemma
+          - Polya enumeration
+      status: missing
+      divisions: []
+    - id: combinatorics.counting-dp
+      name: Counting dynamic programming
+      subject: combinatorics
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: combinatorics.generating-functions
+      name: Generating functions
+      subject: combinatorics
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: combinatorics.hook-length-formula
+      name: The hook-length formula
+      subject: combinatorics
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: combinatorics.inclusion-exclusion
+      name: Inclusion and exclusion
+      subject: combinatorics
+      synonyms:
+          - inclusion exclusion
+          - PIE
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: combinatorics.integer-partitions
+      name: Integer partitions
+      subject: combinatorics
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: combinatorics.multinomial-coefficients
+      name: Multinomial coefficients and the hypergeometric distribution
+      subject: combinatorics
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: combinatorics.reflection-principle
+      name: The reflection principle
+      subject: combinatorics
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: combinatorics.stars-and-bars
+      name: Stars and bars
+      subject: combinatorics
+      synonyms:
+          - stars and bars
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: dynamic-programming.0-1-knapsack
+      name: 0/1 knapsack
+      subject: dynamic-programming
+      synonyms:
+          - knapsack
+          - 0/1 knapsack
+      status: published
+      divisions:
+          - gold
+    - id: dynamic-programming.aliens-trick
+      name: The aliens trick
+      subject: dynamic-programming
+      synonyms:
+          - Lagrangian optimization
+          - aliens trick
+      status: missing
+      divisions: []
+    - id: dynamic-programming.bitmask-dp
+      name: Bitmask dynamic programming
+      subject: dynamic-programming
+      synonyms:
+          - bitmask DP
+          - subset DP
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: dynamic-programming.convex-hull-trick
+      name: Convex hull trick
+      subject: dynamic-programming
+      synonyms:
+          - CHT
+          - convex hull trick
+      status: published
+      divisions:
+          - platinum
+    - id: dynamic-programming.dag-dp
+      name: Dynamic programming on a directed acyclic graph
+      subject: dynamic-programming
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+    - id: dynamic-programming.digit-dp
+      name: Digit dynamic programming
+      subject: dynamic-programming
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: dynamic-programming.divide-and-conquer-optimization
+      name: Divide-and-conquer optimization
+      subject: dynamic-programming
+      synonyms:
+          - D&C optimization
+      status: missing
+      divisions: []
+    - id: dynamic-programming.interval-dp
+      name: Interval dynamic programming
+      subject: dynamic-programming
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+    - id: dynamic-programming.knuth-optimization
+      name: Knuth optimization
+      subject: dynamic-programming
+      synonyms:
+          - Knuth-Yao optimization
+      status: missing
+      divisions: []
+    - id: dynamic-programming.li-chao-tree
+      name: The Li Chao tree
+      subject: dynamic-programming
+      synonyms:
+          - Li Chao segment tree
+      status: missing
+      divisions: []
+    - id: dynamic-programming.longest-increasing-subsequence
+      name: Longest increasing subsequence
+      subject: dynamic-programming
+      synonyms:
+          - LIS
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: dynamic-programming.monotonic-queue-optimization
+      name: Monotonic queue optimization
+      subject: dynamic-programming
+      synonyms:
+          - sliding window optimization
+      status: missing
+      divisions: []
+    - id: dynamic-programming.profile-dp
+      name: Profile dynamic programming
+      subject: dynamic-programming
+      synonyms:
+          - profile DP
+          - frontier DP
+      status: missing
+      divisions: []
+    - id: dynamic-programming.subset-transforms
+      name: Subset transforms
+      subject: dynamic-programming
+      synonyms:
+          - zeta transform
+          - Mobius transform
+      status: missing
+      divisions: []
+    - id: enumeration.backtracking
+      name: Backtracking
+      subject: enumeration
+      synonyms: []
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: enumeration.branch-and-bound
+      name: Branch and bound
+      subject: enumeration
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+    - id: enumeration.complete-search
+      name: Complete search as a subject
+      subject: enumeration
+      synonyms:
+          - complete search
+          - brute force
+      status: missing
+      divisions: []
+    - id: enumeration.constraint-propagation
+      name: Constraint propagation
+      subject: enumeration
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: enumeration.gray-codes
+      name: Gray codes
+      subject: enumeration
+      synonyms:
+          - Gray code
+      status: missing
+      divisions: []
+    - id: enumeration.iterative-deepening
+      name: Iterative deepening
+      subject: enumeration
+      synonyms:
+          - IDDFS
+      status: missing
+      divisions: []
+    - id: enumeration.meet-in-the-middle
+      name: Meet in the middle as its own article
+      subject: enumeration
+      synonyms:
+          - meet in the middle
+      status: missing
+      divisions: []
+    - id: enumeration.permutations
+      name: Permutations
+      subject: enumeration
+      synonyms: []
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: enumeration.subset-enumeration
+      name: Subset enumeration
+      subject: enumeration
+      synonyms:
+          - subsets
+          - subset enumeration
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: foundations.amortized-analysis
+      name: Amortized analysis
+      subject: foundations
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: foundations.binary-representation
+      name: Binary representation
+      subject: foundations
+      synonyms:
+          - bit manipulation
+          - bits
+      status: published
+      divisions:
+          - bronze
+          - silver
+    - id: foundations.complexity
+      name: Complexity analysis
+      subject: foundations
+      synonyms:
+          - big O
+          - asymptotic analysis
+          - complexity analysis
+      status: published
+      divisions:
+          - bronze
+          - silver
+    - id: foundations.loop-invariants
+      name: Loop invariants
+      subject: foundations
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: foundations.proof-techniques
+      name: The proof techniques
+      subject: foundations
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: foundations.recursion
+      name: Recursion
+      subject: foundations
+      synonyms: []
+      status: published
+      divisions:
+          - bronze
+          - silver
+    - id: foundations.sorting
+      name: Sorting
+      subject: foundations
+      synonyms: []
+      status: published
+      divisions:
+          - bronze
+          - silver
+    - id: foundations.time-memory-tradeoff
+      name: The time-memory tradeoff
+      subject: foundations
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: geometry.closest-pair
+      name: Closest pair
+      subject: geometry
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: geometry.convex-hull
+      name: Convex hull
+      subject: geometry
+      synonyms:
+          - Graham scan
+          - Andrew monotone chain
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: geometry.half-plane-intersection
+      name: Line arrangements and the half-plane intersection
+      subject: geometry
+      synonyms:
+          - half-plane intersection
+      status: missing
+      divisions: []
+    - id: geometry.integer-geometry
+      name: Integer geometry
+      subject: geometry
+      synonyms:
+          - lattice geometry
+          - Pick's theorem
+      status: missing
+      divisions: []
+    - id: geometry.kd-trees
+      name: K-D trees
+      subject: geometry
+      synonyms:
+          - k-d tree
+          - KD tree
+      status: missing
+      divisions: []
+    - id: geometry.point-in-polygon
+      name: Point in polygon
+      subject: geometry
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: geometry.robust-predicates
+      name: Robust predicates
+      subject: geometry
+      synonyms:
+          - exact orientation test
+      status: missing
+      divisions: []
+    - id: geometry.rotating-calipers
+      name: Rotating calipers
+      subject: geometry
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: geometry.smallest-enclosing-circle
+      name: The smallest enclosing circle
+      subject: geometry
+      synonyms:
+          - minimum enclosing circle
+      status: missing
+      divisions: []
+    - id: geometry.sweep-line
+      name: Sweep line
+      subject: geometry
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: geometry.voronoi-diagram
+      name: The Voronoi diagram
+      subject: geometry
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: graphs.0-1-bfs
+      name: 0-1 BFS
+      subject: graphs
+      synonyms:
+          - zero-one BFS
+      status: published
+      divisions:
+          - gold
+    - id: graphs.articulation-points
+      name: Articulation points
+      subject: graphs
+      synonyms:
+          - cut vertices
+      status: published
+      divisions:
+          - gold
+    - id: graphs.bellman-ford
+      name: Bellman-Ford
+      subject: graphs
+      synonyms:
+          - Bellman Ford
+      status: published
+      divisions:
+          - gold
+    - id: graphs.bfs
+      name: Breadth-first search
+      subject: graphs
+      synonyms:
+          - BFS
+          - breadth first search
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: graphs.bipartite-matching
+      name: Bipartite matching
+      subject: graphs
+      synonyms:
+          - maximum matching
+          - Hopcroft-Karp
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: graphs.bipartite-two-coloring
+      name: The two-coloring test for a bipartite graph
+      subject: graphs
+      synonyms:
+          - bipartite check
+          - two-coloring
+      status: missing
+      divisions: []
+    - id: graphs.bridges
+      name: Bridges
+      subject: graphs
+      synonyms:
+          - cut edges
+      status: published
+      divisions:
+          - gold
+    - id: graphs.dfs
+      name: Depth-first search
+      subject: graphs
+      synonyms:
+          - DFS
+          - depth first search
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: graphs.dijkstra
+      name: Dijkstra's algorithm
+      subject: graphs
+      synonyms:
+          - single source shortest path
+      status: published
+      divisions:
+          - gold
+    - id: graphs.dominator-trees
+      name: Dominator trees
+      subject: graphs
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: graphs.dsu
+      name: Disjoint set union
+      subject: graphs
+      synonyms:
+          - DSU
+          - union find
+          - union-find
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: graphs.euler-tour
+      name: Euler tours in graphs
+      subject: graphs
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: graphs.floyd-warshall
+      name: Floyd-Warshall and all-pairs shortest paths
+      subject: graphs
+      synonyms:
+          - Floyd Warshall
+          - all-pairs shortest paths
+      status: missing
+      divisions: []
+    - id: graphs.hungarian-algorithm
+      name: The Hungarian algorithm
+      subject: graphs
+      synonyms:
+          - Kuhn-Munkres
+      status: missing
+      divisions: []
+    - id: graphs.johnson
+      name: Johnson's algorithm
+      subject: graphs
+      synonyms:
+          - Johnson algorithm
+      status: missing
+      divisions: []
+    - id: graphs.minimum-cost-flow
+      name: Minimum cost flow
+      subject: graphs
+      synonyms:
+          - min cost flow
+          - MCMF
+      status: missing
+      divisions: []
+    - id: graphs.minimum-cut
+      name: Minimum cut
+      subject: graphs
+      synonyms: []
+      status: published
+      divisions:
+          - platinum
+    - id: graphs.mst
+      name: Minimum spanning tree
+      subject: graphs
+      synonyms:
+          - MST
+          - minimum spanning tree
+          - Kruskal
+          - Prim
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: graphs.representation
+      name: Graph representation
+      subject: graphs
+      synonyms:
+          - adjacency list
+          - adjacency matrix
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: graphs.strongly-connected-components
+      name: Strongly connected components
+      subject: graphs
+      synonyms:
+          - SCC
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: graphs.topological-sort
+      name: Topological sort
+      subject: graphs
+      synonyms:
+          - toposort
+          - topological ordering
+          - Kahn's algorithm
+      status: published
+      divisions:
+          - gold
+    - id: greedy.exchange-argument
+      name: The exchange argument as a general tool
+      subject: greedy
+      synonyms:
+          - exchange argument
+      status: missing
+      divisions: []
+    - id: greedy.feasibility-oracle
+      name: Greedy with a feasibility oracle
+      subject: greedy
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: greedy.interval-scheduling
+      name: Interval scheduling
+      subject: greedy
+      synonyms:
+          - activity selection
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: greedy.matroid-perspective
+      name: The matroid perspective
+      subject: greedy
+      synonyms:
+          - matroid
+      status: missing
+      divisions: []
+    - id: greedy.multi-key-sorting
+      name: Sorting by several keys
+      subject: greedy
+      synonyms:
+          - multi-key sorting
+      status: missing
+      divisions: []
+    - id: greedy.scheduling-deadlines-and-release-times
+      name: Scheduling with deadlines and release times
+      subject: greedy
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: number-theory.chinese-remainder
+      name: Chinese remainder theorem
+      subject: number-theory
+      synonyms:
+          - CRT
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: number-theory.discrete-logarithm
+      name: The discrete logarithm
+      subject: number-theory
+      synonyms:
+          - discrete log
+      status: missing
+      divisions: []
+    - id: number-theory.euler-totient
+      name: Euler's totient function and Euler's theorem
+      subject: number-theory
+      synonyms:
+          - phi function
+          - Euler theorem
+      status: missing
+      divisions: []
+    - id: number-theory.extended-euclidean
+      name: The extended Euclidean algorithm
+      subject: number-theory
+      synonyms:
+          - extended gcd
+          - extended Euclidean algorithm
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: number-theory.fft
+      name: The fast Fourier transform
+      subject: number-theory
+      synonyms:
+          - FFT
+      status: missing
+      divisions: []
+    - id: number-theory.matrix-exponentiation
+      name: Matrix exponentiation
+      subject: number-theory
+      synonyms:
+          - matrix power
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: number-theory.miller-rabin
+      name: Miller-Rabin
+      subject: number-theory
+      synonyms:
+          - Miller Rabin
+      status: missing
+      divisions: []
+    - id: number-theory.modular-arithmetic
+      name: Modular arithmetic
+      subject: number-theory
+      synonyms:
+          - modular inverse
+      status: published
+      divisions:
+          - silver
+          - gold
+          - platinum
+    - id: number-theory.ntt
+      name: The number-theoretic transform
+      subject: number-theory
+      synonyms:
+          - NTT
+          - number theoretic transform
+      status: missing
+      divisions: []
+    - id: number-theory.pollard-rho
+      name: Pollard's rho
+      subject: number-theory
+      synonyms:
+          - Pollard rho
+      status: missing
+      divisions: []
+    - id: number-theory.prime-factorization
+      name: Prime factorization
+      subject: number-theory
+      synonyms: []
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: number-theory.sieve
+      name: Sieve of Eratosthenes
+      subject: number-theory
+      synonyms:
+          - sieve of Eratosthenes
+          - Eratosthenes sieve
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: range-queries.fenwick-tree
+      name: Fenwick tree
+      subject: range-queries
+      synonyms:
+          - Fenwick
+          - BIT
+          - binary indexed tree
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: range-queries.implicit-segment-tree
+      name: Implicit segment trees
+      subject: range-queries
+      synonyms:
+          - dynamic segment tree
+          - sparse segment tree
+      status: missing
+      divisions: []
+    - id: range-queries.lazy-propagation
+      name: Lazy propagation
+      subject: range-queries
+      synonyms:
+          - lazy segment tree
+      status: missing
+      divisions: []
+    - id: range-queries.merge-sort-tree
+      name: Merge sort trees
+      subject: range-queries
+      synonyms:
+          - merge sort tree
+      status: missing
+      divisions: []
+    - id: range-queries.mos-algorithm
+      name: Mo's algorithm
+      subject: range-queries
+      synonyms:
+          - Mo algorithm
+      status: missing
+      divisions: []
+    - id: range-queries.persistent-segment-tree
+      name: Persistent segment trees
+      subject: range-queries
+      synonyms:
+          - persistent segment tree
+      status: missing
+      divisions: []
+    - id: range-queries.segment-tree
+      name: Segment tree
+      subject: range-queries
+      synonyms:
+          - range tree
+          - range query tree
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: range-queries.segment-tree-beats
+      name: Segment tree beats
+      subject: range-queries
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: range-queries.sparse-table
+      name: Sparse table
+      subject: range-queries
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: range-queries.sqrt-decomposition
+      name: Square-root decomposition
+      subject: range-queries
+      synonyms:
+          - sqrt decomposition
+          - block decomposition
+      status: missing
+      divisions: []
+    - id: range-queries.wavelet-tree
+      name: Wavelet trees
+      subject: range-queries
+      synonyms:
+          - wavelet tree
+      status: missing
+      divisions: []
+    - id: searching.binary-search
+      name: Binary search
+      subject: searching
+      synonyms: []
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: searching.binary-search-on-answer
+      name: Binary search on the answer
+      subject: searching
+      synonyms:
+          - binary search on the answer
+      status: published
+      divisions:
+          - gold
+    - id: searching.parametric-search
+      name: The parametric search generalization
+      subject: searching
+      synonyms:
+          - parametric search
+      status: missing
+      divisions: []
+    - id: searching.sliding-window
+      name: Sliding window
+      subject: searching
+      synonyms: []
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: searching.sliding-window-variants
+      name: The sliding window variants with a state machine
+      subject: searching
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: searching.sorted-range-search
+      name: Search over a sorted range of indices
+      subject: searching
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: searching.ternary-search
+      name: Ternary search
+      subject: searching
+      synonyms: []
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: searching.two-pointer-patterns
+      name: The individual two-pointer patterns
+      subject: searching
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: searching.two-pointers
+      name: Two pointers
+      subject: searching
+      synonyms: []
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: strings.aho-corasick
+      name: Aho-Corasick
+      subject: strings
+      synonyms:
+          - Aho Corasick
+          - AC automaton
+      status: missing
+      divisions: []
+    - id: strings.kmp
+      name: Knuth-Morris-Pratt
+      subject: strings
+      synonyms:
+          - KMP
+          - Knuth-Morris-Pratt
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: strings.manacher
+      name: The Manacher algorithm
+      subject: strings
+      synonyms:
+          - Manacher's algorithm
+      status: published
+      divisions:
+          - gold
+    - id: strings.minimal-rotation
+      name: The minimal rotation of a string
+      subject: strings
+      synonyms:
+          - Booth's algorithm
+          - minimal rotation
+      status: missing
+      divisions: []
+    - id: strings.palindrome-tree
+      name: Palindrome trees, also called the eertree
+      subject: strings
+      synonyms:
+          - eertree
+          - palindromic tree
+      status: missing
+      divisions: []
+    - id: strings.rolling-hash
+      name: Rolling hash
+      subject: strings
+      synonyms:
+          - polynomial hashing
+      status: published
+      divisions:
+          - gold
+    - id: strings.subsequence-hashing
+      name: String hashing of subsequences
+      subject: strings
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: strings.suffix-array
+      name: Suffix array
+      subject: strings
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: strings.suffix-array-palindrome
+      name: The suffix-array-based palindrome method
+      subject: strings
+      synonyms: []
+      status: missing
+      divisions: []
+    - id: strings.suffix-automaton
+      name: The suffix automaton
+      subject: strings
+      synonyms:
+          - SAM
+      status: missing
+      divisions: []
+    - id: strings.suffix-tree
+      name: Suffix trees
+      subject: strings
+      synonyms:
+          - suffix tree
+      status: missing
+      divisions: []
+    - id: strings.trie
+      name: Trie
+      subject: strings
+      synonyms:
+          - prefix tree
+      status: published
+      divisions:
+          - silver
+          - gold
+    - id: strings.z-algorithm
+      name: The Z algorithm
+      subject: strings
+      synonyms:
+          - Z-function
+          - Z function
+      status: published
+      divisions:
+          - gold
+    - id: trees.binary-lifting
+      name: Binary lifting
+      subject: trees
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: trees.centroid-decomposition
+      name: Centroid decomposition
+      subject: trees
+      synonyms: []
+      status: published
+      divisions:
+          - platinum
+    - id: trees.dynamic-trees
+      name: Dynamic trees
+      subject: trees
+      synonyms:
+          - link-cut tree
+          - top tree
+      status: missing
+      divisions: []
+    - id: trees.euler-tour
+      name: Euler tour for trees
+      subject: trees
+      synonyms: []
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: trees.heavy-light-decomposition
+      name: Heavy-light decomposition
+      subject: trees
+      synonyms:
+          - HLD
+          - heavy light decomposition
+          - heavy path decomposition
+      status: published
+      divisions:
+          - platinum
+    - id: trees.lca
+      name: Lowest common ancestor
+      subject: trees
+      synonyms:
+          - LCA
+          - lowest common ancestor
+          - common ancestor
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: trees.rerooting
+      name: Rerooting
+      subject: trees
+      synonyms:
+          - rerooting DP
+          - all roots DP
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: trees.small-to-large-merging
+      name: Small-to-large merging
+      subject: trees
+      synonyms:
+          - small to large
+          - DSU on tree
+      status: missing
+      divisions: []
+    - id: trees.top-tree
+      name: The top-tree and rake-compress formulation
+      subject: trees
+      synonyms:
+          - top tree
+          - rake-compress
+      status: missing
+      divisions: []
+    - id: trees.tree-dp
+      name: Tree dynamic programming
+      subject: trees
+      synonyms:
+          - tree DP
+          - subtree DP
+      status: published
+      divisions:
+          - gold
+          - platinum
+    - id: trees.tree-hashing
+      name: Tree hashing
+      subject: trees
+      synonyms:
+          - tree hash
+      status: missing
+      divisions: []
+    - id: trees.virtual-tree
+      name: Virtual trees
+      subject: trees
+      synonyms:
+          - virtual tree
+      status: missing
+      divisions: []
