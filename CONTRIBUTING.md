@@ -275,4 +275,54 @@ CI runs the same commands. A pull request that fails the build does not merge.
 
 The project is licensed under **AGPL-3.0-only**. Original lessons, implementations and artwork are covered by it. Contributed code must be your own or compatible with it; the webfonts under `docs/public/fonts` are covered by the SIL Open Font License 1.1, and the manifest of every implementation records its license and provenance.
 
-`A.A.Y.N.T.N.` is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad.
+`A.A.Y.N.T.N.` is an independent preparation resource. It is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad. The names of the examinations, the competitions and the languages that appear in the material belong to their owners; see [TRADEMARKS.md](TRADEMARKS.md) for the detail.
+
+---
+
+## 10. The community files
+
+These files are part of the repository and a pull request that touches them is reviewed against them like any other change.
+
+| File | What it states |
+| --- | --- |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | How people are expected to treat each other, and what happens when they do not, including the rules that are specific to a teaching project. |
+| [SECURITY.md](SECURITY.md) | What a vulnerability can be in a static site, how to report one privately, and what the reader can expect. |
+| [ACCESSIBILITY.md](ACCESSIBILITY.md) | The commitment, the environments that are supported, the limitations that are known, and how to report a barrier. |
+| [SUPPORT.md](SUPPORT.md) | Where to ask, what to put in an issue, and how long it takes. |
+| [TRADEMARKS.md](TRADEMARKS.md) | The names that belong to other people, the independence of the project, and the rules of a contest. |
+| [README.md](README.md) | What the project is, and how to run it. |
+
+A pull request that adds a lesson, a listing, a laboratory or a page must keep every promise those files make. In particular, a change that lowers the contrast of the text, that removes the statement of the situation in which a technique fails, or that reproduces a problem statement is a regression.
+
+---
+
+## 11. The shape of a commit
+
+One file per commit, with a conventional subject and a body that says what the file does. The subject reads as a sentence about the repository:
+
+```text
+fix(algorithms): keep the identifier whole in a narrow cell
+```
+
+The body is a list of lines, each of which says one thing about the change:
+
+```text
+- Breaks a word only when it cannot fit on a line of its own, so that an
+  identifier in a table keeps its name instead of being cut in two.
+- Writes the word that names the accent with the accent token, so that a
+  cobalt letter is legible on a dark page.
+```
+
+The reasons are worth writing down, because the next person to change the file is not the person who wrote the code. The history is the only record of why a rule exists, and this repository has rules that exist because something went wrong once.
+
+The commits are in American English, like everything else here.
+
+---
+
+## 12. The two questions a reviewer will ask
+
+**Is it true?** A bound that is stated in a lesson, in a listing and in a summary panel must be the same bound in all three. The complexity block in the frontmatter is checked against the article, and the six languages are checked against each other, byte for byte.
+
+**Is it worth reading?** A lesson that a reader who is stuck can follow is worth more than a lesson that is merely correct. Every article derives the technique, states the situation in which it fails, and shows a counter example. If a contribution removes one of those, it needs a reason that is better than brevity.
+
+Everything else — the prose, the formatting, the spelling, the appearance — is checked by machines, and a pull request that fails a check does not merge.
