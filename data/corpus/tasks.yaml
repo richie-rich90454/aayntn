@@ -1,0 +1,530 @@
+# The task corpus.
+#
+# One entry per problem in data/problems. `techniques` names ids from
+# data/taxonomy.yaml and nowhere else. `evidence` records how the tags were
+# checked: an official editorial URL, or the literal `derived` when the tags
+# come from our own reading of the statement.
+#
+# Add a tag with:
+#   pnpm exec tsx tools/coverage/tag.ts <task-id> <technique-id> <evidence>
+#
+# The file is rewritten in id order with each technique list sorted, so a tag
+# produces one clean diff line.
+
+tasks:
+    - id: usaco.2015.feb.gold.censoring
+      title: Censoring (Gold)
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=533
+      techniques:
+          - strings.kmp
+      evidence: https://usaco.org/current/data/sol_censor_gold.html
+    - id: usaco.2015.feb.gold.fencing-the-herd
+      title: Fencing the Herd
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=534
+      techniques:
+          - geometry.convex-hull
+          - searching.binary-search
+      evidence: https://usaco.org/current/data/sol_fencing_gold.html
+    - id: usaco.2015.feb.silver.cow-hopscotch
+      title: Cow Hopscotch (Silver)
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=530
+      techniques:
+          - arrays.prefix-sums
+          - arrays.two-dimensional-prefix-sums
+      evidence: https://usaco.org/current/data/sol_hopscotch_silver.html
+    - id: usaco.2015.feb.silver.superbull
+      title: Superbull
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=531
+      techniques:
+          - graphs.dijkstra
+          - graphs.mst
+      evidence: https://usaco.org/current/data/sol_superbull_silver.html
+    - id: usaco.2015.jan.bronze.cow-routing
+      title: Cow Routing
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=507
+      techniques:
+          - foundations.complexity
+          - graphs.representation
+      evidence: https://usaco.org/current/data/sol_cowroute_bronze.html
+    - id: usaco.2015.jan.bronze.what-base
+      title: It's All About the Base
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=509
+      techniques:
+          - foundations.binary-representation
+      evidence: https://usaco.org/current/data/sol_whatbase_bronze.html
+    - id: usaco.2015.jan.silver.meeting-time
+      title: Meeting Time
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=513
+      techniques:
+          - graphs.dfs
+          - graphs.representation
+      evidence: https://usaco.org/current/data/sol_meeting_silver.html
+    - id: usaco.2016.feb.gold.circular-barn
+      title: Circular Barn (Gold)
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=621
+      techniques:
+          - arrays.prefix-sums
+          - greedy.interval-scheduling
+      evidence: https://usaco.org/current/data/sol_cbarn_gold_feb16.html
+    - id: usaco.2016.feb.platinum.circular-barn
+      title: Circular Barn (Platinum)
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=626
+      techniques:
+          - dynamic-programming.0-1-knapsack
+          - dynamic-programming.convex-hull-trick
+      evidence: https://usaco.org/current/data/sol_cbarn_platinum_feb16.html
+    - id: usaco.2016.feb.silver.milk-pails
+      title: Milk Pails
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=620
+      techniques:
+          - enumeration.subset-enumeration
+          - graphs.bfs
+      evidence: https://usaco.org/current/data/sol_pails_silver_feb16.html
+    - id: usaco.2016.jan.bronze.promotion-counting
+      title: Promotion Counting
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=591
+      techniques:
+          - arrays.prefix-sums
+          - arrays.two-dimensional-prefix-sums
+      evidence: https://usaco.org/current/data/sol_promote_bronze_jan16.html
+    - id: usaco.2016.jan.silver.build-gates
+      title: Build Gates
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=596
+      techniques:
+          - graphs.bfs
+          - graphs.representation
+      evidence: https://usaco.org/current/data/sol_gates_silver_jan16.html
+    - id: usaco.2017.dec.gold.barn-painting
+      title: Barn Painting
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=766
+      techniques:
+          - graphs.representation
+          - trees.tree-dp
+      evidence: https://usaco.org/current/data/sol_barnpainting_gold_dec17.html
+    - id: usaco.2017.dec.platinum.greedy-gift-takers
+      title: Greedy Gift Takers
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=770
+      techniques:
+          - range-queries.fenwick-tree
+          - searching.binary-search
+      evidence: https://usaco.org/current/data/sol_greedy_platinum_dec17.html
+    - id: usaco.2017.jan.silver.secret-cow-code
+      title: Secret Cow Code
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=692
+      techniques:
+          - foundations.recursion
+          - strings.kmp
+      evidence: https://usaco.org/current/data/sol_cowcode_silver_jan17.html
+    - id: usaco.2017.open.bronze.modern-art
+      title: Modern Art
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=737
+      techniques:
+          - graphs.bfs
+          - graphs.representation
+      evidence: https://usaco.org/current/data/sol_art_bronze_open17.html
+    - id: usaco.2017.open.gold.bovine-genomics
+      title: Bovine Genomics
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=741
+      techniques:
+          - foundations.sorting
+          - searching.sliding-window
+      evidence: https://usaco.org/current/data/sol_cownomics_gold_open17.html
+    - id: usaco.2018.dec.platinum.sort-it-out
+      title: Sort It Out
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=865
+      techniques:
+          - dynamic-programming.longest-increasing-subsequence
+          - range-queries.fenwick-tree
+      evidence: https://usaco.org/current/data/sol_itout_platinum_dec18.html
+    - id: usaco.2018.jan.bronze.out-of-place
+      title: Out of Place
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=785
+      techniques:
+          - foundations.sorting
+      evidence: https://usaco.org/current/data/sol_outofplace_bronze_jan18.html
+    - id: usaco.2018.jan.gold.mootube
+      title: MooTube
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=789
+      techniques:
+          - graphs.bfs
+          - graphs.dsu
+          - range-queries.fenwick-tree
+      evidence: https://usaco.org/current/data/sol_mootube_gold_jan18.html
+    - id: usaco.2018.jan.silver.rental-service
+      title: Rental Service
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=787
+      techniques:
+          - foundations.sorting
+          - greedy.interval-scheduling
+      evidence: https://usaco.org/current/data/sol_rental_silver_jan18.html
+    - id: usaco.2018.open.platinum.disruption
+      title: Disruption
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=842
+      techniques:
+          - range-queries.segment-tree
+          - trees.heavy-light-decomposition
+          - trees.lca
+      evidence: https://usaco.org/current/data/sol_disrupt_platinum_open18.html
+    - id: usaco.2019.dec.gold.milk-pumping
+      title: Milk Pumping
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=969
+      techniques:
+          - arrays.prefix-sums
+          - range-queries.sparse-table
+          - searching.sliding-window
+      evidence: https://usaco.org/current/data/sol_pump_gold_dec19.html
+    - id: usaco.2019.dec.gold.milk-visits
+      title: Milk Visits
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=970
+      techniques:
+          - graphs.representation
+          - trees.heavy-light-decomposition
+      evidence: https://usaco.org/current/data/sol_milkvisits_gold_dec19.html
+    - id: usaco.2019.dec.gold.moortal-cowmbat
+      title: Moortal Cowmbat
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=971
+      techniques:
+          - combinatorics.binomial-coefficients
+          - searching.sliding-window
+      evidence: https://usaco.org/current/data/sol_cowmbat_gold_dec19.html
+    - id: usaco.2019.dec.platinum.bessies-snow-cow
+      title: Bessie's Snow Cow
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=973
+      techniques:
+          - range-queries.segment-tree
+          - trees.heavy-light-decomposition
+      evidence: https://usaco.org/current/data/sol_snowcow_platinum_dec19.html
+    - id: usaco.2019.feb.gold.cow-land
+      title: Cow Land
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=921
+      techniques:
+          - range-queries.fenwick-tree
+          - trees.heavy-light-decomposition
+          - trees.lca
+      evidence: https://usaco.org/current/data/sol_cowland_gold_feb19.html
+    - id: usaco.2019.feb.platinum.mowing-mischief
+      title: Mowing Mischief
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=926
+      techniques:
+          - dynamic-programming.convex-hull-trick
+          - geometry.convex-hull
+      evidence: https://usaco.org/current/data/sol_mowing_platinum_feb19.html
+    - id: usaco.2019.feb.silver.painting-the-barn
+      title: Painting the Barn
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=919
+      techniques:
+          - arrays.difference-arrays
+          - arrays.two-dimensional-prefix-sums
+      evidence: https://usaco.org/current/data/sol_paintbarn_silver_feb19.html
+    - id: usaco.2019.jan.gold.shortcut
+      title: Shortcut
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=899
+      techniques:
+          - graphs.dijkstra
+          - graphs.representation
+      evidence: https://usaco.org/current/data/sol_shortcut_gold_jan19.html
+    - id: usaco.2019.open.gold.i-would-walk-500-miles
+      title: I Would Walk 500 Miles
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=946
+      techniques:
+          - graphs.dijkstra
+          - graphs.mst
+      evidence: https://usaco.org/current/data/sol_walk_gold_open19.html
+    - id: usaco.2019.open.platinum.compound-escape
+      title: Compound Escape
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=949
+      techniques:
+          - graphs.dsu
+          - graphs.mst
+      evidence: https://usaco.org/current/data/sol_escape_platinum_open19.html
+    - id: usaco.2019.open.silver.fence-planning
+      title: Fence Planning
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=944
+      techniques:
+          - foundations.sorting
+          - graphs.dsu
+      evidence: https://usaco.org/current/data/sol_fenceplan_silver_open19.html
+    - id: usaco.2020.dec.bronze.daisy-chains
+      title: Daisy Chains
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1060
+      techniques:
+          - arrays.prefix-sums
+          - enumeration.subset-enumeration
+      evidence: https://usaco.org/current/data/sol_prob2_bronze_dec20.html
+    - id: usaco.2020.feb.gold.timeline
+      title: Timeline
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1017
+      techniques:
+          - graphs.topological-sort
+          - range-queries.segment-tree
+      evidence: https://usaco.org/current/data/sol_timeline_gold_feb20.html
+    - id: usaco.2020.feb.platinum.delegation
+      title: Delegation
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1020
+      techniques:
+          - enumeration.backtracking
+          - graphs.dsu
+          - trees.tree-dp
+      evidence: https://usaco.org/current/data/sol_deleg_platinum_feb20.html
+    - id: usaco.2020.jan.gold.springboards
+      title: Springboards
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=995
+      techniques:
+          - graphs.representation
+          - range-queries.segment-tree
+      evidence: https://usaco.org/current/data/sol_boards_gold_jan20.html
+    - id: usaco.2020.jan.platinum.falling-portals
+      title: Falling Portals
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=998
+      techniques:
+          - dynamic-programming.convex-hull-trick
+          - geometry.convex-hull
+      evidence: https://usaco.org/current/data/sol_falling_platinum_jan20.html
+    - id: usaco.2020.jan.silver.loan-repayment
+      title: Loan Repayment
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=991
+      techniques:
+          - searching.binary-search
+      evidence: https://usaco.org/current/data/sol_loan_silver_jan20.html
+    - id: usaco.2020.open.bronze.social-distancing-ii
+      title: Social Distancing II
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1036
+      techniques:
+          - arrays.difference-arrays
+          - foundations.sorting
+      evidence: https://usaco.org/current/data/sol_socdist2_bronze_open20.html
+    - id: usaco.2021.jan.bronze.just-stalling
+      title: Just Stalling
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1085
+      techniques:
+          - enumeration.subset-enumeration
+          - foundations.sorting
+      evidence: https://usaco.org/current/data/sol_prob3_bronze_jan21.html
+    - id: usaco.2021.jan.bronze.uddered-but-not-herd
+      title: Uddered but not Herd
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1083
+      techniques:
+          - enumeration.subset-enumeration
+          - foundations.binary-representation
+      evidence: https://usaco.org/current/data/sol_prob1_bronze_jan21.html
+    - id: usaco.2022.dec.bronze.cow-college
+      title: Cow College
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1251
+      techniques:
+          - foundations.sorting
+          - searching.binary-search
+      evidence: https://usaco.org/current/data/sol_prob1_bronze_dec22.html
+    - id: usaco.2022.dec.silver.circular-barn
+      title: Circular Barn (Silver)
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1255
+      techniques:
+          - arrays.prefix-sums
+          - searching.two-pointers
+      evidence: https://usaco.org/current/data/sol_prob2_silver_dec22.html
+    - id: usaco.2022.feb.gold.moo-network
+      title: Moo Network
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1211
+      techniques:
+          - graphs.dijkstra
+          - graphs.mst
+          - number-theory.modular-arithmetic
+      evidence: https://usaco.org/current/data/sol_prob3_gold_feb22.html
+    - id: usaco.2022.jan.bronze.non-transitive-dice
+      title: Non-Transitive Dice
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1180
+      techniques:
+          - enumeration.backtracking
+          - foundations.complexity
+      evidence: https://usaco.org/current/data/sol_prob2_bronze_jan22.html
+    - id: usaco.2022.jan.platinum.counting-haybales
+      title: Counting Haybales
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1189
+      techniques:
+          - combinatorics.binomial-coefficients
+          - number-theory.modular-arithmetic
+      evidence: https://usaco.org/current/data/sol_prob2_platinum_jan22.html
+    - id: usaco.2022.jan.platinum.multiple-choice-test
+      title: Multiple Choice Test
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1190
+      techniques:
+          - geometry.convex-hull
+          - searching.binary-search
+      evidence: https://usaco.org/current/data/sol_prob3_platinum_jan22.html
+    - id: usaco.2023.dec.gold.flight-routes
+      title: Flight Routes
+      source: USACO
+      division: gold
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1353
+      techniques:
+          - dynamic-programming.0-1-knapsack
+          - graphs.dijkstra
+          - graphs.topological-sort
+      evidence: https://usaco.org/current/data/sol_prob1_gold_dec23.html
+    - id: usaco.2023.dec.platinum.a-graph-problem
+      title: A Graph Problem
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1357
+      techniques:
+          - graphs.dsu
+          - graphs.mst
+      evidence: https://usaco.org/current/data/sol_prob2_platinum_dec23.html
+    - id: usaco.2023.dec.silver.cycle-correspondence
+      title: Cycle Correspondence
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1351
+      techniques:
+          - searching.binary-search
+          - strings.kmp
+      evidence: https://usaco.org/current/data/sol_prob2_silver_dec23.html
+    - id: usaco.2023.feb.bronze.hungry-cow
+      title: Hungry Cow
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1299
+      techniques:
+          - foundations.sorting
+          - greedy.interval-scheduling
+      evidence: https://usaco.org/current/data/sol_prob1_bronze_feb23.html
+    - id: usaco.2023.feb.platinum.problem-setting
+      title: Problem Setting
+      source: USACO
+      division: platinum
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1309
+      techniques:
+          - advanced.parallel-binary-search
+          - range-queries.fenwick-tree
+      evidence: https://usaco.org/current/data/sol_prob2_platinum_feb23.html
+    - id: usaco.2023.feb.silver.moo-route-ii
+      title: Moo Route II
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1304
+      techniques:
+          - advanced.parallel-binary-search
+          - graphs.representation
+      evidence: https://usaco.org/current/data/sol_prob3_silver_feb23.html
+    - id: usaco.2024.feb.silver.moorbles
+      title: Moorbles
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1400
+      techniques:
+          - combinatorics.binomial-coefficients
+          - number-theory.modular-arithmetic
+      evidence: https://usaco.org/current/data/sol_prob3_silver_feb24.html
+    - id: usaco.2024.open.silver.painting-fence-posts
+      title: Painting Fence Posts
+      source: USACO
+      division: silver
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1423
+      techniques:
+          - graphs.dsu
+          - range-queries.fenwick-tree
+      evidence: https://usaco.org/current/data/sol_prob2_silver_open24.html
+    - id: usaco.2025.feb.bronze.making-mexes
+      title: Making Mexes
+      source: USACO
+      division: bronze
+      url: https://usaco.org/index.php?page=viewproblem2&cpid=1492
+      techniques:
+          - arrays.prefix-sums
+          - foundations.complexity
+      evidence: https://usaco.org/current/data/sol_prob2_bronze_feb25.html
