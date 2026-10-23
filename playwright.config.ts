@@ -19,6 +19,12 @@ export default defineConfig({
     testDir: "./tests/visual",
     testMatch: /.*\.spec\.ts/,
     fullyParallel: true,
+    /* The heaviest pages render a whole style guide and a hundred and fifty
+       code listings; thirty seconds is not enough for them when four tests
+       share one preview server. */
+    timeout: 90_000,
+    expect: { timeout: 10_000 },
+    workers: 4,
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 1 : 0,
     reporter: process.env.CI ? "github" : "list",
