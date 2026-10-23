@@ -693,6 +693,52 @@ async function main() {
     await rm(implPagesDir, { recursive: true, force: true });
     await mkdir(implPagesDir, { recursive: true });
 
+    /*
+     * The root of the source tree. Every listing the encyclopedia publishes
+     * is reachable from here, so that a reader who wants the code rather than
+     * the article has one page to start from.
+     */
+    const root: string[] = [];
+    root.push("---");
+    root.push("id: implementation.index");
+    root.push("title: The source of every listing");
+    root.push(
+        "summary: Every implementation that the encyclopedia publishes, with the languages it is written in and the article that explains it.",
+    );
+    root.push("subjects: []");
+    root.push("importance: extended-reference");
+    root.push("reviewed: false");
+    root.push("---");
+    root.push("");
+    root.push("# The source of every listing");
+    root.push("");
+    root.push(
+        "Every implementation in the encyclopedia is a real source file in the language it claims to be. The test suite compiles each one, runs it against shared fixtures, and requires the six languages of an algorithm to produce the same output byte for byte.",
+    );
+    root.push("");
+    root.push(
+        "This page lists the source of every algorithm. Each link leads to the files of one algorithm, with a page for every language and variant.",
+    );
+    root.push("");
+    root.push("| Algorithm | Subject | Languages | Source |");
+    root.push("| --- | --- | --- | --- |");
+    for (const { algorithm, files } of [...sourcePages].sort((a, b) =>
+        a.algorithm.title.localeCompare(b.algorithm.title),
+    )) {
+        const languages = [
+            ...new Set(files.map((file) => LANGUAGE_LABEL[file.language] ?? file.language)),
+        ];
+        root.push(
+            `| ${algorithm.title} | ${algorithm.subject} | ${languages.join(", ")} | [${files.length} listing${files.length === 1 ? "" : "s"}](/implementations/${algorithm.id.replace(/\./g, "-")}/) |`,
+        );
+    }
+    root.push("");
+    root.push(
+        `That is ${sourcePages.reduce((total, item) => total + item.files.length, 0)} listings across ${sourcePages.length} algorithms.`,
+    );
+    root.push("");
+    await writeFile(join(implPagesDir, "index.md"), root.join("\n"), "utf8");
+
     for (const { algorithm, files } of sourcePages) {
         const algorithmDir = join(implPagesDir, algorithm.id.replace(/\./g, "-"));
         await mkdir(algorithmDir, { recursive: true });
