@@ -34,6 +34,13 @@ typedef struct {
  * is only read while the table is built.
  */
 static int lca_init(lca_table *table, const adjacency_list *adj, int n, int root) {
+    /* The table is a defined value from this line on, so that a caller may
+     * pass it to destroy even when the build fails. */
+    table->n = 0;
+    table->levels = 0;
+    table->depth = NULL;
+    table->up = NULL;
+
     if (n <= 0 || root < 0 || root >= n) {
         return 0;
     }
@@ -237,7 +244,7 @@ int main(void) {
         adj[v].neighbors[cursor[v]++] = u;
     }
 
-    lca_table table;
+    lca_table table = {0, 0, NULL, NULL};
     const int built = lca_init(&table, adj, n, 0);
 
     int q = 0;
