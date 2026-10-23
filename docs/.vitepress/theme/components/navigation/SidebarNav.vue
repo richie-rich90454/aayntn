@@ -2,6 +2,7 @@
 import { computed, ref, watch } from "vue";
 import { useRoute, withBase } from "vitepress";
 import { useSidebar } from "vitepress/theme";
+import { pagePath } from "../../composables/useBasePath";
 
 /**
  * Subject navigation.
@@ -26,8 +27,7 @@ const openIndex = ref<number | null>(null);
 
 function isActive(item: SidebarItem): boolean {
     if (!item.link) return false;
-    const path = route.path;
-    return path === item.link || path.startsWith(item.link + "/");
+    return pagePath(route.path) === pagePath(item.link);
 }
 
 function hasActive(item: SidebarItem): boolean {
