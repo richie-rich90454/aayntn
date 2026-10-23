@@ -6,7 +6,7 @@ name: Visual regression
 # a laboratory — at five widths from a phone to a screen wider than a desk,
 # in the light appearance and in the dark one, and measure whether the page
 # scrolls sideways, whether anything stands past the edge, whether the text
-# keeps its measure, and whether the search control is still on the screen.
+# keeps its measure, and whether any word has become hard to read.
 
 on:
     pull_request:
@@ -16,20 +16,21 @@ concurrency:
     group: visual-${{ github.ref }}
     cancel-in-progress: true
 
+permissions:
+    contents: read
+
 jobs:
     layout:
         name: Measure the layout of the reference pages
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v7
 
-            - uses: pnpm/action-setup@v4
-              with:
-                  version: 12.14.0
+            - uses: pnpm/action-setup@v6
 
-            - uses: actions/setup-node@v4
+            - uses: actions/setup-node@v7
               with:
-                  node-version: 22
+                  node-version: 24
                   cache: pnpm
 
             - name: Install the dependencies
@@ -44,7 +45,7 @@ jobs:
             - name: Measure the pages
               run: pnpm exec playwright test
 
-            - uses: actions/upload-artifact@v4
+            - uses: actions/upload-artifact@v7
               if: always()
               with:
                   name: layout-report
