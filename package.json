@@ -33,7 +33,7 @@
         "node": ">=20"
     },
     "dependencies": {
-        "@mdit/plugin-katex": "^1.1.3",
+        "@mdit/plugin-katex": "^1.1.4",
         "katex": "^0.19.0",
         "minisearch": "^7.2.0",
         "vue": "^3.5.13"
@@ -41,20 +41,18 @@
     "devDependencies": {
         "@live-codes/pascal-wasm": "^0.1.0",
         "@playwright/test": "^1.64.1",
-        "@types/node": "^22.13.1",
+        "@types/node": "^26.6.5",
         "@vue/compiler-dom": "^3.5.44",
         "fast-glob": "^3.3.3",
         "markdown-it": "^15.0.3",
-        "odin-turbo-pascal": "2.0.0-dev.4",
         "oxfmt": "0.74.0",
-        "pascal-interpreter": "^1.0.6",
-        "shiki": "^2.1.0",
+        "shiki": "^4.5.0",
         "tsx": "^4.19.2",
-        "typescript": "^5.7.3",
-        "vite": "^5.4.21",
+        "typescript": "6.0.3",
+        "vite": "^8.3.5",
         "vitepress": "^1.6.4",
-        "vitest": "^2.1.9",
+        "vitest": "^5.0.5",
         "yaml": "^2.7.0",
-        "zod": "^3.24.1"
+        "zod": "^4.6.7"
     }
 }
