@@ -34,7 +34,11 @@ jobs:
         name: Build the static site
         runs-on: ubuntu-latest
         steps:
+            # The changelog is read from the history, so the checkout must
+            # carry it; a shallow clone would publish a page with one entry.
             - uses: actions/checkout@v7
+              with:
+                  fetch-depth: 0
 
             - name: Work out the address of the site
               id: address
