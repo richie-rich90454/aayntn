@@ -1,0 +1,13 @@
+{
+    "updated": null,
+    "required": 0,
+    "complete": 0,
+    "taggedTasks": 0,
+    "totalTasks": 0,
+    "divisions": [
+        { "id": "bronze", "label": "Bronze", "required": 0, "complete": 0, "taggedTasks": 0, "totalTasks": 0 },
+        { "id": "silver", "label": "Silver", "required": 0, "complete": 0, "taggedTasks": 0, "totalTasks": 0 },
+        { "id": "gold", "label": "Gold", "required": 0, "complete": 0, "taggedTasks": 0, "totalTasks": 0 },
+        { "id": "platinum", "label": "Platinum", "required": 0, "complete": 0, "taggedTasks": 0, "totalTasks": 0 }
+    ]
+}
