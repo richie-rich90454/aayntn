@@ -8,10 +8,14 @@
  * The worker is deliberately simple. It never intercepts a navigation request
  * with a stale document, because a stale lesson is worse than no lesson, and
  * it never caches a response that reports an error.
+ *
+ * Every address is built from the directory that holds this file, because the
+ * site may be published under a path rather than at the root of a domain.
  */
 
-const CACHE = "aayntn-v1";
-const SHELL = ["/", "/index.html", "/fonts/fonts.css"];
+const BASE = new URL("./", self.location).pathname;
+const CACHE = "aayntn-v2";
+const SHELL = [BASE, `${BASE}index.html`, `${BASE}fonts/fonts.css`];
 
 self.addEventListener("install", (event) => {
     event.waitUntil(
@@ -54,7 +58,9 @@ self.addEventListener("fetch", (event) => {
                     return response;
                 })
                 .catch(() =>
-                    caches.match(request).then((cached) => cached || caches.match("/index.html")),
+                    caches
+                        .match(request)
+                        .then((cached) => cached || caches.match(`${BASE}index.html`)),
                 ),
         );
         return;
