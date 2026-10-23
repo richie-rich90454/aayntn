@@ -34,8 +34,8 @@ function menuId(index: number): string {
 
 function isLinkActive(link: string): boolean {
     const path = pagePath(route.path);
-    if (path === link || path === `${link}/`) return true;
-    return path.startsWith(link.endsWith("/") ? link : `${link}/`);
+    const target = pagePath(link);
+    return path === target || path.startsWith(`${target}/`);
 }
 
 const activeGroup = computed(() => {
