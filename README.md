@@ -10,6 +10,8 @@
 
 The site is a set of static files. Every lesson is an ordinary Markdown file, every implementation is a real source file in the language it claims to be, and every interactive demonstration is driven by a deterministic TypeScript reference implementation rather than by hand-drawn animation.
 
+![Binary search, recorded from the laboratory](assets/binary-search.gif)
+
 ## What is in the box
 
 - **A prerequisite academy** that fills the gap between AP Computer Science A and rigorous algorithmic problem solving: the execution model, complexity analysis, discrete mathematics, data structures, the language transition and contest literacy.
