@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useData, withBase } from "vitepress";
-import { repositoryFile } from "../../repository";
+import { REPOSITORY_URL, repositoryFile } from "../../repository";
 
 const { theme } = useData();
 
@@ -10,47 +10,52 @@ const columns = computed(() => [
         heading: "Learn",
         links: [
             { text: "Start here", href: withBase("/start/") },
-            { text: "From AP Computer Science A", href: withBase("/start/from-ap-csa/") },
-            { text: "The curriculum", href: withBase("/curriculum/") },
-            { text: "Bronze to Platinum", href: withBase("/curriculum/bronze/") },
+            { text: "Curriculum", href: withBase("/curriculum/") },
+            { text: "Practice", href: withBase("/practice/") },
+            { text: "Contest", href: withBase("/contest/") },
         ],
     },
     {
         heading: "Reference",
         links: [
-            { text: "The encyclopedia", href: withBase("/algorithms/") },
-            { text: "The laboratory", href: withBase("/laboratory/") },
-            { text: "The mathematics", href: withBase("/mathematics/") },
-            { text: "The practice catalog", href: withBase("/practice/") },
+            { text: "Algorithms", href: withBase("/algorithms/") },
+            { text: "Mathematics", href: withBase("/mathematics/") },
+            { text: "Templates", href: withBase("/templates/") },
+            { text: "Languages", href: withBase("/languages/") },
         ],
     },
     {
-        heading: "Build",
+        heading: "Tools",
         links: [
-            { text: "The language centers", href: withBase("/languages/") },
-            { text: "The template library", href: withBase("/templates/") },
-            { text: "The competition rules", href: withBase("/reference/usaco-rules") },
-            { text: "The pre-contest checklist", href: withBase("/reference/contest-checklist") },
+            { text: "Laboratory", href: withBase("/laboratory/") },
+            { text: "Debugging", href: withBase("/debugging/") },
+            { text: "My progress", href: withBase("/progress/") },
+            { text: "Coverage", href: withBase("/coverage/") },
         ],
     },
     {
-        heading: "The project",
+        heading: "About",
         links: [
-            { text: "About this encyclopedia", href: withBase("/about") },
-            { text: "Contributing", href: repositoryFile("CONTRIBUTING.md") },
-            { text: "Code of conduct", href: repositoryFile("CODE_OF_CONDUCT.md") },
-            { text: "Accessibility", href: repositoryFile("ACCESSIBILITY.md") },
-            { text: "Trademarks and affiliation", href: repositoryFile("TRADEMARKS.md") },
-            { text: "Security policy", href: repositoryFile("SECURITY.md") },
+            { text: "About", href: withBase("/about") },
+            { text: "Download", href: withBase("/download/") },
+            { text: "Glossary", href: withBase("/reference/glossary") },
         ],
     },
 ]);
+
+const documents = [
+    { text: "Contributing", file: "CONTRIBUTING.md" },
+    { text: "Code of conduct", file: "CODE_OF_CONDUCT.md" },
+    { text: "Accessibility", file: "ACCESSIBILITY.md" },
+    { text: "Trademarks", file: "TRADEMARKS.md" },
+    { text: "Security", file: "SECURITY.md" },
+];
 </script>
 
 <template>
     <footer class="aayntn-footer">
         <div class="aayntn-footer__inner">
-            <div>
+            <div class="aayntn-footer__lede">
                 <div class="aayntn-footer__brand">A.A.Y.N.T.N.</div>
                 <p class="aayntn-footer__tagline">
                     All Algorithms You Need to Know. A competitive programming encyclopedia built
@@ -59,19 +64,34 @@ const columns = computed(() => [
                 </p>
             </div>
 
-            <div v-for="column in columns" :key="column.heading">
-                <div class="aayntn-footer__heading">{{ column.heading }}</div>
+            <nav
+                v-for="column in columns"
+                :key="column.heading"
+                class="aayntn-footer__column"
+                :aria-label="`${column.heading} links`"
+            >
+                <h2 class="aayntn-footer__heading">{{ column.heading }}</h2>
                 <ul class="aayntn-footer__list">
                     <li v-for="link in column.links" :key="link.href">
                         <a :href="link.href">{{ link.text }}</a>
                     </li>
                 </ul>
-            </div>
+            </nav>
         </div>
 
         <div class="aayntn-footer__legal">
-            <p>{{ theme.footer?.message }}</p>
-            <p>{{ theme.footer?.copyright }}</p>
+            <div class="aayntn-footer__legal-inner">
+                <p class="aayntn-footer__licence">{{ theme.footer?.copyright }}</p>
+                <p class="aayntn-footer__trademark">{{ theme.footer?.message }}</p>
+                <ul class="aayntn-footer__documents">
+                    <li v-for="document in documents" :key="document.file">
+                        <a :href="repositoryFile(document.file)">{{ document.text }}</a>
+                    </li>
+                </ul>
+                <p class="aayntn-footer__source">
+                    <a :href="REPOSITORY_URL">The source and its history on GitHub</a>
+                </p>
+            </div>
         </div>
     </footer>
 </template>
