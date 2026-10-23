@@ -421,9 +421,9 @@ export default defineConfig({
     ...(HOSTNAME
         ? {
               sitemap: {
-                  hostname: HOSTNAME,
+                  hostname: `${HOSTNAME.replace(/\/+$/, "")}${BASE.replace(/\/+$/, "")}`,
                   transformItems(items: { url: string }[]) {
-                      return items.filter((item) => !item.url.includes("/implementations/"));
+                      return items.filter((item) => !item.url.includes("implementations/"));
                   },
               },
           }
