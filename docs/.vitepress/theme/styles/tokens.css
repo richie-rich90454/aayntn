@@ -43,6 +43,24 @@
     --color-observation: var(--color-gold);
     --color-violet-role: var(--color-violet);
 
+    /* Interactive states ------------------------------------------------ */
+    /* One field and one ink for every hover, so no component invents its
+       own and nothing ends up purple on a blue field. */
+    --hover-surface: #eef1f8;
+    --hover-surface-strong: #dfe5f1;
+    --hover-ink: var(--color-black);
+    --hover-surface-inverse: rgba(255, 255, 255, 0.1);
+    --hover-ink-inverse: var(--color-white);
+    --hover-accent-field: var(--color-gold);
+    --hover-accent-ink: var(--color-black);
+    --hover-primary-field: var(--color-primary-strong);
+    --hover-primary-ink: var(--color-white);
+    --visited-ink: var(--text-link);
+    --focus-ring: var(--color-cobalt);
+    --focus-ring-inverse: var(--color-gold);
+    --state-selected-field: var(--color-violet);
+    --state-selected-ink: var(--color-white);
+
     /* ---------------------------------------------------------------- */
     /* Surfaces                                                          */
     /* ---------------------------------------------------------------- */
@@ -99,8 +117,13 @@
     /* ---------------------------------------------------------------- */
     /* Geometry                                                          */
     /* ---------------------------------------------------------------- */
-    --radius: 0px;
-    --radius-field: 0px;
+    /*
+     * The one radius. Every bordered surface and control reads this token, so
+     * the whole site is tuned from a single value.
+     */
+    --radius: 5px;
+    --radius-field: var(--radius);
+    --radius-pill: 999px;
 
     --space-1: 4px;
     --space-2: 8px;
@@ -171,32 +194,69 @@ html.dark {
        white text that stands on them has to stay legible. */
     --color-primary: #4a6ac9;
     --color-primary-strong: #3a58a8;
+    /* The raw cobalt is read by components that predate the role token. On a
+       near-black page it takes the same value as the role, so a cobalt field
+       and a primary field can never disagree in the dark. */
+    --color-cobalt: #4a6ac9;
     --color-gold: #e8bd63;
     --color-gold-bright: #f0c458;
     --color-vermilion: #e07a70;
     --color-emerald: #25543f;
     --color-oxblood: #c98bab;
-    --color-violet: #9d84de;
+    /* A field that carries white text. It keeps the light-mode depth instead
+       of the decorative lavender, which is not dark enough for a label. */
+    --color-violet: #5b3aa0;
     --color-parchment: #2a2419;
     --color-code: #0f1319;
     --color-highlight: #3d3115;
     --color-invalid-soft: #3d1a19;
+
+    --hover-surface: #1e2531;
+    --hover-surface-strong: #27303f;
+    --hover-ink: var(--text-primary);
+    --hover-surface-inverse: rgba(255, 255, 255, 0.12);
+    --hover-ink-inverse: var(--color-white);
+    --hover-accent-field: var(--color-gold);
+    --hover-accent-ink: var(--color-black);
+    --hover-primary-field: var(--color-primary-strong);
+    --hover-primary-ink: var(--color-white);
+    --visited-ink: var(--text-link);
+    --focus-ring: #8fadf5;
+    --focus-ring-inverse: var(--color-gold-bright);
+    /* A field that carries white text. The light lavender that the page uses
+       for decoration is not dark enough for a label. */
+    --state-selected-field: #6b46c7;
+    --state-selected-ink: var(--color-white);
 }
 
 /* -------------------------------------------------------------------- */
 /* Division identities                                                  */
 /* -------------------------------------------------------------------- */
 
-html {
+html,
+.aayntn-appearance-light {
     --division-bronze: #a34a20;
     --division-silver: #5c6675;
     --division-gold: #a8790a;
     --division-platinum: #593399;
+    --division-bronze-hover: #8b3c17;
+    --division-silver-hover: #4e5765;
+    --division-gold-hover: #c08a0b;
+    --division-platinum-hover: #4a2a82;
+    --division-bronze-hover-ink: var(--color-white);
+    --division-silver-hover-ink: var(--color-white);
+    --division-gold-hover-ink: var(--color-black);
+    --division-platinum-hover-ink: var(--color-white);
 }
 
-html.dark {
+html.dark,
+.aayntn-appearance-dark {
     --division-bronze: #b3551f;
     --division-silver: #6a7383;
     --division-gold: #b8860c;
     --division-platinum: #6639ad;
+    --division-bronze-hover: #8f3f18;
+    --division-silver-hover: #515a68;
+    --division-gold-hover: #cf9a12;
+    --division-platinum-hover: #502c88;
 }
