@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
+import { withBase } from "vitepress";
 import lessons from "../../../data/generated/lessons.json";
 import problems from "../../../data/generated/problems.json";
 import {
@@ -210,7 +211,9 @@ async function resetProgress() {
                 :key="lesson.id"
                 class="aayntn-progress__row"
             >
-                <a class="aayntn-progress__title" :href="lesson.href">{{ lesson.title }}</a>
+                <a class="aayntn-progress__title" :href="withBase(lesson.href)">
+                    {{ lesson.title }}
+                </a>
                 <select
                     class="aayntn-filter"
                     :value="lessonStatus[lesson.id]"
