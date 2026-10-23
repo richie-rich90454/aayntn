@@ -2,6 +2,7 @@
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { useData, withBase } from "vitepress";
 import type { AlgorithmEntry } from "../../../data/types";
+import algorithms from "../../../data/generated/algorithms.json";
 import { lookupLesson } from "../../composables/useReadingOrder";
 import CopyLinkButton from "./CopyLinkButton.vue";
 import LessonStatus from "./LessonStatus.vue";
