@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useData } from "vitepress";
+import { useData, withBase } from "vitepress";
 import { repositoryFile } from "../../repository";
 
 const { theme } = useData();
@@ -9,34 +9,34 @@ const columns = computed(() => [
     {
         heading: "Learn",
         links: [
-            { text: "Start here", href: "/start/" },
-            { text: "From AP Computer Science A", href: "/start/from-ap-csa/" },
-            { text: "The curriculum", href: "/curriculum/" },
-            { text: "Bronze to Platinum", href: "/curriculum/bronze/" },
+            { text: "Start here", href: withBase("/start/") },
+            { text: "From AP Computer Science A", href: withBase("/start/from-ap-csa/") },
+            { text: "The curriculum", href: withBase("/curriculum/") },
+            { text: "Bronze to Platinum", href: withBase("/curriculum/bronze/") },
         ],
     },
     {
         heading: "Reference",
         links: [
-            { text: "The encyclopedia", href: "/algorithms/" },
-            { text: "The laboratory", href: "/laboratory/" },
-            { text: "The mathematics", href: "/mathematics/" },
-            { text: "The practice catalog", href: "/practice/" },
+            { text: "The encyclopedia", href: withBase("/algorithms/") },
+            { text: "The laboratory", href: withBase("/laboratory/") },
+            { text: "The mathematics", href: withBase("/mathematics/") },
+            { text: "The practice catalog", href: withBase("/practice/") },
         ],
     },
     {
         heading: "Build",
         links: [
-            { text: "The language centers", href: "/languages/" },
-            { text: "The template library", href: "/templates/" },
-            { text: "The competition rules", href: "/reference/usaco-rules" },
-            { text: "The pre-contest checklist", href: "/reference/contest-checklist" },
+            { text: "The language centers", href: withBase("/languages/") },
+            { text: "The template library", href: withBase("/templates/") },
+            { text: "The competition rules", href: withBase("/reference/usaco-rules") },
+            { text: "The pre-contest checklist", href: withBase("/reference/contest-checklist") },
         ],
     },
     {
         heading: "The project",
         links: [
-            { text: "About this encyclopedia", href: "/about/" },
+            { text: "About this encyclopedia", href: withBase("/about") },
             { text: "Contributing", href: repositoryFile("CONTRIBUTING.md") },
             { text: "Code of conduct", href: repositoryFile("CODE_OF_CONDUCT.md") },
             { text: "Accessibility", href: repositoryFile("ACCESSIBILITY.md") },
