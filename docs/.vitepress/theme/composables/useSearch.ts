@@ -18,6 +18,7 @@ import {
     type SearchEntry,
     type Subject,
 } from "../../data/types";
+import lessonList from "../../data/generated/lessons.json";
 
 export type SearchGroupId = "lessons" | "laboratories" | "problems" | "reference";
 
@@ -148,15 +149,12 @@ export function ensureIndex(): Promise<void> {
         loading.value = true;
         error.value = null;
         try {
-            const [response, lessonsModule] = await Promise.all([
-                fetch(`${import.meta.env.BASE_URL}search-index.json`),
-                import("../../data/generated/lessons.json"),
-            ]);
+            const response = await fetch(`${import.meta.env.BASE_URL}search-index.json`);
             if (!response.ok) {
                 throw new Error(`The search index answered with ${response.status}.`);
             }
             const payload = (await response.json()) as { entries: SearchEntry[] };
-            const lessons = lessonsModule.default as unknown as LessonEntry[];
+            const lessons = lessonList as unknown as LessonEntry[];
             const metadata = new Map(lessons.map((lesson) => [lesson.id, lesson]));
 
             items.value = payload.entries.map((entry) => enrich(entry, metadata));
