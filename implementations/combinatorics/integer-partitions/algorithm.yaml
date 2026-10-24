@@ -1,0 +1,100 @@
+algorithm: combinatorics.integer-partitions
+title: Integer partitions
+summary: Count the ways to write n as a sum of positive integers with Euler's recurrence, whose terms sit at the generalized pentagonal numbers and whose sign alternates in pairs.
+subject: combinatorics
+divisions: [silver, gold]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.complexity, combinatorics.binomial-coefficients]
+    recommended:
+        [
+            combinatorics.generating-functions,
+            number-theory.modular-arithmetic,
+            dynamic-programming.0-1-knapsack,
+        ]
+complexity:
+    time: "O(n sqrt n)"
+    space: "O(n)"
+assumptions:
+    - A partition is an unordered multiset of positive parts, so the order of the parts is not counted.
+    - The answer is reported modulo 1000000007, so every update is performed in that residue class.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of integer partitions of n modulo 1000000007."
+      time: "O(n sqrt n)"
+      auxiliarySpace: "O(n) for the partition table of n + 1 entries"
+      status: unverified
+      inputs: "One integer n, with 0 <= n <= 100000."
+      outputs: "One line, holding p(n) modulo 1000000007."
+      notes: "The table is a calloc array of n + 1 ints, so the largest stated input needs 400 KB. The offsets and the loop index use long long, because k(3k - 1) is formed before the division and can overflow a 32-bit product on a wider input range."
+      operations: [count-partitions, pentagonal-recurrence]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of integer partitions of n modulo 1000000007."
+      time: "O(n sqrt n)"
+      auxiliarySpace: "O(n) for the partition table of n + 1 entries"
+      status: unverified
+      inputs: "One integer n, with 0 <= n <= 100000."
+      outputs: "One line, holding p(n) modulo 1000000007."
+      notes: "The table is a std::vector<int>, and the running total is a long long so that two residues can be added before the conditional subtraction. The stream is untied, because the program performs no interleaved input and output."
+      operations: [count-partitions, pentagonal-recurrence]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of integer partitions of n modulo 1000000007."
+      time: "O(n sqrt n)"
+      auxiliarySpace: "O(n) for the partition table of n + 1 entries"
+      status: unverified
+      inputs: "One integer n, with 0 <= n <= 100000."
+      outputs: "One line, holding p(n) modulo 1000000007."
+      notes: "The table is an int array and the running total is a long, because a sum of two residues can exceed the int range even though the final residue fits. The pentagonal offsets are formed in long arithmetic for the same reason."
+      operations: [count-partitions, pentagonal-recurrence]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of integer partitions of n modulo 1000000007."
+      time: "O(n sqrt n)"
+      auxiliarySpace: "O(n) for the partition table of n + 1 entries"
+      status: unverified
+      inputs: "One integer n, with 0 <= n <= 100000."
+      outputs: "One line, holding p(n) modulo 1000000007."
+      notes: "The whole input is read once, because a per-token read is the slowest part of a Python solution. The table is a list of ints, and the arithmetic needs no explicit width because Python integers are arbitrary precision."
+      operations: [count-partitions, pentagonal-recurrence]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of integer partitions of n modulo 1000000007."
+      time: "O(n sqrt n)"
+      auxiliarySpace: "O(n) for the partition table of n + 1 entries"
+      status: unverified
+      inputs: "One integer n, with 0 <= n <= 100000."
+      outputs: "One line, holding p(n) modulo 1000000007."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The variant gives every Read exactly one argument and uses no IOResult, so it compiles under pas2js, and it uses LongInt throughout because no value or offset exceeds the 32-bit range for the stated input."
+      operations: [count-partitions, pentagonal-recurrence]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of integer partitions of n modulo 1000000007."
+      time: "O(n sqrt n)"
+      auxiliarySpace: "O(n) for the partition table of n + 1 entries"
+      status: unverified
+      inputs: "One integer n, with 0 <= n <= 100000."
+      outputs: "One line, holding p(n) modulo 1000000007."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The table is an Int32Array, which holds every residue because the modulus is below 2^31, and the running total is a Number, which represents the intermediate sums exactly."
+      operations: [count-partitions, pentagonal-recurrence]

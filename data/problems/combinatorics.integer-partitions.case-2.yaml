@@ -1,0 +1,30 @@
+id: project-euler.76.counting-summations
+title: Counting Summations
+source: Project Euler
+contest: Project Euler
+division: silver
+url: https://projecteuler.net/problem=76
+techniques:
+    - combinatorics.integer-partitions
+prerequisites:
+    - foundations.complexity
+    - number-theory.modular-arithmetic
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - The input is fixed at n = 100, and the sum must use at least two positive integers.
+    - The exact answer is 190569291, so no modular reduction is needed.
+    - The partition 100 by itself is excluded, so the answer is p(100) - 1 rather than p(100).
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - p(100) counts every partition of 100, including the single part 100.
+    - Subtract one from p(100) to enforce at least two parts.
+    - The pentagonal recurrence fills the whole table with fewer than two thousand term visits.
+discussion: >-
+    The at-least-two condition is the only twist, and it removes exactly one partition, the one whose only part is 100. The count itself is p(100) = 190569292, which the pentagonal recurrence produces in one pass over the values from 1 to 100. Enumerating the partitions instead would visit every one of those 190 million objects, which is the reason the recurrence exists. The exact value is small enough that a 64-bit integer holds the result, but the recurrence is already the modular form, so only the final subtraction needs care.
+related:
+    - hdu.1028.ignatius-and-the-princess-iii
+    - project-euler.78.coin-partitions

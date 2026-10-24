@@ -1,0 +1,30 @@
+id: project-euler.78.coin-partitions
+title: Coin Partitions
+source: Project Euler
+contest: Project Euler
+division: gold
+url: https://projecteuler.net/problem=78
+techniques:
+    - combinatorics.integer-partitions
+prerequisites:
+    - foundations.complexity
+    - number-theory.modular-arithmetic
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The problem has no input; it asks for the least n with p(n) divisible by 1000000.
+    - Only the residue modulo 1000000 is needed, so the recurrence can be evaluated modulo 1000000 instead of with big integers.
+    - The answer is 55374, and p(55374) has more than 250 decimal digits.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Divisibility by 1000000 depends only on the residue, so compute p(n) modulo 1000000.
+    - Compute the values in increasing order and stop at the first zero residue.
+    - p(0) = 1, so the scan for a zero must start at n = 1.
+discussion: >-
+    The value p(55374) is far too large to store exactly, but the question asks only whether it is divisible by one million. That is a statement about the residue, and every operation in the pentagonal recurrence is an addition or a subtraction, so the whole computation can be carried out modulo one million. The scan starts at n = 1 because p(0) = 1, and it stops at the first zero. Using the problem's stated divisor as the modulus is the entire insight; using 1000000007 instead would produce residues that never answer the divisibility question.
+related:
+    - hdu.1028.ignatius-and-the-princess-iii
+    - project-euler.76.counting-summations
