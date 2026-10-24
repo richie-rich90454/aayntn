@@ -271,3 +271,35 @@ algorithms:
       title: Scheduling with deadlines and release times
       subject: greedy
       manifest: implementations/greedy/scheduling-deadlines-and-release-times/algorithm.yaml
+    - id: advanced.bitset-optimization
+      title: Bitset optimization
+      subject: advanced
+      manifest: implementations/advanced/bitset-optimization/algorithm.yaml
+    - id: advanced.persistent-data-structures
+      title: Persistent data structures
+      subject: advanced
+      manifest: implementations/advanced/persistent-data-structures/algorithm.yaml
+    - id: advanced.randomized-algorithms
+      title: Randomized algorithms
+      subject: advanced
+      manifest: implementations/advanced/randomized-algorithms/algorithm.yaml
+    - id: arrays.prefix-sums-over-other-operators
+      title: Prefix sums over other operators
+      subject: arrays
+      manifest: implementations/arrays/prefix-sums-over-other-operators/algorithm.yaml
+    - id: enumeration.complete-search
+      title: Complete search as a subject
+      subject: enumeration
+      manifest: implementations/enumeration/complete-search/algorithm.yaml
+    - id: enumeration.iterative-deepening
+      title: Iterative deepening
+      subject: enumeration
+      manifest: implementations/enumeration/iterative-deepening/algorithm.yaml
+    - id: foundations.amortized-analysis
+      title: Amortized analysis
+      subject: foundations
+      manifest: implementations/foundations/amortized-analysis/algorithm.yaml
+    - id: greedy.feasibility-oracle
+      title: Greedy with a feasibility oracle
+      subject: greedy
+      manifest: implementations/greedy/feasibility-oracle/algorithm.yaml

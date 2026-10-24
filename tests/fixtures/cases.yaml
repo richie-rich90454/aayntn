@@ -1980,3 +1980,251 @@ greedy.scheduling-deadlines-and-release-times:
           3 1000000000
       expected: |
           3000000000
+
+advanced.bitset-optimization:
+    - name: distinct subset sums below a small limit
+      input: |
+          5 10
+          2 3 5 6 7
+      expected: |
+          9
+    - name: a limit of zero keeps only the empty subset
+      input: |
+          3 0
+          4 5 6
+      expected: |
+          1
+    - name: word-boundary shifts, a duplicate, and weights above the limit
+      input: |
+          5 70
+          26 32 71 32 6
+      expected: |
+          8
+
+advanced.persistent-data-structures:
+    - name: pushes, a branch, pops, and empty queries share nodes
+      input: |
+          12
+          1 0 5
+          1 1 7
+          3 2
+          2 2
+          3 3
+          3 1
+          2 1
+          3 4
+          2 0
+          3 5
+          1 4 9
+          3 6
+      expected: |
+          7
+          5
+          5
+          -1
+          -1
+          9
+    - name: two branches from one version stay independent
+      input: |
+          12
+          1 0 1
+          1 1 2
+          1 1 3
+          3 2
+          3 3
+          2 2
+          2 3
+          3 4
+          3 5
+          3 1
+          2 5
+          3 6
+      expected: |
+          2
+          3
+          1
+          1
+          1
+          -1
+    - name: an edge case with no pushes, repeated pops of empty versions, and a negative value
+      input: |
+          10
+          3 0
+          2 0
+          3 1
+          3 0
+          1 1 -7
+          2 2
+          3 3
+          3 2
+          2 3
+          3 4
+      expected: |
+          -1
+          -1
+          -1
+          -1
+          -7
+          -1
+
+advanced.randomized-algorithms:
+    - name: an unsorted array
+      input: |
+          5
+          5 3 8 1 4
+      expected: |
+          1 3 4 5 8
+          10
+    - name: duplicate values
+      input: |
+          6
+          2 2 1 1 3 3
+      expected: |
+          1 1 2 2 3 3
+          10
+    - name: a single element
+      input: |
+          1
+          7
+      expected: |
+          7
+          0
+
+arrays.prefix-sums-over-other-operators:
+    - name: zeros split the range
+      input: |
+          6
+          3 0 4 5 0 2
+          5
+          1 6
+          3 4
+          1 1
+          2 5
+          6 6
+      expected: |
+          0
+          20
+          3
+          0
+          2
+    - name: negative values reduced modulo the prime
+      input: |
+          4
+          -1 2 -3 4
+          5
+          1 4
+          2 3
+          1 3
+          4 4
+          2 2
+      expected: |
+          24
+          1000000001
+          6
+          4
+          2
+    - name: edge case where multiples of the modulus become zeros
+      input: |
+          3
+          1000000007 -1000000007 5
+          4
+          1 1
+          2 3
+          3 3
+          1 3
+      expected: |
+          0
+          0
+          5
+          0
+
+enumeration.complete-search:
+    - name: two subsets reach the target
+      input: |
+          4
+          1 2 3 4
+          5
+      expected: |
+          2
+    - name: duplicate and negative values are counted by position
+      input: |
+          4
+          1 1 -1 0
+          1
+      expected: |
+          6
+    - name: edge case with no values and an empty subset
+      input: |
+          0
+          0
+      expected: |
+          1
+
+enumeration.iterative-deepening:
+    - name: a chain is found only at the last limit
+      input: |
+          7 6
+          1 7
+          1 2
+          2 3
+          3 4
+          4 5
+          5 6
+          6 7
+      expected: |
+          6 28
+    - name: a branching graph repeats the early levels
+      input: |
+          6 6
+          1 6
+          1 2
+          1 3
+          2 4
+          3 4
+          4 5
+          5 6
+      expected: |
+          4 24
+    - name: edge case where the start is already the target
+      input: |
+          1 0
+          1 1
+      expected: |
+          0 1
+
+foundations.amortized-analysis:
+    - name: thirteen pushes resize at one, two, four, and eight
+      input: |
+          13
+      expected: |
+          15 16
+    - name: one million pushes land just below the next power of two
+      input: |
+          1000000
+      expected: |
+          1048575 1048576
+    - name: no pushes leave the initial capacity untouched
+      input: |
+          0
+      expected: |
+          0 1
+
+greedy.feasibility-oracle:
+    - name: unsorted weights with three items fitting
+      input: |
+          5 12
+          4 2 9 1 7
+      expected: |
+          3
+    - name: exact capacity stops at two items
+      input: |
+          4 10
+          6 4 3 7
+      expected: |
+          2
+    - name: zero capacity with zero-weight items
+      input: |
+          4 0
+          0 0 1 0
+      expected: |
+          3

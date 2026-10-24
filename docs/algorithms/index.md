@@ -33,11 +33,11 @@ A second reason runs deeper. The recognition of a problem is what actually fails
 
 | Subject | Techniques it contains | Page |
 | --- | --- | --- |
-| Foundations and complexity | Binary representation, Complexity analysis, Recursion, Sorting | [Foundations and complexity](/algorithms/foundations/) |
-| Enumeration and searching | Backtracking, Branch and bound, Gray codes, Meet in the middle, Permutations, Subset enumeration | [Enumeration and searching](/algorithms/enumeration/) |
+| Foundations and complexity | Amortized analysis, Binary representation, Complexity analysis, Recursion, Sorting | [Foundations and complexity](/algorithms/foundations/) |
+| Enumeration and searching | Backtracking, Branch and bound, Complete search, Gray codes, Iterative deepening, Meet in the middle, Permutations, Subset enumeration | [Enumeration and searching](/algorithms/enumeration/) |
 | Searching | Binary search on the answer, Binary search, Parametric search, Sliding window, Search over a sorted range of indices, Ternary search, The individual two-pointer patterns, Two pointers | [Searching](/algorithms/searching/) |
-| Greedy methods | Interval scheduling, Sorting by several keys, Scheduling with deadlines and release times | [Greedy methods](/algorithms/greedy/) |
-| Arrays and sequences | Coordinate compression, Difference arrays, Monotonic queue, Monotonic stack, Prefix sums, Range hashing, Subarray sums, Two-dimensional difference arrays, Two-dimensional prefix sums, Two pointers on an array, Sliding window maximum | [Arrays and sequences](/algorithms/arrays/) |
+| Greedy methods | Greedy with a feasibility oracle, Interval scheduling, Sorting by several keys, Scheduling with deadlines and release times | [Greedy methods](/algorithms/greedy/) |
+| Arrays and sequences | Coordinate compression, Difference arrays, Monotonic queue, Monotonic stack, Prefix sums over other operators, Prefix sums, Range hashing, Subarray sums, Two-dimensional difference arrays, Two-dimensional prefix sums, Two pointers on an array, Sliding window maximum | [Arrays and sequences](/algorithms/arrays/) |
 | Range query structures | Fenwick tree, Implicit segment trees, Lazy propagation, Merge sort trees, Mo's algorithm, Persistent segment trees, Segment tree beats, Segment tree, Sparse table, Square-root decomposition, Wavelet trees | [Range query structures](/algorithms/range-queries/) |
 | Graphs and shortest paths | 0-1 BFS, Articulation points, Bellman-Ford, Breadth-first search, Bipartite matching, The two-coloring test for a bipartite graph, Bridges, Depth-first search, Dijkstra's algorithm, Dominator trees, Disjoint set union, Euler tours in graphs, Floyd-Warshall and all-pairs shortest paths, The Hungarian algorithm, Johnson's algorithm, Minimum cost flow, Minimum cut, Minimum spanning tree, Graph representation, Strongly connected components, Topological sort | [Graphs and shortest paths](/algorithms/graphs/) |
 | Trees and decompositions | Binary lifting, Centroid decomposition, Dynamic trees, Euler tour for trees, Heavy-light decomposition, Lowest common ancestor, Rerooting, Small-to-large merging, Tree dynamic programming, Tree hashing, Virtual trees | [Trees and decompositions](/algorithms/trees/) |
@@ -46,7 +46,7 @@ A second reason runs deeper. The recognition of a problem is what actually fails
 | Number theory | Chinese remainder theorem, The discrete logarithm, Euler's totient function and Euler's theorem, The extended Euclidean algorithm, The fast Fourier transform, Matrix exponentiation, Miller-Rabin primality test, Modular arithmetic, The number-theoretic transform, Pollard's rho, Prime factorization, Sieve of Eratosthenes | [Number theory](/algorithms/number-theory/) |
 | Combinatorics | Binomial coefficients, Counting dynamic programming, Generating functions, Inclusion and exclusion, Integer partitions, Multinomial coefficients and the hypergeometric distribution, The reflection principle, Stars and bars | [Combinatorics](/algorithms/combinatorics/) |
 | Computational geometry | Closest pair, Convex hull, Integer geometry, K-D trees, Point in polygon, Robust predicates, Rotating calipers, The smallest enclosing circle, Sweep line | [Computational geometry](/algorithms/geometry/) |
-| Advanced algorithms and special techniques | Berlekamp-Massey, Offline dynamic connectivity, Parallel binary search, Quickselect and randomized selection, The rollback disjoint set union, Game theory and Sprague-Grundy theory, XOR bases | [Advanced algorithms and special techniques](/algorithms/advanced/) |
+| Advanced algorithms and special techniques | Berlekamp-Massey, Bitset optimization, Offline dynamic connectivity, Parallel binary search, Persistent data structures, Quickselect and randomized selection, Randomized algorithms, The rollback disjoint set union, Game theory and Sprague-Grundy theory, XOR bases | [Advanced algorithms and special techniques](/algorithms/advanced/) |
 
 <!-- aayntn:subjects:end -->
 
@@ -59,9 +59,12 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Technique | Time | Space | Requires | Article |
 | --- | --- | --- | --- | --- |
 | Berlekamp-Massey | O(n^2) | O(n) | `number-theory.modular-arithmetic` | [Berlekamp-Massey](/algorithms/advanced/berlekamp-massey) |
+| Bitset optimization | O(nW / 32) | O(W / 32) | `foundations.binary-representation` | [Bitset optimization](/algorithms/advanced/bitset-optimization) |
 | Offline dynamic connectivity | O(q log q log n) | O(n + q log q) | `graphs.dsu` | [Offline dynamic connectivity](/algorithms/advanced/offline-dynamic-connectivity) |
 | Parallel binary search | O((N + Q) log^2 N) | O(N + Q) | `searching.binary-search` | [Parallel binary search](/algorithms/advanced/parallel-binary-search) |
+| Persistent data structures | O(1) per operation on the persistent stack | O(q) for q operations, one node per push | `foundations.complexity` | [Persistent data structures](/algorithms/advanced/persistent-data-structures) |
 | Quickselect and randomized selection | O(n) expected with a random pivot, O(n^2) worst case | O(1) auxiliary in the iterative form, O(n) stack in the worst recursive form | `foundations.sorting` | [Quickselect and randomized selection](/algorithms/advanced/quickselect) |
+| Randomized algorithms | O(n log n) expected comparisons, O(n^2) worst case | O(n) for the array, O(log n) expected recursion stack, O(n) in the worst case | `foundations.sorting` | [Randomized algorithms](/algorithms/advanced/randomized-algorithms) |
 | The rollback disjoint set union | O(log n) per find or union, O(1) per rollback | O(n + q) for the forest and its history | `graphs.dsu` | [The rollback disjoint set union](/algorithms/advanced/rollback-dsu) |
 | Game theory and Sprague-Grundy theory | O(M k + h) to tabulate the Grundy values up to the largest heap, where k moves are allowed | O(M + k) | `foundations.complexity` | [Game theory and Sprague-Grundy theory](/algorithms/advanced/sprague-grundy) |
 | XOR bases | O((n + q) log A) | O(log A) | `foundations.binary-representation` | [XOR bases](/algorithms/advanced/xor-bases) |
@@ -69,6 +72,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Difference arrays | O(n + q) | O(n) | `arrays.prefix-sums` | [Difference arrays](/algorithms/arrays/difference-arrays) |
 | Monotonic queue | O(n) amortized | O(k) for a window of size k, O(n) without a window | `foundations.complexity` | [Monotonic queue](/algorithms/arrays/monotonic-queue) |
 | Monotonic stack | O(n) | O(n) in the worst case | `foundations.complexity` | [Monotonic stack](/algorithms/arrays/monotonic-stack) |
+| Prefix sums over other operators | O(n + q) | O(n) | `arrays.prefix-sums` | [Prefix sums over other operators](/algorithms/arrays/prefix-sums-over-other-operators) |
 | Prefix sums | O(n + q) | O(n) | `foundations.complexity` | [Prefix sums](/algorithms/arrays/prefix-sums) |
 | Range hashing | O(n + q) | O(n) | `arrays.prefix-sums` | [Range hashing](/algorithms/arrays/range-hashing) |
 | Subarray sums | O(n) expected with a frequency map, O(n log n) without one | O(n) | `arrays.prefix-sums` | [Subarray sums](/algorithms/arrays/subarray-sums) |
@@ -99,10 +103,13 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Subset transforms | O(n 2^n) | O(2^n) | `foundations.complexity` | [Subset transforms](/algorithms/dynamic-programming/subset-transforms) |
 | Backtracking | O(b^d * t) in the worst case, far less with pruning | O(d + s) | `foundations.recursion` | [Backtracking](/algorithms/enumeration/backtracking) |
 | Branch and bound | O(b * V), where V is the number of surviving nodes | O(n) | `enumeration.backtracking` | [Branch and bound](/algorithms/enumeration/branch-and-bound) |
+| Complete search | O(n 2^n) for the subset contract, O(S c) for a candidate space of S candidates with a test of cost c | O(n) for the recursion, or O(1) beyond the input for a mask loop | `foundations.complexity` | [Complete search](/algorithms/enumeration/complete-search) |
 | Gray codes | O(n 2^n) | O(n) auxiliary | `foundations.binary-representation` | [Gray codes](/algorithms/enumeration/gray-codes) |
+| Iterative deepening | O(b^d) for branching factor b and solution depth d | O(d) auxiliary, plus O(n + m) for the graph | `foundations.recursion` | [Iterative deepening](/algorithms/enumeration/iterative-deepening) |
 | Meet in the middle | O(n 2^(n/2)) | O(2^(n/2)) | `enumeration.subset-enumeration` | [Meet in the middle](/algorithms/enumeration/meet-in-the-middle) |
 | Permutations | O(n * n!) | O(n) | `enumeration.backtracking` | [Permutations](/algorithms/enumeration/permutations) |
 | Subset enumeration | O(2^n) per mask, O(n 2^n) with the subsets materialized | O(1) per mask, O(n) per subset | `foundations.binary-representation` | [Subset enumeration](/algorithms/enumeration/subset-enumeration) |
+| Amortized analysis | O(n) total for n pushes, O(1) amortized per push | O(n) for the array | `foundations.complexity` | [Amortized analysis](/algorithms/foundations/amortized-analysis) |
 | Binary representation | O(1) per word operation | O(1) | `start.computational-foundations` | [Binary representation](/algorithms/foundations/binary-representation) |
 | Complexity analysis | a method, not an algorithm | a method, not an algorithm | `start.computational-foundations` | [Complexity analysis](/algorithms/foundations/complexity) |
 | Recursion | the cost of its recurrence | O(d) for the call stack | `start.computational-foundations` | [Recursion](/algorithms/foundations/recursion) |
@@ -137,6 +144,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Graph representation | O(V + E) to build | O(V + E) for an adjacency list | `foundations.complexity` | [Graph representation](/algorithms/graphs/representation) |
 | Strongly connected components | O(V + E) | O(V) for Tarjan, O(V + E) for Kosaraju | `graphs.representation` | [Strongly connected components](/algorithms/graphs/strongly-connected-components) |
 | Topological sort | O(V + E) | O(V) | `graphs.representation` | [Topological sort](/algorithms/graphs/topological-sort) |
+| Greedy with a feasibility oracle | O(n log n) | O(n) | `foundations.sorting` | [Greedy with a feasibility oracle](/algorithms/greedy/feasibility-oracle) |
 | Interval scheduling | O(n log n) | O(n) | `foundations.sorting` | [Interval scheduling](/algorithms/greedy/interval-scheduling) |
 | Sorting by several keys | O(n log n) | O(n) | `foundations.sorting` | [Sorting by several keys](/algorithms/greedy/multi-key-sorting) |
 | Scheduling with deadlines and release times | O(n log n) | O(n) | `foundations.sorting` | [Scheduling with deadlines and release times](/algorithms/greedy/scheduling-deadlines-and-release-times) |

@@ -9,7 +9,7 @@ techniques:
       name: Bitset optimization
       subject: advanced
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: advanced.matroids
       name: Matroids
@@ -34,7 +34,7 @@ techniques:
       name: Persistent data structures
       subject: advanced
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: advanced.quickselect
       name: Quickselect and randomized selection
@@ -47,7 +47,7 @@ techniques:
       name: Randomized algorithms
       subject: advanced
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: advanced.rollback-dsu
       name: The rollback disjoint set union
@@ -118,7 +118,7 @@ techniques:
       name: Prefix sums over other operators
       subject: arrays
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: arrays.range-hashing
       name: Range hashing
@@ -377,7 +377,7 @@ techniques:
       synonyms:
           - complete search
           - brute force
-      status: missing
+      status: published
       divisions: []
     - id: enumeration.constraint-propagation
       name: Constraint propagation
@@ -397,7 +397,7 @@ techniques:
       subject: enumeration
       synonyms:
           - IDDFS
-      status: missing
+      status: published
       divisions: []
     - id: enumeration.meet-in-the-middle
       name: Meet in the middle as its own article
@@ -428,7 +428,7 @@ techniques:
       name: Amortized analysis
       subject: foundations
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: foundations.binary-representation
       name: Binary representation
@@ -762,7 +762,7 @@ techniques:
       name: Greedy with a feasibility oracle
       subject: greedy
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: greedy.interval-scheduling
       name: Interval scheduling
