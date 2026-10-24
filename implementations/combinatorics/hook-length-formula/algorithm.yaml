@@ -1,0 +1,100 @@
+algorithm: combinatorics.hook-length-formula
+title: The hook-length formula
+summary: Count the standard Young tableaux of a shape by dividing the factorial of its cell count by the product of the hook lengths of its cells.
+subject: combinatorics
+divisions: [gold, platinum]
+importance: specialized-technique
+prerequisites:
+    required: [foundations.complexity, combinatorics.binomial-coefficients]
+    recommended:
+        [
+            number-theory.modular-arithmetic,
+            combinatorics.integer-partitions,
+            combinatorics.multinomial-coefficients,
+        ]
+complexity:
+    time: "O(n + w) for a diagram of n cells and width w, plus O(log M) for the inverse"
+    space: "O(k + w) for the row lengths and the column heights"
+assumptions:
+    - The row lengths are given in non-increasing order, so together they describe a Young diagram.
+    - The answer is reported modulo 1000000007, which is prime, and the number of cells is below the modulus, so every hook length is invertible.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the row lengths and prints the number of standard Young tableaux modulo 1000000007."
+      time: "O(n + w + log M)"
+      auxiliarySpace: "O(k + w) for the row lengths and the column heights"
+      status: unverified
+      inputs: "One integer k, then k non-increasing row lengths whose sum is n."
+      outputs: "One line, holding the number of standard Young tableaux of the shape modulo 1000000007."
+      notes: "The column heights are accumulated in one pass over the cells, so every hook length is available in constant time. The factorial is formed modulo the prime, the hook product is formed modulo the prime, and a single Fermat inverse divides them."
+      operations: [count-tableaux, compute-column-heights, modular-inverse]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the row lengths and prints the number of standard Young tableaux modulo 1000000007."
+      time: "O(n + w + log M)"
+      auxiliarySpace: "O(k + w) for the row lengths and the column heights"
+      status: unverified
+      inputs: "One integer k, then k non-increasing row lengths whose sum is n."
+      outputs: "One line, holding the number of standard Young tableaux of the shape modulo 1000000007."
+      notes: "The column heights are accumulated in one pass over the cells, so every hook length is available in constant time. The vector of heights has the width of the first row, and the stream is untied because input and output are not interleaved."
+      operations: [count-tableaux, compute-column-heights, modular-inverse]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the row lengths and prints the number of standard Young tableaux modulo 1000000007."
+      time: "O(n + w + log M)"
+      auxiliarySpace: "O(k + w) for the row lengths and the column heights"
+      status: unverified
+      inputs: "One integer k, then k non-increasing row lengths whose sum is n."
+      outputs: "One line, holding the number of standard Young tableaux of the shape modulo 1000000007."
+      notes: "The column heights are ints and every modular product is a long, because the product of two residues is about 10^18 and fits a signed 64-bit integer. The tokenizer reads the whole input once, which is faster than a Scanner per token."
+      operations: [count-tableaux, compute-column-heights, modular-inverse]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the row lengths and prints the number of standard Young tableaux modulo 1000000007."
+      time: "O(n + w + log M)"
+      auxiliarySpace: "O(k + w) for the row lengths and the column heights"
+      status: unverified
+      inputs: "One integer k, then k non-increasing row lengths whose sum is n."
+      outputs: "One line, holding the number of standard Young tableaux of the shape modulo 1000000007."
+      notes: "The whole input is read at once, because a per-token read is the slowest part of a Python solution. Python integers are arbitrary precision, so the factorial and the hook product need no explicit width."
+      operations: [count-tableaux, compute-column-heights, modular-inverse]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the row lengths and prints the number of standard Young tableaux modulo 1000000007."
+      time: "O(n + w + log M)"
+      auxiliarySpace: "O(k + w) for the row lengths and the column heights"
+      status: unverified
+      inputs: "One integer k, then k non-increasing row lengths whose sum is n."
+      outputs: "One line, holding the number of standard Young tableaux of the shape modulo 1000000007."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The variant gives every Read exactly one argument, uses no IOResult, and includes SysUtils, so it compiles under pas2js. Because the browser compiler represents Int64 with a JavaScript number, every modular product goes through a three-limb routine whose partial products stay below 2^50."
+      operations: [count-tableaux, compute-column-heights, modular-inverse]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the row lengths and prints the number of standard Young tableaux modulo 1000000007."
+      time: "O(n + w + log M)"
+      auxiliarySpace: "O(k + w) for the row lengths and the column heights"
+      status: unverified
+      inputs: "One integer k, then k non-increasing row lengths whose sum is n."
+      outputs: "One line, holding the number of standard Young tableaux of the shape modulo 1000000007."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The modular products use BigInt, because the product of two residues near 10^9 is about 10^18 and a Number cannot represent it exactly. The row lengths and the heights stay Numbers because they are small."
+      operations: [count-tableaux, compute-column-heights, modular-inverse]

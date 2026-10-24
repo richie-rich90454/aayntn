@@ -1,0 +1,30 @@
+id: poj.2279.mr-youngs-picture-permutations
+title: Mr. Young's Picture Permutations
+source: POJ
+contest: Greater New York 2004
+division: gold
+url: http://poj.org/problem?id=2279
+techniques:
+    - combinatorics.hook-length-formula
+prerequisites:
+    - foundations.complexity
+    - combinatorics.binomial-coefficients
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The input holds several cases and ends with a row count of 0.
+    - There are at most five rows and at most thirty students, so the exact count fits in an unsigned 32-bit integer.
+    - The row lengths are non-increasing from back to front, and the heights decrease along every row and every column.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Reverse the heights so that the smallest number is at the back-left, and the arrangement becomes a standard Young tableau of the given shape.
+    - The hook length of a cell is the number of cells to its right plus the number below it plus one for the cell itself.
+    - The answer is the factorial of the number of students divided by the product of all hook lengths, and no modular arithmetic is needed.
+discussion: >-
+    The picture is a Young diagram whose row lengths are given from back to front. Placing the tallest student as 1 and the shortest as N turns the height condition into the standard Young tableau condition, so the number of arrangements is f of the shape. The hook-length formula answers each case in time proportional to the number of students, which is at most thirty. The exact division is safe because N is small; the only structural work is building the column heights so that every hook can be read in constant time. The multiple test cases are independent and share no state.
+related:
+    - atcoder.judge-update-202004.c-numbering-blocks
+    - codeforces.102538.d-disjoint-lis

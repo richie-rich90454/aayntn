@@ -1,0 +1,30 @@
+id: codeforces.102538.d-disjoint-lis
+title: Disjoint LIS
+source: Codeforces
+contest: 300iq Contest 3
+division: platinum
+url: https://codeforces.com/gym/102538/problem/D
+techniques:
+    - combinatorics.hook-length-formula
+prerequisites:
+    - foundations.complexity
+    - combinatorics.binomial-coefficients
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The permutation length n is at most seventy-five, so every RSK shape has at most seventy-five cells.
+    - The answer is reported modulo 998244353.
+    - Two disjoint increasing subsequences must each reach the LIS length, so the RSK shape must have its first two rows equal.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The Robinson-Schensted-Knuth correspondence maps a permutation to a pair of standard Young tableaux of the same shape, and the first row of that shape is the LIS length.
+    - Greene's theorem says the maximum total length of two disjoint increasing subsequences is the sum of the first two rows.
+    - Two disjoint subsequences of length LIS exist exactly when the second row equals the first, so only shapes with equal first two rows contribute.
+    - For each such shape, the number of permutations is the square of the number of tableaux, which the hook-length formula gives.
+discussion: >-
+    The counting is an application of RSK rather than of the formula alone. A permutation corresponds to a pair of standard Young tableaux of one shape, so a shape with f tableaux accounts for f squared permutations. The LIS is the first row, and Greene's theorem makes the best two disjoint increasing subsequences total the first two rows, so the good shapes are exactly those whose first two rows are equal. Enumerating the partitions of n whose first two rows are equal and applying the hook-length formula to each one is fast at n = 75, and every division is performed with a modular inverse because 998244353 is prime and every hook is smaller than it.
+related:
+    - poj.2279.mr-youngs-picture-permutations
+    - atcoder.judge-update-202004.c-numbering-blocks

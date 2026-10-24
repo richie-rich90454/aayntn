@@ -1,0 +1,30 @@
+id: atcoder.judge-update-202004.c-numbering-blocks
+title: Numbering Blocks
+source: AtCoder
+contest: Judge System Update Test Contest 202004
+division: silver
+url: https://atcoder.jp/contests/judge-update-202004/tasks/judge_update_202004_c
+techniques:
+    - combinatorics.hook-length-formula
+prerequisites:
+    - foundations.complexity
+    - combinatorics.binomial-coefficients
+difficulty: 2
+estimatedMinutes: 15
+specialConstraints:
+    - There are exactly three piles, and each holds at most three blocks, so the diagram has at most nine cells.
+    - Only the three pile heights are read, so the shape is known before any cell is examined.
+    - The numbers increase up each pile and from left to right, which is a standard Young tableau after the picture is flipped vertically.
+recommendedLanguages:
+    - cpp17
+    - python
+    - java
+hints:
+    - The three pile heights are the row lengths of a Young diagram.
+    - Flipping the picture turns the two increase conditions into the row and column conditions of a standard Young tableau.
+    - Apply the hook-length formula; with at most nine cells the exact count fits in a 32-bit integer.
+discussion: >-
+    The problem is the smallest direct statement of the hook-length formula. The three non-increasing pile heights form the shape, and each legal numbering is a standard Young tableau of that shape. The hook of a cell has a simple form here because there are at most three rows, but the general column-height construction costs only the number of cells. The answer is at most nine factorial divided by a product of small hooks, so the exact integer division is enough and no modulus is involved.
+related:
+    - poj.2279.mr-youngs-picture-permutations
+    - codeforces.102538.d-disjoint-lis
