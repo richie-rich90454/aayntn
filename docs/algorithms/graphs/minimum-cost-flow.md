@@ -499,7 +499,7 @@ Under contest pressure, the mistakes above are what cost points, and each is avo
 
 ### Problem 2: the dream team
 
-**Restatement.** $N$ competitive programmers each have a university $A_i$, a subject $B_i$ and a power $C_i$. A team is valid if no two members share a university and no two share a subject. Let $k$ be the largest valid team size. For every $i$ from $1$ to $k$, report the maximum total power of a valid team of exactly $i$ members. Constraints: $1 \le N \le 30\,000$, $1 \le A_i, B_i \le 150$ and $1 \le C_i \le 10^9$.
+**Restatement.** $N$ competitive programrs each have a university $A_i$, a subject $B_i$ and a power $C_i$. A team is valid if no two members share a university and no two share a subject. Let $k$ be the largest valid team size. For every $i$ from $1$ to $k$, report the maximum total power of a valid team of exactly $i$ members. Constraints: $1 \le N \le 30\,000$, $1 \le A_i, B_i \le 150$ and $1 \le C_i \le 10^9$.
 
 **Naive baseline.** Enumerate subsets of people, or run a separate maximum-weight matching for every team size. The first is exponential in $N$, and the second repeats work that the residual graph already contains.
 
