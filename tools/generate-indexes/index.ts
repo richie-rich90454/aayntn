@@ -821,7 +821,9 @@ async function main() {
                 .replaceAll("&", "&amp;")
                 .replaceAll("<", "&lt;")
                 .replaceAll(">", "&gt;");
-            index.push(`<pre class="aayntn-source" v-pre><code>${escaped}</code></pre>`);
+            index.push(
+                `<pre class="aayntn-source" data-source-fragment="${algorithm.id}/${file.language}.${file.variant}" v-pre><code>${escaped}</code></pre>`,
+            );
             index.push("");
         }
 

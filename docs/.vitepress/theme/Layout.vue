@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { Content, useData } from "vitepress";
+import { computed, nextTick, onMounted, watch } from "vue";
+import { Content, useData, useRoute } from "vitepress";
 import SiteHeader from "./components/navigation/SiteHeader.vue";
 import SiteFooter from "./components/navigation/SiteFooter.vue";
 import SidebarNav from "./components/navigation/SidebarNav.vue";
@@ -10,6 +10,7 @@ import ArticleMeta from "./components/article/ArticleMeta.vue";
 import ArticlePager from "./components/article/ArticlePager.vue";
 import HomeLayout from "./HomeLayout.vue";
 import { initPreferences } from "./composables/usePreferences";
+import { enhanceSourceArchive } from "./composables/useSourceArchive";
 import { sidebarOpen } from "./composables/useSidebarToggle";
 import { LANGUAGE_IDS } from "../data/types";
 
@@ -37,6 +38,20 @@ const hasRail = computed(() => {
 });
 
 initPreferences(LANGUAGE_IDS);
+
+const route = useRoute();
+
+onMounted(() => {
+    enhanceSourceArchive();
+});
+
+watch(
+    () => route.path,
+    async () => {
+        await nextTick();
+        enhanceSourceArchive();
+    },
+);
 </script>
 
 <template>

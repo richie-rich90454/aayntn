@@ -197,14 +197,18 @@ html.dark .aayntn-code__line--highlight {
 .aayntn-code__body .shiki,
 .aayntn-code__body .shiki span,
 .aayntn-code-expanded__body .shiki,
-.aayntn-code-expanded__body .shiki span {
+.aayntn-code-expanded__body .shiki span,
+.aayntn-source--highlighted,
+.aayntn-source--highlighted .shiki span {
     color: var(--shiki-light);
 }
 
 html.dark .aayntn-code__body .shiki,
 html.dark .aayntn-code__body .shiki span,
 html.dark .aayntn-code-expanded__body .shiki,
-html.dark .aayntn-code-expanded__body .shiki span {
+html.dark .aayntn-code-expanded__body .shiki span,
+html.dark .aayntn-source--highlighted,
+html.dark .aayntn-source--highlighted .shiki span {
     color: var(--shiki-dark);
 }
 
