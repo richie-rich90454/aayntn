@@ -1,0 +1,29 @@
+id: joi.2018.snake-escaping
+title: Snake Escaping
+source: JOI
+contest: 2017/2018 Japanese Olympiad in Informatics Final Round
+division: platinum
+url: https://oj.uz/problem/view/JOI18_snake_escaping
+techniques:
+    - dynamic-programming.subset-transforms
+prerequisites:
+    - foundations.binary-representation
+difficulty: 5
+estimatedMinutes: 70
+specialConstraints:
+    - There are 2^L snakes with L at most 20, and up to 10^6 complaints, so each query must be answered in well under a millisecond.
+    - The toxicities are single digits given as one string of length 2^L, and the answer is their sum, not a count and not a value modulo a prime.
+    - A complaint fixes some parts to blue or red and leaves the rest unknown, so a query describes an intersection of a subset condition and a superset condition.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Precompute the subset sums and the superset sums of the toxicity table with two zeta transforms.
+    - Split the query positions into the zero positions A, the one positions B, and the unknown positions C. One of the three sets has size at most six.
+    - If C is small, enumerate every assignment of the unknown positions and read the table directly.
+    - If A is small, use inclusion-exclusion over the zero positions against the superset sums; if B is small, use inclusion-exclusion over the one positions against the subset sums.
+discussion: >-
+    The query is a partial mask, and the three kinds of positions suggest three different ways to answer it. When the unknown set is small, enumeration is cheapest. When the zero set is small, the superset sums answer the query after an inclusion-exclusion over the zeros that are incorrectly allowed to be one. When the one set is small, the subset sums answer it after an inclusion-exclusion over the ones that are incorrectly allowed to be zero. Since the three set sizes add to at most twenty, the smallest is at most six, so one of the three methods always costs at most 64 operations. The two transforms cost O(L 2^L) once and serve every query.
+related:
+    - cses.1654.bit-problem
+    - library-checker.subset-convolution

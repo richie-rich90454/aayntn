@@ -1,0 +1,93 @@
+algorithm: dynamic-programming.subset-transforms
+title: "Subset transforms"
+summary: Sum a function over every subset of every mask, and invert the result, with one pass per bit instead of one enumeration per mask.
+subject: dynamic-programming
+divisions: [platinum]
+importance: advanced-technique
+complexity:
+    time: "O(n 2^n)"
+    space: "O(2^n)"
+assumptions:
+    - The universe has at most about twenty-four elements, so the table of 2^n masks fits in memory.
+    - The values are reduced modulo 1000000007, and every addition stays below twice the modulus.
+    - The required quantity is a sum over the subsets or the supersets of each mask, or a subset convolution built from those sums.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "Complete program that reads the 2^n values, applies one zeta pass per bit, and prints the 2^n subset sums."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(2^n)"
+      status: unverified
+      inputs: "n, then the 2^n values f[0] .. f[2^n - 1]."
+      outputs: "The 2^n values g[0] .. g[2^n - 1], separated by spaces, on one line."
+      notes: "The transform runs in place over a flat array. Each pass walks blocks of 2^(bit + 1) masks and adds the lower half to the upper half. The source half is unchanged during the pass, so no temporary array is needed. Every addition is reduced with one conditional subtraction, because both operands are below the modulus."
+      operations: [read-values, zeta-pass, print-values]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "Complete program that reads the 2^n values, applies one zeta pass per bit, and prints the 2^n subset sums."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(2^n)"
+      status: unverified
+      inputs: "n, then the 2^n values f[0] .. f[2^n - 1]."
+      outputs: "The 2^n values g[0] .. g[2^n - 1], separated by spaces, on one line."
+      notes: "The table is a std::vector<int> and the transform runs in place. The bounce pattern over blocks keeps consecutive accesses in cache, and the conditional subtraction replaces the modulo operator in the inner loop."
+      operations: [read-values, zeta-pass, print-values]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "Complete program that reads the 2^n values, applies one zeta pass per bit, and prints the 2^n subset sums."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(2^n)"
+      status: unverified
+      inputs: "n, then the 2^n values f[0] .. f[2^n - 1]."
+      outputs: "The 2^n values g[0] .. g[2^n - 1], separated by spaces, on one line."
+      notes: "A byte-buffered scanner reads the table, and a StringBuilder collects the output. The transform runs in place over an int array. Both operands are below the modulus, so a single conditional subtraction reduces each sum."
+      operations: [read-values, zeta-pass, print-values]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "Complete program that reads the 2^n values, applies one zeta pass per bit, and prints the 2^n subset sums."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(2^n)"
+      status: unverified
+      inputs: "n, then the 2^n values f[0] .. f[2^n - 1]."
+      outputs: "The 2^n values g[0] .. g[2^n - 1], separated by spaces, on one line."
+      notes: "The input is read in one call and split into integers, and the table is a list. Python integers are arbitrary precision, so the modulo is the only bound needed. The transform is the same block walk as in the compiled variants."
+      operations: [read-values, zeta-pass, print-values]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Complete program that reads the 2^n values, applies one zeta pass per bit, and prints the 2^n subset sums."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(2^n)"
+      status: unverified
+      inputs: "n, then the 2^n values f[0] .. f[2^n - 1]."
+      outputs: "The 2^n values g[0] .. g[2^n - 1], separated by spaces, on one line."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The table is a dynamic array of LongInt, and the sums stay below 2^31. The source compiles under pas2js: no IOResult, one argument per Read, uses SysUtils, and no 128-bit integer."
+      operations: [read-values, zeta-pass, print-values]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Complete program that reads the 2^n values, applies one zeta pass per bit, and prints the 2^n subset sums."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(2^n)"
+      status: unverified
+      inputs: "n, then the 2^n values f[0] .. f[2^n - 1]."
+      outputs: "The 2^n values g[0] .. g[2^n - 1], separated by spaces, on one line."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The table is an array of numbers. Both operands are below the modulus, so every sum is below 2^31 and a double holds it exactly; no BigInt is needed."
+      operations: [read-values, zeta-pass, print-values]

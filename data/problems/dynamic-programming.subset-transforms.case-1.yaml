@@ -1,0 +1,29 @@
+id: cses.1654.bit-problem
+title: Bit Problem
+source: CSES
+contest: CSES Problem Set
+division: gold
+url: https://cses.fi/problemset/task/1654
+techniques:
+    - dynamic-programming.subset-transforms
+prerequisites:
+    - foundations.binary-representation
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The list has up to 200000 elements, and every value is at most 10^6, so twenty bits cover every mask.
+    - For each element the program prints three counts on one line, and the counts are exact rather than taken modulo a prime.
+    - Scanning every pair of elements is quadratic, so the counts for all masks have to be computed together.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The first count asks how many values are submasks of x, and the second asks how many are supermasks of x.
+    - Build a frequency table over the twenty-bit masks, then apply the subset zeta transform once for the submasks and the superset transform once for the supermasks.
+    - A value is disjoint from x exactly when it is a submask of the complement of x, so the third count is n minus that subset sum.
+    - The full mask is 2^20 - 1, and the complement must be taken inside twenty bits rather than in thirty-two.
+discussion: >-
+    The three outputs are three views of one frequency table. The subset zeta transform turns the frequencies into sub[S], the number of values contained in S, and the superset transform turns them into super[S], the number of values that contain S. The third count is the complement of the first: a value avoids every bit of x exactly when it lies inside the complement. The table has 2^20 entries, so the whole computation is about twenty million additions and one pass over the input. The only subtlety is the width of the complement, because taking it in thirty-two bits leaves high bits set that no value can have.
+related:
+    - library-checker.subset-convolution
+    - joi.2018.snake-escaping

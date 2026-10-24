@@ -1,0 +1,29 @@
+id: library-checker.subset-convolution
+title: Subset Convolution
+source: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/subset_convolution
+techniques:
+    - dynamic-programming.subset-transforms
+prerequisites:
+    - foundations.binary-representation
+    - number-theory.modular-arithmetic
+difficulty: 5
+estimatedMinutes: 55
+specialConstraints:
+    - There are 2^n values in each array, with n at most 20, and the result is taken modulo 998244353.
+    - The definition sums over every subset of a mask, so enumerating the subsets of each mask costs 3^n and is too slow at the upper limit.
+    - The two arrays are independent, and the plain transform pairs overlapping subsets; the rank coordinate is what separates a disjoint split from an overlapping one.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A plain zeta transform of each array loses the size of the subset, and the pointwise product then counts pairs whose union is only contained in the mask.
+    - Add the subset size as a second coordinate, so that F[k][S] sums f[T] over T contained in S with exactly k elements.
+    - After the ranked zeta transforms, the coefficient of rank k at S is the sum over pairs with total size k whose union is contained in S.
+    - Invert each rank with the Mobius transform; at rank equal to the popcount of S, the only surviving pairs are the disjoint ones.
+discussion: >-
+    Subset convolution is the zeta transform with one extra coordinate. The rank records how many elements the subset contributes, and the product of two ranked transforms adds those ranks, so the pair that produces a given coefficient has a known total size. The Mobius inversion then removes every pair whose union is a proper subset of the mask. At the rank equal to the mask size, a pair that covers the mask and has total size equal to the mask size cannot overlap, which is exactly the disjointness condition in the definition. The rank dimension multiplies both the time and the memory by n.
+related:
+    - cses.1654.bit-problem
+    - joi.2018.snake-escaping

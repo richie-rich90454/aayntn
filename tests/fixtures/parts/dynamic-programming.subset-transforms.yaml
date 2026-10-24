@@ -1,0 +1,9 @@
+- name: a four-mask transform with a zero
+  input: "2\n1 2 3 4\n"
+  expected: "1 3 4 10\n"
+- name: values that wrap around the modulus
+  input: "2\n1000000006 1000000006 1000000006 1000000006\n"
+  expected: "1000000006 1000000005 1000000005 1000000003\n"
+- name: a single empty subset
+  input: "0\n42\n"
+  expected: "42\n"
