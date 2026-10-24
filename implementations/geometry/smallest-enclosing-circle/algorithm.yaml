@@ -1,0 +1,95 @@
+algorithm: geometry.smallest-enclosing-circle
+title: The smallest enclosing circle
+summary: A deterministic incremental construction keeps one circle and pins each violating point on the boundary, using exact integer predicates and a squared-radius answer.
+subject: geometry
+divisions: [gold, platinum]
+importance: common-contest-technique
+prerequisites:
+    required: [geometry.convex-hull]
+    recommended: [foundations.complexity, foundations.sorting]
+complexity:
+    time: "O(n^3) worst case; O(n) expected with a random shuffle"
+    space: "O(n) for the points, O(1) auxiliary"
+assumptions:
+    - The coordinates are integers whose squared differences and incircle determinants fit in a signed 64-bit integer.
+    - The squared radius of the answer is an integer, which the problem statement guarantees.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical C program: it reads the points and prints the squared radius of the smallest enclosing circle."
+      time: "O(n^3) worst case"
+      auxiliarySpace: "O(n) for the points, O(1) auxiliary"
+      status: unverified
+      inputs: "n, then n lines with an integer x and an integer y."
+      outputs: "One line holding the squared radius as an integer."
+      notes: "The circle is stored as its defining points rather than as a center and a radius, so every containment test stays in integers. The collinear case falls back to the diameter of the farthest pair, and the final division is exact under the stated guarantee."
+      operations: [smallest-enclosing-circle, point-in-circle]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical C++17 program: it reads the points and prints the squared radius of the smallest enclosing circle."
+      time: "O(n^3) worst case"
+      auxiliarySpace: "O(n) for the points, O(1) auxiliary"
+      status: unverified
+      inputs: "n, then n lines with an integer x and an integer y."
+      outputs: "One line holding the squared radius as an integer."
+      notes: "The circle is stored as its defining points rather than as a center and a radius, so every containment test stays in integers. The collinear case falls back to the diameter of the farthest pair, and the final division is exact under the stated guarantee."
+      operations: [smallest-enclosing-circle, point-in-circle]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical Java program: it reads the points and prints the squared radius of the smallest enclosing circle."
+      time: "O(n^3) worst case"
+      auxiliarySpace: "O(n) for the points, O(1) auxiliary"
+      status: unverified
+      inputs: "n, then n lines with an integer x and an integer y."
+      outputs: "One line holding the squared radius as an integer."
+      notes: "The circle is stored as its defining points rather than as a center and a radius, so every containment test stays in long arithmetic. The collinear case falls back to the diameter of the farthest pair, and the final division is exact under the stated guarantee."
+      operations: [smallest-enclosing-circle, point-in-circle]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical Python program: it reads the points and prints the squared radius of the smallest enclosing circle."
+      time: "O(n^3) worst case"
+      auxiliarySpace: "O(n) for the points, O(1) auxiliary"
+      status: unverified
+      inputs: "n, then n lines with an integer x and an integer y."
+      outputs: "One line holding the squared radius as an integer."
+      notes: "The circle is stored as its defining points rather than as a center and a radius, so every containment test stays in integers. Python's integers do not overflow, but the algorithm and the exact division are the same as in the other five languages."
+      operations: [smallest-enclosing-circle, point-in-circle]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical Pascal program: it reads the points and prints the squared radius of the smallest enclosing circle."
+      time: "O(n^3) worst case"
+      auxiliarySpace: "O(n) for the points, O(1) auxiliary"
+      status: unverified
+      inputs: "n, then n lines with an integer x and an integer y."
+      outputs: "One line holding the squared radius as an integer."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The circle is stored as its defining points in Int64 records, the collinear case falls back to the diameter of the farthest pair, and the program avoids IOResult and 128-bit integers so that it compiles under pas2js."
+      operations: [smallest-enclosing-circle, point-in-circle]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical JavaScript program: it reads the points and prints the squared radius of the smallest enclosing circle."
+      time: "O(n^3) worst case"
+      auxiliarySpace: "O(n) for the points, O(1) auxiliary"
+      status: unverified
+      inputs: "n, then n lines with an integer x and an integer y."
+      outputs: "One line holding the squared radius as an integer."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The circle is stored as its defining points, every intermediate value stays below the safe-integer bound for the stated coordinates, and the collinear case falls back to the diameter of the farthest pair."
+      operations: [smallest-enclosing-circle, point-in-circle]

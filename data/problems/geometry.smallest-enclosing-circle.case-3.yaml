@@ -1,0 +1,30 @@
+id: library-checker.minimum-enclosing-circle
+title: Minimum Enclosing Circle
+source: Library Checker
+contest: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/minimum_enclosing_circle
+techniques:
+    - geometry.smallest-enclosing-circle
+prerequisites:
+    - geometry.convex-hull
+difficulty: 5
+estimatedMinutes: 45
+specialConstraints:
+    - N <= 100000, so an expected linear or linear-time method is needed.
+    - The output identifies every input point that lies on the circumference, so a point strictly inside must be excluded exactly.
+    - The boundary test must be an equality test on the defining pair or triple, not a comparison with an epsilon.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Compute the smallest enclosing circle once, then classify every point against the final defining set.
+    - For a diameter pair, a point is on the boundary exactly when the Thales dot product is zero.
+    - For a triple, a point is on the boundary exactly when the incircle determinant is zero.
+    - Keep the defining points rather than the center so the adjacency test stays in integers.
+discussion: >-
+    The problem separates the construction from the classification. The construction is the randomized incremental smallest enclosing circle, which is expected linear after the shuffle. The classification is one exact predicate per point: equality in the diameter test or a zero incircle determinant. A floating-point epsilon is the wrong tool, because a point that is strictly inside can be closer to the boundary than the rounding error of the center. Keeping the defining pair or triple makes the distinction exact and keeps the whole solution in integer arithmetic.
+related:
+    - atcoder.abc151.f
+    - aizu.cgl5.b

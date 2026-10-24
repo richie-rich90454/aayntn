@@ -1,0 +1,31 @@
+id: atcoder.abc151.f
+title: Enclose All
+source: AtCoder
+contest: AtCoder Beginner Contest 151
+division: gold
+url: https://atcoder.jp/contests/abc151/tasks/abc151_f
+editorialUrl: https://atcoder.jp/contests/abc151/tasks/abc151_f/editorial
+techniques:
+    - geometry.smallest-enclosing-circle
+prerequisites:
+    - geometry.convex-hull
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - N <= 50, so enumerating every pair and every triple is fast enough, but the incremental construction is shorter and generalizes to larger inputs.
+    - The output is the radius with an absolute or relative error of at most 1e-6, so a square root is needed at the end.
+    - The coordinates are nonnegative and at most 1000, so the final answer is determined by a diameter pair or an acute triple.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The smallest circle is fixed by two points that form a diameter or by three points that form an acute triangle.
+    - Try the incremental construction instead of enumerating every candidate.
+    - When a point is outside the current circle, it must lie on the boundary of the new smallest circle.
+    - Normalize the orientation of a triple before the incircle test, and handle collinear triples with the farthest pair.
+discussion: >-
+    The task is the unconstrained smallest enclosing circle of at most fifty points. The characterization by a diameter pair or an acute triple reduces the candidate set, and the incremental construction finds the decisive pair or triple without generating all of them. The containment tests are integer predicates, so the only floating-point step is the final square root that the tolerance output requires. The deterministic construction is fast enough for the constraint, and a brute-force enumeration is a useful independent check on small random cases.
+related:
+    - aizu.cgl5.b
+    - library-checker.minimum-enclosing-circle

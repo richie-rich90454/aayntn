@@ -1,0 +1,30 @@
+id: aizu.cgl5.b
+title: Minimum Enclosing Circle
+source: Aizu Online Judge
+contest: AOJ Computational Geometry
+division: platinum
+url: https://onlinejudge.u-aizu.ac.jp/problems/CGL_5_B
+techniques:
+    - geometry.smallest-enclosing-circle
+prerequisites:
+    - geometry.convex-hull
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - N <= 100000, so the deterministic O(n^3) construction is too slow and a randomized or linear-time method is needed.
+    - The coordinates range up to 1e6 in absolute value, so the incircle determinant needs a wider integer type or careful floating-point arithmetic in the exact version.
+    - The output is the center and the radius with an error below 1e-6, so the final center must be reconstructed from the defining pair or triple.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Shuffle the points before the incremental construction to get the expected linear bound.
+    - Keep the defining pair or triple instead of a center and a radius, so the containment tests stay exact.
+    - A diameter pair gives the center as the midpoint, and a triple gives the circumcenter.
+    - The collinear case has no circumcircle and must fall back to the farthest pair.
+discussion: >-
+    The input is large enough that the deterministic order is not safe, so the solution is the randomized incremental construction: shuffle once, keep the defining points, and use exact integer predicates for containment. The final center is rational when the circle is determined by three points, and the tolerance output allows it to be recovered with doubles after the decisive triple is known. The boundary cases are the same as in the small version, but they matter more because the coordinates are large and a floating-point predicate would lose the sign of a nearly collinear determinant.
+related:
+    - atcoder.abc151.f
+    - library-checker.minimum-enclosing-circle
