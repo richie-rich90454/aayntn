@@ -1,0 +1,9 @@
+- name: edge case with one bit
+  input: "1\n"
+  expected: "0\n1\n"
+- name: two bits form the reflected square
+  input: "2\n"
+  expected: "00\n01\n11\n10\n"
+- name: four bits preserve the leading zeros
+  input: "4\n"
+  expected: "0000\n0001\n0011\n0010\n0110\n0111\n0101\n0100\n1100\n1101\n1111\n1110\n1010\n1011\n1001\n1000\n"

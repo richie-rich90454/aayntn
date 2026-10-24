@@ -1,0 +1,28 @@
+id: codechef.graycode
+title: Gray Codes
+source: CodeChef
+contest: CodeChef Practice
+url: https://www.codechef.com/problems/GRAYCODE
+techniques:
+    - enumeration.gray-codes
+prerequisites:
+    - foundations.binary-representation
+difficulty: 2
+estimatedMinutes: 15
+specialConstraints:
+    - The input integer is a Gray encoding, not an ordinary binary number, so reading it directly gives the wrong value.
+    - The first line is the number of test cases, and each case is decoded independently.
+    - The inverse is a prefix XOR over the bits of the encoding, not a single XOR with a shifted copy.
+recommendedLanguages:
+    - cpp17
+    - python
+    - java
+hints:
+    - The forward map is g = i XOR (i >> 1), so undo it by XORing every right-shifted copy of g.
+    - Stop the prefix XOR when the shifted value becomes zero, or run exactly the number of bits in the encoding.
+    - Check the sample, where the encoding 4 decodes to 7 and the encoding 6 decodes to 4.
+discussion: >-
+    The problem is the inverse direction. The forward map g = i XOR (i >> 1) is inverted by XORing every prefix shift of g, which telescopes to i. A single g XOR (g >> 1) applies the forward map again and is not the inverse. The sample shows the difference: the encoding 4 decodes to 7, and the encoding 6 decodes to 4.
+related:
+    - cses.2205.gray-code
+    - sgu.249.matrix

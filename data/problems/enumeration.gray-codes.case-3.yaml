@@ -1,0 +1,27 @@
+id: sgu.249.matrix
+title: Matrix
+source: SGU
+contest: SGU Online Judge
+url: https://codeforces.com/problemsets/acmsguru/problem/99999/249
+techniques:
+    - enumeration.gray-codes
+prerequisites:
+    - foundations.binary-representation
+difficulty: 4
+estimatedMinutes: 35
+specialConstraints:
+    - N + M <= 20, so the matrix has up to 2^20 cells and the output is the bottleneck.
+    - Every value from 0 to 2^(N+M) - 1 must appear exactly once.
+    - The matrix is cyclic, so the first and last columns are adjacent and the first and last rows are adjacent.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Assign each cell the concatenation of an N-bit Gray code for its row and an M-bit Gray code for its column.
+    - A horizontal step changes only the column code, and a vertical step changes only the row code.
+    - Use cyclic Gray codes so the wrap-around edges also change exactly one bit.
+discussion: >-
+    The construction is the product of two cyclic Gray codes. The row code occupies the high N bits and the column code the low M bits, so the two coordinates never interfere. Bijectivity follows from the bijectivity of each factor, and the adjacency condition follows because a step in one axis changes exactly one factor by one bit. The sample N = M = 1 is the 2 by 2 case.
+related:
+    - cses.2205.gray-code
+    - codechef.graycode

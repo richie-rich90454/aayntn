@@ -1,0 +1,92 @@
+algorithm: enumeration.gray-codes
+title: Gray codes
+summary: Print every n-bit string in binary reflected Gray code order, where consecutive strings differ in exactly one bit, using the closed form g(i) = i XOR (i >> 1).
+subject: enumeration
+divisions: [bronze, silver]
+importance: specialized-technique
+complexity:
+    time: "O(n 2^n)"
+    space: "O(n) auxiliary"
+assumptions:
+    - The output is the binary reflected Gray code, emitted in increasing index order and starting at zero.
+    - n is at most 20, so a 32-bit integer holds every code and the output remains practical.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints all 2^n n-bit binary reflected Gray codes, starting at zero, one per line."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(n) for the bit loop; the output is streamed."
+      status: unverified
+      inputs: "One integer n with 1 <= n <= 20."
+      outputs: "2^n lines, each holding the n-bit Gray code for its index, starting with the all-zero word."
+      notes: "The loop visits i = 0 to 2^n - 1 and forms g = i XOR (i >> 1), whose consecutive values differ in exactly one bit. The bits are printed from the most significant position down, so the leading zeros are preserved, and the C variant uses uint32_t with putchar so the width is explicit."
+      operations: [generate, xor-shift, print-bits]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints all 2^n n-bit binary reflected Gray codes, starting at zero, one per line."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(n) for the bit loop; the output is streamed."
+      status: unverified
+      inputs: "One integer n with 1 <= n <= 20."
+      outputs: "2^n lines, each holding the n-bit Gray code for its index, starting with the all-zero word."
+      notes: "The loop visits i = 0 to 2^n - 1 and forms g = i XOR (i >> 1), whose consecutive values differ in exactly one bit. The bits are printed from the most significant position down, so the leading zeros are preserved, and the C++ variant uses std::uint32_t with the standard streams untied for output speed."
+      operations: [generate, xor-shift, print-bits]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints all 2^n n-bit binary reflected Gray codes, starting at zero, one per line."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(n) for the bit loop; the output is streamed."
+      status: unverified
+      inputs: "One integer n with 1 <= n <= 20."
+      outputs: "2^n lines, each holding the n-bit Gray code for its index, starting with the all-zero word."
+      notes: "The loop visits i = 0 to 2^n - 1 and forms g = i XOR (i >>> 1), whose consecutive values differ in exactly one bit. The bits are printed from the most significant position down, so the leading zeros are preserved, and the Java variant writes through a BufferedOutputStream; the class is Main so the file can be submitted unchanged."
+      operations: [generate, xor-shift, print-bits]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints all 2^n n-bit binary reflected Gray codes, starting at zero, one per line."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(n) for the bit loop; the lines are buffered before one write."
+      status: unverified
+      inputs: "One integer n with 1 <= n <= 20."
+      outputs: "2^n lines, each holding the n-bit Gray code for its index, starting with the all-zero word."
+      notes: "The loop visits i = 0 to 2^n - 1 and forms g = i XOR (i >> 1), whose consecutive values differ in exactly one bit. Each code is formatted with a zero-padded binary width of n, and the Python variant joins the lines before a single write, so the leading zeros are preserved without a manual bit loop."
+      operations: [generate, xor-shift, print-bits]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints all 2^n n-bit binary reflected Gray codes, starting at zero, one per line."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(n) for the bit loop; the output is streamed."
+      status: unverified
+      inputs: "One integer n with 1 <= n <= 20."
+      outputs: "2^n lines, each holding the n-bit Gray code for its index, starting with the all-zero word."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The loop visits i = 0 to 2^n - 1 and forms g = i XOR (i shr 1), whose consecutive values differ in exactly one bit. The bits are printed from the most significant position down with IntToStr, so the leading zeros are preserved, and the program reads exactly one integer with one argument per Read."
+      operations: [generate, xor-shift, print-bits]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints all 2^n n-bit binary reflected Gray codes, starting at zero, one per line."
+      time: "O(n 2^n)"
+      auxiliarySpace: "O(n) for the bit loop; the lines are buffered before one write."
+      status: unverified
+      inputs: "One integer n with 1 <= n <= 20."
+      outputs: "2^n lines, each holding the n-bit Gray code for its index, starting with the all-zero word."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The loop visits i = 0 to 2^n - 1 and forms g = i XOR (i >>> 1), whose consecutive values differ in exactly one bit. Each code is produced with toString(2) and padStart(n, '0'), and the lines are joined before one write, so the leading zeros are preserved."
+      operations: [generate, xor-shift, print-bits]

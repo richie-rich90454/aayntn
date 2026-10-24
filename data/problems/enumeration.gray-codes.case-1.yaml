@@ -1,0 +1,28 @@
+id: cses.2205.gray-code
+title: Gray Code
+source: CSES
+contest: CSES Problem Set
+url: https://cses.fi/problemset/task/2205
+techniques:
+    - enumeration.gray-codes
+prerequisites:
+    - foundations.binary-representation
+difficulty: 2
+estimatedMinutes: 15
+specialConstraints:
+    - The output itself is 2^n lines of n characters, so n is capped at 16 and the cost is output-bound.
+    - Every line must hold exactly n bits, so leading zeros are part of the answer.
+    - Consecutive lines must differ in exactly one bit, and the judge accepts any valid Gray order.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The reflected construction takes the (n-1)-bit code, prefixes 0 to every word, then prefixes 1 to the same words in reverse.
+    - Alternatively, the i-th code is i XOR (i >> 1) for i = 0, 1, ..., 2^n - 1.
+    - Print every bit from the most significant position down, or the leading zeros disappear.
+discussion: >-
+    The problem is output-bound: 2^n lines of n bits. The closed form computes each code in constant time and a bit loop preserves the width. The reflection construction is the proof-friendly alternative. The common failure is printing the integer, which loses leading zeros; n = 2 is the smallest case where 3 appears instead of 11.
+related:
+    - codechef.graycode
+    - sgu.249.matrix
