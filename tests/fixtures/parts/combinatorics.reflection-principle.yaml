@@ -1,0 +1,9 @@
+- name: the empty path is the only path at zero
+  input: "0\n"
+  expected: "1\n"
+- name: three pairs have five admissible paths
+  input: "3\n"
+  expected: "5\n"
+- name: one million pairs need the modular inverse
+  input: "1000000\n"
+  expected: "70646122\n"

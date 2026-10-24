@@ -1,0 +1,32 @@
+id: atcoder.abc205.e-white-and-black-balls
+title: White and Black Balls
+source: AtCoder
+contest: AtCoder Beginner Contest 205
+division: platinum
+url: https://atcoder.jp/contests/abc205/tasks/abc205_e
+editorialUrl: https://atcoder.jp/contests/abc205/tasks/abc205_e/editorial
+techniques:
+    - combinatorics.reflection-principle
+prerequisites:
+    - combinatorics.binomial-coefficients
+    - number-theory.modular-arithmetic
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - White and black balls are identical within their colors, so an arrangement is determined by the positions of the white balls.
+    - N and M are up to one million and the modulus is prime, so factorials cannot be formed exactly and the binomial coefficients must be reduced.
+    - If N is greater than M + K, every arrangement violates the prefix condition and the answer is zero before any reflection.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Map a white ball to an east step and a black ball to a north step.
+    - The condition on every prefix says that the path stays on or above the line y = x - K.
+    - The bad paths first touch y = x - K - 1; reflect the prefix up to that touch to move the start to (K + 1, -K - 1).
+    - The bad count is binom(N + M, N - K - 1), and the answer is binom(N + M, N) minus that count.
+discussion: >-
+    The prefix condition is a one-sided boundary on a monotone lattice path. The total number of arrangements is the number of paths from (0,0) to (N,M), and the bad arrangements are the paths that touch the line one step below the allowed boundary. Reflecting the prefix at the first touch converts the bad paths into paths from (K + 1, -K - 1) to (N,M), which have N - K - 1 east steps among N + M. The guard N <= M + K is essential: without it the endpoint itself is already below the allowed boundary, every arrangement is bad, and the reflected count is larger than the total. The two binomial coefficients are evaluated modulo 1000000007 with the usual product and inverse.
+related:
+    - cses.2064.bracket-sequences-i
+    - cses.2187.bracket-sequences-ii

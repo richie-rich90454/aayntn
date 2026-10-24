@@ -1,0 +1,32 @@
+id: cses.2187.bracket-sequences-ii
+title: Bracket Sequences II
+source: CSES
+contest: CSES Problem Set
+division: platinum
+url: https://cses.fi/problemset/task/2187
+techniques:
+    - combinatorics.reflection-principle
+prerequisites:
+    - combinatorics.binomial-coefficients
+    - number-theory.modular-arithmetic
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The prefix may already be invalid, in which case no completion exists.
+    - An odd total length has no valid sequence, because the two bracket counts cannot agree.
+    - The total length is up to one million, so the completions must be counted with binomial coefficients modulo 1000000007.
+    - The prefix may use more than half of the total opening or closing brackets, which is also fatal.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Walk the prefix and track its balance, which is the number of opening brackets minus the number of closing brackets.
+    - If the balance is ever negative, or the prefix uses more than n/2 opening or closing brackets, print zero.
+    - Otherwise let O and C be the remaining opening and closing brackets and let b be the prefix balance.
+    - Reflection gives the valid suffixes as binom(O + C, O) minus binom(O + C, O + b + 1).
+discussion: >-
+    The prefix fixes a starting point inside the grid, so the remaining suffix is a path from height b to height zero that must never go below zero. The total number of suffixes is a binomial coefficient. The bad suffixes are those that first reach height -1, and reflecting the prefix up to that point moves the start to height -b - 2, which changes the number of opening steps in the reflected path to O + b + 1. The difference of the two binomial coefficients counts the completions. Both coefficients are evaluated modulo the prime with a product and a Fermat inverse, and the invalid-prefix checks are what keep the formula from being applied outside its assumptions.
+related:
+    - cses.2064.bracket-sequences-i
+    - atcoder.abc205.e-white-and-black-balls

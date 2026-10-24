@@ -1,0 +1,95 @@
+algorithm: combinatorics.reflection-principle
+title: The reflection principle
+summary: Count the monotone lattice paths from (0,0) to (n,n) that never rise above the diagonal by reflecting the tail of every bad path at its first touch, then evaluate the resulting Catalan number modulo 1000000007.
+subject: combinatorics
+divisions: [gold, platinum]
+importance: common-contest-technique
+complexity:
+    time: "O(n + log MOD)"
+    space: "O(1)"
+assumptions:
+    - The path uses only east and north steps, so the diagonal condition is y <= x at every vertex.
+    - The modulus 1000000007 is prime and 2n is smaller than it, so every denominator in the binomial product is invertible.
+prerequisites:
+    required: [combinatorics.binomial-coefficients, number-theory.modular-arithmetic]
+    recommended: [combinatorics.stars-and-bars]
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of monotone paths from (0,0) to (n,n) that never rise above the diagonal, modulo 1000000007."
+      time: "O(n + log MOD)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 1000000."
+      outputs: "One line holding the Catalan number C(n) modulo 1000000007."
+      notes: "The program computes binom(2n, n) and binom(2n, n - 1) as products of at most n factors each, then subtracts the second from the first to apply the reflection principle. Every product in the main loop is a residue below 1000000007 times a factor of at most 2n, so it fits in a signed 64-bit integer, and the Fermat inverse multiplies two full residues, whose product is still below 2^63."
+      operations: [read, binomial, reflect, subtract, print]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of monotone paths from (0,0) to (n,n) that never rise above the diagonal, modulo 1000000007."
+      time: "O(n + log MOD)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 1000000."
+      outputs: "One line holding the Catalan number C(n) modulo 1000000007."
+      notes: "The program computes binom(2n, n) and binom(2n, n - 1) as products of at most n factors each, then subtracts the second from the first to apply the reflection principle. The C++ variant stores every residue in std::int64_t and uses the same product form as the C variant, so the two programs agree on every input."
+      operations: [read, binomial, reflect, subtract, print]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of monotone paths from (0,0) to (n,n) that never rise above the diagonal, modulo 1000000007."
+      time: "O(n + log MOD)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 1000000."
+      outputs: "One line holding the Catalan number C(n) modulo 1000000007."
+      notes: "The program computes binom(2n, n) and binom(2n, n - 1) as products of at most n factors each, then subtracts the second from the first to apply the reflection principle. The Java variant uses long throughout and reads through a BufferedReader, and the class is Main so the file can be submitted unchanged."
+      operations: [read, binomial, reflect, subtract, print]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of monotone paths from (0,0) to (n,n) that never rise above the diagonal, modulo 1000000007."
+      time: "O(n + log MOD)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 1000000."
+      outputs: "One line holding the Catalan number C(n) modulo 1000000007."
+      notes: "The program computes binom(2n, n) and binom(2n, n - 1) as products of at most n factors each, then subtracts the second from the first to apply the reflection principle. The Python variant uses arbitrary-precision integers and calls pow(denominator, MODULO - 2, MODULO) for the inverse, so it needs no special multiplication routine."
+      operations: [read, binomial, reflect, subtract, print]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of monotone paths from (0,0) to (n,n) that never rise above the diagonal, modulo 1000000007."
+      time: "O(n + log MOD)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 1000000."
+      outputs: "One line holding the Catalan number C(n) modulo 1000000007."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program computes binom(2n, n) and binom(2n, n - 1) as products of at most n factors each, then subtracts the second from the first to apply the reflection principle. Because pas2js maps Int64 to a JavaScript number, two residues cannot be multiplied directly; the inverse therefore uses MulMod, which doubles and reduces so that every intermediate stays below 2 * 1000000007. The program reads exactly one integer with one argument per Read."
+      operations: [read, binomial, reflect, subtract, print]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and prints the number of monotone paths from (0,0) to (n,n) that never rise above the diagonal, modulo 1000000007."
+      time: "O(n + log MOD)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 1000000."
+      outputs: "One line holding the Catalan number C(n) modulo 1000000007."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The program computes binom(2n, n) and binom(2n, n - 1) as products of at most n factors each, then subtracts the second from the first to apply the reflection principle. The main products stay below 2^53 because one factor is at most 2n, while the inverse uses mulMod, which doubles and reduces so that no intermediate exceeds 2 * 1000000007."
+      operations: [read, binomial, reflect, subtract, print]

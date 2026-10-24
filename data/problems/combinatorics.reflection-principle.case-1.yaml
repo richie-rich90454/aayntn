@@ -1,0 +1,31 @@
+id: cses.2064.bracket-sequences-i
+title: Bracket Sequences I
+source: CSES
+contest: CSES Problem Set
+division: gold
+url: https://cses.fi/problemset/task/2064
+techniques:
+    - combinatorics.reflection-principle
+prerequisites:
+    - combinatorics.binomial-coefficients
+    - number-theory.modular-arithmetic
+difficulty: 2
+estimatedMinutes: 15
+specialConstraints:
+    - The input is the length of the string, so an odd length has no valid sequence and the answer is zero.
+    - The length is up to one million, so the count must be reduced modulo 1000000007 rather than computed exactly.
+    - The number of opening brackets must equal the number of closing brackets, so the count is indexed by half the length.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Map an opening bracket to an east step and a closing bracket to a north step.
+    - A sequence is valid exactly when every prefix has at least as many opening as closing brackets, so the path never rises above y = x.
+    - Reflection counts the invalid paths as the paths from (0,0) to (n/2 - 1, n/2 + 1), which is one binomial coefficient.
+    - The answer is binom(n, n/2) minus binom(n, n/2 - 1), evaluated modulo 1000000007.
+discussion: >-
+    A bracket sequence of even length n becomes a monotone path with n steps, and the prefix condition becomes the diagonal condition. The valid sequences are the Catalan paths at half the length, so reflection subtracts the paths whose first touch of y = x + 1 is reflected to the endpoint one row higher. The subtraction is the difference of two binomial coefficients, and each coefficient is a product of at most n/2 factors with one Fermat inverse. Odd lengths are the edge case: the numbers of opening and closing brackets cannot agree, so the program prints zero before any counting.
+related:
+    - cses.2187.bracket-sequences-ii
+    - atcoder.abc205.e-white-and-black-balls
