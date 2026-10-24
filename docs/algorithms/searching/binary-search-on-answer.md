@@ -130,24 +130,20 @@ These two parts are proved separately and compose. The search part is inherited 
 Let $A$ be the set of candidate answers, a finite totally ordered set, and let $P : A \to \{\text{true}, \text{false}\}$ be the feasibility predicate.
 
 ::: math definition Definition
-A predicate $P$ over $A$ is **monotone increasing** if there is a threshold $k^*$ in $A$ such that $P(k)$ is false for every $k < k^*$ and true for every $k \ge k^*$. The value $k^*$ is the **answer**. The predicate is **monotone decreasing** when the truth values run the other way, and then the answer is the largest acceptable value.
+A predicate $P$ over $A$ is **monotone increasing** if there is a threshold $k^{\ast}$ in $A$ such that $P(k)$ is false for every $k < k^{\ast}$ and true for every $k \ge k^{\ast}$. The value $k^{\ast}$ is the **answer**. The predicate is **monotone decreasing** when the truth values run the other way, and then the answer is the largest acceptable value.
 :::
-
 
 ::: math definition Definition
 A **check** for $P$ is a function that, given a candidate $k$, returns true if and only if $k$ is acceptable. The check is **exact** when it agrees with $P$ on every candidate.
 :::
 
-
 ::: math lemma Lemma
 Let $P$ be monotone increasing on $A$, and let $k^*$ be its threshold. The condition $P(k)$ implies $P(k')$ for every $k' \ge k$ is exactly the property that allows the answer to be found by halving.
 :::
 
-
 ::: math invariant Invariant
 Throughout the search, the answer $k^*$ lies in the current interval $[lo, hi]$. Every candidate below $lo$ has been proved unacceptable, and every candidate above $hi$ has been proved acceptable.
 :::
-
 
 The invariant is what the halving maintains, and it is the same invariant as in binary search. The interesting part is the predicate it depends on.
 
@@ -192,11 +188,8 @@ Three checks were made over a range of width 9, and the answer 4 is right: any c
 If the check is exact and the predicate is monotone increasing over $[L, U]$, the search returns the smallest acceptable candidate.
 :::
 
-
 ::: math proof Proof
-The invariant states that the answer lies in $[lo, hi]$, that every candidate
-below $lo$ has been proved unacceptable, and that every candidate above $hi$
-has been proved acceptable.
+The invariant states that the answer lies in $[lo, hi]$, that every candidate below $lo$ has been proved unacceptable, and that every candidate above $hi$ has been proved acceptable.
 
 The invariant holds initially: the answer lies in $[L, U]$ by assumption, and there is nothing below or above the interval.
 
@@ -209,16 +202,9 @@ If the check is false at $mid$, then by the monotonicity every candidate at or b
 In both cases the invariant is preserved. The interval strictly shrinks, so the loop terminates with $lo = hi$, and the invariant says the answer is that value. $\square$
 :::
 
-
 ::: math proof Proof
-The composition of the two parts is what the theorem relies on: the proof of
-the search uses the monotonicity of the predicate, and the monotonicity is a
-property of the meaning of the check. If the check is not exact, that is, if
-it disagrees with the true feasibility somewhere, then the predicate of the
-theorem is not the predicate the check implements, and the conclusion does
-not follow.
+The composition of the two parts is what the theorem relies on: the proof of the search uses the monotonicity of the predicate, and the monotonicity is a property of the meaning of the check. If the check is not exact, that is, if it disagrees with the true feasibility somewhere, then the predicate of the theorem is not the predicate the check implements, and the conclusion does not follow.
 :::
-
 
 ## Complexity analysis
 
@@ -227,11 +213,8 @@ not follow.
 **Auxiliary space:** whatever the check itself needs, usually $O(n)$ for a copy of the data or $O(1)$ for a running state. The search itself uses $O(1)$.
 
 ::: math complexity Complexity
-Binary search on the answer: $O(c \log R)$ time and $O(1)$ auxiliary space
-beyond the check's working space. The dominant term is the product of the
-check cost and the number of checks, so both are worth tightening.
+Binary search on the answer: $O(c \log R)$ time and $O(1)$ auxiliary space beyond the check's working space. The dominant term is the product of the check cost and the number of checks, so both are worth tightening.
 :::
-
 
 ## Algorithm selection
 
