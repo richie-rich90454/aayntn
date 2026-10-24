@@ -1,0 +1,96 @@
+algorithm: foundations.time-memory-tradeoff
+title: The time-memory tradeoff
+summary: A block-prefix table spends O(n) memory so that every static range-sum query is two lookups, while the smaller table of block totals answers in O(n/B + B) with only O(n/B) memory.
+subject: foundations
+divisions: [silver, gold]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.complexity]
+    recommended: [arrays.prefix-sums, range-queries.sqrt-decomposition]
+complexity:
+    time: "O(n) preprocessing and O(1) per query"
+    space: "O(n + n/B) = O(n), with B = floor(sqrt n)"
+assumptions:
+    - The array is static, and each query asks for the sum of an inclusive range.
+    - Integer addition is invertible, so a range sum is the difference of two prefix sums.
+    - The block size is fixed before the table is built, and the last block may be shorter than the others.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the scores and the range queries from stdin and prints one sum per query."
+      time: "O(n) preprocessing; O(1) per query"
+      auxiliarySpace: "O(n + n/B) for the inside prefix and the block prefix; O(n) overall"
+      status: unverified
+      inputs: "n, then n scores, then q, then q pairs l r."
+      outputs: "One line per query, holding the sum a_l + ... + a_r."
+      notes: "The scores are read directly into the inside-prefix array and prefixed in place, so the input is overwritten and the table costs n + n/B + 1 entries. The block size is the integer square root of n, and the index formula (i - 1) / B is the block of a 1-based position. The C variant owns both arrays through malloc and frees them before returning."
+      operations: [build, prefix, range-sum]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the scores and the range queries from stdin and prints one sum per query."
+      time: "O(n) preprocessing; O(1) per query"
+      auxiliarySpace: "O(n + n/B) for the inside prefix and the block prefix; O(n) overall"
+      status: unverified
+      inputs: "n, then n scores, then q, then q pairs l r."
+      outputs: "One line per query, holding the sum a_l + ... + a_r."
+      notes: "The scores are read directly into the inside-prefix array and prefixed in place, so the input is overwritten and the table costs n + n/B + 1 entries. The block size is the integer square root of n, and the index formula (i - 1) / B is the block of a 1-based position. The C++ variant keeps the same arrays in std::vector and uses a lambda for the prefix helper."
+      operations: [build, prefix, range-sum]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the scores and the range queries from stdin and prints one sum per query."
+      time: "O(n) preprocessing; O(1) per query"
+      auxiliarySpace: "O(n + n/B) for the inside prefix and the block prefix; O(n) overall"
+      status: unverified
+      inputs: "n, then n scores, then q, then q pairs l r."
+      outputs: "One line per query, holding the sum a_l + ... + a_r."
+      notes: "The class is Main and every table entry is a long. The scores are read directly into the inside-prefix array and prefixed in place, so the input is overwritten. The block size is the integer square root of n, the answers are accumulated in a StringBuilder, and the scanner is the custom fast scanner used by the other Java programs."
+      operations: [build, prefix, range-sum]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the scores and the range queries from stdin and prints one sum per query."
+      time: "O(n) preprocessing; O(1) per query"
+      auxiliarySpace: "O(n + n/B) for the inside prefix and the block prefix; O(n) overall"
+      status: unverified
+      inputs: "n, then n scores, then q, then q pairs l r."
+      outputs: "One line per query, holding the sum a_l + ... + a_r."
+      notes: "Python integers are arbitrary precision, so no explicit width is needed. The scores are read directly into the inside-prefix array and prefixed in place, and the block size comes from math.isqrt so that a perfect square is never rounded down. The answers are joined with newlines and written once."
+      operations: [build, prefix, range-sum]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the scores and the range queries from stdin and prints one sum per query."
+      time: "O(n) preprocessing; O(1) per query"
+      auxiliarySpace: "O(n + n/B) for the inside prefix and the block prefix; O(n) overall"
+      status: unverified
+      inputs: "n, then n scores, then q, then q pairs l r."
+      outputs: "One line per query, holding the sum a_l + ... + a_r."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The scores are read directly into the inside-prefix array and prefixed in place. The block size is found with an integer loop, every table entry is Int64, the program uses SysUtils, and every Read takes one argument so it compiles under pas2js."
+      operations: [build, prefix, range-sum]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the scores and the range queries from stdin and prints one sum per query."
+      time: "O(n) preprocessing; O(1) per query"
+      auxiliarySpace: "O(n + n/B) for the inside prefix and the block prefix; O(n) overall"
+      status: unverified
+      inputs: "n, then n scores, then q, then q pairs l r."
+      outputs: "One line per query, holding the sum a_l + ... + a_r."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The scores are read directly into the inside-prefix array and prefixed in place. Every value stays exact under the double-precision Number type for every input below 2^53, which is far above the n = 200,000 and a_i = 10^9 bounds of the reference problem."
+      operations: [build, prefix, range-sum]

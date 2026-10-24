@@ -1,0 +1,31 @@
+id: codeforces.103.d.time-to-raid-cowavans
+title: Time to Raid Cowavans
+source: Codeforces
+contest: Codeforces Beta Round 80 (Div. 1 Only)
+division: platinum
+url: https://codeforces.com/problemset/problem/103/D
+editorialUrl: https://codeforces.com/blog/entry/2426
+techniques:
+    - foundations.time-memory-tradeoff
+prerequisites:
+    - range-queries.sqrt-decomposition
+    - foundations.complexity
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - The cowavan and the number of scenarios both reach 300,000, and the memory limit is 70 MB.
+    - A scenario with a small step b visits n/b cows, so answering every small-step scenario directly is too slow.
+    - The sum for one scenario can reach 3e5 times 1e9, which is 3e14, so it requires 64-bit integers.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - For a fixed step b, the answer for every starting cow satisfies a suffix recurrence, so one table of n values answers every start position in O(n).
+    - Building that table for every b is too expensive, but a scenario with b at least sqrt(n) has at most sqrt(n) terms and can be answered directly.
+    - Sort the scenarios by b and build the recurrence table only for the small steps, reusing it for every scenario with the same step.
+    - Choose the threshold at sqrt(n), where the direct scenarios cost O(sqrt(n)) each and the tables cost O(n) per small step, for O((n + p) sqrt(n)) total time.
+discussion: >-
+    The two obvious algorithms are a direct walk along the cowavan and a suffix table for a fixed step. The direct walk is cheap for large steps and expensive for small ones; the table is linear to build for any step and constant per query, but keeping a table for every step would exceed the memory limit. Sorting the scenarios by step lets one table be reused for all scenarios with the same small step and discarded before the next, so the memory is O(n) and the time is O((n + p) sqrt(n)). The memory limit is what rules out the naive table-of-tables version and forces the offline ordering.
+related:
+    - codeforces.1207.f.remainder-problem
+    - usaco.2016.jan.silver.subsequences-summing-to-sevens

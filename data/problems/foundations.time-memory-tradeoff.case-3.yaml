@@ -1,0 +1,31 @@
+id: codeforces.1207.f.remainder-problem
+title: Remainder Problem
+source: Codeforces
+contest: Educational Codeforces Round 71 (Rated for Div. 2)
+division: platinum
+url: https://codeforces.com/problemset/problem/1207/F
+editorialUrl: https://codeforces.com/blog/entry/69314
+techniques:
+    - foundations.time-memory-tradeoff
+prerequisites:
+    - range-queries.sqrt-decomposition
+    - foundations.complexity
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The array has 500,000 positions and the number of queries reaches 500,000.
+    - A query with a small modulus x has about 500,000/x terms, so answering it directly is too slow.
+    - A table for every small modulus costs K^2 entries, which is why the threshold has to be chosen as a square root rather than as the full array size.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A type-2 query asks for the sum of a_y, a_{y+x}, a_{y+2x}, and so on.
+    - If x is large, the query visits at most 500,000/x positions, so a direct scan is affordable.
+    - If x is small, precompute sum[x][r] for every remainder r, and update exactly one entry per small x whenever a position changes.
+    - Choose the threshold K around sqrt(500,000), which is about 707; the editorial uses 750, giving O(qK + q times 500,000/K) time and O(K^2) memory.
+discussion: >-
+    The moduli split the queries into two regimes. A large modulus has few terms, so the array is scanned directly; a small modulus has many terms, so the answer is read from a table indexed by the modulus and the remainder. An update touches one position, and that position contributes to exactly one remainder for each small modulus, so the table can be maintained in O(K) per update. The threshold K is the square root of the array length: below it the table wins per query, and above it the scan is short enough. The table holds K^2 entries, about 560,000 at the editorial's threshold, which is the memory the time is bought with.
+related:
+    - codeforces.103.d.time-to-raid-cowavans
+    - usaco.2016.jan.silver.subsequences-summing-to-sevens

@@ -1,0 +1,9 @@
+- name: ranges that cross block boundaries
+  input: "10\n3 1 4 1 5 9 2 6 5 3\n4\n2 8\n1 10\n7 10\n3 3\n"
+  expected: "28\n39\n16\n4\n"
+- name: every element in its own block
+  input: "2\n5 0\n3\n1 2\n2 2\n1 1\n"
+  expected: "5\n0\n5\n"
+- name: a single element
+  input: "1\n7\n3\n1 1\n1 1\n1 1\n"
+  expected: "7\n7\n7\n"

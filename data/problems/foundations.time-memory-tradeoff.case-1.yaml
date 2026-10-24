@@ -1,0 +1,30 @@
+id: usaco.2016.jan.silver.subsequences-summing-to-sevens
+title: Subsequences Summing to Sevens
+source: USACO
+contest: 2016 January Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=595
+editorialUrl: https://usaco.org/current/data/sol_div7_silver_jan16.html
+techniques:
+    - foundations.time-memory-tradeoff
+prerequisites:
+    - arrays.prefix-sums
+    - number-theory.modular-arithmetic
+difficulty: 1
+estimatedMinutes: 15
+specialConstraints:
+    - The sum of a large group can exceed a 32-bit integer, so the running sum needs 64 bits or a remainder reduction at every step.
+    - Fifty thousand cows rule out checking every pair of endpoints.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A contiguous group sums to a multiple of 7 exactly when its two prefix sums have the same remainder modulo 7.
+    - For each remainder, only the first and the last prefix position matter, and the best group with that remainder is the distance between them.
+    - Seven first positions and seven last positions replace a table of all n prefix sums, so the memory is constant.
+discussion: >-
+    The prefix table is reduced to its smallest useful form: one slot per remainder. Two prefixes with the same remainder differ by a multiple of 7, so the longest group with that remainder is the distance from its first occurrence to its last. The table has seven first positions and seven last positions, which is the memory end of the tradeoff, and the scan over the cows is linear. The running sum is reduced modulo 7 after every cow, so the 64-bit note only matters for the unreduced values in the statement.
+related:
+    - codeforces.103.d.time-to-raid-cowavans
+    - usaco.2015.feb.silver.cow-hopscotch
