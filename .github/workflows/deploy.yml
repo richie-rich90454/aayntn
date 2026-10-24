@@ -99,6 +99,8 @@ jobs:
             - name: Generate, validate and build
               run: pnpm run build
               env:
+                  NODE_OPTIONS: --max-old-space-size=6144
+              env:
                   AAYNTN_BASE: ${{ steps.address.outputs.base }}
                   AAYNTN_HOSTNAME: ${{ steps.address.outputs.hostname }}
 
