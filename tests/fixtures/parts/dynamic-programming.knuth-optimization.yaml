@@ -1,0 +1,9 @@
+- name: three matrices where the left grouping is cheaper
+  input: "3\n10 30 5 60\n"
+  expected: "4500\n"
+- name: six matrices with a narrow window at the end
+  input: "6\n30 35 15 5 10 20 25\n"
+  expected: "15125\n"
+- name: edge case with a single matrix and no multiplication
+  input: "1\n7 13\n"
+  expected: "0\n"

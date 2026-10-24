@@ -1,0 +1,93 @@
+algorithm: dynamic-programming.knuth-optimization
+title: "Knuth optimization"
+summary: Narrow the split search of an interval dynamic program to a monotone window, turning the cubic table into a quadratic one when the range cost satisfies the quadrangle inequality.
+subject: dynamic-programming
+divisions: [platinum]
+importance: advanced-technique
+complexity:
+    time: "O(n^2)"
+    space: "O(n^2)"
+assumptions:
+    - The cost of a range is independent of the split point.
+    - The range cost satisfies the quadrangle inequality and is monotone.
+    - The optimal split obeys opt[i][j - 1] <= opt[i][j] <= opt[i + 1][j].
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and the n + 1 dimensions of a matrix chain and prints the minimum number of scalar multiplications, searching only the monotone split window."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n^2) for the cost table and the split table"
+      status: unverified
+      inputs: "n, then p[0] .. p[n], the dimensions of the n matrices."
+      outputs: "The minimum number of scalar multiplications, on one line."
+      notes: "The tables are flat arrays of n * n entries. The window is [opt[i][j - 1], opt[i + 1][j]], clamped to [i, j - 1], and the scan records the smallest split that attains the minimum. All arithmetic is 64-bit, because a chain of 2000 matrices with dimensions up to 1000 reaches 2 * 10^12."
+      operations: [init-table, compute-length, narrow-split-window, choose-split]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and the n + 1 dimensions of a matrix chain and prints the minimum number of scalar multiplications, searching only the monotone split window."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n^2) for the cost table and the split table"
+      status: unverified
+      inputs: "n, then p[0] .. p[n], the dimensions of the n matrices."
+      outputs: "The minimum number of scalar multiplications, on one line."
+      notes: "The tables are std::vectors of n * n 64-bit entries. The window is [opt[i][j - 1], opt[i + 1][j]], clamped to [i, j - 1], and the scan records the smallest split that attains the minimum. All arithmetic is 64-bit, because a chain of 2000 matrices with dimensions up to 1000 reaches 2 * 10^12."
+      operations: [init-table, compute-length, narrow-split-window, choose-split]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and the n + 1 dimensions of a matrix chain and prints the minimum number of scalar multiplications, searching only the monotone split window."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n^2) for the cost table and the split table"
+      status: unverified
+      inputs: "n, then p[0] .. p[n], the dimensions of the n matrices."
+      outputs: "The minimum number of scalar multiplications, on one line."
+      notes: "The tables are two-dimensional arrays of 64-bit values and 32-bit split indices. The window is [opt[i][j - 1], opt[i + 1][j]], clamped to [i, j - 1], and the scan records the smallest split that attains the minimum. All arithmetic is 64-bit, because a chain of 2000 matrices with dimensions up to 1000 reaches 2 * 10^12."
+      operations: [init-table, compute-length, narrow-split-window, choose-split]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads n and the n + 1 dimensions of a matrix chain and prints the minimum number of scalar multiplications, searching only the monotone split window."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n^2) for the cost table and the split table"
+      status: unverified
+      inputs: "n, then p[0] .. p[n], the dimensions of the n matrices."
+      outputs: "The minimum number of scalar multiplications, on one line."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The tables are nested arrays of numbers. The window is [opt[i][j - 1], opt[i + 1][j]], clamped to [i, j - 1], and the scan records the smallest split that attains the minimum. The stated constraints keep every intermediate product below 2^53, so a plain number is exact; a larger instance would need BigInt."
+      operations: [init-table, compute-length, narrow-split-window, choose-split]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads n and the n + 1 dimensions of a matrix chain and prints the minimum number of scalar multiplications, searching only the monotone split window."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n^2) for the cost table and the split table"
+      status: unverified
+      inputs: "n, then p[0] .. p[n], the dimensions of the n matrices."
+      outputs: "The minimum number of scalar multiplications, on one line."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The tables are dynamic arrays of Int64 and Integer. The window is [opt[i][j - 1], opt[i + 1][j]], clamped to [i, j - 1], and the scan records the smallest split that attains the minimum. The repository compiles Pascal with a Pascal-to-JavaScript toolchain, where Int64 is represented by a JavaScript number, so the stated constraints keep every value exact."
+      operations: [init-table, compute-length, narrow-split-window, choose-split]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and the n + 1 dimensions of a matrix chain and prints the minimum number of scalar multiplications, searching only the monotone split window."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n^2) for the cost table and the split table"
+      status: unverified
+      inputs: "n, then p[0] .. p[n], the dimensions of the n matrices."
+      outputs: "The minimum number of scalar multiplications, on one line."
+      notes: "The tables are lists of lists, and the values are arbitrary-precision integers, so no product overflows. The window is [opt[i][j - 1], opt[i + 1][j]], clamped to [i, j - 1], and the scan records the smallest split that attains the minimum. The quadratic loop is slow in Python, so the variant is recommended only when n is at most a few thousand."
+      operations: [init-table, compute-length, narrow-split-window, choose-split]

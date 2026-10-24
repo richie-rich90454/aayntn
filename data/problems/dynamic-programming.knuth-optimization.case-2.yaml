@@ -1,0 +1,29 @@
+id: luogu.p1775.stone-merging
+title: Stone Merging (Weak Version)
+source: Luogu
+contest: Luogu Problem Set
+division: gold
+url: https://www.luogu.com.cn/problem/P1775
+techniques:
+    - dynamic-programming.knuth-optimization
+prerequisites:
+    - dynamic-programming.interval-dp
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The n piles lie in a line, with n at most 300 and at most 1000 stones in a pile.
+    - Only two adjacent piles may be merged, and the cost of a merge is the total number of stones in the two piles.
+    - The total cost fits in a 64-bit integer, although the cubic program is already fast enough at this size.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The last merge combines two adjacent ranges, so the state is a range of piles.
+    - The cost added by a range is the sum of its piles, which a prefix sum answers in constant time.
+    - The range-sum cost satisfies the quadrangle inequality, so the best split is monotone in the endpoints.
+    - The search for the best split can start at the split of the range without its last pile and stop at the split of the range without its first pile.
+discussion: >-
+    This is the smallest complete form of the interval dynamic program with a range cost. The cost of a range is the sum of its piles, and that cost is additive, monotone, and satisfies the quadrangle inequality. The optimal split therefore obeys the Knuth bound, and the cubic table becomes quadratic. The weak version allows a cubic solution, which is why it is a good place to compare the two programs and to see that the bound never changes the answer. The same code, with the doubled array trick, solves the circular version.
+related:
+    - uva.10304.optimal-binary-search-tree
+    - hdu.3506.monkey-party

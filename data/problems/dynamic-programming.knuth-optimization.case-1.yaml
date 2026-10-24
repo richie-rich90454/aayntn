@@ -1,0 +1,29 @@
+id: uva.10304.optimal-binary-search-tree
+title: Optimal Binary Search Tree
+source: UVa
+contest: UVa Online Judge
+division: platinum
+url: https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1245
+techniques:
+    - dynamic-programming.knuth-optimization
+prerequisites:
+    - dynamic-programming.interval-dp
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - The input holds several trees, each on one line as n followed by n non-negative frequencies, and ends at end of file.
+    - n is at most 250, so the cubic table is feasible and the monotone split window makes it quadratic.
+    - The cost is a sum of frequencies weighted by depth, so every transition needs the sum of a range of frequencies.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Every subtree occupies a contiguous range of the sorted keys, so the state is a pair of endpoints.
+    - The root of a range splits it into a left range and a right range, and the added cost is the sum of the frequencies in the whole range.
+    - The optimal root only moves to the right as the right endpoint grows, which is the bound opt[i][j - 1] <= opt[i][j] <= opt[i + 1][j].
+    - Prefix sums give the range sum in constant time, and the split table removes the cubic inner loop.
+discussion: >-
+    The recurrence is the interval dynamic program with a range cost equal to the sum of the frequencies. That cost is additive and satisfies the quadrangle inequality, so the optimal root is monotone in both endpoints. Recording the root lets each range search only the window between the roots of the two shorter ranges, which makes the total number of split evaluations quadratic. The frequencies are non-negative, so the range sums are monotone as well, and the answer fits in a 64-bit integer. The usual implementation keeps a prefix-sum array, a cost table, and a root table.
+related:
+    - luogu.p1775.stone-merging
+    - hdu.3506.monkey-party

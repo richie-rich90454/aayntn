@@ -1,0 +1,29 @@
+id: hdu.3506.monkey-party
+title: Monkey Party
+source: HDU
+contest: 2010 ACM-ICPC Multi-University Training Contest 7
+division: platinum
+url: https://acm.hdu.edu.cn/showproblem.php?pid=3506
+techniques:
+    - dynamic-programming.knuth-optimization
+prerequisites:
+    - dynamic-programming.interval-dp
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - There are up to 1000 monkeys in a circle, and several test cases are read until end of file.
+    - Two adjacent groups may be introduced, and the cost is the sum of the making-friends times of both groups.
+    - The circle has no fixed starting point, so the array is doubled and every window of n monkeys is a candidate.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Duplicate the array so that every rotation of the circle becomes a contiguous range of length n.
+    - The last introduction in a range combines two adjacent subranges, and the added cost is the sum of the range.
+    - The range-sum cost satisfies the quadrangle inequality, so the optimal split is monotone.
+    - Compute every range up to length n, then take the smallest cost among the n windows of length n.
+discussion: >-
+    The circle is linearized by doubling the array, after which the problem is the stone-merging recurrence over ranges of length at most n. The range cost is the sum of the making-friends times, which is additive and satisfies the quadrangle inequality, so the optimal split obeys the Knuth bound. The doubled array has 2n positions, and the quadratic table over them is the price of removing the circle. The answer is the smallest cost of a range of length n, because every rotation appears as one such window. A cubic table over 2n positions is too slow at the upper limit, which is what makes the bound necessary here.
+related:
+    - uva.10304.optimal-binary-search-tree
+    - luogu.p1775.stone-merging
