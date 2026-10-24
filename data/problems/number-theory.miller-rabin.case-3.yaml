@@ -1,0 +1,28 @@
+id: codeforces.45g.prime-problem
+title: Prime Problem
+source: Codeforces
+contest: School Team Contest 3 (Winter Computer School 2010/11)
+division: platinum
+url: https://codeforces.com/problemset/problem/45/G
+techniques:
+    - number-theory.miller-rabin
+prerequisites:
+    - number-theory.modular-arithmetic
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The total of the house numbers is at most 18003000, so every prime test is on a value whose square root is below 4244.
+    - The answer uses at most three colors, but the houses of each color must be constructed rather than only counted.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The total sum S of the house numbers decides the answer, because every color class has a prime sum and the sums of the colors add up to S.
+    - If S is prime, one color is enough.
+    - If S is even, Goldbach gives two primes p and S - p; choose a subset of the houses whose numbers sum to p.
+    - If S is odd, test S - 2; when it is prime, house 2 is one color and the rest is the other. Otherwise house 3 is one color, and S - 3 is even and splits into two primes.
+discussion: >-
+    The sum of all house numbers is S. One color works exactly when S is prime. Two colors work exactly when S is even, by Goldbach, or when S - 2 is prime, because the only even prime is 2. In every remaining case three colors work: house 3 stands alone and the even number S - 3 splits into two primes. The construction needs a subset of 1..n with a given sum, which the consecutive house numbers supply greedily, and the only arithmetic is a few primality tests on values below 18003000.
+related:
+    - codeforces.230b.t-primes
+    - codeforces.735d.taxes

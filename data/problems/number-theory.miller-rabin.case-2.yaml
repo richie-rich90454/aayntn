@@ -1,0 +1,29 @@
+id: codeforces.735d.taxes
+title: Taxes
+source: Codeforces
+contest: Codeforces Round 382 (Div. 2)
+division: gold
+url: https://codeforces.com/problemset/problem/735/D
+editorialUrl: https://codeforces.com/blog/entry/48659
+techniques:
+    - number-theory.miller-rabin
+prerequisites:
+    - number-theory.modular-arithmetic
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The income reaches 2e9, but the answer is at most 3, so every decision is a primality test on n, n - 2 or n - 3.
+    - Goldbach's conjecture has been verified far beyond 2e9, so every even number in range is the sum of two primes.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A part that is itself prime pays a tax of 1, and splitting a composite part into its prime factors never increases the total, so the answer is the minimum number of primes that sum to n.
+    - If n is prime the answer is 1.
+    - If n is even, Goldbach writes it as the sum of two primes, so the answer is 2.
+    - If n is odd, test n - 2; when it is prime the answer is 2. Otherwise n = 3 + (n - 3), and n - 3 is even, so Goldbach splits it into two primes and the answer is 3.
+discussion: >-
+    The tax on a single part is its largest proper divisor, which is 1 exactly when the part is prime, so the cheapest split uses only primes. The minimum is 1 for a prime, 2 for an even number or for an odd number whose predecessor by two is prime, and 3 otherwise. The whole computation is a constant number of primality tests below 2e9, which deterministic Miller-Rabin answers in a few dozen multiplications each.
+related:
+    - codeforces.230b.t-primes
+    - codeforces.45g.prime-problem

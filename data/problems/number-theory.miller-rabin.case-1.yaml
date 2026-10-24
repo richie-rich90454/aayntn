@@ -1,0 +1,29 @@
+id: codeforces.230b.t-primes
+title: T-primes
+source: Codeforces
+contest: Codeforces Round 142 (Div. 2)
+division: silver
+url: https://codeforces.com/problemset/problem/230/B
+editorialUrl: https://codeforces.com/blog/entry/5437
+techniques:
+    - number-theory.miller-rabin
+prerequisites:
+    - number-theory.modular-arithmetic
+    - foundations.binary-representation
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - There are up to 100000 values, each at most 10^12, so trial division up to the square root of every value is too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A number has exactly three positive divisors exactly when it is the square of a prime, because the divisors of p^2 are 1, p and p^2.
+    - An integer square root decides whether a value is a perfect square, and comparing the root's square against the value catches the rounding of the floating-point square root.
+    - The root is at most 10^6, so a sieve of Eratosthenes answers every query after one preprocessing pass.
+    - Deterministic Miller-Rabin answers the same question with no preprocessing, which is the simpler program when the root can be large.
+discussion: >-
+    The three divisors of p^2 are 1, p and p^2, and no other number has exactly three divisors, so each query reduces to a square test followed by a primality test of the root. The roots reach 10^6, which a sieve covers in one pass, and the same question at the full 64-bit bound needs a primality test rather than a table. The two implementations differ in preprocessing cost, not in the decision.
+related:
+    - codeforces.735d.taxes
+    - codeforces.45g.prime-problem

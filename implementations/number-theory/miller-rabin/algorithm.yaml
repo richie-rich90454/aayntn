@@ -1,0 +1,94 @@
+algorithm: number-theory.miller-rabin
+title: Miller-Rabin primality test
+summary: Decide whether a 64-bit integer is prime by writing n - 1 as a power of two times an odd number and checking a fixed set of bases, which is deterministic for the whole signed 64-bit range.
+subject: number-theory
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [number-theory.modular-arithmetic]
+    recommended: [foundations.binary-representation]
+complexity:
+    time: "O(k log n) modular multiplications with k = 12"
+    space: "O(1)"
+assumptions:
+    - Every value is a non-negative integer below 2^63, where the twelve fixed bases decide every case.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a count and that many 64-bit integers and prints PRIME or COMPOSITE for each, with deterministic bases and a 128-bit intermediate product."
+      time: "O(log n) modular multiplications per base, twelve bases"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one non-negative integer below 2^63."
+      outputs: "One line per integer, holding PRIME or COMPOSITE."
+      notes: "The product of two residues is formed in unsigned __int128 before the modulo, so no 64-bit multiplication can wrap. Small prime factors are removed first, which also handles 2, 3 and every other base, and a value below 2 is reported as composite. The C variant sets the standard output to binary mode so its line feeds match the other five programs."
+      operations: [parse, decompose, modular-power, witness-loop, verdict]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a count and that many 64-bit integers and prints PRIME or COMPOSITE for each, with deterministic bases and a 128-bit intermediate product."
+      time: "O(log n) modular multiplications per base, twelve bases"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one non-negative integer below 2^63."
+      outputs: "One line per integer, holding PRIME or COMPOSITE."
+      notes: "The product of two residues is formed in unsigned __int128 before the modulo, so no 64-bit multiplication can wrap. Small prime factors are removed first, which also handles 2, 3 and every other base, and a value below 2 is reported as composite. Input and output are untied from the C streams, and every line ends with a line feed."
+      operations: [parse, decompose, modular-power, witness-loop, verdict]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a count and that many 64-bit integers and prints PRIME or COMPOSITE for each, with deterministic bases and an exact 128-bit product."
+      time: "O(log n) modular multiplications per base, twelve bases"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one non-negative integer below 2^63."
+      outputs: "One line per integer, holding PRIME or COMPOSITE."
+      notes: "Java has no 128-bit integer, so mulMod uses the long product whenever it cannot overflow and BigInteger otherwise; both paths return the same exact residue. The byte-array scanner reads the count and then exactly that many values, and a value below 2 is reported as composite."
+      operations: [parse, decompose, modular-power, witness-loop, verdict]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a count and that many 64-bit integers and prints PRIME or COMPOSITE for each, with deterministic bases."
+      time: "O(log n) modular multiplications per base, twelve bases"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one non-negative integer below 2^63."
+      outputs: "One line per integer, holding PRIME or COMPOSITE."
+      notes: "Python integers are arbitrary precision, so the product of two residues is exact without special handling, and the built-in pow computes the modular power. Values below 2 are reported as composite. The output is written as bytes so the line feeds do not depend on the platform."
+      operations: [parse, decompose, modular-power, witness-loop, verdict]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads a count and that many 64-bit integers and prints PRIME or COMPOSITE for each, with deterministic bases."
+      time: "O(log^2 n) 32-bit operations per base because multiplication is repeated doubling"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one non-negative integer below 2^63."
+      outputs: "One line per integer, holding PRIME or COMPOSITE."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The browser Pascal compiler stores Int64 as a double, so this listing keeps every value as two 32-bit limbs, parses the decimal text into those limbs, and multiplies by doubling instead of relying on a 128-bit type. No step uses a floating-point value, and the program reads one value per line so the decimal text is never rounded."
+      operations: [parse, decompose, modular-power, witness-loop, verdict]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads a count and that many 64-bit integers and prints PRIME or COMPOSITE for each, with deterministic bases."
+      time: "O(log n) modular multiplications per base, twelve bases"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one non-negative integer below 2^63."
+      outputs: "One line per integer, holding PRIME or COMPOSITE."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. BigInt supplies exact 64-bit input and exact 128-bit intermediate products, while a Number would lose precision above 2^53. Values below 2 are reported as composite."
+      operations: [parse, decompose, modular-power, witness-loop, verdict]

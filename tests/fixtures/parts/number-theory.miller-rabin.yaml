@@ -1,0 +1,9 @@
+- name: the boundary values and the first primes
+  input: "7\n0\n1\n2\n3\n4\n37\n41\n"
+  expected: "COMPOSITE\nCOMPOSITE\nPRIME\nPRIME\nCOMPOSITE\nPRIME\nPRIME\n"
+- name: strong pseudoprimes that pass the first few bases
+  input: "4\n561\n2047\n1373653\n3215031751\n"
+  expected: "COMPOSITE\nCOMPOSITE\nCOMPOSITE\nCOMPOSITE\n"
+- name: primes and products at the top of the signed 64-bit range
+  input: "4\n3037000493\n9223371994482243049\n9223372036854775783\n9223372036854775807\n"
+  expected: "PRIME\nCOMPOSITE\nPRIME\nCOMPOSITE\n"
