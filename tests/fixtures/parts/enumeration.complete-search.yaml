@@ -1,0 +1,9 @@
+- name: two subsets reach the target
+  input: "4\n1 2 3 4\n5\n"
+  expected: "2\n"
+- name: duplicate and negative values are counted by position
+  input: "4\n1 1 -1 0\n1\n"
+  expected: "6\n"
+- name: edge case with no values and an empty subset
+  input: "0\n0\n"
+  expected: "1\n"

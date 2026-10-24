@@ -1,0 +1,31 @@
+id: usaco.2023.jan.bronze.air-cownditioning-ii
+title: Air Cownditioning II
+source: USACO
+contest: 2023 January Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1276
+editorialUrl: https://usaco.org/current/data/sol_prob2_bronze_jan23.html
+techniques:
+    - enumeration.complete-search
+prerequisites:
+    - enumeration.subset-enumeration
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - M is at most 10, so the 2^M subsets of air conditioners are at most 1024.
+    - The cow intervals are disjoint, but the conditioner intervals may overlap, so every stall has to be checked against every chosen unit.
+    - Running every conditioner keeps all cows comfortable, so at least one feasible subset exists.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The number of air conditioners is at most ten, so the choice of which units to run is a subset of at most 1024 candidates.
+    - For each subset, add the power of every chosen unit to a difference array over the hundred stalls.
+    - Prefix-sum the difference array, then check every cow's interval against its requirement.
+    - Keep the subsets that satisfy every cow and take the minimum total cost.
+discussion: >-
+    The search space is the family of subsets of conditioners, which is small because M is at most ten. For each subset the test is a sweep over one hundred stalls, so the cost is the candidate count times the test cost. The difference array makes the cooling of a chosen unit two updates instead of a loop over its interval, and the prefix sum reconstructs every stall's temperature. The minimum cost over the feasible subsets is the answer, and the guarantee that all units together suffice means the minimum is always defined.
+related:
+    - cses.1623.apple-division
+    - usaco.2014.jan.bronze.ski-course-design

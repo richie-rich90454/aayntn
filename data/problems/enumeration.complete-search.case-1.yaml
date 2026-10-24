@@ -1,0 +1,28 @@
+id: cses.1623.apple-division
+title: Apple Division
+source: CSES
+contest: CSES Problem Set
+url: https://cses.fi/problemset/task/1623
+techniques:
+    - enumeration.complete-search
+prerequisites:
+    - enumeration.subset-enumeration
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - n is at most 20, so the 2^n subsets are the intended candidates and a dynamic program over the weights is unnecessary.
+    - The weights are up to 10^9, so the total reaches 2 * 10^10 and does not fit in a 32-bit integer.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A division is determined by the subset that goes into the first group, and the second group is the complement.
+    - Enumerate the 2^n subsets, keep the sum of the chosen weights, and compare |total - 2 * sum| with the best difference.
+    - The empty subset and the full subset are both candidates and both give the full total as the difference.
+    - Use 64-bit integers for the total and for the running sum.
+discussion: >-
+    The candidate space is the 2^n subsets, about one million at n = 20, and each candidate is tested with one subtraction and one absolute value. Passing the running sum down the recursion avoids rescanning the subset, so the cost is O(2^n). The answer is the minimum over all masks of |total - 2 * sum|, and a mask and its complement give the same difference, so half the masks could be skipped, but the full enumeration is already fast enough.
+related:
+    - usaco.2023.jan.bronze.air-cownditioning-ii
+    - usaco.2014.jan.bronze.ski-course-design

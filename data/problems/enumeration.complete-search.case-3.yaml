@@ -1,0 +1,30 @@
+id: usaco.2014.jan.bronze.ski-course-design
+title: Ski Course Design
+source: USACO
+contest: 2014 January Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=376
+editorialUrl: https://usaco.org/current/data/sol_skidesign.html
+techniques:
+    - enumeration.complete-search
+prerequisites:
+    - foundations.complexity
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - Elevations are between 0 and 100, so the possible final intervals are only the 84 intervals [L, L + 17] with 0 <= L <= 83.
+    - N is up to 1000, so each candidate interval costs a linear scan and the total is about 84000 operations.
+    - The cost of changing a hill by x is x^2, so for a fixed interval the cheapest change is to the nearest endpoint.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The final range has a lowest height L between 0 and 83, and every hill outside [L, L + 17] has to move to the nearest endpoint.
+    - Try all 84 values of L, sum the squared distances, and keep the minimum.
+    - The answer is at most 1000 * 100^2, so a 32-bit integer is enough.
+discussion: >-
+    The candidate is a single parameter rather than a subset: the lowest height of the final interval. The elevations are integers between 0 and 100, so there are only 84 intervals of width 17 to try. For a fixed interval the squared cost is convex in the final height, which makes the nearest endpoint optimal for every hill. The whole solution is a double loop over the intervals and the hills, and the common failure is restricting the interval endpoints to elevations that actually occur.
+related:
+    - cses.1623.apple-division
+    - usaco.2023.jan.bronze.air-cownditioning-ii

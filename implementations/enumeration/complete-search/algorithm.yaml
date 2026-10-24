@@ -1,0 +1,93 @@
+algorithm: enumeration.complete-search
+title: Complete search
+summary: Enumerate every candidate in a finite space, test each one against the statement, and count the successes, with no pruning and no shortcuts.
+subject: enumeration
+divisions: [bronze, silver]
+importance: core-prerequisite
+complexity:
+    time: "O(2^n) with the include-or-skip recursion, O(n 2^n) with a mask and a rescan"
+    space: "O(n) for the recursion stack"
+assumptions:
+    - The candidate space is finite and every candidate is generated exactly once.
+    - The test is decided from the candidate alone, so one test does not hide a search.
+    - n is at most 20, so the 2^n candidates are affordable.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the values and the target, and counts the subsets whose sum equals the target with a recursive include-or-skip search."
+      time: "O(2^n)"
+      auxiliarySpace: "O(n) for the recursion stack"
+      status: unverified
+      inputs: "n, then n integers, then the target T, all whitespace-separated."
+      outputs: "One line holding the number of subsets whose sum equals T."
+      notes: "The program reads with scanf using %d for n and %lld for the values and the target, stores the values in a static array of twenty long long, and carries the running sum through a recursive include-or-skip search, so every subset is tested once and the empty subset is counted. The counter is long long even though it never exceeds 2^20, because the same code is easy to reuse for a larger candidate space."
+      operations: [read, enumerate, include-exclude, test, count]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the values and the target, and counts the subsets whose sum equals the target with a recursive include-or-skip search."
+      time: "O(2^n)"
+      auxiliarySpace: "O(n) for the recursion stack"
+      status: unverified
+      inputs: "n, then n integers, then the target T, all whitespace-separated."
+      outputs: "One line holding the number of subsets whose sum equals T."
+      notes: "The program reads with std::cin into a std::vector<long long>, then recurses over the index with the running sum passed by value, so no state has to be restored and the empty subset is generated at the all-skip leaf. The recursive function returns a long long count, and the whole program compiles clean under -Wall -Wextra -Werror."
+      operations: [read, enumerate, include-exclude, test, count]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the values and the target, and counts the subsets whose sum equals the target with a recursive include-or-skip search."
+      time: "O(2^n)"
+      auxiliarySpace: "O(n) for the recursion stack"
+      status: unverified
+      inputs: "n, then n integers, then the target T, all whitespace-separated."
+      outputs: "One line holding the number of subsets whose sum equals T."
+      notes: "The class is named Main and the file is Main.java, so the source can be submitted unchanged. It reads with Scanner, keeps the values in a long[], and recurses with the running sum as a parameter, incrementing a long counter at each matching leaf. Scanner is more than fast enough for at most twenty-two tokens."
+      operations: [read, enumerate, include-exclude, test, count]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the values and the target, and counts the subsets whose sum equals the target with a recursive include-or-skip search."
+      time: "O(2^n)"
+      auxiliarySpace: "O(n) for the recursion stack"
+      status: unverified
+      inputs: "n, then n integers, then the target T, all whitespace-separated."
+      outputs: "One line holding the number of subsets whose sum equals T."
+      notes: "The program reads all tokens from sys.stdin.buffer, slices the first n values after n, and reads the target from the next token. The recursive function returns the count from its two branches, so the counter is a return value rather than shared state. Python integers are arbitrary precision, so the sums and the count cannot overflow."
+      operations: [read, enumerate, include-exclude, test, count]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the values and the target, and counts the subsets whose sum equals the target with a recursive include-or-skip search."
+      time: "O(2^n)"
+      auxiliarySpace: "O(n) for the recursion stack"
+      status: unverified
+      inputs: "n, then n integers, then the target T, all whitespace-separated."
+      outputs: "One line holding the number of subsets whose sum equals T."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program uses Int64 for the values, the target and the counter, and calls Read with one argument per value, which the browser compiler requires. It uses SysUtils for IntToStr, avoids IOResult and 128-bit integers, and carries the running sum as a parameter through the same recursive include-or-skip search as the other languages."
+      operations: [read, enumerate, include-exclude, test, count]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the values and the target, and counts the subsets whose sum equals the target with a recursive include-or-skip search."
+      time: "O(2^n)"
+      auxiliarySpace: "O(n) for the recursion stack"
+      status: unverified
+      inputs: "n, then n integers, then the target T, all whitespace-separated."
+      outputs: "One line holding the number of subsets whose sum equals T."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The program reads the whole of stdin with readFileSync(0), parses the tokens with Number, and recurses with the running sum as a parameter. Every intermediate value is far below 2^53, so Number arithmetic is exact, and the code uses plain arithmetic rather than 32-bit bitwise operators."
+      operations: [read, enumerate, include-exclude, test, count]
