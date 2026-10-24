@@ -1,0 +1,97 @@
+algorithm: greedy.matroid-perspective
+title: The matroid perspective
+summary: Recognize a matroid from its independence system and exchange property, then sort the items by weight and take every item that keeps the set independent.
+subject: greedy
+divisions: [gold, platinum]
+importance: advanced-technique
+prerequisites:
+    required: [foundations.sorting, foundations.complexity]
+    recommended:
+        [greedy.interval-scheduling, greedy.scheduling-deadlines-and-release-times, graphs.mst]
+complexity:
+    time: "O(n log n)"
+    space: "O(n)"
+assumptions:
+    - The items are partitioned into color classes, and a set is feasible when it contains at most one item of each class.
+    - Every weight is a nonnegative integer, and the objective is the total weight of the chosen set.
+    - Ties in weight may be broken arbitrarily, because the problem asks only for the total.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n pairs of color and weight, groups the items by color, and prints the maximum total weight of a set with at most one item per color."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the item array"
+      status: unverified
+      inputs: "n, then n lines each holding a color and a weight, separated by whitespace."
+      outputs: "One line holding the maximum total weight of a set with at most one item per color."
+      notes: "The items are sorted by color ascending and by weight descending, so the first item of every color is its heaviest item and the scan adds exactly one weight per color. The comparator returns a three-way result rather than a subtraction, so no difference can overflow, and the total is a long long because the sum can exceed 2^31."
+      operations: [sort, scan, sum]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n pairs of color and weight, groups the items by color, and prints the maximum total weight of a set with at most one item per color."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the item vector"
+      status: unverified
+      inputs: "n, then n lines each holding a color and a weight, separated by whitespace."
+      outputs: "One line holding the maximum total weight of a set with at most one item per color."
+      notes: "std::sort orders the items by color ascending and weight descending, so the first item of each color is the heaviest one. The scan is one range loop, and the accumulator is a long long because the total can reach 2 * 10^14."
+      operations: [sort, scan, sum]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n pairs of color and weight, groups the items by color, and prints the maximum total weight of a set with at most one item per color."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the item array"
+      status: unverified
+      inputs: "n, then n lines each holding a color and a weight, separated by whitespace."
+      outputs: "One line holding the maximum total weight of a set with at most one item per color."
+      notes: "The class is Main and lives in java/Main.java. A byte-oriented scanner avoids the cost of Scanner, Arrays.sort orders the Item objects by color and then by descending weight, and the accumulator is a long."
+      operations: [sort, scan, sum]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n pairs of color and weight, groups the items by color, and prints the maximum total weight of a set with at most one item per color."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the item array"
+      status: unverified
+      inputs: "n, then n lines each holding a color and a weight, separated by whitespace."
+      outputs: "One line holding the maximum total weight of a set with at most one item per color."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The comparator is numeric, the grouping is done by comparing adjacent colors after the sort, and Number arithmetic is exact because the largest total, 2 * 10^14, is below 2^53."
+      operations: [sort, scan, sum]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n pairs of color and weight, groups the items by color, and prints the maximum total weight of a set with at most one item per color."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the item array and the merge buffer"
+      status: unverified
+      inputs: "n, then n lines each holding a color and a weight, separated by whitespace."
+      outputs: "One line holding the maximum total weight of a set with at most one item per color."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program uses SysUtils, one argument per Read, no IOResult, and no 128-bit integers, so it compiles under pas2js. The sort is an iterative bottom-up merge sort, and the total is Int64."
+      operations: [sort, scan, sum]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n pairs of color and weight, groups the items by color, and prints the maximum total weight of a set with at most one item per color."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the item list"
+      status: unverified
+      inputs: "n, then n lines each holding a color and a weight, separated by whitespace."
+      outputs: "One line holding the maximum total weight of a set with at most one item per color."
+      notes: "The input is read in one pass over sys.stdin.buffer, the items are sorted by color and then by descending weight, and Python integers remove the overflow concern. The scan adds the first weight of every color."
+      operations: [sort, scan, sum]

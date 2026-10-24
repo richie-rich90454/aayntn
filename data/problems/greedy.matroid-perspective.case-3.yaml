@@ -1,0 +1,30 @@
+id: atcoder.abc236.f.spices
+title: Spices
+source: AtCoder
+contest: AtCoder Beginner Contest 236
+division: gold
+url: https://atcoder.jp/contests/abc236/tasks/abc236_f
+techniques:
+    - greedy.matroid-perspective
+prerequisites:
+    - advanced.xor-bases
+    - foundations.sorting
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - N is at most 16, so there are at most 65535 spices.
+    - Every cost is at most 10^9, and a basis has N vectors, so the answer needs 64 bits.
+    - The bought labels must span every value from 1 to 2^N - 1 under XOR, not merely produce N distinct values.
+recommendedLanguages:
+    - cpp17
+    - python
+hints:
+    - The labels are vectors in GF(2)^N, and the reachable hotness values are exactly the span of the bought labels.
+    - A spanning set contains a basis, and all costs are positive, so the optimum is a minimum-cost basis.
+    - Linearly independent subsets form a linear matroid, so the matroid greedy applies.
+    - Sort the spices by cost ascending and insert each label into an XOR basis, buying it exactly when the insertion succeeds.
+discussion: >-
+    The set of labels that can produce every hotness is exactly a spanning set of GF(2)^N. Every spanning set contains a basis, and deleting redundant vectors cannot increase the cost, so the problem is the minimum-cost basis of a linear matroid. The matroid greedy sorts by cost ascending and keeps a vector exactly when it is linearly independent of the vectors kept so far, which is the XOR basis insertion step. The loop stops once N independent vectors are held, because they already span the whole space. The exchange property is the usual one for vector spaces: a larger independent set has a direction that a smaller one does not, and that direction can be added without losing independence.
+related:
+    - codeforces.1101g.zero-xor-subset-less
+    - codeforces.959f.mahmoud-and-ehab-and-yet-another-xor-task

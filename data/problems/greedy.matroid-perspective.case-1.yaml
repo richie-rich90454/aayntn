@@ -1,0 +1,32 @@
+id: usaco.2013.dec.silver.milk-scheduling
+title: Milk Scheduling
+source: USACO
+contest: 2013 December Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=361
+techniques:
+    - greedy.matroid-perspective
+prerequisites:
+    - foundations.sorting
+    - greedy.scheduling-deadlines-and-release-times
+    - graphs.dsu
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - Up to 10000 cows, each taking one unit of time, with deadlines up to 10000.
+    - A cow can be milked only in a slot strictly before its deadline, so at most x cows can be milked in the first x slots.
+    - The answer is a sum of up to 10000 values of at most 1000, which fits 32 bits, but a 64-bit accumulator is harmless.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The schedulable subsets of unit-time jobs form a matroid, so sorting the cows by gallons descending is the matroid greedy.
+    - Place each cow in the latest free slot at or before its deadline, not in the earliest free slot.
+    - A disjoint set union over the slots finds the latest free slot at or before a deadline almost in constant time.
+    - If the latest free slot is before slot one, the cow cannot be milked and is skipped.
+discussion: >-
+    The feasible sets of unit-time jobs with deadlines satisfy the exchange property, so the scheduling matroid is a matroid and the profit-descending greedy is optimal. The implementation question is only how to find the latest free slot at or before a deadline. A disjoint set union over the time slots answers that query: slot s points to s when it is free, and to the nearest free slot below it otherwise, so accepting a job unions s with s - 1. The exchange argument is the same one as in the partition case, with the set of occupied slots playing the role of the set of used colors. The alternative min-heap formulation processes the cows by deadline and discards the smallest yield whenever the prefix holds more cows than the earliest deadline allows, which is the same matroid greedy seen from the other side.
+related:
+    - poj.1456.supermarket
+    - hdu.1789.doing-homework-again

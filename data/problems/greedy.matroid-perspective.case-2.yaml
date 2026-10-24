@@ -1,0 +1,31 @@
+id: codeforces.1108f.mst-unification
+title: MST Unification
+source: Codeforces
+contest: "Codeforces Round 535 (Div. 3)"
+division: platinum
+url: https://codeforces.com/problemset/problem/1108/F
+editorialUrl: https://codeforces.com/blog/entry/64751
+techniques:
+    - greedy.matroid-perspective
+prerequisites:
+    - graphs.mst
+    - graphs.dsu
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - Up to 200000 vertices and 200000 edges, so the graph is sparse and Kruskal's algorithm is the natural fit.
+    - Edge weights reach 10^9, but the answer is at most the number of edges.
+    - The MST cost must stay exactly the same while the MST becomes unique.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The forests of a graph form the graphic matroid, and Kruskal's algorithm is the matroid greedy.
+    - Two MSTs can differ only inside a group of edges of equal weight.
+    - Inside one equal-weight group, count the edges that join different components before the group is processed, then count how many components the group actually merges.
+    - The difference is the number of optional edges, and each optional edge needs exactly one increment.
+discussion: >-
+    The graphic matroid puts Kruskal's algorithm in the same framework as the partition matroid: sort the edges by weight and add an edge when it preserves independence, which here means joining two different components. Uniqueness fails exactly when an equal-weight group offers more candidate edges between components than are needed to merge them. Processing the groups together is what makes those alternatives visible, because an edge whose endpoints are already connected by strictly lighter edges cannot appear in any MST. If the group has c candidates and merges k components, then k candidates are needed in every MST and c - k are surplus, so raising each surplus edge by one removes the ambiguity at the minimum possible cost.
+related:
+    - usaco.2015.feb.silver.superbull
+    - codeforces.891c.envy
