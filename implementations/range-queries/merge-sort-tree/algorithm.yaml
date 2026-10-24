@@ -1,0 +1,94 @@
+algorithm: range-queries.merge-sort-tree
+title: Merge sort trees
+summary: A segment tree whose nodes keep the values of their intervals sorted answers a range rank query by binary searching the nodes that cover the range, at a cost of one logarithmic factor for the nodes and one for the searches.
+subject: range-queries
+divisions: [gold, platinum]
+importance: common-contest-technique
+prerequisites:
+    required: [range-queries.segment-tree, searching.binary-search, foundations.sorting]
+    recommended: [arrays.coordinate-compression, range-queries.fenwick-tree]
+complexity:
+    time: "O(log^2 n) per rank query; O(log C log^2 n) per k-th smallest query"
+    space: "O(n log n)"
+assumptions:
+    - The array is static, because repairing a node's sorted list after a point update costs the size of that list.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log^2 n) per rank query; O(log C log^2 n) per k-th smallest query"
+      auxiliarySpace: "O(n log n) entries across the sorted lists, plus O(n) tree nodes"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "The tree is built bottom-up by merging the children's sorted lists, and the k-th smallest is the least value whose rank in the range reaches k, found by binary search over the value range. The C variant allocates one array per nonempty node and frees every list after the last query."
+      operations: [build, rank-query, kth-smallest]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log^2 n) per rank query; O(log C log^2 n) per k-th smallest query"
+      auxiliarySpace: "O(n log n) entries across the sorted lists, plus O(n) tree nodes"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "The tree is built bottom-up with std::merge, so the children's sorted lists are merged once, and the k-th smallest is the least value whose rank in the range reaches k. The std::vector nodes own their storage and release it when the tree goes out of scope."
+      operations: [build, rank-query, kth-smallest]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log^2 n) per rank query; O(log C log^2 n) per k-th smallest query"
+      auxiliarySpace: "O(n log n) entries across the sorted lists, plus O(n) tree nodes"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "The tree is a ragged long[][] built bottom-up by merging the children's sorted lists, and the output is collected in a StringBuilder so the q answers cost one write. The FastScanner keeps the input far below the cost of java.util.Scanner, and the garbage collector reclaims the node arrays."
+      operations: [build, rank-query, kth-smallest]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log^2 n) per rank query; O(log C log^2 n) per k-th smallest query"
+      auxiliarySpace: "O(n log n) entries across the sorted lists, plus O(n) tree nodes"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "The tree is a list of sorted lists built bottom-up by merging the children, and bisect_right performs the rank search in each covered node. The interpreter owns the lists, and the algorithm is the same as the other five versions; the constant factor is larger because every binary search crosses the interpreter."
+      operations: [build, rank-query, kth-smallest]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log^2 n) per rank query; O(log C log^2 n) per k-th smallest query"
+      auxiliarySpace: "O(n log n) entries across the sorted lists, plus O(n) tree nodes"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The tree is a dynamic array of dynamic arrays built bottom-up by merging the children's sorted lists, and the k-th smallest is found by binary search over the value range with an Int64 accumulator. SetLength owns and grows each node's storage."
+      operations: [build, rank-query, kth-smallest]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log^2 n) per rank query; O(log C log^2 n) per k-th smallest query"
+      auxiliarySpace: "O(n log n) entries across the sorted lists, plus O(n) tree nodes"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The tree is an array of sorted arrays built bottom-up by merging the children, and a hand-written upper bound binary searches each covered node. The platform line separator is used so the six outputs stay byte-identical."
+      operations: [build, rank-query, kth-smallest]

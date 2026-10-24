@@ -1,0 +1,31 @@
+id: cses.1734.distinct-values-queries
+title: Distinct Values Queries
+source: CSES
+contest: CSES Problem Set
+division: gold
+url: https://cses.fi/problemset/task/1734
+techniques:
+    - range-queries.merge-sort-tree
+prerequisites:
+    - range-queries.merge-sort-tree
+    - searching.binary-search
+    - foundations.sorting
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The array and the number of queries both reach 200,000.
+    - Values can be as large as 1e9, so a frequency array indexed by value cannot be allocated.
+    - A query asks for a count over a subarray, not for the values themselves.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A value contributes to a range exactly once, at its first occurrence in that range.
+    - Let prev[i] be the previous position that holds the same value, or 0 when there is none; position i is the first occurrence in [l, r] exactly when i is in [l, r] and prev[i] < l.
+    - Build a merge sort tree over prev and answer each query as the count of entries in [l, r] that are smaller than l.
+    - The tree answers the queries in the input order, while the standard alternative sorts them and sweeps a Fenwick tree over the positions.
+discussion: >-
+    A value is counted at its first occurrence in the query range, and that occurrence is characterized by the previous occurrence of the same value. With prev[i] set to that previous position, or zero when there is none, position i is the first occurrence in [l, r] exactly when prev[i] is below l. The problem becomes a count of entries below a threshold over a subarray, which a merge sort tree answers in O(log^2 N) per query. The standard offline solution replaces the tree with a Fenwick tree over positions, but the tree keeps the answers independent and works in the input order.
+related:
+    - atcoder.abc339.g.smaller-sum
+    - codeforces.813e.army-creation

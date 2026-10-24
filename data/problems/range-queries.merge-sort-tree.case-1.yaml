@@ -1,0 +1,31 @@
+id: atcoder.abc339.g.smaller-sum
+title: Smaller Sum
+source: AtCoder
+contest: AtCoder Beginner Contest 339
+division: platinum
+url: https://atcoder.jp/contests/abc339/tasks/abc339_g
+techniques:
+    - range-queries.merge-sort-tree
+prerequisites:
+    - range-queries.merge-sort-tree
+    - searching.binary-search
+    - foundations.sorting
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - The array holds up to 200,000 values and there are up to 200,000 queries.
+    - Every query is encrypted with the answer to the previous query, so the queries must be answered online and an offline sweep is not available.
+    - The sum can reach 2e14, and the encrypted query parameters reach 1e18, so both need 64 bits.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A segment tree can store, for every node, the sorted values of its interval together with the prefix sums of that sorted list.
+    - A query range splits into O(log N) nodes; inside each node, a binary search finds the count of values at most X and the prefix sum at that position gives the contribution.
+    - The answer is the sum of those contributions over the covered nodes.
+    - The encryption forces online answers, so a static range structure such as a merge sort tree, a wavelet tree, or a persistent segment tree is needed.
+discussion: >-
+    The encrypted queries rule out the usual offline sweep, so the array has to be indexed once and every query answered in the input order. A merge sort tree stores the sorted values of every segment and the prefix sums of each sorted list, so a range decomposes into O(log N) nodes and each node contributes the prefix sum up to the first value greater than X. The sum of those contributions is the answer, and the binary search inside each node adds another logarithmic factor. Both the accumulated sum and the decrypted query parameters need 64 bits.
+related:
+    - cses.1734.distinct-values-queries
+    - codeforces.813e.army-creation

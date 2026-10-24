@@ -1,0 +1,31 @@
+id: codeforces.813e.army-creation
+title: Army Creation
+source: Codeforces
+contest: Educational Codeforces Round 22
+division: platinum
+url: https://codeforces.com/problemset/problem/813/E
+techniques:
+    - range-queries.merge-sort-tree
+prerequisites:
+    - range-queries.merge-sort-tree
+    - searching.binary-search
+    - foundations.sorting
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The array, the cap k, and the number of queries all reach 100,000.
+    - A query is decoded with the previous answer modulo n, so the answers must be produced online.
+    - The answer is a sum of capped frequencies, which is a count of positions rather than a sum of values.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - For a fixed value, the largest balanced army takes the smaller of its count in the range and k, so the answer is the sum of those caps over all values.
+    - Let prev[i] be the position of the k-th occurrence of a[i] strictly before i, or 0 when there are fewer than k.
+    - Position i is among the first k occurrences of its value in [l, r] exactly when prev[i] < l, so the answer is the count of i in [l, r] with prev[i] < l.
+    - The k-th previous occurrence of every position can be precomputed with one queue of recent positions per value, and then a merge sort tree answers each count.
+discussion: >-
+    For a fixed value, a balanced army can take at most k of its copies, so the largest army is the sum over values of the smaller of the count and k. If prev[i] is the position of the k-th occurrence of a[i] strictly before i, then position i is among the first k occurrences of its value in [l, r] exactly when prev[i] is below l. The answer is therefore a range count of prev values below l, which a merge sort tree answers in O(log^2 N). The previous answer participates in decoding the next query, so the online structure is required.
+related:
+    - atcoder.abc339.g.smaller-sum
+    - cses.1734.distinct-values-queries
