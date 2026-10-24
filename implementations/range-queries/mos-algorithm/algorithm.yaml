@@ -1,0 +1,92 @@
+algorithm: range-queries.mos-algorithm
+title: Mo's algorithm
+summary: Answer a batch of range queries on a static array by sorting the queries into blocks and moving one maintained window instead of rescanning every range.
+subject: range-queries
+divisions: [gold, platinum]
+importance: specialized-technique
+complexity:
+    time: "O(q log q + (n + q) sqrt n) for the batch"
+    space: "O(n + q)"
+assumptions:
+    - The array never changes, and every query is known before the first answer is produced.
+    - The answer can be maintained in constant time when one element is added to or removed from either end of the current range.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from stdin and prints the distinct count of every range in the original order."
+      time: "O(q log q + (n + q) sqrt n) for the batch"
+      auxiliarySpace: "O(n + q) for the rank table, the frequency table, the sorted queries and the answers"
+      status: unverified
+      inputs: 'n q, then n signed 32-bit values, then q pairs "l r" with 1 <= l <= r <= n.'
+      outputs: "One line per query, holding the number of distinct values in a[l..r], in the input order."
+      notes: "Values are compressed to dense ranks, the queries are sorted by the block of the left endpoint with the right endpoint alternating direction, and the window holds the frequency table and the running distinct count. The block width is the largest integer whose square is at most n, clamped to one, so the comparator never divides by zero. The C variant owns its arrays through malloc and free, so every successful allocation is released before main returns."
+      operations: [add, remove, distinct-count]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from stdin and prints the distinct count of every range in the original order."
+      time: "O(q log q + (n + q) sqrt n) for the batch"
+      auxiliarySpace: "O(n + q) for the rank table, the frequency table, the sorted queries and the answers"
+      status: unverified
+      inputs: 'n q, then n signed 32-bit values, then q pairs "l r" with 1 <= l <= r <= n.'
+      outputs: "One line per query, holding the number of distinct values in a[l..r], in the input order."
+      notes: "Values are compressed to dense ranks, the queries are sorted by the block of the left endpoint with the right endpoint alternating direction, and the window holds the frequency table and the running distinct count. The block width is the largest integer whose square is at most n, clamped to one, so the comparator never divides by zero. The C++ variant keeps every array in a std::vector, so the containers own their storage and release it automatically."
+      operations: [add, remove, distinct-count]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from stdin and prints the distinct count of every range in the original order."
+      time: "O(q log q + (n + q) sqrt n) for the batch"
+      auxiliarySpace: "O(n + q) for the rank table, the frequency table, the sorted queries and the answers"
+      status: unverified
+      inputs: 'n q, then n signed 32-bit values, then q pairs "l r" with 1 <= l <= r <= n.'
+      outputs: "One line per query, holding the number of distinct values in a[l..r], in the input order."
+      notes: "Values are compressed to dense ranks, the queries are sorted by the block of the left endpoint with the right endpoint alternating direction, and the window holds the frequency table and the running distinct count. The block width is the largest integer whose square is at most n, clamped to one, so the comparator never divides by zero. The Java variant reads through a byte-buffered scanner, sorts an array of query records with a lambda comparator, and builds the output in one StringBuilder."
+      operations: [add, remove, distinct-count]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from stdin and prints the distinct count of every range in the original order."
+      time: "O(q log q + (n + q) sqrt n) for the batch"
+      auxiliarySpace: "O(n + q) for the rank table, the frequency table, the sorted queries and the answers"
+      status: unverified
+      inputs: 'n q, then n signed 32-bit values, then q pairs "l r" with 1 <= l <= r <= n.'
+      outputs: "One line per query, holding the number of distinct values in a[l..r], in the input order."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Values are compressed to dense ranks with a Map, the queries are sorted by the block of the left endpoint with the right endpoint alternating direction, and the window holds an Int32Array frequency table and the running distinct count. The block width is the largest integer whose square is at most n, clamped to one. The output uses the platform line ending so the six languages remain byte-identical after normalization."
+      operations: [add, remove, distinct-count]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from stdin and prints the distinct count of every range in the original order."
+      time: "O(q log q + (n + q) sqrt n) for the batch"
+      auxiliarySpace: "O(n + q) for the rank table, the frequency table, the sorted queries and the answers"
+      status: unverified
+      inputs: 'n q, then n signed 32-bit values, then q pairs "l r" with 1 <= l <= r <= n.'
+      outputs: "One line per query, holding the number of distinct values in a[l..r], in the input order."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Values are compressed to dense ranks by sorting a copy and binary-searching each value, the queries are sorted with an iterative merge sort by the block of the left endpoint with the right endpoint alternating direction, and the window holds a dynamic frequency array and the running distinct count. The block width is the largest integer whose square is at most n, clamped to one."
+      operations: [add, remove, distinct-count]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the queries from stdin and prints the distinct count of every range in the original order."
+      time: "O(q log q + (n + q) sqrt n) for the batch"
+      auxiliarySpace: "O(n + q) for the rank table, the frequency table, the sorted queries and the answers"
+      status: unverified
+      inputs: 'n q, then n signed 32-bit values, then q pairs "l r" with 1 <= l <= r <= n.'
+      outputs: "One line per query, holding the number of distinct values in a[l..r], in the input order."
+      notes: "Values are compressed to dense ranks with a rank dictionary, the queries are sorted by the block of the left endpoint with the right endpoint alternating direction, and the window holds a frequency list and the running distinct count. The block width is math.isqrt(n) clamped to one, so the sort key never divides by zero. Reading is done once through sys.stdin.buffer and the answers are joined into one write."
+      operations: [add, remove, distinct-count]
