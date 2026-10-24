@@ -1,0 +1,31 @@
+id: codeforces.102058k.voronoi-diagram-returns
+title: Voronoi Diagram Returns
+source: Codeforces
+contest: XIX Open Cup, Grand Prix of Korea (Division 2)
+division: platinum
+url: https://codeforces.com/problemset/gymProblem/102058/K
+techniques:
+    - geometry.voronoi-diagram
+prerequisites:
+    - geometry.convex-hull
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - n is at most 2000 and q can be 250000, so the O(nq) per-query scan is the intended solution rather than a full diagram.
+    - A query can lie inside one cell, on the shared edge of exactly two cells, or at a vertex shared by three or more cells.
+    - Ties must be reported as LINE with the two indices in increasing order, and as POINT when three or more sites are equally near.
+    - The coordinates are small enough that every squared distance fits in a 64-bit integer.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The closed regions cover the plane, so NONE never occurs for a valid query.
+    - One scan of the sites finds the minimum squared distance.
+    - "Count how many sites attain that minimum: one is REGION, two is LINE, and three or more is POINT."
+    - Sort the two indices for LINE because the statement requires the smaller index first.
+discussion: >-
+    The task asks for the location of one query in the diagram, not for the diagram itself, so the cell structure is only a vocabulary. Scanning all sites gives the nearest squared distance, and a single pass with a counter and the two smallest indices collects every site that attains it. The number of minimizers is exactly the local dimension of the diagram at the query: one means the interior of a cell, two means a shared edge, and three or more means a vertex. The small bound on n and the large bound on q are the signal that the direct scan is intended.
+related:
+    - codeforces.101806v.voronoi-diagram
+    - codeforces.1651d.nearest-excluded-points

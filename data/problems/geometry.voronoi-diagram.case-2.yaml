@@ -1,0 +1,31 @@
+id: codeforces.101806v.voronoi-diagram
+title: Voronoi Diagram
+source: Codeforces
+contest: 2018 KAIST RUN Spring Contest
+division: platinum
+url: https://codeforces.com/problemset/gymProblem/101806/V
+techniques:
+    - geometry.voronoi-diagram
+prerequisites:
+    - graphs.dijkstra
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - The graph has up to 250000 vertices and edges, and the sources are a subset of the vertices.
+    - The distance is measured along weighted edges, and a tie goes to the source with the smaller vertex number.
+    - The boundary between two sources can fall inside an edge, so the edge must be split in proportion to the two distances.
+    - The answer is a total length that must be printed with one digit after the decimal point and no precision error.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Run one multi-source Dijkstra with every source in the priority queue, and make the label a pair of distance and source index.
+    - After the run, every vertex knows its nearest source, and equal distances have already been resolved toward the smaller index.
+    - For one edge, the difference between the distances to the two endpoint sources is linear along the edge, so the set of points closer to one source is a prefix or a suffix.
+    - Double every length so that the split point and the total are integers, then print the total as total / 2 with .0 or .5.
+discussion: >-
+    The graph version of the diagram is a shortest-path labeling rather than a geometric subdivision. One Dijkstra run from all sources labels every vertex with the nearest source and breaks ties by the source index, so the only remaining work is to cut each edge at the point where the two endpoint labels meet. The cut point is the solution of a linear equation, and doubling the lengths keeps the arithmetic exact. The total length assigned to each source is the sum of its prefixes and suffixes over all edges.
+related:
+    - codeforces.102058k.voronoi-diagram-returns
+    - codeforces.1651d.nearest-excluded-points

@@ -1,0 +1,102 @@
+algorithm: geometry.voronoi-diagram
+title: The Voronoi diagram
+summary: Partition the plane into one region per site, read the cell structure from the Delaunay dual, and answer a nearest-site query by scanning the sites directly.
+subject: geometry
+divisions: [gold, platinum]
+importance: common-contest-technique
+prerequisites:
+    required: [geometry.convex-hull]
+    recommended:
+        [
+            geometry.robust-predicates,
+            foundations.sorting,
+            foundations.complexity,
+            searching.binary-search,
+        ]
+complexity:
+    time: "O(n) per nearest-site query; O(n log n) to build the full diagram"
+    space: "O(1) extra for a direct query; O(n) for the full diagram"
+assumptions:
+    - The sites are distinct points with integer coordinates of magnitude at most 10^6, so every squared distance is below 2^53 and fits exactly in a signed 64-bit integer and in a JavaScript Number.
+    - The distance is the Euclidean distance, and every comparison uses the squared distance.
+    - "The full diagram is in general position when its counts are stated: no three sites are collinear and no four are cocircular."
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical C program: it reads the sites and queries and prints the 1-based index of the nearest site."
+      time: "O(n) per query"
+      auxiliarySpace: "O(1) extra beyond the array of sites"
+      status: unverified
+      inputs: "n q, then n lines with an integer x and y, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest site, with ties broken by the lowest index."
+      notes: "The program answers the defining query directly and does not build the full diagram. It stores the sites in an array, scans them for every query, and keeps the pair (squared distance, index) so that the tie rule is the same in all six languages."
+      operations: [nearest-site, squared-distance, tie-break]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical C++17 program: it reads the sites and queries and prints the 1-based index of the nearest site."
+      time: "O(n) per query"
+      auxiliarySpace: "O(1) extra beyond the vector of sites"
+      status: unverified
+      inputs: "n q, then n lines with an integer x and y, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest site, with ties broken by the lowest index."
+      notes: "The program answers the defining query directly and does not build the full diagram. It uses a std::vector of points and buffered std::cin, and the update compares the squared distance first and the index second."
+      operations: [nearest-site, squared-distance, tie-break]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical Java program: it reads the sites and queries and prints the 1-based index of the nearest site."
+      time: "O(n) per query"
+      auxiliarySpace: "O(1) extra beyond the coordinate arrays"
+      status: unverified
+      inputs: "n q, then n lines with an integer x and y, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest site, with ties broken by the lowest index."
+      notes: "The program answers the defining query directly and does not build the full diagram. Coordinates and squared distances are long, and a custom token scanner avoids the overhead of java.util.Scanner. The class is Main and every query is appended to one StringBuilder."
+      operations: [nearest-site, squared-distance, tie-break]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical Python program: it reads the sites and queries and prints the 1-based index of the nearest site."
+      time: "O(n) per query"
+      auxiliarySpace: "O(1) extra beyond the list of sites"
+      status: unverified
+      inputs: "n q, then n lines with an integer x and y, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest site, with ties broken by the lowest index."
+      notes: "The program answers the defining query directly and does not build the full diagram. It reads the whole of standard input at once, stores the sites as tuples, and relies on Python's unbounded integers for the squared distances."
+      operations: [nearest-site, squared-distance, tie-break]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical Pascal program: it reads the sites and queries and prints the 1-based index of the nearest site."
+      time: "O(n) per query"
+      auxiliarySpace: "O(1) extra beyond the array of sites"
+      status: unverified
+      inputs: "n q, then n lines with an integer x and y, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest site, with ties broken by the lowest index."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program answers the defining query directly and does not build the full diagram. It uses Int64 for coordinates and squared distances, one argument per Read, and no IOResult, so it compiles under pas2js."
+      operations: [nearest-site, squared-distance, tie-break]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical JavaScript program: it reads the sites and queries and prints the 1-based index of the nearest site."
+      time: "O(n) per query"
+      auxiliarySpace: "O(1) extra beyond the coordinate arrays"
+      status: unverified
+      inputs: "n q, then n lines with an integer x and y, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest site, with ties broken by the lowest index."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The program answers the defining query directly and does not build the full diagram. Every squared distance stays below 2^53 for the stated coordinate bound, so Number comparisons are exact."
+      operations: [nearest-site, squared-distance, tie-break]

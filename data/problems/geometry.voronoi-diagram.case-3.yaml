@@ -1,0 +1,31 @@
+id: codeforces.1651d.nearest-excluded-points
+title: Nearest Excluded Points
+source: Codeforces
+contest: Educational Codeforces Round 124 (Rated for Div. 2)
+division: gold
+url: https://codeforces.com/problemset/problem/1651/D
+techniques:
+    - geometry.voronoi-diagram
+prerequisites:
+    - graphs.bfs
+difficulty: 4
+estimatedMinutes: 35
+specialConstraints:
+    - The metric is Manhattan, so the Euclidean Voronoi diagram is not the right object.
+    - There are up to 200000 points, so expanding a diamond around every point is too slow in the worst case.
+    - The nearest missing point of a site is always adjacent to some site, which makes a BFS over the sites sufficient.
+    - Several answers are accepted, so any nearest missing point is fine.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - "A site with an empty neighbor has its answer immediately: that neighbor is at distance 1."
+    - A site with no empty neighbor has all four neighbors in the set, so its answer is the answer of a neighbor, one step farther away.
+    - Seed a BFS with every site that has an empty neighbor, then propagate the recorded missing point across adjacent sites.
+    - Each site enters the queue once and each of its four neighbors is inspected a constant number of times.
+discussion: >-
+    The grid version of the nearest-site problem replaces the Euclidean bisector with the Manhattan distance, and the diagram becomes a set of unit-step regions. A site on the boundary of the point set has an empty neighbor and is a source for the BFS. An interior site has all four neighbors in the set, so its nearest missing point is reached by stepping to a neighbor and following that neighbor's best path. The BFS over the sites therefore computes the nearest missing point of every site in linear expected time, without visiting the empty grid cells that are not adjacent to any site.
+related:
+    - codeforces.102058k.voronoi-diagram-returns
+    - codeforces.101806v.voronoi-diagram
