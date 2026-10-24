@@ -1,0 +1,93 @@
+algorithm: enumeration.constraint-propagation
+title: Constraint propagation
+summary: Carry the effect of every choice in a bitmask domain, so each branch tests all earlier constraints at once and the search visits thousands of nodes instead of millions.
+subject: enumeration
+divisions: [silver, gold]
+importance: common-contest-technique
+complexity:
+    time: "O(N), where N is the number of visited nodes, which is 856189 for n = 12"
+    space: "O(n) for the recursion and O(1) masks per frame"
+assumptions:
+    - Every constraint is local to the decision that violates it, so its effect on the remaining decisions can be summarized in a fixed-size state.
+    - n is at most 12, so the propagated domain fits in one 32-bit word and the counters fit in a 64-bit integer.
+    - The node count is the number of recursive calls, including the root and the leaves.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, counts the n-queens placements with the column and two diagonal masks, and prints the count and the number of visited nodes."
+      time: "O(N), where N is the number of visited nodes"
+      auxiliarySpace: "O(n) for the recursion and O(1) masks per frame"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 12."
+      outputs: "One line holding the number of solutions and the number of visited nodes, separated by one space."
+      notes: "The program reads n with scanf and keeps the three masks in int, which holds every board up to n = 30; the counters are long long and printed with %lld. The masks are passed by value, so no state is restored on the way back, and the node counter is incremented at the entry of every call, including the root and the leaves."
+      operations: [read, propagate, backtrack, count, report]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, counts the n-queens placements with the column and two diagonal masks, and prints the count and the number of visited nodes."
+      time: "O(N), where N is the number of visited nodes"
+      auxiliarySpace: "O(n) for the recursion and O(1) masks per frame"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 12."
+      outputs: "One line holding the number of solutions and the number of visited nodes, separated by one space."
+      notes: "The program reads n with std::cin and keeps the three masks in int; the counters are long long. The masks are function parameters, so every branch owns its state and there is no undo step, and the node counter is incremented at the entry of every call."
+      operations: [read, propagate, backtrack, count, report]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, counts the n-queens placements with the column and two diagonal masks, and prints the count and the number of visited nodes."
+      time: "O(N), where N is the number of visited nodes"
+      auxiliarySpace: "O(n) for the recursion and O(1) masks per frame"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 12."
+      outputs: "One line holding the number of solutions and the number of visited nodes, separated by one space."
+      notes: "The class is named Main and the file is Main.java, so the source can be submitted unchanged. It reads the single integer with Scanner, keeps the masks in int and the counters in long, and prints one line with both numbers. The masks are primitive parameters, so no branch can see another branch's state."
+      operations: [read, propagate, backtrack, count, report]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, counts the n-queens placements with the column and two diagonal masks, and prints the count and the number of visited nodes."
+      time: "O(N), where N is the number of visited nodes"
+      auxiliarySpace: "O(n) for the recursion and O(1) masks per frame"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 12."
+      outputs: "One line holding the number of solutions and the number of visited nodes, separated by one space."
+      notes: "The program reads all tokens from sys.stdin.buffer and recurses with the three masks as arguments; Python integers are arbitrary precision, so the AND with full is what keeps the domain to n bits. The counters are nonlocal, and the node counter is incremented at the entry of every call."
+      operations: [read, propagate, backtrack, count, report]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, counts the n-queens placements with the column and two diagonal masks, and prints the count and the number of visited nodes."
+      time: "O(N), where N is the number of visited nodes"
+      auxiliarySpace: "O(n) for the recursion and O(1) masks per frame"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 12."
+      outputs: "One line holding the number of solutions and the number of visited nodes, separated by one space."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program uses Integer masks, Int64 counters, SysUtils for IntToStr, one argument per Read, and no IOResult or 128-bit integers, so it compiles under pas2js; the bitwise not is applied to the union of the three masks and then masked with Full."
+      operations: [read, propagate, backtrack, count, report]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, counts the n-queens placements with the column and two diagonal masks, and prints the count and the number of visited nodes."
+      time: "O(N), where N is the number of visited nodes"
+      auxiliarySpace: "O(n) for the recursion and O(1) masks per frame"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 12."
+      outputs: "One line holding the number of solutions and the number of visited nodes, separated by one space."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The program reads the whole of stdin with readFileSync(0) and uses 32-bit bitwise operators, so n is limited to 30; the right shift is unsigned, and the counters are plain Numbers, which are exact far beyond the largest node count for n = 12."
+      operations: [read, propagate, backtrack, count, report]

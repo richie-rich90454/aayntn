@@ -1,0 +1,29 @@
+id: poj.2676.sudoku
+title: Sudoku
+source: POJ
+division: gold
+url: http://poj.org/problem?id=2676
+techniques:
+    - enumeration.constraint-propagation
+prerequisites:
+    - enumeration.backtracking
+difficulty: 3
+estimatedMinutes: 40
+specialConstraints:
+    - Each grid is nine by nine, with 0 marking an empty cell and digits 1 to 9 marking fixed cells.
+    - A digit may appear once in each row, each column, and each of the nine 3 by 3 boxes.
+    - The number of test cases is given first, and any valid solution is accepted for each grid, because the judge is special.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Keep one 9-bit mask for every row, every column, and every box.
+    - The domain of a cell is the complement of the union of its three masks, and the box index is (row / 3) * 3 + column / 3.
+    - Choose the empty cell with the fewest candidates first; if a cell has none, backtrack immediately.
+    - Undo the three mask updates when the recursion returns, because the masks are shared arrays rather than values.
+discussion: >-
+    Sudoku is forward checking on a grid. The three masks give each cell's domain in one AND-NOT, and the minimum-remaining-values rule picks the cell that is most likely to fail fast. The masks are shared, so unlike the n-queens program the search must undo the three updates on the way back. The judge accepts any valid grid, so a correct search can stop at the first complete assignment.
+related:
+    - uva.750.8-queens-chess-problem
+    - uva.167.the-sultans-successors

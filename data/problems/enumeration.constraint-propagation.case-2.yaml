@@ -1,0 +1,31 @@
+id: uva.167.the-sultans-successors
+title: The Sultan's Successors
+source: UVa
+contest: UVa Volume 1
+division: gold
+url: https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=103
+techniques:
+    - enumeration.constraint-propagation
+prerequisites:
+    - enumeration.backtracking
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - There are at most 20 boards, and each is a fixed eight by eight grid of values from 1 to 99.
+    - Each board needs eight nonattacking queens, so the search has eight rows and at most 92 complete placements.
+    - Each score is printed right-justified in a field five characters wide, one per line.
+    - The values are positive, so the running sum plus the largest value of every remaining row is an upper bound, and a branch-and-bound cutoff is sound.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Search row by row with the three masks, and carry the sum of the chosen squares as a parameter.
+    - The eight-queens tree visits 2057 nodes before any bound, so one board is cheap and twenty boards are still small.
+    - At a leaf, compare the sum with the best sum for the board.
+    - The output field is five characters wide; use %5d in C, printf("%5d%n") in Java, and format(score, "5d") in Python.
+discussion: >-
+    The masks do the pruning and the sum rides along the recursion, so the program is the counting search with one extra accumulator and a maximum at the leaf. The bound is optional because the tree is already tiny: 2057 nodes per board, and 20 boards cost about 41000 nodes. The formatting is the part that fails most often, because the score must be right-justified in a field of width five, and a plain print produces the right number with the wrong spacing.
+related:
+    - uva.750.8-queens-chess-problem
+    - poj.2676.sudoku

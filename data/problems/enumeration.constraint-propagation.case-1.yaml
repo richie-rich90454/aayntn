@@ -1,0 +1,31 @@
+id: uva.750.8-queens-chess-problem
+title: 8 Queens Chess Problem
+source: UVa
+contest: UVa Volume 7
+division: silver
+url: https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=691
+techniques:
+    - enumeration.constraint-propagation
+prerequisites:
+    - enumeration.backtracking
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - The board is always eight by eight, so the search has eight columns and at most 92 solutions.
+    - Each dataset fixes one queen, and only the solutions that contain that queen may be printed.
+    - The eight numbers of a solution are the rows of the queens in column order, and the solutions must appear in lexicographic order under the two heading lines.
+    - The first line gives the number of datasets and is followed by a blank line, so the input must be read as whitespace-separated tokens.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Search column by column, because the output lists the row of the queen in each column.
+    - Assign the fixed queen first and set its row, down-diagonal, and anti-diagonal bits, then compute the domain of every later column with one AND-NOT.
+    - Emit the eight rows when the last column is filled, and print the two heading lines once per dataset.
+    - The order of the recursion is lexicographic when the rows are tried in increasing order, so no sort is needed.
+discussion: >-
+    The fixed queen removes one column from the search and pins its row, so the propagation starts with three nonzero masks instead of three zeros. The output order is the order of the recursion, which is why the columns and the rows are both tried in increasing order. The heading lines are part of the accepted output and are easy to forget, and the solution numbers restart at one for every dataset.
+related:
+    - uva.167.the-sultans-successors
+    - poj.2676.sudoku

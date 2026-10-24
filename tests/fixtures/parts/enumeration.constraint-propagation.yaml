@@ -1,0 +1,9 @@
+- name: the four-queens board has two placements
+  input: "4\n"
+  expected: "2 17\n"
+- name: the eight-queens board visits two thousand and fifty-seven nodes
+  input: "8\n"
+  expected: "92 2057\n"
+- name: edge case with a single square board
+  input: "1\n"
+  expected: "1 2\n"
