@@ -120,6 +120,7 @@ const runners: Record<LanguageId, LanguageRunner> = {
                 file,
                 "-o",
                 binary,
+                "-lm",
             ]);
             if (result.code !== 0) throw new Error(result.stderr.trim() || "gcc failed");
         },
