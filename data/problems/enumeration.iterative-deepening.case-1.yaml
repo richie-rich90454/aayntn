@@ -1,0 +1,29 @@
+id: poj.3134.power-calculus
+title: Power Calculus
+source: POJ
+contest: Japan 2006
+url: http://poj.org/problem?id=3134
+techniques:
+    - enumeration.iterative-deepening
+prerequisites:
+    - foundations.recursion
+    - enumeration.backtracking
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - n is at most 1000, and the input holds several test cases terminated by a zero.
+    - Division is allowed, but every intermediate value must remain a positive integer power.
+    - The search depth is the answer, which is small, while the branching factor grows with the length of the constructed sequence.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Keep the exponents that have already been produced, and form the next exponent by adding or subtracting two of them.
+    - Try limits 0, 1, 2, ... and stop at the first limit that reaches n; every failed limit proves that no shorter sequence exists.
+    - The largest exponent at most doubles in one operation, so prune when that exponent times 2 to the remaining depth is still below n.
+    - Avoid using the same exponent more than once at a depth, because the order of the operations does not change the resulting exponent.
+discussion: >-
+    The problem asks for the minimum number of multiplication and division steps, not for any sequence that happens to work, so a plain depth-first search has no reason to stop at the shortest answer. Iterative deepening supplies the missing bound: a depth-limited search decides whether n is reachable within a fixed number of operations, and the first limit that succeeds is optimal. The necessary pruning is arithmetic. One operation can at most double the largest exponent already present, because the new exponent is the sum or difference of two existing exponents and neither exceeds the largest. If the largest exponent times a power of two for the remaining operations is below n, the branch cannot reach n and is cut. Without that bound the search revisits permuted sequences of the same operations, so a depth-local duplicate check is the second prune.
+related:
+    - hdu.1560.dna-sequence
+    - hdu.1667.rotation-game

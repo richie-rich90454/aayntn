@@ -1,0 +1,29 @@
+id: hdu.1560.dna-sequence
+title: DNA sequence
+source: HDU
+contest: HDU 2006-12 Programming Contest
+url: https://acm.hdu.edu.cn/showproblem.php?pid=1560
+techniques:
+    - enumeration.iterative-deepening
+prerequisites:
+    - foundations.recursion
+    - enumeration.backtracking
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - There are at most 8 input sequences, each of length between 1 and 5.
+    - The shortest common supersequence has length at most 40, so the answer is bounded but a breadth-first search over all strings is not.
+    - Each position of the answer has four possible letters, so branching is four.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A depth limit L asks whether some string of length at most L contains every input sequence as a subsequence.
+    - Append one of A, C, G, T at each step and advance every sequence whose next unmatched letter is that letter.
+    - The longest unmatched suffix is a lower bound on the letters still needed, so prune when depth plus that bound exceeds the limit.
+    - Only try letters that advance at least one sequence; a letter that advances none can be removed from any solution.
+discussion: >-
+    This is the shortest common supersequence problem with a small number of short strings. The depth of the answer is the length of the supersequence, and the branching is the size of the alphabet, which is exactly the shape iterative deepening is designed for. A breadth-first search would store every string of the current length, and the number of such strings grows as four to that length. The depth-limited search keeps only the current prefix and the position reached in each input sequence. The heuristic is the longest unmatched suffix: every remaining input sequence has to be completed, so the answer needs at least that many more letters. The prune is admissible, which makes the search an instance of IDA*, and the first successful limit is the minimum length.
+related:
+    - poj.3134.power-calculus
+    - hdu.1667.rotation-game

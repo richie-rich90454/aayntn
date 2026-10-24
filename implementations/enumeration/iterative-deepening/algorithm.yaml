@@ -1,0 +1,96 @@
+algorithm: enumeration.iterative-deepening
+title: Iterative deepening
+summary: Repeat a depth-limited depth-first search with growing limits, so the first limit that reaches the target is the shortest distance while the memory stays proportional to the depth.
+subject: enumeration
+divisions: [silver, gold]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.recursion, graphs.dfs]
+    recommended: [graphs.bfs, enumeration.backtracking, foundations.complexity]
+complexity:
+    time: "O(b^d) for branching factor b and solution depth d"
+    space: "O(n + m) for the graph and the path marker, plus O(d) for the recursion"
+assumptions:
+    - Every edge has the same cost, so the number of edges in a path is its length.
+    - The successors of a vertex can be generated from the graph or the state in time proportional to the number of successors.
+    - The solution depth is small enough that the last depth-limited search is affordable.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads an undirected graph, runs depth-limited searches with limits from zero upward, and prints the shortest distance and the cumulative expansion count."
+      time: "O(b^d) for branching factor b and solution depth d"
+      auxiliarySpace: "O(n + m) for the adjacency arrays and the path marker, plus O(d) for the recursion"
+      status: unverified
+      inputs: "n m s t, then m undirected edges u v, with vertices numbered 1..n."
+      outputs: "One line holding the shortest distance and the total number of depth-first search entries across all limits, separated by a space; the distance is -1 when t is unreachable."
+      notes: "A vertex is expanded when the depth-limited search enters it, and the count accumulates over every limit, including calls cut off by the limit. The adjacency list appends at the tail so the neighbor order is the input order, which keeps the expansion count identical in all six languages. The path marker is cleared after every failed branch and between limits. The arrays are allocated from the input size and released before exit, and the expansion counter is a 64-bit integer."
+      operations: [depth-limited-search, iterative-deepening, path-restore, expansion-count]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads an undirected graph, runs depth-limited searches with limits from zero upward, and prints the shortest distance and the cumulative expansion count."
+      time: "O(b^d) for branching factor b and solution depth d"
+      auxiliarySpace: "O(n + m) for the adjacency lists and the path marker, plus O(d) for the recursion"
+      status: unverified
+      inputs: "n m s t, then m undirected edges u v, with vertices numbered 1..n."
+      outputs: "One line holding the shortest distance and the total number of depth-first search entries across all limits, separated by a space; the distance is -1 when t is unreachable."
+      notes: "A vertex is expanded when the depth-limited search enters it, and the count accumulates over every limit, including calls cut off by the limit. The adjacency lists keep the input edge order, the path marker is cleared after every failed branch and between limits, and the expansion counter is a 64-bit integer."
+      operations: [depth-limited-search, iterative-deepening, path-restore, expansion-count]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads an undirected graph, runs depth-limited searches with limits from zero upward, and prints the shortest distance and the cumulative expansion count."
+      time: "O(b^d) for branching factor b and solution depth d"
+      auxiliarySpace: "O(n + m) for the adjacency lists and the path marker, plus O(d) for the recursion"
+      status: unverified
+      inputs: "n m s t, then m undirected edges u v, with vertices numbered 1..n."
+      outputs: "One line holding the shortest distance and the total number of depth-first search entries across all limits, separated by a space; the distance is -1 when t is unreachable."
+      notes: "A vertex is expanded when the depth-limited search enters it, and the count accumulates over every limit, including calls cut off by the limit. The class is named Main so the file can be submitted unchanged, the adjacency lists keep the input edge order, and the path marker is cleared after every failed branch and between limits."
+      operations: [depth-limited-search, iterative-deepening, path-restore, expansion-count]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads an undirected graph, runs depth-limited searches with limits from zero upward, and prints the shortest distance and the cumulative expansion count."
+      time: "O(b^d) for branching factor b and solution depth d"
+      auxiliarySpace: "O(n + m) for the adjacency lists and the path marker, plus O(d) for the recursion"
+      status: unverified
+      inputs: "n m s t, then m undirected edges u v, with vertices numbered 1..n."
+      outputs: "One line holding the shortest distance and the total number of depth-first search entries across all limits, separated by a space; the distance is -1 when t is unreachable."
+      notes: "A vertex is expanded when the depth-limited search enters it, and the count accumulates over every limit, including calls cut off by the limit. The recursion limit is raised to the number of vertices plus a margin, the path marker is cleared after every failed branch and between limits, and the expansion counter stays exact because Python integers do not overflow."
+      operations: [depth-limited-search, iterative-deepening, path-restore, expansion-count]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads an undirected graph, runs depth-limited searches with limits from zero upward, and prints the shortest distance and the cumulative expansion count."
+      time: "O(b^d) for branching factor b and solution depth d"
+      auxiliarySpace: "O(n + m) for the adjacency arrays and the path marker, plus O(d) for the recursion"
+      status: unverified
+      inputs: "n m s t, then m undirected edges u v, with vertices numbered 1..n."
+      outputs: "One line holding the shortest distance and the total number of depth-first search entries across all limits, separated by a space; the distance is -1 when t is unreachable."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. A vertex is expanded when the depth-limited search enters it, and the count accumulates over every limit. The adjacency arrays append at the tail so the neighbor order is the input order, each Read takes one argument, the path marker is cleared after every failed branch and between limits, and the expansion counter is Int64."
+      operations: [depth-limited-search, iterative-deepening, path-restore, expansion-count]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads an undirected graph, runs depth-limited searches with limits from zero upward, and prints the shortest distance and the cumulative expansion count."
+      time: "O(b^d) for branching factor b and solution depth d"
+      auxiliarySpace: "O(n + m) for the adjacency lists and the path marker, plus O(d) for the recursion"
+      status: unverified
+      inputs: "n m s t, then m undirected edges u v, with vertices numbered 1..n."
+      outputs: "One line holding the shortest distance and the total number of depth-first search entries across all limits, separated by a space; the distance is -1 when t is unreachable."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. A vertex is expanded when the depth-limited search enters it, and the count accumulates over every limit. The adjacency lists keep the input edge order, the path marker is a typed array cleared after every failed branch and between limits, and Number is exact for the expansion counts this technique is used with."
+      operations: [depth-limited-search, iterative-deepening, path-restore, expansion-count]
