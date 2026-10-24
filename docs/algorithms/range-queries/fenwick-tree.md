@@ -161,51 +161,28 @@ The laboratory below shows the tree with the current block highlighted and the r
 Let $a_1, a_2, \ldots, a_n$ be the values of the array, indexed from one.
 
 ::: math definition Definition
-For $i \ge 1$, the **lowest set bit** of $i$ is
-$\operatorname{lowbit}(i) = i \mathbin{\&} (-i)$. It is the largest power of
-two that divides $i$, and it satisfies
-$\operatorname{lowbit}(i) = 2^k$ exactly when the $k$-th bit of $i$ is the
-lowest bit that is set.
+For $i \ge 1$, the **lowest set bit** of $i$ is $\operatorname{lowbit}(i) = i \mathbin{\&} (-i)$. It is the largest power of two that divides $i$, and it satisfies $\operatorname{lowbit}(i) = 2^k$ exactly when the $k$-th bit of $i$ is the lowest bit that is set.
 :::
-
 
 ::: math definition Definition
-The **block** of an index $i$ is the interval
-$B(i) = \bigl(i - \operatorname{lowbit}(i),\; i\bigr]$. A Fenwick tree over
-$a$ is an array $\text{tree}$ with $\text{tree}[i] = \sum_{p \in B(i)} a_p$
-for every $1 \le i \le n$, and $\text{tree}[0]$ unused.
+The **block** of an index $i$ is the interval $B(i) = \bigl(i - \operatorname{lowbit}(i),\; i\bigr]$. A Fenwick tree over $a$ is an array $\text{tree}$ with $\text{tree}[i] = \sum_{p \in B(i)} a_p$ for every $1 \le i \le n$, and $\text{tree}[0]$ unused.
 :::
-
 
 ::: math definition Definition
-The **prefix sum** $P(i)$ is the total of the first $i$ values,
-$P(i) = \sum_{p=1}^{i} a_p$, with $P(0) = 0$. The **range sum** of the
-inclusive range $[l, r]$ is $P(r) - P(l - 1)$.
+The **prefix sum** $P(i)$ is the total of the first $i$ values, $P(i) = \sum_{p=1}^{i} a_p$, with $P(0) = 0$. The **range sum** of the inclusive range $[l, r]$ is $P(r) - P(l - 1)$.
 :::
-
 
 ::: math lemma Lemma
-For every $1 \le i \le n$, the indices visited by the walk
-$i, \; i - \operatorname{lowbit}(i), \; \ldots$ down to $0$ are exactly the
-indices whose blocks partition $\{1, \ldots, i\}$. The blocks are pairwise
-disjoint and their union is $\{1, \ldots, i\}$.
+For every $1 \le i \le n$, the indices visited by the walk $i, \; i - \operatorname{lowbit}(i), \; \ldots$ down to $0$ are exactly the indices whose blocks partition $\{1, \ldots, i\}$. The blocks are pairwise disjoint and their union is $\{1, \ldots, i\}$.
 :::
-
 
 ::: math lemma Lemma
-For every position $p$, the indices visited by the walk
-$p, \; p + \operatorname{lowbit}(p), \; \ldots$ are exactly the indices
-whose blocks contain $p$.
+For every position $p$, the indices visited by the walk $p, \; p + \operatorname{lowbit}(p), \; \ldots$ are exactly the indices whose blocks contain $p$.
 :::
-
 
 ::: math definition Definition
-A binary operation $\odot$ on a set is **invertible** if there is an
-operation $\oslash$ such that $a \oslash (a \odot b) = b$ for every
-$a$ and $b$. Addition of integers is invertible, with subtraction as the
-inverse; taking a maximum is not.
+A binary operation $\odot$ on a set is **invertible** if there is an operation $\oslash$ such that $a \oslash (a \odot b) = b$ for every $a$ and $b$. Addition of integers is invertible, with subtraction as the inverse; taking a maximum is not.
 :::
-
 
 ## Algorithm derivation
 
@@ -237,10 +214,8 @@ $$
 and this is the step that imposes the algebraic requirement. The prefix totals can only be taken apart again if the combining operation has an inverse. For sums the inverse is subtraction. For a maximum there is no inverse, so $P(r) - P(l-1)$ is not even a well-formed expression, and the Fenwick tree cannot answer the query at all.
 
 ::: math invariant Invariant
-After every update, $\text{tree}[i]$ equals the total of the values at the
-positions in $B(i)$ for every $1 \le i \le n$.
+After every update, $\text{tree}[i]$ equals the total of the values at the positions in $B(i)$ for every $1 \le i \le n$.
 :::
-
 
 ### Why the algebraic requirement is not negotiable
 
@@ -268,15 +243,11 @@ Notice in step 2 that the update touched neither $\text{tree}[5]$ nor $\text{tre
 ## Correctness proof
 
 ::: math theorem Theorem
-The Fenwick tree maintains the invariant that $\text{tree}[i]$ is the total
-of the values at the positions in $B(i)$, and every range query returns the
-sum of the values in the requested range.
+The Fenwick tree maintains the invariant that $\text{tree}[i]$ is the total of the values at the positions in $B(i)$, and every range query returns the sum of the values in the requested range.
 :::
 
-
 ::: math proof Proof
-The invariant holds before any update, because every value is zero and
-every block total is zero.
+The invariant holds before any update, because every value is zero and every block total is zero.
 
 Suppose the invariant holds and a value $\delta$ is added at position $p$. By the second lemma, the walk $p, p + \operatorname{lowbit}(p), \ldots$ visits exactly the indices whose blocks contain $p$. The update adds $\delta$ to the total of exactly those blocks, so each block total stays equal to the sum of the values it covers. Blocks that do not contain $p$ are not touched, and their totals are still correct because the values in them did not change. The invariant is therefore preserved.
 
@@ -285,20 +256,11 @@ Now the query. By the first lemma, the blocks visited by the downward walk from 
 Finally, the range query returns $P(r) - P(l - 1)$, which by the definition of the prefix sums is $\sum_{p=l}^{r} a_p$, the sum of the requested range. $\square$
 :::
 
-
 ::: math proof Proof
-The two lemmas about the walks hold because of the binary representation.
-Every positive integer $j$ has a unique decomposition $j = 2^{k_1} +
-2^{k_2} + \cdots$ into distinct powers of two, with $k_1 > k_2 > \cdots$.
-The block of $j$ has length $2^{k_1}$, and $j - \operatorname{lowbit}(j)$ is
-the sum of the remaining powers. The blocks visited by the downward walk
-therefore cover successively smaller suffixes of $1, \ldots, j$, and the
-next block ends exactly where the previous one begins, so they are disjoint
-and their union is the whole prefix.
+The two lemmas about the walks hold because of the binary representation. Every positive integer $j$ has a unique decomposition $j = 2^{k_1} + 2^{k_2} + \cdots$ into distinct powers of two, with $k_1 > k_2 > \cdots$. The block of $j$ has length $2^{k_1}$, and $j - \operatorname{lowbit}(j)$ is the sum of the remaining powers. The blocks visited by the downward walk therefore cover successively smaller suffixes of $1, \ldots, j$, and the next block ends exactly where the previous one begins, so they are disjoint and their union is the whole prefix.
 
 For the upward walk, position $p$ lies in the block of $j$ exactly when $j - \operatorname{lowbit}(j) < p \le j$. Writing $j$ in binary, that condition says that the lowest set bit of $j$ is the lowest set bit of $p$ raised to the position of the next set bit of $j$ above $p$, which is precisely the description of the walk $p, p + \operatorname{lowbit}(p), \ldots$. $\square$
 :::
-
 
 ## Complexity analysis
 
@@ -311,10 +273,8 @@ For the upward walk, position $p$ lies in the block of $j$ exactly when $j - \op
 **Space: $O(n)$** for the tree of $n + 1$ entries. With 64-bit entries that is $8(n+1)$ bytes, so $1.6$ MB at $n = 200\,000$.
 
 ::: math complexity Complexity
-Fenwick tree over $n$ values: $O(n)$ to build, $O(\log n)$ per update,
-$O(\log n)$ per range query, and $O(n)$ extra space.
+Fenwick tree over $n$ values: $O(n)$ to build, $O(\log n)$ per update, $O(\log n)$ per range query, and $O(n)$ extra space.
 :::
-
 
 The width of the accumulator is part of the complexity statement, because it decides whether the answer is even correct. With $n = 200\,000$ values of magnitude up to $10^9$, a total can reach $2 \cdot 10^{14}$, which does not fit in a 32-bit signed integer, whose largest value is about $2.1 \cdot 10^9$. The reference implementations therefore use a 64-bit type.
 

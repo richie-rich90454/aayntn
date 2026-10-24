@@ -142,36 +142,22 @@ That is the first reason it is not used in contests. The second is more fundamen
 Let $f : [lo, hi] \to \mathbb{R}$ be a function on a real interval.
 
 ::: math definition Definition
-A function $f$ is **unimodal** on $[lo, hi]$ if there is a point $p$ in the
-interval such that $f$ is non-decreasing on $[lo, p]$ and non-increasing on
-$[p, hi]$. The point $p$ is a **peak**. The function is **weakly unimodal**
-if the monotonicity is non-strict, and **strictly unimodal** if it is strict
-on both sides.
+A function $f$ is **unimodal** on $[lo, hi]$ if there is a point $p$ in the interval such that $f$ is non-decreasing on $[lo, p]$ and non-increasing on $[p, hi]$. The point $p$ is a **peak**. The function is **weakly unimodal** if the monotonicity is non-strict, and **strictly unimodal** if it is strict on both sides.
 :::
-
 
 ::: math definition Definition
-The **discrete unimodal array** is a sequence $A_1, \dots, A_n$ with an index
-$p$ such that $A_1 \le \cdots \le A_p \ge \cdots \ge A_n$.
+The **discrete unimodal array** is a sequence $A_1, \dots, A_n$ with an index $p$ such that $A_1 \le \cdots \le A_p \ge \cdots \ge A_n$.
 :::
-
 
 ::: math lemma Lemma
-Let $f$ be unimodal on $[lo, hi]$ and let $m_1 < m_2$ be two interior points.
-If $f(m_1) < f(m_2)$ then every peak of $f$ lies in $[m_1, hi]$. If
-$f(m_1) > f(m_2)$ then every peak of $f$ lies in $[lo, m_2]$. If
-$f(m_1) = f(m_2)$ then every peak of $f$ lies in $[m_1, m_2]$.
+Let $f$ be unimodal on $[lo, hi]$ and let $m_1 < m_2$ be two interior points. If $f(m_1) < f(m_2)$ then every peak of $f$ lies in $[m_1, hi]$. If $f(m_1) > f(m_2)$ then every peak of $f$ lies in $[lo, m_2]$. If $f(m_1) = f(m_2)$ then every peak of $f$ lies in $[m_1, m_2]$.
 :::
-
 
 The lemma is the whole technique. The third case is the one that the discrete version gets wrong, because a discrete sequence can be weakly unimodal with a plateau, and then the equal values need not be at the peak.
 
 ::: math invariant Invariant
-Throughout the search, the interval still contains a peak of $f$. Every
-iteration reduces the interval to about two thirds of its previous length,
-so after $k$ iterations the interval has length at most $L \cdot (2/3)^k$.
+Throughout the search, the interval still contains a peak of $f$. Every iteration reduces the interval to about two thirds of its previous length, so after $k$ iterations the interval has length at most $L \cdot (2/3)^k$.
 :::
-
 
 ## Algorithm derivation
 
@@ -207,10 +193,8 @@ Now take the weakly unimodal array $[1, 4, 4, 1]$, whose peak is a plateau of tw
 If $f$ is unimodal on $[lo, hi]$, the continuous ternary search returns a point within $\varepsilon$ of a peak, and it terminates.
 :::
 
-
 ::: math proof Proof
-The invariant states that the interval contains a peak of $f$ and that its
-length is at most $L \cdot (2/3)^k$ after $k$ iterations.
+The invariant states that the interval contains a peak of $f$ and that its length is at most $L \cdot (2/3)^k$ after $k$ iterations.
 
 The invariant holds initially, because the whole interval contains a peak.
 
@@ -219,15 +203,9 @@ Suppose it holds at the start of an iteration. Let $m_1$ and $m_2$ be the two pr
 The length shrinks by a factor of at least one third at every iteration, so after $k$ iterations the length is at most $L \cdot (2/3)^k$. The loop terminates when this is at most $\varepsilon$, which happens for $k \ge \log_{3/2}(L/\varepsilon)$, and the midpoint of the final interval is within $\varepsilon$ of the peak it contains. $\square$
 :::
 
-
 ::: math proof Proof
-The proof depends on the unimodality assumption and on nothing else. In
-particular, it does not depend on the array version, whose equality branch
-discards the middle third. The discrete proof fails at exactly that step,
-because a weakly unimodal array may have its peak inside the discarded
-middle third.
+The proof depends on the unimodality assumption and on nothing else. In particular, it does not depend on the array version, whose equality branch discards the middle third. The discrete proof fails at exactly that step, because a weakly unimodal array may have its peak inside the discarded middle third.
 :::
-
 
 ## Complexity analysis
 
@@ -238,11 +216,8 @@ middle third.
 For the discrete version the complexity is $O(\log n)$ iterations, but each iteration performs two array lookups, so the number of lookups is about $2 \log_{3/2} n \approx 3.42 \log_2 n$, which is more than the $n$ lookups of a plain scan for small $n$. A scan is better than a search until the array is large enough for the logarithm to win.
 
 ::: math complexity Complexity
-Ternary search on a unimodal function: $O(\log_{3/2}(L / \varepsilon))$
-iterations and $O(1)$ auxiliary space, with two function evaluations per
-iteration. The discrete version: $O(\log n)$ iterations and $O(1)$ space.
+Ternary search on a unimodal function: $O(\log_{3/2}(L / \varepsilon))$ iterations and $O(1)$ auxiliary space, with two function evaluations per iteration. The discrete version: $O(\log n)$ iterations and $O(1)$ space.
 :::
-
 
 ## Algorithm selection
 

@@ -130,43 +130,24 @@ The head is the right pointer and the tail is the left pointer. The tail only ev
 Let $a_1, a_2, \ldots, a_n$ be an array and let $1 \le l \le r \le n$ describe an interval of it.
 
 ::: math definition Definition
-A quantity $f$ of an interval $[l, r]$ is **monotone in $l$** if
-$f(l, r) \le f(l+1, r)$ for every $l < r$, and **monotone in $r$** if
-$f(l, r) \le f(l, r+1)$ for every $l \le r$. A function is monotone when it
-is monotone in the direction that matters for the question being asked.
+A quantity $f$ of an interval $[l, r]$ is **monotone in $l$** if $f(l, r) \le f(l+1, r)$ for every $l < r$, and **monotone in $r$** if $f(l, r) \le f(l, r+1)$ for every $l \le r$. A function is monotone when it is monotone in the direction that matters for the question being asked.
 :::
-
 
 ::: math definition Definition
-The **opposite-end pattern** maintains two pointers $l$ and $r$ with
-$l \le r$. It starts with $l = 1$ and $r = n$, and at each step it either
-increases $l$ by one or decreases $r$ by one, until the pointers cross.
+The **opposite-end pattern** maintains two pointers $l$ and $r$ with $l \le r$. It starts with $l = 1$ and $r = n$, and at each step it either increases $l$ by one or decreases $r$ by one, until the pointers cross.
 :::
-
 
 ::: math definition Definition
-The **same-direction pattern** maintains two pointers $l$ and $r$ with
-$l \le r$. It starts with $l = r = 1$. The right pointer always advances,
-and the left pointer advances only when a condition requires it, so that
-the interval $[l, r]$ is a window that only ever moves to the right.
+The **same-direction pattern** maintains two pointers $l$ and $r$ with $l \le r$. It starts with $l = r = 1$. The right pointer always advances, and the left pointer advances only when a condition requires it, so that the interval $[l, r]$ is a window that only ever moves to the right.
 :::
-
 
 ::: math lemma Lemma
-Let $a_1 \le a_2 \le \cdots \le a_n$ and let $T$ be a target. If
-$a_l + a_r < T$, then there is no index $j$ with $l < j \le r$ such that
-$a_l + a_j = T$. If $a_l + a_r > T$, then there is no index $i$ with
-$l \le i < r$ such that $a_i + a_r = T$.
+Let $a_1 \le a_2 \le \cdots \le a_n$ and let $T$ be a target. If $a_l + a_r < T$, then there is no index $j$ with $l < j \le r$ such that $a_l + a_j = T$. If $a_l + a_r > T$, then there is no index $i$ with $l \le i < r$ such that $a_i + a_r = T$.
 :::
-
 
 ::: math lemma Lemma
-Let every element of $a$ be non-negative. Then the window sum
-$S(l, r) = \sum_{k=l}^{r} a_k$ is non-decreasing in $r$ and
-non-increasing in $l$. That is, growing the window right never decreases
-the sum, and growing it left never increases the sum.
+Let every element of $a$ be non-negative. Then the window sum $S(l, r) = \sum_{k=l}^{r} a_k$ is non-decreasing in $r$ and non-increasing in $l$. That is, growing the window right never decreases the sum, and growing it left never increases the sum.
 :::
-
 
 The second lemma is the monotonicity that the window pattern needs, and it is exactly what a negative number destroys.
 
@@ -191,18 +172,12 @@ The update rule is correct by the lemma. When $s < T$, the index $l$ cannot be p
 The update rule is correct by the second lemma. The inner loop terminates because removing a non-negative element never increases the sum, and it stops at the smallest $l$ for which the sum is at most $K$, which is the longest valid window ending at $r$.
 
 ::: math invariant Invariant
-In the opposite-end pattern, every pair of indices with one index below
-the current $l$ or one index above the current $r$ has been proved to be
-an invalid answer, so the answer, if it exists, lies inside $[l, r]$.
+In the opposite-end pattern, every pair of indices with one index below the current $l$ or one index above the current $r$ has been proved to be an invalid answer, so the answer, if it exists, lies inside $[l, r]$.
 :::
-
 
 ::: math invariant Invariant
-In the same-direction pattern, at the end of the inner loop the left
-pointer is the smallest index for which the window sum is at most $K$, so
-the window $[l, r]$ is the longest valid window ending at $r$.
+In the same-direction pattern, at the end of the inner loop the left pointer is the smallest index for which the window sum is at most $K$, so the window $[l, r]$ is the longest valid window ending at $r$.
 :::
-
 
 ## Step-by-step execution
 
@@ -232,14 +207,11 @@ The best window seen was $[0, 2]$ with the sum 8 and the length 3.
 ## Correctness proof
 
 ::: math theorem Theorem
-The opposite-end pattern on a sorted array reports a pair summing to $T$
-if such a pair exists, and reports that none exists otherwise.
+The opposite-end pattern on a sorted array reports a pair summing to $T$ if such a pair exists, and reports that none exists otherwise.
 :::
 
-
 ::: math proof Proof
-The invariant is that every pair with an index outside $[l, r]$ has been
-proved invalid, so any solution lies inside $[l, r]$.
+The invariant is that every pair with an index outside $[l, r]$ has been proved invalid, so any solution lies inside $[l, r]$.
 
 The invariant holds initially, because $[0, n-1]$ contains every index.
 
@@ -254,17 +226,12 @@ If $s > T$, the same argument with the roles exchanged shows that all pairs invo
 The interval shrinks at every step, so the loop terminates. It terminates either by finding a solution, which is correct, or by reaching $l \ge r$, in which case the interval holds at most one index and the invariant says no solution exists. $\square$
 :::
 
-
 ::: math theorem Theorem
-The same-direction pattern, applied to an array of non-negative values,
-returns the length of the longest contiguous window whose sum is at most
-$K$.
+The same-direction pattern, applied to an array of non-negative values, returns the length of the longest contiguous window whose sum is at most $K$.
 :::
 
-
 ::: math proof Proof
-Fix a right end $r$. We show that the window $[l, r]$ produced for this
-$r$ is the longest valid window ending at $r$.
+Fix a right end $r$. We show that the window $[l, r]$ produced for this $r$ is the longest valid window ending at $r$.
 
 The inner loop removes elements from the left while the sum exceeds $K$, and by the monotonicity lemma removing a non-negative element never increases the sum, so the loop terminates. When it stops, the sum of $[l, r]$ is at most $K$, so the window is valid.
 
@@ -273,7 +240,6 @@ The loop stopped because the sum became at most $K$ for the first time since $l$
 Hence $[l, r]$ is the longest valid window ending at $r$. Taking the maximum over all $r$ gives the longest valid window in the array. $\square$
 :::
 
-
 ## Complexity analysis
 
 **Time: $O(n)$ for both patterns.** Each pointer moves at most $n$ times, and each move does a constant amount of work. This holds regardless of how many candidate pairs exist, because the elimination argument, not the enumeration, is what bounds the work.
@@ -281,11 +247,8 @@ Hence $[l, r]$ is the longest valid window ending at $r$. Taking the maximum ove
 **Auxiliary space: $O(1)$.** The two pointers and, in the window pattern, the running sum are the entire state. If the array must be sorted first, the sorting costs $O(n \log n)$ and the sort is the dominant term.
 
 ::: math complexity Complexity
-Two pointers: $O(n)$ time and $O(1)$ auxiliary space, provided the array
-is already monotone in the way the pattern requires. If a sort is needed
-first, the total is $O(n \log n)$.
+Two pointers: $O(n)$ time and $O(1)$ auxiliary space, provided the array is already monotone in the way the pattern requires. If a sort is needed first, the total is $O(n \log n)$.
 :::
-
 
 The linear bound is the whole point of the technique, and it is worth stating what it saves. On $n = 200\,000$ elements, the double loop is $2 \cdot 10^{10}$ comparisons and the two-pointer scan is at most $4 \cdot 10^5$. The saving is not a constant factor.
 
@@ -320,15 +283,8 @@ The recursion question belongs to the alternative formulations. A divide-and-con
 | JavaScript | The V8 engine limit | About $10^4$ frames | The loop |
 
 ::: math counterexample Counterexample
-A sorted array of $10^6$ elements searched with a recursive formulation that
-considers one end at every level makes $10^6$ nested calls. In C++ on Linux,
-with an 8 MB stack and a frame of roughly 64 bytes, the stack is exhausted
-after about $130\,000$ frames, so the program dies with a segmentation fault
-before it has examined $13\%$ of the array. The loop finishes the same array
-in at most $2 \cdot 10^5$ comparisons. The input is legal and the answer is
-well defined; only the choice of implementation is wrong.
+A sorted array of $10^6$ elements searched with a recursive formulation that considers one end at every level makes $10^6$ nested calls. In C++ on Linux, with an 8 MB stack and a frame of roughly 64 bytes, the stack is exhausted after about $130\,000$ frames, so the program dies with a segmentation fault before it has examined $13\%$ of the array. The loop finishes the same array in at most $2 \cdot 10^5$ comparisons. The input is legal and the answer is well defined; only the choice of implementation is wrong.
 :::
-
 
 The rule of thumb is simple: if the recursion depth would be proportional to the length of the array, write the loop.
 

@@ -143,64 +143,53 @@ Let $U$ be a finite universe and let $A_1, \ldots, A_m$ be subsets of $U$.
 
 ::: math definition Definition
 The **principle of inclusion and exclusion** is the identity
+
 $$
 \left| \bigcup_{i=1}^{m} A_i \right|
 = \sum_{\emptyset \ne S \subseteq \{1, \ldots, m\}}
 (-1)^{|S|+1} \left| \bigcap_{i \in S} A_i \right|,
 $$
+
 where the intersection over an empty index set is understood to be $U$.
 :::
 
-
 ::: math definition Definition
-The **Möbius function** $\mu$ is defined on the positive integers by
-$\mu(1) = 1$, by $\mu(d) = 0$ when $d$ is divisible by the square of a
-prime, and by $\mu(d) = (-1)^{\omega(d)}$ when $d$ is a product of
-$\omega(d)$ distinct primes. It satisfies
+The **Möbius function** $\mu$ is defined on the positive integers by $\mu(1) = 1$, by $\mu(d) = 0$ when $d$ is divisible by the square of a prime, and by $\mu(d) = (-1)^{\omega(d)}$ when $d$ is a product of $\omega(d)$ distinct primes. It satisfies
+
 $$
 \sum_{d \mid g} \mu(d) = \begin{cases} 1 & \text{if } g = 1, \\ 0 & \text{if } g > 1. \end{cases}
 $$
 :::
 
-
 ::: math lemma Lemma
-Let $x$ be an element of $U$ that belongs to exactly $r$ of the sets
-$A_1, \ldots, A_m$. Then the contribution of $x$ to the right-hand side of
-the principle of inclusion and exclusion is
+Let $x$ be an element of $U$ that belongs to exactly $r$ of the sets $A_1, \ldots, A_m$. Then the contribution of $x$ to the right-hand side of the principle of inclusion and exclusion is
+
 $$
 \sum_{j=1}^{r} (-1)^{j+1} \binom{r}{j},
 $$
+
 which is $1$ if $r \ge 1$ and $0$ if $r = 0$.
 :::
 
-
 ::: math proof Proof
-The subsets $S$ with $x \in \bigcap_{i \in S} A_i$ are exactly the subsets of
-the $r$ sets that contain $x$, and there are $\binom{r}{j}$ of them of size
-$j$. Hence the total contribution is
-$\sum_{j=1}^{r} (-1)^{j+1}\binom{r}{j}$. Expanding $(1-1)^r = 0$ for
-$r \ge 1$ gives
+The subsets $S$ with $x \in \bigcap_{i \in S} A_i$ are exactly the subsets of the $r$ sets that contain $x$, and there are $\binom{r}{j}$ of them of size $j$. Hence the total contribution is $\sum_{j=1}^{r} (-1)^{j+1}\binom{r}{j}$. Expanding $(1-1)^r = 0$ for $r \ge 1$ gives
+
 $$
 \sum_{j=0}^{r} (-1)^j \binom{r}{j} = 0,
 $$
-and removing the $j = 0$ term, which is $1$, leaves $\sum_{j=1}^{r}
-(-1)^{j+1}\binom{r}{j} = 1$. For $r = 0$ the sum is empty and equals $0$.
-$\square$
+
+and removing the $j = 0$ term, which is $1$, leaves $\sum_{j=1}^{r} (-1)^{j+1}\binom{r}{j} = 1$. For $r = 0$ the sum is empty and equals $0$. $\square$
 :::
 
-
 ::: math invariant Invariant
-In the combinatorial sieve for coprime pairs, after the primes up to $p$
-have been processed, the running value
+In the combinatorial sieve for coprime pairs, after the primes up to $p$ have been processed, the running value
+
 $$
 S(p) = \sum_{d \le p} \mu(d) \left\lfloor \frac{n}{d} \right\rfloor^{2}
 $$
-equals the number of ordered pairs $(a,b)$ with $1 \le a, b \le n$ such that
-no prime at most $p$ divides both $a$ and $b$. When $p = n$, every prime
-that could divide both has been considered, so $S(n)$ is the number of
-coprime pairs.
-:::
 
+equals the number of ordered pairs $(a,b)$ with $1 \le a, b \le n$ such that no prime at most $p$ divides both $a$ and $b$. When $p = n$, every prime that could divide both has been considered, so $S(n)$ is the number of coprime pairs.
+:::
 
 ## Algorithm derivation
 
@@ -255,23 +244,15 @@ Each of the seven students in exactly two courses is added twice and subtracted 
 ## Correctness proof
 
 ::: math theorem Theorem
-Let $A_1, \ldots, A_m$ be subsets of a finite universe $U$. The principle of
-inclusion and exclusion computes $\lvert \bigcup_i A_i\rvert$ exactly. In
-particular, the number of ordered pairs $(a,b)$ with $1 \le a, b \le n$ and
-$\gcd(a,b) = 1$ is
+Let $A_1, \ldots, A_m$ be subsets of a finite universe $U$. The principle of inclusion and exclusion computes $\lvert \bigcup_i A_i\rvert$ exactly. In particular, the number of ordered pairs $(a,b)$ with $1 \le a, b \le n$ and $\gcd(a,b) = 1$ is
+
 $$
 \sum_{d=1}^{n} \mu(d) \left\lfloor \frac{n}{d} \right\rfloor^{2}.
 $$
 :::
 
-
 ::: math proof Proof
-**The union.** Sum the right-hand side over all $x \in U$. An element $x$
-that lies in exactly $r$ of the sets contributes
-$\sum_{j=1}^{r}(-1)^{j+1}\binom{r}{j}$, which is $1$ when $r \ge 1$ and $0$
-when $r = 0$, by the lemma. Therefore the sum counts each element of the
-union exactly once and each element outside it zero times, which is
-$\lvert \bigcup_i A_i \rvert$.
+**The union.** Sum the right-hand side over all $x \in U$. An element $x$ that lies in exactly $r$ of the sets contributes $\sum_{j=1}^{r}(-1)^{j+1}\binom{r}{j}$, which is $1$ when $r \ge 1$ and $0$ when $r = 0$, by the lemma. Therefore the sum counts each element of the union exactly once and each element outside it zero times, which is $\lvert \bigcup_i A_i \rvert$.
 
 **The coprime pairs.** Let $P$ be the set of primes at most $n$, and for each $p \in P$ let $B_p$ be the set of ordered pairs $(a,b)$ with $1 \le a, b \le n$ such that $p$ divides both $a$ and $b$. An ordered pair is coprime exactly when it lies in no $B_p$, because a common divisor greater than $1$ has a prime factor. The size of $B_p$ is $\lfloor n/p \rfloor^2$, and for a subfamily with product $d$ the size of the intersection is $\lfloor n/d \rfloor^2$, because an integer is divisible by every prime of the subfamily exactly when it is divisible by their product $d$. Inclusion and exclusion therefore gives the count of coprime pairs as
 
@@ -283,7 +264,6 @@ $$
 
 where the product of the empty set is $1$. Group the subsets $S$ by their product $d$. The product is squarefree, and the number of subsets with product $d$ is $\mu(d)$: it is $1$ for $d = 1$, it is $(-1)^{\omega(d)}$ when $d$ is a product of $\omega(d)$ distinct primes, and no subset of primes has a product divisible by a prime square, so the terms with $\mu(d) = 0$ contribute nothing. Summing over all $d$ at most $n$ gives $\sum_{d=1}^{n} \mu(d)\lfloor n/d \rfloor^2$, as claimed. $\square$
 :::
-
 
 ## Complexity analysis
 

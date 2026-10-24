@@ -123,54 +123,30 @@ The third insight is about the arithmetic. Every entry of the table is a count, 
 Let $C$ be the set of configurations, and let $v(c)$ be the number of constraints that configuration $c$ violates.
 
 ::: math definition Definition
-A **state** is a description of a partial configuration that determines,
-for every way of completing it, whether the completion is valid. A
-**counting dynamic program** assigns to every state $s$ a value $D(s)$,
-the number of valid partial configurations that reach $s$, computed by a
-recurrence over a set of predecessors.
+A **state** is a description of a partial configuration that determines, for every way of completing it, whether the completion is valid. A **counting dynamic program** assigns to every state $s$ a value $D(s)$, the number of valid partial configurations that reach $s$, computed by a recurrence over a set of predecessors.
 :::
 
-
 ::: math definition Definition
-For a grid of $n$ rows and $m$ columns with a set $B$ of blocked cells, let
-$P(r,c)$ be the number of paths from $(0,0)$ to $(r,c)$ that move only right
-or down and never enter a blocked cell. Then $P$ satisfies
+For a grid of $n$ rows and $m$ columns with a set $B$ of blocked cells, let $P(r,c)$ be the number of paths from $(0,0)$ to $(r,c)$ that move only right or down and never enter a blocked cell. Then $P$ satisfies
+
 $$
 P(r,c) = P(r-1,c) + P(r,c-1)
 $$
-for every cell that is neither blocked nor the origin, with $P(r,c) = 0$ on
-blocked cells, $P(0,0) = 1$, and $P$ taken to be $0$ outside the grid.
-:::
 
+for every cell that is neither blocked nor the origin, with $P(r,c) = 0$ on blocked cells, $P(0,0) = 1$, and $P$ taken to be $0$ outside the grid.
+:::
 
 ::: math lemma Lemma
-For every cell $(r,c)$, the paths counted by $P(r,c)$ partition into the
-paths whose last step is downward and the paths whose last step is
-rightward, and these two classes have sizes $P(r-1,c)$ and $P(r,c-1)$
-respectively.
+For every cell $(r,c)$, the paths counted by $P(r,c)$ partition into the paths whose last step is downward and the paths whose last step is rightward, and these two classes have sizes $P(r-1,c)$ and $P(r,c-1)$ respectively.
 :::
-
 
 ::: math proof Proof
-Every path to $(r,c)$ ends with a step from $(r-1,c)$ or from $(r,c-1)$,
-because those are the only cells from which a rightward or a downward step
-enters $(r,c)$. A path whose last step is downward is obtained uniquely by
-appending that step to a path counted by $P(r-1,c)$, provided the last step
-does not enter a blocked cell, which is excluded by the convention that
-$P$ is $0$ on blocked cells. The two classes are disjoint, because a path
-has exactly one last step, so their sizes add. $\square$
+Every path to $(r,c)$ ends with a step from $(r-1,c)$ or from $(r,c-1)$, because those are the only cells from which a rightward or a downward step enters $(r,c)$. A path whose last step is downward is obtained uniquely by appending that step to a path counted by $P(r-1,c)$, provided the last step does not enter a blocked cell, which is excluded by the convention that $P$ is $0$ on blocked cells. The two classes are disjoint, because a path has exactly one last step, so their sizes add. $\square$
 :::
-
 
 ::: math invariant Invariant
-After the outer loop has processed the first $r$ rows, the table entry
-$D(r,c)$ equals the number of valid paths from the origin to $(r,c)$, taken
-modulo $m$, for every column $c$ of those rows. The base case holds
-because the only path to the origin is the empty path, and the step from
-row $r-1$ to row $r$ preserves the invariant by the lemma, since the two
-predecessor entries are already correct.
+After the outer loop has processed the first $r$ rows, the table entry $D(r,c)$ equals the number of valid paths from the origin to $(r,c)$, taken modulo $m$, for every column $c$ of those rows. The base case holds because the only path to the origin is the empty path, and the step from row $r-1$ to row $r$ preserves the invariant by the lemma, since the two predecessor entries are already correct.
 :::
-
 
 ## Algorithm derivation
 
@@ -241,11 +217,8 @@ The answer is $2$. The path that goes all the way right along the top row and th
 ## Correctness proof
 
 ::: math theorem Theorem
-The counting dynamic program computes, for every cell, the number of valid
-paths to that cell modulo the modulus, and in particular the number of
-valid paths from the origin to the target.
+The counting dynamic program computes, for every cell, the number of valid paths to that cell modulo the modulus, and in particular the number of valid paths from the origin to the target.
 :::
-
 
 ::: math proof Proof
 The invariant is the statement in the panel above.
@@ -256,7 +229,6 @@ The invariant is the statement in the panel above.
 
 **Termination.** When the last row has been processed, the invariant says that the entry for the target cell is the residue of the number of valid paths to it, which is the answer the problem asks for. $\square$
 :::
-
 
 ## Complexity analysis
 

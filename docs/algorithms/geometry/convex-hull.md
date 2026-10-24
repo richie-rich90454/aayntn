@@ -92,20 +92,17 @@ The removal is safe because it never removes a point that could be a hull vertex
 Let $S$ be a finite set of points in the plane.
 
 ::: math definition Definition
-A set $C$ is **convex** if, for any two points $p$ and $q$ in $C$, the
-whole segment from $p$ to $q$ lies in $C$. The **convex hull** of $S$ is
-the smallest convex set containing $S$. It is a convex polygon whose
-vertices are exactly the **extreme points** of $S$, that is, the points of
-$S$ that are not in the convex hull of the remaining points.
+A set $C$ is **convex** if, for any two points $p$ and $q$ in $C$, the whole segment from $p$ to $q$ lies in $C$. The **convex hull** of $S$ is the smallest convex set containing $S$. It is a convex polygon whose vertices are exactly the **extreme points** of $S$, that is, the points of $S$ that are not in the convex hull of the remaining points.
 :::
-
 
 ::: math definition Definition
 For points $A$, $B$, $C$, put $u = B - A$ and $v = C - A$ and define
+
 $$
 \operatorname{cross}(A, B, C) = u_x v_y - u_y v_x
 = (B_x - A_x)(C_y - A_y) - (B_y - A_y)(C_x - A_x).
 $$
+
 The **orientation** of the triple is one of three cases:
 
 - $\operatorname{cross}(A, B, C) > 0$: $C$ lies strictly to the **left** of the directed line from $A$ to $B$, and the turn $A \to B \to C$ is counterclockwise.
@@ -113,47 +110,38 @@ The **orientation** of the triple is one of three cases:
 - $\operatorname{cross}(A, B, C) = 0$: the three points are **collinear**.
 :::
 
-
 ::: math definition Definition
-A **chain** of points is **convex** if every three consecutive points of
-the chain make a strict left turn, that is, if
-$\operatorname{cross}(p_{i-1}, p_i, p_{i+1}) > 0$ for every applicable
-index $i$. The **lower hull** of $S$ is the convex chain from the
-leftmost point of $S$ to the rightmost point of $S$ such that every point
-of $S$ lies on or above it.
+A **chain** of points is **convex** if every three consecutive points of the chain make a strict left turn, that is, if $\operatorname{cross}(p_{i-1}, p_i, p_{i+1}) > 0$ for every applicable index $i$. The **lower hull** of $S$ is the convex chain from the leftmost point of $S$ to the rightmost point of $S$ such that every point of $S$ lies on or above it.
 :::
 
-
 ::: math lemma Lemma
-Let $a$, $b$, $c$ be points with $a_x \le b_x \le c_x$ and $c_x > a_x$.
-Then
+Let $a$, $b$, $c$ be points with $a_x \le b_x \le c_x$ and $c_x > a_x$. Then
+
 $$
 \operatorname{cross}(a, b, c) = (c_x - a_x)\bigl(h(b_x) - b_y\bigr),
 $$
-where $h$ is the height of the line through $a$ and $c$ at the abscissa
-$b_x$. Consequently $\operatorname{cross}(a, b, c) \le 0$ if and only if
-$b$ lies on or above the segment from $a$ to $c$.
-:::
 
+where $h$ is the height of the line through $a$ and $c$ at the abscissa $b_x$. Consequently $\operatorname{cross}(a, b, c) \le 0$ if and only if $b$ lies on or above the segment from $a$ to $c$.
+:::
 
 ::: math proof Proof
 Expand the definition:
+
 $$
 \operatorname{cross}(a, b, c)
 = (b_x - a_x)(c_y - a_y) - (b_y - a_y)(c_x - a_x).
 $$
-The height of the line through $a$ and $c$ at $b_x$ is
-$h(b_x) = a_y + \frac{c_y - a_y}{c_x - a_x}(b_x - a_x)$, so
+
+The height of the line through $a$ and $c$ at $b_x$ is $h(b_x) = a_y + \frac{c_y - a_y}{c_x - a_x}(b_x - a_x)$, so
+
 $$
 (c_x - a_x)\bigl(h(b_x) - b_y\bigr)
 = (c_x - a_x)(a_y - b_y) + (c_y - a_y)(b_x - a_x)
 = (b_x - a_x)(c_y - a_y) - (b_y - a_y)(c_x - a_x),
 $$
-which is the cross product. Since $c_x - a_x > 0$, the sign of the cross
-product is the sign of $h(b_x) - b_y$, and $b$ lies on or above the line
-exactly when $h(b_x) - b_y \ge 0$. $\square$
-:::
 
+which is the cross product. Since $c_x - a_x > 0$, the sign of the cross product is the sign of $h(b_x) - b_y$, and $b$ lies on or above the line exactly when $h(b_x) - b_y \ge 0$. $\square$
+:::
 
 ## Algorithm derivation
 
@@ -232,15 +220,11 @@ That is a triangle, traversed counterclockwise, and the other three points are i
 ## Correctness proof
 
 ::: math theorem Theorem
-The monotone chain algorithm returns the convex hull of its input, in
-counterclockwise order, starting at the point with the smallest $x$ and
-then the smallest $y$.
+The monotone chain algorithm returns the convex hull of its input, in counterclockwise order, starting at the point with the smallest $x$ and then the smallest $y$.
 :::
 
-
 ::: math proof Proof
-Let the points be sorted by $x$ and then by $y$, and let the sweep build
-the chain `lower`.
+Let the points be sorted by $x$ and then by $y$, and let the sweep build the chain `lower`.
 
 **The invariant.** After the sweep has processed the first $t$ points:
 
@@ -260,7 +244,6 @@ When the loop stops, the triple formed by the last two points of the chain and $
 
 The same argument applied to the reversed order produces the upper hull. Joining the two chains, with the shared endpoints removed so that they are not counted twice, gives the boundary of the convex hull, traversed counterclockwise. $\square$
 :::
-
 
 ## Complexity analysis
 

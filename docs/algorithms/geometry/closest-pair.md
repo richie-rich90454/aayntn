@@ -125,61 +125,35 @@ Let $S$ be a set of $n$ points in the plane.
 
 ::: math definition Definition
 For a finite set $S$, the **closest pair distance** is
+
 $$
 \delta(S) = \min_{\{a, b\} \subseteq S} |a - b|,
 $$
-and a **closest pair** is a pair attaining it. The **split** of $S$ at
-$x = L$ divides it into $S_{\text{left}} = \{p \in S : p_x \le L\}$ and
-$S_{\text{right}} = \{p \in S : p_x > L\}$. The **strip** at $L$ with width
-$\delta$ is the set of points with $|p_x - L| \le \delta$.
-:::
 
+and a **closest pair** is a pair attaining it. The **split** of $S$ at $x = L$ divides it into $S_{\text{left}} = \{p \in S : p_x \le L\}$ and $S_{\text{right}} = \{p \in S : p_x > L\}$. The **strip** at $L$ with width $\delta$ is the set of points with $|p_x - L| \le \delta$.
+:::
 
 ::: math lemma Lemma
-Let $S$ be split at $x = L$, let $\delta = \min(\delta(S_{\text{left}}),
-\delta(S_{\text{right}}))$, and let $(a, b)$ be a pair with $a$ in the left
-half, $b$ in the right half and $|a - b| < \delta$. Then both $a$ and $b$
-lie in the strip at $L$ with width $\delta$.
+Let $S$ be split at $x = L$, let $\delta = \min(\delta(S_{\text{left}}), \delta(S_{\text{right}}))$, and let $(a, b)$ be a pair with $a$ in the left half, $b$ in the right half and $|a - b| < \delta$. Then both $a$ and $b$ lie in the strip at $L$ with width $\delta$.
 :::
-
 
 ::: math proof Proof
-The distance satisfies $|a - b| \ge |a_x - b_x| = b_x - a_x$, because the
-horizontal difference is one of the two components of the distance. Hence
-$b_x - a_x < \delta$. Since $a_x \le L \le b_x$, it follows that
-$a_x > b_x - \delta \ge L - \delta$ and $b_x < a_x + \delta \le L + \delta$.
-So $L - \delta < a_x$ and $b_x < L + \delta$, and both points are in the
-strip. $\square$
+The distance satisfies $|a - b| \ge |a_x - b_x| = b_x - a_x$, because the horizontal difference is one of the two components of the distance. Hence $b_x - a_x < \delta$. Since $a_x \le L \le b_x$, it follows that $a_x > b_x - \delta \ge L - \delta$ and $b_x < a_x + \delta \le L + \delta$. So $L - \delta < a_x$ and $b_x < L + \delta$, and both points are in the strip. $\square$
 :::
-
 
 ::: math lemma Lemma
-Let $p$ be a point of the strip, and consider the part of the strip whose
-$y$-coordinate is within $\delta$ of $p_y$. It contains at most eight
-points of $S$, one of which is $p$, so at most seven of them are closer to
-$p$ than $\delta$.
+Let $p$ be a point of the strip, and consider the part of the strip whose $y$-coordinate is within $\delta$ of $p_y$. It contains at most eight points of $S$, one of which is $p$, so at most seven of them are closer to $p$ than $\delta$.
 :::
 
-
 ::: math proof Proof
-The region in question is a rectangle of width $2\delta$ and height
-$\delta$. Divide it into eight squares of side $\delta/2$, four across and
-two down. Each square lies entirely in one half of the split, because the
-splitting line is one of the four vertical boundaries of the squares.
+The region in question is a rectangle of width $2\delta$ and height $\delta$. Divide it into eight squares of side $\delta/2$, four across and two down. Each square lies entirely in one half of the split, because the splitting line is one of the four vertical boundaries of the squares.
 
 Suppose two points $u$ and $v$ of $S$ lie in the same square. Their horizontal separation is at most $\delta/2$ and their vertical separation is at most $\delta/2$, so their distance is at most $\sqrt{(\delta/2)^2 + (\delta/2)^2} = \delta/\sqrt{2} < \delta$. But they are in the same half, and every pair of points in the same half is at distance at least $\delta$, by the definition of $\delta$ as the smaller of the two closest pair distances. This is a contradiction, so each square contains at most one point. There are eight squares, so there are at most eight points in the region. $\square$
 :::
 
-
 ::: math invariant Invariant
-At the start of the merge for the split at $x = L$, the value `best` is the
-squared closest pair distance of the two halves, and the strip is defined by
-$|p_x - L| \le \sqrt{\text{best}}$. Every time `best` is reduced, the strip
-narrows, so the invariant that `best` is the squared distance of the
-closest pair found so far, and that the strip contains every point that
-could still form a closer pair, is preserved.
+At the start of the merge for the split at $x = L$, the value `best` is the squared closest pair distance of the two halves, and the strip is defined by $|p_x - L| \le \sqrt{\text{best}}$. Every time `best` is reduced, the strip narrows, so the invariant that `best` is the squared distance of the closest pair found so far, and that the strip contains every point that could still form a closer pair, is preserved.
 :::
-
 
 ## Algorithm derivation
 
@@ -240,14 +214,11 @@ Notice that the closest pair straddles the dividing line at $x = 2.5$, so it was
 ## Correctness proof
 
 ::: math theorem Theorem
-The divide and conquer algorithm returns the closest pair of a set of
-points.
+The divide and conquer algorithm returns the closest pair of a set of points.
 :::
 
-
 ::: math proof Proof
-**The invariant.** At every level of the recursion, the call returns the
-closest pair of its set and the set sorted by $y$.
+**The invariant.** At every level of the recursion, the call returns the closest pair of its set and the set sorted by $y$.
 
 **The base case.** For at most three points the brute force examines every pair, so the closest pair is found, and the list is sorted by $y$ before it is returned.
 
@@ -259,7 +230,6 @@ The scan therefore finds the smallest squared distance among all the pairs of th
 
 The merge of the two $y$-sorted halves is $y$-sorted, so the invariant is preserved. $\square$
 :::
-
 
 ## Complexity analysis
 

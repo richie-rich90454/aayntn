@@ -131,36 +131,22 @@ The same reduction answers the "at most $K$" version. The number of blocks with 
 Let $a_1, a_2, \ldots, a_n$ be the array, and let $P_0 = 0$ and $P_j = \sum_{k=1}^{j} a_k$.
 
 ::: math definition Definition
-A **block** of the array is a pair of indices $(l, r)$ with $1 \le l \le r \le n$.
-Its sum is $\sigma(l, r) = P_r - P_{l-1}$.
+A **block** of the array is a pair of indices $(l, r)$ with $1 \le l \le r \le n$. Its sum is $\sigma(l, r) = P_r - P_{l-1}$.
 :::
-
 
 ::: math definition Definition
-The **prefix pairs** of the array are the pairs $(i, j)$ with $0 \le i < j \le n$.
-The map $(l, r) \mapsto (l-1, r)$ is a bijection from the blocks to the prefix
-pairs, and it preserves the sum: $\sigma(l, r) = P_j - P_i$ for the pair
-$(i, j) = (l-1, r)$.
+The **prefix pairs** of the array are the pairs $(i, j)$ with $0 \le i < j \le n$. The map $(l, r) \mapsto (l-1, r)$ is a bijection from the blocks to the prefix pairs, and it preserves the sum: $\sigma(l, r) = P_j - P_i$ for the pair $(i, j) = (l-1, r)$.
 :::
-
 
 ::: math lemma Lemma
-Let $c$ be a map that stores, for each prefix value, the number of times it
-has been seen. If the scan inserts $P_0, P_1, \ldots, P_{j-1}$ into $c$ before
-the position $j$ is processed, then $c(P_j - K)$ is exactly the number of
-blocks ending at $j$ whose sum is $K$.
+Let $c$ be a map that stores, for each prefix value, the number of times it has been seen. If the scan inserts $P_0, P_1, \ldots, P_{j-1}$ into $c$ before the position $j$ is processed, then $c(P_j - K)$ is exactly the number of blocks ending at $j$ whose sum is $K$.
 :::
-
 
 The lemma is the correctness of the counting algorithm. Every prefix index $i < j$ with $P_i = P_j - K$ gives a block $(i+1, j)$ with sum $K$, and every block ending at $j$ with sum $K$ gives such an $i$.
 
 ::: math invariant Invariant
-When the scan is at position $j$, the map holds exactly the values
-$P_0, P_1, \ldots, P_{j-1}$, each with its multiplicity. The running total
-of the answer is the number of blocks ending at a position at most $j$ whose
-sum is $K$.
+When the scan is at position $j$, the map holds exactly the values $P_0, P_1, \ldots, P_{j-1}$, each with its multiplicity. The running total of the answer is the number of blocks ending at a position at most $j$ whose sum is $K$.
 :::
-
 
 ## Algorithm derivation
 
@@ -196,11 +182,8 @@ The answer is 4, and the four blocks are the elements 1 and $-1$; the elements 1
 The algorithm returns the number of contiguous blocks whose sum is $K$.
 :::
 
-
 ::: math proof Proof
-The invariant states that when the scan is at position $j$, the map holds
-exactly the values $P_0, \ldots, P_{j-1}$ with their multiplicities, and the
-answer is the number of blocks ending at a position at most $j$ with sum $K$.
+The invariant states that when the scan is at position $j$, the map holds exactly the values $P_0, \ldots, P_{j-1}$ with their multiplicities, and the answer is the number of blocks ending at a position at most $j$ with sum $K$.
 
 The invariant holds before the scan starts, because the map holds $P_0 = 0$ once and there are no blocks yet.
 
@@ -213,7 +196,6 @@ Inserting $P_j$ into the map makes the map hold exactly $P_0, \ldots, P_j$, whic
 The loop ends after position $n$, so the answer counts every block of the array whose sum is $K$, and each exactly once, because a block has a unique last position. $\square$
 :::
 
-
 ## Complexity analysis
 
 **Time: $O(n)$ expected.** The scan is linear, and each map operation costs $O(1)$ expected. The expectation comes from the hashing; a worst-case bound needs a different map.
@@ -223,12 +205,8 @@ The loop ends after position $n$, so the answer counts every block of the array 
 The variant that sorts the prefix sums and uses two pointers costs $O(n \log n)$ time and $O(n)$ space, and it needs no hash map, which matters in languages without a fast hash map or when the hash map is the target of adversarial input.
 
 ::: math complexity Complexity
-Counting blocks with a given sum: $O(n)$ expected time and $O(n)$ space
-with a hash map, and $O(n \log n)$ time and $O(n)$ space by sorting the
-prefix sums. The non-negative special case is $O(n)$ time and $O(1)$ space
-with a sliding window.
+Counting blocks with a given sum: $O(n)$ expected time and $O(n)$ space with a hash map, and $O(n \log n)$ time and $O(n)$ space by sorting the prefix sums. The non-negative special case is $O(n)$ time and $O(1)$ space with a sliding window.
 :::
-
 
 ## Algorithm selection
 

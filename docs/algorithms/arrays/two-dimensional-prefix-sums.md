@@ -158,8 +158,7 @@ And $34 = 6 + 7 + 10 + 11$, which is the sum of the four cells in the query rect
 Let $a_{i,j}$ be the value at row $i$ and column $j$, with $1 \le i \le R$ and $1 \le j \le C$.
 
 ::: math definition Definition
-The **two-dimensional prefix sum** $P[i][j]$ is the sum of the
-rectangle anchored at the top-left corner of the grid:
+The **two-dimensional prefix sum** $P[i][j]$ is the sum of the rectangle anchored at the top-left corner of the grid:
 
 $$
 P[i][j] = \sum_{x=1}^{i} \sum_{y=1}^{j} a_{x,y},
@@ -168,13 +167,9 @@ $$
 with $P[0][j] = P[i][0] = 0$ for every $i$ and $j$. The table has $(R+1)(C+1)$ entries.
 :::
 
-
 ::: math definition Definition
-The **rectangle sum** of the query $(r_1, c_1, r_2, c_2)$ is
-$S(r_1, c_1, r_2, c_2) = \sum_{x=r_1}^{r_2} \sum_{y=c_1}^{c_2} a_{x,y}$,
-where $1 \le r_1 \le r_2 \le R$ and $1 \le c_1 \le c_2 \le C$.
+The **rectangle sum** of the query $(r_1, c_1, r_2, c_2)$ is $S(r_1, c_1, r_2, c_2) = \sum_{x=r_1}^{r_2} \sum_{y=c_1}^{c_2} a_{x,y}$, where $1 \le r_1 \le r_2 \le R$ and $1 \le c_1 \le c_2 \le C$.
 :::
-
 
 ::: math recurrence Recurrence
 The table is built by
@@ -186,7 +181,6 @@ $$
 for $1 \le i \le R$ and $1 \le j \le C$, in row-major order.
 :::
 
-
 ::: math lemma Lemma
 For every query,
 
@@ -195,12 +189,9 @@ S(r_1, c_1, r_2, c_2) = P[r_2][c_2] - P[r_1-1][c_2] - P[r_2][c_1-1] + P[r_1-1][c
 $$
 :::
 
-
 ::: math theorem Theorem
-The construction and the query formula together answer every rectangle
-sum query correctly.
+The construction and the query formula together answer every rectangle sum query correctly.
 :::
-
 
 ## Algorithm derivation
 
@@ -213,11 +204,8 @@ The build rule is correct because the two prefix rectangles at $(i-1,j)$ and $(i
 The query rule is the lemma: read the four corners and combine them with the signs $+, -, -, +$.
 
 ::: math invariant Invariant
-After the build step for row $i$ and column $j$, the entry $P[i][j]$
-holds the sum of the rectangle from $(1,1)$ to $(i,j)$, and every entry
-in row zero or column zero holds zero.
+After the build step for row $i$ and column $j$, the entry $P[i][j]$ holds the sum of the rectangle from $(1,1)$ to $(i,j)$, and every entry in row zero or column zero holds zero.
 :::
-
 
 The zero row and the zero column are not a convenience. They are what makes the formula work for a query that touches the first row or the first column, because the term $P[r_1-1][c_2]$ is $P[0][c_2]$ when $r_1 = 1$, and a prefix rectangle of height zero has sum zero.
 
@@ -269,7 +257,6 @@ Now two queries.
 The construction computes the prefix sums correctly.
 :::
 
-
 ::: math proof Proof
 We prove the invariant by induction over the row-major order.
 
@@ -284,23 +271,15 @@ $$
 which is exactly what the build rule writes into $P[i][j]$. The invariant is preserved, so every entry of the table is correct. $\square$
 :::
 
-
 ::: math proof Proof
 The query formula returns the sum of the query rectangle.
 :::
 
-
 ::: math proof Proof
-By the definition, $P[r_2][c_2]$ is the sum of every cell with
-$1 \le x \le r_2$ and $1 \le y \le c_2$. The prefix rectangle
-$P[r_1-1][c_2]$ is the sum of the cells of that region with $x < r_1$,
-and the prefix rectangle $P[r_2][c_1-1]$ is the sum of the cells with
-$y < c_1$. Subtracting the first removes the rows above the query and
-subtracting the second removes the columns to the left of it.
+By the definition, $P[r_2][c_2]$ is the sum of every cell with $1 \le x \le r_2$ and $1 \le y \le c_2$. The prefix rectangle $P[r_1-1][c_2]$ is the sum of the cells of that region with $x < r_1$, and the prefix rectangle $P[r_2][c_1-1]$ is the sum of the cells with $y < c_1$. Subtracting the first removes the rows above the query and subtracting the second removes the columns to the left of it.
 
 The cells with $x < r_1$ and $y < c_1$ are removed twice, and every other cell outside the query is removed exactly once. Their total is $P[r_1-1][c_1-1]$, so adding it back leaves each cell of the query counted once and every other cell counted zero. The result is therefore $S(r_1, c_1, r_2, c_2)$. $\square$
 :::
-
 
 ## Complexity analysis
 
@@ -309,10 +288,8 @@ The cells with $x < r_1$ and $y < c_1$ are removed twice, and every other cell o
 **Space: $O(RC)$** for the table, which has $(R+1)(C+1)$ entries. With 64-bit entries that is $8(R+1)(C+1)$ bytes: 8 MB for a $1000 \times 1000$ grid, 32 MB for a $2000 \times 2000$ grid, and 128 MB for a $4000 \times 4000$ grid, which is where the memory limit usually bites.
 
 ::: math complexity Complexity
-Two-dimensional prefix sums over an $R \times C$ grid: $O(RC)$ to build,
-$O(1)$ per rectangle query, $O(RC + q)$ in total, and $O(RC)$ space.
+Two-dimensional prefix sums over an $R \times C$ grid: $O(RC)$ to build, $O(1)$ per rectangle query, $O(RC + q)$ in total, and $O(RC)$ space.
 :::
-
 
 The width of the accumulator is part of the correctness, not a detail. With $4 \cdot 10^6$ cells of value up to $10^6$, a prefix total reaches $4 \cdot 10^{12}$, which needs 64 bits.
 

@@ -175,53 +175,30 @@ The picture is short, and it is useless for the question "who are the neighbors 
 Let $G = (V, E)$ be a graph with $V = \{v_1, \ldots, v_n\}$ and $E \subseteq V \times V$.
 
 ::: math definition Definition
-The **adjacency matrix** of $G$ is the $n \times n$ matrix $A$ with
-$A_{ij} = 1$ when $\{v_i, v_j\} \in E$ and $A_{ij} = 0$ otherwise, for a
-simple undirected graph. A weighted graph replaces the flag with the weight
-and a missing edge with a sentinel.
+The **adjacency matrix** of $G$ is the $n \times n$ matrix $A$ with $A_{ij} = 1$ when $\{v_i, v_j\} \in E$ and $A_{ij} = 0$ otherwise, for a simple undirected graph. A weighted graph replaces the flag with the weight and a missing edge with a sentinel.
 :::
-
 
 ::: math definition Definition
-The **adjacency list** of $G$ assigns to each vertex $v_i$ the sequence
-$L_i = (u_1, u_2, \ldots, u_{d_i})$ of the vertices adjacent to it, where
-$d_i$ is the degree of $v_i$. The total length of all the sequences is
-$2|E|$ for an undirected graph.
+The **adjacency list** of $G$ assigns to each vertex $v_i$ the sequence $L_i = (u_1, u_2, \ldots, u_{d_i})$ of the vertices adjacent to it, where $d_i$ is the degree of $v_i$. The total length of all the sequences is $2|E|$ for an undirected graph.
 :::
-
 
 ::: math definition Definition
-The **edge list** of $G$ is a sequence of pairs $(u, v, w)$, one for each
-edge, holding the endpoints and optionally the weight. It carries no
-information about which vertex a given edge list belongs to, beyond what
-the endpoints say.
+The **edge list** of $G$ is a sequence of pairs $(u, v, w)$, one for each edge, holding the endpoints and optionally the weight. It carries no information about which vertex a given edge list belongs to, beyond what the endpoints say.
 :::
-
 
 ::: math definition Definition
-A graph is **sparse** when $E = O(V)$ and **dense** when $E = \Theta(V^2)$.
-A graph is **implicit** when the neighbor function of a vertex is
-computable in $O(1)$ time from the vertex itself, without storing the
-edges.
+A graph is **sparse** when $E = O(V)$ and **dense** when $E = \Theta(V^2)$. A graph is **implicit** when the neighbor function of a vertex is computable in $O(1)$ time from the vertex itself, without storing the edges.
 :::
-
 
 ::: math lemma Lemma
-For any graph, the sum of the degrees is $2|E|$. Therefore the adjacency
-list stores exactly $2|E|$ neighbor entries, and the total length of the
-list is $O(V + E)$ however the graph is shaped.
+For any graph, the sum of the degrees is $2|E|$. Therefore the adjacency list stores exactly $2|E|$ neighbor entries, and the total length of the list is $O(V + E)$ however the graph is shaped.
 :::
-
 
 The lemma is the formal version of the uneven picture above. It says the list is never much bigger than the graph itself, which is the property the matrix lacks.
 
 ::: math lemma Lemma
-Let $G$ be a simple undirected graph and let $A$ be its adjacency matrix.
-For every $i \ne j$, the entry $A_{ij}$ is $1$ if and only if the edge
-$\{v_i, v_j\}$ exists, so an edge-existence test costs $O(1)$ with a
-matrix and $O(\deg(v_i))$ with an adjacency list.
+Let $G$ be a simple undirected graph and let $A$ be its adjacency matrix. For every $i \ne j$, the entry $A_{ij}$ is $1$ if and only if the edge $\{v_i, v_j\}$ exists, so an edge-existence test costs $O(1)$ with a matrix and $O(\deg(v_i))$ with an adjacency list.
 :::
-
 
 ## Algorithm derivation
 
@@ -244,11 +221,8 @@ The derivation is mechanical once the operations are named, and it is the reason
 The state of a representation is the storage itself, and there are two shapes worth distinguishing inside the list family.
 
 ::: math invariant Invariant
-A traversal that enumerates neighbors through an adjacency list visits
-each edge exactly twice, once from each endpoint, so the total work of the
-traversal is proportional to the number of stored neighbor entries.
+A traversal that enumerates neighbors through an adjacency list visits each edge exactly twice, once from each endpoint, so the total work of the traversal is proportional to the number of stored neighbor entries.
 :::
-
 
 The **list of lists** stores, for each vertex, a dynamically grown vector of neighbors. It is the easiest to write and the most forgiving, because the growth is automatic.
 
@@ -287,54 +261,36 @@ Now the traversal. A depth-first search from vertex 0 pops 0, reads the slice `n
 ## Correctness proof
 
 ::: math theorem Theorem
-For every graph $G$, the three representations describe the same graph:
-the adjacency list of a vertex contains exactly the vertices adjacent to
-it, the adjacency matrix has a $1$ in exactly the positions of the edges,
-and the edge list contains exactly one entry for each edge.
+For every graph $G$, the three representations describe the same graph: the adjacency list of a vertex contains exactly the vertices adjacent to it, the adjacency matrix has a $1$ in exactly the positions of the edges, and the edge list contains exactly one entry for each edge.
 :::
 
-
 ::: math proof Proof
-Fix an edge $\{u, v\}$ of $G$. When the adjacency list is built, the edge
-contributes $u$ to the list of $v$ and $v$ to the list of $u$, and no
-other edge contributes either, so $u$ is in the list of $v$ if and only if
-$\{u, v\}$ is an edge. When the matrix is built, the edge sets the entry
-at the position of $(u, v)$ and the entry at the position of $(v, u)$ to
-$1$, and no other edge sets either, so the entry is $1$ if and only if
-the edge exists. When the edge list is built, the edge appends one pair,
-and the pairs appended are exactly the edges of $G$.
+Fix an edge $\{u, v\}$ of $G$. When the adjacency list is built, the edge contributes $u$ to the list of $v$ and $v$ to the list of $u$, and no other edge contributes either, so $u$ is in the list of $v$ if and only if $\{u, v\}$ is an edge. When the matrix is built, the edge sets the entry at the position of $(u, v)$ and the entry at the position of $(v, u)$ to $1$, and no other edge sets either, so the entry is $1$ if and only if the edge exists. When the edge list is built, the edge appends one pair, and the pairs appended are exactly the edges of $G$.
 
 Conversely, an entry in the list of $v$, an entry equal to $1$ in the matrix, and a pair in the edge list are each produced by exactly one edge of $G$, so nothing appears in one representation that is not an edge.
 
 The three representations therefore agree on the edges of $G$. Any algorithm that asks only about edges, neighbors and degrees gives the same answers on all three. $\square$
 :::
 
-
 ::: math proof Proof
-The compacted adjacency list returns the neighbors of every vertex
-correctly.
+The compacted adjacency list returns the neighbors of every vertex correctly.
 
 Let `start` be the array of offsets built from the prefix sums of the degrees, so that the entries belonging to vertex $v$ occupy the positions `start[v]` through `start[v + 1] - 1`. The number of those positions is `start[v + 1] - start[v]`, which is the degree of $v$. The fill pass writes one entry into the block of each endpoint of every edge, so the block of $v$ receives exactly one entry for each edge incident to $v$, which is $\deg(v)$ entries, and it receives no entry from any other edge.
 
 The block of $v$ therefore holds exactly the neighbors of $v$. $\square$
 :::
 
-
 ::: math proof Proof
-A breadth-first search that enumerates neighbors through an adjacency list
-runs in $O(V + E)$ time.
+A breadth-first search that enumerates neighbors through an adjacency list runs in $O(V + E)$ time.
 
 Every vertex is enqueued at most once, because a vertex is enqueued only when it is discovered and it is marked at that moment, so the queue operations cost $O(V)$. Each vertex is dequeued at most once, and the neighbors of the dequeued vertex are enumerated once, at a cost of $O(\deg(v))$. The total enumeration cost is $O(\sum_v \deg(v)) = O(2E)$, by the lemma on the sum of the degrees. The total is therefore $O(V + E)$. $\square$
 :::
 
-
 ::: math proof Proof
-The same breadth-first search on an adjacency matrix runs in $O(V^2)$
-time.
+The same breadth-first search on an adjacency matrix runs in $O(V^2)$ time.
 
 A dequeue of vertex $v$ scans the whole row of $v$, which is $n$ entries, and the scan is not shortened by the row being mostly zeros. The search dequeues each of the $n$ vertices at most once, so the total scanning cost is $O(n^2)$. $\square$
 :::
-
 
 ## Complexity analysis
 
@@ -347,12 +303,8 @@ A dequeue of vertex $v$ scans the whole row of $v$, which is $n$ entries, and th
 **Implicit graph.** The graph itself costs $O(1)$ space, because it is not stored. The cost of a traversal is $O(V + E)$ where $E$ is the number of edges of the implicit graph, which for a grid of $RC$ cells with side-adjacency is $4RC$ edges, so the traversal is $O(RC)$. The auxiliary space is the visited array, $O(RC)$ booleans, or $O(RC)$ bits if it is packed.
 
 ::: math complexity Complexity
-Adjacency list: $O(V + E)$ space, $O(\deg(v))$ per neighbor query.
-Adjacency matrix: $O(V^2)$ space, $O(1)$ per edge test, $O(V)$ per
-neighbor query. Edge list: $O(E)$ space, $O(E)$ per neighbor query.
-Implicit graph: $O(1)$ space for the graph itself.
+Adjacency list: $O(V + E)$ space, $O(\deg(v))$ per neighbor query. Adjacency matrix: $O(V^2)$ space, $O(1)$ per edge test, $O(V)$ per neighbor query. Edge list: $O(E)$ space, $O(E)$ per neighbor query. Implicit graph: $O(1)$ space for the graph itself.
 :::
-
 
 The numbers that decide between them are worth computing before coding. A boolean matrix over $200\,000$ vertices is $4 \cdot 10^{10}$ bytes. A matrix of 64-bit weights over $20\,000$ vertices is $3.2 \cdot 10^9$ bytes. An adjacency list over $200\,000$ vertices and $400\,000$ edges is $10^6$ integers, or $4$ MB.
 

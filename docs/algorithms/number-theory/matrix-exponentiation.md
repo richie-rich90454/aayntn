@@ -146,24 +146,15 @@ So a matrix power answers the "find the $n$-th term of a recurrence" problem, an
 Let $G = (V, E)$ be a directed graph with $n$ vertices.
 
 ::: math definition Definition
-The **adjacency matrix** $A$ of $G$ is the $n$ by $n$ matrix with
-$A_{ij}$ equal to the number of edges from $i$ to $j$. A **walk of length
-$k$** from $i$ to $j$ is a sequence $v_0 = i, v_1, \ldots, v_k = j$ of
-vertices with an edge from $v_{t-1}$ to $v_t$ for every $t$. Vertices may
-repeat.
+The **adjacency matrix** $A$ of $G$ is the $n$ by $n$ matrix with $A_{ij}$ equal to the number of edges from $i$ to $j$. A **walk of length $k$** from $i$ to $j$ is a sequence $v_0 = i, v_1, \ldots, v_k = j$ of vertices with an edge from $v_{t-1}$ to $v_t$ for every $t$. Vertices may repeat.
 :::
-
 
 ::: math lemma Lemma
-For every $k \ge 1$, the entry $(A^k)_{ij}$ equals the number of walks of
-length $k$ from $i$ to $j$.
+For every $k \ge 1$, the entry $(A^k)_{ij}$ equals the number of walks of length $k$ from $i$ to $j$.
 :::
 
-
 ::: math proof Proof
-The statement is clear for $k = 1$, because $A_{ij}$ is the number of edges
-from $i$ to $j$, which is the number of walks of length one. Assume it holds
-for $k$. Then
+The statement is clear for $k = 1$, because $A_{ij}$ is the number of edges from $i$ to $j$, which is the number of walks of length one. Assume it holds for $k$. Then
 
 $$
 (A^{k+1})_{ij} = \sum_{t=1}^{n} (A^k)_{it} A_{tj},
@@ -172,20 +163,9 @@ $$
 and by the induction hypothesis $(A^k)_{it}$ counts the walks of length $k$ from $i$ to $t$, while $A_{tj}$ counts the edges from $t$ to $j$. Every walk of length $k+1$ from $i$ to $j$ has a unique vertex $t$ at position $k$, and it is obtained uniquely by choosing such a walk and such an edge, so the sum counts each walk exactly once. $\square$
 :::
 
-
 ::: math invariant Invariant
-During the exponentiation by squaring, the loop maintains
-$\text{result} \cdot \text{base}^{e} = A^{k}$ in the semiring of matrices
-modulo the modulus. Initialization holds because the result is the identity
-matrix, the base is $A$, and the exponent is $k$. Each iteration squares
-the base and halves the exponent when the exponent is even, which
-replaces $\text{base}^{e}$ by $(\text{base}^2)^{e/2}$ and leaves the
-product unchanged, and multiplies the result by the base and decrements the
-exponent when it is odd, which replaces $\text{base}^{e}$ by
-$\text{base}^{e-1}$ and absorbs the base into the result. The invariant is
-preserved, and at termination $e = 0$ the result is $A^{k}$.
+During the exponentiation by squaring, the loop maintains $\text{result} \cdot \text{base}^{e} = A^{k}$ in the semiring of matrices modulo the modulus. Initialization holds because the result is the identity matrix, the base is $A$, and the exponent is $k$. Each iteration squares the base and halves the exponent when the exponent is even, which replaces $\text{base}^{e}$ by $(\text{base}^2)^{e/2}$ and leaves the product unchanged, and multiplies the result by the base and decrements the exponent when it is odd, which replaces $\text{base}^{e}$ by $\text{base}^{e-1}$ and absorbs the base into the result. The invariant is preserved, and at termination $e = 0$ the result is $A^{k}$.
 :::
-
 
 ## Algorithm derivation
 
@@ -255,32 +235,16 @@ $$
 ## Correctness proof
 
 ::: math theorem Theorem
-The exponentiation by squaring returns $A^k$ modulo the modulus, and
-therefore the $(s,t)$ entry of the result is the number of walks of length
-$k$ from $s$ to $t$ modulo the modulus.
+The exponentiation by squaring returns $A^k$ modulo the modulus, and therefore the $(s,t)$ entry of the result is the number of walks of length $k$ from $s$ to $t$ modulo the modulus.
 :::
 
-
 ::: math proof Proof
-**The power.** The invariant is the statement in the panel above. It holds
-at initialization, because the identity matrix times $A^k$ is $A^k$. When
-the exponent is even, the loop replaces the base by its square and the
-exponent by its half, and
-$\text{base}^2{}^{e/2} = (\text{base}^2)^{e/2} = \text{base}^{e}$, so the
-product $\text{result} \cdot \text{base}^{e}$ is unchanged. When the
-exponent is odd, the loop replaces the result by $\text{result} \cdot
-\text{base}$, the base by its square and the exponent by $e-1$, and
-$\text{result} \cdot \text{base} \cdot (\text{base}^2)^{(e-1)/2} =
-\text{result} \cdot \text{base}^{e}$, so the product is again unchanged. The
-exponent is halved or decremented at every iteration, so it strictly
-decreases and the loop terminates. At termination $e = 0$ and the
-invariant reads $\text{result} = A^k$.
+**The power.** The invariant is the statement in the panel above. It holds at initialization, because the identity matrix times $A^k$ is $A^k$. When the exponent is even, the loop replaces the base by its square and the exponent by its half, and $\text{base}^2{}^{e/2} = (\text{base}^2)^{e/2} = \text{base}^{e}$, so the product $\text{result} \cdot \text{base}^{e}$ is unchanged. When the exponent is odd, the loop replaces the result by $\text{result} \cdot \text{base}$, the base by its square and the exponent by $e-1$, and $\text{result} \cdot \text{base} \cdot (\text{base}^2)^{(e-1)/2} = \text{result} \cdot \text{base}^{e}$, so the product is again unchanged. The exponent is halved or decremented at every iteration, so it strictly decreases and the loop terminates. At termination $e = 0$ and the invariant reads $\text{result} = A^k$.
 
 **The walk count.** The lemma proves that $(A^k)_{st}$ counts the walks of length $k$ from $s$ to $t$. All of the arithmetic is done modulo the modulus, and reduction is compatible with addition and multiplication, so the entries of the result are the residues of the exact counts.
 
 **The overflow.** Every entry of the result and of the base is a residue, hence less than $m$. The product of two such entries is less than $m^2$, and the accumulator is reduced after every addition, so every intermediate value is less than $m^2$ as well. When $m \le 2^{31}$, the value $m^2$ is less than $2^{62}$ and a signed 64-bit integer suffices. When $m$ is larger, a 128-bit intermediate is required. $\square$
 :::
-
 
 ## Complexity analysis
 

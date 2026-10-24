@@ -118,52 +118,31 @@ A union is an arrow from the root of one tree to the root of another, and the ru
 Let $X = \{0, 1, \ldots, n-1\}$ be the set of elements.
 
 ::: math definition Definition
-A **partition** of $X$ is a collection $\mathcal{P}$ of pairwise disjoint
-non-empty subsets of $X$ whose union is $X$. The **block** of an element
-$x$ under a partition is the unique member of $\mathcal{P}$ that contains
-$x$.
+A **partition** of $X$ is a collection $\mathcal{P}$ of pairwise disjoint non-empty subsets of $X$ whose union is $X$. The **block** of an element $x$ under a partition is the unique member of $\mathcal{P}$ that contains $x$.
 :::
 
-
 ::: math definition Definition
-A **disjoint set union** maintains a partition $\mathcal{P}$ of $X$ and
-supports the operations
+A **disjoint set union** maintains a partition $\mathcal{P}$ of $X$ and supports the operations
 
 - $\operatorname{unite}(a, b)$, which replaces the two blocks containing $a$ and $b$ by their union;
 - $\operatorname{find}(x)$, which returns the **representative** of the block containing $x$, that is, a fixed element of that block chosen so that every element of the block has the same representative.
 :::
 
-
 ::: math definition Definition
-The structure is stored as a **parent array** $\mathit{parent}$ and a
-**size array** $\mathit{size}$. An element $x$ is a **root** when
-$\mathit{parent}[x] = x$, and $\mathit{size}[r]$ is the number of elements
-in the tree rooted at $r$.
+The structure is stored as a **parent array** $\mathit{parent}$ and a **size array** $\mathit{size}$. An element $x$ is a **root** when $\mathit{parent}[x] = x$, and $\mathit{size}[r]$ is the number of elements in the tree rooted at $r$.
 :::
-
 
 ::: math invariant Invariant
-At every moment, the elements of each tree of the forest are exactly the
-elements of one block of the partition, and the root of that tree is the
-representative of that block. Path compression preserves this invariant
-because it only redraws the arrows inside a tree; a union preserves it
-because it merges exactly two trees into one.
+At every moment, the elements of each tree of the forest are exactly the elements of one block of the partition, and the root of that tree is the representative of that block. Path compression preserves this invariant because it only redraws the arrows inside a tree; a union preserves it because it merges exactly two trees into one.
 :::
-
 
 ::: math lemma Lemma
-If $\mathit{size}$ is maintained correctly and a root $r$ becomes a child
-of a root $s$, then the size of the tree rooted at $s$ after the merge is
-at least twice the size of the tree rooted at $r$ before the merge.
+If $\mathit{size}$ is maintained correctly and a root $r$ becomes a child of a root $s$, then the size of the tree rooted at $s$ after the merge is at least twice the size of the tree rooted at $r$ before the merge.
 :::
-
 
 ::: math lemma Lemma
-If a root always becomes a child of a root whose tree is at least as
-large, then the depth of every element in the forest is at most
-$\lfloor \log_2 n \rfloor$.
+If a root always becomes a child of a root whose tree is at least as large, then the depth of every element in the forest is at most $\lfloor \log_2 n \rfloor$.
 :::
-
 
 ## Algorithm derivation
 
@@ -210,17 +189,11 @@ Note that the find of $1$ in step 2 did not change anything, because the path fr
 ## Correctness proof
 
 ::: math theorem Theorem
-After any sequence of operations, the blocks of the maintained partition
-are exactly the connected components of the graph whose edges are the
-unions performed so far, and `same(a, b)` returns true if and only if $a$
-and $b$ are in the same component.
+After any sequence of operations, the blocks of the maintained partition are exactly the connected components of the graph whose edges are the unions performed so far, and `same(a, b)` returns true if and only if $a$ and $b$ are in the same component.
 :::
 
-
 ::: math proof Proof
-We maintain the following invariant: at every moment, the elements of each
-tree of the forest are exactly the elements of one block of the
-partition, and the root of the tree is the representative of that block.
+We maintain the following invariant: at every moment, the elements of each tree of the forest are exactly the elements of one block of the partition, and the root of the tree is the representative of that block.
 
 Initially every element is a tree of one element, and every block is a singleton, so the invariant holds.
 
@@ -231,20 +204,13 @@ A unite operation finds the roots $r_a$ and $r_b$ of the blocks of the two eleme
 The forest and the graph of performed unions are therefore the same partition at every moment: a union adds exactly the edge that joins two components, and the structure merges exactly those two components. Two elements are in the same block exactly when their representatives are equal, which is what `same` tests. $\square$
 :::
 
-
 ::: math lemma Lemma
-The number of blocks of the maintained partition is $n$ minus the number
-of unions that actually merged two blocks.
+The number of blocks of the maintained partition is $n$ minus the number of unions that actually merged two blocks.
 :::
-
 
 ::: math proof Proof
-Initially there are $n$ blocks, one per element. A union that merges two
-blocks reduces the count by exactly one, and a union that finds the two
-elements already in the same block reduces it by zero. The count is
-therefore $n$ minus the number of merging unions. $\square$
+Initially there are $n$ blocks, one per element. A union that merges two blocks reduces the count by exactly one, and a union that finds the two elements already in the same block reduces it by zero. The count is therefore $n$ minus the number of merging unions. $\square$
 :::
-
 
 ## Complexity analysis
 
@@ -259,13 +225,8 @@ With path compression alone, a find makes the tree flatter, and the amortized co
 With both rules together, the amortized cost is $O(\alpha(n))$ per operation, and the total for a run of $q$ operations on $n$ elements is $O((n + q)\alpha(n))$, including the $O(n)$ initialization.
 
 ::: math complexity Complexity
-Disjoint set union with union by size and path compression: $O(n)$ space,
-$O(\alpha(n))$ amortized time per operation, and $O((n + q)\alpha(n))$ for
-a run of $q$ operations on $n$ elements. With union by size alone the
-amortized cost is $O(\log n)$; with path compression alone it is also
-$O(\log n)$.
+Disjoint set union with union by size and path compression: $O(n)$ space, $O(\alpha(n))$ amortized time per operation, and $O((n + q)\alpha(n))$ for a run of $q$ operations on $n$ elements. With union by size alone the amortized cost is $O(\log n)$; with path compression alone it is also $O(\log n)$.
 :::
-
 
 The value of $\alpha$ in practice: $\alpha(1) = 1$, $\alpha(2) = 2$, $\alpha(3) = 4$ and $\alpha(4) = 65\,536$, and the function grows so slowly that $\alpha(n) \le 4$ for every $n$ that fits in a 64-bit word. For a contest, the practical statement is: the structure is as fast as constant time, and the constant is small.
 

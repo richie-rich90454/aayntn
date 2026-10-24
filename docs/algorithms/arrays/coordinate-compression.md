@@ -130,40 +130,27 @@ Let $V = \{v_0 < v_1 < \cdots < v_{m-1}\}$ be the sorted distinct values of a mu
 
 ::: math definition Definition
 The **rank** of a value $x$ with respect to $V$ is
+
 $$
 \rho(x) = \bigl| \{ j \in \{0, \ldots, m-1\} : v_j < x \} \bigr|.
 $$
-It is the number of distinct values of the data that are strictly less than $x$,
-so $\rho(x) \in \{0, 1, \ldots, m\}$ for an arbitrary $x$, and
-$\rho(v_j) = j$ for every $j$.
-:::
 
+It is the number of distinct values of the data that are strictly less than $x$, so $\rho(x) \in \{0, 1, \ldots, m\}$ for an arbitrary $x$, and $\rho(v_j) = j$ for every $j$.
+:::
 
 ::: math definition Definition
-A map $\rho$ is **order preserving** if $x < y$ implies $\rho(x) < \rho(y)$.
-The compression of a multiset is the multiset in which every value $x$ is
-replaced by $\rho(x)$.
+A map $\rho$ is **order preserving** if $x < y$ implies $\rho(x) < \rho(y)$. The compression of a multiset is the multiset in which every value $x$ is replaced by $\rho(x)$.
 :::
-
 
 ::: math lemma Lemma
-For any two values $x$ and $y$ of the data, $x \le y$ if and only if
-$\rho(x) \le \rho(y)$, and $x = y$ if and only if $\rho(x) = \rho(y)$. For an
-arbitrary threshold $x$, the number of data values that are strictly less
-than $x$ equals the number of data values whose rank is strictly less than
-$\rho(x)$.
+For any two values $x$ and $y$ of the data, $x \le y$ if and only if $\rho(x) \le \rho(y)$, and $x = y$ if and only if $\rho(x) = \rho(y)$. For an arbitrary threshold $x$, the number of data values that are strictly less than $x$ equals the number of data values whose rank is strictly less than $\rho(x)$.
 :::
-
 
 The second half of the lemma is the statement that justifies compressing the queries as well: the count of values below a threshold is the same in both worlds.
 
 ::: math invariant Invariant
-During the compression, the array of ranks has the same multiset of
-comparison outcomes as the array of values: for every pair of indices $p$ and
-$q$, the comparison between $a_p$ and $a_q$ is unchanged, and every rank is
-the rank of its own value.
+During the compression, the array of ranks has the same multiset of comparison outcomes as the array of values: for every pair of indices $p$ and $q$, the comparison between $a_p$ and $a_q$ is unchanged, and every rank is the rank of its own value.
 :::
-
 
 ## Algorithm derivation
 
@@ -216,28 +203,16 @@ A query with the threshold $x = 400$ is compressed by binary search over $[100, 
 ## Correctness proof
 
 ::: math theorem Theorem
-The compression preserves every comparison between two values of the data, and
-for every threshold $x$ it preserves the number of data values that are
-strictly less than $x$. Therefore any algorithm that answers the question by
-comparing values and counting them returns the same answer on the compressed
-data.
+The compression preserves every comparison between two values of the data, and for every threshold $x$ it preserves the number of data values that are strictly less than $x$. Therefore any algorithm that answers the question by comparing values and counting them returns the same answer on the compressed data.
 :::
 
-
 ::: math proof Proof
-By construction the ranks are assigned in increasing order of value, and two
-values share a rank exactly when they are equal. So for two values $x$ and
-$y$ of the data, $x < y$ implies that $x$ is assigned a smaller rank than
-$y$, because the sweep visits the values in increasing order and the counter
-only increases when the value changes. Equal values are visited consecutively
-and share the counter's value. The comparison between any two elements of
-the array is therefore unchanged.
+By construction the ranks are assigned in increasing order of value, and two values share a rank exactly when they are equal. So for two values $x$ and $y$ of the data, $x < y$ implies that $x$ is assigned a smaller rank than $y$, because the sweep visits the values in increasing order and the counter only increases when the value changes. Equal values are visited consecutively and share the counter's value. The comparison between any two elements of the array is therefore unchanged.
 
 Now let $x$ be an arbitrary threshold and let $t$ be the number of distinct values of the data that are strictly less than $x$. By the definition of the rank, $\rho(x) = t$. An element $a_i$ of the data is strictly less than $x$ if and only if its rank is one of $0, 1, \ldots, t - 1$, so the number of elements strictly below $x$ is exactly the number of elements with rank below $\rho(x)$. The count is the same in both worlds.
 
 An algorithm that decides everything by comparisons and counts therefore behaves identically on the compressed data, and in particular it returns the same answer. $\square$
 :::
-
 
 ## Complexity analysis
 
@@ -246,11 +221,8 @@ An algorithm that decides everything by comparisons and counts therefore behaves
 **Auxiliary space: $O(n)$** for the copy of the values, the sorted order, and the rank array. The compressed data structure itself is $O(m)$, where $m$ is the number of distinct values, and $m \le n$.
 
 ::: math complexity Complexity
-Coordinate compression: $O(n \log n + q \log n)$ time and $O(n)$ auxiliary
-space, with $O(n)$ for the rank assignment when it is done with a sweep and
-$O(n \log n)$ when each rank is found by a binary search.
+Coordinate compression: $O(n \log n + q \log n)$ time and $O(n)$ auxiliary space, with $O(n)$ for the rank assignment when it is done with a sweep and $O(n \log n)$ when each rank is found by a binary search.
 :::
-
 
 The saving is worth stating in numbers. A Fenwick tree over the original values of a $10^9$ range needs $4 \cdot 10^9$ bytes. The same tree over the compressed ranks of $2 \cdot 10^5$ distinct values needs $800\,000$ bytes, and the queries are answered on exactly the same data.
 

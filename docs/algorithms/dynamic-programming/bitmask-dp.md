@@ -143,50 +143,26 @@ $$
 $$
 
 ::: math definition Definition
-The **popcount** of a mask $m$ is the number of set bits of $m$, written
-$\operatorname{pc}(m)$. It equals $|S|$ when $m = \operatorname{mask}(S)$.
-The **least set bit** of a nonzero mask $m$ is $m \mathbin{\&} (-m)$, and it
-equals $2^i$ where $i$ is the smallest index in $S$.
+The **popcount** of a mask $m$ is the number of set bits of $m$, written $\operatorname{pc}(m)$. It equals $|S|$ when $m = \operatorname{mask}(S)$. The **least set bit** of a nonzero mask $m$ is $m \mathbin{\&} (-m)$, and it equals $2^i$ where $i$ is the smallest index in $S$.
 :::
-
 
 ::: math definition Definition
-A problem has the **subset property** if there is a function $f$ on the
-subsets of $U$ such that, for every subset $S$ and every ordering of $S$,
-the value of the construction built on that ordering is $f(S)$. A problem
-has the **ordered subset property** if instead there is a function $f$ on
-pairs $(S, u)$ with $u \in S$, giving the value of a construction that has
-used exactly the items of $S$ and currently sits at item $u$.
+A problem has the **subset property** if there is a function $f$ on the subsets of $U$ such that, for every subset $S$ and every ordering of $S$, the value of the construction built on that ordering is $f(S)$. A problem has the **ordered subset property** if instead there is a function $f$ on pairs $(S, u)$ with $u \in S$, giving the value of a construction that has used exactly the items of $S$ and currently sits at item $u$.
 :::
-
 
 ::: math definition Definition
-For a problem with the ordered subset property, the **transition** from
-$(S, u)$ to $(S \cup \{v\}, v)$ has cost $c(u, v)$, where $c$ depends only
-on $u$ and $v$. The **terminal cost** is a value $c_{\text{end}}(S, u)$
-charged once when every item has been used.
+For a problem with the ordered subset property, the **transition** from $(S, u)$ to $(S \cup \{v\}, v)$ has cost $c(u, v)$, where $c$ depends only on $u$ and $v$. The **terminal cost** is a value $c_{\text{end}}(S, u)$ charged once when every item has been used.
 :::
-
 
 ::: math lemma Lemma
-A problem with the subset property is solved by a dynamic program whose
-states are the subsets of $U$ and whose transitions add one item. A problem
-with only the ordered subset property is solved by a dynamic program whose
-states are the pairs $(S, u)$.
+A problem with the subset property is solved by a dynamic program whose states are the subsets of $U$ and whose transitions add one item. A problem with only the ordered subset property is solved by a dynamic program whose states are the pairs $(S, u)$.
 :::
 
-
 ::: math proof Proof
-Consider the subset case. Any construction on a set $S \cup \{v\}$ removes
-$v$ to give a construction on $S$, and by the subset property the value of
-the construction on $S$ is $f(S)$ regardless of its order. The
-contribution of $v$ is determined by the construction on $S$ and by $v$.
-Taking the best over all choices therefore yields a function of the set
-alone, and the recurrence is well defined.
+Consider the subset case. Any construction on a set $S \cup \{v\}$ removes $v$ to give a construction on $S$, and by the subset property the value of the construction on $S$ is $f(S)$ regardless of its order. The contribution of $v$ is determined by the construction on $S$ and by $v$. Taking the best over all choices therefore yields a function of the set alone, and the recurrence is well defined.
 
 In the ordered case the same argument applies to pairs, because the removal of $v$ from a construction that ends at $v$ leaves a construction on $S$ that ends at some $u \in S$, and the value of that construction is $f(S, u)$. $\square$
 :::
-
 
 ## Algorithm derivation
 
@@ -230,13 +206,8 @@ $$
 The transition is a loop over the items of $S$, so it costs $O(n)$ per state and $O(n^2 2^n)$ overall.
 
 ::: math invariant Invariant
-When the program writes the state $f[S \cup \{v\}][v]$, every state whose
-subset is a proper subset of $S \cup \{v\}$ already holds its final value,
-because the evaluation order visits the subsets in increasing popcount.
-Every value written into the table is the cost of an actual path, and the
-table entry is the minimum over all such paths.
+When the program writes the state $f[S \cup \{v\}][v]$, every state whose subset is a proper subset of $S \cup \{v\}$ already holds its final value, because the evaluation order visits the subsets in increasing popcount. Every value written into the table is the cost of an actual path, and the table entry is the minimum over all such paths.
 :::
-
 
 ### Laying out the table
 
@@ -305,11 +276,8 @@ The row for $\{0,1\}$ makes the same point in the smallest possible case. The se
 ## Correctness proof
 
 ::: math theorem Theorem
-The ordered-form dynamic program computes $f[S][u]$ correctly for every
-subset $S$ and every $u \in S$, and the minimum of $f[U][u] + c_{\text{end}}(U, u)$
-over $u$ is the cost of the optimal tour.
+The ordered-form dynamic program computes $f[S][u]$ correctly for every subset $S$ and every $u \in S$, and the minimum of $f[U][u] + c_{\text{end}}(U, u)$ over $u$ is the cost of the optimal tour.
 :::
-
 
 ::: math proof Proof
 The proof is an induction on $|S|$.
@@ -323,22 +291,13 @@ Conversely, let $u$ attain the minimum. By the induction hypothesis there is a c
 **The answer.** Every tour uses every city and ends at some city $u$, and the return edge costs $c_{\text{end}}(U, u)$. Minimizing over $u$ therefore gives the optimal tour. $\square$
 :::
 
-
 ::: math theorem Theorem
 The subset form is correct for every problem with the subset property.
 :::
 
-
 ::: math proof Proof
-The proof mirrors the one above with the current item removed from the
-state. Let $S$ be a subset and $v \in S$. Any construction on $S$ removes
-$v$ and leaves a construction on $S \setminus \{v\}$, whose value is
-$f[S \setminus \{v\}]$ by the subset property, so the construction's value
-is at most $f[S \setminus \{v\}] + c(\operatorname{last}(S \setminus \{v\}), v)$.
-Conversely, the best construction on $S \setminus \{v\}$ followed by $v$
-achieves that value. Minimizing over $v$ gives $f[S]$. $\square$
+The proof mirrors the one above with the current item removed from the state. Let $S$ be a subset and $v \in S$. Any construction on $S$ removes $v$ and leaves a construction on $S \setminus \{v\}$, whose value is $f[S \setminus \{v\}]$ by the subset property, so the construction's value is at most $f[S \setminus \{v\}] + c(\operatorname{last}(S \setminus \{v\}), v)$. Conversely, the best construction on $S \setminus \{v\}$ followed by $v$ achieves that value. Minimizing over $v$ gives $f[S]$. $\square$
 :::
-
 
 ## Complexity analysis
 

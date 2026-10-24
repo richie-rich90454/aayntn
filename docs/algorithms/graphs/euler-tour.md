@@ -134,48 +134,28 @@ The output is built in reverse because a vertex is only written down once the wa
 Let $G = (V, E)$ be an undirected graph.
 
 ::: math definition Definition
-An **Euler trail** is a walk that uses every edge of $G$ exactly once. It is a
-**circuit** when it also ends at the vertex where it started. The graph $G$ is
-**Eulerian** when it has an Euler circuit, and **semi-Eulerian** when it has an
-Euler trail that is not a circuit.
+An **Euler trail** is a walk that uses every edge of $G$ exactly once. It is a **circuit** when it also ends at the vertex where it started. The graph $G$ is **Eulerian** when it has an Euler circuit, and **semi-Eulerian** when it has an Euler trail that is not a circuit.
 :::
-
 
 ::: math definition Definition
-Write $G'$ for the graph obtained from $G$ by deleting every vertex of degree
-zero. Then $G$ has an Euler circuit if and only if $G'$ is connected and every
-vertex of $G'$ has even degree. It has an Euler trail if and only if $G'$ is
-connected and exactly zero or two vertices of $G'$ have odd degree.
+Write $G'$ for the graph obtained from $G$ by deleting every vertex of degree zero. Then $G$ has an Euler circuit if and only if $G'$ is connected and every vertex of $G'$ has even degree. It has an Euler trail if and only if $G'$ is connected and exactly zero or two vertices of $G'$ have odd degree.
 :::
-
 
 ::: math definition Definition
-The **degree** of a vertex $v$ is the number of edges incident to it, counted
-with multiplicity, so a loop contributes two.
+The **degree** of a vertex $v$ is the number of edges incident to it, counted with multiplicity, so a loop contributes two.
 :::
-
 
 ::: math lemma Lemma
-If a graph has an Euler circuit, then every vertex has even degree. If it has
-an Euler trail that is not a circuit, then exactly two vertices have odd
-degree, and they are the two endpoints of the trail.
+If a graph has an Euler circuit, then every vertex has even degree. If it has an Euler trail that is not a circuit, then exactly two vertices have odd degree, and they are the two endpoints of the trail.
 :::
-
 
 ::: math lemma Lemma
-In a graph in which every vertex has even degree, a walk that uses each edge
-at most once and never repeats an edge can only stop at the vertex where it
-started.
+In a graph in which every vertex has even degree, a walk that uses each edge at most once and never repeats an edge can only stop at the vertex where it started.
 :::
-
 
 ::: math lemma Lemma
-Let $G$ be connected with at least one edge, and let $T$ be the set of vertices
-of odd degree. Then $G$ has an Euler circuit if $T$ is empty, and an Euler
-trail from one vertex of $T$ to the other if $|T| = 2$. In both cases the
-trail exists.
+Let $G$ be connected with at least one edge, and let $T$ be the set of vertices of odd degree. Then $G$ has an Euler circuit if $T$ is empty, and an Euler trail from one vertex of $T$ to the other if $|T| = 2$. In both cases the trail exists.
 :::
-
 
 ## Algorithm derivation
 
@@ -205,20 +185,12 @@ The three lines of the inner loop are the whole algorithm.
 The update rule is correct because the stack always holds a walk from the starting vertex to the top of the stack. Pushing an edge extends that walk. Popping a vertex whose edges are exhausted finalizes it. When the stack empties, the finalized vertices, read in reverse, form a closed walk.
 
 ::: math invariant Invariant
-At every moment, the stack holds a sequence of vertices
-$v_0, v_1, \ldots, v_k$ such that $v_0$ is the starting vertex and the
-vertices $v_{i-1}$ and $v_i$ are joined by an edge that has been removed from
-the graph and not yet written to the output. The edges that have been removed
-but not yet output form a trail from $v_0$ to $v_k$.
+At every moment, the stack holds a sequence of vertices $v_0, v_1, \ldots, v_k$ such that $v_0$ is the starting vertex and the vertices $v_{i-1}$ and $v_i$ are joined by an edge that has been removed from the graph and not yet written to the output. The edges that have been removed but not yet output form a trail from $v_0$ to $v_k$.
 :::
-
 
 ::: math invariant Invariant
-Every edge removed from the graph is written to the output exactly once, and
-every edge written to the output has been removed from the graph. No edge is
-used twice.
+Every edge removed from the graph is written to the output exactly once, and every edge written to the output has been removed from the graph. No edge is used twice.
 :::
-
 
 ## Step-by-step execution
 
@@ -250,31 +222,21 @@ Step 7 is the splice in action. The walk had already returned to the neighborhoo
 ## Correctness proof
 
 ::: math theorem Theorem
-Hierholzer's algorithm returns an Euler circuit of the graph it is run on, and
-the degree condition characterizes exactly when such a circuit or trail
-exists.
+Hierholzer's algorithm returns an Euler circuit of the graph it is run on, and the degree condition characterizes exactly when such a circuit or trail exists.
 :::
 
-
 ::: math proof Proof
-First, the existence condition. If a graph has an Euler circuit, then at every
-vertex the circuit arrives as often as it leaves, so the degree is even. If it
-has an open Euler trail, the same argument applies to every vertex except the
-two endpoints, which have odd degree. This proves necessity.
+First, the existence condition. If a graph has an Euler circuit, then at every vertex the circuit arrives as often as it leaves, so the degree is even. If it has an open Euler trail, the same argument applies to every vertex except the two endpoints, which have odd degree. This proves necessity.
 
 For sufficiency, let $G$ be connected with all degrees even, and let $T$ be any edge of $G$. Start a walk at one endpoint of $T$ and follow unused edges as long as possible. By the lemma, the walk can only stop at the vertex where it started, so it produces a closed walk $C$ using each edge at most once. If $C$ used every edge of $G$, it is an Euler circuit. Otherwise, remove the edges of $C$ from $G$. The remaining graph has all degrees even, since removing a closed walk removes an even number of edges at every vertex, and it has at least one edge. Choose a vertex $w$ of $C$ that is incident to a remaining edge; such a vertex exists because the remaining graph is nonempty and $G$ is connected. Run the same procedure from $w$ on the remaining graph, producing a second closed walk $C'$, and splice $C'$ into $C$ at $w$. Repeat until every edge has been used. The result is a closed walk using every edge exactly once, which is an Euler circuit. The construction is exactly what Hierholzer's algorithm performs, with the stack standing in for the recursive splicing. $\square$
 :::
 
-
 ::: math proof Proof
-Hierholzer's algorithm uses every edge of the graph exactly once and produces
-a closed walk.
+Hierholzer's algorithm uses every edge of the graph exactly once and produces a closed walk.
 :::
 
-
 ::: math proof Proof
-Every edge is removed from the graph at the moment it is used, and an edge
-that has been removed is never removed again, so no edge is used twice.
+Every edge is removed from the graph at the moment it is used, and an edge that has been removed is never removed again, so no edge is used twice.
 
 Now consider the output. The stack always holds a trail from the starting vertex to the top of the stack, by the invariant: pushing a vertex extends the trail by one edge, and popping removes the last vertex of the trail without breaking the rest.
 
@@ -285,22 +247,13 @@ It remains to show that every edge is used. Suppose the algorithm ends with some
 Hence every edge is used, and the output reversed is a closed walk using every edge exactly once, which is an Euler circuit. $\square$
 :::
 
-
 ::: math lemma Lemma
-If a graph has exactly two vertices of odd degree, say $s$ and $t$, then it
-has an Euler trail from $s$ to $t$, and Hierholzer's algorithm started at $s$
-produces one.
+If a graph has exactly two vertices of odd degree, say $s$ and $t$, then it has an Euler trail from $s$ to $t$, and Hierholzer's algorithm started at $s$ produces one.
 :::
-
 
 ::: math proof Proof
-Add a new vertex $w$ and a new edge $\{w, s\}$. Then $w$ has degree one and
-$s$ now has even degree, while $t$ still has odd degree. Adding a second edge
-$\{w, t\}$ makes every degree even, and the resulting graph has an Euler
-circuit by the theorem. Removing the two new edges from that circuit leaves
-an Euler trail of the original graph from $s$ to $t$. $\square$
+Add a new vertex $w$ and a new edge $\{w, s\}$. Then $w$ has degree one and $s$ now has even degree, while $t$ still has odd degree. Adding a second edge $\{w, t\}$ makes every degree even, and the resulting graph has an Euler circuit by the theorem. Removing the two new edges from that circuit leaves an Euler trail of the original graph from $s$ to $t$. $\square$
 :::
-
 
 ## Complexity analysis
 
@@ -309,12 +262,8 @@ an Euler trail of the original graph from $s$ to $t$. $\square$
 **Auxiliary space: $O(V + E)$** for the adjacency list, plus $O(V)$ for the stack and $O(V + E)$ for the output, which has one entry per edge.
 
 ::: math complexity Complexity
-Euler circuit of an undirected graph with $V$ vertices and $E$ edges: time
-$O(V + E)$, auxiliary space $O(V)$ beyond the adjacency list and the output.
-The existence check costs $O(V + E)$ as well, by counting the degrees and
-running a traversal.
+Euler circuit of an undirected graph with $V$ vertices and $E$ edges: time $O(V + E)$, auxiliary space $O(V)$ beyond the adjacency list and the output. The existence check costs $O(V + E)$ as well, by counting the degrees and running a traversal.
 :::
-
 
 The existence check is worth putting in the same bound. Counting the degrees is $O(V + E)$ over the adjacency list, and connectivity is one more traversal. A full implementation therefore checks the condition first and then either reports that no tour exists or constructs one, in $O(V + E)$ time either way.
 
@@ -350,15 +299,8 @@ Hierholzer's algorithm is naturally recursive, because the walk into an unfinish
 The failure mode is a crash rather than a wrong answer: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
 ::: math counterexample Counterexample
-A single cycle on $10^6$ vertices, that is, the edges $\{i, i+1\}$ for
-$0 \le i < 10^6 - 1$ together with the edge $\{10^6 - 1, 0\}$. The graph is
-legal, every degree is two, and the Euler circuit is the cycle itself. The
-recursive form makes one nested call per edge, so in C++ on Linux with an 8 MB
-stack and a frame of roughly 64 bytes the stack is exhausted after about
-$130\,000$ frames, and the program dies with a segmentation fault after
-inspecting $13\%$ of the roads. The iterative form finishes normally.
+A single cycle on $10^6$ vertices, that is, the edges $\{i, i+1\}$ for $0 \le i < 10^6 - 1$ together with the edge $\{10^6 - 1, 0\}$. The graph is legal, every degree is two, and the Euler circuit is the cycle itself. The recursive form makes one nested call per edge, so in C++ on Linux with an 8 MB stack and a frame of roughly 64 bytes the stack is exhausted after about $130\,000$ frames, and the program dies with a segmentation fault after inspecting $13\%$ of the roads. The iterative form finishes normally.
 :::
-
 
 The iterative form is only slightly longer than the recursive one, and it has a further advantage: the stack of the iterative form is exactly the stack that the recursive form would use, so the two produce the same output, and the iterative one can be debugged with a printed stack.
 

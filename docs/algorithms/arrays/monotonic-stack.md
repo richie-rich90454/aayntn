@@ -121,11 +121,8 @@ If $a_{s_t} < a_i$, then $i$ is a greater element to the right of $s_t$. Is it t
 Every index between $s_t$ and $i$ was pushed after $s_t$ and popped before $i$ arrived, because it was dominated by something to its right. The lemma below states exactly what that implies, and it is the reason the popped index can be given the current index as its answer.
 
 ::: math lemma Lemma
-When a new index $i$ arrives and the index $s$ at the top of the stack satisfies
-$a_s < a_i$, then $i$ is the nearest index to the right of $s$ with a value
-greater than $a_s$.
+When a new index $i$ arrives and the index $s$ at the top of the stack satisfies $a_s < a_i$, then $i$ is the nearest index to the right of $s$ with a value greater than $a_s$.
 :::
-
 
 The proof of the lemma is by contradiction on the nearest candidate. Suppose there were an index $u$ with $s < u < i$ and $a_u > a_s$. When $u$ arrived, the index $s$ was still on the stack, and since $a_u > a_s$ the pop loop would have removed $s$ and settled it. That contradicts $s$ still being on the stack when $i$ arrived. So no such $u$ exists, and $i$ is the nearest.
 
@@ -142,34 +139,22 @@ $$
 with $G(i) = -1$ when no such $j$ exists. The variant $S(i) = \min \{ j > i : a_j < a_i \}$ is the next strictly smaller element, and it is handled by reversing the comparisons.
 
 ::: math definition Definition
-A **candidate index** for position $i$ is an index $j > i$ with $a_j > a_i$
-that has not yet been reached by the scan. The **answer** $G(i)$ is the
-smallest candidate index, that is, the first one the scan reaches.
+A **candidate index** for position $i$ is an index $j > i$ with $a_j > a_i$ that has not yet been reached by the scan. The **answer** $G(i)$ is the smallest candidate index, that is, the first one the scan reaches.
 :::
-
 
 ::: math definition Definition
-The **stack** is a sequence of indices $s_1 < s_2 < \cdots < s_t$ with
-$a_{s_1} > a_{s_2} > \cdots > a_{s_t}$, all of them unresolved. An index is
-**settled** when it is popped, and the index that pops it is its answer.
+The **stack** is a sequence of indices $s_1 < s_2 < \cdots < s_t$ with $a_{s_1} > a_{s_2} > \cdots > a_{s_t}$, all of them unresolved. An index is **settled** when it is popped, and the index that pops it is its answer.
 :::
-
 
 ::: math lemma Lemma
-The stack always holds its indices in increasing index order, and its values
-in decreasing order from bottom to top.
+The stack always holds its indices in increasing index order, and its values in decreasing order from bottom to top.
 :::
-
 
 The lemma is immediate from the update rule: a new index is appended at the top, and only elements with a smaller value are popped, so the remaining values are all greater than the new one.
 
 ::: math invariant Invariant
-At the end of the iteration for index $i$, the stack holds exactly the
-unresolved indices of the prefix $[1, i]$, in increasing index order and
-strictly decreasing value order, and every index already settled has been
-given its correct answer.
+At the end of the iteration for index $i$, the stack holds exactly the unresolved indices of the prefix $[1, i]$, in increasing index order and strictly decreasing value order, and every index already settled has been given its correct answer.
 :::
-
 
 ## Algorithm derivation
 
@@ -202,15 +187,11 @@ The stack never held more than two indices, and it emptied completely at index 3
 ## Correctness proof
 
 ::: math theorem Theorem
-For every index $s$, the algorithm reports the smallest index $j > s$ with
-$a_j > a_s$, or $-1$ when no such index exists.
+For every index $s$, the algorithm reports the smallest index $j > s$ with $a_j > a_s$, or $-1$ when no such index exists.
 :::
 
-
 ::: math proof Proof
-The invariant states that the stack holds exactly the unresolved indices of
-the prefix, in increasing index order and strictly decreasing value order,
-and that every settled index has been given its correct answer.
+The invariant states that the stack holds exactly the unresolved indices of the prefix, in increasing index order and strictly decreasing value order, and that every settled index has been given its correct answer.
 
 The invariant holds initially, since the prefix is empty and the stack is empty.
 
@@ -225,7 +206,6 @@ Step 3 pushes $i$. Every value left on the stack is at least $a_i$, so the decre
 Finally, consider an index $s$ that is never popped. It is never settled, and by the lemma no index to its right has a value greater than $a_s$, because such an index would have popped it. So $s$ has no next greater element, and $-1$ is the correct answer. Every other index was settled with the correct answer when it was popped. $\square$
 :::
 
-
 ## Complexity analysis
 
 **Time: $O(n)$.** The outer loop runs $n$ times. Every index is pushed once and popped at most once, so the total number of iterations of the inner `while` loop is at most $n$. The total is therefore at most $3n$ operations of the inner machinery.
@@ -235,11 +215,8 @@ The amortization is the whole point. A single iteration can pop $n$ indices, whi
 **Auxiliary space: $O(n)$** in the worst case, which is reached on a decreasing array where no element is ever popped. The stack holds at most $n$ indices, and the answer array holds $n$ entries.
 
 ::: math complexity Complexity
-Monotonic stack: $O(n)$ time, amortized over the whole scan, and $O(n)$
-auxiliary space in the worst case. The quadratic inner loop is amortized
-linear because every index is pushed once and popped at most once.
+Monotonic stack: $O(n)$ time, amortized over the whole scan, and $O(n)$ auxiliary space in the worst case. The quadratic inner loop is amortized linear because every index is pushed once and popped at most once.
 :::
-
 
 ## Algorithm selection
 

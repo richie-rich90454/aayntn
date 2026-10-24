@@ -133,55 +133,35 @@ The laboratory below draws the tree and highlights the nodes the current operati
 Let $a_1, a_2, \ldots, a_n$ be the values of the array, indexed from one.
 
 ::: math definition Definition
-A **monoid** is a set $S$ together with a binary operation $\star$ and an
-element $e \in S$ such that
+A **monoid** is a set $S$ together with a binary operation $\star$ and an element $e \in S$ such that
 
 - $\star$ is **associative**: $(x \star y) \star z = x \star (y \star z)$ for every $x, y, z \in S$;
 - $e$ is the **identity**: $e \star x = x$ and $x \star e = x$ for every $x \in S$.
 :::
 
-
 ::: math definition Definition
-The **aggregate** of a range $[l, r]$ under $\star$ is
-$A(l, r) = a_l \star a_{l+1} \star \cdots \star a_r$, with
-$A(l, r) = e$ when $l > r$.
+The **aggregate** of a range $[l, r]$ under $\star$ is $A(l, r) = a_l \star a_{l+1} \star \cdots \star a_r$, with $A(l, r) = e$ when $l > r$.
 :::
 
-
 ::: math definition Definition
-A **segment tree** over $a$ is a complete binary tree in which each node
-$v$ covers a contiguous range $R(v)$ and stores
-$\text{tree}[v] = A(R(v))$. A node covering $[l, r]$ has two children
-covering $[l, m]$ and $[m+1, r]$ for some $m$, and the leaves cover single
-positions.
+A **segment tree** over $a$ is a complete binary tree in which each node $v$ covers a contiguous range $R(v)$ and stores $\text{tree}[v] = A(R(v))$. A node covering $[l, r]$ has two children covering $[l, m]$ and $[m+1, r]$ for some $m$, and the leaves cover single positions.
 :::
-
 
 ::: math lemma Lemma
-If $\star$ is associative and $e$ is its identity, then the aggregate of a
-range does not depend on how the range is partitioned into contiguous
-pieces. In particular, if $[l, r]$ is partitioned into $[l_1, r_1],
-[l_2, r_2], \ldots, [l_k, r_k]$ in order, then
+If $\star$ is associative and $e$ is its identity, then the aggregate of a range does not depend on how the range is partitioned into contiguous pieces. In particular, if $[l, r]$ is partitioned into $[l_1, r_1], [l_2, r_2], \ldots, [l_k, r_k]$ in order, then
 
 $$
 A(l, r) \;=\; A(l_1, r_1) \star A(l_2, r_2) \star \cdots \star A(l_k, r_k).
 $$
 :::
 
-
 ::: math lemma Lemma
-A segment tree over $n$ positions has $O(n)$ nodes, and the depth of the
-tree is $\lceil \log_2 n \rceil$.
+A segment tree over $n$ positions has $O(n)$ nodes, and the depth of the tree is $\lceil \log_2 n \rceil$.
 :::
 
-
 ::: math lemma Lemma
-Let $m$ be the number of positions of the range whose boundaries fall
-strictly inside a node's range. A range query visits at most
-$2 \lceil \log_2 n \rceil$ partial nodes and at most
-$2 \lceil \log_2 n \rceil + 1$ whole nodes.
+Let $m$ be the number of positions of the range whose boundaries fall strictly inside a node's range. A range query visits at most $2 \lceil \log_2 n \rceil$ partial nodes and at most $2 \lceil \log_2 n \rceil + 1$ whole nodes.
 :::
-
 
 ## Algorithm derivation
 
@@ -200,10 +180,8 @@ The query rule, at a node covering $[l, r]$:
 The third case is where associativity is used. The two children return the aggregates of the parts of the queried range that fall inside them, and merging those two aggregates gives the aggregate of the whole range, because the children cover consecutive pieces and the merge of consecutive pieces is the aggregate of their union.
 
 ::: math invariant Invariant
-After the build, and after every assignment, each node $v$ stores
-$\text{tree}[v] = A(R(v))$ for its range $R(v)$.
+After the build, and after every assignment, each node $v$ stores $\text{tree}[v] = A(R(v))$ for its range $R(v)$.
 :::
-
 
 ### The identity element in practice
 
@@ -243,36 +221,20 @@ Now assign $a_3 = 30$. The descent reaches the leaf over $[3,3]$, which is node 
 ## Correctness proof
 
 ::: math theorem Theorem
-The segment tree maintains the invariant that every node stores the
-aggregate of its range, and every range query returns the aggregate of the
-requested range.
+The segment tree maintains the invariant that every node stores the aggregate of its range, and every range query returns the aggregate of the requested range.
 :::
 
-
 ::: math proof Proof
-First the invariant after the build. The claim is by induction on the
-height of the node. At a leaf covering $[i, i]$, the build stores $a_i$,
-which is the aggregate of a single-element range. At an internal node
-covering $[l, r]$ with children covering $[l, m]$ and $[m+1, r]$, the
-induction hypothesis says that the children hold $A(l, m)$ and $A(m+1, r)$.
-By associativity and the identity, their merge is
-$A(l, m) \star A(m+1, r) = A(l, r)$, which is what the build stores.
+First the invariant after the build. The claim is by induction on the height of the node. At a leaf covering $[i, i]$, the build stores $a_i$, which is the aggregate of a single-element range. At an internal node covering $[l, r]$ with children covering $[l, m]$ and $[m+1, r]$, the induction hypothesis says that the children hold $A(l, m)$ and $A(m+1, r)$. By associativity and the identity, their merge is $A(l, m) \star A(m+1, r) = A(l, r)$, which is what the build stores.
 
 Next the invariant after an assignment at position $i$. Only the ancestors of the leaf covering $i$ cover $i$, so only their cached values can change, and the assignment rewrites exactly those, each as the merge of its two children. The children of every rewritten node are already correct, by induction from the leaf upwards, so the merge is correct by the same argument as in the build. Every other node covers a range that does not contain $i$, so its cached value is unaffected and still correct.
 
 Finally the query. At a node whose range is disjoint from the queried range, the algorithm returns the identity $e$, and $e \star x = x$, so the empty contribution changes nothing. At a node whose range is inside the queried range, the algorithm returns the cached value, which is the aggregate of that range by the invariant. At a node that straddles the boundary, the algorithm queries both children and merges the results. By the induction hypothesis, each child returns the aggregate of the part of the queried range that lies inside it, and by the lemma, the merge of those two consecutive pieces is the aggregate of the whole of the node's part of the queried range. The root's part is the whole queried range, so the returned value is its aggregate. $\square$
 :::
 
-
 ::: math proof Proof
-The number of nodes a query visits is $O(\log n)$. Only the nodes that
-straddle a boundary of the queried range can be partial, and a range has
-at most two boundaries per level of the tree. Each partial node spawns two
-children, so the number of visited nodes is $O(\log n)$. The nodes that
-are fully covered are the children of the partial ones, so there are also
-$O(\log n)$ of them.
+The number of nodes a query visits is $O(\log n)$. Only the nodes that straddle a boundary of the queried range can be partial, and a range has at most two boundaries per level of the tree. Each partial node spawns two children, so the number of visited nodes is $O(\log n)$. The nodes that are fully covered are the children of the partial ones, so there are also $O(\log n)$ of them.
 :::
-
 
 ## Complexity analysis
 
@@ -285,10 +247,8 @@ $O(\log n)$ of them.
 **Space: $O(n)$.** A complete binary tree over $n$ leaves has $2n - 1$ nodes, and the reference implementation stores them in an array of $4n + 4$ entries, which is the standard safe bound for the $2v$ and $2v + 1$ indexing. With 64-bit entries that is $32n$ bytes, so $6.4$ MB at $n = 200\,000$.
 
 ::: math complexity Complexity
-Segment tree over $n$ values: $O(n)$ to build, $O(\log n)$ per assignment,
-$O(\log n)$ per range query, and $O(n)$ extra space.
+Segment tree over $n$ values: $O(n)$ to build, $O(\log n)$ per assignment, $O(\log n)$ per range query, and $O(n)$ extra space.
 :::
-
 
 The width of the accumulator is part of the complexity statement. With $n = 200\,000$ values of magnitude up to $10^9$, a sum can reach $2 \cdot 10^{14}$, which does not fit in a 32-bit signed integer. The reference implementations use a 64-bit type.
 

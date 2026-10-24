@@ -113,41 +113,24 @@ Once the call stack is understood as a data structure, two moves are available. 
 Let $D$ be a domain equipped with a well-founded relation $<$, and let $f : D \to R$ be the function being computed.
 
 ::: math definition Definition
-A function $f$ is defined **recursively** on $D$ if there is a set $B$ of
-**base cases** and a rule that assigns $f(x)$ for every $x \notin B$ in
-terms of $f(y)$ for $y < x$. The function is **well-founded** if every
-chain $x_0 > x_1 > x_2 > \cdots$ is finite, which guarantees that the
-recursion terminates.
+A function $f$ is defined **recursively** on $D$ if there is a set $B$ of **base cases** and a rule that assigns $f(x)$ for every $x \notin B$ in terms of $f(y)$ for $y < x$. The function is **well-founded** if every chain $x_0 > x_1 > x_2 > \cdots$ is finite, which guarantees that the recursion terminates.
 :::
-
 
 ::: math definition Definition
-The **depth** of a recursive computation is the maximum number of calls that
-are active at the same moment. Each active call occupies one **stack
-frame** on the call stack, so the memory needed by the recursion is the
-depth multiplied by the size of a frame.
+The **depth** of a recursive computation is the maximum number of calls that are active at the same moment. Each active call occupies one **stack frame** on the call stack, so the memory needed by the recursion is the depth multiplied by the size of a frame.
 :::
-
 
 ::: math definition Definition
-A recursive call is in **tail position** if it is the last computation the
-function performs, so that the function's own frame can be discarded before
-the call returns. A language with **proper tail calls** executes such a call
-in constant stack space.
+A recursive call is in **tail position** if it is the last computation the function performs, so that the function's own frame can be discarded before the call returns. A language with **proper tail calls** executes such a call in constant stack space.
 :::
-
 
 ::: math lemma Lemma
 A recursion that traverses a path of $n$ vertices has depth $n$.
 :::
 
-
 ::: math lemma Lemma
-A recursion over a balanced binary structure of $n$ leaves has depth
-$\lceil \log_2 n \rceil + 1$, because each level of the recursion consumes
-one level of the structure.
+A recursion over a balanced binary structure of $n$ leaves has depth $\lceil \log_2 n \rceil + 1$, because each level of the recursion consumes one level of the structure.
 :::
-
 
 These two lemmas are the whole basis for the decision. A balanced tree of a million leaves has a depth of about 21, which every language handles. A path of a million vertices has a depth of a million, which no language handles by default.
 
@@ -235,11 +218,8 @@ The depth of the recursion is three frames at the deepest moment: root, right ch
 ## Correctness proof
 
 ::: math theorem Theorem
-For a binary tree $T$, let $d(T)$ be the number of vertices on the longest
-path from the root to a leaf. The recursive function `depth` returns $d(T)$
-for every tree $T$, and terminates.
+For a binary tree $T$, let $d(T)$ be the number of vertices on the longest path from the root to a leaf. The recursive function `depth` returns $d(T)$ for every tree $T$, and terminates.
 :::
-
 
 ::: math proof Proof
 We prove the claim by structural induction on the number of vertices of $T$.
@@ -251,22 +231,15 @@ We prove the claim by structural induction on the number of vertices of $T$.
 Every path from $r$ to a leaf begins at $r$ and then continues into either $L$ or $R$. The longest such path therefore has length $1 + \max(d(L), d(R))$, which is exactly what the function returns. The function terminates because its two recursive calls are on strictly smaller trees, and the induction applies to both of them. $\square$
 :::
 
-
 ::: math theorem Theorem
 The explicit-stack version returns the same value as the recursive version.
 :::
 
-
 ::: math proof Proof
-At any moment of the explicit-stack computation, the vector holds exactly
-the calls that the recursive version would have pending, in the same
-last-in, first-out order: the recursive version pushes a call for each
-child and evaluates the last child first, and the explicit version pushes
-the left child and then the right child and pops the right child first.
+At any moment of the explicit-stack computation, the vector holds exactly the calls that the recursive version would have pending, in the same last-in, first-out order: the recursive version pushes a call for each child and evaluates the last child first, and the explicit version pushes the left child and then the right child and pops the right child first.
 
 Induct on the number of pending calls. When the vector is empty, the recursive version has no pending call either, and both have returned the same value. When the vector is not empty, both computations examine the same subtree and at the same accumulated depth, and both then push the two children and record the same candidate maximum. By the induction the two computations agree on every value they record, and in particular on the maximum returned. $\square$
 :::
-
 
 ## Complexity analysis
 

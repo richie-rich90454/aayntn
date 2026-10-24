@@ -113,46 +113,30 @@ The insight is that **acyclicity guarantees the existence of an order in which e
 The order is the topological order. A topological order of a directed acyclic graph is a permutation of the vertices in which, for every edge $u \to v$, the vertex $u$ appears before the vertex $v$.
 
 ::: math definition Definition
-A **topological order** of a directed graph $G = (V, E)$ is a bijection
-$\pi : V \to \{1, 2, \ldots, |V|\}$ such that for every edge $(u, v) \in E$,
-$\pi(u) < \pi(v)$. A directed graph has a topological order if and only if
-it has no directed cycle.
+A **topological order** of a directed graph $G = (V, E)$ is a bijection $\pi : V \to \{1, 2, \ldots, |V|\}$ such that for every edge $(u, v) \in E$, $\pi(u) < \pi(v)$. A directed graph has a topological order if and only if it has no directed cycle.
 :::
 
-
 ::: math definition Definition
-The **value** $d(v)$ of a vertex $v$ is defined by a recurrence over the
-incoming edges of $v$. For the longest-path recurrence it is
+The **value** $d(v)$ of a vertex $v$ is defined by a recurrence over the incoming edges of $v$. For the longest-path recurrence it is
+
 $$
 d(v) = \max\bigl(\{d(u) + w(u, v) : (u, v) \in E\} \cup \{0\}\bigr),
 $$
-with $d(s) = 0$ for a designated source $s$ and $d(v) = -\infty$ for a
-vertex with no incoming edge and no source designation.
-:::
 
+with $d(s) = 0$ for a designated source $s$ and $d(v) = -\infty$ for a vertex with no incoming edge and no source designation.
+:::
 
 ::: math lemma Lemma
-If $G$ is a directed acyclic graph, then in a topological order every
-predecessor of a vertex appears before it, so the recurrence for a vertex
-can be evaluated when the vertex is reached.
+If $G$ is a directed acyclic graph, then in a topological order every predecessor of a vertex appears before it, so the recurrence for a vertex can be evaluated when the vertex is reached.
 :::
-
 
 ::: math proof Proof
-A topological order exists by the definition of acyclicity, and the
-definition of a topological order says exactly that the predecessor
-precedes the vertex. Every value the recurrence reads has therefore already
-been computed. $\square$
+A topological order exists by the definition of acyclicity, and the definition of a topological order says exactly that the predecessor precedes the vertex. Every value the recurrence reads has therefore already been computed. $\square$
 :::
-
 
 ::: math invariant Invariant
-When the program processes a vertex $v$, every predecessor $u$ of $v$ has
-already been processed, and the recorded value $d(u)$ is final. The
-recorded value $d(v)$ is the true value of $v$, and it never changes
-afterwards.
+When the program processes a vertex $v$, every predecessor $u$ of $v$ has already been processed, and the recorded value $d(u)$ is final. The recorded value $d(v)$ is the true value of $v$, and it never changes afterwards.
 :::
-
 
 ### Why the order matters
 
@@ -181,19 +165,12 @@ The costs are the same: $O(V + E)$ time, because every edge is examined once and
 Let $G = (V, E)$ be a directed acyclic graph with a weight function $w : E \to \mathbb{R}$, and let $s \in V$ be a source.
 
 ::: math definition Definition
-A **path** in $G$ is a sequence of vertices $v_0, v_1, \ldots, v_k$ with
-$(v_{i-1}, v_i) \in E$ for every $i$. Its **length** is
-$\sum_{i=1}^{k} w(v_{i-1}, v_i)$. A path is **$s$-rooted** if it starts
-at $s$.
+A **path** in $G$ is a sequence of vertices $v_0, v_1, \ldots, v_k$ with $(v_{i-1}, v_i) \in E$ for every $i$. Its **length** is $\sum_{i=1}^{k} w(v_{i-1}, v_i)$. A path is **$s$-rooted** if it starts at $s$.
 :::
-
 
 ::: math definition Definition
-The **longest path distance** $\delta(v)$ of a vertex $v$ is the greatest
-length of an $s$-rooted path from $s$ to $v$, and it is $-\infty$ when no
-such path exists.
+The **longest path distance** $\delta(v)$ of a vertex $v$ is the greatest length of an $s$-rooted path from $s$ to $v$, and it is $-\infty$ when no such path exists.
 :::
-
 
 ::: math recurrence Recurrence
 $$
@@ -202,23 +179,17 @@ d(v) = \max\bigl(\{d(u) + w(u, v) : (u, v) \in E\} \cup \{-\infty\}\bigr),
 $$
 :::
 
-
 ::: math lemma Lemma
-The recurrence computes $\delta(v)$ for every vertex $v$, in any order in
-which every predecessor precedes its successor.
+The recurrence computes $\delta(v)$ for every vertex $v$, in any order in which every predecessor precedes its successor.
 :::
 
-
 ::: math proof Proof
-The proof is an induction on the position of $v$ in the order. For the
-source, $d(s) = 0 = \delta(s)$, because the empty path has length zero and
-every edge weight is at least zero.
+The proof is an induction on the position of $v$ in the order. For the source, $d(s) = 0 = \delta(s)$, because the empty path has length zero and every edge weight is at least zero.
 
 Now let $v$ be a vertex that is not the source, and suppose every predecessor of $v$ already holds its true value. Every $s$-rooted path to $v$ ends with an edge $(u, v)$ for some predecessor $u$, and the part of the path before that edge is an $s$-rooted path to $u$, whose length is at most $\delta(u) = d(u)$. So the length of the path is at most $d(u) + w(u,v)$, and the length of the longest path to $v$ is at most the maximum of those values, which is $d(v)$.
 
 Conversely, let $u$ be a predecessor attaining the maximum. There is an $s$-rooted path to $u$ of length $d(u)$, and appending the edge $(u, v)$ gives an $s$-rooted path to $v$ of length $d(u) + w(u,v) = d(v)$. So the bound is achieved. $\square$
 :::
-
 
 ## Algorithm derivation
 
@@ -308,16 +279,11 @@ That is the failure the topological order prevents, and it is subtler than the o
 ## Correctness proof
 
 ::: math theorem Theorem
-Let $G$ be a directed acyclic graph with a source $s$ and a weight
-function $w$. The program that processes the vertices in a topological
-order and relaxes every edge exactly once computes the longest path
-distance $\delta(v)$ for every vertex $v$.
+Let $G$ be a directed acyclic graph with a source $s$ and a weight function $w$. The program that processes the vertices in a topological order and relaxes every edge exactly once computes the longest path distance $\delta(v)$ for every vertex $v$.
 :::
 
-
 ::: math proof Proof
-The proof is an induction on the position of the vertex in the topological
-order.
+The proof is an induction on the position of the vertex in the topological order.
 
 **Base case.** The first vertex in a topological order has no incoming edges, so it can only be a source. Its value is set to $0$ and never changed, and the longest path distance of a source is $0$, since the empty path has length zero and every edge weight is nonnegative.
 
@@ -330,22 +296,15 @@ Conversely, the program has relaxed every edge $(u, v)$ by the time it reaches $
 Hence $d(v) = \delta(v)$ when $v$ is processed, and no later relaxation can change it, because every edge into $v$ has already been relaxed. The induction closes. $\square$
 :::
 
-
 ::: math theorem Theorem
-The vertex order produced by Kahn's algorithm is a topological order, and
-the algorithm detects a cycle.
+The vertex order produced by Kahn's algorithm is a topological order, and the algorithm detects a cycle.
 :::
 
-
 ::: math proof Proof
-A vertex is appended to the order only when its in-degree reaches zero,
-which happens only after every edge into it has been removed, which happens
-only after every predecessor has been appended. So every predecessor
-precedes the vertex, which is the definition of a topological order.
+A vertex is appended to the order only when its in-degree reaches zero, which happens only after every edge into it has been removed, which happens only after every predecessor has been appended. So every predecessor precedes the vertex, which is the definition of a topological order.
 
 If the graph has a cycle $v_1 \to v_2 \to \cdots \to v_k \to v_1$, then no vertex of the cycle can ever reach in-degree zero, because the edge from the previous vertex of the cycle is still present. So the algorithm stops with the cycle unprocessed, and the number of vertices it processed is smaller than $|V|$. Checking that the order has $|V|$ entries is therefore a cycle detection. $\square$
 :::
-
 
 ## Complexity analysis
 

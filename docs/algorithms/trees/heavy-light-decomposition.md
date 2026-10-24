@@ -138,49 +138,28 @@ The laboratory below draws the tree, the chains in color, and the flattened arra
 Let $T$ be a tree with vertex set $V$, rooted at $r$, and let $\text{value}(v)$ be the weight of a vertex.
 
 ::: math definition Definition
-The **subtree size** of a vertex $v$ is the number of vertices in the
-subtree rooted at $v$, including $v$ itself. The **heavy child** of $v$ is
-the child $c$ of $v$ with the largest subtree size. A child of $v$ that is
-not the heavy child is a **light child**, and the edge to it is a **light
-edge**.
+The **subtree size** of a vertex $v$ is the number of vertices in the subtree rooted at $v$, including $v$ itself. The **heavy child** of $v$ is the child $c$ of $v$ with the largest subtree size. A child of $v$ that is not the heavy child is a **light child**, and the edge to it is a **light edge**.
 :::
-
 
 ::: math definition Definition
-A **chain** is a maximal path of heavy edges. It is identified by its top
-vertex, called the **head** of the chain. The **position** of a vertex is
-its index in the flattened array, where the chains are written one after
-the other and each chain is written in depth order.
+A **chain** is a maximal path of heavy edges. It is identified by its top vertex, called the **head** of the chain. The **position** of a vertex is its index in the flattened array, where the chains are written one after the other and each chain is written in depth order.
 :::
-
 
 ::: math lemma Lemma
-Let $c$ be a light child of $u$. Then
-$\text{size}(c) \le (\text{size}(u) - 1)/2 < \text{size}(u)/2$.
+Let $c$ be a light child of $u$. Then $\text{size}(c) \le (\text{size}(u) - 1)/2 < \text{size}(u)/2$.
 :::
-
 
 ::: math lemma Lemma
-A path from the root to any vertex crosses at most
-$\lfloor \log_2 n \rfloor$ light edges, and therefore at most
-$\lfloor \log_2 n \rfloor + 1$ chains.
+A path from the root to any vertex crosses at most $\lfloor \log_2 n \rfloor$ light edges, and therefore at most $\lfloor \log_2 n \rfloor + 1$ chains.
 :::
-
 
 ::: math lemma Lemma
-Let $h$ be the head of the chain of a vertex $v$, and let $p$ be the
-parent of $h$. The vertices of the chain segment from $h$ to $v$ occupy
-the contiguous range $[\text{pos}(h), \text{pos}(v)]$ of the flattened
-array, in increasing depth.
+Let $h$ be the head of the chain of a vertex $v$, and let $p$ be the parent of $h$. The vertices of the chain segment from $h$ to $v$ occupy the contiguous range $[\text{pos}(h), \text{pos}(v)]$ of the flattened array, in increasing depth.
 :::
-
 
 ::: math definition Definition
-The **path** from $u$ to $v$ is the unique set of vertices on the route
-between them. Its weight is $\sum_{w \in \text{path}(u, v)} \text{value}(w)$,
-and both endpoints are included.
+The **path** from $u$ to $v$ is the unique set of vertices on the route between them. Its weight is $\sum_{w \in \text{path}(u, v)} \text{value}(w)$, and both endpoints are included.
 :::
-
 
 ## Algorithm derivation
 
@@ -196,12 +175,8 @@ The query rule has two parts. While the two endpoints lie in different chains, t
 The move in the loop crosses a light edge, because the head of a chain is by definition a vertex whose edge from its parent is light. That is why the loop runs only a logarithmic number of times.
 
 ::: math invariant Invariant
-At the start of every iteration of the query loop, the vertices already
-counted are exactly the part of the path from the original endpoints up
-to the current endpoints, and the remaining part of the path runs from the
-current endpoint of $u$ to the current endpoint of $v$.
+At the start of every iteration of the query loop, the vertices already counted are exactly the part of the path from the original endpoints up to the current endpoints, and the remaining part of the path runs from the current endpoint of $u$ to the current endpoint of $v$.
 :::
-
 
 ### Why the loop always makes progress
 
@@ -231,17 +206,11 @@ Notice that the loop ran once. The path crossed one light edge, and the light ed
 ## Correctness proof
 
 ::: math theorem Theorem
-The decomposition satisfies the halving claim: every light edge leads into
-a subtree that is strictly smaller than half of the subtree it leaves.
+The decomposition satisfies the halving claim: every light edge leads into a subtree that is strictly smaller than half of the subtree it leaves.
 :::
 
-
 ::: math proof Proof
-Let $u$ be a vertex and $c$ a light child of $u$. Since $c$ is not the
-heavy child, $u$ has a heavy child $h$, and by the definition of the
-heavy child, $\text{size}(h) \ge \text{size}(c)$. The subtree of $u$
-contains $u$ itself, the subtree of $h$ and the subtree of $c$, and these
-are disjoint, so
+Let $u$ be a vertex and $c$ a light child of $u$. Since $c$ is not the heavy child, $u$ has a heavy child $h$, and by the definition of the heavy child, $\text{size}(h) \ge \text{size}(c)$. The subtree of $u$ contains $u$ itself, the subtree of $h$ and the subtree of $c$, and these are disjoint, so
 
 $$
 \text{size}(u) \;\ge\; 1 + \text{size}(h) + \text{size}(c)
@@ -251,41 +220,27 @@ $$
 Therefore $\text{size}(c) \le (\text{size}(u) - 1)/2 < \text{size}(u)/2$, which is the claim. $\square$
 :::
 
-
 ::: math theorem Theorem
-A path between two vertices of a tree with $n$ vertices crosses at most
-$\lfloor \log_2 n \rfloor + 1$ chains.
+A path between two vertices of a tree with $n$ vertices crosses at most $\lfloor \log_2 n \rfloor + 1$ chains.
 :::
 
-
 ::: math proof Proof
-Let $w$ be the lowest common ancestor of the two endpoints. The path is
-the union of the path from the first endpoint up to $w$ and the path from
-the second endpoint up to $w$. Each of those is a suffix of a path from the
-root, so it is enough to bound the number of light edges on a root-to-vertex
-path.
+Let $w$ be the lowest common ancestor of the two endpoints. The path is the union of the path from the first endpoint up to $w$ and the path from the second endpoint up to $w$. Each of those is a suffix of a path from the root, so it is enough to bound the number of light edges on a root-to-vertex path.
 
 On such a path, the subtree sizes strictly decrease, and by the previous theorem each light edge reduces the current subtree size to strictly less than half of it. Starting from at most $n$ and halving at each light edge, after $k$ light edges the subtree size is less than $n / 2^k$, and it is at least $1$. So $n / 2^k > 1$, which gives $k < \log_2 n$, hence $k \le \lfloor \log_2 n \rfloor$. Each chain boundary on the path is a light edge, so the path crosses at most $\lfloor \log_2 n \rfloor + 1$ chains. $\square$
 :::
 
-
 ::: math theorem Theorem
-The path query returns the sum of the values of the vertices on the path
-between the two endpoints, both included.
+The path query returns the sum of the values of the vertices on the path between the two endpoints, both included.
 :::
 
-
 ::: math proof Proof
-The build stage stores at each vertex the subtree size, which the previous
-theorem uses, and it flattens the chains so that the vertices of a chain
-occupy a contiguous range in depth order. That is the claim of the third
-lemma above.
+The build stage stores at each vertex the subtree size, which the previous theorem uses, and it flattens the chains so that the vertices of a chain occupy a contiguous range in depth order. That is the claim of the third lemma above.
 
 Now the query. At the start of each iteration, the invariant says that the counted vertices are exactly the part of the path below the current endpoints. The two endpoints lie in different chains. One of the two chain heads is deeper than the other, and the segment from the endpoint of the deeper chain up to its head lies entirely on the path, because the head is deeper than the other chain's head and therefore below the lowest common ancestor. The algorithm adds the value of that segment, which is one subtraction of two prefix sums over a contiguous range of the flattened array, and then moves the endpoint to the parent of the head. The counted part grows by exactly that segment, so the invariant is preserved.
 
 Each iteration moves an endpoint up across a light edge, and by the second theorem there are at most $O(\log n)$ such edges on the path, so the loop terminates. When it terminates the two endpoints lie in one chain, and the remaining part of the path is exactly the range between their positions in the flattened array, because a chain is a path in the tree and the positions follow the depth. The algorithm adds that range as one more subtraction, and the two endpoints are counted exactly once, by the inclusive range. The total is therefore the sum of the values of all the vertices on the path. $\square$
 :::
-
 
 ## Complexity analysis
 
@@ -298,12 +253,8 @@ Each iteration moves an endpoint up across a light edge, and by the second theor
 **Space: $O(n)$** for the parent, depth, subtree size, heavy child, chain head and position arrays, plus the flattened array and its prefix sums. That is about $40n$ bytes at 64 bits for the two numeric arrays.
 
 ::: math complexity Complexity
-Heavy-light decomposition of a tree with $n$ vertices: $O(n)$ to build,
-$O(\log n)$ per path query with prefix sums over the flattened array,
-$O(\log^2 n)$ per path query with a segment tree over it, and $O(n)$ extra
-space.
+Heavy-light decomposition of a tree with $n$ vertices: $O(n)$ to build, $O(\log n)$ per path query with prefix sums over the flattened array, $O(\log^2 n)$ per path query with a segment tree over it, and $O(n)$ extra space.
 :::
-
 
 ## Algorithm selection
 

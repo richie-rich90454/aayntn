@@ -130,56 +130,36 @@ because the three factors are the three independent choices of how many coins of
 ## Formal model
 
 ::: math definition Definition
-A **formal power series** over a ring $R$ is a sequence
-$(a_0, a_1, a_2, \ldots)$ of elements of $R$, written
-$F(x) = \sum_{n \ge 0} a_n x^n$. Multiplication is defined by the
-convolution
+A **formal power series** over a ring $R$ is a sequence $(a_0, a_1, a_2, \ldots)$ of elements of $R$, written $F(x) = \sum_{n \ge 0} a_n x^n$. Multiplication is defined by the convolution
+
 $$
 (F \cdot G)(x^n) = \sum_{i=0}^{n} a_i b_{n-i},
 $$
+
 and it is associative and commutative because convolution is.
 :::
 
-
 ::: math definition Definition
-The **generating function** of a counting problem is the series whose
-coefficient of $x^n$ is the number of valid configurations of total weight
-$n$. For a family of item types with weights $w_1, \ldots, w_k$, each
-usable any number of times, it is
+The **generating function** of a counting problem is the series whose coefficient of $x^n$ is the number of valid configurations of total weight $n$. For a family of item types with weights $w_1, \ldots, w_k$, each usable any number of times, it is
+
 $$
 F(x) = \prod_{i=1}^{k} \frac{1}{1 - x^{w_i}},
 $$
+
 and the answer for total weight $n$ is the coefficient $[x^n] F(x)$.
 :::
 
-
 ::: math lemma Lemma
-Let $A$ be a family of configurations of weight $i$ counted by $a_i$, and
-let $B$ be a family of configurations of weight $j$ counted by $b_j$. The
-number of combined configurations of weight $n$, one from each family, is
-the coefficient of $x^n$ in the product of the two generating functions.
+Let $A$ be a family of configurations of weight $i$ counted by $a_i$, and let $B$ be a family of configurations of weight $j$ counted by $b_j$. The number of combined configurations of weight $n$, one from each family, is the coefficient of $x^n$ in the product of the two generating functions.
 :::
-
 
 ::: math proof Proof
-A combined configuration of weight $n$ determines uniquely a pair
-$(p, q)$ with $p$ in $A$ and $q$ in $B$ such that the weight of $p$ plus
-the weight of $q$ is $n$. For a fixed weight $i$ of $p$, there are $a_i$
-choices for $p$ and $b_{n-i}$ choices for $q$, so the number of pairs with
-$p$ of weight $i$ is $a_i b_{n-i}$. Summing over $i$ from $0$ to $n$ gives
-$\sum_{i=0}^{n} a_i b_{n-i}$, which by the definition of multiplication of
-formal power series is the coefficient of $x^n$ in the product. $\square$
+A combined configuration of weight $n$ determines uniquely a pair $(p, q)$ with $p$ in $A$ and $q$ in $B$ such that the weight of $p$ plus the weight of $q$ is $n$. For a fixed weight $i$ of $p$, there are $a_i$ choices for $p$ and $b_{n-i}$ choices for $q$, so the number of pairs with $p$ of weight $i$ is $a_i b_{n-i}$. Summing over $i$ from $0$ to $n$ gives $\sum_{i=0}^{n} a_i b_{n-i}$, which by the definition of multiplication of formal power series is the coefficient of $x^n$ in the product. $\square$
 :::
-
 
 ::: math invariant Invariant
-In the coefficient-by-coefficient multiplication of two series, after the
-inner loop has processed the term of degree $k$, the entry for degree $k$
-holds $\sum_{i=0}^{k} a_i b_{k-i}$ reduced modulo the modulus, which is the
-coefficient of $x^k$ in the product. The entry is never read again, so the
-reduction is safe and the table can be reused for the next factor.
+In the coefficient-by-coefficient multiplication of two series, after the inner loop has processed the term of degree $k$, the entry for degree $k$ holds $\sum_{i=0}^{k} a_i b_{k-i}$ reduced modulo the modulus, which is the coefficient of $x^k$ in the product. The entry is never read again, so the reduction is safe and the table can be reused for the next factor.
 :::
-
 
 ## Algorithm derivation
 
@@ -237,29 +217,16 @@ Take coins of value $1$, $3$ and $4$, and count the ways to make $n = 6$.
 ## Correctness proof
 
 ::: math theorem Theorem
-For item types of weights $w_1, \ldots, w_k$, each usable any number of
-times, the number of multisets of items of total weight $n$ is the
-coefficient of $x^n$ in $\prod_{i=1}^{k} (1 - x^{w_i})^{-1}$. The dynamic
-program computes that coefficient list, and the dynamic program with the
-outer and inner loops exchanged computes the count of ordered sequences.
+For item types of weights $w_1, \ldots, w_k$, each usable any number of times, the number of multisets of items of total weight $n$ is the coefficient of $x^n$ in $\prod_{i=1}^{k} (1 - x^{w_i})^{-1}$. The dynamic program computes that coefficient list, and the dynamic program with the outer and inner loops exchanged computes the count of ordered sequences.
 :::
 
-
 ::: math proof Proof
-**The encoding.** Write the factor for item type $i$ as
-$\sum_{c \ge 0} x^{c w_i}$, the $c$-th term standing for the choice of using
-$c$ items of that type. The product of the $k$ factors is a sum over
-$k$-tuples $(c_1, \ldots, c_k)$ of nonnegative integers of the monomial
-$x^{c_1 w_1 + \cdots + c_k w_k}$. The coefficient of $x^n$ collects
-exactly the tuples whose weighted sum is $n$, and each such tuple is one
-multiset of items, because a multiset is determined by the counts of each
-type. The lemma proves the same statement in general.
+**The encoding.** Write the factor for item type $i$ as $\sum_{c \ge 0} x^{c w_i}$, the $c$-th term standing for the choice of using $c$ items of that type. The product of the $k$ factors is a sum over $k$-tuples $(c_1, \ldots, c_k)$ of nonnegative integers of the monomial $x^{c_1 w_1 + \cdots + c_k w_k}$. The coefficient of $x^n$ collects exactly the tuples whose weighted sum is $n$, and each such tuple is one multiset of items, because a multiset is determined by the counts of each type. The lemma proves the same statement in general.
 
 **The dynamic program.** After the first $j$ types have been processed, the invariant states that `ways[t]` is the coefficient of $x^t$ in $\prod_{i=1}^{j} (1-x^{w_i})^{-1}$, reduced modulo the modulus. It holds for $j = 0$, when the product is $1$ and `ways[0] = 1` with all other entries $0$. When type $j+1$ of weight $w$ is added, the new coefficient list is the old one plus the old one shifted by $w$, because $\frac{1}{1-x^w} = 1 + \frac{x^w}{1-x^w}$. The inner loop adds exactly the shifted copy, and because it runs upward it also includes the new contribution of the same type repeatedly, which is the geometric series rather than a single use of the type. The invariant is preserved, and after all $k$ types the entry for $n$ is the required count.
 
 **The ordered version.** When the total loop is the outer one, the state counts the sequences of total weight $t$ built from the types processed so far, and the update appends one item of the current type at the end. The coefficient list is then that of $\frac{1}{1-(x^{w_1} + \cdots + x^{w_k})}$, because the type being processed is the last one in the sequence. $\square$
 :::
-
 
 ## Complexity analysis
 

@@ -106,27 +106,18 @@ The laboratory below runs the algorithm on a real array. The gray cells have bee
 Let $A$ be a finite sequence of $n$ elements, sorted so that $A[i] \le A[j]$ whenever $i \le j$. Let $x$ be the target.
 
 ::: math definition Definition
-A predicate $P$ on the indices $\{0, \ldots, n-1\}$ is **monotone** if there is an index
-$k$ such that $P(i)$ is false for every $i < k$ and true for every $i \ge k$. The value
-$k$ is the *boundary* of the predicate.
+A predicate $P$ on the indices $\{0, \ldots, n-1\}$ is **monotone** if there is an index $k$ such that $P(i)$ is false for every $i < k$ and true for every $i \ge k$. The value $k$ is the _boundary_ of the predicate.
 :::
-
 
 ::: math definition Definition
-The **lower bound** of $x$ in $A$ is the smallest index $i$ such that $A[i] \ge x$, or
-$n$ when no such index exists. The **upper bound** is the smallest index $i$ such that
-$A[i] > x$.
+The **lower bound** of $x$ in $A$ is the smallest index $i$ such that $A[i] \ge x$, or $n$ when no such index exists. The **upper bound** is the smallest index $i$ such that $A[i] > x$.
 :::
-
 
 The lower bound and the upper bound are two instances of the same boundary search with two different monotone predicates: $A[i] \ge x$ and $A[i] > x$.
 
 ::: math lemma Lemma
-If $A$ is sorted and $P$ is the predicate $A[i] \le x$, then the lower bound of $x$ is
-the smallest index at which $P$ is false. Equivalently, the lower bound is one more than
-the largest index at which $P$ is true.
+If $A$ is sorted and $P$ is the predicate $A[i] \le x$, then the lower bound of $x$ is the smallest index at which $P$ is false. Equivalently, the lower bound is one more than the largest index at which $P$ is true.
 :::
-
 
 ## Algorithm derivation
 
@@ -146,11 +137,8 @@ The interval starts as $[0, n-1]$. At every step:
 The loop stops when $lo > hi$, which means the interval is empty and the answer does not exist.
 
 ::: math invariant Invariant
-At the start of every iteration, the answer to the search lies in $[lo, hi]$. The
-interval is halved at every step, so its length is at most $\lfloor n/2 \rfloor$ after
-the first iteration and at most $1$ after $\lceil \log_2 n \rceil$ iterations.
+At the start of every iteration, the answer to the search lies in $[lo, hi]$. The interval is halved at every step, so its length is at most $\lfloor n/2 \rfloor$ after the first iteration and at most $1$ after $\lceil \log_2 n \rceil$ iterations.
 :::
-
 
 ### Why the midpoint is computed that way
 
@@ -159,14 +147,11 @@ the first iteration and at most $1$ after $\lceil \log_2 n \rceil$ iterations.
 ## Correctness proof
 
 ::: math theorem Theorem
-The iterative search returns the index of the target when it is present, and $-1$
-otherwise.
+The iterative search returns the index of the target when it is present, and $-1$ otherwise.
 :::
 
-
 ::: math proof Proof
-The invariant that the answer lies in $[lo, hi]$ holds initially, because the answer is
-an index of the array and $[0, n-1]$ contains every index.
+The invariant that the answer lies in $[lo, hi]$ holds initially, because the answer is an index of the array and $[0, n-1]$ contains every index.
 
 Suppose the invariant holds at the start of an iteration.
 
@@ -176,7 +161,6 @@ Suppose the invariant holds at the start of an iteration.
 
 In every case the invariant is preserved. The interval strictly shrinks, so the loop terminates. It terminates either by returning a correct index, or by reaching $lo > hi$, in which case the invariant says the answer lies in an empty interval, so the answer does not exist and $-1$ is correct. $\square$
 :::
-
 
 ## Complexity analysis
 
@@ -209,13 +193,8 @@ The six implementations are listed above, with the language and the variant sele
 The recursive form is included for teaching, not because it is the better choice.
 
 ::: math counterexample Counterexample
-A sorted array of $2^{20}$ elements searched with the recursive form needs about
-$20$ stack frames, which every language handles. But a search that recurses once per
-*element* — as the recursive binary search on an unbalanced variant, or a binary search
-whose midpoint is computed incorrectly, does — will overflow the stack in C++ and Java
-and crash the process. The iterative form cannot overflow, because it uses a loop.
+A sorted array of $2^{20}$ elements searched with the recursive form needs about $20$ stack frames, which every language handles. But a search that recurses once per _element_ — as the recursive binary search on an unbalanced variant, or a binary search whose midpoint is computed incorrectly, does — will overflow the stack in C++ and Java and crash the process. The iterative form cannot overflow, because it uses a loop.
 :::
-
 
 In Python the recursion limit is a counter rather than a guard, and raising it does not make deep recursion safe: the interpreter still has to allocate the frames, and the operating system still has to grow the stack. The iterative form is the right answer in every language.
 

@@ -113,35 +113,21 @@ $$
 The set $L_k$ is the **level** of the vertices at distance $k$ from $s$.
 :::
 
+::: math definition Definition
+The **distance** $d(v)$ of a vertex $v$ from $s$ is the length of a shortest path from $s$ to $v$, that is, the smallest $k$ with $v \in L_k$. The distance is undefined, and written $\infty$, when no path exists.
+:::
 
 ::: math definition Definition
-The **distance** $d(v)$ of a vertex $v$ from $s$ is the length of a
-shortest path from $s$ to $v$, that is, the smallest $k$ with $v \in L_k$.
-The distance is undefined, and written $\infty$, when no path exists.
+A **breadth-first search** of $G$ from $s$ is a traversal in which the vertices waiting to be expanded are held in a first-in, first-out queue, so that they are expanded in the order they were discovered, which is an order of non-decreasing distance from $s$.
 :::
-
-
-::: math definition Definition
-A **breadth-first search** of $G$ from $s$ is a traversal in which the
-vertices waiting to be expanded are held in a first-in, first-out queue, so
-that they are expanded in the order they were discovered, which is an
-order of non-decreasing distance from $s$.
-:::
-
 
 ::: math lemma Lemma
-The levels partition the vertices reachable from $s$: every reachable
-vertex belongs to exactly one $L_k$, and $v \in L_k$ if and only if
-$d(v) = k$.
+The levels partition the vertices reachable from $s$: every reachable vertex belongs to exactly one $L_k$, and $v \in L_k$ if and only if $d(v) = k$.
 :::
-
 
 ::: math lemma Lemma
-The queue of a breadth-first search holds vertices of at most two
-consecutive levels at any moment, and every vertex of a lower level leaves
-the queue before any vertex of a higher level enters it.
+The queue of a breadth-first search holds vertices of at most two consecutive levels at any moment, and every vertex of a lower level leaves the queue before any vertex of a higher level enters it.
 :::
-
 
 ## Algorithm derivation
 
@@ -154,11 +140,8 @@ The rule is correct because of the level discipline of the queue. When $v$ is ex
 The derivation of the initialization is equally important. The source is discovered at distance zero, so `distance[s] = 0` before the loop starts. If it is left at $-1$, the source is rediscovered through its own neighbors, and the level structure collapses.
 
 ::: math invariant Invariant
-At every moment of the search, the queue holds a suffix of the vertices of
-one level followed by a prefix of the vertices of the next level, and every
-vertex in the queue has its true distance recorded.
+At every moment of the search, the queue holds a suffix of the vertices of one level followed by a prefix of the vertices of the next level, and every vertex in the queue has its true distance recorded.
 :::
-
 
 ## Step-by-step execution
 
@@ -180,15 +163,11 @@ Notice step 3. Vertex $3$ is a neighbor of both $1$ and $2$, and it is discovere
 ## Correctness proof
 
 ::: math theorem Theorem
-When the search terminates, `distance[v]` is the length of a shortest path
-from $s$ to $v$ for every vertex $v$ reachable from $s$, and it is $-1$ for
-every vertex that is not reachable.
+When the search terminates, `distance[v]` is the length of a shortest path from $s$ to $v$ for every vertex $v$ reachable from $s$, and it is $-1$ for every vertex that is not reachable.
 :::
 
-
 ::: math proof Proof
-We prove first that every vertex taken out of the queue has its true
-distance recorded, by induction over the number of dequeue operations.
+We prove first that every vertex taken out of the queue has its true distance recorded, by induction over the number of dequeue operations.
 
 The base case is the first dequeue. The only vertex in the queue is $s$, and `distance[s] = 0` was set before the loop, which is correct because the shortest path from $s$ to itself has length zero.
 
@@ -197,7 +176,6 @@ For the inductive step, suppose the vertex $v$ being dequeued has its true dista
 It remains to show that the search terminates and reaches every reachable vertex. Each vertex is enqueued at most once, because it is marked at the moment it is enqueued, so the queue holds at most $n$ entries. Each dequeue examines the incident edges of one vertex, so at most $2E$ edge examinations happen, and the loop therefore ends. When it ends, the queue is empty, and every vertex reachable from $s$ has been enqueued: the induction above shows that a vertex of level $k$ is discovered while a vertex of level $k - 1$ is expanded, and the expansion of level $0$ is guaranteed. A vertex that was never enqueued was never discovered, so no path from $s$ reaches it, and its distance is correctly recorded as $-1$. $\square$
 :::
 
-
 ## Complexity analysis
 
 **Time: $O(V + E)$.** Every vertex is enqueued at most once and dequeued at most once, because it is marked when it is enqueued. Dequeuing a vertex examines each of its incident edges once, and every edge is incident to two vertices, so at most $2E$ edge examinations happen in the whole search. The total is $O(V + E)$.
@@ -205,11 +183,8 @@ It remains to show that the search terminates and reaches every reachable vertex
 **Space.** The distance array holds $V$ entries, and the queue holds at most one entry per vertex, so the traversal's own working set is $O(V)$. The adjacency list that the search is given holds $O(V + E)$ entries, and that is the $O(V + E)$ figure recorded in the manifest: the search needs the graph, and the graph is the largest object in the program.
 
 ::: math complexity Complexity
-Breadth-first search over an adjacency list: time $O(V + E)$. Auxiliary
-structures $O(V)$ for the distance array and the queue, for a total of
-$O(V + E)$ including the adjacency list.
+Breadth-first search over an adjacency list: time $O(V + E)$. Auxiliary structures $O(V)$ for the distance array and the queue, for a total of $O(V + E)$ including the adjacency list.
 :::
-
 
 One practical warning belongs here. In Python, `list.pop(0)` is $O(n)$ because every remaining element is shifted, so a queue implemented with `pop(0)` turns the whole search into $O(V^2)$. Use `collections.deque`, or a list with a head index that only ever moves forward. The same trap exists in Java with `ArrayList.remove(0)`, and in JavaScript with `Array.prototype.shift`.
 

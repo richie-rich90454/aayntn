@@ -110,52 +110,38 @@ Let there be $N$ positions. Update $j$ adds a non-negative weight $w_j$ to posit
 
 ::: math definition Definition
 The **prefix count** is
+
 $$
 f(k, y) = \sum_{p=1}^{k} \sum_{\substack{j \le y \\ p_j = p}} w_j,
 $$
-the total weight in positions $1$ through $k$ after the first $y$ updates.
-The **answer** of query $i$ is the smallest $k$ with $f(k, y_i) \ge x_i$,
-or $N+1$ when no such $k$ exists.
-:::
 
+the total weight in positions $1$ through $k$ after the first $y$ updates. The **answer** of query $i$ is the smallest $k$ with $f(k, y_i) \ge x_i$, or $N+1$ when no such $k$ exists.
+:::
 
 ::: math definition Definition
-A predicate $P$ on the positions is **monotone** if there is an index $k$
-such that $P(j)$ is false for every $j < k$ and true for every $j \ge k$.
-The predicate of query $i$ is $P_i(j) = [f(j, y_i) \ge x_i]$.
+A predicate $P$ on the positions is **monotone** if there is an index $k$ such that $P(j)$ is false for every $j < k$ and true for every $j \ge k$. The predicate of query $i$ is $P_i(j) = [f(j, y_i) \ge x_i]$.
 :::
-
 
 ::: math lemma Lemma
 The predicate $P_i$ is monotone in $j$.
 :::
 
-
 ::: math proof Proof
-Because every weight $w_j$ is non-negative, the prefix count
-$f(j, y_i)$ is non-decreasing in $j$: adding position $j+1$ adds a
-non-negative amount. Therefore the set $\{j : f(j, y_i) \ge x_i\}$ is a
-suffix of $\{1, \ldots, N\}$, which is exactly the definition of a
-monotone predicate. $\square$
+Because every weight $w_j$ is non-negative, the prefix count $f(j, y_i)$ is non-decreasing in $j$: adding position $j+1$ adds a non-negative amount. Therefore the set $\{j : f(j, y_i) \ge x_i\}$ is a suffix of $\{1, \ldots, N\}$, which is exactly the definition of a monotone predicate. $\square$
 :::
 
-
 ::: math lemma Lemma
-Let the answer of query $i$ be $k^\ast$, let $[lo, hi]$ be a range that
-contains $k^\ast$, and let $mid = \lfloor (lo + hi)/2 \rfloor$. Then:
+Let the answer of query $i$ be $k^\ast$, let $[lo, hi]$ be a range that contains $k^\ast$, and let $mid = \lfloor (lo + hi)/2 \rfloor$. Then:
 
 - if $P_i(mid)$ is true then $k^\ast \le mid$;
 - if $P_i(mid)$ is false then $k^\ast > mid$.
 :::
 
-
 ::: math proof Proof
-If $P_i(mid)$ is true, that is $f(mid, y_i) \ge x_i$, and the answer is
-the smallest position satisfying that inequality, so $k^\ast \le mid$.
+If $P_i(mid)$ is true, that is $f(mid, y_i) \ge x_i$, and the answer is the smallest position satisfying that inequality, so $k^\ast \le mid$.
 
 If $P_i(mid)$ is false, then $f(mid, y_i) < x_i$. Suppose $k^\ast \le mid$. Since $k^\ast$ is the smallest position with $f(k^\ast, y_i) \ge x_i$ and $f$ is non-decreasing, every position from $k^\ast$ to $mid$ also satisfies the inequality, in particular $f(mid, y_i) \ge x_i$, which is a contradiction. Therefore $k^\ast > mid$. $\square$
 :::
-
 
 ## Algorithm derivation
 
@@ -253,10 +239,8 @@ Note the second row of round 2. B and C share the same midpoint $3$ and the same
 The parallel binary search returns the correct answer for every query.
 :::
 
-
 ::: math proof Proof
-Maintain the invariant that the range $[lo_i, hi_i]$ of query $i$ contains
-its answer $k^\ast_i$.
+Maintain the invariant that the range $[lo_i, hi_i]$ of query $i$ contains its answer $k^\ast_i$.
 
 The invariant holds at the start, because the range of every query begins as $[1, N]$ and $k^\ast_i \in [1, N+1]$, with $N+1$ handled by an explicit check.
 
@@ -264,7 +248,6 @@ In a round, the midpoint $mid_i$ of query $i$'s range is computed, and the predi
 
 Every range shrinks by at least a factor of two each round, so after at most $\lceil \log_2 N \rceil$ rounds every non-empty range is a single point, and the lemma forces that point to be $k^\ast_i$. The query whose predicate is false at every position is reported as having no answer. $\square$
 :::
-
 
 ## Complexity analysis
 

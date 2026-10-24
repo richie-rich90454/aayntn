@@ -96,44 +96,28 @@ The second variant uses the structure of a depth-first search instead. Every dir
 Let $G = (V, E)$ be a directed graph.
 
 ::: math definition Definition
-A **topological order** of $G$ is a sequence $v_1, v_2, \ldots, v_{|V|}$
-of the vertices of $G$, each appearing exactly once, such that for every
-edge $(u, v) \in E$ the vertex $u$ appears before $v$ in the sequence.
+A **topological order** of $G$ is a sequence $v_1, v_2, \ldots, v_{|V|}$ of the vertices of $G$, each appearing exactly once, such that for every edge $(u, v) \in E$ the vertex $u$ appears before $v$ in the sequence.
 :::
-
 
 ::: math definition Definition
-A directed graph is **acyclic** if it contains no directed cycle. A
-**directed cycle** is a sequence of edges $v_0 \to v_1 \to \cdots \to v_k
-\to v_0$ with all the vertices distinct.
+A directed graph is **acyclic** if it contains no directed cycle. A **directed cycle** is a sequence of edges $v_0 \to v_1 \to \cdots \to v_k \to v_0$ with all the vertices distinct.
 :::
-
 
 ::: math definition Definition
-The **in-degree** of a vertex $v$ is the number of edges of $G$ that point
-into $v$. The in-degree of $v$ in the graph with a set $S$ of vertices
-removed is the number of its predecessors that are not in $S$.
+The **in-degree** of a vertex $v$ is the number of edges of $G$ that point into $v$. The in-degree of $v$ in the graph with a set $S$ of vertices removed is the number of its predecessors that are not in $S$.
 :::
-
 
 ::: math theorem Theorem
-A directed graph has a topological order if and only if it has no directed
-cycle.
+A directed graph has a topological order if and only if it has no directed cycle.
 :::
-
 
 ::: math lemma Lemma
 Every nonempty directed acyclic graph has a vertex of in-degree zero.
 :::
 
-
 ::: math lemma Lemma
-Let $v$ be a vertex of in-degree zero in a directed acyclic graph. The graph
-with $v$ removed is still acyclic, and every topological order of the
-remaining graph that is prefixed by $v$ is a topological order of the whole
-graph.
+Let $v$ be a vertex of in-degree zero in a directed acyclic graph. The graph with $v$ removed is still acyclic, and every topological order of the remaining graph that is prefixed by $v$ is a topological order of the whole graph.
 :::
-
 
 ## Algorithm derivation
 
@@ -148,14 +132,8 @@ The initialization is the other half: the in-degree of each vertex is the number
 The depth-first variant keeps three states per vertex instead of the in-degree array. A vertex is unvisited, active (on the current path) or finished. The algorithm pushes a vertex onto the output list when it finishes, and the answer is the output list reversed.
 
 ::: math invariant Invariant
-For Kahn's algorithm, at every moment the output list is a sequence in which
-every vertex appears after all of its predecessors that have been placed,
-and the queue holds exactly the unplaced vertices whose in-degree is zero.
-For the depth-first variant, the output list holds exactly the vertices
-that have finished, and every edge points from a later-finishing vertex to
-an earlier-finishing one, unless a cycle has been found.
+For Kahn's algorithm, at every moment the output list is a sequence in which every vertex appears after all of its predecessors that have been placed, and the queue holds exactly the unplaced vertices whose in-degree is zero. For the depth-first variant, the output list holds exactly the vertices that have finished, and every edge points from a later-finishing vertex to an earlier-finishing one, unless a cycle has been found.
 :::
-
 
 ## Step-by-step execution
 
@@ -190,45 +168,24 @@ The two variants detect the cycle in different ways and at different moments, bu
 ## Correctness proof
 
 ::: math theorem Theorem
-If Kahn's algorithm places every vertex, the resulting order is a
-topological order. If it places fewer than $|V|$ vertices, the graph
-contains a directed cycle.
+If Kahn's algorithm places every vertex, the resulting order is a topological order. If it places fewer than $|V|$ vertices, the graph contains a directed cycle.
 :::
 
-
 ::: math proof Proof
-The first claim is by induction on the length of the output list. The list
-is empty, so the claim holds. Suppose the list is a sequence in which every
-placed vertex appears after all of its predecessors that are placed, and let
-$v$ be the next vertex taken from the queue. The queue holds only the
-unplaced vertices whose in-degree, counting only the unplaced
-predecessors, is zero. Every predecessor of $v$ that is unplaced is counted
-in that in-degree, so the count being zero means that no unplaced vertex
-points into $v$. Every predecessor of $v$ has therefore already been
-placed, and appending $v$ preserves the claim.
+The first claim is by induction on the length of the output list. The list is empty, so the claim holds. Suppose the list is a sequence in which every placed vertex appears after all of its predecessors that are placed, and let $v$ be the next vertex taken from the queue. The queue holds only the unplaced vertices whose in-degree, counting only the unplaced predecessors, is zero. Every predecessor of $v$ that is unplaced is counted in that in-degree, so the count being zero means that no unplaced vertex points into $v$. Every predecessor of $v$ has therefore already been placed, and appending $v$ preserves the claim.
 
 For the second claim, suppose the queue becomes empty while some vertices remain unplaced. Every remaining vertex then has at least one incoming edge from another remaining vertex, because a vertex whose remaining in-degree is zero would have been enqueued when its last remaining predecessor was placed. Starting at any remaining vertex and following an incoming edge backwards never stops, and the graph is finite, so some vertex repeats. The repeated part of the walk is a directed cycle. $\square$
 :::
 
-
 ::: math theorem Theorem
-If the graph is acyclic, the reverse of the finish order of a depth-first
-search is a topological order.
+If the graph is acyclic, the reverse of the finish order of a depth-first search is a topological order.
 :::
 
-
 ::: math proof Proof
-Let $u \to v$ be an edge. Suppose, for a contradiction, that $u$ finished
-before $v$. The search starts at $u$ or reaches $u$ first, and it explores
-every vertex reachable from $u$ before it finishes $u$. The vertex $v$ is
-reachable from $u$ along the edge $u \to v$, so $v$ was visited before $u$
-finished, and it could not have finished before $u$ did, because a vertex
-finishes only after every vertex reachable from it has finished. So $v$
-finishes after $u$, which is a contradiction.
+Let $u \to v$ be an edge. Suppose, for a contradiction, that $u$ finished before $v$. The search starts at $u$ or reaches $u$ first, and it explores every vertex reachable from $u$ before it finishes $u$. The vertex $v$ is reachable from $u$ along the edge $u \to v$, so $v$ was visited before $u$ finished, and it could not have finished before $u$ did, because a vertex finishes only after every vertex reachable from it has finished. So $v$ finishes after $u$, which is a contradiction.
 
 Therefore, for every edge $u \to v$, the vertex $v$ finishes before $u$. Reversing the finish order therefore places $u$ before $v$ for every edge, which is the definition of a topological order. $\square$
 :::
-
 
 The second proof is the one that shows why the depth-first variant needs the three states. Without them, the search cannot tell "I have already been here" from "I am on the path in front of me", and the distinction is exactly what a cycle is.
 
@@ -239,12 +196,8 @@ The second proof is the one that shows why the depth-first variant needs the thr
 **Auxiliary space: $O(V)$.** The in-degree array and the state array hold one entry per vertex, and the queue holds at most one entry per vertex. The graph itself is $O(V + E)$.
 
 ::: math complexity Complexity
-Topological sort by Kahn's algorithm: time $O(V + E)$, auxiliary space
-$O(V)$ beyond the adjacency list. The depth-first variant has the same
-bounds, and the recursive depth-first variant additionally uses $O(V)$ of
-call stack.
+Topological sort by Kahn's algorithm: time $O(V + E)$, auxiliary space $O(V)$ beyond the adjacency list. The depth-first variant has the same bounds, and the recursive depth-first variant additionally uses $O(V)$ of call stack.
 :::
-
 
 Two practical warnings belong here. First, the depth-first variant needs the recursion depth to hold a path of the graph, which can be $V$ frames deep; the iterative form with an explicit stack is the safe one. Second, if the order must be lexicographically smallest, the queue becomes a min-heap and the running time becomes $O(V + E + V \log V)$.
 
@@ -279,17 +232,8 @@ The depth-first variant is the one that raises the question, and the answer is t
 The failure mode is a crash rather than a wrong answer: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
 ::: math counterexample Counterexample
-Consider a directed path on $10^6$ vertices, that is, the chain
-$0 \to 1 \to 2 \to \cdots \to 10^6 - 1$, and the depth-first variant of the
-topological sort. The graph is acyclic, the constraints are met, and the
-answer is the reverse of the chain. The recursive form makes $10^6$ nested
-calls, each with a frame holding a loop index and a pointer to the adjacency
-list. In C++ on Linux, with an 8 MB stack and a frame of roughly 64 bytes,
-the stack is exhausted after about $130\,000$ frames, so the program dies
-with a segmentation fault before it has visited $13\%$ of the graph. Kahn's
-algorithm handles the same graph with a queue and never touches the stack.
+Consider a directed path on $10^6$ vertices, that is, the chain $0 \to 1 \to 2 \to \cdots \to 10^6 - 1$, and the depth-first variant of the topological sort. The graph is acyclic, the constraints are met, and the answer is the reverse of the chain. The recursive form makes $10^6$ nested calls, each with a frame holding a loop index and a pointer to the adjacency list. In C++ on Linux, with an 8 MB stack and a frame of roughly 64 bytes, the stack is exhausted after about $130\,000$ frames, so the program dies with a segmentation fault before it has visited $13\%$ of the graph. Kahn's algorithm handles the same graph with a queue and never touches the stack.
 :::
-
 
 Kahn's algorithm has no recursive form at all, so it has no stack limit and no recursion decision to make. That is one more reason to prefer it in a contest.
 

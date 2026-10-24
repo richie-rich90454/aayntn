@@ -131,43 +131,30 @@ The third insight is that **the solution is the smallest non-negative residue of
 Let $m_1, \ldots, m_k$ be positive integers and $a_1, \ldots, a_k$ integers.
 
 ::: math definition Definition
-The moduli $m_1, \ldots, m_k$ are **pairwise coprime** when
-$\gcd(m_i, m_j) = 1$ for every $i \ne j$. The **system of congruences**
+The moduli $m_1, \ldots, m_k$ are **pairwise coprime** when $\gcd(m_i, m_j) = 1$ for every $i \ne j$. The **system of congruences**
+
 $$
 x \equiv a_i \pmod{m_i}, \qquad i = 1, \ldots, k,
 $$
-is **consistent** when it has at least one integer solution, and the
-**least non-negative solution** is the smallest solution in $\{0, 1, \ldots,
-M-1\}$ where $M = m_1 m_2 \cdots m_k$.
-:::
 
+is **consistent** when it has at least one integer solution, and the **least non-negative solution** is the smallest solution in $\{0, 1, \ldots, M-1\}$ where $M = m_1 m_2 \cdots m_k$.
+:::
 
 ::: math theorem Chinese remainder theorem
-If $m_1, \ldots, m_k$ are pairwise coprime, then the system of congruences
-$x \equiv a_i \pmod{m_i}$ has exactly one solution modulo $M = m_1 \cdots
-m_k$. The least non-negative solution is that unique residue.
+If $m_1, \ldots, m_k$ are pairwise coprime, then the system of congruences $x \equiv a_i \pmod{m_i}$ has exactly one solution modulo $M = m_1 \cdots m_k$. The least non-negative solution is that unique residue.
 :::
 
-
 ::: math proof Proof
-The proof is by induction on the number of congruences, and the inductive
-step is the merge.
+The proof is by induction on the number of congruences, and the inductive step is the merge.
 
 The case $k = 1$ is immediate: every integer congruent to $a_1$ modulo $m_1$ is a solution, so the solutions form one residue class modulo $m_1$.
 
 Suppose the first $k-1$ congruences have the unique solution class $x \equiv x_0 \pmod{M'}$ with $M' = m_1 \cdots m_{k-1}$. Any solution of the whole system satisfies $x \equiv x_0 \pmod{M'}$ and $x \equiv a_k \pmod {m_k}$, so $x = x_0 + M't$ for some integer $t$. Substituting into the last congruence gives $M' t \equiv a_k - x_0 \pmod{m_k}$. Since $\gcd(M', m_k) = 1$, which follows from the pairwise coprimality of the moduli, the inverse of $M'$ modulo $m_k$ exists, and $t \equiv (a_k - x_0)(M')^{-1} \pmod{m_k}$ has exactly one solution modulo $m_k$. Therefore $x$ is fixed modulo $M' m_k = M$, and the merged congruence $x \equiv x_0 + M't \pmod M$ describes the solution set completely. $\square$
 :::
 
-
 ::: math invariant Invariant
-After the merge of the first $j$ congruences, the program holds a pair
-$(x_j, M_j)$ with $M_j = m_1 \cdots m_j$ such that the solutions of the
-first $j$ congruences are exactly the integers congruent to $x_j$ modulo
-$M_j$. The initialization holds with $M_1 = m_1$ and $x_1 = a_1$. The merge
-preserves it by the argument in the theorem, and the loop ends with
-$(x_k, M_k)$ describing the whole system.
+After the merge of the first $j$ congruences, the program holds a pair $(x_j, M_j)$ with $M_j = m_1 \cdots m_j$ such that the solutions of the first $j$ congruences are exactly the integers congruent to $x_j$ modulo $M_j$. The initialization holds with $M_1 = m_1$ and $x_1 = a_1$. The merge preserves it by the argument in the theorem, and the loop ends with $(x_k, M_k)$ describing the whole system.
 :::
-
 
 ## Algorithm derivation
 
@@ -235,27 +222,16 @@ and $x = 17 + 35 \cdot 1 = 52$. The merged congruence is $x \equiv 52 \pmod {105
 ## Correctness proof
 
 ::: math theorem Theorem
-The merge of two congruences with coprime moduli returns a pair $(x', m')$
-such that the solutions of the two congruences are exactly the integers
-congruent to $x'$ modulo $m'$, where $m' = mn$ and $0 \le x' < m'$. The
-fold over the congruences therefore returns the least non-negative solution
-of the whole system together with the product of the moduli.
+The merge of two congruences with coprime moduli returns a pair $(x', m')$ such that the solutions of the two congruences are exactly the integers congruent to $x'$ modulo $m'$, where $m' = mn$ and $0 \le x' < m'$. The fold over the congruences therefore returns the least non-negative solution of the whole system together with the product of the moduli.
 :::
 
-
 ::: math proof Proof
-**The merge.** Let $t$ be the value computed by the merge, so that
-$t \equiv (b-a)p \pmod n$ where $p$ is the inverse of $m$ modulo $n$. Then
-$mp \equiv 1 \pmod n$, and therefore
-$mt \equiv m(b-a)p \equiv b - a \pmod n$. With $x' = a + mt$ this gives
-$x' \equiv a \pmod m$ by construction, and $x' \equiv a + (b-a) = b \pmod
-n$, so $x'$ satisfies both congruences.
+**The merge.** Let $t$ be the value computed by the merge, so that $t \equiv (b-a)p \pmod n$ where $p$ is the inverse of $m$ modulo $n$. Then $mp \equiv 1 \pmod n$, and therefore $mt \equiv m(b-a)p \equiv b - a \pmod n$. With $x' = a + mt$ this gives $x' \equiv a \pmod m$ by construction, and $x' \equiv a + (b-a) = b \pmod n$, so $x'$ satisfies both congruences.
 
 Now let $x$ be any common solution. Then $x = a + ms$ for some integer $s$, and the second congruence gives $ms \equiv b - a \pmod n$. Multiplying by $p$ gives $s \equiv t \pmod n$, so $s = t + kn$ and $x = a + mt + kmn = x' + kmn$. Every common solution is therefore congruent to $x'$ modulo $mn$, and $x'$ itself is one, so the solution set is exactly that residue class. Because $0 \le a < m$ and $0 \le t < n$, we have $0 \le x' < mn$.
 
 **The fold.** The invariant states that after the merge of the first $j$ congruences, the pair $(x_j, M_j)$ describes their solution set exactly. The base case holds because the solutions of $x \equiv a_1 \pmod{m_1}$ are the integers congruent to $a_1$ modulo $m_1$. Each merge preserves the invariant by the argument above, using the pairwise coprimality to justify the existence of the inverse. At the end of the fold, the pair $(x_k, M_k)$ describes the whole system, and $0 \le x_k < M_k$, so $x_k$ is the least non-negative solution. $\square$
 :::
-
 
 ## Complexity analysis
 

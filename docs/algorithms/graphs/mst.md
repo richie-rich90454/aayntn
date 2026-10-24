@@ -111,21 +111,17 @@ Let $G = (V, E)$ be a connected undirected graph with a weight function $w : E \
 A **spanning tree** of $G$ is a pair $(V, F)$ with $F \subseteq E$ such that the graph $(V, F)$ is connected and contains no cycle. Equivalently, $F$ has exactly $|V| - 1$ edges and every pair of vertices is joined by a path in $(V, F)$.
 :::
 
-
 ::: math definition Definition
 The **total weight** of an edge set $F$ is $w(F) = \sum_{e \in F} w(e)$. A **minimum spanning tree** of $G$ is a spanning tree $(V, F)$ whose total weight $w(F)$ is as small as possible among all spanning trees of $G$.
 :::
-
 
 ::: math definition Definition
 A **cut** of $G$ is a partition of $V$ into two nonempty sets $S$ and $V \setminus S$. An edge **crosses** the cut when one of its endpoints lies in $S$ and the other lies in $V \setminus S$.
 :::
 
-
 ::: math lemma Lemma (the cut property)
 Let $(S, V \setminus S)$ be any cut of a connected graph $G$, and let $e$ be an edge of minimum weight among the edges that cross the cut. Then there is a minimum spanning tree of $G$ that contains $e$.
 :::
-
 
 ::: math proof Proof
 Let $T$ be a minimum spanning tree of $G$, and let $F_T$ be its edge set. If $e$ belongs to $T$, the claim already holds.
@@ -140,7 +136,6 @@ $$
 
 Since $T$ was a minimum spanning tree, no spanning tree has a smaller total weight, so $w(T') = w(T)$ and $T'$ is a minimum spanning tree as well. It contains $e$, which proves the claim. $\square$
 :::
-
 
 The exchange argument in that proof is the whole algorithm in miniature: take the edge you want, find an edge of comparable or greater weight that it can replace, and swap them.
 
@@ -171,7 +166,6 @@ Why that cut is the right one is the part worth understanding. When the edge $e 
 At every moment of Kruskal's algorithm, the accepted edges form a forest, and there is a minimum spanning tree of $G$ that contains every one of them. The same exchange argument, run inside the subgraph of the edges examined so far, gives the stronger statement that the accepted edges are a minimum spanning forest of that subgraph.
 :::
 
-
 ### Prim's algorithm
 
 The state is a set $S$ of reached vertices, starting from one vertex $r$, together with a min-priority queue of candidate edges crossing the cut $(S, V \setminus S)$.
@@ -196,7 +190,6 @@ The reason a priority queue works is that the cut changes by exactly one vertex 
 ::: math invariant Invariant
 At every moment of Prim's algorithm, the accepted edges form a tree on the vertex set $S$, and there is a minimum spanning tree of $G$ that contains every one of them. The priority queue holds an entry for every edge crossing the cut $(S, V \setminus S)$, together with stale entries for edges that have become internal.
 :::
-
 
 ## Step-by-step execution
 
@@ -259,7 +252,6 @@ The proof needs one more fact, which is the safe edge version of the cut propert
 Let $F$ be a set of edges of a connected graph $G$, and suppose some minimum spanning tree $T$ contains $F$. Let $e \notin T$ be an edge such that $e$ closes no cycle with $F$, and such that $e$ has minimum weight among the edges crossing some cut that no edge of $F$ crosses. Then there is a minimum spanning tree $T'$ with $F \cup \{e\} \subseteq T'$.
 :::
 
-
 ::: math proof Proof
 Let $(S, V \setminus S)$ be the cut from the hypothesis, and let $u$ and $v$ be the endpoints of $e$, with $u \in S$ and $v \notin S$.
 
@@ -274,11 +266,9 @@ $$
 Since $T$ was a minimum spanning tree, $T'$ is one too. $\square$
 :::
 
-
 ::: math theorem Theorem
 Kruskal's algorithm returns a minimum spanning tree of a connected graph $G$.
 :::
-
 
 ::: math proof Proof
 The invariant is the one stated in the algorithm derivation: the accepted edges form a forest, and there is a minimum spanning tree of $G$ that contains every one of them. We prove it by induction on the number of accepted edges.
@@ -293,7 +283,6 @@ Therefore $e$ is a lightest edge across the cut, and no edge of $F$ crosses the 
 
 The algorithm ends with $|V| - 1$ accepted edges. A forest on $|V|$ vertices with $|V| - 1$ edges is connected, so the accepted edges form a spanning tree. By the invariant they are contained in a minimum spanning tree, and two spanning trees of the same graph with the same number of edges are the same edge set, so the accepted edges are a minimum spanning tree. $\square$
 :::
-
 
 Prim's algorithm has the same proof with one substitution. The cut is the boundary of the region $S$ instead of the boundary of one component, and the extracted edge is the cheapest of all the edges across that cut by construction, so the safe edge lemma applies with the same conclusion.
 
@@ -314,13 +303,8 @@ For a simple graph, that is, one with at most one edge between each pair of vert
 Kruskal also needs the graph as an **edge list** rather than an adjacency list, because it sorts edges. The [graph representation](/algorithms/graphs/representation) article covers the difference between the two and why the edge list is the natural input for this algorithm.
 
 ::: math complexity Complexity
-Kruskal's algorithm with a comparison sort: time $O(E \log E)$, auxiliary space
-$O(V + E)$. With a bucket or radix sort over a weight range of size
-$W$: time $O(E + W)$. Prim's algorithm with a binary heap: time
-$O(E \log V)$, auxiliary space $O(V + E)$. Prim's algorithm with an array:
-time $O(V^2 + E)$, auxiliary space $O(V)$ beyond the graph.
+Kruskal's algorithm with a comparison sort: time $O(E \log E)$, auxiliary space $O(V + E)$. With a bucket or radix sort over a weight range of size $W$: time $O(E + W)$. Prim's algorithm with a binary heap: time $O(E \log V)$, auxiliary space $O(V + E)$. Prim's algorithm with an array: time $O(V^2 + E)$, auxiliary space $O(V)$ beyond the graph.
 :::
-
 
 ## Algorithm selection
 

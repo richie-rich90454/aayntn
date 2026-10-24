@@ -128,53 +128,28 @@ Three consequences follow.
 The third consequence is what makes the technique feel airtight rather than lucky. There is no heuristic about which split is promising, and no reason to prefer a particular one. The recurrence tries all of them, and the proof says that is sufficient.
 
 ::: math invariant Invariant
-At the moment the program computes $dp[i][j]$, every $dp[i][k]$ with
-$i \le k < j$ and every $dp[k+1][j]$ with $i \le k < j$ already holds its
-final value, because both have a smaller length. Every value stored in the
-table is the cost of an actual construction on its range, and the table
-entry is the minimum over all such constructions.
+At the moment the program computes $dp[i][j]$, every $dp[i][k]$ with $i \le k < j$ and every $dp[k+1][j]$ with $i \le k < j$ already holds its final value, because both have a smaller length. Every value stored in the table is the cost of an actual construction on its range, and the table entry is the minimum over all such constructions.
 :::
-
 
 ## Formal model
 
 Let $a_1, a_2, \ldots, a_n$ be the sequence, and let $C(i, j)$ be the cost of performing the final operation on the range $[i, j]$ when the range has been split at $k$, where the final operation merges the block $[i, k]$ with the block $[k+1, j]$.
 
 ::: math definition Definition
-The **optimal cost** $D(i, j)$ of a range $[i, j]$ is the minimum, over all
-constructions on that range, of the total cost of the construction. A
-construction is a sequence of final operations, each of which joins two
-adjacent blocks.
+The **optimal cost** $D(i, j)$ of a range $[i, j]$ is the minimum, over all constructions on that range, of the total cost of the construction. A construction is a sequence of final operations, each of which joins two adjacent blocks.
 :::
-
 
 ::: math definition Definition
-A **split** of the range $[i, j]$ is an index $k$ with $i \le k < j$. The
-split separates the range into the left block $[i, k]$ and the right block
-$[k+1, j]$.
+A **split** of the range $[i, j]$ is an index $k$ with $i \le k < j$. The split separates the range into the left block $[i, k]$ and the right block $[k+1, j]$.
 :::
-
 
 ::: math lemma Lemma
-Every construction on a range $[i, j]$ with $i < j$ has a last operation
-that joins two adjacent blocks $[i, k]$ and $[k+1, j]$ for some split $k$,
-and the cost of the construction is the cost of the construction on the
-left block, plus the cost of the construction on the right block, plus
-$C(i, k, j)$.
+Every construction on a range $[i, j]$ with $i < j$ has a last operation that joins two adjacent blocks $[i, k]$ and $[k+1, j]$ for some split $k$, and the cost of the construction is the cost of the construction on the left block, plus the cost of the construction on the right block, plus $C(i, k, j)$.
 :::
-
 
 ::: math proof Proof
-The last operation of the construction joins two blocks, and the blocks
-must be adjacent and must together cover the range, because the last
-operation is the only one that remains and the range was produced by the
-earlier operations. Write the two blocks as $[i, k]$ and $[k+1, j]$ for
-some $k$. The earlier operations split into the operations that built the
-left block and the operations that built the right block, and their costs
-add to the cost of the construction, because every operation of the
-construction is charged exactly once. $\square$
+The last operation of the construction joins two blocks, and the blocks must be adjacent and must together cover the range, because the last operation is the only one that remains and the range was produced by the earlier operations. Write the two blocks as $[i, k]$ and $[k+1, j]$ for some $k$. The earlier operations split into the operations that built the left block and the operations that built the right block, and their costs add to the cost of the construction, because every operation of the construction is charged exactly once. $\square$
 :::
-
 
 ::: math recurrence Recurrence
 $$
@@ -183,24 +158,13 @@ D(i, j) = \min_{i \le k < j} \bigl(D(i, k) + D(k+1, j) + C(i, k, j)\bigr),
 $$
 :::
 
-
 ::: math lemma Lemma
-The splits of $[i, j]$ are exhaustive: for every construction on the range,
-one of the splits in the recurrence produces a cost no larger than the cost
-of that construction.
+The splits of $[i, j]$ are exhaustive: for every construction on the range, one of the splits in the recurrence produces a cost no larger than the cost of that construction.
 :::
-
 
 ::: math proof Proof
-Take any construction on $[i, j]$ and let $k$ be the split of its last
-operation, which exists by the previous lemma. The construction's cost is
-$D(i,k) + D(k+1,j) + C(i,k,j)$ with the two $D$ values replaced by the
-costs of its own sub-constructions, and those costs are at least $D(i,k)$
-and $D(k+1,j)$ by the definition of $D$. So the construction's cost is at
-least the value of the term of the recurrence at $k$, and therefore at
-least the minimum over all $k$. $\square$
+Take any construction on $[i, j]$ and let $k$ be the split of its last operation, which exists by the previous lemma. The construction's cost is $D(i,k) + D(k+1,j) + C(i,k,j)$ with the two $D$ values replaced by the costs of its own sub-constructions, and those costs are at least $D(i,k)$ and $D(k+1,j)$ by the definition of $D$. So the construction's cost is at least the value of the term of the recurrence at $k$, and therefore at least the minimum over all $k$. $\square$
 :::
-
 
 ## Algorithm derivation
 
@@ -279,10 +243,8 @@ The last row is the interesting one. The split $k = 3$ is the last split tried, 
 ## Correctness proof
 
 ::: math theorem Theorem
-For every range $[i, j]$, the table entry $D(i, j)$ computed by the
-algorithm is the cost of the cheapest construction on that range.
+For every range $[i, j]$, the table entry $D(i, j)$ computed by the algorithm is the cost of the cheapest construction on that range.
 :::
-
 
 ::: math proof Proof
 The proof is an induction on the length of the range.
@@ -298,21 +260,13 @@ Second, take any construction on $[i, j]$. By the last-move lemma, its last oper
 So $D(i,j)$ is at most the cost of every construction and at least the cost of one, and it is the optimal cost. $\square$
 :::
 
-
 ::: math theorem Theorem
-The algorithm computes the table correctly, because every state it reads
-has already been computed.
+The algorithm computes the table correctly, because every state it reads has already been computed.
 :::
-
 
 ::: math proof Proof
-The state $D(i,j)$ reads $D(i,k)$ and $D(k+1,j)$, whose lengths are
-$k - i + 1$ and $j - k$, and both are strictly less than $j - i + 1$
-because $i \le k < j$. The outer loop of the algorithm processes the
-lengths in increasing order, so both states have been computed and will
-not be changed again. $\square$
+The state $D(i,j)$ reads $D(i,k)$ and $D(k+1,j)$, whose lengths are $k - i + 1$ and $j - k$, and both are strictly less than $j - i + 1$ because $i \le k < j$. The outer loop of the algorithm processes the lengths in increasing order, so both states have been computed and will not be changed again. $\square$
 :::
-
 
 ## Complexity analysis
 

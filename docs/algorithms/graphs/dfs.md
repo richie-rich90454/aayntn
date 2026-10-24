@@ -123,50 +123,28 @@ The narration states what just changed at each step, and it is worth reading it 
 Let $G = (V, E)$ be a graph and $s \in V$ the start vertex.
 
 ::: math definition Definition
-A **traversal** of $G$ from $s$ is a sequence $v_0 = s, v_1, \ldots, v_{k-1}$
-of distinct vertices of $G$ such that $v_i$ and $v_{i+1}$ are joined by an
-edge for every $0 \le i < k - 1$. The traversal is **complete** if every
-vertex of $G$ reachable from $s$ appears in the sequence.
+A **traversal** of $G$ from $s$ is a sequence $v_0 = s, v_1, \ldots, v_{k-1}$ of distinct vertices of $G$ such that $v_i$ and $v_{i+1}$ are joined by an edge for every $0 \le i < k - 1$. The traversal is **complete** if every vertex of $G$ reachable from $s$ appears in the sequence.
 :::
-
 
 ::: math definition Definition
-A traversal is **depth-first** if the vertices that have been discovered but
-not yet expanded are held in a last-in, first-out stack, so that the vertex
-most recently discovered is always the next one expanded.
+A traversal is **depth-first** if the vertices that have been discovered but not yet expanded are held in a last-in, first-out stack, so that the vertex most recently discovered is always the next one expanded.
 :::
-
 
 ::: math definition Definition
-The **parent** of a vertex $v \ne s$ is the vertex from which $v$ was first
-discovered. The parent relation is a forest: every vertex has at most one
-parent, and following parent pointers from any vertex ends at $s$. It is
-called the **DFS forest** of the search.
+The **parent** of a vertex $v \ne s$ is the vertex from which $v$ was first discovered. The parent relation is a forest: every vertex has at most one parent, and following parent pointers from any vertex ends at $s$. It is called the **DFS forest** of the search.
 :::
-
 
 ::: math definition Definition
-The **state** of a vertex during the search is one of three values:
-*unvisited*, if it has not been discovered; *active*, if it has been
-discovered and its neighbors are still being examined; and *finished*, if it
-has been discovered and every one of its neighbors has been examined.
+The **state** of a vertex during the search is one of three values: _unvisited_, if it has not been discovered; _active_, if it has been discovered and its neighbors are still being examined; and _finished_, if it has been discovered and every one of its neighbors has been examined.
 :::
-
 
 ::: math lemma Lemma
-Let $u$ be an active vertex and let $v$ be a neighbor of $u$ that is also
-active. Then the DFS forest contains a path from $v$ to $u$, so the
-directed graph has a cycle. In an undirected graph, every non-tree edge is
-such an edge.
+Let $u$ be an active vertex and let $v$ be a neighbor of $u$ that is also active. Then the DFS forest contains a path from $v$ to $u$, so the directed graph has a cycle. In an undirected graph, every non-tree edge is such an edge.
 :::
-
 
 ::: math lemma Lemma
-In an undirected graph, the DFS forest of a search from $s$ has exactly the
-connected component of $s$ as its vertex set, and every vertex of the
-component other than $s$ has a parent inside the component.
+In an undirected graph, the DFS forest of a search from $s$ has exactly the connected component of $s$ as its vertex set, and every vertex of the component other than $s$ has a parent inside the component.
 :::
-
 
 ## Algorithm derivation
 
@@ -187,11 +165,8 @@ This form reproduces the recursive visit order exactly, because the stack of pen
 This form keeps at most one entry per vertex on the stack, so the stack holds $O(V)$ entries. Its visit order differs from the recursive form, because the neighbors are expanded in the reverse of the order in which they were discovered rather than in the order of the recursive descent.
 
 ::: math invariant Invariant
-At every moment of the iterative search, the set of marked vertices is
-exactly a set of vertices reachable from $s$ in the graph, and the stack
-holds only marked or unmarked vertices of that same reachable set.
+At every moment of the iterative search, the set of marked vertices is exactly a set of vertices reachable from $s$ in the graph, and the stack holds only marked or unmarked vertices of that same reachable set.
 :::
-
 
 ## Step-by-step execution
 
@@ -214,46 +189,24 @@ The recursive search from $0$ visits $0, 1, 3, 2, 4$ instead. The two orders dif
 ## Correctness proof
 
 ::: math theorem Theorem
-The iterative search marks exactly the vertices of $G$ that are reachable
-from $s$, and it terminates.
+The iterative search marks exactly the vertices of $G$ that are reachable from $s$, and it terminates.
 :::
 
-
 ::: math proof Proof
-First, every marked vertex is reachable. The proof is by induction on the
-number of marking operations. The first marked vertex is $s$, which is
-reachable from itself. Suppose the marked vertex is $v$, and $v$ is
-reachable from $s$ by a path. A neighbor $w$ of $v$ that becomes marked
-later is reachable from $s$ by that path followed by the edge $\{v, w\}$.
-So every marked vertex is reachable from $s$.
+First, every marked vertex is reachable. The proof is by induction on the number of marking operations. The first marked vertex is $s$, which is reachable from itself. Suppose the marked vertex is $v$, and $v$ is reachable from $s$ by a path. A neighbor $w$ of $v$ that becomes marked later is reachable from $s$ by that path followed by the edge $\{v, w\}$. So every marked vertex is reachable from $s$.
 
 Second, every reachable vertex is marked. Let $w$ be any vertex reachable from $s$, and let $s = u_0, u_1, \ldots, u_k = w$ be a simple path from $s$ to $w$ in $G$. We show that each $u_i$ is eventually marked. Suppose $u_0, \ldots, u_{i-1}$ are marked. When $u_{i-1}$ is expanded, its neighbor $u_i$ is examined. If $u_i$ is already marked there is nothing to prove. Otherwise $u_i$ is unmarked at that moment, so either it is pushed onto the stack, or it was already pushed earlier. In both cases $u_i$ sits on the stack, so it is eventually popped, and a pop of an unmarked vertex marks it. Hence $u_i$ is marked, and by induction $w$ is marked.
 
 Finally, the search terminates. Each pop either marks a previously unmarked vertex or discards an already marked one. There are at most $n$ marking pops, and the total number of pushes is at most one for the start vertex plus one for each edge end examined, so at most $1 + 2m$ pushes. Each pop consumes one push, so the loop runs at most $1 + 2m$ times and the stack empties. $\square$
 :::
 
-
 ::: math proof Proof
-The recursive search marks exactly the same set of vertices as the iterative
-search, and produces the same DFS forest.
+The recursive search marks exactly the same set of vertices as the iterative search, and produces the same DFS forest.
 :::
 
-
 ::: math proof Proof
-The two searches differ only in where the pending vertices are held: in the
-call stack for the recursive form, and in an explicit stack for the
-iterative form. In the recursive form, the call for vertex $v$ is made at
-the moment $v$ is expanded, and the neighbors of $v$ are examined in the
-order they appear in the adjacency list; in the iterative form, $v$ is
-expanded when it is popped, and the same neighbors are pushed in the same
-order and popped in the reverse order. Since the stack is last-in,
-first-out in both cases, the sequence of expanded vertices is the same
-sequence, and each expansion examines the same neighbors in the same
-order. The marked set and the parent relation are therefore identical. The
-correctness of the iterative search above then applies to the recursive
-search as well. $\square$
+The two searches differ only in where the pending vertices are held: in the call stack for the recursive form, and in an explicit stack for the iterative form. In the recursive form, the call for vertex $v$ is made at the moment $v$ is expanded, and the neighbors of $v$ are examined in the order they appear in the adjacency list; in the iterative form, $v$ is expanded when it is popped, and the same neighbors are pushed in the same order and popped in the reverse order. Since the stack is last-in, first-out in both cases, the sequence of expanded vertices is the same sequence, and each expansion examines the same neighbors in the same order. The marked set and the parent relation are therefore identical. The correctness of the iterative search above then applies to the recursive search as well. $\square$
 :::
-
 
 ## Complexity analysis
 
@@ -266,13 +219,8 @@ The bounds below describe the two variants in this article's implementations, an
 **Auxiliary space: $O(V)$ for the recursive variant.** The visited array holds $V$ entries, and the call stack holds at most one frame per vertex on the current path, which is at most $V$ frames. The marking happens on entry to the call, so no vertex is ever entered twice, and the space does not depend on the number of edges at all.
 
 ::: math complexity Complexity
-Iterative depth-first search that marks on pop: time $O(V + E)$,
-auxiliary space $O(V + E)$. Recursive depth-first search that marks on
-entry: time $O(V + E)$, auxiliary space $O(V)$. Marking on push makes the
-iterative form use $O(V)$ auxiliary space as well, at the price of a
-different visit order.
+Iterative depth-first search that marks on pop: time $O(V + E)$, auxiliary space $O(V + E)$. Recursive depth-first search that marks on entry: time $O(V + E)$, auxiliary space $O(V)$. Marking on push makes the iterative form use $O(V)$ auxiliary space as well, at the price of a different visit order.
 :::
-
 
 ## Algorithm selection
 
@@ -312,19 +260,8 @@ The recursive form is the one to learn, because it is the shortest and because i
 The failure mode is not a wrong answer. It is a crash: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
 ::: math counterexample Counterexample
-Consider a path graph on $10^6$ vertices, that is, a chain
-$0 - 1 - 2 - \cdots - 10^6 - 1$, and a search that starts at vertex $0$.
-Every vertex is reachable, so the answer is $10^6$, and the traversal is
-trivially correct. The recursive form, however, makes $10^6$ nested calls,
-each with a frame holding a loop index and a pointer to the adjacency
-list. In C++ on Linux, with an 8 MB stack and a frame of roughly 64 bytes,
-the stack is exhausted after about $130\,000$ frames, so the program dies
-with a segmentation fault before it has visited $13\%$ of the graph. The
-iterative form traverses the same chain with a heap-allocated stack and
-finishes normally. The graph is legal, the input constraints are met, and
-the answer is well defined; only the choice of implementation is wrong.
+Consider a path graph on $10^6$ vertices, that is, a chain $0 - 1 - 2 - \cdots - 10^6 - 1$, and a search that starts at vertex $0$. Every vertex is reachable, so the answer is $10^6$, and the traversal is trivially correct. The recursive form, however, makes $10^6$ nested calls, each with a frame holding a loop index and a pointer to the adjacency list. In C++ on Linux, with an 8 MB stack and a frame of roughly 64 bytes, the stack is exhausted after about $130\,000$ frames, so the program dies with a segmentation fault before it has visited $13\%$ of the graph. The iterative form traverses the same chain with a heap-allocated stack and finishes normally. The graph is legal, the input constraints are met, and the answer is well defined; only the choice of implementation is wrong.
 :::
-
 
 The rule of thumb is simple: if $V$ can be as large as $10^5$ or more, write the iterative form. It is four lines longer and it cannot fail.
 

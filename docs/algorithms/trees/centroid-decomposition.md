@@ -137,55 +137,32 @@ The histogram of depths therefore counts both kinds of pairs, and the correction
 Let $T$ be a tree with vertex set $V$, and let $M \subseteq V$ be the set of occupied vertices.
 
 ::: math definition Definition
-A vertex $c$ of a tree $T$ is a **centroid** of $T$ if every connected
-component of $T - c$ contains at most $\lvert T \rvert / 2$ vertices. The
-pieces of $T - c$ are called the **branches** of $c$, and the vertex $c$
-itself forms a branch of size one.
+A vertex $c$ of a tree $T$ is a **centroid** of $T$ if every connected component of $T - c$ contains at most $\lvert T \rvert / 2$ vertices. The pieces of $T - c$ are called the **branches** of $c$, and the vertex $c$ itself forms a branch of size one.
 :::
-
 
 ::: math definition Definition
-The **depth histogram** of a branch $B$ with respect to a vertex $c$ is the
-array $\text{cnt}[d]$ whose entry $d$ is the number of vertices of $B$ at
-distance exactly $d$ from $c$.
+The **depth histogram** of a branch $B$ with respect to a vertex $c$ is the array $\text{cnt}[d]$ whose entry $d$ is the number of vertices of $B$ at distance exactly $d$ from $c$.
 :::
-
 
 ::: math definition Definition
-The **histogram pair count** of a histogram $\text{cnt}$ for a target $k$ is
-the number of unordered pairs of distinct occupied vertices whose two depths
-sum to $k$. When the two depths differ, it contributes
-$\text{cnt}[i] \cdot \text{cnt}[j]$; when they are equal, it contributes
-$\binom{\text{cnt}[i]}{2}$.
+The **histogram pair count** of a histogram $\text{cnt}$ for a target $k$ is the number of unordered pairs of distinct occupied vertices whose two depths sum to $k$. When the two depths differ, it contributes $\text{cnt}[i] \cdot \text{cnt}[j]$; when they are equal, it contributes $\binom{\text{cnt}[i]}{2}$.
 :::
-
 
 ::: math lemma Lemma (the centroid exists)
 Every tree with at least one vertex has a centroid.
 :::
 
-
 ::: math lemma Lemma (the size bound)
-If $c$ is a centroid of $T$, then every branch of $c$ contains at most
-$\lvert T \rvert / 2$ vertices. Therefore a centroid decomposition of a tree
-with $n$ vertices has depth at most $\lfloor \log_2 n \rfloor + 1$.
+If $c$ is a centroid of $T$, then every branch of $c$ contains at most $\lvert T \rvert / 2$ vertices. Therefore a centroid decomposition of a tree with $n$ vertices has depth at most $\lfloor \log_2 n \rfloor + 1$.
 :::
-
 
 ::: math lemma Lemma (the path through the centroid)
-Let $a$ and $b$ be vertices of $T$ that do not lie in the same branch of the
-centroid $c$. Then
-$\operatorname{dist}(a, b) = d(a) + d(b)$, where $d(u)$ is the distance from
-$c$ to $u$.
+Let $a$ and $b$ be vertices of $T$ that do not lie in the same branch of the centroid $c$. Then $\operatorname{dist}(a, b) = d(a) + d(b)$, where $d(u)$ is the distance from $c$ to $u$.
 :::
-
 
 ::: math lemma Lemma (the overcount)
-Let $a$ and $b$ lie in the same branch of $c$, whose root is $r$. Then
-$\operatorname{dist}(a, b) = d(a) + d(b) - 2d(r)$, so
-$\operatorname{dist}(a, b) < d(a) + d(b)$.
+Let $a$ and $b$ lie in the same branch of $c$, whose root is $r$. Then $\operatorname{dist}(a, b) = d(a) + d(b) - 2d(r)$, so $\operatorname{dist}(a, b) < d(a) + d(b)$.
 :::
-
 
 ## Algorithm derivation
 
@@ -230,19 +207,12 @@ The subtraction is correct by the overcount lemma: a pair inside one branch is c
 The recursion then counts the pairs that lie entirely inside a branch, and by induction it counts exactly those whose distance is $k$.
 
 ::: math invariant Invariant
-At every moment of the recursion, the pairs that the histogram counted and
-that have not been subtracted lie in different branches of the current
-centroid, and for such a pair the histogram condition
-$d(a) + d(b) = k$ is equivalent to $\operatorname{dist}(a, b) = k$.
+At every moment of the recursion, the pairs that the histogram counted and that have not been subtracted lie in different branches of the current centroid, and for such a pair the histogram condition $d(a) + d(b) = k$ is equivalent to $\operatorname{dist}(a, b) = k$.
 :::
-
 
 ::: math invariant Invariant
-Every ordered pair of occupied vertices is considered at exactly one level of
-the recursion: at the level of the first centroid that separates the two
-vertices into different branches.
+Every ordered pair of occupied vertices is considered at exactly one level of the recursion: at the level of the first centroid that separates the two vertices into different branches.
 :::
-
 
 ## Step-by-step execution
 
@@ -274,14 +244,11 @@ Now the same tree with $k = 1$ instead.
 ## Correctness proof
 
 ::: math theorem Theorem
-The algorithm returns the number of unordered pairs of occupied vertices whose
-distance is exactly $k$.
+The algorithm returns the number of unordered pairs of occupied vertices whose distance is exactly $k$.
 :::
 
-
 ::: math proof Proof
-We prove by induction on the size of the piece that `solve(piece)` returns
-the correct count for that piece.
+We prove by induction on the size of the piece that `solve(piece)` returns the correct count for that piece.
 
 The base case is a piece with fewer than two vertices, which contains no pair at all, and the algorithm returns zero.
 
@@ -296,22 +263,13 @@ The third kind is the pairs that lie entirely inside a single branch. They are c
 Every pair belongs to exactly one of the three kinds, and the kinds are disjoint, so the total returned by the algorithm is exactly the number of pairs at distance $k$. $\square$
 :::
 
-
 ::: math theorem Theorem
 The decomposition visits every vertex $O(\log n)$ times.
 :::
 
-
 ::: math proof Proof
-By the size bound lemma, every branch of a centroid has at most half as many
-vertices as its parent. Hence a vertex at depth $t$ of the decomposition
-belongs to a piece of at most $n / 2^t$ vertices, so it can be at depth at
-most $\lfloor \log_2 n \rfloor$. Each level of the decomposition processes
-every vertex of that level exactly once, so each vertex is processed at most
-$\lfloor \log_2 n \rfloor + 1$ times, and the total work is
-$O(n \log n)$. $\square$
+By the size bound lemma, every branch of a centroid has at most half as many vertices as its parent. Hence a vertex at depth $t$ of the decomposition belongs to a piece of at most $n / 2^t$ vertices, so it can be at depth at most $\lfloor \log_2 n \rfloor$. Each level of the decomposition processes every vertex of that level exactly once, so each vertex is processed at most $\lfloor \log_2 n \rfloor + 1$ times, and the total work is $O(n \log n)$. $\square$
 :::
-
 
 ## Complexity analysis
 
@@ -322,10 +280,8 @@ $O(n \log n)$. $\square$
 **Auxiliary space: $O(n)$.** The recursion has depth $O(\log n)$, and the piece sizes along the recursion path are at most $n, n/2, n/4, \ldots$, so the space held by the recursion is a geometric series that sums to $O(n)$.
 
 ::: math complexity Complexity
-Centroid decomposition of a tree with $n$ vertices: $O(n \log n)$ time for
-the whole decomposition, and $O(n)$ space. A single level costs $O(n)$.
+Centroid decomposition of a tree with $n$ vertices: $O(n \log n)$ time for the whole decomposition, and $O(n)$ space. A single level costs $O(n)$.
 :::
-
 
 Two practical warnings belong here. The histogram is indexed by distance, so its length is the depth of the piece, which is at most its size; allocating a histogram of length $n$ at every level costs $O(n \log n)$ space and should be avoided. And the pair counts are products of counts, so the answer needs a 64-bit integer: with $n$ occupied vertices the number of pairs can reach $n^2 / 2$.
 
@@ -359,15 +315,8 @@ The recursion of the decomposition itself has depth $O(\log n)$, which is comfor
 The failure mode is a crash rather than a wrong answer: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
 ::: math counterexample Counterexample
-A tree that is a path on $10^6$ vertices. The decomposition recursion has
-depth about $20$, which is safe, but the traversal that computes the centroid
-and the distances inside each piece is a depth-first search that can reach a
-depth of $10^6$ if it is written recursively. In C++ on Linux with an 8 MB
-stack and a frame of roughly 64 bytes the stack is exhausted after about
-$130\,000$ frames, and the program dies with a segmentation fault on the first
-piece. The iterative traversal finishes the piece and the whole decomposition.
+A tree that is a path on $10^6$ vertices. The decomposition recursion has depth about $20$, which is safe, but the traversal that computes the centroid and the distances inside each piece is a depth-first search that can reach a depth of $10^6$ if it is written recursively. In C++ on Linux with an 8 MB stack and a frame of roughly 64 bytes the stack is exhausted after about $130\,000$ frames, and the program dies with a segmentation fault on the first piece. The iterative traversal finishes the piece and the whole decomposition.
 :::
-
 
 The decomposition recursion itself is safe to write recursively, because its depth is logarithmic by the size bound. It is the traversal inside each piece that needs the iterative form.
 

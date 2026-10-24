@@ -105,35 +105,20 @@ The second insight is about **ties**. Two elements with equal keys are _equivale
 Let $A = (a_0, a_1, \dots, a_{n-1})$ be a sequence of records, each with a key $k(a_i)$.
 
 ::: math definition Definition
-A sorting algorithm is **comparison-based** if the only information it
-obtains about the input is obtained by comparing pairs of elements. A sort
-that inspects the keys themselves is **non-comparison**.
+A sorting algorithm is **comparison-based** if the only information it obtains about the input is obtained by comparing pairs of elements. A sort that inspects the keys themselves is **non-comparison**.
 :::
-
 
 ::: math definition Definition
-A sort is **stable** if for every two elements $a_i$ and $a_j$ with
-$i < j$ and $k(a_i) = k(a_j)$, the sorted output places $a_i$ before
-$a_j$.
+A sort is **stable** if for every two elements $a_i$ and $a_j$ with $i < j$ and $k(a_i) = k(a_j)$, the sorted output places $a_i$ before $a_j$.
 :::
-
 
 ::: math definition Definition
-A comparator is a **strict weak ordering** if it is irreflexive, that is,
-never reports that an element is less than itself; transitive; and
-asymmetric on distinct elements, so that exactly one of "less than" and
-"greater than" holds between any two distinct elements. The standard
-sorting functions require this, and a comparator that does not provide it
-produces undefined behavior.
+A comparator is a **strict weak ordering** if it is irreflexive, that is, never reports that an element is less than itself; transitive; and asymmetric on distinct elements, so that exactly one of "less than" and "greater than" holds between any two distinct elements. The standard sorting functions require this, and a comparator that does not provide it produces undefined behavior.
 :::
-
 
 ::: math definition Definition
-A **key** of an element is the value it is ordered by. A sort is by
-**lexicographic** order on a tuple of keys when it compares the first key
-that differs.
+A **key** of an element is the value it is ordered by. A sort is by **lexicographic** order on a tuple of keys when it compares the first key that differs.
 :::
-
 
 ## Algorithm derivation
 
@@ -267,10 +252,8 @@ The result is $(1,a), (1,b), (1,c)$, and the original order of the three equal k
 ## Correctness proof
 
 ::: math theorem Theorem
-Merge sort produces a non-decreasing ordering of the keys and preserves the
-relative order of elements with equal keys.
+Merge sort produces a non-decreasing ordering of the keys and preserves the relative order of elements with equal keys.
 :::
-
 
 ::: math proof Proof
 We prove both claims by induction on the length $n$ of the sequence.
@@ -284,25 +267,13 @@ The merge maintains the invariant that the output written so far is sorted by ke
 The output therefore contains every element exactly once, sorted by key, with equal keys in their original relative order. $\square$
 :::
 
-
 ::: math theorem Theorem
-Any comparison-based sorting algorithm on $n$ distinct elements performs
-at least $\lceil \log_2 (n!) \rceil$ comparisons, and therefore at least
-$\Omega(n \log n)$.
+Any comparison-based sorting algorithm on $n$ distinct elements performs at least $\lceil \log_2 (n!) \rceil$ comparisons, and therefore at least $\Omega(n \log n)$.
 :::
-
 
 ::: math proof Proof
-Model the algorithm as a binary decision tree whose internal nodes are
-comparisons and whose leaves are outcomes. Sorting $n$ distinct elements
-has $n!$ possible outcomes, one for each ordering of the input, and the
-algorithm must distinguish them, so the tree has at least $n!$ leaves. A
-binary tree of height $h$ has at most $2^h$ leaves, so the height is at
-least $\log_2(n!)$. By Stirling's formula,
-$\log_2(n!) = n \log_2 n - n \log_2 e + O(\log n)$, which is
-$\Omega(n \log n)$. $\square$
+Model the algorithm as a binary decision tree whose internal nodes are comparisons and whose leaves are outcomes. Sorting $n$ distinct elements has $n!$ possible outcomes, one for each ordering of the input, and the algorithm must distinguish them, so the tree has at least $n!$ leaves. A binary tree of height $h$ has at most $2^h$ leaves, so the height is at least $\log_2(n!)$. By Stirling's formula, $\log_2(n!) = n \log_2 n - n \log_2 e + O(\log n)$, which is $\Omega(n \log n)$. $\square$
 :::
-
 
 The lower bound says nothing about counting sort or radix sort, because neither is a comparison sort. They read the keys, and they are not bound by the theorem.
 

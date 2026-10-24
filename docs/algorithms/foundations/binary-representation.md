@@ -102,25 +102,17 @@ $$
 The bit $b_{w-1}$ is the **sign bit**. The value of the pattern as an unsigned integer is $U = \sum_{i=0}^{w-1} b_i 2^i$, and the two are related by $V = U$ when $b_{w-1} = 0$ and $V = U - 2^w$ when $b_{w-1} = 1$.
 :::
 
-
 ::: math definition Definition
-The **low-$k$ mask** is the pattern whose lowest $k$ bits are $1$ and whose
-other bits are $0$. The operation $x \mathbin{\&} m$ keeps the bits of $x$
-that are $1$ in $m$ and clears the others.
+The **low-$k$ mask** is the pattern whose lowest $k$ bits are $1$ and whose other bits are $0$. The operation $x \mathbin{\&} m$ keeps the bits of $x$ that are $1$ in $m$ and clears the others.
 :::
-
 
 ::: math lemma Lemma
-The two's complement encoding is a bijection from the $2^w$ bit patterns
-onto the integers in $[-2^{w-1},\; 2^{w-1}-1]$.
+The two's complement encoding is a bijection from the $2^w$ bit patterns onto the integers in $[-2^{w-1},\; 2^{w-1}-1]$.
 :::
-
 
 ::: math lemma Lemma
-The sign bit of a two's complement pattern is $1$ if and only if the value
-is negative.
+The sign bit of a two's complement pattern is $1$ if and only if the value is negative.
 :::
-
 
 The lemma about the sign bit is the one that explains the representation. The weight of the top bit is negative, so a pattern with the top bit set has a value that is at most $(2^{w-1} - 1) - 2^{w-1} = -1$, and a pattern with the top bit clear has a value that is at least $0$. There is no pattern whose value is both, and no value in the range with two patterns.
 
@@ -229,46 +221,28 @@ The other bits are untouched, and the field now reads `1001`.
 ## Correctness proof
 
 ::: math theorem Theorem
-The two's complement encoding maps the $2^w$ patterns of a $w$-bit type
-bijectively onto the integers in $[-2^{w-1},\; 2^{w-1}-1]$.
+The two's complement encoding maps the $2^w$ patterns of a $w$-bit type bijectively onto the integers in $[-2^{w-1},\; 2^{w-1}-1]$.
 :::
 
-
 ::: math proof Proof
-**Surjectivity.** Let $v$ be an integer in the range. If $v \ge 0$, write
-$v$ in binary using at most $w-1$ bits and set the top bit to $0$; the
-definition then gives $V = v$. If $v < 0$, write $-v$ in binary using at
-most $w-1$ bits, complement every bit, and add one. By the identity
-$\sim x + 1 \equiv -x \pmod{2^w}$ derived above, the resulting pattern has
-value $-v$ as an unsigned integer, that is $2^w + v$, and since its top bit
-is $1$ its two's complement value is $2^w + v - 2^w = v$. So every value
-in the range has a pattern.
+**Surjectivity.** Let $v$ be an integer in the range. If $v \ge 0$, write $v$ in binary using at most $w-1$ bits and set the top bit to $0$; the definition then gives $V = v$. If $v < 0$, write $-v$ in binary using at most $w-1$ bits, complement every bit, and add one. By the identity $\sim x + 1 \equiv -x \pmod{2^w}$ derived above, the resulting pattern has value $-v$ as an unsigned integer, that is $2^w + v$, and since its top bit is $1$ its two's complement value is $2^w + v - 2^w = v$. So every value in the range has a pattern.
 
 **Injectivity.** Suppose two patterns have the same value. If they have the same top bit, they represent the same unsigned integer, and the binary representation of an unsigned integer is unique, so the patterns are equal. If their top bits differ, one value is negative and the other is not, so they cannot be equal. Therefore distinct patterns have distinct values.
 
 There are $2^w$ patterns and exactly $2^w$ integers in the range, and the encoding is a bijection. $\square$
 :::
 
-
 ::: math theorem Theorem
-For a $w$-bit unsigned value $x$ and a field of width $f$ starting at bit
-position $o$, the expression `(x >> o) & ((1 << f) - 1)` is the value of
-that field, and the expression `(x & ~(((1 << f) - 1) << o)) | (v << o)`
-replaces that field with $v$ and leaves every other bit of $x$ unchanged.
+For a $w$-bit unsigned value $x$ and a field of width $f$ starting at bit position $o$, the expression `(x >> o) & ((1 << f) - 1)` is the value of that field, and the expression `(x & ~(((1 << f) - 1) << o)) | (v << o)` replaces that field with $v$ and leaves every other bit of $x$ unchanged.
 :::
 
-
 ::: math proof Proof
-A right shift by $o$ moves the bit at position $o + k$ to position $k$ and
-discards the bits at positions below $o$. The bits that were at positions
-$o$ through $o + f - 1$ are therefore now at positions $0$ through $f - 1$,
-and every bit above them is at position $f$ or higher.
+A right shift by $o$ moves the bit at position $o + k$ to position $k$ and discards the bits at positions below $o$. The bits that were at positions $o$ through $o + f - 1$ are therefore now at positions $0$ through $f - 1$, and every bit above them is at position $f$ or higher.
 
 The mask $(1 << f) - 1$ has its low $f$ bits set and all others clear. The bitwise AND of a value with that mask keeps exactly the low $f$ bits and clears everything above them. Applied to the shifted value, this keeps exactly the field bits and discards the rest. The first expression is therefore the field.
 
 For the second, the mask $((1 << f) - 1) << o$ has ones exactly in the field positions and zeros elsewhere. Its complement has zeros in the field positions and ones everywhere else, so `x & ~mask` clears the field and preserves every other bit of $x$. The value `v << o` has the bits of $v$ in the field positions and zeros elsewhere, provided $v < 2^f$; the bitwise OR of the two therefore sets the field to $v$ and disturbs nothing else. $\square$
 :::
-
 
 ## Complexity analysis
 

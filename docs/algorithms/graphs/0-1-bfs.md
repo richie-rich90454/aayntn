@@ -86,33 +86,20 @@ That is the whole insight: **a deque with a two-ended push rule is a priority qu
 Let $G = (V, E)$ be a graph with a weight function $w : E \to \{0, 1\}$, and let $s \in V$ be the source.
 
 ::: math definition Definition
-The **distance** $\delta(v)$ of a vertex $v$ from $s$ is the length of a
-shortest path from $s$ to $v$, where the length of a path is the sum of its
-edge weights. It is written $\infty$ when no path exists.
+The **distance** $\delta(v)$ of a vertex $v$ from $s$ is the length of a shortest path from $s$ to $v$, where the length of a path is the sum of its edge weights. It is written $\infty$ when no path exists.
 :::
-
 
 ::: math definition Definition
-The **deque invariant** of a 0-1 BFS is the statement that at every moment
-there is a value $d$ such that every entry in the deque has a key in
-$\{d, d + 1\}$, and every entry with key $d$ comes before every entry with
-key $d + 1$. The value $d$ is the key of the front entry, or the key of the
-last entry removed from the front.
+The **deque invariant** of a 0-1 BFS is the statement that at every moment there is a value $d$ such that every entry in the deque has a key in $\{d, d + 1\}$, and every entry with key $d$ comes before every entry with key $d + 1$. The value $d$ is the key of the front entry, or the key of the last entry removed from the front.
 :::
-
 
 ::: math lemma Lemma
-Let $d$ be the value in the deque invariant. Every candidate produced while
-the front entry has key $d$ is either $d$ or $d + 1$, and neither is
-smaller than $d$.
+Let $d$ be the value in the deque invariant. Every candidate produced while the front entry has key $d$ is either $d$ or $d + 1$, and neither is smaller than $d$.
 :::
-
 
 ::: math lemma Lemma
-Under the deque invariant, the front entry of the deque always has the
-smallest key in the deque.
+Under the deque invariant, the front entry of the deque always has the smallest key in the deque.
 :::
-
 
 The lemma that ties it to the general case is the obvious one: if the front entry always has the smallest key, then the search settles vertices in non-decreasing distance order, which is exactly the condition that [Dijkstra's algorithm](/algorithms/graphs/dijkstra) needs.
 
@@ -140,12 +127,8 @@ if d != distance[v]:
 The second is that a zero-weight edge is not free to ignore. A path of $10^6$ zero-weight edges is a legitimate shortest path, and the search must follow it.
 
 ::: math invariant Invariant
-At every moment of the search, the deque holds the deque invariant, every
-vertex in the deque has a tentative distance equal to the key it was pushed
-with, and the tentative distance of every vertex is the length of an actual
-path from the source.
+At every moment of the search, the deque holds the deque invariant, every vertex in the deque has a tentative distance equal to the key it was pushed with, and the tentative distance of every vertex is the length of an actual path from the source.
 :::
-
 
 ## Step-by-step execution
 
@@ -166,41 +149,24 @@ Step 3 is the heart of the algorithm. Vertex $b$ was first reached from $s$ at d
 ## Correctness proof
 
 ::: math theorem Theorem
-When the search terminates, the recorded distance of every vertex reachable
-from the source is the length of a shortest path from the source to it, and
-the distance of every unreachable vertex is unchanged.
+When the search terminates, the recorded distance of every vertex reachable from the source is the length of a shortest path from the source to it, and the distance of every unreachable vertex is unchanged.
 :::
 
-
 ::: math proof Proof
-We first prove the deque invariant by induction on the number of removals
-from the front.
+We first prove the deque invariant by induction on the number of removals from the front.
 
 Initially the deque holds the single entry $(0, s)$, so the invariant holds with $d = 0$.
 
 Suppose the invariant holds with the value $d$, and the front entry is removed. By the lemma, its key is $d$, and the remaining entries have keys in $\{d, d + 1\}$ with the $d$'s in front, so the invariant still holds for the remaining deque. Every candidate produced by relaxing an edge out of the expanded vertex is either $d$ or $d + 1$, since the weights are zero and one. A candidate equal to $d$ is pushed to the front, which places it before every entry with key $d + 1$, and a candidate equal to $d + 1$ is pushed to the back, which places it after every entry with key $d$. So the invariant is preserved in both cases. When the deque becomes empty of entries with key $d$, the value of $d$ advances by one and the invariant holds again with the new value. $\square$
 :::
 
-
 ::: math proof Proof
-The search settles vertices in non-decreasing order of their recorded
-distance, and every settled vertex has its true distance.
+The search settles vertices in non-decreasing order of their recorded distance, and every settled vertex has its true distance.
 :::
 
-
 ::: math proof Proof
-By the deque invariant, the front entry always has the smallest key in the
-deque, so the search always takes the vertex with the smallest tentative
-distance, exactly as [Dijkstra's algorithm](/algorithms/graphs/dijkstra)
-does. The two searches differ only in the container: the heap of the one is
-the deque of the other, and every candidate that the heap would order by key
-the deque also orders by key, because the deque invariant guarantees that
-the front is the minimum. The greedy step of Dijkstra's algorithm is
-therefore valid here, and its exchange argument shows that a settled vertex
-has its true distance. The vertices that are never settled are never given a
-finite distance, which is correct for the unreachable ones. $\square$
+By the deque invariant, the front entry always has the smallest key in the deque, so the search always takes the vertex with the smallest tentative distance, exactly as [Dijkstra's algorithm](/algorithms/graphs/dijkstra) does. The two searches differ only in the container: the heap of the one is the deque of the other, and every candidate that the heap would order by key the deque also orders by key, because the deque invariant guarantees that the front is the minimum. The greedy step of Dijkstra's algorithm is therefore valid here, and its exchange argument shows that a settled vertex has its true distance. The vertices that are never settled are never given a finite distance, which is correct for the unreachable ones. $\square$
 :::
-
 
 The last proof is deliberately short, and that is the point of the algorithm: 0-1 BFS is not a new shortest-path algorithm, it is Dijkstra's algorithm with a container that happens to be exact for two-valued keys.
 
@@ -211,12 +177,8 @@ The last proof is deliberately short, and that is the point of the algorithm: 0-
 **Auxiliary space: $O(V + E)$.** The distance array holds $V$ entries, and the deque holds at most one entry per successful relaxation, which is at most $E$ entries. The adjacency list that the search is given holds $O(V + E)$ entries, and that is the largest object in the program.
 
 ::: math complexity Complexity
-0-1 BFS over an adjacency list: time $O(V + E)$, auxiliary structures
-$O(V + E)$ for the distance array and the deque, for a total of $O(V + E)$
-including the adjacency list. Dijkstra's algorithm on the same graph costs
-$O((V + E) \log V)$.
+0-1 BFS over an adjacency list: time $O(V + E)$, auxiliary structures $O(V + E)$ for the distance array and the deque, for a total of $O(V + E)$ including the adjacency list. Dijkstra's algorithm on the same graph costs $O((V + E) \log V)$.
 :::
-
 
 Two practical warnings belong here. First, a deque is not a list: in Python `list.pop(0)` is $O(n)$ because every remaining element is shifted, so use `collections.deque`. The same trap exists in Java with `ArrayList.remove(0)` and in JavaScript with `Array.prototype.shift`. Second, the push side matters. Pushing to the front of a list with `insert(0, x)` is also $O(n)$, so the container must be a real double-ended queue in every language.
 

@@ -154,42 +154,26 @@ That is the whole picture: **an update moves the boundary markers, and nothing i
 Let $a_1, a_2, \ldots, a_n$ be the value array and let $a_0 = 0$.
 
 ::: math definition Definition
-The **difference array** of $a$ is the array $d_1, d_2, \ldots, d_{n+1}$ with
-$d_i = a_i - a_{i-1}$ for $1 \le i \le n$ and $d_{n+1} = 0$ when the
-array is padded with a zero on the right. The array $a$ is recovered from
-$d$ by the prefix sums $a_i = \sum_{j=1}^{i} d_j$.
+The **difference array** of $a$ is the array $d_1, d_2, \ldots, d_{n+1}$ with $d_i = a_i - a_{i-1}$ for $1 \le i \le n$ and $d_{n+1} = 0$ when the array is padded with a zero on the right. The array $a$ is recovered from $d$ by the prefix sums $a_i = \sum_{j=1}^{i} d_j$.
 :::
-
 
 ::: math definition Definition
-A **range update** is a triple $(l, r, v)$ that adds the constant $v$ to
-every element $a_l, a_{l+1}, \ldots, a_r$. The update is written on the
-difference array as the two writes $d_l \gets d_l + v$ and
-$d_{r+1} \gets d_{r+1} - v$.
+A **range update** is a triple $(l, r, v)$ that adds the constant $v$ to every element $a_l, a_{l+1}, \ldots, a_r$. The update is written on the difference array as the two writes $d_l \gets d_l + v$ and $d_{r+1} \gets d_{r+1} - v$.
 :::
-
 
 ::: math lemma Lemma
-Let $a'$ be the array that results from applying the range update
-$(l, r, v)$ to $a$, and let $d'$ be its difference array. Then
-$d'_i = d_i$ for every $i \ne l$ and $i \ne r + 1$, and
-$d'_l = d_l + v$ and $d'_{r+1} = d_{r+1} - v$.
+Let $a'$ be the array that results from applying the range update $(l, r, v)$ to $a$, and let $d'$ be its difference array. Then $d'_i = d_i$ for every $i \ne l$ and $i \ne r + 1$, and $d'*l = d_l + v$ and $d'*{r+1} = d_{r+1} - v$.
 :::
-
 
 ::: math lemma Lemma
-For every $i$ with $1 \le i \le n$,
-$\sum_{j=1}^{i} d_j = a_i$.
+For every $i$ with $1 \le i \le n$, $\sum_{j=1}^{i} d_j = a_i$.
 :::
-
 
 The second lemma is the statement that the transformation is reversible, and it is the reason the final pass is a prefix sum and not something else.
 
 ::: math theorem Theorem
-The difference array algorithm produces, for every position $i$, the
-value that the direct application of all the range updates would produce.
+The difference array algorithm produces, for every position $i$, the value that the direct application of all the range updates would produce.
 :::
-
 
 ## Algorithm derivation
 
@@ -202,11 +186,8 @@ The read rule is: for $i$ from $1$ to $n$, set $a_i \gets a_{i-1} + d_i$, starti
 The update rule is correct by the lemma on the difference array. The read rule is correct by the lemma on the prefix sum: after the update to $a_i$, the value is $a_{i-1} + d_i$, which is the running total of the differences.
 
 ::: math invariant Invariant
-After any number of updates, the prefix sum of the differences up to
-position $i$ equals the value that the direct application of those
-updates would place at position $i$.
+After any number of updates, the prefix sum of the differences up to position $i$ equals the value that the direct application of those updates would place at position $i$.
 :::
-
 
 The extra entry at position $n + 1$ is what makes the rule uniform. When the range ends at $n$, the update writes to $d_{n+1}$, which would otherwise be outside the array. With the extra entry, the rule needs no special case at all: the update at the right edge of the array is written the same way as every other update, and the final prefix sum simply stops before the extra entry.
 
@@ -238,11 +219,8 @@ The whole thing took three updates of two writes each, so six writes, plus one p
 The update rule maintains the invariant.
 :::
 
-
 ::: math proof Proof
-The invariant says that the prefix sum of the differences up to position
-$i$ equals the value the direct application of the updates so far would
-place at position $i$.
+The invariant says that the prefix sum of the differences up to position $i$ equals the value the direct application of the updates so far would place at position $i$.
 
 It holds before any update, because all the differences are zero and the initial value array is all zeros.
 
@@ -255,19 +233,13 @@ If $i > r$, both writes are at or before $i$, so the prefix sum grows by $v - v 
 The invariant is preserved in every case, so after all the updates it holds for the whole array. The final pass computes the prefix sums and therefore produces exactly the array that direct application would have produced. $\square$
 :::
 
-
 ::: math proof Proof
 The read rule recovers the values.
 :::
 
-
 ::: math proof Proof
-By the lemma, $a_i = \sum_{j=1}^{i} d_j$. The pass sets
-$a_i = a_{i-1} + d_i$, and by induction $a_{i-1} = \sum_{j=1}^{i-1} d_j$
-when the update is performed, so the value written at position $i$ is
-$\sum_{j=1}^{i} d_j = a_i$. $\square$
+By the lemma, $a_i = \sum_{j=1}^{i} d_j$. The pass sets $a_i = a_{i-1} + d_i$, and by induction $a_{i-1} = \sum_{j=1}^{i-1} d_j$ when the update is performed, so the value written at position $i$ is $\sum_{j=1}^{i} d_j = a_i$. $\square$
 :::
-
 
 ## Complexity analysis
 
@@ -276,11 +248,8 @@ $\sum_{j=1}^{i} d_j = a_i$. $\square$
 **Auxiliary space: $O(n)$** for the difference array, and $O(n)$ for the recovered values if they are kept. A difference array can be built in place over the value array, since the transformation is its own kind of overwrite, so the extra space can be $O(1)$ beyond the input when the values are read out in place.
 
 ::: math complexity Complexity
-Difference array: $O(1)$ per range update, $O(n)$ to recover all the
-values, so $O(n + q)$ in total. The accumulator must be 64 bits when
-the updates can accumulate beyond the 32-bit range.
+Difference array: $O(1)$ per range update, $O(n)$ to recover all the values, so $O(n + q)$ in total. The accumulator must be 64 bits when the updates can accumulate beyond the 32-bit range.
 :::
-
 
 The comparison with the Fenwick tree is the practical one.
 

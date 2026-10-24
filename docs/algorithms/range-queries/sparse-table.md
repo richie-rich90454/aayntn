@@ -110,42 +110,23 @@ There are $O(\log n)$ rows, and each row has $O(n)$ entries, so the table costs 
 Let $a_1, a_2, \ldots, a_n$ be the values of the array, indexed from one.
 
 ::: math definition Definition
-A binary operation $\star$ on a set is **idempotent** if $x \star x = x$
-for every $x$ in the set. It is **associative** if
-$(x \star y) \star z = x \star (y \star z)$ for every triple.
+A binary operation $\star$ on a set is **idempotent** if $x \star x = x$ for every $x$ in the set. It is **associative** if $(x \star y) \star z = x \star (y \star z)$ for every triple.
 :::
-
 
 ::: math definition Definition
-The **sparse table** of $a$ under $\star$ is the array $\text{st}$ with
-$\text{st}[k][i]$ equal to the aggregate of the block
-$[i, i + 2^k - 1]$, for every $0 \le k \le \lfloor \log_2 n \rfloor$ and
-every $1 \le i \le n - 2^k + 1$. The row $k = 0$ holds the values
-themselves.
+The **sparse table** of $a$ under $\star$ is the array $\text{st}$ with $\text{st}[k][i]$ equal to the aggregate of the block $[i, i + 2^k - 1]$, for every $0 \le k \le \lfloor \log_2 n \rfloor$ and every $1 \le i \le n - 2^k + 1$. The row $k = 0$ holds the values themselves.
 :::
-
 
 ::: math definition Definition
-The **log table** is $\text{lg}[1] = 0$ and
-$\text{lg}[i] = \text{lg}[\lfloor i/2 \rfloor] + 1$ for $i \ge 2$, so that
-$\text{lg}[i] = \lfloor \log_2 i \rfloor$. It is built in $O(n)$ time and
-lets a query find its row in $O(1)$ time without a floating point
-computation.
+The **log table** is $\text{lg}[1] = 0$ and $\text{lg}[i] = \text{lg}[\lfloor i/2 \rfloor] + 1$ for $i \ge 2$, so that $\text{lg}[i] = \lfloor \log_2 i \rfloor$. It is built in $O(n)$ time and lets a query find its row in $O(1)$ time without a floating point computation.
 :::
 
-
 ::: math lemma Lemma
-Let $k = \lfloor \log_2(r - l + 1) \rfloor$. The blocks
-$[l, l + 2^k - 1]$ and $[r - 2^k + 1, r]$ are contained in $[l, r]$, and
-their union is $[l, r]$.
+Let $k = \lfloor \log_2(r - l + 1) \rfloor$. The blocks $[l, l + 2^k - 1]$ and $[r - 2^k + 1, r]$ are contained in $[l, r]$, and their union is $[l, r]$.
 :::
 
-
 ::: math lemma Lemma
-If $\star$ is associative and idempotent, then the aggregate of the union
-of two overlapping blocks is the combination of the aggregates of the
-blocks. That is, if the blocks overlap in a set $I$ and
-$B_1 \cap B_2 = I$, then
+If $\star$ is associative and idempotent, then the aggregate of the union of two overlapping blocks is the combination of the aggregates of the blocks. That is, if the blocks overlap in a set $I$ and $B_1 \cap B_2 = I$, then
 
 $$
 \bigstar_{x \in B_1 \cup B_2} x
@@ -154,7 +135,6 @@ $$
 \left(\bigstar_{x \in B_2} x\right).
 $$
 :::
-
 
 ## Algorithm derivation
 
@@ -180,10 +160,8 @@ The query is correct by the two lemmas. The two blocks cover the range, and thei
 There is no update rule, and that absence is the defining feature of the structure. A change at position $p$ invalidates every entry of row $k$ whose block contains $p$, of which there are up to $2^k$, and the rows sum to $O(n)$. Repairing the table therefore costs $O(n)$ per change, which is more than the $O(\log n)$ of a segment tree and much more than the $O(1)$ of a prefix sum.
 
 ::: math invariant Invariant
-After the build, $\text{st}[k][i]$ is the aggregate of the block
-$[i, i + 2^k - 1]$ for every valid $k$ and $i$.
+After the build, $\text{st}[k][i]$ is the aggregate of the block $[i, i + 2^k - 1]$ for every valid $k$ and $i$.
 :::
-
 
 ## Step-by-step execution
 
@@ -215,35 +193,20 @@ Notice in the second query that the two blocks overlap in the single position $2
 ## Correctness proof
 
 ::: math theorem Theorem
-The sparse table answers every range query with the aggregate of the
-requested range.
+The sparse table answers every range query with the aggregate of the requested range.
 :::
 
-
 ::: math proof Proof
-First the build. The claim is by induction on $k$. For $k = 0$ the entry
-is the value of a single-element block, which is its aggregate. Suppose
-the row $k - 1$ is correct. The block $[i, i + 2^k - 1]$ is the disjoint
-union of the blocks $[i, i + 2^{k-1} - 1]$ and
-$[i + 2^{k-1}, i + 2^k - 1]$, and by the induction hypothesis their
-aggregates are $\text{st}[k-1][i]$ and $\text{st}[k-1][i + 2^{k-1}]$. By
-associativity their combination is the aggregate of the whole block, which
-is what the build stores.
+First the build. The claim is by induction on $k$. For $k = 0$ the entry is the value of a single-element block, which is its aggregate. Suppose the row $k - 1$ is correct. The block $[i, i + 2^k - 1]$ is the disjoint union of the blocks $[i, i + 2^{k-1} - 1]$ and $[i + 2^{k-1}, i + 2^k - 1]$, and by the induction hypothesis their aggregates are $\text{st}[k-1][i]$ and $\text{st}[k-1][i + 2^{k-1}]$. By associativity their combination is the aggregate of the whole block, which is what the build stores.
 
 Now the query. Let $k = \lfloor \log_2(r - l + 1) \rfloor$. By the first lemma, the blocks $B_1 = [l, l + 2^k - 1]$ and $B_2 = [r - 2^k + 1, r]$ lie inside the range and together cover it. By the second lemma, and because the operation is idempotent, the combination of their aggregates is the aggregate of their union, which is the aggregate of the range. The program prints exactly that combination. $\square$
 :::
 
-
 ::: math proof Proof
-The two lemmas hold as follows. For the first, $2^k \le r - l + 1$ gives
-$l + 2^k - 1 \le r$ and $r - 2^k + 1 \ge l$, so both blocks lie inside the
-range; and $2 \cdot 2^k > r - l + 1$ gives
-$r - 2^k + 1 \le l + 2^k - 1$, so the blocks overlap or touch, and since
-each ends inside the range, their union is the whole range.
+The two lemmas hold as follows. For the first, $2^k \le r - l + 1$ gives $l + 2^k - 1 \le r$ and $r - 2^k + 1 \ge l$, so both blocks lie inside the range; and $2 \cdot 2^k > r - l + 1$ gives $r - 2^k + 1 \le l + 2^k - 1$, so the blocks overlap or touch, and since each ends inside the range, their union is the whole range.
 
 For the second, list the elements of $B_1 \cup B_2$ as a concatenation of the elements of $B_1$ and the elements of $B_2$ with the elements of the intersection removed from the second block. The combination of the first list is the aggregate of $B_1$ and the combination of the second is the aggregate of $B_2$ with the intersection removed. Combining the two lists in order is the aggregate of the union, and it equals $\text{aggregate}(B_1) \star \text{aggregate}(B_2)$ because the elements of the intersection appear twice in the right hand side and combining a value with itself leaves it unchanged.
 :::
-
 
 ## Complexity analysis
 
@@ -254,10 +217,8 @@ For the second, list the elements of $B_1 \cup B_2$ as a concatenation of the el
 **Space: $O(n \log n)$** for the table, plus $O(n)$ for the log table. The entries hold a value each, so at $n = 100\,000$ and $17$ rows the table holds $1.7 \cdot 10^6$ entries, which is $6.8$ MB at 32 bits each.
 
 ::: math complexity Complexity
-Sparse table over $n$ values: $O(n \log n)$ time to build, $O(1)$ time per
-query, and $O(n \log n)$ extra space.
+Sparse table over $n$ values: $O(n \log n)$ time to build, $O(1)$ time per query, and $O(n \log n)$ extra space.
 :::
-
 
 The memory is the price of the constant time query. A segment tree over the same array costs $O(n)$ memory and answers a query in $O(\log n)$, which is a good trade when memory is tight and the queries are few.
 

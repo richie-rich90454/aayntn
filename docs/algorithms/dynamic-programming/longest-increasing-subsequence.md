@@ -118,19 +118,12 @@ That gives the whole algorithm. For each value $x$, find the first position in `
 Let $a_1, a_2, \ldots, a_n$ be a sequence of elements of a totally ordered set.
 
 ::: math definition Definition
-An **increasing subsequence** of $a$ is a sequence of indices
-$i_1 < i_2 < \cdots < i_m$ with $a_{i_1} < a_{i_2} < \cdots < a_{i_m}$. Its
-**length** is $m$. The **longest increasing subsequence** has the greatest
-such length.
+An **increasing subsequence** of $a$ is a sequence of indices $i_1 < i_2 < \cdots < i_m$ with $a_{i_1} < a_{i_2} < \cdots < a_{i_m}$. Its **length** is $m$. The **longest increasing subsequence** has the greatest such length.
 :::
-
 
 ::: math definition Definition
-Let $D_i$ be the length of the longest increasing subsequence that ends at
-index $i$. Then $D_i \ge 1$ for every $i$, and the length of the longest
-increasing subsequence is $\max_i D_i$.
+Let $D_i$ be the length of the longest increasing subsequence that ends at index $i$. Then $D_i \ge 1$ for every $i$, and the length of the longest increasing subsequence is $\max_i D_i$.
 :::
-
 
 ::: math recurrence Recurrence
 $$
@@ -138,28 +131,17 @@ D_i = 1 + \max\bigl(\{D_j : 1 \le j < i \text{ and } a_j < a_i\} \cup \{0\}\bigr
 $$
 :::
 
-
 ::: math definition Definition
-After the first $t$ elements have been processed, the **tails array** is the
-sequence $T_0, T_1, \ldots$ where $T_k$ is the smallest last element of any
-increasing subsequence of length $k+1$ that uses only the first $t$ elements.
-A length with no such subsequence has no entry.
+After the first $t$ elements have been processed, the **tails array** is the sequence $T_0, T_1, \ldots$ where $T_k$ is the smallest last element of any increasing subsequence of length $k+1$ that uses only the first $t$ elements. A length with no such subsequence has no entry.
 :::
-
 
 ::: math lemma Lemma
-The tails array is strictly increasing: if $T_k$ and $T_{k+1}$ both exist,
-then $T_k < T_{k+1}$.
+The tails array is strictly increasing: if $T_k$ and $T_{k+1}$ both exist, then $T_k < T_{k+1}$.
 :::
-
 
 ::: math proof Proof
-Let $u$ be an increasing subsequence of length $k+2$ ending in $T_{k+1}$. Its
-first $k+1$ elements form an increasing subsequence of length $k+1$ that ends
-in some value $w$ with $w < T_{k+1}$. By the definition of $T_k$, the
-smallest such value, $T_k \le w < T_{k+1}$. Hence $T_k < T_{k+1}$. $\square$
+Let $u$ be an increasing subsequence of length $k+2$ ending in $T_{k+1}$. Its first $k+1$ elements form an increasing subsequence of length $k+1$ that ends in some value $w$ with $w < T_{k+1}$. By the definition of $T_k$, the smallest such value, $T_k \le w < T_{k+1}$. Hence $T_k < T_{k+1}$. $\square$
 :::
-
 
 ## Algorithm derivation
 
@@ -226,31 +208,20 @@ The next section gives the instance where the reading fails outright.
 The quadratic dynamic program computes $D_i$ correctly for every index $i$.
 :::
 
-
 ::: math proof Proof
-Fix an index $i$. Any increasing subsequence ending at $i$ is either the
-single element $a_i$, of length $1$, or has a penultimate index $j$ with
-$j < i$ and $a_j < a_i$. In the second case its length is at most
-$1 + D_j$, by the correctness of the earlier states. Hence every increasing
-subsequence ending at $i$ has length at most
-$1 + \max(\{D_j : j < i, a_j < a_i\} \cup \{0\})$.
+Fix an index $i$. Any increasing subsequence ending at $i$ is either the single element $a_i$, of length $1$, or has a penultimate index $j$ with $j < i$ and $a_j < a_i$. In the second case its length is at most $1 + D_j$, by the correctness of the earlier states. Hence every increasing subsequence ending at $i$ has length at most $1 + \max(\{D_j : j < i, a_j < a_i\} \cup \{0\})$.
 
 Conversely, let $j$ attain that maximum, if any such $j$ exists. Take a longest increasing subsequence ending at $j$, of length $D_j$, and append $a_i$. The result is an increasing subsequence ending at $i$, because $j < i$ and $a_j < a_i$. Its length is $D_j + 1$, so the bound is achieved.
 
 The recurrence therefore gives exactly $D_i$. By induction on $i$, every state is correct, and $\max_i D_i$ is the length of the longest increasing subsequence. $\square$
 :::
 
-
 ::: math theorem Theorem
-The patience sorting method computes the length of the longest increasing
-subsequence.
+The patience sorting method computes the length of the longest increasing subsequence.
 :::
 
-
 ::: math proof Proof
-The claim is that after processing $a_1, \ldots, a_t$, the length of the
-tails array equals the length of the longest increasing subsequence of that
-prefix.
+The claim is that after processing $a_1, \ldots, a_t$, the length of the tails array equals the length of the longest increasing subsequence of that prefix.
 
 **The update is correct.** Suppose $x = a_t$ is placed at position $p$, so that $p = 0$ or $T_{p-1} < x$, and $T_p \ge x$ or $p$ is past the end.
 
@@ -261,16 +232,9 @@ If $p$ is not past the end, then $T_{p-1} < x$, so the prefix has an increasing 
 **The length is the answer.** By the definition of the tails array, a tails array of length $L$ means an increasing subsequence of length $L$ exists, and the strict increase of the tails array means no longer one exists at the time it was created; and by the argument above, the array never shrinks. The induction closes. $\square$
 :::
 
-
 ::: math counterexample Counterexample
-Let $a = 2, 3, 1$. The tails array after each step is $[2]$, $[2, 3]$,
-$[1, 3]$. The final array is $[1, 3]$ and its length $2$ is the correct
-length of the longest increasing subsequence. But $[1, 3]$ is **not** a
-subsequence of the input: the value $3$ occurs at index $2$ and the value $1$
-at index $3$, so in the input the $3$ comes before the $1$. The array reads
-the values in an order the input never produces.
+Let $a = 2, 3, 1$. The tails array after each step is $[2]$, $[2, 3]$, $[1, 3]$. The final array is $[1, 3]$ and its length $2$ is the correct length of the longest increasing subsequence. But $[1, 3]$ is **not** a subsequence of the input: the value $3$ occurs at index $2$ and the value $1$ at index $3$, so in the input the $3$ comes before the $1$. The array reads the values in an order the input never produces.
 :::
-
 
 ## Complexity analysis
 

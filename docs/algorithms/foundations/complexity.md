@@ -87,12 +87,8 @@ Everything else in this article is either a precise statement of these rules, a 
 Let $n$ be the size of the input and let $f(n)$ be the number of primitive operations performed by an algorithm on inputs of size $n$.
 
 ::: math definition Definition
-A **cost model** is a specification of the cost of each operation an
-algorithm may use. The standard model is the random access machine, in which
-every primitive operation, including indexing into an array, costs
-$O(1)$.
+A **cost model** is a specification of the cost of each operation an algorithm may use. The standard model is the random access machine, in which every primitive operation, including indexing into an array, costs $O(1)$.
 :::
-
 
 ::: math definition Definition
 For functions $f$ and $g$ from the natural numbers to the reals:
@@ -102,16 +98,11 @@ For functions $f$ and $g$ from the natural numbers to the reals:
 - $f(n) = \Theta(g(n))$ if both hold, which says that $f$ and $g$ have the same growth rate.
 :::
 
-
 The asymmetry between the three symbols is the source of most misstatements. An upper bound is a guarantee that the program will not be slower than the claim. A lower bound is a guarantee that some input makes it that slow. A tight bound is a statement about the growth rate, and it is the only one of the three that lets a reader compare two algorithms.
 
 ::: math definition Definition
-An operation sequence has **amortized cost** $O(g(n))$ if there is a
-constant $c > 0$ such that the total cost of any sequence of $k$ operations
-on a structure of size $n$ is at most $c\,k\,g(n) + c\,n_0$, where $n_0$ is
-the size of the structure when the sequence began.
+An operation sequence has **amortized cost** $O(g(n))$ if there is a constant $c > 0$ such that the total cost of any sequence of $k$ operations on a structure of size $n$ is at most $c\,k\,g(n) + c\,n_0$, where $n_0$ is the size of the structure when the sequence began.
 :::
-
 
 Amortized cost is a statement about the sum of a sequence of costs divided by the length of the sequence. It holds for every sequence, with no probability and no distribution, and it does not say that any individual operation is cheap.
 
@@ -222,11 +213,8 @@ for (int i = 0; i < n; i++)
 executes its body exactly $\frac{n(n+1)}{2}$ times, and therefore runs in $\Theta(n^2)$ time.
 :::
 
-
 ::: math proof Proof
-Fix an outer index $i$. The inner loop starts at $j = 0$ and increments $j$
-by one on every iteration, and it stops when $j > i$. Its body therefore
-executes once for each of $j = 0, 1, \dots, i$, which is $i + 1$ times.
+Fix an outer index $i$. The inner loop starts at $j = 0$ and increments $j$ by one on every iteration, and it stops when $j > i$. Its body therefore executes once for each of $j = 0, 1, \dots, i$, which is $i + 1$ times.
 
 The outer loop takes each of the values $i = 0, 1, \dots, n-1$ exactly once, so the total number of body executions is the sum of the inner counts over those values:
 
@@ -239,25 +227,13 @@ The last equality is the standard formula for the sum of the first $n$ positive 
 Finally, for $n \ge 1$ we have $\frac{n^2}{2} \le \frac{n(n+1)}{2} \le n^2$, so the count is bounded above and below by positive constant multiples of $n^2$. By the definition of $\Theta$, the running time is $\Theta(n^2)$. $\square$
 :::
 
-
 ::: math theorem Theorem
-Every comparison-based sorting algorithm performs at least
-$\lceil \log_2 (n!) \rceil$ comparisons, and therefore at least
-$\Omega(n \log n)$.
+Every comparison-based sorting algorithm performs at least $\lceil \log_2 (n!) \rceil$ comparisons, and therefore at least $\Omega(n \log n)$.
 :::
-
 
 ::: math proof Proof
-Such an algorithm can be modeled as a binary decision tree whose internal
-nodes are comparisons and whose leaves are the possible outcomes. Sorting $n$
-distinct elements has $n!$ possible outcomes, one per ordering of the
-input, and each ordering must be reachable by some path, so the tree has at
-least $n!$ leaves. A binary tree of height $h$ has at most $2^h$ leaves,
-so $h \ge \log_2(n!)$. By Stirling's formula,
-$\log_2(n!) = n \log_2 n - n \log_2 e + O(\log n)$, which is
-$\Omega(n \log n)$. $\square$
+Such an algorithm can be modeled as a binary decision tree whose internal nodes are comparisons and whose leaves are the possible outcomes. Sorting $n$ distinct elements has $n!$ possible outcomes, one per ordering of the input, and each ordering must be reachable by some path, so the tree has at least $n!$ leaves. A binary tree of height $h$ has at most $2^h$ leaves, so $h \ge \log_2(n!)$. By Stirling's formula, $\log_2(n!) = n \log_2 n - n \log_2 e + O(\log n)$, which is $\Omega(n \log n)$. $\square$
 :::
-
 
 ## Complexity analysis
 

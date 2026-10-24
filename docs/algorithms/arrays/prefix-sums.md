@@ -154,18 +154,13 @@ $$
 with $P[0] = 0$ by convention. The array $P$ has $n + 1$ entries.
 :::
 
-
 ::: math definition Definition
-The **range sum** of the inclusive range $[l, r]$ is
-$S(l, r) = \sum_{i=l}^{r} a_i$, and it is $0$ when $l > r$.
+The **range sum** of the inclusive range $[l, r]$ is $S(l, r) = \sum_{i=l}^{r} a_i$, and it is $0$ when $l > r$.
 :::
-
 
 ::: math lemma Lemma
-For every $1 \le l \le r \le n$, the range sum satisfies
-$S(l, r) = P[r] - P[l-1]$.
+For every $1 \le l \le r \le n$, the range sum satisfies $S(l, r) = P[r] - P[l-1]$.
 :::
-
 
 ::: math recurrence Recurrence
 The prefix sums are computed by the recurrence
@@ -176,7 +171,6 @@ $$
 
 Every entry depends on exactly one earlier entry, so the array is built in a single left-to-right pass.
 :::
-
 
 ## Algorithm derivation
 
@@ -191,10 +185,8 @@ The query rule is: answer $S(l, r)$ with $P[r] - P[l-1]$. By the lemma, that dif
 The one structural choice that deserves a paragraph is the offset. The array is indexed from one in the problem, and the prefix array is indexed from zero, with $P[i]$ meaning "the sum of the first $i$ values". This offset is what makes $P[l-1]$ the right term to subtract for a range that starts at $l$, and it is the reason the prefix array has $n + 1$ entries. An alternative convention indexes the prefix array from one and stores $P[i] = a_1 + \cdots + a_i$ with $P[0] = 0$ unused; that wastes a slot and invites off-by-one errors, and this article does not use it.
 
 ::: math invariant Invariant
-After the update for index $i$, the entries $P[0], P[1], \ldots, P[i]$
-hold the sums of the first $0, 1, \ldots, i$ values of the array.
+After the update for index $i$, the entries $P[0], P[1], \ldots, P[i]$ hold the sums of the first $0, 1, \ldots, i$ values of the array.
 :::
-
 
 ## Step-by-step execution
 
@@ -218,20 +210,11 @@ Notice that the prefix array is not sorted and is not monotone: it goes down at 
 ## Correctness proof
 
 ::: math theorem Theorem
-The construction produces a prefix array $P$ with $P[0] = 0$ and
-$P[i] = P[i-1] + a_i$, and for every query $(l, r)$ the program prints
-$S(l, r)$, the sum of the values from $l$ to $r$.
+The construction produces a prefix array $P$ with $P[0] = 0$ and $P[i] = P[i-1] + a_i$, and for every query $(l, r)$ the program prints $S(l, r)$, the sum of the values from $l$ to $r$.
 :::
 
-
 ::: math proof Proof
-First the construction. The loop sets $P[0] = 0$ before it starts, which
-is the sum of the first zero values. Suppose the entry $P[i-1]$ holds the
-sum of the first $i - 1$ values. The update sets
-$P[i] = P[i-1] + a_i$, which is the sum of the first $i$ values. By
-induction, every entry of $P$ holds the sum of the corresponding prefix,
-and in particular $P[r]$ is the sum of the first $r$ values and $P[l-1]$
-is the sum of the first $l-1$ values.
+First the construction. The loop sets $P[0] = 0$ before it starts, which is the sum of the first zero values. Suppose the entry $P[i-1]$ holds the sum of the first $i - 1$ values. The update sets $P[i] = P[i-1] + a_i$, which is the sum of the first $i$ values. By induction, every entry of $P$ holds the sum of the corresponding prefix, and in particular $P[r]$ is the sum of the first $r$ values and $P[l-1]$ is the sum of the first $l-1$ values.
 
 Now the query. Subtracting the two sums gives
 
@@ -242,14 +225,9 @@ $$
 because the first $l - 1$ terms appear in both sums and cancel. That is $S(l, r)$, so the printed value is correct. $\square$
 :::
 
-
 ::: math proof Proof
-The clipping rule in the reference program preserves correctness. A query
-whose range leaves the array is replaced by its intersection with the
-array, and a range that is empty after clipping has no values to sum, so
-the sum of the empty range is $0$, which the program prints.
+The clipping rule in the reference program preserves correctness. A query whose range leaves the array is replaced by its intersection with the array, and a range that is empty after clipping has no values to sum, so the sum of the empty range is $0$, which the program prints.
 :::
-
 
 ## Complexity analysis
 
@@ -260,11 +238,8 @@ the sum of the empty range is $0$, which the program prints.
 **The whole run: $O(n + q)$ time** and **$O(n)$ auxiliary space**, since the prefix array has $n + 1$ entries and the queries are read and answered one at a time.
 
 ::: math complexity Complexity
-Prefix sums over an array of $n$ values: $O(n)$ time to build, $O(1)$
-time per query, $O(n + q)$ time in total, and $O(n)$ extra space for the
-$n + 1$ prefix entries.
+Prefix sums over an array of $n$ values: $O(n)$ time to build, $O(1)$ time per query, $O(n + q)$ time in total, and $O(n)$ extra space for the $n + 1$ prefix entries.
 :::
-
 
 The width of the accumulator is part of the complexity statement, because it decides whether the answer is even correct. With $n = 10^5$ values of magnitude up to $10^9$, a prefix sum can reach $10^{14}$, which does not fit in a 32-bit signed integer, whose largest value is about $2.1 \cdot 10^9$. The reference implementations therefore use a 64-bit type: `long long` in C and C++, `long` in Java, `Int64` in Pascal, and `BigInt` in JavaScript, where a plain `Number` would silently lose the low bits beyond $2^{53}$.
 

@@ -141,7 +141,6 @@ Let $A$ be the implementation you want to trust, usually the fast one. Let $B$ b
 For every $x \in X$, check that $A(x) = B(x)$. The test passes when no input in $X$ produces a disagreement.
 :::
 
-
 The property you actually want is the universal statement
 
 $$
@@ -276,7 +275,6 @@ The vertex is marked finalized at the moment it is discovered, not when it is re
 ::: math counterexample Counterexample
 On the graph $s \to p \to v \to w$ with weights 1, 10, 1 and $s \to q \to v$ with weights 2 and 3, the true distance to $v$ is 5 and to $w$ is 6. The code finalizes $v$ on discovery with distance 11 and never improves it, so the reported distances are 11 and 12.
 :::
-
 
 **Step seven, the fix.** Finalize a vertex when it is removed from the queue, and discard the stale entries:
 
