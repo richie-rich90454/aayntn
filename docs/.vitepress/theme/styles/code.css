@@ -339,3 +339,19 @@ html.dark .aayntn-variant-note__label--conditional {
     font-size: var(--text-code);
     line-height: 1.68;
 }
+
+/* The source archive prints the exact file without token markup, so the page
+   stays small to build and to download. The surface and the rhythm are the
+   same as a highlighted listing. */
+.aayntn-source {
+    margin: var(--space-4) 0;
+    padding: var(--space-4) var(--space-6);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    background: var(--surface-code);
+    overflow-x: auto;
+    font-family: var(--font-code);
+    font-size: var(--text-code);
+    line-height: 1.65;
+    tab-size: 4;
+}

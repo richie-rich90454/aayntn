@@ -797,55 +797,35 @@ async function main() {
         );
         index.push("");
 
+        /* One page per algorithm, not one per listing: the six languages and
+           their variants are sections of the same page. The build then holds
+           ninety-three pages instead of seven hundred, which is what makes the
+           memory cost of the site proportional to the encyclopedia rather than
+           to the number of files it publishes. */
         for (const file of files) {
-            const slug = `${file.language}-${file.variant}`;
             const label = `${LANGUAGE_LABEL[file.language] ?? file.language} — ${file.variant}`;
+            const anchor = `${file.language}-${file.variant}`;
 
-            index.push(
-                `- [${label}](/implementations/${algorithm.id.replace(/\./g, "-")}/${slug})`,
-            );
+            index.push(`- [${label}](#${anchor})`);
         }
         index.push("");
 
-        await writeFile(join(algorithmDir, "index.md"), index.join("\n"), "utf8");
-
         for (const file of files) {
-            const slug = `${file.language}-${file.variant}`;
             const label = `${LANGUAGE_LABEL[file.language] ?? file.language} — ${file.variant}`;
-            const page: string[] = [];
-            page.push("---");
-            page.push(`id: implementation.${algorithm.id}.${file.variant}.${file.language}`);
-            page.push(`title: ${algorithm.title} — ${label}`);
-            page.push(
-                `summary: The ${LANGUAGE_LABEL[file.language] ?? file.language} ${file.variant} implementation of ${algorithm.title}.`,
-            );
-            page.push("subjects:");
-            page.push(`  - ${algorithm.subject}`);
-            page.push("importance: extended-reference");
-            page.push("reviewed: false");
-            page.push("---");
-            page.push("");
-            page.push(`# ${algorithm.title} — ${label}`);
-            page.push("");
-            page.push(algorithm.summary);
-            page.push("");
-            page.push(
-                "This is the real source file used by the encyclopedia. It is compiled and executed against the shared fixtures by the test suite in continuous integration, and it is required to produce the same output as the other five languages.",
-            );
-            page.push("");
-            page.push(`Source file: \`${file.sourcePath}\``);
-            page.push("");
-            page.push("```" + (SHIKI_LANG[file.language] ?? "text"));
-            page.push(file.source.trimEnd());
-            page.push("```");
-            page.push("");
-            page.push(
-                `Back to [the ${algorithm.title} source index](/implementations/${algorithm.id.replace(/\./g, "-")}/).`,
-            );
-            page.push("");
-
-            await writeFile(join(algorithmDir, `${slug}.md`), page.join("\n"), "utf8");
+            index.push(`## ${label} {#${file.language}-${file.variant}}`);
+            index.push("");
+            index.push(`Source file: \`${file.sourcePath}\``);
+            index.push("");
+            const escaped = file.source
+                .trimEnd()
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
+            index.push(`<pre class="aayntn-source" v-pre><code>${escaped}</code></pre>`);
+            index.push("");
         }
+
+        await writeFile(join(algorithmDir, "index.md"), index.join("\n"), "utf8");
     }
 
     /* Fill the generated regions of the encyclopedia index. ------------- */

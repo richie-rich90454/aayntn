@@ -45,7 +45,7 @@ jobs:
             - name: Render the document and print the presets
               run: pnpm run book
               env:
-                  NODE_OPTIONS: --max-old-space-size=10240
+                  NODE_OPTIONS: --max-old-space-size=4096
                   AAYNTN_BASE: /aayntn/
 
             - name: Print the language card
