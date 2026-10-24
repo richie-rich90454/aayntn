@@ -2228,3 +2228,180 @@ greedy.feasibility-oracle:
           0 0 1 0
       expected: |
           3
+
+combinatorics.burnside-lemma:
+    - name: four beads in three colors match the sample
+      input: |
+          4 3
+      expected: |
+          24
+    - name: one million beads in two colors need the divisor sum
+      input: |
+          1000000 2
+      expected: |
+          757897407
+    - name: a single bead can use every color
+      input: |
+          1 1000000000
+      expected: |
+          1000000000
+
+combinatorics.hook-length-formula:
+    - name: "edge case: a single column has exactly one tableau"
+      input: |
+          5
+          1 1 1 1 1
+      expected: |
+          1
+    - name: the staircase of three rows
+      input: |
+          3
+          3 2 1
+      expected: |
+          16
+    - name: a staircase of ten rows, reduced modulo 1000000007
+      input: |
+          10
+          10 9 8 7 6 5 4 3 2 1
+      expected: |
+          896330428
+
+dynamic-programming.aliens-trick:
+    - name: two groups over an increasing array
+      input: |
+          5 2
+          1 2 3 4 5
+      expected: |
+          117
+    - name: three groups with a large element
+      input: |
+          7 3
+          3 1 4 1 5 9 2
+      expected: |
+          221
+    - name: edge case where every value is zero, so every partition ties
+      input: |
+          4 2
+          0 0 0 0
+      expected: |
+          0
+
+enumeration.constraint-propagation:
+    - name: the four-queens board has two placements
+      input: |
+          4
+      expected: |
+          2 17
+    - name: the eight-queens board visits two thousand and fifty-seven nodes
+      input: |
+          8
+      expected: |
+          92 2057
+    - name: edge case with a single square board
+      input: |
+          1
+      expected: |
+          1 2
+
+foundations.loop-invariants:
+    - name: duplicates of the target return the first occurrence
+      input: |
+          8
+          1 3 3 5 8 8 8 13
+          8
+      expected: |
+          4 3
+    - name: a target above every value returns the array length
+      input: |
+          6
+          2 4 6 8 10 12
+          20
+      expected: |
+          6 2
+    - name: a single element equal to the target stops after one probe
+      input: |
+          1
+          7
+          7
+      expected: |
+          0 1
+
+foundations.time-memory-tradeoff:
+    - name: ranges that cross block boundaries
+      input: |
+          10
+          3 1 4 1 5 9 2 6 5 3
+          4
+          2 8
+          1 10
+          7 10
+          3 3
+      expected: |
+          28
+          39
+          16
+          4
+    - name: every element in its own block
+      input: |
+          2
+          5 0
+          3
+          1 2
+          2 2
+          1 1
+      expected: |
+          5
+          0
+          5
+    - name: a single element
+      input: |
+          1
+          7
+          3
+          1 1
+          1 1
+          1 1
+      expected: |
+          7
+          7
+          7
+
+searching.sliding-window-variants:
+    - name: two distinct values on a short string
+      input: |
+          abcba
+          2
+      expected: |
+          3
+    - name: repeated characters under a larger bound
+      input: |
+          aabacbebebe
+          3
+      expected: |
+          7
+    - name: zero distinct values forces the empty window
+      input: |
+          aaaa
+          0
+      expected: |
+          0
+
+strings.suffix-tree:
+    - name: a mixed string with overlapping repeats, including the longest repeat inside another suffix
+      input: |
+          banana
+      expected: |
+          15
+          3
+    - name: one character repeated, where the deepest branching node is the longest proper prefix
+      input: |
+          aaaa
+      expected: |
+          4
+          3
+    - name: the single-character edge case, with no internal node and no repeated substring
+      input: |
+          z
+      expected: |
+          1
+          0

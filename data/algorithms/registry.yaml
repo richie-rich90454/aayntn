@@ -303,3 +303,35 @@ algorithms:
       title: Greedy with a feasibility oracle
       subject: greedy
       manifest: implementations/greedy/feasibility-oracle/algorithm.yaml
+    - id: combinatorics.burnside-lemma
+      title: Burnside's lemma
+      subject: combinatorics
+      manifest: implementations/combinatorics/burnside-lemma/algorithm.yaml
+    - id: combinatorics.hook-length-formula
+      title: The hook-length formula
+      subject: combinatorics
+      manifest: implementations/combinatorics/hook-length-formula/algorithm.yaml
+    - id: dynamic-programming.aliens-trick
+      title: The aliens trick
+      subject: dynamic-programming
+      manifest: implementations/dynamic-programming/aliens-trick/algorithm.yaml
+    - id: enumeration.constraint-propagation
+      title: Constraint propagation
+      subject: enumeration
+      manifest: implementations/enumeration/constraint-propagation/algorithm.yaml
+    - id: foundations.loop-invariants
+      title: Loop invariants
+      subject: foundations
+      manifest: implementations/foundations/loop-invariants/algorithm.yaml
+    - id: foundations.time-memory-tradeoff
+      title: The time-memory tradeoff
+      subject: foundations
+      manifest: implementations/foundations/time-memory-tradeoff/algorithm.yaml
+    - id: searching.sliding-window-variants
+      title: The sliding window variants with a state machine
+      subject: searching
+      manifest: implementations/searching/sliding-window-variants/algorithm.yaml
+    - id: strings.suffix-tree
+      title: Suffix trees
+      subject: strings
+      manifest: implementations/strings/suffix-tree/algorithm.yaml

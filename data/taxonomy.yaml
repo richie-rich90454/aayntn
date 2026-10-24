@@ -184,7 +184,7 @@ techniques:
       synonyms:
           - Burnside lemma
           - Polya enumeration
-      status: missing
+      status: published
       divisions: []
     - id: combinatorics.counting-dp
       name: Counting dynamic programming
@@ -206,7 +206,7 @@ techniques:
       name: The hook-length formula
       subject: combinatorics
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: combinatorics.inclusion-exclusion
       name: Inclusion and exclusion
@@ -260,7 +260,7 @@ techniques:
       synonyms:
           - Lagrangian optimization
           - aliens trick
-      status: missing
+      status: published
       divisions: []
     - id: dynamic-programming.bitmask-dp
       name: Bitmask dynamic programming
@@ -383,7 +383,7 @@ techniques:
       name: Constraint propagation
       subject: enumeration
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: enumeration.gray-codes
       name: Gray codes
@@ -455,7 +455,7 @@ techniques:
       name: Loop invariants
       subject: foundations
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: foundations.proof-techniques
       name: The proof techniques
@@ -483,7 +483,7 @@ techniques:
       name: The time-memory tradeoff
       subject: foundations
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: geometry.closest-pair
       name: Closest pair
@@ -1014,7 +1014,7 @@ techniques:
       name: The sliding window variants with a state machine
       subject: searching
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: searching.sorted-range-search
       name: Search over a sorted range of indices
@@ -1126,7 +1126,7 @@ techniques:
       subject: strings
       synonyms:
           - suffix tree
-      status: missing
+      status: published
       divisions: []
     - id: strings.trie
       name: Trie
