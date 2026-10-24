@@ -1,0 +1,9 @@
+- name: a word with two repeated letters
+  input: "aabb\n"
+  expected: "6\n"
+- name: a word long enough to wrap the modulus
+  input: "abcdefghijklmnopqrstuvwxyzabcdefghij\n"
+  expected: "297385838\n"
+- name: the shortest word
+  input: "a\n"
+  expected: "1\n"

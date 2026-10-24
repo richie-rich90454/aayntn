@@ -1,0 +1,30 @@
+id: cses.1622.creating-strings
+title: Creating Strings
+source: CSES
+contest: CSES Problem Set
+division: bronze
+url: https://cses.fi/problemset/task/1622
+techniques:
+    - combinatorics.multinomial-coefficients
+prerequisites:
+    - combinatorics.binomial-coefficients
+    - foundations.recursion
+difficulty: 1
+estimatedMinutes: 10
+specialConstraints:
+    - The string has between 1 and 8 lowercase letters.
+    - The output lists every distinct string in alphabetical order, so the count and the enumeration must agree.
+    - The count is the multinomial coefficient of the letter frequencies.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The first output value is the number of distinct arrangements, which is n factorial divided by the factorials of the letter counts.
+    - With at most 8 letters, generating the arrangements from a frequency array is fast enough.
+    - Try the available letters in alphabetical order and decrement a count before the recursive call, so the output is already sorted.
+discussion: >-
+    The problem asks for the arrangements and their number. The number is the multinomial coefficient of the letter counts, and the arrangements are the leaves of a backtracking tree that chooses one available letter at each position. Because the recursion tries the letters in alphabetical order and skips a letter whose count is zero, the leaves come out in alphabetical order. The count can be printed before the enumeration or accumulated as the leaves are produced.
+related:
+    - uva.10338.mischievous-children
+    - atcoder.abc425.e.count-sequences-2

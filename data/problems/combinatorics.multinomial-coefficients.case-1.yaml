@@ -1,0 +1,30 @@
+id: uva.10338.mischievous-children
+title: Mischievous Children
+source: UVa
+contest: UVa Volume 103
+division: bronze
+url: https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1279
+techniques:
+    - combinatorics.multinomial-coefficients
+prerequisites:
+    - combinatorics.binomial-coefficients
+    - foundations.complexity
+difficulty: 2
+estimatedMinutes: 15
+specialConstraints:
+    - Each word has at most 20 capital letters, so the exact answer fits in a signed 64-bit integer.
+    - The answer is reported exactly rather than modulo a prime, so the division by the letter counts must stay exact.
+    - The input can hold up to 30000 data sets, so the factorial table should be built once and reused.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Count how many times each letter appears, then divide n factorial by the factorial of every count.
+    - The division is exact in integer arithmetic, but a 32-bit factorial overflows at 13!, so use a 64-bit type or cancel the repeated factorials before multiplying.
+    - Precompute factorials up to 20 once, and divide them in an order that keeps the running value integral.
+discussion: >-
+    The word is a multiset, and two arrangements are equal when they produce the same string. The count is n factorial divided by the factorials of the letter frequencies. The exact answer fits in 64 bits for a 20-letter word, but a 32-bit factorial overflows at 13!, so the implementation has to use a 64-bit type or divide while it multiplies. The problem is the cleanest test of the counting argument without a modulus.
+related:
+    - cses.1622.creating-strings
+    - atcoder.abc425.e.count-sequences-2

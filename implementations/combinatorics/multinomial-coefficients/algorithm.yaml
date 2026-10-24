@@ -1,0 +1,96 @@
+algorithm: combinatorics.multinomial-coefficients
+title: Multinomial coefficients and the hypergeometric distribution
+summary: Count the distinct permutations of a word by dividing n factorial by the factorial of every letter frequency, and evaluate the ratio modulo a prime with one inverse factorial table.
+subject: combinatorics
+divisions: [silver, gold]
+importance: common-contest-technique
+prerequisites:
+    required: [combinatorics.binomial-coefficients]
+    recommended: [foundations.complexity, foundations.recursion]
+complexity:
+    time: "O(n + log p) per word"
+    space: "O(n)"
+assumptions:
+    - The input is one word of lowercase letters of length n, with n < 1000000007.
+    - The modulus is the prime 1000000007, so every factorial that is inverted has an inverse.
+    - Two arrangements are equal exactly when they produce the same string, so copies of the same letter are indistinguishable.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one word and prints its number of distinct permutations modulo 1000000007."
+      time: "O(n + log p) per word"
+      auxiliarySpace: "O(n) for the factorial and inverse factorial tables"
+      status: unverified
+      inputs: "One word of lowercase letters, read from standard input."
+      outputs: "One line with the number of distinct permutations of the word modulo 1000000007."
+      notes: "The word is read into a growable buffer so the length is limited by memory rather than by a fixed array, and the two tables are heap-allocated and released on every exit path. The only modular inverse is computed by binary exponentiation."
+      operations: [count-frequencies, factorial-table, inverse-factorial-table, multinomial]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one word and prints its number of distinct permutations modulo 1000000007."
+      time: "O(n + log p) per word"
+      auxiliarySpace: "O(n) for the factorial and inverse factorial tables"
+      status: unverified
+      inputs: "One word of lowercase letters, read from standard input."
+      outputs: "One line with the number of distinct permutations of the word modulo 1000000007."
+      notes: "The word is a std::string and the tables are std::vectors, so the storage grows with the input. The modular inverse is computed by binary exponentiation, and every product fits in a signed 64-bit integer because the modulus is near 10^9."
+      operations: [count-frequencies, factorial-table, inverse-factorial-table, multinomial]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one word and prints its number of distinct permutations modulo 1000000007."
+      time: "O(n + log p) per word"
+      auxiliarySpace: "O(n) for the factorial and inverse factorial tables"
+      status: unverified
+      inputs: "One word of lowercase letters, read from standard input."
+      outputs: "One line with the number of distinct permutations of the word modulo 1000000007."
+      notes: "The source is java/Main.java and the class is Main, so the judge entry point is the standard one. A BufferedReader reads the single token, and the tables are long[] because a product of two residues near 10^9 exceeds a signed 32-bit integer."
+      operations: [count-frequencies, factorial-table, inverse-factorial-table, multinomial]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one word and prints its number of distinct permutations modulo 1000000007."
+      time: "O(n + log p) per word"
+      auxiliarySpace: "O(n) for the factorial and inverse factorial tables"
+      status: unverified
+      inputs: "One word of lowercase letters, read from standard input."
+      outputs: "One line with the number of distinct permutations of the word modulo 1000000007."
+      notes: "The whole input is read once and split, and the inverse is produced by the built-in three-argument pow with exponent 1000000005. Python integers are arbitrary-precision, so the modular products cannot overflow, but the loops still run in linear time."
+      operations: [count-frequencies, factorial-table, inverse-factorial-table, multinomial]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one word and prints its number of distinct permutations modulo 1000000007."
+      time: "O(n + log p) per word"
+      auxiliarySpace: "O(n) for the factorial and inverse factorial tables"
+      status: unverified
+      inputs: "One word of lowercase letters, read from standard input."
+      outputs: "One line with the number of distinct permutations of the word modulo 1000000007."
+      notes: "Educational reference implementation: JavaScript/Pascal is not a USACO submission language. The line is read with one argument, there is no IOResult, and the arithmetic uses Int64 only: a product of two residues near 10^9 is below 2^63 in a native compiler, and a 10-bit limb helper keeps every partial product exact when the browser compiler represents Int64 with JavaScript numbers. No 128-bit integer is needed."
+      operations: [count-frequencies, factorial-table, inverse-factorial-table, multinomial]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one word and prints its number of distinct permutations modulo 1000000007."
+      time: "O(n + log p) per word"
+      auxiliarySpace: "O(n) for the factorial and inverse factorial tables"
+      status: unverified
+      inputs: "One word of lowercase letters, read from standard input."
+      outputs: "One line with the number of distinct permutations of the word modulo 1000000007."
+      notes: "Educational reference implementation: JavaScript/Pascal is not a USACO submission language. Ordinary JavaScript numbers are doubles with 53 bits of exact integer precision, which is less than the 60 bits a product of two residues near 10^9 needs, so every table entry and every modular product uses BigInt."
+      operations: [count-frequencies, factorial-table, inverse-factorial-table, multinomial]

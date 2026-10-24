@@ -1,0 +1,30 @@
+id: atcoder.abc425.e.count-sequences-2
+title: Count Sequences 2
+source: AtCoder
+contest: UNIQUE VISION Programming Contest 2025 Autumn (AtCoder Beginner Contest 425)
+division: gold
+url: https://atcoder.jp/contests/abc425/tasks/abc425_e
+techniques:
+    - combinatorics.multinomial-coefficients
+prerequisites:
+    - combinatorics.binomial-coefficients
+    - number-theory.modular-arithmetic
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The modulus is between 2 and 10^9 and is not necessarily prime, so inverse factorials may not exist.
+    - The sum of the counts in one test case is at most 5000.
+    - The sum of N over all test cases is at most 300000, so each test case must be linear after preprocessing.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The answer is the factorial of the total count divided by the product of the count factorials.
+    - Build the sequence by choosing positions for color 1, then color 2, and so on; the product of binomial coefficients is the multinomial coefficient.
+    - Because the modulus may be composite, precompute binomial coefficients with Pascal's identity modulo the given modulus instead of dividing by factorials.
+discussion: >-
+    The count is a multinomial coefficient, but the modulus is arbitrary. The inverse factorial method requires a prime modulus larger than the total count, and neither condition holds here. The safe route is Pascal's identity: precompute every binomial coefficient modulo the given modulus up to the largest total count, then multiply the coefficient that chooses the positions of each color. The preprocessing is quadratic in the largest total count, and each test case is linear in N. The problem is the counterexample to the reflex of dividing by factorials under any modulus.
+related:
+    - uva.10338.mischievous-children
+    - cses.1622.creating-strings
