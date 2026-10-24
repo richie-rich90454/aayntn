@@ -10,6 +10,7 @@ import { katex } from "@mdit/plugin-katex";
 import { createHighlighter, type Highlighter } from "shiki";
 import { aayntnLight } from "../../docs/.vitepress/theme/shiki-theme.ts";
 import { katexMacros } from "../../docs/.vitepress/theme/katex-macros.ts";
+import { mathPanel } from "../../docs/.vitepress/theme/markdown/math-panel.ts";
 
 export const CODE_LANGUAGES = ["c", "cpp", "java", "python", "pascal", "javascript"] as const;
 
@@ -83,6 +84,7 @@ export async function createBookMarkdown(): Promise<{
         typographer: false,
     });
 
+    md.use(mathPanel as never);
     md.use(katex as never, {
         delimiters: "dollars",
         throwOnError: false,
