@@ -12,7 +12,7 @@ var
 
 begin
   Read(N);
-  if (IOResult <> 0) or (N < 0) then
+  if N < 0 then
   begin
     WriteLn(-1);
     Halt(0);
@@ -23,20 +23,11 @@ begin
 
   for I := 0 to N - 1 do
   begin
-    Read(Lefts[I], Rights[I]);
-    if IOResult <> 0 then
-    begin
-      WriteLn(-1);
-      Halt(0);
-    end;
+    Read(Lefts[I]);
+    Read(Rights[I]);
   end;
 
   Read(Point);
-  if IOResult <> 0 then
-  begin
-    WriteLn(-1);
-    Halt(0);
-  end;
 
   Lo := 0;
   Hi := N - 1;
