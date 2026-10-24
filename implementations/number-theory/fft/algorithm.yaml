@@ -1,0 +1,96 @@
+algorithm: number-theory.fft
+title: The fast Fourier transform
+summary: Multiply two polynomials in O(n log n) by evaluating both at the roots of unity, multiplying the values, and interpolating back with an in-place iterative radix-2 butterfly.
+subject: number-theory
+divisions: [gold, platinum]
+importance: specialized-technique
+prerequisites:
+    required: [foundations.complexity]
+    recommended: [number-theory.modular-arithmetic, foundations.recursion]
+complexity:
+    time: "O(n log n)"
+    space: "O(n)"
+assumptions:
+    - The two coefficient lists are non-empty and the recovered coefficients are rounded to the nearest integer at the end.
+    - The transform length is a power of two at least as large as the degree of the product, so the circular convolution equals the linear one.
+    - The coefficients and the transform length are small enough that double-precision rounding error stays below one half.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two coefficient lists, pads them to a power of two, and prints the rounded coefficients of the product."
+      time: "O(n log n) complex operations"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n on the first line, then n coefficients; m on the next line, then m coefficients. Any whitespace separates the integers."
+      outputs: "The n + m - 1 coefficients of the product, from degree 0 upward, separated by spaces on one line and rounded to the nearest integer."
+      notes: "The real and imaginary parts live in separate calloc'd arrays that are extended and transformed in place. The inverse transform is the forward transform with the opposite angle, followed by a division by n, and the rounding adds 0.5 for a non-negative value and subtracts 0.5 for a negative one before truncating."
+      operations: [parse, pad, bit-reversal, butterfly, pointwise-product, inverse, round]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two coefficient lists, pads them to a power of two, and prints the rounded coefficients of the product."
+      time: "O(n log n) complex operations"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n on the first line, then n coefficients; m on the next line, then m coefficients. Any whitespace separates the integers."
+      outputs: "The n + m - 1 coefficients of the product, from degree 0 upward, separated by spaces on one line and rounded to the nearest integer."
+      notes: "The arrays are std::vector<double> pairs that are resized to the transform length with zeros, and std::swap performs the bit-reversal exchange. The inverse transform uses the conjugate angle and a division by n, and the rounding is the same half-away-from-zero rule as the other five programs."
+      operations: [parse, pad, bit-reversal, butterfly, pointwise-product, inverse, round]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two coefficient lists, pads them to a power of two, and prints the rounded coefficients of the product."
+      time: "O(n log n) complex operations"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n on the first line, then n coefficients; m on the next line, then m coefficients. Any whitespace separates the integers."
+      outputs: "The n + m - 1 coefficients of the product, from degree 0 upward, separated by spaces on one line and rounded to the nearest integer."
+      notes: "StreamTokenizer reads the integers without boxing them into strings. Four double arrays hold the padded input and the pointwise product, and a StringBuilder collects the output. The rounding casts x + 0.5 or x - 0.5 to long, which truncates toward zero exactly as the C variant does."
+      operations: [parse, pad, bit-reversal, butterfly, pointwise-product, inverse, round]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two coefficient lists, pads them to a power of two, and prints the rounded coefficients of the product."
+      time: "O(n log n) complex operations"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n on the first line, then n coefficients; m on the next line, then m coefficients. Any whitespace separates the integers."
+      outputs: "The n + m - 1 coefficients of the product, from degree 0 upward, separated by spaces on one line and rounded to the nearest integer."
+      notes: "The real and imaginary parts are separate Python lists rather than complex numbers, so the butterfly is the same arithmetic as in the other five languages. The input is parsed in one pass from sys.stdin.buffer, and the rounding uses floor or ceil so that exact halves leave zero in both directions."
+      operations: [parse, pad, bit-reversal, butterfly, pointwise-product, inverse, round]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: conditional
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads two coefficient lists, pads them to a power of two, and prints the rounded coefficients of the product."
+      time: "O(n log n) complex operations"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n on the first line, then n coefficients; m on the next line, then m coefficients. Any whitespace separates the integers."
+      outputs: "The n + m - 1 coefficients of the product, from degree 0 upward, separated by spaces on one line and rounded to the nearest integer."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Four dynamic arrays of Double hold the real and imaginary parts of the two inputs, because the browser Pascal compiler has no complex type. Every Read takes one argument, the arrays are zero-filled after SetLength, and the rounding uses Trunc of x + 0.5 or x - 0.5 rather than Round, whose tie rule is banker's rounding."
+      operations: [parse, pad, bit-reversal, butterfly, pointwise-product, inverse, round]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: conditional
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads two coefficient lists, pads them to a power of two, and prints the rounded coefficients of the product."
+      time: "O(n log n) complex operations"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n on the first line, then n coefficients; m on the next line, then m coefficients. Any whitespace separates the integers."
+      outputs: "The n + m - 1 coefficients of the product, from degree 0 upward, separated by spaces on one line and rounded to the nearest integer."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The coefficients fit in Number, so no BigInt is needed; the arrays are filled with zeros and transformed in place. The rounding uses floor for a non-negative value and ceil for a negative one, because Math.round breaks ties toward positive infinity."
+      operations: [parse, pad, bit-reversal, butterfly, pointwise-product, inverse, round]

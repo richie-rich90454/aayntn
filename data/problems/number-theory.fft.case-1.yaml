@@ -1,0 +1,29 @@
+id: kattis.polymul2.polynomial-multiplication-2
+title: Polynomial Multiplication 2
+source: Kattis
+division: gold
+url: https://open.kattis.com/problems/polymul2
+techniques:
+    - number-theory.fft
+prerequisites:
+    - foundations.complexity
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - Each degree is at most 131,071, so multiplying term by term costs about 1.7e10 operations.
+    - The coefficients of the input and of the product fit in a signed 32-bit integer.
+    - At the maximum degree the product coefficients can reach about 6e23, far beyond the exact range of a double FFT, so the transform must split the coefficients or use an NTT.
+    - There is exactly one test case, but its input and output are large enough that buffered I/O matters.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The output has degree n + m, so the naive double loop over the two coefficient lists is quadratic.
+    - Evaluating both polynomials at the same roots of unity turns their convolution into pointwise multiplication.
+    - Pad both lists to one power of two at least n + m + 1, or the circular wrap corrupts the low coefficients.
+    - The inverse transform uses the conjugate root and a division by the transform length, and the rounding happens only after that.
+discussion: >-
+    The input is two coefficient lists of degree up to 131,071, and the output is their product in the same format. The naive convolution is quadratic and too slow at this size, while the FFT evaluates both lists at the roots of unity in O(n log n), multiplies the two point-value vectors, and interpolates the product with the inverse transform. Two numerical decisions decide correctness: the transform length must be the next power of two at or above n + m + 1, and at the maximum degree the exact coefficients can exceed the precision of a double, so a correct solution splits the coefficients into smaller pieces or uses an NTT.
+related:
+    - atcoder.abc196.f.substring-2
+    - codeforces.993e.nikita-and-order-statistics

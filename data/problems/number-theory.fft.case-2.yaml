@@ -1,0 +1,29 @@
+id: atcoder.abc196.f.substring-2
+title: Substring 2
+source: AtCoder
+contest: AtCoder Beginner Contest 196
+division: platinum
+url: https://atcoder.jp/contests/abc196/tasks/abc196_f
+techniques:
+    - number-theory.fft
+prerequisites:
+    - foundations.complexity
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - Both strings can reach 10^6 characters, so checking every shift character by character is about 10^12 comparisons.
+    - The transform length is about 2 * 10^6, which the next power of two rounds up to 2^21.
+    - The answer is the minimum Hamming distance over the valid shifts, not the sum over all shifts.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Map bit 0 to +1 and bit 1 to -1; then the correlation of T with a window of S is matches minus mismatches.
+    - Reversing T turns that correlation into a convolution of two coefficient lists.
+    - One convolution gives the correlation for every shift at once, and the mismatch count is half the difference between |T| and that correlation.
+    - Only shifts from 0 to |S| - |T| are valid, so the extrema outside that range must be ignored.
+discussion: >-
+    For a fixed shift, the number of positions where the window of S differs from T is a Hamming distance, and checking every shift directly is quadratic. Encoding each bit as +1 or -1 makes the sum of the products over the overlap equal to matches minus mismatches, so the weight of the window plus the weight of T minus twice that sum is the squared difference at the shift. Reversing T turns the sum into a convolution, and one FFT evaluates every shift in O(n log n). The answer is the smallest mismatch count among the |S| - |T| + 1 valid alignments.
+related:
+    - kattis.polymul2.polynomial-multiplication-2
+    - codeforces.993e.nikita-and-order-statistics

@@ -1,0 +1,31 @@
+id: codeforces.993e.nikita-and-order-statistics
+title: Nikita and Order Statistics
+source: Codeforces
+contest: Codeforces Round 488 by NEAR (Div. 1)
+division: platinum
+url: https://codeforces.com/problemset/problem/993/E
+editorialUrl: https://codeforces.com/blog/entry/60047
+techniques:
+    - number-theory.fft
+prerequisites:
+    - foundations.complexity
+    - number-theory.modular-arithmetic
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - The array has up to 200,000 elements, and the program must answer all n + 1 values of k.
+    - Each answer is at most n(n + 1)/2, which exceeds a signed 32-bit integer.
+    - Counting the qualifying subarrays separately for every k is quadratic, while one convolution produces all of them.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Replace each element by 1 when it is below x and by 0 otherwise, and let pref[i] be the prefix sum of that array.
+    - The subarray from l + 1 through r contains exactly k elements below x exactly when pref[r] - pref[l] = k.
+    - Count how many prefixes have each sum v, then the number of pairs at distance k is a coefficient of the count list convolved with its reverse.
+    - For k = 0, subtract the n + 1 pairs with l = r and halve the rest, because every unordered pair of distinct prefixes is counted twice.
+discussion: >-
+    The comparison with x throws away the values: only whether an element is below x matters. With a prefix sum of those indicators, a subarray has exactly k qualifying elements when its two prefix sums differ by k, so the answer for every k is a histogram of distances between equal or shifted prefix sums. That histogram is a cross-correlation of the count of each prefix sum with itself, which one FFT computes for all k at once. The zero case removes the n + 1 pairs with equal endpoints and halves the remainder, because the convolution counts both orders of every distinct pair, and every answer fits in a 64-bit integer.
+related:
+    - kattis.polymul2.polynomial-multiplication-2
+    - atcoder.abc196.f.substring-2

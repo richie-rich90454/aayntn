@@ -1,0 +1,9 @@
+- name: constant polynomials with a negative product
+  input: "1\n-3\n1\n7\n"
+  expected: "-21\n"
+- name: a small product that cancels and contains a zero coefficient
+  input: "4\n1 -2 0 3\n3\n4 5 -6\n"
+  expected: "4 -3 -16 24 15 -18\n"
+- name: a product whose length is just over a power of two
+  input: "5\n1 2 3 4 5\n5\n5 4 3 2 1\n"
+  expected: "5 14 26 40 55 40 26 14 5\n"
