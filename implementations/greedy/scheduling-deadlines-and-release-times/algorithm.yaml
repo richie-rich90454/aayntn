@@ -1,0 +1,96 @@
+algorithm: greedy.scheduling-deadlines-and-release-times
+title: Scheduling with deadlines and release times
+summary: Maximize the profit of unit-time jobs by keeping the most profitable set that fits before each deadline, and handle release times with an earliest-deadline sweep or a matching.
+subject: greedy
+divisions: [silver, gold]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.sorting, foundations.complexity]
+    recommended: [range-queries.fenwick-tree, graphs.dsu]
+complexity:
+    time: "O(n log n)"
+    space: "O(n)"
+assumptions:
+    - Every job takes exactly one unit of time, and every job is available from time 0 unless the statement gives a release time.
+    - Deadlines are positive integers, and a job with deadline d must occupy one of the slots 1, 2, ..., d.
+    - Profits are nonnegative, so adding a feasible job never lowers the total, and ties may be broken arbitrarily.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n jobs with deadlines and profits, and prints the maximum total profit of the jobs that finish on time."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the job array and the profit heap"
+      status: unverified
+      inputs: "n, then n lines holding the deadline and the profit of one job."
+      outputs: "A single line holding the maximum total profit."
+      notes: "The jobs are sorted by deadline with qsort, and a hand-written binary min-heap keeps the profits of the selected jobs. The heap is trimmed after every insertion, so the prefix condition holds at every step, and the total is accumulated in long long because n profits of 10^9 exceed a 32-bit integer."
+      operations: [sort, heap, trim, total]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n jobs with deadlines and profits, and prints the maximum total profit of the jobs that finish on time."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the job vector and the profit heap"
+      status: unverified
+      inputs: "n, then n lines holding the deadline and the profit of one job."
+      outputs: "A single line holding the maximum total profit."
+      notes: "The jobs are sorted by deadline, and std::priority_queue with std::greater<long long> is the min-heap that removes the least profitable selected job. The third template argument is the detail that separates a min-heap from the default max-heap, and the accumulator is a signed 64-bit integer."
+      operations: [sort, heap, trim, total]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n jobs with deadlines and profits, and prints the maximum total profit of the jobs that finish on time."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the job array and the profit heap"
+      status: unverified
+      inputs: "n, then n lines holding the deadline and the profit of one job."
+      outputs: "A single line holding the maximum total profit."
+      notes: "The class is Main and lives in java/Main.java. A byte-oriented scanner avoids the cost of java.util.Scanner, Arrays.sort orders the jobs by deadline, and PriorityQueue<Long> is a min-heap, so the smallest selected profit is the one that leaves when the prefix is too large. The answer is a long."
+      operations: [sort, heap, trim, total]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n jobs with deadlines and profits, and prints the maximum total profit of the jobs that finish on time."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the job list and the profit heap"
+      status: unverified
+      inputs: "n, then n lines holding the deadline and the profit of one job."
+      outputs: "A single line holding the maximum total profit."
+      notes: "The whole input is read once and split, the jobs are sorted as (deadline, profit) tuples, and heapq is a min-heap. Python integers are arbitrary precision, so the total needs no special width, and n = 0 prints 0 instead of failing."
+      operations: [sort, heap, trim, total]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n jobs with deadlines and profits, and prints the maximum total profit of the jobs that finish on time."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the job array, the merge buffer and the profit heap"
+      status: unverified
+      inputs: "n, then n lines holding the deadline and the profit of one job."
+      outputs: "A single line holding the maximum total profit."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program uses SysUtils, one argument per Read, no IOResult, and Int64 rather than a 128-bit type, so it compiles under pas2js. The sort is an iterative bottom-up merge sort and the min-heap is hand-written, which keeps the listing free of recursion."
+      operations: [sort, heap, trim, total]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n jobs with deadlines and profits, and prints the maximum total profit of the jobs that finish on time."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the job array and the profit heap"
+      status: unverified
+      inputs: "n, then n lines holding the deadline and the profit of one job."
+      outputs: "A single line holding the maximum total profit."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The jobs are sorted with a deadline comparator, and a hand-written array-backed min-heap replaces the priority queue that the standard library does not provide. Number represents every integer below 2^53 exactly, and the largest possible answer is far below that limit."
+      operations: [sort, heap, trim, total]

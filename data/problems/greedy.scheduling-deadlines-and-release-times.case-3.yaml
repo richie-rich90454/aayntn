@@ -1,0 +1,31 @@
+id: atcoder.abc325.d.printing-machine
+title: Printing Machine
+source: AtCoder
+contest: AtCoder Beginner Contest 325
+division: gold
+url: https://atcoder.jp/contests/abc325/tasks/abc325_d
+editorialUrl: https://atcoder.jp/contests/abc325/editorial/7482
+techniques:
+    - greedy.scheduling-deadlines-and-release-times
+prerequisites:
+    - foundations.sorting
+    - foundations.complexity
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - Product i can be printed only between time T_i and time T_i + D_i, inclusive.
+    - A print is instantaneous, but the printer needs one microsecond of charging before the next print.
+    - T_i and D_i reach 10^18, so the sweep must jump between arrival times instead of visiting every microsecond.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A product is a unit-time job whose window starts at T_i and ends at T_i + D_i.
+    - At any time, print the available product whose window ends earliest.
+    - Keep the available products in a min-heap ordered by exit time.
+    - If no product is available, jump directly to the next arrival time.
+discussion: >-
+    This is the release-time version of the scheduling question, with every profit equal to one. A product can be printed at any integer time inside its window, and consecutive prints are one microsecond apart, so the products are unit-time jobs with release times and deadlines. Earliest-deadline-first among the available products is optimal: if a schedule prints a later-exit product while an earlier-exit product waits, swapping the two keeps both inside their windows. The time axis reaches 10^18, so the sweep cannot visit every microsecond. It jumps to the next arrival whenever the heap is empty, and each product enters and leaves the heap once, which gives O(N log N) time.
+related:
+    - poj.1456.supermarket
+    - hdu.1789.doing-homework-again

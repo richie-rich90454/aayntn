@@ -1,0 +1,29 @@
+id: hdu.1789.doing-homework-again
+title: Doing Homework again
+source: HDU
+division: gold
+url: https://acm.hdu.edu.cn/showproblem.php?pid=1789
+techniques:
+    - greedy.scheduling-deadlines-and-release-times
+prerequisites:
+    - foundations.sorting
+    - foundations.complexity
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The first line is the number of test cases, and each case gives all deadlines on one line and all penalties on the next line.
+    - Every homework takes one day, and homework handed in after its deadline costs its full penalty.
+    - The task is to minimize the total penalty, which equals the total penalty minus the maximum profit of the homework finished on time.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Minimizing the lost score is the same as maximizing the score saved by the on-time homework.
+    - Treat each penalty as a profit and reuse the deadline-and-profit greedy.
+    - Sort by deadline and keep a min-heap of the saved penalties.
+    - When the heap is larger than the current deadline, discard the smallest saved penalty.
+discussion: >-
+    The problem is the penalty form of the same scheduling question. Every homework takes one day, and a late homework loses its whole penalty, so the saved score of an on-time homework is exactly a profit in the deadline-and-profit problem. The total penalty is fixed, so minimizing the loss is the same as maximizing the saved penalty. The deadline-ascending min-heap is the natural implementation: after each deadline, keep the largest penalties that fit, and drop the smallest whenever the prefix is too large. The input gives the deadlines and the penalties in two separate lines, so the parser should not assume that each homework occupies one line.
+related:
+    - poj.1456.supermarket
+    - atcoder.abc325.d.printing-machine

@@ -1,0 +1,30 @@
+id: poj.1456.supermarket
+title: Supermarket
+source: POJ
+contest: Southeastern Europe 2003
+division: gold
+url: http://poj.org/problem?id=1456
+techniques:
+    - greedy.scheduling-deadlines-and-release-times
+prerequisites:
+    - foundations.sorting
+    - foundations.complexity
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - Several product sets are read until the end of the input, and each set is answered on its own line.
+    - Every product takes exactly one unit of time, and its profit is earned only when it is sold by its deadline.
+    - The input gives the profit before the deadline, the reverse of the order used by this article's reference programs.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A product with deadline d can occupy only one of the first d units of time.
+    - Sorting by profit and placing each product in the latest free slot before its deadline is safe.
+    - A disjoint set union over the slots finds the latest free slot in almost constant time.
+    - If a deadline is larger than the number of products, cap it at that number before allocating the slot array.
+discussion: >-
+    The classic supermarket problem is the deadline-and-profit greedy without release times. Each product is a unit-time job, and the profit is earned only if the product is sold by its deadline. Sorting by profit descending and using the latest free slot is correct because a higher-profit product placed late does not consume an early slot that a lower-profit product with an earlier deadline needs. A disjoint set union over the slots makes the latest-free-slot search almost constant time, and the deadlines larger than the number of products can be capped without changing the answer. The multiple data sets and the profit-first input order are the two implementation details that differ from this article's reference contract.
+related:
+    - hdu.1789.doing-homework-again
+    - atcoder.abc325.d.printing-machine
