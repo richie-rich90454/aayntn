@@ -1,0 +1,31 @@
+id: codeforces.786c.till-i-collapse
+title: Till I Collapse
+source: Codeforces
+contest: "Codeforces Round 406 (Div. 1)"
+division: platinum
+url: https://codeforces.com/problemset/problem/786/C
+techniques:
+    - advanced.persistent-data-structures
+prerequisites:
+    - range-queries.segment-tree
+    - searching.binary-search
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - The array length reaches 100000, and an answer is required for every k from 1 to n.
+    - Each squad is a contiguous block with at most k distinct colors, and the number of squads must be minimized.
+    - The greedy farthest jump is optimal, but the end of each block must be found without rescanning the suffix.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - For a fixed k, take the longest valid prefix, then repeat; argue by exchange that this is optimal.
+    - Build a version for every start l marking the first occurrence of each color in a[l..n].
+    - In that version, the position of the (k+1)-th mark is the first position that would exceed k distinct colors.
+    - Sum the jumps over all k; each non-final block has at least k positions, so the total number of jumps is harmonic.
+discussion: >-
+    Greedy is optimal because any shorter first block can be extended to the farthest valid end without increasing the number of blocks. The end of the farthest block is the position just before the (k+1)-th distinct color in the suffix. A persistent segment tree over start positions marks the first occurrence of each color in every suffix: version l is version l+1 with the mark at the next occurrence of a[l] removed and a mark at l added. The (k+1)-th mark is found by descending with subtree counts. For a fixed k the number of jumps is at most n/k plus one, so the harmonic sum over k is O(n log n) jumps, each O(log n), for O(n log^2 n) time and O(n log n) space.
+related:
+    - codeforces.484e.sign-on-fence
+    - codeforces.893f.subtree-minimum-query
+    - cses.1734.distinct-values-queries

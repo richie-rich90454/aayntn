@@ -1,0 +1,31 @@
+id: codeforces.893f.subtree-minimum-query
+title: Subtree Minimum Query
+source: Codeforces
+contest: "Educational Codeforces Round 33 (Rated for Div. 2)"
+division: platinum
+url: https://codeforces.com/problemset/problem/893/F
+techniques:
+    - advanced.persistent-data-structures
+prerequisites:
+    - graphs.dfs
+    - range-queries.segment-tree
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The tree has up to 100000 vertices and there can be up to 1000000 queries, so each query must be logarithmic and the input needs a fast reader.
+    - Queries are decoded with the previous answer, so they must be answered online.
+    - The depth limit is relative to the queried vertex, not an absolute depth.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - An Euler tour turns the subtree of x into one contiguous interval.
+    - A vertex y is in the k-blocked subtree of x exactly when y is in the Euler interval of x and depth[y] <= depth[x] + k.
+    - Build one persistent segment tree version per depth, inserting the vertices of that depth at their Euler positions with their values.
+    - Query the version for the depth limit over the Euler interval and take the minimum.
+discussion: >-
+    The subtree condition becomes an interval after an Euler tour, and the distance condition becomes a depth bound. Version d of a persistent segment tree contains every vertex of depth at most d, keyed by Euler entry time and storing the minimum value. Building version d from version d-1 costs one path copy per vertex at depth d, so the whole pool is O(n log n). A query finds the depth limit, clamps it to the maximum depth, and asks for a range minimum on one version over the Euler interval of x. The answers are produced online because each query is decoded with the previous one, which persistence supports without reordering. The total is O(n log n) build time and space and O(log n) per query.
+related:
+    - codeforces.484e.sign-on-fence
+    - codeforces.786c.till-i-collapse
+    - poj.2104.k-th-number

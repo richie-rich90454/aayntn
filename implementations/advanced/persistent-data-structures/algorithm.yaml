@@ -1,0 +1,97 @@
+algorithm: advanced.persistent-data-structures
+title: Persistent data structures
+summary: Keep every version of a stack by path copying, so each push allocates one immutable node, each version is a root pointer, and old versions stay readable while new versions branch from them.
+subject: advanced
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [foundations.complexity]
+    recommended:
+        [range-queries.persistent-segment-tree, range-queries.segment-tree, advanced.rollback-dsu]
+complexity:
+    time: "O(1) per operation on the persistent stack"
+    space: "O(q) for q operations, one node per push"
+assumptions:
+    - Every operation reads one existing version and derives at most one new version; no version is modified after it is created.
+    - A pop of an empty version produces the empty version, so the empty stack never needs an error result.
+    - Each value fits in a 32-bit signed integer, and the number of operations q is known before the first version is created.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the q versioned stack operations and prints the top of every queried version."
+      time: "O(1) per operation"
+      auxiliarySpace: "O(q) for the node pool and the version roots"
+      status: unverified
+      inputs: 'q, then q lines: "1 v x" pushes x on version v, "2 v" pops version v, and "3 v" prints the top of version v; versions are numbered in the order the push and pop operations create them.'
+      outputs: "One line per type-3 operation, holding the top value or -1 when the version is empty."
+      notes: "Nodes are appended to three flat arrays sized q + 1, so a push writes one entry and a pop writes none; -1 in the root array marks the empty version. The program checks every allocation and frees the three arrays before it returns."
+      operations: [push, pop, top]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the q versioned stack operations and prints the top of every queried version."
+      time: "O(1) per operation"
+      auxiliarySpace: "O(q) for the node pool and the version roots"
+      status: unverified
+      inputs: 'q, then q lines: "1 v x" pushes x on version v, "2 v" pops version v, and "3 v" prints the top of version v; versions are numbered in the order the push and pop operations create them.'
+      outputs: "One line per type-3 operation, holding the top value or -1 when the version is empty."
+      notes: "Nodes are appended to three vectors sized q + 1, so a push writes one entry and a pop writes none; -1 in the root array marks the empty version. The root of the queried version is read before the version counter advances."
+      operations: [push, pop, top]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the q versioned stack operations and prints the top of every queried version."
+      time: "O(1) per operation"
+      auxiliarySpace: "O(q) for the node pool and the version roots"
+      status: unverified
+      inputs: 'q, then q lines: "1 v x" pushes x on version v, "2 v" pops version v, and "3 v" prints the top of version v; versions are numbered in the order the push and pop operations create them.'
+      outputs: "One line per type-3 operation, holding the top value or -1 when the version is empty."
+      notes: "Three int arrays sized q + 1 hold the node values, the parent links and the version roots; -1 marks the empty version. A StreamTokenizer reads the tokens, and a StringBuilder collects one line per type-3 operation."
+      operations: [push, pop, top]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the q versioned stack operations and prints the top of every queried version."
+      time: "O(1) per operation"
+      auxiliarySpace: "O(q) for the node pool and the version roots"
+      status: unverified
+      inputs: 'q, then q lines: "1 v x" pushes x on version v, "2 v" pops version v, and "3 v" prints the top of version v; versions are numbered in the order the push and pop operations create them.'
+      outputs: "One line per type-3 operation, holding the top value or -1 when the version is empty."
+      notes: "The whole input is read once and split into tokens, and three lists sized q + 1 hold the nodes and the version roots; -1 marks the empty version. Each push appends one node and each pop appends only a root entry."
+      operations: [push, pop, top]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the q versioned stack operations and prints the top of every queried version."
+      time: "O(1) per operation"
+      auxiliarySpace: "O(q) for the node pool and the version roots"
+      status: unverified
+      inputs: 'q, then q lines: "1 v x" pushes x on version v, "2 v" pops version v, and "3 v" prints the top of version v; versions are numbered in the order the push and pop operations create them.'
+      outputs: "One line per type-3 operation, holding the top value or -1 when the version is empty."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Dynamic arrays sized q + 1 hold the nodes and the version roots, and -1 marks the empty version. The program reads one operation per ReadLn, parses the numbers with a helper, gives every Read one argument, and uses no IOResult, so it compiles under pas2js."
+      operations: [push, pop, top]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the q versioned stack operations and prints the top of every queried version."
+      time: "O(1) per operation"
+      auxiliarySpace: "O(q) for the node pool and the version roots"
+      status: unverified
+      inputs: 'q, then q lines: "1 v x" pushes x on version v, "2 v" pops version v, and "3 v" prints the top of version v; versions are numbered in the order the push and pop operations create them.'
+      outputs: "One line per type-3 operation, holding the top value or -1 when the version is empty."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The whole input is read once and split into tokens, and three arrays sized q + 1 hold the nodes and the version roots; -1 marks the empty version. The output uses the platform line separator so it matches the compiled languages byte for byte."
+      operations: [push, pop, top]

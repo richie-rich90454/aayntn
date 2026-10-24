@@ -1,0 +1,31 @@
+id: codeforces.484e.sign-on-fence
+title: Sign on Fence
+source: Codeforces
+contest: "Codeforces Round 276 (Div. 1)"
+division: platinum
+url: https://codeforces.com/problemset/problem/484/E
+techniques:
+    - advanced.persistent-data-structures
+prerequisites:
+    - range-queries.segment-tree
+    - searching.binary-search
+difficulty: 5
+estimatedMinutes: 55
+specialConstraints:
+    - The number of panels and the number of queries both reach 100000, and heights reach 10^9.
+    - A query needs w consecutive panels of height at least H inside [l, r], which is a longest-run query rather than a range sum.
+    - The answer is the largest feasible height, so the height axis must be searched without rebuilding the marked set each time.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Binary search the answer height H; feasibility is monotone because lowering H can only add panels.
+    - For a fixed H, mark the panels with height at least H and look for a run of w marked panels inside [l, r].
+    - Build one persistent version per distinct height, adding the panels of that height to the previous version.
+    - Store the longest marked prefix, suffix, and run in every segment tree node; the query combines them and compares the run with w.
+discussion: >-
+    The answer is the largest height for which the range contains w consecutive panels of at least that height. Feasibility is monotone in the height, so a binary search over the distinct heights works. The check is a longest-run query on a marked set, and the marked set changes only by additions as the threshold decreases. Sorting the distinct heights from largest to smallest and building a persistent segment tree for each height turns every check into a range query on one version. Each update copies one root-to-leaf path, so the versions cost O(n log n) nodes. Each node stores the longest marked prefix, suffix, and run, and a range query merges those summaries in O(log n). The total is O((n + m) log^2 n) time and O(n log n) space.
+related:
+    - codeforces.786c.till-i-collapse
+    - codeforces.893f.subtree-minimum-query
+    - poj.2104.k-th-number
