@@ -1,0 +1,31 @@
+id: codeforces.1968f.equal-xor-segments
+title: Equal XOR Segments
+source: Codeforces
+contest: Codeforces Round 943 (Div. 3)
+division: gold
+url: https://codeforces.com/problemset/problem/1968/F
+editorialUrl: https://codeforces.com/blog/entry/129096
+techniques:
+    - arrays.prefix-sums-over-other-operators
+prerequisites:
+    - arrays.prefix-sums
+    - searching.binary-search
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The subarray must be split into at least two parts, so the whole subarray alone is not an answer.
+    - A split into more than three parts is never necessary when a valid split exists.
+    - The array and the query count both reach 200,000, so each query must cost logarithmic time or better.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The XOR of a range is the XOR of two prefix XOR values, and XOR is its own inverse.
+    - If the whole range has XOR zero, any split into two parts has the same XOR on both sides.
+    - Otherwise the common XOR must be the total XOR, so the answer needs three parts; find the first matching prefix after the left end and the next matching prefix after that.
+discussion: >-
+    Prefix XOR turns every range into a constant-time value, and the question becomes whether the prefix sequence inside the range contains the right two values in the right order. When the range XOR is zero, two parts always work, because the prefix at the left boundary equals the prefix at the right boundary and any cut produces two equal halves. When the range XOR is nonzero, a valid split has an odd number of parts, and three parts always suffice if any split exists: the first cut must land on the total prefix, the second on the prefix before the range, and both positions have to occur before the right end. Position lists for each prefix value, searched with binary search, answer each query in logarithmic time.
+related:
+    - codechef.segprod.product-on-the-segment-by-modulo
+    - codeforces.1215b.the-number-of-products

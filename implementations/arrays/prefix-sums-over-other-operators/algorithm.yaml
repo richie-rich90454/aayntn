@@ -1,0 +1,93 @@
+algorithm: arrays.prefix-sums-over-other-operators
+title: Prefix sums over other operators
+summary: Keep the running fold of an associative operation, count the values that have no inverse, and answer every range query with one combination and one inverse step.
+subject: arrays
+divisions: [silver, gold]
+importance: common-contest-technique
+complexity:
+    time: "O(n + q)"
+    space: "O(n)"
+assumptions:
+    - The array is static, so the prefix tables are built once before the queries.
+    - The operation is associative and has an identity element.
+    - Non-invertible values are counted separately, as zeros are for multiplication modulo a prime.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "Reads the array and the queries and prints one range product per line, using a prefix product of the nonzero values and a prefix zero count."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the product of a[l] through a[r] modulo 1000000007."
+      notes: "Each value is reduced modulo 1000000007 on read, and a negative residue is normalized into [0, 1000000007). The inverse prefix table is built backward from one modular exponentiation of the total prefix product. Every product is below 1.01 times 10^18, which fits a signed 64-bit integer."
+      operations: [accumulate-prefix-product, count-zeros, invert-prefix-product]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "Reads the array and the queries and prints one range product per line, using a prefix product of the nonzero values and a prefix zero count."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the product of a[l] through a[r] modulo 1000000007."
+      notes: "Each value is reduced modulo 1000000007 on read, and a negative residue is normalized into [0, 1000000007). The inverse prefix table is built backward from one modular exponentiation of the total prefix product. Every product is below 1.01 times 10^18, which fits a signed 64-bit integer."
+      operations: [accumulate-prefix-product, count-zeros, invert-prefix-product]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "Reads the array and the queries and prints one range product per line, using a prefix product of the nonzero values and a prefix zero count."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the product of a[l] through a[r] modulo 1000000007."
+      notes: "The class is named Main so the file can be submitted to a judge unchanged. Each value is reduced modulo 1000000007 on read, and a negative residue is normalized into [0, 1000000007). The inverse prefix table is built backward from one modular exponentiation of the total prefix product. Every product is below 1.01 times 10^18, which fits a signed 64-bit long."
+      operations: [accumulate-prefix-product, count-zeros, invert-prefix-product]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "Reads the array and the queries and prints one range product per line, using a prefix product of the nonzero values and a prefix zero count."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the product of a[l] through a[r] modulo 1000000007."
+      notes: "Python integers are unbounded, so every intermediate product stays exact. Each value is reduced modulo 1000000007 on read, including negative input. The inverse prefix table is built backward from one call to the built-in modular exponentiation."
+      operations: [accumulate-prefix-product, count-zeros, invert-prefix-product]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Reads the array and the queries and prints one range product per line, using a prefix product of the nonzero values and a prefix zero count."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the product of a[l] through a[r] modulo 1000000007."
+      notes: "Educational reference implementation: JavaScript/Pascal is not a USACO submission language. Int64 is exact in Free Pascal; under the browser compiler it is represented as a double, so MulMod splits one factor into 15-bit limbs and keeps every intermediate below 2^53. Each value is reduced modulo 1000000007 on read, including negative input."
+      operations: [accumulate-prefix-product, count-zeros, invert-prefix-product]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Reads the array and the queries and prints one range product per line, using a prefix product of the nonzero values and a prefix zero count."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with a 1-based inclusive range l r."
+      outputs: "One line per query with the product of a[l] through a[r] modulo 1000000007."
+      notes: "Educational reference implementation: JavaScript/Pascal is not a USACO submission language. BigInt keeps every intermediate exact. Each value is reduced modulo 1000000007 on read, including negative input. The inverse prefix table is built backward from one modular exponentiation of the total prefix product."
+      operations: [accumulate-prefix-product, count-zeros, invert-prefix-product]

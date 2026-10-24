@@ -1,0 +1,29 @@
+id: codechef.segprod.product-on-the-segment-by-modulo
+title: Product on the Segment by Modulo
+source: CodeChef
+contest: CodeChef November Challenge 2017
+division: platinum
+url: https://www.codechef.com/problems/SEGPROD
+techniques:
+    - arrays.prefix-sums-over-other-operators
+prerequisites:
+    - arrays.prefix-sums
+    - number-theory.modular-arithmetic
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The modulus is not necessarily prime, so a prefix product cannot always be divided by the prefix before the range.
+    - Queries are online, so every query depends on the previous answer and the queries cannot be reordered.
+    - The array has up to one million values and the query count reaches twenty million, so the work per query must be constant time.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Count the zeros separately, because a range containing a zero has product zero modulo any modulus.
+    - For the prime subtask, build the prefix product of the nonzero values and one inverse prefix table; each query is then a zero check and one multiplication.
+    - For the general modulus, a residue can share a factor with the modulus and have no inverse, so the full task needs a static structure that combines two products without dividing.
+discussion: >-
+    The task is the range product in its least forgiving form. The prefix-product trick needs a division, and the modulus is composite, so a residue can share a factor with the modulus and have no inverse. The prime subtask is exactly the technique in this article: a prefix product of the nonzero values, a prefix count of zeros, and an inverse prefix table. The full task needs a static structure that combines two products without dividing, such as block decomposition or a disjoint sparse table, because the online queries rule out sorting or offline reordering.
+related:
+    - codeforces.1215b.the-number-of-products
+    - codeforces.1968f.equal-xor-segments

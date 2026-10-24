@@ -1,0 +1,31 @@
+id: codeforces.1215b.the-number-of-products
+title: The Number of Products
+source: Codeforces
+contest: Codeforces Round 585 (Div. 2)
+division: silver
+url: https://codeforces.com/problemset/problem/1215/B
+editorialUrl: https://codeforces.com/blog/entry/69815
+techniques:
+    - arrays.prefix-sums-over-other-operators
+prerequisites:
+    - arrays.prefix-sums
+    - foundations.complexity
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - Every element is nonzero, so a subarray product is never zero and only the sign matters.
+    - The array has up to 200,000 values, so enumerating every subarray is too slow.
+    - The two counts can reach about 2 times 10^10, which exceeds a signed 32-bit integer.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The sign of a product is determined by the parity of the number of negative factors.
+    - Replace every value by its sign and build the prefix products of the signs; those prefix products are only +1 and -1.
+    - Count pairs of prefix positions with different signs for the negative products, and pairs with the same sign for the positive ones, including the empty prefix.
+discussion: >-
+    Multiplication collapses to a two-state operation once only the sign is kept, and the prefix product of those two states is a prefix XOR in disguise. A subarray has negative product exactly when its two bounding prefix signs differ, so the number of negative subarrays is the number of unlike pairs of prefix signs. The positive count is the number of like pairs, with the empty prefix included so that subarrays starting at the first element are counted. The whole scan is linear and needs one counter for each sign, which is why the values themselves never have to be multiplied.
+related:
+    - codechef.segprod.product-on-the-segment-by-modulo
+    - codeforces.1968f.equal-xor-segments
