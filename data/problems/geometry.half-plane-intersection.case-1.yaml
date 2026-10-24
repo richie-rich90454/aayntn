@@ -1,0 +1,30 @@
+id: poj.1279.art-gallery
+title: Art Gallery
+source: POJ
+contest: Southeastern Europe 2002
+division: platinum
+url: http://poj.org/problem?id=1279
+techniques:
+    - geometry.half-plane-intersection
+prerequisites:
+    - geometry.half-plane-intersection
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The polygon is simple but not necessarily convex, and it can have 1500 vertices.
+    - The answer is the area of the kernel, so the half-planes are the inward sides of the polygon's directed edges.
+    - The area is printed with exactly two digits after the decimal point, so the final value is rounded rather than kept as a fraction.
+    - The coordinates fit in a 16-bit integer, which makes the intersection tests small but does not remove the need for a tolerant comparison.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A point sees the whole gallery exactly when it lies on the inward side of every edge, so the answer is the area of an intersection of half-planes.
+    - Build one half-plane per directed edge of the polygon, oriented so that the polygon lies on its left.
+    - Intersect the half-planes, then take the shoelace area of the resulting convex polygon.
+    - A kernel can be empty, so handle the empty case before computing the area.
+discussion: >-
+    The problem is the canonical kernel computation. Each edge of the gallery contributes the half-plane on its inward side, and the set of points that see the whole gallery is exactly the intersection of those half-planes. The intersection is convex, so the angular-sweep half-plane intersection applies directly. The two details that decide the submission are the orientation of each edge, because a clockwise input reverses every half-plane, and the empty kernel, which has to be detected before the area is taken.
+related:
+    - poj.1474.video-surveillance
+    - poj.3335.rotating-scoreboard

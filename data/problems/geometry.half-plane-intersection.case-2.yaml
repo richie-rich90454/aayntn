@@ -1,0 +1,30 @@
+id: poj.1474.video-surveillance
+title: Video Surveillance
+source: POJ
+contest: Southwestern European Regional Contest 1997
+division: gold
+url: http://poj.org/problem?id=1474
+techniques:
+    - geometry.half-plane-intersection
+prerequisites:
+    - geometry.half-plane-intersection
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The floor is a simple rectilinear polygon with at most 100 vertices, given in clockwise order.
+    - The question is only whether a feasible position exists, so the intersection may be tested for emptiness without computing its area.
+    - Several floor descriptions follow one another, and a zero vertex count ends the input.
+    - The output has a numbered line for every floor and a blank line after each case.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A camera position is feasible exactly when it lies on the inward side of every wall segment.
+    - Read the vertices in the given order and build one half-plane per edge, with the normal pointing into the floor.
+    - Intersect the half-planes and report whether anything remains.
+    - A single remaining point is a valid camera position, so the test must accept a degenerate intersection.
+discussion: >-
+    The problem is the feasibility version of the kernel computation, and it is the smaller half of the previous problem: the intersection either contains a point or it does not. The rectilinear shape does not change the half-plane formulation, and the clockwise order only fixes the sign of every inequality. The case that is easy to miss is the kernel that collapses to a single point or a segment; a test that insists on three distinct vertices rejects a valid camera position.
+related:
+    - poj.1279.art-gallery
+    - poj.3335.rotating-scoreboard

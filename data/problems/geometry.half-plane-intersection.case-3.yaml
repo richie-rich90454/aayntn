@@ -1,0 +1,30 @@
+id: poj.3335.rotating-scoreboard
+title: Rotating Scoreboard
+source: POJ
+contest: Tehran 2006 Preliminary
+division: gold
+url: http://poj.org/problem?id=3335
+techniques:
+    - geometry.half-plane-intersection
+prerequisites:
+    - geometry.half-plane-intersection
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The hall is a simple polygon with at most 100 vertices, and there are several test cases.
+    - Tangency is allowed, so a scoreboard on a wall or at a vertex still counts as visible.
+    - The answer is YES or NO for each case, not an area.
+    - The polygon may be clockwise or counterclockwise, so the half-planes need a consistent inward orientation.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A scoreboard sees every boundary point exactly when the whole hall lies on one side of the line from the scoreboard to each edge, which is the kernel condition.
+    - The kernel is the intersection of the inward half-planes of the edges.
+    - Because tangency counts, use closed half-planes and accept a kernel that is only a point or a segment.
+    - A half-plane intersection that becomes empty means NO.
+discussion: >-
+    The rotating scoreboard is the same kernel question as the video surveillance problem, with the extra requirement that the kernel may touch the boundary. The half-plane formulation is unchanged: every edge contributes the closed half-plane on the hall's side, tangency is the boundary case, and the answer is whether the intersection is nonempty. The implementation detail is to orient the edges from the polygon's own order rather than assuming a particular winding, and to keep the predicates exact when the coordinates are integers.
+related:
+    - poj.1279.art-gallery
+    - poj.1474.video-surveillance

@@ -1,0 +1,93 @@
+algorithm: geometry.half-plane-intersection
+title: Line arrangements and the half-plane intersection
+summary: Intersect a family of integer linear inequalities exactly, keep the feasible polygon as the cyclic list of its supporting lines, and report twice its area or prove that the region is unbounded.
+subject: geometry
+divisions: [platinum]
+importance: advanced-technique
+complexity:
+    time: "O(n^2) for the reference clipping, O(n log n) with the angular sweep"
+    space: "O(n)"
+assumptions:
+    - Every constraint is a closed half-plane $a x + b y \le c$ with integer coefficients.
+    - The coefficients satisfy $|a|, |b| \le 100$ and $|c| \le 10^4$, so every clipping predicate fits in a signed 64-bit integer.
+    - An empty feasible region is reported as zero, because it is bounded and has no area, and twice the area of a nonempty bounded region is an integer on the judge data.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the half-planes, keeps the feasible polygon in dual form, and prints twice the area or UNBOUNDED."
+      time: "O(n^2) worst case"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: 'n, then n lines "a b c", each describing the closed half-plane a*x + b*y <= c.'
+      outputs: "Twice the area of the bounded feasible region as an exact integer, an exact fraction p/q when the value is not integral, or UNBOUNDED."
+      notes: "The polygon is a cyclic list of line indices, so clipping never stores a coordinate: a vertex is the intersection of two consecutive lines and is classified with one determinant. The box [-M, M]^2 bounds the polygon during the clip, with M = 2*max|a|*max|c| + 2, which is larger than every vertex of a bounded region. Emptiness is detected by the clip itself, and unboundedness by the recession cone: if a nonzero direction satisfies every homogeneous constraint, the region is unbounded. The area is the shoelace sum of the rational vertices, reduced after every addition."
+      operations: [intersect-half-planes, detect-unbounded, compute-area]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the half-planes, keeps the feasible polygon in dual form, and prints twice the area or UNBOUNDED."
+      time: "O(n^2) worst case"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: 'n, then n lines "a b c", each describing the closed half-plane a*x + b*y <= c.'
+      outputs: "Twice the area of the bounded feasible region as an exact integer, an exact fraction p/q when the value is not integral, or UNBOUNDED."
+      notes: "The polygon is a cyclic list of line indices, so clipping never stores a coordinate: a vertex is the intersection of two consecutive lines and is classified with one determinant. The box [-M, M]^2 bounds the polygon during the clip, with M = 2*max|a|*max|c| + 2, which is larger than every vertex of a bounded region. Emptiness is detected by the clip itself, and unboundedness by the recession cone: if a nonzero direction satisfies every homogeneous constraint, the region is unbounded. The area is the shoelace sum of the rational vertices, reduced after every addition."
+      operations: [intersect-half-planes, detect-unbounded, compute-area]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the half-planes, keeps the feasible polygon in dual form, and prints twice the area or UNBOUNDED."
+      time: "O(n^2) worst case"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: 'n, then n lines "a b c", each describing the closed half-plane a*x + b*y <= c.'
+      outputs: "Twice the area of the bounded feasible region as an exact integer, an exact fraction p/q when the value is not integral, or UNBOUNDED."
+      notes: "The polygon is a cyclic list of line indices, so clipping never stores a coordinate: a vertex is the intersection of two consecutive lines and is classified with one determinant. The box [-M, M]^2 bounds the polygon during the clip, with M = 2*max|a|*max|c| + 2, which is larger than every vertex of a bounded region. Emptiness is detected by the clip itself, and unboundedness by the recession cone: if a nonzero direction satisfies every homogeneous constraint, the region is unbounded. The area is the shoelace sum of the rational vertices, reduced after every addition. The class is Main so that javac and java agree on the entry point."
+      operations: [intersect-half-planes, detect-unbounded, compute-area]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the half-planes, keeps the feasible polygon in dual form, and prints twice the area or UNBOUNDED."
+      time: "O(n^2) worst case"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: 'n, then n lines "a b c", each describing the closed half-plane a*x + b*y <= c.'
+      outputs: "Twice the area of the bounded feasible region as an exact integer, an exact fraction p/q when the value is not integral, or UNBOUNDED."
+      notes: "The polygon is a cyclic list of line indices, so clipping never stores a coordinate: a vertex is the intersection of two consecutive lines and is classified with one determinant. The box [-M, M]^2 bounds the polygon during the clip, with M = 2*max|a|*max|c| + 2, which is larger than every vertex of a bounded region. Emptiness is detected by the clip itself, and unboundedness by the recession cone: if a nonzero direction satisfies every homogeneous constraint, the region is unbounded. Python integers are unbounded, so the rational area and the clipping determinants are exact over the whole documented range."
+      operations: [intersect-half-planes, detect-unbounded, compute-area]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the half-planes, keeps the feasible polygon in dual form, and prints twice the area or UNBOUNDED."
+      time: "O(n^2) worst case"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: 'n, then n lines "a b c", each describing the closed half-plane a*x + b*y <= c.'
+      outputs: "Twice the area of the bounded feasible region as an exact integer, an exact fraction p/q when the value is not integral, or UNBOUNDED."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The polygon is a cyclic list of line indices, so clipping never stores a coordinate: a vertex is the intersection of two consecutive lines and is classified with one determinant. The box [-M, M]^2 bounds the polygon during the clip, with M = 2*max|a|*max|c| + 2, which is larger than every vertex of a bounded region. Emptiness is detected by the clip itself, and unboundedness by the recession cone. Every intermediate product stays within Int64 for the documented coefficient bound, each input number is read with one Read, and SysUtils supplies IntToStr."
+      operations: [intersect-half-planes, detect-unbounded, compute-area]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the half-planes, keeps the feasible polygon in dual form, and prints twice the area or UNBOUNDED."
+      time: "O(n^2) worst case"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: 'n, then n lines "a b c", each describing the closed half-plane a*x + b*y <= c.'
+      outputs: "Twice the area of the bounded feasible region as an exact integer, an exact fraction p/q when the value is not integral, or UNBOUNDED."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The polygon is a cyclic list of line indices, so clipping never stores a coordinate: a vertex is the intersection of two consecutive lines and is classified with one determinant. The box [-M, M]^2 bounds the polygon during the clip, with M = 2*max|a|*max|c| + 2, which is larger than every vertex of a bounded region. Emptiness is detected by the clip itself, and unboundedness by the recession cone. BigInt keeps the 64-bit-range values exact without the 2^53 limitation of Number."
+      operations: [intersect-half-planes, detect-unbounded, compute-area]

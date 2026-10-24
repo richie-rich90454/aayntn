@@ -1,0 +1,9 @@
+- name: the square with corners at zero and two
+  input: "4\n-1 0 0\n0 -1 0\n1 0 2\n0 1 2\n"
+  expected: "8\n"
+- name: the right triangle cut by the line with normal one and two
+  input: "3\n-1 0 0\n0 -1 0\n1 2 6\n"
+  expected: "18\n"
+- name: an unbounded quadrant has no finite area
+  input: "2\n-1 0 0\n0 -1 0\n"
+  expected: "UNBOUNDED\n"
