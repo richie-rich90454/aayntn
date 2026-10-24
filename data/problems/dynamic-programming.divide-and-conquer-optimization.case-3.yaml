@@ -1,0 +1,31 @@
+id: codeforces.833b.the-bakery
+title: The Bakery
+source: Codeforces
+contest: Codeforces Round 426 (Div. 1)
+division: platinum
+url: https://codeforces.com/problemset/problem/833/B
+editorialUrl: https://codeforces.com/blog/entry/53567
+techniques:
+    - dynamic-programming.divide-and-conquer-optimization
+prerequisites:
+    - dynamic-programming.0-1-knapsack
+    - arrays.prefix-sums
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - There are up to 35000 cakes and at most 50 boxes, so the O(k n^2) recurrence is too slow.
+    - The value of a box is the number of distinct cake types in its contiguous segment, and the total is maximized rather than minimized.
+    - The order of the cakes is fixed, so a box is a contiguous segment and the cakes cannot be rearranged.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Write dp[g][i] = max over j < i of dp[g - 1][j] + distinct(j + 1, i); the best j is nondecreasing in i because the distinct-count cost satisfies the quadrangle inequality for maximization.
+    - While a right endpoint is fixed and the left endpoint moves left, the distinct count grows only when the new value does not already appear in the segment.
+    - Precompute the next occurrence of every position, or maintain a segment tree, so each candidate transition is evaluated in constant or logarithmic time.
+    - Use divide and conquer on the prefix range and keep the smallest optimal split point when values tie.
+discussion: >-
+    The direct dynamic program evaluates O(n^2) split points per layer, which is too slow at n = 35000 and k = 50. The value of a box is the number of distinct values in a contiguous segment, and the total value is maximized. For a fixed right endpoint, extending the segment leftward increases the distinct count exactly when the new value has not appeared inside the current segment, so the cost of every candidate can be maintained while the left endpoint moves. The distinct-count cost is inverse Monge, which makes the optimal split point nondecreasing, and divide and conquer restricts the candidate interval of each half. A segment tree over the previous layer gives an alternative O(k n log n) solution, but the divide-and-conquer form needs no range-update structure. The answer is at most n, so it fits in a 32-bit integer, though the DP table and the segment tree are usually kept in 64 bits for uniformity.
+related:
+    - codeforces.321e.ciel-and-gondolas
+    - codeforces.868f.yet-another-minimization-problem

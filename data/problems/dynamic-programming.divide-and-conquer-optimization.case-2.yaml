@@ -1,0 +1,31 @@
+id: codeforces.868f.yet-another-minimization-problem
+title: Yet Another Minimization Problem
+source: Codeforces
+contest: "Codeforces Round 438 by Sberbank and Barcelona Bootcamp (Div. 1 + Div. 2 combined)"
+division: platinum
+url: https://codeforces.com/problemset/problem/868/F
+editorialUrl: https://codeforces.com/blog/entry/55046
+techniques:
+    - dynamic-programming.divide-and-conquer-optimization
+prerequisites:
+    - dynamic-programming.0-1-knapsack
+    - arrays.prefix-sums
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The array holds up to 100000 elements and there are at most 20 segments, so an O(k n^2) recurrence is far too slow.
+    - The cost of a segment is the number of unordered pairs of equal values inside it, which can be maintained in constant time per endpoint move.
+    - The answer counts pairs, so it can reach about 5 * 10^9 and needs 64 bits.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Each transition needs the number of equal pairs in the segment, so keep a frequency array and the current cost while sliding the segment endpoints.
+    - Adding a value x to a segment increases the cost by its current frequency; removing x decreases the cost by its frequency after the removal.
+    - The segment cost satisfies the quadrangle inequality, so the optimal split point is nondecreasing in the prefix length.
+    - Divide and conquer over the prefix range, and move the shared window between recursive calls instead of recomputing a cost from scratch.
+discussion: >-
+    The recurrence is dp[g][i] = min over j < i of dp[g - 1][j] + pairs(j + 1, i), where pairs is the number of equal unordered pairs in the segment. The cost is not available in O(1) from a prefix sum, but it can be maintained: adding one occurrence of a value raises the count of equal pairs by the number of matching occurrences already inside, and removing one lowers it by the number remaining after the removal. The cost is Monge, so the best split point is monotone, and divide and conquer applies. The window endpoints move across the recursion in a controlled order, so each layer performs O(n log n) endpoint moves and O(1) work per move. The answer is a 64-bit count, because an array of 100000 equal values contains about 5 * 10^9 pairs.
+related:
+    - codeforces.321e.ciel-and-gondolas
+    - codeforces.833b.the-bakery

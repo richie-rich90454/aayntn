@@ -1,0 +1,31 @@
+id: codeforces.321e.ciel-and-gondolas
+title: Ciel and Gondolas
+source: Codeforces
+contest: Codeforces Round 190 (Div. 1)
+division: platinum
+url: https://codeforces.com/problemset/problem/321/E
+editorialUrl: https://codeforces.com/blog/entry/8192
+techniques:
+    - dynamic-programming.divide-and-conquer-optimization
+prerequisites:
+    - dynamic-programming.0-1-knapsack
+    - arrays.two-dimensional-prefix-sums
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The queue holds up to 4000 people and there are up to 800 gondolas, so the O(k n^2) recurrence is too slow.
+    - The unfamiliarity matrix is symmetric with a zero diagonal, so the cost of a contiguous block is the sum of a triangular region.
+    - Every matrix entry is a single digit, so the largest possible total fits easily in 64 bits.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The cost of a gondola is the sum of the unfamiliarity values over all unordered pairs inside it, and a two-dimensional prefix sum answers the cost of any contiguous block in constant time.
+    - Write dp[g][i] = min over j < i of dp[g - 1][j] + cost(j + 1, i); the block cost satisfies the quadrangle inequality, so the best j never moves left as i grows.
+    - Solve the middle i of a range directly, then pass its optimal j as the upper bound of the left half and the lower bound of the right half.
+    - Every layer costs O(n log n) transitions, and there are k layers.
+discussion: >-
+    The direct dynamic program has k layers and O(n^2) transitions per layer, which is far too large at n = 4000 and k = 800. The block cost is the sum of a symmetric matrix over the pairs inside the block, and a two-dimensional prefix sum of the upper triangle gives it in constant time. The cost is Monge because adding an element to a larger block can only add at least as much unfamiliarity as adding it to a smaller block, so the optimal split point for a fixed layer is nondecreasing in the prefix length. Divide and conquer uses that monotonicity: it evaluates the middle prefix over its whole candidate interval, then restricts the left half to split points at most the middle optimum and the right half to split points at least it. Choosing the smallest optimal split point keeps the bounds consistent across ties. The result is O(k n log n) time and O(n) memory.
+related:
+    - codeforces.868f.yet-another-minimization-problem
+    - codeforces.833b.the-bakery

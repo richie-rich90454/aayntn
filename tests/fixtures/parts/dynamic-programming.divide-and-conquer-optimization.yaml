@@ -1,0 +1,9 @@
+- name: two groups over an increasing array
+  input: "5 2\n1 2 3 4 5\n"
+  expected: "117\n"
+- name: three groups with a large element in the middle
+  input: "7 3\n3 1 4 1 5 9 2\n"
+  expected: "221\n"
+- name: edge case where every element is its own group
+  input: "4 4\n0 0 0 0\n"
+  expected: "0\n"

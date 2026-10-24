@@ -1,0 +1,92 @@
+algorithm: dynamic-programming.divide-and-conquer-optimization
+title: Divide-and-conquer optimization
+summary: Evaluate a layered dynamic program whose best split point is monotone by solving the middle entry of a range and passing its optimum as a bound to both halves.
+subject: dynamic-programming
+divisions: [platinum]
+importance: advanced-technique
+complexity:
+    time: "O(k n log n)"
+    space: "O(n)"
+assumptions:
+    - Every array element is nonnegative, so the prefix sums never decrease.
+    - The group cost satisfies the quadrangle inequality, which makes the best split point monotone.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the number of groups from stdin and prints the minimum total squared group sum."
+      time: "O(k n log n)"
+      auxiliarySpace: "O(n) for the prefix sums and two DP rows"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "The recurrence is dp[g][i] = min over j < i of dp[g - 1][j] + (prefix[i] - prefix[j])^2. The best j never moves left as i grows, so the middle entry of a range is solved by a direct scan and its optimum becomes the upper bound of the left half and the lower bound of the right half. The smallest optimal j is kept, which makes the bound consistent. The cost is 64-bit: with n at most 2000 and values at most 10^4, a group sum reaches 2 * 10^7 and its square 4 * 10^14."
+      operations: [read-array, prefix-sums, fill-layer, split-candidates, find-best]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the number of groups from stdin and prints the minimum total squared group sum."
+      time: "O(k n log n)"
+      auxiliarySpace: "O(n) for the prefix sums and two DP rows"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "The recurrence is dp[g][i] = min over j < i of dp[g - 1][j] + (prefix[i] - prefix[j])^2. The best j never moves left as i grows, so the middle entry of a range is solved by a direct scan and its optimum becomes the upper bound of the left half and the lower bound of the right half. The smallest optimal j is kept, which makes the bound consistent. The cost is 64-bit, and the vectors release both DP rows when the solver leaves scope."
+      operations: [read-array, prefix-sums, fill-layer, split-candidates, find-best]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the number of groups from stdin and prints the minimum total squared group sum."
+      time: "O(k n log n)"
+      auxiliarySpace: "O(n) for the prefix sums and two DP rows"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "The recurrence is dp[g][i] = min over j < i of dp[g - 1][j] + (prefix[i] - prefix[j])^2. The best j never moves left as i grows, so the middle entry of a range is solved by a direct scan and its optimum becomes the upper bound of the left half and the lower bound of the right half. The smallest optimal j is kept, which makes the bound consistent. The cost is 64-bit: with n at most 2000 and values at most 10^4, a group sum reaches 2 * 10^7 and its square 4 * 10^14."
+      operations: [read-array, prefix-sums, fill-layer, split-candidates, find-best]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program reads the array and the number of groups from stdin and prints the minimum total squared group sum."
+      time: "O(k n log n)"
+      auxiliarySpace: "O(n) for the prefix sums and two DP rows"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The recurrence is dp[g][i] = min over j < i of dp[g - 1][j] + (prefix[i] - prefix[j])^2. The best j never moves left as i grows, so the middle entry of a range is solved by a direct scan and its optimum becomes the upper bound of the left half and the lower bound of the right half. The smallest optimal j is kept, which makes the bound consistent. The values are ordinary numbers, so a cost beyond 2^53 would lose precision; under the stated constraints the maximum is about 4 * 10^14."
+      operations: [read-array, prefix-sums, fill-layer, split-candidates, find-best]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program reads the array and the number of groups from stdin and prints the minimum total squared group sum."
+      time: "O(k n log n)"
+      auxiliarySpace: "O(n) for the prefix sums and two DP rows"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The recurrence is dp[g][i] = min over j < i of dp[g - 1][j] + (prefix[i] - prefix[j])^2. The best j never moves left as i grows, so the middle entry of a range is solved by a direct scan and its optimum becomes the upper bound of the left half and the lower bound of the right half. The smallest optimal j is kept, which makes the bound consistent. Every cost is an Int64, and the source uses one Read argument per call so it compiles under pas2js."
+      operations: [read-array, prefix-sums, fill-layer, split-candidates, find-best]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the number of groups from stdin and prints the minimum total squared group sum."
+      time: "O(k n log n)"
+      auxiliarySpace: "O(n) for the prefix sums and two DP rows"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "The recurrence is dp[g][i] = min over j < i of dp[g - 1][j] + (prefix[i] - prefix[j])^2. The best j never moves left as i grows, so the middle entry of a range is solved by a direct scan and its optimum becomes the upper bound of the left half and the lower bound of the right half. The smallest optimal j is kept, which makes the bound consistent. Python integers are arbitrary precision, so the cost never overflows."
+      operations: [read-array, prefix-sums, fill-layer, split-candidates, find-best]
