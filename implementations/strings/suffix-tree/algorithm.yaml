@@ -1,0 +1,94 @@
+algorithm: strings.suffix-tree
+title: Suffix trees
+summary: Compress the trie of all suffixes into a tree whose edges are labels, then read the number of distinct substrings from the total edge length and the longest repeated substring from the deepest branching node.
+subject: strings
+divisions: [gold, platinum]
+importance: advanced-technique
+complexity:
+    time: "O(n^2) for the quadratic construction; O(n) for both answers after the build"
+    space: "O(n) nodes with 27 child slots each, for a string of length n"
+assumptions:
+    - The string has length at most 2000 in the published contract, so inserting every suffix and comparing characters is fast enough.
+    - A sentinel character outside the alphabet is appended, so no suffix is a prefix of another and every suffix ends at its own leaf.
+    - The alphabet is small and fixed, so a node can carry one child slot per symbol.
+    - The number of distinct substrings is accumulated in 64 bits, because it can exceed a 32-bit integer for a longer string.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix tree of the string plus a sentinel and prints the distinct-substring count and the longest repeated substring."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) nodes, with 27 child slots per node"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters of length at most 2000."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the length of the longest repeated substring, or 0 when no substring repeats."
+      notes: "Every suffix is inserted by walking down from the root and comparing characters with the edge label. A mismatch inside an edge splits the edge into an internal node with two children. Edge labels are stored as a start position and a length into the string plus its sentinel, so no label is copied. The distinct count is the sum of the edge lengths minus the number of suffixes, and the longest repeat is the greatest depth of a node with at least two children."
+      operations: [build, count-distinct-substrings, longest-repeated-substring]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix tree of the string plus a sentinel and prints the distinct-substring count and the longest repeated substring."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) nodes, with 27 child slots per node"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters of length at most 2000."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the length of the longest repeated substring, or 0 when no substring repeats."
+      notes: "The tree lives in flat std::vector arrays indexed by node, and each node owns a row of 27 child slots. Suffix insertion compares the new suffix with the edge label of the matching child and splits the edge at the longest common prefix. The variant uses the standard library for the string and the arrays, and accumulates the distinct count in a long long."
+      operations: [build, count-distinct-substrings, longest-repeated-substring]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix tree of the string plus a sentinel and prints the distinct-substring count and the longest repeated substring."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) nodes, with 27 child slots per node"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters of length at most 2000."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the length of the longest repeated substring, or 0 when no substring repeats."
+      notes: "The class Main keeps the child table in one int array so that the 27 slots of a node are contiguous, and reads the string with a BufferedReader. Edge labels are start-and-length pairs into the string with its sentinel. The distinct count is a long, and the deepest node with two children supplies the longest repeat."
+      operations: [build, count-distinct-substrings, longest-repeated-substring]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix tree of the string plus a sentinel and prints the distinct-substring count and the longest repeated substring."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) nodes, with 27 child slots per node"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters of length at most 2000."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the length of the longest repeated substring, or 0 when no substring repeats."
+      notes: "The string is read as bytes, so a character comparison is an integer comparison and the sentinel is the byte 36. The child table is one flat list with 27 entries per node. Python's arbitrary-precision integers make the distinct count exact without a wider type."
+      operations: [build, count-distinct-substrings, longest-repeated-substring]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix tree of the string plus a sentinel and prints the distinct-substring count and the longest repeated substring."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) nodes, with 27 child slots per node"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters of length at most 2000."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the length of the longest repeated substring, or 0 when no substring repeats."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The child table is a flat dynamic array of Integer with 27 entries per node, and edge labels are start-and-length pairs. The listing reads the string with a single ReadLn, strips a carriage return, and uses SysUtils. The distinct count is an Int64 so it stays exact."
+      operations: [build, count-distinct-substrings, longest-repeated-substring]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix tree of the string plus a sentinel and prints the distinct-substring count and the longest repeated substring."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) nodes, with 27 child slots per node"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters of length at most 2000."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the length of the longest repeated substring, or 0 when no substring repeats."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The child table is an Int32Array with 27 entries per node, and edge labels are start-and-length pairs. At the published bound of 2000 characters the distinct count is below 2^31, so ordinary numbers are exact for both answers."
+      operations: [build, count-distinct-substrings, longest-repeated-substring]

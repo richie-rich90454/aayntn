@@ -1,0 +1,29 @@
+id: codeforces.427d.match-and-catch
+title: Match & Catch
+source: Codeforces
+contest: "Codeforces Round 244 (Div. 2)"
+division: gold
+url: https://codeforces.com/problemset/problem/427/D
+techniques:
+    - strings.suffix-tree
+prerequisites:
+    - strings.suffix-tree
+    - strings.trie
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - Each string has at most 5000 characters, so the quadratic construction in this article is affordable, but enumerating and comparing every substring is not.
+    - The substring must be unique in each string separately; occurring several times in one string disqualifies it even when the total number of occurrences is two.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Build one generalized suffix tree of s1#s2$, and count how many leaves in each subtree come from each string.
+    - A string occurs exactly once in a string when its locus has exactly one leaf of that color below it.
+    - Every point inside an edge has the same leaf set as the node at the bottom of the edge, so a qualifying edge contributes its shallowest length, depth[parent] + 1.
+    - Take the minimum qualifying length over all nodes, and print -1 when no node qualifies.
+discussion: >-
+    A generalized suffix tree stores both strings, and the subtree of a locus is exactly the set of suffixes that start with that string. Counting the leaves by origin gives the number of occurrences in each string. The shortest unique common substring on an edge is the length just below its parent, because every longer prefix of the same edge has the same occurrence set. The qualifying edge with the smallest such length is the answer, and no substring is ever enumerated. The quadratic construction costs O((n1+n2)^2) time and linear space; the counting pass is linear in the number of nodes.
+related:
+    - codeforces.271d.good-substrings
+    - codeforces.873f.forbidden-indices

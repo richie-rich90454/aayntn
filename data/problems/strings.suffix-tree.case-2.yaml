@@ -1,0 +1,30 @@
+id: codeforces.271d.good-substrings
+title: Good Substrings
+source: Codeforces
+contest: "Codeforces Round 166 (Div. 2)"
+division: gold
+url: https://codeforces.com/problemset/problem/271/D
+techniques:
+    - strings.suffix-tree
+prerequisites:
+    - strings.suffix-tree
+    - arrays.prefix-sums
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The string has at most 1500 characters, so the quadratic construction is affordable, but the substring occurrences number about 1.1 million.
+    - Distinctness is by content, not by position, so two equal substrings at different positions count once.
+    - The sentinel is not a letter of the alphabet and must not enter the bad-letter count.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Each distinct substring is one point on one edge of the suffix tree of s$.
+    - All points on one edge spell prefixes of the same path, so the number of bad letters is nondecreasing with the length.
+    - Store one suffix start in every subtree, and use a prefix sum over the string to test the bad-letter count of any prefix.
+    - On an edge, binary-search the last length whose bad count is at most k, and add the number of valid lengths above the parent depth.
+discussion: >-
+    The suffix tree partitions the distinct substrings into edge intervals, and every length on one edge spells a prefix of the same path. The number of bad letters along that path is nondecreasing, so the valid lengths form a prefix of the interval. A prefix-sum array indexed from any suffix start in the edge's subtree evaluates a bad count in constant time, and a binary search finds the cut. Summing the valid lengths over all edges counts every distinct good substring exactly once. The build is quadratic, the counting pass is O(nodes log n), and a suffix array with an LCP array gives the same edge decomposition for larger inputs.
+related:
+    - codeforces.427d.match-and-catch
+    - cses.2105.distinct-substrings

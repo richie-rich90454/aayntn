@@ -1,0 +1,9 @@
+- name: a mixed string with overlapping repeats, including the longest repeat inside another suffix
+  input: "banana\n"
+  expected: "15\n3\n"
+- name: one character repeated, where the deepest branching node is the longest proper prefix
+  input: "aaaa\n"
+  expected: "4\n3\n"
+- name: the single-character edge case, with no internal node and no repeated substring
+  input: "z\n"
+  expected: "1\n0\n"

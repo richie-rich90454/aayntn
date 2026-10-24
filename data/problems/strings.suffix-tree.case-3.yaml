@@ -1,0 +1,30 @@
+id: codeforces.873f.forbidden-indices
+title: Forbidden Indices
+source: Codeforces
+contest: "Educational Codeforces Round 30"
+division: platinum
+url: https://codeforces.com/problemset/problem/873/F
+techniques:
+    - strings.suffix-tree
+prerequisites:
+    - strings.suffix-tree
+    - arrays.prefix-sums
+difficulty: 4
+estimatedMinutes: 55
+specialConstraints:
+    - The length reaches 200000, so the full constraints need a linear-time suffix tree or a suffix array; the quadratic construction in this article is only for small tests of the idea.
+    - An occurrence is valid only when its last character is at a non-forbidden index, so the weight depends on the end position.
+    - The answer is 0 when every index is forbidden.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Reverse the string, so that an occurrence ending at a forbidden index becomes an occurrence starting at the mirrored index.
+    - In the suffix tree of the reversed string, weight each leaf by one when its start mirrors a non-forbidden end.
+    - Every point on one edge has the same suffix leaves, so its f value is the subtree weight sum and is constant along the edge.
+    - The best length on the edge is its deepest valid length; multiply it by the subtree weight and take the maximum over all edges.
+discussion: >-
+    The weight of an occurrence depends on its end position, which shifts with the length of the string, so in the original tree the weight is not constant along an edge. Reversing the string turns the end position into a start position, which is fixed for a suffix leaf. Then every point on an edge has the same occurrence set and therefore the same f, and the longest string on the edge is the best one. A postorder sum of the leaf weights gives f for every node, and the maximum of length times f is the answer. Stripping the sentinel from a leaf edge keeps every candidate inside the original string.
+related:
+    - codeforces.427d.match-and-catch
+    - codeforces.271d.good-substrings
