@@ -1,0 +1,29 @@
+id: kattis.minspantree
+title: Minimum Spanning Tree
+source: Kattis
+contest: KTH CSC Popup 2005
+division: silver
+url: https://open.kattis.com/problems/minspantree
+techniques:
+    - advanced.matroids
+prerequisites:
+    - graphs.mst
+    - graphs.dsu
+difficulty: 2
+estimatedMinutes: 30
+specialConstraints:
+    - The input contains several test cases terminated by "0 0", and a case may be disconnected even though a spanning tree is requested.
+    - Edge weights may be negative, so a minimum spanning tree can have a negative total.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The chosen edges form the independent set of the graphic matroid, so the cheapest edge that joins two different components is always safe.
+    - Sort the edges ascending, run Kruskal with a disjoint set union, and count the accepted edges.
+    - A spanning tree on n vertices has exactly n - 1 edges; if fewer are accepted, the graph is disconnected and the case has no spanning tree.
+    - The answer edges must be printed with the smaller endpoint first and in lexicographic order, which is a presentation rule independent of the greedy order.
+discussion: >-
+    The set of acyclic edge sets is the graphic matroid, so Kruskal's rule returns a minimum-weight basis of each connected component. A forest on n vertices with n - 1 edges is a spanning tree, so the program can decide connectivity by counting accepted edges instead of running a separate search. The disjoint set union supplies the independence test, and the sort dominates the running time. The lexicographic order of the printed edges is separate from the weight order used by the algorithm.
+related:
+    - usaco.2015.feb.silver.superbull
+    - kattis.arcticnetwork

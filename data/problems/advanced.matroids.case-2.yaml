@@ -1,0 +1,29 @@
+id: kattis.arcticnetwork
+title: Arctic Network
+source: Kattis
+contest: Waterloo Programming Contest 2002
+division: gold
+url: https://open.kattis.com/problems/arcticnetwork
+techniques:
+    - advanced.matroids
+prerequisites:
+    - graphs.mst
+    - graphs.dsu
+difficulty: 3
+estimatedMinutes: 40
+specialConstraints:
+    - Each test case has at most 500 outposts, so the complete graph has at most 124750 edges and can be built explicitly.
+    - Distances are irrational in general, so the comparisons that choose the answer should be made on squared distances.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A satellite channel connects one outpost to every other channel, so S channels let the radio network have S components.
+    - Build the complete graph on the outposts, with squared Euclidean distances as weights, and run Kruskal.
+    - Stop after P - S accepted edges; those edges form a minimum spanning forest with S components, and the last accepted weight is the smallest possible maximum radio distance.
+    - Sort squared distances to avoid floating-point ties, and take the square root only when printing the answer to two decimals.
+discussion: >-
+    The radio links must leave at most S components, because each satellite channel can join one component to the satellite network. A spanning forest with S components has P - S edges, and Kruskal's first P - S accepted edges form a minimum-weight forest with that many edges by the matroid greedy theorem applied to the truncation of the graphic matroid. Its heaviest edge is the smallest possible D: any forest with P - S edges has a heaviest edge at least that large, because below that threshold the graph still has more than S components. Squared distances preserve the order of non-negative distances, so the sort and the comparisons stay exact.
+related:
+    - usaco.2022.feb.gold.moo-network
+    - kattis.minspantree

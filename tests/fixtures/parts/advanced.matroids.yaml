@@ -1,0 +1,9 @@
+- name: a small connected graph with a heavy shortcut
+  input: "4 5\n1 2 1\n2 3 2\n3 4 3\n1 4 10\n2 4 4\n"
+  expected: "17\n"
+- name: a disconnected forest with negative weights and a self-loop
+  input: "6 7\n1 2 5\n2 3 4\n1 3 9\n4 5 -2\n5 6 -3\n4 6 -1\n2 2 100\n"
+  expected: "11\n"
+- name: the minimal graph with no edges
+  input: "1 0\n"
+  expected: "0\n"

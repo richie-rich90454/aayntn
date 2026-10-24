@@ -1,0 +1,29 @@
+id: kattis.the-kings-guards
+title: The King's Guards
+source: Kattis
+contest: ICPC North America Championship 2021
+division: platinum
+url: https://open.kattis.com/problems/thekingsguards
+techniques:
+    - advanced.matroids
+prerequisites:
+    - graphs.mst
+    - graphs.bipartite-matching
+difficulty: 5
+estimatedMinutes: 90
+specialConstraints:
+    - There are at most 300 villages and at most 300 guards, so the augmented graph has a few hundred vertices, at most 45000 road edges, and at most 90000 root edges.
+    - A guard may be placed in any village of its subset, and the subsets may overlap, so the guards are not interchangeable.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Add a virtual root 0. For every guard i and every village v in its subset, add a zero-cost edge from 0 to v whose color is i.
+    - A valid deployment is a spanning tree of the augmented graph that uses at most one edge of each guard color, with a capacity of n - g on the village edges.
+    - The village edges form a forest with g components, each attached to exactly one guard edge, so every component contains exactly one guard.
+    - That is a minimum-weight common basis of the graphic matroid and a partition matroid, found by weighted matroid intersection; if no common basis of size n exists, print -1.
+discussion: >-
+    The improved roads must form a forest, because a cycle can lose an edge without disconnecting anything, and every component must contain exactly one guard. The virtual root turns the placement of a guard into a root edge: guard i can be placed at any village in its subset, so the root edge for guard i has color i. A spanning tree of the augmented graph with at most one root edge of each color has exactly g root edges and n - g village edges, so removing the root leaves a forest with g components, one per guard. The problem is therefore a minimum-weight common basis of the graphic matroid on the augmented edges and a partition matroid that allows one edge per guard and n - g village edges. Weighted matroid intersection finds that basis with augmenting paths, and the small number of vertices keeps the polynomial algorithm inside the limit.
+related:
+    - atcoder.abc247.g.dream-team
+    - codeforces.891c.envy

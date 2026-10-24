@@ -1,0 +1,95 @@
+algorithm: advanced.matroids
+title: Matroids
+summary: Recognize when a family of feasible sets satisfies the exchange property, so the greedy algorithm that takes the heaviest element that keeps the set independent returns a maximum-weight basis.
+subject: advanced
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [graphs.mst, foundations.sorting]
+    recommended: [graphs.dsu, foundations.complexity, greedy.feasibility-oracle]
+complexity:
+    time: "O(m log m + (n + m) α(n))"
+    space: "O(n + m)"
+assumptions:
+    - The graph is undirected and may be disconnected, so the answer is the weight of a spanning forest rather than of a spanning tree.
+    - Every edge weight is a signed integer and the total weight fits in a signed 64-bit integer.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the graph and prints the weight of a maximum-weight spanning forest, computed by Kruskal's greedy rule."
+      time: "O(m log m + (n + m) α(n))"
+      auxiliarySpace: "O(n + m) for the edge array and the disjoint set union"
+      status: unverified
+      inputs: "n m, then m lines u v w describing an undirected edge of weight w between vertices 1 and n."
+      outputs: "One line with the total weight of a maximum-weight spanning forest."
+      notes: "The edge array is sorted with qsort and a comparator that never subtracts the weights, so the comparison cannot overflow. The disjoint set union uses union by size and path halving, and the total is accumulated in a long long, so negative weights and a disconnected graph are handled without special cases."
+      operations: [sort-edges, find, union, spanning-forest]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the graph and prints the weight of a maximum-weight spanning forest, computed by Kruskal's greedy rule."
+      time: "O(m log m + (n + m) α(n))"
+      auxiliarySpace: "O(n + m) for the edge vector and the disjoint set union"
+      status: unverified
+      inputs: "n m, then m lines u v w describing an undirected edge of weight w between vertices 1 and n."
+      outputs: "One line with the total weight of a maximum-weight spanning forest."
+      notes: "std::sort receives a strict comparator on the weights, and the Dsu class keeps its parent and size arrays in vectors. The weight type is long long, which covers the sum even though every single weight is small."
+      operations: [sort-edges, find, union, spanning-forest]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the graph and prints the weight of a maximum-weight spanning forest, computed by Kruskal's greedy rule."
+      time: "O(m log m + (n + m) α(n))"
+      auxiliarySpace: "O(n + m) for the edge array and the disjoint set union"
+      status: unverified
+      inputs: "n m, then m lines u v w describing an undirected edge of weight w between vertices 1 and n."
+      outputs: "One line with the total weight of a maximum-weight spanning forest."
+      notes: "The edges are objects in an array and are sorted with a comparator on long weights. A byte-buffer scanner reads the tokens, and the total is a long. The output uses the platform line separator, which the cross-language comparison normalizes."
+      operations: [sort-edges, find, union, spanning-forest]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the graph and prints the weight of a maximum-weight spanning forest, computed by Kruskal's greedy rule."
+      time: "O(m log m + (n + m) α(n))"
+      auxiliarySpace: "O(n + m) for the edge array and the disjoint set union"
+      status: unverified
+      inputs: "n m, then m lines u v w describing an undirected edge of weight w between vertices 1 and n."
+      outputs: "One line with the total weight of a maximum-weight spanning forest."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The weights and the total are BigInt, so the program does not depend on the 53-bit integer range of Number, and the comparator compares BigInt values without subtraction. It writes the platform line separator so its output matches the compiled languages byte for byte."
+      operations: [sort-edges, find, union, spanning-forest]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the graph and prints the weight of a maximum-weight spanning forest, computed by Kruskal's greedy rule."
+      time: "O(m log m + (n + m) α(n))"
+      auxiliarySpace: "O(n + m) for the edge array and the disjoint set union"
+      status: unverified
+      inputs: "n m, then m lines u v w describing an undirected edge of weight w between vertices 1 and n."
+      outputs: "One line with the total weight of a maximum-weight spanning forest."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The variant reads one argument per Read with no IOResult, uses SysUtils, and stores the weights in Int64, so it stays inside the subset that pas2js compiles. The merge sort is bottom-up and allocates one scratch array, which avoids recursion with a deep stack."
+      operations: [sort-edges, find, union, spanning-forest]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the graph and prints the weight of a maximum-weight spanning forest, computed by Kruskal's greedy rule."
+      time: "O(m log m + (n + m) α(n))"
+      auxiliarySpace: "O(n + m) for the edge list and the disjoint set union"
+      status: unverified
+      inputs: "n m, then m lines u v w describing an undirected edge of weight w between vertices 1 and n."
+      outputs: "One line with the total weight of a maximum-weight spanning forest."
+      notes: "The whole input is read once and split, which keeps the parsing loop out of the interpreter's per-token overhead. Python integers are arbitrary precision, so the total needs no special type, and the find loop uses path halving."
+      operations: [sort-edges, find, union, spanning-forest]
