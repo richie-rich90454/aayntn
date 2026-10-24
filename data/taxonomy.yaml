@@ -3,7 +3,7 @@ techniques:
       name: Berlekamp-Massey
       subject: advanced
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: advanced.bitset-optimization
       name: Bitset optimization
@@ -222,19 +222,19 @@ techniques:
       name: Integer partitions
       subject: combinatorics
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: combinatorics.multinomial-coefficients
       name: Multinomial coefficients and the hypergeometric distribution
       subject: combinatorics
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: combinatorics.reflection-principle
       name: The reflection principle
       subject: combinatorics
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: combinatorics.stars-and-bars
       name: Stars and bars
@@ -524,7 +524,7 @@ techniques:
       synonyms:
           - k-d tree
           - KD tree
-      status: missing
+      status: published
       divisions: []
     - id: geometry.point-in-polygon
       name: Point in polygon
@@ -539,7 +539,7 @@ techniques:
       subject: geometry
       synonyms:
           - exact orientation test
-      status: missing
+      status: published
       divisions: []
     - id: geometry.rotating-calipers
       name: Rotating calipers
@@ -652,7 +652,7 @@ techniques:
       name: Dominator trees
       subject: graphs
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: graphs.dsu
       name: Disjoint set union
@@ -791,7 +791,7 @@ techniques:
       name: Scheduling with deadlines and release times
       subject: greedy
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: number-theory.chinese-remainder
       name: Chinese remainder theorem

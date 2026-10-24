@@ -239,3 +239,35 @@ algorithms:
       title: Tree hashing
       subject: trees
       manifest: implementations/trees/tree-hashing/algorithm.yaml
+    - id: advanced.berlekamp-massey
+      title: Berlekamp-Massey
+      subject: advanced
+      manifest: implementations/advanced/berlekamp-massey/algorithm.yaml
+    - id: combinatorics.integer-partitions
+      title: Integer partitions
+      subject: combinatorics
+      manifest: implementations/combinatorics/integer-partitions/algorithm.yaml
+    - id: combinatorics.multinomial-coefficients
+      title: Multinomial coefficients and the hypergeometric distribution
+      subject: combinatorics
+      manifest: implementations/combinatorics/multinomial-coefficients/algorithm.yaml
+    - id: combinatorics.reflection-principle
+      title: The reflection principle
+      subject: combinatorics
+      manifest: implementations/combinatorics/reflection-principle/algorithm.yaml
+    - id: geometry.kd-trees
+      title: K-D trees
+      subject: geometry
+      manifest: implementations/geometry/kd-trees/algorithm.yaml
+    - id: geometry.robust-predicates
+      title: Robust predicates
+      subject: geometry
+      manifest: implementations/geometry/robust-predicates/algorithm.yaml
+    - id: graphs.dominator-trees
+      title: Dominator trees
+      subject: graphs
+      manifest: implementations/graphs/dominator-trees/algorithm.yaml
+    - id: greedy.scheduling-deadlines-and-release-times
+      title: Scheduling with deadlines and release times
+      subject: greedy
+      manifest: implementations/greedy/scheduling-deadlines-and-release-times/algorithm.yaml

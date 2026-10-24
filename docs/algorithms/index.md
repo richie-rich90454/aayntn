@@ -36,17 +36,17 @@ A second reason runs deeper. The recognition of a problem is what actually fails
 | Foundations and complexity | Binary representation, Complexity analysis, Recursion, Sorting | [Foundations and complexity](/algorithms/foundations/) |
 | Enumeration and searching | Backtracking, Branch and bound, Gray codes, Meet in the middle, Permutations, Subset enumeration | [Enumeration and searching](/algorithms/enumeration/) |
 | Searching | Binary search on the answer, Binary search, Parametric search, Sliding window, Search over a sorted range of indices, Ternary search, The individual two-pointer patterns, Two pointers | [Searching](/algorithms/searching/) |
-| Greedy methods | Interval scheduling, Sorting by several keys | [Greedy methods](/algorithms/greedy/) |
+| Greedy methods | Interval scheduling, Sorting by several keys, Scheduling with deadlines and release times | [Greedy methods](/algorithms/greedy/) |
 | Arrays and sequences | Coordinate compression, Difference arrays, Monotonic queue, Monotonic stack, Prefix sums, Range hashing, Subarray sums, Two-dimensional difference arrays, Two-dimensional prefix sums, Two pointers on an array, Sliding window maximum | [Arrays and sequences](/algorithms/arrays/) |
 | Range query structures | Fenwick tree, Implicit segment trees, Lazy propagation, Merge sort trees, Mo's algorithm, Persistent segment trees, Segment tree beats, Segment tree, Sparse table, Square-root decomposition, Wavelet trees | [Range query structures](/algorithms/range-queries/) |
-| Graphs and shortest paths | 0-1 BFS, Articulation points, Bellman-Ford, Breadth-first search, Bipartite matching, The two-coloring test for a bipartite graph, Bridges, Depth-first search, Dijkstra's algorithm, Disjoint set union, Euler tours in graphs, Floyd-Warshall and all-pairs shortest paths, The Hungarian algorithm, Johnson's algorithm, Minimum cost flow, Minimum cut, Minimum spanning tree, Graph representation, Strongly connected components, Topological sort | [Graphs and shortest paths](/algorithms/graphs/) |
+| Graphs and shortest paths | 0-1 BFS, Articulation points, Bellman-Ford, Breadth-first search, Bipartite matching, The two-coloring test for a bipartite graph, Bridges, Depth-first search, Dijkstra's algorithm, Dominator trees, Disjoint set union, Euler tours in graphs, Floyd-Warshall and all-pairs shortest paths, The Hungarian algorithm, Johnson's algorithm, Minimum cost flow, Minimum cut, Minimum spanning tree, Graph representation, Strongly connected components, Topological sort | [Graphs and shortest paths](/algorithms/graphs/) |
 | Trees and decompositions | Binary lifting, Centroid decomposition, Dynamic trees, Euler tour for trees, Heavy-light decomposition, Lowest common ancestor, Rerooting, Small-to-large merging, Tree dynamic programming, Tree hashing, Virtual trees | [Trees and decompositions](/algorithms/trees/) |
 | Dynamic programming | 0/1 knapsack, Bitmask dynamic programming, Convex hull trick, Dynamic programming on a directed acyclic graph, Digit dynamic programming, Divide-and-conquer optimization, Interval dynamic programming, Knuth optimization, The Li Chao tree, Longest increasing subsequence, Monotonic queue optimization, Profile dynamic programming, Subset transforms | [Dynamic programming](/algorithms/dynamic-programming/) |
 | Strings | Aho-Corasick, Knuth-Morris-Pratt, The Manacher algorithm, The minimal rotation of a string, Palindrome trees (eertree), Rolling hash, Suffix array, The suffix automaton, Trie, The Z algorithm | [Strings](/algorithms/strings/) |
 | Number theory | Chinese remainder theorem, The discrete logarithm, Euler's totient function and Euler's theorem, The extended Euclidean algorithm, The fast Fourier transform, Matrix exponentiation, Miller-Rabin primality test, Modular arithmetic, The number-theoretic transform, Pollard's rho, Prime factorization, Sieve of Eratosthenes | [Number theory](/algorithms/number-theory/) |
-| Combinatorics | Binomial coefficients, Counting dynamic programming, Generating functions, Inclusion and exclusion, Stars and bars | [Combinatorics](/algorithms/combinatorics/) |
-| Computational geometry | Closest pair, Convex hull, Integer geometry, Point in polygon, Rotating calipers, The smallest enclosing circle, Sweep line | [Computational geometry](/algorithms/geometry/) |
-| Advanced algorithms and special techniques | Offline dynamic connectivity, Parallel binary search, Quickselect and randomized selection, The rollback disjoint set union, Game theory and Sprague-Grundy theory, XOR bases | [Advanced algorithms and special techniques](/algorithms/advanced/) |
+| Combinatorics | Binomial coefficients, Counting dynamic programming, Generating functions, Inclusion and exclusion, Integer partitions, Multinomial coefficients and the hypergeometric distribution, The reflection principle, Stars and bars | [Combinatorics](/algorithms/combinatorics/) |
+| Computational geometry | Closest pair, Convex hull, Integer geometry, K-D trees, Point in polygon, Robust predicates, Rotating calipers, The smallest enclosing circle, Sweep line | [Computational geometry](/algorithms/geometry/) |
+| Advanced algorithms and special techniques | Berlekamp-Massey, Offline dynamic connectivity, Parallel binary search, Quickselect and randomized selection, The rollback disjoint set union, Game theory and Sprague-Grundy theory, XOR bases | [Advanced algorithms and special techniques](/algorithms/advanced/) |
 
 <!-- aayntn:subjects:end -->
 
@@ -58,6 +58,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 
 | Technique | Time | Space | Requires | Article |
 | --- | --- | --- | --- | --- |
+| Berlekamp-Massey | O(n^2) | O(n) | `number-theory.modular-arithmetic` | [Berlekamp-Massey](/algorithms/advanced/berlekamp-massey) |
 | Offline dynamic connectivity | O(q log q log n) | O(n + q log q) | `graphs.dsu` | [Offline dynamic connectivity](/algorithms/advanced/offline-dynamic-connectivity) |
 | Parallel binary search | O((N + Q) log^2 N) | O(N + Q) | `searching.binary-search` | [Parallel binary search](/algorithms/advanced/parallel-binary-search) |
 | Quickselect and randomized selection | O(n) expected with a random pivot, O(n^2) worst case | O(1) auxiliary in the iterative form, O(n) stack in the worst recursive form | `foundations.sorting` | [Quickselect and randomized selection](/algorithms/advanced/quickselect) |
@@ -79,6 +80,9 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Counting dynamic programming | O(S * T) | O(S) | `dynamic-programming.0-1-knapsack` | [Counting dynamic programming](/algorithms/combinatorics/counting-dp) |
 | Generating functions | O(nk) for the dynamic program | O(n) | `combinatorics.binomial-coefficients` | [Generating functions](/algorithms/combinatorics/generating-functions) |
 | Inclusion and exclusion | O(2^m) | O(1) to O(m) | `combinatorics.binomial-coefficients` | [Inclusion and exclusion](/algorithms/combinatorics/inclusion-exclusion) |
+| Integer partitions | O(n sqrt n) | O(n) | `foundations.complexity` | [Integer partitions](/algorithms/combinatorics/integer-partitions) |
+| Multinomial coefficients and the hypergeometric distribution | O(n + log p) per word | O(n) | `combinatorics.binomial-coefficients` | [Multinomial coefficients and the hypergeometric distribution](/algorithms/combinatorics/multinomial-coefficients) |
+| The reflection principle | O(n + log p) | O(1) | `combinatorics.binomial-coefficients` | [The reflection principle](/algorithms/combinatorics/reflection-principle) |
 | Stars and bars | O(min(k-1, n)) | O(1) | `combinatorics.binomial-coefficients` | [Stars and bars](/algorithms/combinatorics/stars-and-bars) |
 | 0/1 knapsack | O(nW) | O(W) | `foundations.complexity` | [0/1 knapsack](/algorithms/dynamic-programming/0-1-knapsack) |
 | Bitmask dynamic programming | O(n 2^n) | O(2^n) | `foundations.complexity` | [Bitmask dynamic programming](/algorithms/dynamic-programming/bitmask-dp) |
@@ -106,7 +110,9 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Closest pair | O(n log n) | O(n) | `geometry.convex-hull` | [Closest pair](/algorithms/geometry/closest-pair) |
 | Convex hull | O(n log n) | O(n) | `foundations.sorting` | [Convex hull](/algorithms/geometry/convex-hull) |
 | Integer geometry | O(n log C) | O(n) | `number-theory.extended-euclidean` | [Integer geometry](/algorithms/geometry/integer-geometry) |
+| K-D trees | O(n log^2 n) build with a full sort per node; O(log n) average per query and O(n) worst case | O(n) | `foundations.sorting` | [K-D trees](/algorithms/geometry/kd-trees) |
 | Point in polygon | O(n) per query | O(1) per query | `geometry.convex-hull` | [Point in polygon](/algorithms/geometry/point-in-polygon) |
+| Robust predicates | O(1) per query | O(1) | `foundations.complexity` | [Robust predicates](/algorithms/geometry/robust-predicates) |
 | Rotating calipers | O(n log n) for the whole algorithm | O(n) | `geometry.convex-hull` | [Rotating calipers](/algorithms/geometry/rotating-calipers) |
 | The smallest enclosing circle | O(n^3) worst case; O(n) expected with a random shuffle | O(n) for the points, O(1) auxiliary | `geometry.convex-hull` | [The smallest enclosing circle](/algorithms/geometry/smallest-enclosing-circle) |
 | Sweep line | O(n log n) for the decision version | O(n) | `geometry.convex-hull` | [Sweep line](/algorithms/geometry/sweep-line) |
@@ -119,6 +125,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Bridges | O(V + E) | O(V) | `graphs.representation` | [Bridges](/algorithms/graphs/bridges) |
 | Depth-first search | O(V + E) | O(V + E) | `graphs.representation` | [Depth-first search](/algorithms/graphs/dfs) |
 | Dijkstra's algorithm | O((V + E) log V) | O(V + E) | `graphs.representation` | [Dijkstra's algorithm](/algorithms/graphs/dijkstra) |
+| Dominator trees | O(V E) per pass, two or three passes in practice | O(V + E) | `graphs.representation` | [Dominator trees](/algorithms/graphs/dominator-trees) |
 | Disjoint set union | O((n + q) alpha(n)) | O(n) | `foundations.recursion` | [Disjoint set union](/algorithms/graphs/dsu) |
 | Euler tours in graphs | O(V + E) | O(V) beyond the adjacency list and the output | `graphs.representation` | [Euler tours in graphs](/algorithms/graphs/euler-tour) |
 | Floyd-Warshall and all-pairs shortest paths | O(V^3) | O(V^2) | `graphs.representation` | [Floyd-Warshall and all-pairs shortest paths](/algorithms/graphs/floyd-warshall) |
@@ -132,6 +139,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Topological sort | O(V + E) | O(V) | `graphs.representation` | [Topological sort](/algorithms/graphs/topological-sort) |
 | Interval scheduling | O(n log n) | O(n) | `foundations.sorting` | [Interval scheduling](/algorithms/greedy/interval-scheduling) |
 | Sorting by several keys | O(n log n) | O(n) | `foundations.sorting` | [Sorting by several keys](/algorithms/greedy/multi-key-sorting) |
+| Scheduling with deadlines and release times | O(n log n) | O(n) | `foundations.sorting` | [Scheduling with deadlines and release times](/algorithms/greedy/scheduling-deadlines-and-release-times) |
 | Chinese remainder theorem | O(k log M) | O(1) | `number-theory.modular-arithmetic` | [Chinese remainder theorem](/algorithms/number-theory/chinese-remainder) |
 | The discrete logarithm | O(sqrt m) modular multiplications per query | O(sqrt m) | `number-theory.modular-arithmetic` | [The discrete logarithm](/algorithms/number-theory/discrete-logarithm) |
 | Euler's totient function and Euler's theorem | O(sqrt n) for one totient, O(log m) for one power | O(1) | `foundations.complexity` | [Euler's totient function and Euler's theorem](/algorithms/number-theory/euler-totient) |
