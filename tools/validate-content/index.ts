@@ -155,6 +155,7 @@ async function loadProblems(): Promise<Problem[]> {
         onlyFiles: true,
     });
     const problems: Problem[] = [];
+    const seen = new Map<string, string>();
     for (const file of files.sort()) {
         const raw = parseYaml(await readFile(file, "utf8"));
         const result = problemSchema.safeParse(raw);
@@ -164,7 +165,16 @@ async function loadProblems(): Promise<Problem[]> {
             );
             continue;
         }
-        problems.push({ id: result.data.id, file: rel(ROOT, file) });
+        const id = result.data.id;
+        const previous = seen.get(id);
+        if (previous) {
+            fail(
+                `${rel(ROOT, file)}: duplicate problem id "${id}", already recorded in ${previous}`,
+            );
+            continue;
+        }
+        seen.set(id, rel(ROOT, file));
+        problems.push({ id, file: rel(ROOT, file) });
     }
     return problems;
 }
