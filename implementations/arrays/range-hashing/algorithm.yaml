@@ -1,0 +1,92 @@
+algorithm: arrays.range-hashing
+title: Range hashing
+summary: Fingerprint every prefix of a static array with a fixed polynomial hash, so that comparing two ranges costs one subtraction and one multiplication.
+subject: arrays
+divisions: [gold]
+importance: common-contest-technique
+complexity:
+    time: "O(n + q)"
+    space: "O(n)"
+assumptions:
+    - The array is static, so the prefix fingerprints and the powers of the base can be built once.
+    - A hash collision is either acceptable or checked with a direct comparison.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the range pairs, then prints whether each pair has the same content."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with two 1-based inclusive ranges l1 r1 l2 r2, where l1 <= r1 and l2 <= r2."
+      outputs: "One line per query: YES when the ranges have the same length and the same values, otherwise NO."
+      notes: "The prefix fingerprints and the powers of the base are built once, before the first query, so each query costs O(1). The arithmetic is unsigned 64-bit, which wraps modulo 2^64 without undefined behavior."
+      operations: [accumulate-prefix-hash, subtract-shifted-hash]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the range pairs, then prints whether each pair has the same content."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with two 1-based inclusive ranges l1 r1 l2 r2, where l1 <= r1 and l2 <= r2."
+      outputs: "One line per query: YES when the ranges have the same length and the same values, otherwise NO."
+      notes: "The prefix fingerprints and the powers of the base are built once, before the first query, so each query costs O(1). The arithmetic is unsigned 64-bit, which wraps modulo 2^64 without undefined behavior."
+      operations: [accumulate-prefix-hash, subtract-shifted-hash]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the range pairs, then prints whether each pair has the same content."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with two 1-based inclusive ranges l1 r1 l2 r2, where l1 <= r1 and l2 <= r2."
+      outputs: "One line per query: YES when the ranges have the same length and the same values, otherwise NO."
+      notes: "The class is named Main so the file can be submitted to a judge unchanged. The prefix fingerprints and the powers of the base are built once, before the first query, so each query costs O(1). Java long arithmetic wraps modulo 2^64."
+      operations: [accumulate-prefix-hash, subtract-shifted-hash]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the range pairs, then prints whether each pair has the same content."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with two 1-based inclusive ranges l1 r1 l2 r2, where l1 <= r1 and l2 <= r2."
+      outputs: "One line per query: YES when the ranges have the same length and the same values, otherwise NO."
+      notes: "Educational reference implementation: JavaScript/Pascal is not a USACO submission language. The prefix fingerprints and the powers of the base are built once, before the first query, so each query costs O(1). BigInt keeps the full 64 bits, and every operation is masked modulo 2^64."
+      operations: [accumulate-prefix-hash, subtract-shifted-hash]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the range pairs, then prints whether each pair has the same content."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with two 1-based inclusive ranges l1 r1 l2 r2, where l1 <= r1 and l2 <= r2."
+      outputs: "One line per query: YES when the ranges have the same length and the same values, otherwise NO."
+      notes: "Educational reference implementation: JavaScript/Pascal is not a USACO submission language. The prefix fingerprints and the powers of the base are built once, before the first query, so each query costs O(1). Each fingerprint is four 16-bit limbs, which keeps the arithmetic exact modulo 2^64 in the browser-based compiler."
+      operations: [accumulate-prefix-hash, subtract-shifted-hash]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the range pairs, then prints whether each pair has the same content."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers, then q, then q lines with two 1-based inclusive ranges l1 r1 l2 r2, where l1 <= r1 and l2 <= r2."
+      outputs: "One line per query: YES when the ranges have the same length and the same values, otherwise NO."
+      notes: "The prefix fingerprints and the powers of the base are built once, before the first query, so each query costs O(1). Python integers are unbounded, so every operation is masked explicitly modulo 2^64."
+      operations: [accumulate-prefix-hash, subtract-shifted-hash]

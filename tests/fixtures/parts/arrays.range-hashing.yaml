@@ -1,0 +1,9 @@
+- name: overlapping ranges with a repeated block
+  input: "5\n1 2 3 1 2\n3\n1 2 4 5\n1 3 3 5\n2 3 1 2\n"
+  expected: "YES\nNO\nNO\n"
+- name: negative values and a length mismatch
+  input: "6\n-5 0 7 -5 0 7\n4\n1 3 4 6\n1 4 4 6\n2 2 5 5\n1 1 6 6\n"
+  expected: "YES\nNO\nYES\nNO\n"
+- name: edge case with extreme values and different lengths
+  input: "2\n-1000000000 1000000000\n3\n1 1 2 2\n1 2 1 1\n1 2 1 2\n"
+  expected: "NO\nNO\nYES\n"

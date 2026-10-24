@@ -1,0 +1,28 @@
+id: atcoder.abc331.f.palindrome-query
+title: Palindrome Query
+source: AtCoder
+contest: AtCoder Beginner Contest 331
+url: https://atcoder.jp/contests/abc331/tasks/abc331_f
+editorialUrl: https://atcoder.jp/contests/abc331/tasks/abc331_f/editorial
+techniques:
+    - arrays.range-hashing
+prerequisites:
+    - range-queries.segment-tree
+    - strings.rolling-hash
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - The string can hold one million characters and there are 100,000 operations.
+    - Point updates and palindrome queries interleave, so a static prefix table is not enough.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A substring is a palindrome exactly when it equals its reverse.
+    - Store the forward hash and the reverse hash of every segment in a segment tree.
+    - A point update changes one leaf, and a range query combines O(log N) nodes.
+discussion: >-
+    The interleaving of updates and queries rules out a prefix table built once. A segment tree stores both the forward and the reverse fingerprint of each segment, and two children combine by shifting the left hash by the length of the right child. A palindrome query compares the forward fingerprint of the range with its reverse fingerprint, so both the update and the query cost logarithmic time.
+related:
+    - atcoder.abc284.f.abc-bac
+    - cses.1733.finding-periods

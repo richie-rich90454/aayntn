@@ -1,0 +1,27 @@
+id: cses.1733.finding-periods
+title: Finding Periods
+source: CSES
+contest: CSES Problem Set
+url: https://cses.fi/problemset/task/1733
+techniques:
+    - arrays.range-hashing
+prerequisites:
+    - arrays.prefix-sums
+    - strings.rolling-hash
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The string has up to one million characters, so comparing every candidate period character by character is too slow in the worst case.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A period of length p means the prefix of length n - p equals the suffix that starts at position p.
+    - That is one range comparison, not a loop over every repeated block.
+    - Build the prefix hashes once and test every p in constant time.
+discussion: >-
+    The definition of a period is easy to turn into an equality of two ranges: the string has period p exactly when its first n - p characters equal its last n - p characters. Prefix hashing answers each of those comparisons in constant time, so all n candidate periods are tested in one linear pass after the tables are built. Direct comparison is quadratic on a string of one repeated character.
+related:
+    - atcoder.abc284.f.abc-bac
+    - usaco.2015.feb.gold.censoring

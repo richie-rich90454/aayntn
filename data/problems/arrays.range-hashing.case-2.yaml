@@ -1,0 +1,27 @@
+id: atcoder.abc284.f.abc-bac
+title: ABCBAC
+source: AtCoder
+contest: AtCoder Beginner Contest 284
+url: https://atcoder.jp/contests/abc284/tasks/abc284_f
+editorialUrl: https://atcoder.jp/contests/abc284/tasks/abc284_f/editorial
+techniques:
+    - arrays.range-hashing
+prerequisites:
+    - strings.rolling-hash
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The string has up to one million characters, so rebuilding the candidate string at every split is quadratic.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - For a fixed split, the candidate string is determined by the two ends of the input.
+    - Compare the middle of the input with the reverse of the candidate using prefix hashes.
+    - A mismatch at the center leaves two orientations, and both are constant-time checks.
+discussion: >-
+    A split fixes the candidate string, so the only remaining question is whether the candidate reproduces the input at every position. The candidate is read from the front and the back of the input, and the middle must equal its reverse. Prefix hashes of the input and of the reversed input turn each candidate into two range comparisons, which removes the quadratic string construction.
+related:
+    - atcoder.abc331.f.palindrome-query
+    - cses.1733.finding-periods
