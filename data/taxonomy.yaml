@@ -346,7 +346,7 @@ techniques:
       synonyms:
           - profile DP
           - frontier DP
-      status: missing
+      status: published
       divisions: []
     - id: dynamic-programming.subset-transforms
       name: Subset transforms
@@ -354,7 +354,7 @@ techniques:
       synonyms:
           - zeta transform
           - Mobius transform
-      status: missing
+      status: published
       divisions: []
     - id: enumeration.backtracking
       name: Backtracking
@@ -516,7 +516,7 @@ techniques:
       synonyms:
           - lattice geometry
           - Pick's theorem
-      status: missing
+      status: published
       divisions: []
     - id: geometry.kd-trees
       name: K-D trees
@@ -554,7 +554,7 @@ techniques:
       subject: geometry
       synonyms:
           - minimum enclosing circle
-      status: missing
+      status: published
       divisions: []
     - id: geometry.sweep-line
       name: Sweep line
@@ -832,7 +832,7 @@ techniques:
       subject: number-theory
       synonyms:
           - FFT
-      status: missing
+      status: published
       divisions: []
     - id: number-theory.matrix-exponentiation
       name: Matrix exponentiation
@@ -866,7 +866,7 @@ techniques:
       synonyms:
           - NTT
           - number theoretic transform
-      status: missing
+      status: published
       divisions: []
     - id: number-theory.pollard-rho
       name: Pollard's rho
@@ -1034,7 +1034,7 @@ techniques:
       name: The individual two-pointer patterns
       subject: searching
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: searching.two-pointers
       name: Two pointers
@@ -1239,7 +1239,7 @@ techniques:
       subject: trees
       synonyms:
           - tree hash
-      status: missing
+      status: published
       divisions: []
     - id: trees.virtual-tree
       name: Virtual trees

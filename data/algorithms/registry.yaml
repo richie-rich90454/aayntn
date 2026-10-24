@@ -207,3 +207,35 @@ algorithms:
       title: The parametric search generalization
       subject: searching
       manifest: implementations/searching/parametric-search/algorithm.yaml
+    - id: dynamic-programming.profile-dp
+      title: Profile dynamic programming
+      subject: dynamic-programming
+      manifest: implementations/dynamic-programming/profile-dp/algorithm.yaml
+    - id: dynamic-programming.subset-transforms
+      title: Subset transforms
+      subject: dynamic-programming
+      manifest: implementations/dynamic-programming/subset-transforms/algorithm.yaml
+    - id: geometry.integer-geometry
+      title: Integer geometry
+      subject: geometry
+      manifest: implementations/geometry/integer-geometry/algorithm.yaml
+    - id: geometry.smallest-enclosing-circle
+      title: The smallest enclosing circle
+      subject: geometry
+      manifest: implementations/geometry/smallest-enclosing-circle/algorithm.yaml
+    - id: number-theory.fft
+      title: The fast Fourier transform
+      subject: number-theory
+      manifest: implementations/number-theory/fft/algorithm.yaml
+    - id: number-theory.ntt
+      title: The number-theoretic transform
+      subject: number-theory
+      manifest: implementations/number-theory/ntt/algorithm.yaml
+    - id: searching.two-pointer-patterns
+      title: The individual two-pointer patterns
+      subject: searching
+      manifest: implementations/searching/two-pointer-patterns/algorithm.yaml
+    - id: trees.tree-hashing
+      title: Tree hashing
+      subject: trees
+      manifest: implementations/trees/tree-hashing/algorithm.yaml

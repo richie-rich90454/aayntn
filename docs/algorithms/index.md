@@ -35,17 +35,17 @@ A second reason runs deeper. The recognition of a problem is what actually fails
 | --- | --- | --- |
 | Foundations and complexity | Binary representation, Complexity analysis, Recursion, Sorting | [Foundations and complexity](/algorithms/foundations/) |
 | Enumeration and searching | Backtracking, Branch and bound, Gray codes, Meet in the middle, Permutations, Subset enumeration | [Enumeration and searching](/algorithms/enumeration/) |
-| Searching | Binary search on the answer, Binary search, Parametric search, Sliding window, Search over a sorted range of indices, Ternary search, Two pointers | [Searching](/algorithms/searching/) |
+| Searching | Binary search on the answer, Binary search, Parametric search, Sliding window, Search over a sorted range of indices, Ternary search, The individual two-pointer patterns, Two pointers | [Searching](/algorithms/searching/) |
 | Greedy methods | Interval scheduling, Sorting by several keys | [Greedy methods](/algorithms/greedy/) |
 | Arrays and sequences | Coordinate compression, Difference arrays, Monotonic queue, Monotonic stack, Prefix sums, Range hashing, Subarray sums, Two-dimensional difference arrays, Two-dimensional prefix sums, Two pointers on an array, Sliding window maximum | [Arrays and sequences](/algorithms/arrays/) |
 | Range query structures | Fenwick tree, Implicit segment trees, Lazy propagation, Merge sort trees, Mo's algorithm, Persistent segment trees, Segment tree beats, Segment tree, Sparse table, Square-root decomposition, Wavelet trees | [Range query structures](/algorithms/range-queries/) |
 | Graphs and shortest paths | 0-1 BFS, Articulation points, Bellman-Ford, Breadth-first search, Bipartite matching, The two-coloring test for a bipartite graph, Bridges, Depth-first search, Dijkstra's algorithm, Disjoint set union, Euler tours in graphs, Floyd-Warshall and all-pairs shortest paths, The Hungarian algorithm, Johnson's algorithm, Minimum cost flow, Minimum cut, Minimum spanning tree, Graph representation, Strongly connected components, Topological sort | [Graphs and shortest paths](/algorithms/graphs/) |
-| Trees and decompositions | Binary lifting, Centroid decomposition, Dynamic trees, Euler tour for trees, Heavy-light decomposition, Lowest common ancestor, Rerooting, Small-to-large merging, Tree dynamic programming, Virtual trees | [Trees and decompositions](/algorithms/trees/) |
-| Dynamic programming | 0/1 knapsack, Bitmask dynamic programming, Convex hull trick, Dynamic programming on a directed acyclic graph, Digit dynamic programming, Divide-and-conquer optimization, Interval dynamic programming, Knuth optimization, The Li Chao tree, Longest increasing subsequence, Monotonic queue optimization | [Dynamic programming](/algorithms/dynamic-programming/) |
+| Trees and decompositions | Binary lifting, Centroid decomposition, Dynamic trees, Euler tour for trees, Heavy-light decomposition, Lowest common ancestor, Rerooting, Small-to-large merging, Tree dynamic programming, Tree hashing, Virtual trees | [Trees and decompositions](/algorithms/trees/) |
+| Dynamic programming | 0/1 knapsack, Bitmask dynamic programming, Convex hull trick, Dynamic programming on a directed acyclic graph, Digit dynamic programming, Divide-and-conquer optimization, Interval dynamic programming, Knuth optimization, The Li Chao tree, Longest increasing subsequence, Monotonic queue optimization, Profile dynamic programming, Subset transforms | [Dynamic programming](/algorithms/dynamic-programming/) |
 | Strings | Aho-Corasick, Knuth-Morris-Pratt, The Manacher algorithm, The minimal rotation of a string, Palindrome trees (eertree), Rolling hash, Suffix array, The suffix automaton, Trie, The Z algorithm | [Strings](/algorithms/strings/) |
-| Number theory | Chinese remainder theorem, The discrete logarithm, Euler's totient function and Euler's theorem, The extended Euclidean algorithm, Matrix exponentiation, Miller-Rabin primality test, Modular arithmetic, Pollard's rho, Prime factorization, Sieve of Eratosthenes | [Number theory](/algorithms/number-theory/) |
+| Number theory | Chinese remainder theorem, The discrete logarithm, Euler's totient function and Euler's theorem, The extended Euclidean algorithm, The fast Fourier transform, Matrix exponentiation, Miller-Rabin primality test, Modular arithmetic, The number-theoretic transform, Pollard's rho, Prime factorization, Sieve of Eratosthenes | [Number theory](/algorithms/number-theory/) |
 | Combinatorics | Binomial coefficients, Counting dynamic programming, Generating functions, Inclusion and exclusion, Stars and bars | [Combinatorics](/algorithms/combinatorics/) |
-| Computational geometry | Closest pair, Convex hull, Point in polygon, Rotating calipers, Sweep line | [Computational geometry](/algorithms/geometry/) |
+| Computational geometry | Closest pair, Convex hull, Integer geometry, Point in polygon, Rotating calipers, The smallest enclosing circle, Sweep line | [Computational geometry](/algorithms/geometry/) |
 | Advanced algorithms and special techniques | Offline dynamic connectivity, Parallel binary search, Quickselect and randomized selection, The rollback disjoint set union, Game theory and Sprague-Grundy theory, XOR bases | [Advanced algorithms and special techniques](/algorithms/advanced/) |
 
 <!-- aayntn:subjects:end -->
@@ -91,6 +91,8 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | The Li Chao tree | O(log k) per insertion and per query, after O(q log q) preprocessing | O(q) total, O(k) for the tree | `foundations.complexity` | [The Li Chao tree](/algorithms/dynamic-programming/li-chao-tree) |
 | Longest increasing subsequence | O(n log n) | O(n) | `foundations.sorting` | [Longest increasing subsequence](/algorithms/dynamic-programming/longest-increasing-subsequence) |
 | Monotonic queue optimization | O(n) | O(n) | `foundations.complexity` | [Monotonic queue optimization](/algorithms/dynamic-programming/monotonic-queue-optimization) |
+| Profile dynamic programming | O(rc 2^c) | O(2^c) | `foundations.complexity` | [Profile dynamic programming](/algorithms/dynamic-programming/profile-dp) |
+| Subset transforms | O(n 2^n) | O(2^n) | `foundations.complexity` | [Subset transforms](/algorithms/dynamic-programming/subset-transforms) |
 | Backtracking | O(b^d * t) in the worst case, far less with pruning | O(d + s) | `foundations.recursion` | [Backtracking](/algorithms/enumeration/backtracking) |
 | Branch and bound | O(b * V), where V is the number of surviving nodes | O(n) | `enumeration.backtracking` | [Branch and bound](/algorithms/enumeration/branch-and-bound) |
 | Gray codes | O(n 2^n) | O(n) auxiliary | `foundations.binary-representation` | [Gray codes](/algorithms/enumeration/gray-codes) |
@@ -103,8 +105,10 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Sorting | O(n log n) | O(n) for merge sort, O(1) for heapsort | `foundations.complexity` | [Sorting](/algorithms/foundations/sorting) |
 | Closest pair | O(n log n) | O(n) | `geometry.convex-hull` | [Closest pair](/algorithms/geometry/closest-pair) |
 | Convex hull | O(n log n) | O(n) | `foundations.sorting` | [Convex hull](/algorithms/geometry/convex-hull) |
+| Integer geometry | O(n log C) | O(n) | `number-theory.extended-euclidean` | [Integer geometry](/algorithms/geometry/integer-geometry) |
 | Point in polygon | O(n) per query | O(1) per query | `geometry.convex-hull` | [Point in polygon](/algorithms/geometry/point-in-polygon) |
 | Rotating calipers | O(n log n) for the whole algorithm | O(n) | `geometry.convex-hull` | [Rotating calipers](/algorithms/geometry/rotating-calipers) |
+| The smallest enclosing circle | O(n^3) worst case; O(n) expected with a random shuffle | O(n) for the points, O(1) auxiliary | `geometry.convex-hull` | [The smallest enclosing circle](/algorithms/geometry/smallest-enclosing-circle) |
 | Sweep line | O(n log n) for the decision version | O(n) | `geometry.convex-hull` | [Sweep line](/algorithms/geometry/sweep-line) |
 | 0-1 BFS | O(V + E) | O(V + E) | `graphs.bfs` | [0-1 BFS](/algorithms/graphs/0-1-bfs) |
 | Articulation points | O(V + E) | O(V) | `graphs.representation` | [Articulation points](/algorithms/graphs/articulation-points) |
@@ -132,9 +136,11 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | The discrete logarithm | O(sqrt m) modular multiplications per query | O(sqrt m) | `number-theory.modular-arithmetic` | [The discrete logarithm](/algorithms/number-theory/discrete-logarithm) |
 | Euler's totient function and Euler's theorem | O(sqrt n) for one totient, O(log m) for one power | O(1) | `foundations.complexity` | [Euler's totient function and Euler's theorem](/algorithms/number-theory/euler-totient) |
 | The extended Euclidean algorithm | O(log min(a, b)) | O(1) | `foundations.complexity` | [The extended Euclidean algorithm](/algorithms/number-theory/extended-euclidean) |
+| The fast Fourier transform | O(n log n) | O(n) | `foundations.complexity` | [The fast Fourier transform](/algorithms/number-theory/fft) |
 | Matrix exponentiation | O(n^3 log k) | O(n^2) | `number-theory.modular-arithmetic` | [Matrix exponentiation](/algorithms/number-theory/matrix-exponentiation) |
 | Miller-Rabin primality test | O(k log n) modular multiplications with k = 12 | O(1) | `number-theory.modular-arithmetic` | [Miller-Rabin primality test](/algorithms/number-theory/miller-rabin) |
 | Modular arithmetic | O(log m) per operation | O(1) | `foundations.complexity` | [Modular arithmetic](/algorithms/number-theory/modular-arithmetic) |
+| The number-theoretic transform | O(n log n) | O(n) | `number-theory.modular-arithmetic` | [The number-theoretic transform](/algorithms/number-theory/ntt) |
 | Pollard's rho | expected O(n^{1/4}) iterations for a semiprime, each O(log n) | O(log n) for the stack of pending cofactors | `number-theory.modular-arithmetic` | [Pollard's rho](/algorithms/number-theory/pollard-rho) |
 | Prime factorization | O(sqrt{n}) | O(1) | `foundations.complexity` | [Prime factorization](/algorithms/number-theory/prime-factorization) |
 | Sieve of Eratosthenes | O(n log log n) | O(n) | `foundations.complexity` | [Sieve of Eratosthenes](/algorithms/number-theory/sieve) |
@@ -155,6 +161,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Sliding window | O(n) | O(1) for a running sum, O(sigma) for a frequency map | `searching.two-pointers` | [Sliding window](/algorithms/searching/sliding-window) |
 | Search over a sorted range of indices | O(log n) | O(1) | `searching.binary-search` | [Search over a sorted range of indices](/algorithms/searching/sorted-range-search) |
 | Ternary search | O(log_{3/2}(L / varepsilon)) iterations, each costing two evaluations | O(1) | `foundations.complexity` | [Ternary search](/algorithms/searching/ternary-search) |
+| The individual two-pointer patterns | O(n) | O(1) | `foundations.complexity` | [The individual two-pointer patterns](/algorithms/searching/two-pointer-patterns) |
 | Two pointers | O(n) | O(1) | `foundations.complexity` | [Two pointers](/algorithms/searching/two-pointers) |
 | Aho-Corasick | O(26L + n) for a lowercase alphabet | O(26L) for the transitions, where L is the total pattern length | `strings.trie` | [Aho-Corasick](/algorithms/strings/aho-corasick) |
 | Knuth-Morris-Pratt | O(n + m) | O(m) | `foundations.complexity` | [Knuth-Morris-Pratt](/algorithms/strings/kmp) |
@@ -175,6 +182,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Rerooting | O(n) | O(n) | `graphs.dfs` | [Rerooting](/algorithms/trees/rerooting) |
 | Small-to-large merging | O(n log n) expected | O(n) | `graphs.dfs` | [Small-to-large merging](/algorithms/trees/small-to-large-merging) |
 | Tree dynamic programming | O(n) | O(n) | `graphs.bfs` | [Tree dynamic programming](/algorithms/trees/tree-dp) |
+| Tree hashing | O(n log n + m log m) | O(n + m) | `trees.tree-dp` | [Tree hashing](/algorithms/trees/tree-hashing) |
 | Virtual trees | O(n log n) to preprocess, O(k log k + k log n) per query | O(n log n) for the ancestor table, O(k) for the virtual tree | `trees.lca` | [Virtual trees](/algorithms/trees/virtual-tree) |
 
 <!-- aayntn:core:end -->

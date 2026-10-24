@@ -1569,3 +1569,201 @@ searching.parametric-search:
           999999999
       expected: |
           999999999
+
+dynamic-programming.profile-dp:
+    - name: two by four board with five tilings
+      input: |
+          2 4
+          0000
+          0000
+      expected: |
+          5
+    - name: three by three board with the center blocked
+      input: |
+          3 3
+          000
+          010
+          000
+      expected: |
+          2
+    - name: edge case with a single free cell and no domino that fits
+      input: |
+          1 1
+          0
+      expected: |
+          0
+
+dynamic-programming.subset-transforms:
+    - name: a four-mask transform with a zero
+      input: |
+          2
+          1 2 3 4
+      expected: |
+          1 3 4 10
+    - name: values that wrap around the modulus
+      input: |
+          2
+          1000000006 1000000006 1000000006 1000000006
+      expected: |
+          1000000006 1000000005 1000000005 1000000003
+    - name: a single empty subset
+      input: |
+          0
+          42
+      expected: |
+          42
+
+geometry.integer-geometry:
+    - name: a counterclockwise square with four-unit sides
+      input: |
+          4
+          0 0
+          4 0
+          4 4
+          0 4
+      expected: |
+          32
+          16
+          9
+    - name: a right triangle with a primitive hypotenuse
+      input: |
+          3
+          0 0
+          3 0
+          0 4
+      expected: |
+          12
+          8
+          3
+    - name: edge case, a clockwise unit square with no interior lattice point
+      input: |
+          4
+          2 2
+          1 2
+          1 1
+          2 1
+      expected: |
+          2
+          4
+          0
+
+geometry.smallest-enclosing-circle:
+    - name: a single point is a circle of radius zero
+      input: |
+          1
+          0 0
+      expected: |
+          0
+    - name: a right triangle is held by the hypotenuse as a diameter
+      input: |
+          3
+          0 0
+          6 0
+          0 8
+      expected: |
+          25
+    - name: an acute triangle is held by all three vertices
+      input: |
+          3
+          5 0
+          0 5
+          -3 -4
+      expected: |
+          25
+
+number-theory.fft:
+    - name: constant polynomials with a negative product
+      input: |
+          1
+          -3
+          1
+          7
+      expected: |
+          -21
+    - name: a small product that cancels and contains a zero coefficient
+      input: |
+          4
+          1 -2 0 3
+          3
+          4 5 -6
+      expected: |
+          4 -3 -16 24 15 -18
+    - name: a product whose length is just over a power of two
+      input: |
+          5
+          1 2 3 4 5
+          5
+          5 4 3 2 1
+      expected: |
+          5 14 26 40 55 40 26 14 5
+
+number-theory.ntt:
+    - name: a small convolution
+      input: |
+          2 3 998244353
+          1 2
+          3 4 5
+      expected: |
+          3 10 13 10
+    - name: "edge case: a zero polynomial and a trailing zero coefficient"
+      input: |
+          3 3 998244353
+          0 0 0
+          5 7 0
+      expected: |
+          0 0 0 0 0
+    - name: coefficients that wrap around the modulus
+      input: |
+          5 4 998244353
+          998244352 123456789 987654321 0 998244352
+          998244351 2 500000000 998244352
+      expected: |
+          2 751330773 766337995 348621763 347247350 10590030 498244353 1
+
+searching.two-pointer-patterns:
+    - name: duplicates on the boundary
+      input: |
+          4
+          2 2 2 2
+          4
+      expected: |
+          6
+    - name: negative values with repeated endpoints
+      input: |
+          7
+          -5 -3 -1 -1 0 2 4
+          -4
+      expected: |
+          6
+    - name: empty array
+      input: |
+          0
+          10
+      expected: |
+          0
+
+trees.tree-hashing:
+    - name: the same shape with the labeled child swapped
+      input: |
+          5
+          -1 0 0 1 1
+          5
+          -1 0 0 2 2
+      expected: |
+          SAME
+    - name: a chain and a star with four vertices
+      input: |
+          4
+          -1 0 1 2
+          4
+          -1 0 0 0
+      expected: |
+          DIFFERENT
+    - name: edge case of two single-vertex trees
+      input: |
+          1
+          -1
+          1
+          -1
+      expected: |
+          SAME
