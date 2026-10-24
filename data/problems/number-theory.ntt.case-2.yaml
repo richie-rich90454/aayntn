@@ -1,0 +1,29 @@
+id: library-checker.convolution-mod
+title: Convolution
+source: Library Checker
+contest: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/convolution_mod
+techniques:
+    - number-theory.ntt
+prerequisites:
+    - number-theory.modular-arithmetic
+difficulty: 3
+estimatedMinutes: 40
+specialConstraints:
+    - N and M are at most 524288, so an O(NM) product is too slow.
+    - Every coefficient is below 998244353, and the answer is required modulo that prime.
+    - The judge includes adversarial cases with long runs of equal values and with large zero prefixes.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The required array is the convolution of the two input arrays.
+    - The modulus 998244353 supports power-of-two transforms up to length 2^23, which covers the maximum input after padding.
+    - Pad to a power of two at least N + M - 1, transform both arrays with the primitive root 3, and multiply pointwise.
+    - Apply the inverse transform, then print exactly N + M - 1 coefficients.
+discussion: >-
+    The statement is the convolution modulo 998244353 in its purest form. The maximum input needs a transform of length 2^20, so the padded length, the roots, and the inverse scaling are the whole algorithm. The adversarial tests make two details matter: the padding must cover N + M - 1 rather than only the larger input, and the subtraction in the butterfly must be reduced into [0, p). The time limit is generous for a correct NTT and impossible for the quadratic product.
+related:
+    - atcoder.practice2.f.convolution
+    - library-checker.convolution-mod-1000000007

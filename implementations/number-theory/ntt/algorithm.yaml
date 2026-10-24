@@ -1,0 +1,96 @@
+algorithm: number-theory.ntt
+title: The number-theoretic transform
+summary: Multiply two polynomials in O(n log n) by evaluating them at the powers of a primitive root of unity modulo 998244353, multiplying the values pointwise, and interpolating back.
+subject: number-theory
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [number-theory.modular-arithmetic, foundations.complexity]
+    recommended: [foundations.binary-representation, foundations.recursion]
+complexity:
+    time: "O(n log n)"
+    space: "O(n)"
+assumptions:
+    - The modulus is the prime 998244353, whose factorization p - 1 = 119 x 2^23 supplies roots of unity for every power of two up to 2^23.
+    - The transform length is a power of two at least as large as the number of coefficients in the product.
+    - Every coefficient is a residue in [0, p), so a product of two coefficients is below p^2 and fits in a signed 64-bit integer.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two polynomials and the modulus, pads them to a power of two, runs a radix-2 NTT with the primitive root 3, multiplies pointwise, and prints the product coefficients."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n m p on the first line, then n coefficients of the first polynomial, then m coefficients of the second polynomial, with p = 998244353."
+      outputs: "The n + m - 1 coefficients of the product modulo p, separated by spaces on one line."
+      notes: "The arrays are allocated to the transform length, and every product of two residues is below 2^60, so a signed 64-bit integer holds it. Both transforms and the inverse transform use the same bit-reversal permutation and radix-2 butterflies."
+      operations: [read, pad, transform, pointwise-multiply, inverse-transform, output]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two polynomials and the modulus, pads them to a power of two, runs a radix-2 NTT with the primitive root 3, multiplies pointwise, and prints the product coefficients."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n m p on the first line, then n coefficients of the first polynomial, then m coefficients of the second polynomial, with p = 998244353."
+      outputs: "The n + m - 1 coefficients of the product modulo p, separated by spaces on one line."
+      notes: "The transform is written over std::vector<long long>. Every product of two residues is below 2^60, so no 128-bit intermediate is needed for this modulus."
+      operations: [read, pad, transform, pointwise-multiply, inverse-transform, output]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two polynomials and the modulus, pads them to a power of two, runs a radix-2 NTT with the primitive root 3, multiplies pointwise, and prints the product coefficients."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n m p on the first line, then n coefficients of the first polynomial, then m coefficients of the second polynomial, with p = 998244353."
+      outputs: "The n + m - 1 coefficients of the product modulo p, separated by spaces on one line."
+      notes: "A byte-array scanner replaces java.util.Scanner so that a large input stays fast. The long product of two residues is below 2^60, so the modular arithmetic is exact without BigInteger."
+      operations: [read, pad, transform, pointwise-multiply, inverse-transform, output]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two polynomials and the modulus, pads them to a power of two, runs a radix-2 NTT with the primitive root 3, multiplies pointwise, and prints the product coefficients."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n m p on the first line, then n coefficients of the first polynomial, then m coefficients of the second polynomial, with p = 998244353."
+      outputs: "The n + m - 1 coefficients of the product modulo p, separated by spaces on one line."
+      notes: "Python integers are arbitrary precision, so the product of two residues is exact, and the built-in pow computes the modular powers. The transform is iterative and in place."
+      operations: [read, pad, transform, pointwise-multiply, inverse-transform, output]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads two polynomials and the modulus, pads them to a power of two, runs a radix-2 NTT with the primitive root 3, multiplies pointwise, and prints the product coefficients."
+      time: "O(n log n) modular multiplications, each built from 15-bit halves"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n m p on the first line, then n coefficients of the first polynomial, then m coefficients of the second polynomial, with p = 998244353."
+      outputs: "The n + m - 1 coefficients of the product modulo p, separated by spaces on one line."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The browser Pascal compiler stores Int64 as a double, so multiplication splits both residues into 15-bit halves and keeps every intermediate below 2^46. No step uses a 128-bit type."
+      operations: [read, pad, transform, pointwise-multiply, inverse-transform, output]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads two polynomials and the modulus, pads them to a power of two, runs a radix-2 NTT with the primitive root 3, multiplies pointwise, and prints the product coefficients."
+      time: "O(n log n) BigInt multiplications"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n m p on the first line, then n coefficients of the first polynomial, then m coefficients of the second polynomial, with p = 998244353."
+      outputs: "The n + m - 1 coefficients of the product modulo p, separated by spaces on one line."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. BigInt keeps the product of two residues exact, because a Number would lose precision above 2^53. The transform is iterative and in place."
+      operations: [read, pad, transform, pointwise-multiply, inverse-transform, output]

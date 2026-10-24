@@ -1,0 +1,29 @@
+id: atcoder.practice2.f.convolution
+title: Convolution
+source: AtCoder
+contest: AtCoder Library Practice Contest
+division: platinum
+url: https://atcoder.jp/contests/practice2/tasks/practice2_f
+techniques:
+    - number-theory.ntt
+prerequisites:
+    - number-theory.modular-arithmetic
+difficulty: 3
+estimatedMinutes: 45
+specialConstraints:
+    - N and M are at most 524288, so the quadratic convolution is far beyond the time limit.
+    - The coefficients and the answer are taken modulo 998244353.
+    - The product has up to 1048575 coefficients, which fits in a transform of length 2^20.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The answer is the convolution of the two arrays, so the task is a polynomial product modulo 998244353.
+    - 998244353 - 1 = 119 x 2^23, so the field supplies roots of unity for every power of two up to 2^23.
+    - Pad both arrays to the next power of two at least N + M - 1, transform each, multiply pointwise, and transform back.
+    - The inverse transform uses the inverse root and one final multiplication by the inverse of the padded length.
+discussion: >-
+    The task is one convolution at a size where the quadratic loop is hopeless. The modulus is chosen so that p - 1 is divisible by 2^23, which is more than enough for the 2^20 transform length required by the maximum input. The solution is the standard pipeline: pad to a power of two, forward transform both arrays, multiply the value tables pointwise, and invert. The only implementation concerns are keeping the 64-bit product exact and applying the inverse scaling once, at the end.
+related:
+    - library-checker.convolution-mod
+    - library-checker.convolution-mod-1000000007

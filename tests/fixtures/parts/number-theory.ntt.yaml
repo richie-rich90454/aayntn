@@ -1,0 +1,9 @@
+- name: a small convolution
+  input: "2 3 998244353\n1 2\n3 4 5\n"
+  expected: "3 10 13 10\n"
+- name: "edge case: a zero polynomial and a trailing zero coefficient"
+  input: "3 3 998244353\n0 0 0\n5 7 0\n"
+  expected: "0 0 0 0 0\n"
+- name: coefficients that wrap around the modulus
+  input: "5 4 998244353\n998244352 123456789 987654321 0 998244352\n998244351 2 500000000 998244352\n"
+  expected: "2 751330773 766337995 348621763 347247350 10590030 498244353 1\n"

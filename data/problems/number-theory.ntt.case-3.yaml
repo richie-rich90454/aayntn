@@ -1,0 +1,29 @@
+id: library-checker.convolution-mod-1000000007
+title: Convolution (Mod 1,000,000,007)
+source: Library Checker
+contest: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/convolution_mod_1000000007
+techniques:
+    - number-theory.ntt
+prerequisites:
+    - number-theory.modular-arithmetic
+difficulty: 4
+estimatedMinutes: 75
+specialConstraints:
+    - N and M are at most 524288, so an O(NM) product is too slow.
+    - The target modulus is 1000000007, and 1000000006 = 2 x 500000003, so it has no root of unity of order 4 or any higher power of two.
+    - The exact coefficient can be as large as 524288 x (1000000006)^2, which exceeds a signed 64-bit integer.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A single NTT modulo 998244353 computes the convolution modulo 998244353, which is not the required answer.
+    - Run the convolution modulo three NTT-friendly primes such as 998244353, 1004535809, and 469762049.
+    - The product of the three primes exceeds the largest possible exact coefficient, so the Chinese remainder theorem recovers that coefficient.
+    - Reduce each recovered coefficient modulo 1000000007 after the reconstruction.
+discussion: >-
+    The target modulus is prime but not NTT-friendly, because p - 1 has only one factor of two. The exact coefficient is bounded by the number of terms times the square of the largest coefficient, which exceeds a signed 64-bit integer but stays below the product of the three chosen NTT primes. Here their product is about 4.7 x 10^26 and the bound is about 5.2 x 10^23. Each of the three transforms is an ordinary NTT, and the reconstruction is one Chinese remainder step per coefficient. The final reduction modulo 1000000007 is the only place where the target modulus appears.
+related:
+    - atcoder.practice2.f.convolution
+    - library-checker.convolution-mod
