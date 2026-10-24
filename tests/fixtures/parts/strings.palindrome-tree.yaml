@@ -1,0 +1,9 @@
+- name: even and odd palindromes around a repeated pair
+  input: "abba\n"
+  expected: "4\n6\n"
+- name: a run of one character, where every substring is a palindrome
+  input: "aaaa\n"
+  expected: "4\n10\n"
+- name: the shortest nonempty string, exercising the length-one suffix link
+  input: "a\n"
+  expected: "1\n1\n"

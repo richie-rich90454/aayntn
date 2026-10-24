@@ -1,0 +1,30 @@
+id: codeforces.17e.palisection
+title: Palisection
+source: Codeforces
+contest: Codeforces Beta Round 17
+division: platinum
+url: https://codeforces.com/problemset/problem/17/E
+editorialUrl: https://codeforces.com/blog/entry/451
+techniques:
+    - strings.palindrome-tree
+prerequisites:
+    - strings.palindrome-tree
+    - arrays.prefix-sums
+difficulty: 5
+estimatedMinutes: 70
+specialConstraints:
+    - The string has up to two million characters, so enumerating the palindromic substrings is too slow.
+    - The answer is modulo 51123987, and the number of pairs exceeds a 64-bit integer before the reduction.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Count the complement, all unordered pairs minus the pairs whose intervals are disjoint.
+    - The eertree tells how many palindromic substrings end at each position; it is the depth of the last node in the suffix-link tree, with the empty root at depth zero.
+    - Run the same structure on the reversed string to count palindromes starting at each position.
+    - Sweep left to right, multiply the number of palindromes ending before the current position by the number starting there, and subtract from the total.
+discussion: >-
+    Two occurrences cross exactly when their intervals intersect, so the answer is the total number of unordered pairs minus the disjoint pairs. A disjoint pair has a unique later occurrence, which lets a left-to-right sweep count it once at its start. The eertree supplies the number of palindromic occurrences ending at each position as the depth of the last node, and the same structure on the reversed string supplies the number starting at each position. The sweep is linear, and the pair count is reduced modulo 51123987 with the modular inverse of two.
+related:
+    - timus.1960.palindromes-and-super-abilities
+    - codeforces.932g.palindrome-partition

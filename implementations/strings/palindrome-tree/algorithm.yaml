@@ -1,0 +1,96 @@
+algorithm: strings.palindrome-tree
+title: Palindrome trees (eertree)
+summary: Store every distinct palindromic substring as a node of a tree with two roots and suffix links, then count the distinct palindromes and all palindromic substrings in one linear pass.
+subject: strings
+divisions: [gold, platinum]
+importance: advanced-technique
+prerequisites:
+    required: [foundations.complexity, strings.kmp]
+    recommended: [foundations.recursion, strings.manacher]
+complexity:
+    time: "O(n)"
+    space: "O(n)"
+assumptions:
+    - The string is over a fixed alphabet, so a node can hold its transitions in a short adjacency list.
+    - The whole string is available before the structure is built, so the tree is built in one left-to-right pass.
+    - Comparing two characters takes constant time.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the eertree of the string and prints the number of distinct palindromic substrings and the number of palindromic substrings counting multiplicity."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the nodes, suffix links, sparse transitions and occurrence counts"
+      status: unverified
+      inputs: "One line holding a string of lowercase Latin letters; the line may be empty."
+      outputs: "Two lines: the number of distinct nonempty palindromic substrings, then the number of palindromic substrings counting multiplicity."
+      notes: "The two roots have lengths -1 and 0, and every other node is one distinct palindrome. A suffix-link walk finds the longest palindromic suffix that can be extended by the new character; the edge either exists or creates one node. Occurrence counts are pushed up the suffix links in reverse creation order, so a node's count is the number of times its palindrome occurs. The C variant allocates every array from the string length and reads the line with a growable buffer."
+      operations: [build, count-distinct, count-total]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the eertree of the string and prints the number of distinct palindromic substrings and the number of palindromic substrings counting multiplicity."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the nodes, suffix links, sparse transitions and occurrence counts"
+      status: unverified
+      inputs: "One line holding a string of lowercase Latin letters; the line may be empty."
+      outputs: "Two lines: the number of distinct nonempty palindromic substrings, then the number of palindromic substrings counting multiplicity."
+      notes: "The two roots have lengths -1 and 0, and every other node is one distinct palindrome. A suffix-link walk finds the longest palindromic suffix that can be extended by the new character; the edge either exists or creates one node. Occurrence counts are pushed up the suffix links in reverse creation order, so a node's count is the number of times its palindrome occurs. The C++ variant keeps every array in a std::vector and reads the whole line with std::getline."
+      operations: [build, count-distinct, count-total]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the eertree of the string and prints the number of distinct palindromic substrings and the number of palindromic substrings counting multiplicity."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the nodes, suffix links, sparse transitions and occurrence counts"
+      status: unverified
+      inputs: "One line holding a string of lowercase Latin letters; the line may be empty."
+      outputs: "Two lines: the number of distinct nonempty palindromic substrings, then the number of palindromic substrings counting multiplicity."
+      notes: "The two roots have lengths -1 and 0, and every other node is one distinct palindrome. A suffix-link walk finds the longest palindromic suffix that can be extended by the new character; the edge either exists or creates one node. Occurrence counts are pushed up the suffix links in reverse creation order, so a node's count is the number of times its palindrome occurs. The Java variant uses int arrays for the structure and a long array for the counts, and leaves reclamation to the garbage collector."
+      operations: [build, count-distinct, count-total]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the eertree of the string and prints the number of distinct palindromic substrings and the number of palindromic substrings counting multiplicity."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the nodes, suffix links, sparse transitions and occurrence counts"
+      status: unverified
+      inputs: "One line holding a string of lowercase Latin letters; the line may be empty."
+      outputs: "Two lines: the number of distinct nonempty palindromic substrings, then the number of palindromic substrings counting multiplicity."
+      notes: "The two roots have lengths -1 and 0, and every other node is one distinct palindrome. A suffix-link walk finds the longest palindromic suffix that can be extended by the new character; the edge either exists or creates one node. Occurrence counts are pushed up the suffix links in reverse creation order, so a node's count is the number of times its palindrome occurs. The Python variant reads one line, stores the nodes in parallel lists, and uses arbitrary-precision integers for the counts."
+      operations: [build, count-distinct, count-total]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the eertree of the string and prints the number of distinct palindromic substrings and the number of palindromic substrings counting multiplicity."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the nodes, suffix links, sparse transitions and occurrence counts"
+      status: unverified
+      inputs: "One line holding a string of lowercase Latin letters; the line may be empty."
+      outputs: "Two lines: the number of distinct nonempty palindromic substrings, then the number of palindromic substrings counting multiplicity."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The two roots have lengths -1 and 0, and every other node is one distinct palindrome. A suffix-link walk finds the longest palindromic suffix that can be extended by the new character; the edge either exists or creates one node. Occurrence counts are pushed up the suffix links in reverse creation order, so a node's count is the number of times its palindrome occurs. The Pascal variant uses dynamic arrays of Integer for the structure and Int64 for the counts, reads the line with ReadLn, and strips a carriage return."
+      operations: [build, count-distinct, count-total]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the eertree of the string and prints the number of distinct palindromic substrings and the number of palindromic substrings counting multiplicity."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the nodes, suffix links, sparse transitions and occurrence counts"
+      status: unverified
+      inputs: "One line holding a string of lowercase Latin letters; the line may be empty."
+      outputs: "Two lines: the number of distinct nonempty palindromic substrings, then the number of palindromic substrings counting multiplicity."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The two roots have lengths -1 and 0, and every other node is one distinct palindrome. A suffix-link walk finds the longest palindromic suffix that can be extended by the new character; the edge either exists or creates one node. Occurrence counts are pushed up the suffix links in reverse creation order, so a node's count is the number of times its palindrome occurs. The JavaScript variant uses Int32Array for the structure and adds the occurrence counts as ordinary numbers, which are exact well beyond the largest count for a string that fits in memory."
+      operations: [build, count-distinct, count-total]

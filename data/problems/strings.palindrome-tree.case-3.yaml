@@ -1,0 +1,30 @@
+id: codeforces.932g.palindrome-partition
+title: Palindrome Partition
+source: Codeforces
+contest: ICM Technex 2018 and Codeforces Round 463 (Div. 1 + Div. 2, combined)
+division: platinum
+url: https://codeforces.com/problemset/problem/932/G
+editorialUrl: https://codeforces.com/blog/entry/57796
+techniques:
+    - strings.palindrome-tree
+prerequisites:
+    - strings.palindrome-tree
+    - strings.manacher
+difficulty: 5
+estimatedMinutes: 80
+specialConstraints:
+    - The string has up to one million characters, so enumerating the partitions or every palindromic suffix is too slow.
+    - The number of blocks must be even, and the blocks must match in mirror order, which is stricter than an ordinary palindrome partition.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Interleave the first and last characters, then the second and second-last, and so on, to turn the mirror condition into a palindrome condition.
+    - A pair of equal blocks in the original string becomes one even-length palindrome in the interleaved string.
+    - Let dp[i] be the number of ways to partition the first i characters of the interleaved string into even palindromes.
+    - Group the palindromic suffixes by series links, because the plain suffix-link chain can be linear at every position.
+discussion: >-
+    The mirror condition says that the second half of the block list repeats the first half in reverse order, with each block equal to its mirror. Interleaving the characters from the two ends of the string turns each pair of equal blocks into one even-length palindrome, so the problem becomes counting partitions of the interleaved string into even-length palindromes. A dynamic program over the prefix length sums the ways for every even palindromic suffix, and the eertree enumerates those suffixes. Series links group suffixes whose lengths form arithmetic progressions, which reduces the quadratic suffix enumeration to O(n log n).
+related:
+    - timus.1960.palindromes-and-super-abilities
+    - codeforces.17e.palisection

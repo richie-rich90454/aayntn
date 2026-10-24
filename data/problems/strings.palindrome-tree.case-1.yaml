@@ -1,0 +1,27 @@
+id: timus.1960.palindromes-and-super-abilities
+title: Palindromes and Super Abilities
+source: Timus
+contest: Ural FU contest. Kontur Cup. Petrozavodsk training camp, Winter 2013
+division: gold
+url: https://acm.timus.ru/problem.aspx?space=1&num=1960
+techniques:
+    - strings.palindrome-tree
+prerequisites:
+    - strings.palindrome-tree
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The string has up to a hundred thousand characters, so rebuilding the set of palindromes for every prefix is quadratic.
+    - The answer is requested after every character, not only at the end.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The eertree creates at most one new node per character, so the number of distinct palindromes after a prefix is the current node count minus the two roots.
+    - Add the character, follow suffix links until the current palindrome can be extended, and output the node count after the insertion.
+    - The imaginary root lets a single character be created by the same extension step as every other palindrome.
+discussion: >-
+    Each prefix needs the number of distinct nonempty palindromes, and the eertree answers it without recomputing anything: every character creates at most one node, so the answer after position i is the number of nodes minus the two roots. The suffix-link walk finds the longest palindromic suffix that can be extended by the new character, and a new node is created only when that palindrome has not appeared before. The whole scan is linear, while enumerating the palindromes of every prefix is quadratic.
+related:
+    - codeforces.17e.palisection
+    - codeforces.932g.palindrome-partition
