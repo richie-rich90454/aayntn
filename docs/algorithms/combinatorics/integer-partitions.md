@@ -588,7 +588,7 @@ This version reduces once per row with `%`, which is fine in Python because the 
 
 ### Why this fails: the missing second offset
 
-The plausible wrong approach is to read the sequence $1, 2, 5, 7, 12, 15, \ldots$ as one offset per index and to write a recurrence with a single term per $k$. The sequence looks like a list of pairs, but a programmer who is moving quickly may treat it as a list of individual offsets and use only $k(3k-1)/2$.
+The plausible wrong approach is to read the sequence $1, 2, 5, 7, 12, 15, \ldots$ as one offset per index and to write a recurrence with a single term per $k$. The sequence looks like a list of pairs, but a programr who is moving quickly may treat it as a list of individual offsets and use only $k(3k-1)/2$.
 
 The smallest counterexample is $n = 2$. The correct recurrence is
 
