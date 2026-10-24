@@ -74,14 +74,14 @@ int main(void) {
         if (strcmp(command, "union") == 0) {
             int u = 0;
             int v = 0;
-            scanf("%d %d", &u, &v);
+            if (scanf("%d %d", &u, &v) != 2) break;
             unite(u, v);
         } else if (strcmp(command, "rollback") == 0) {
             rollback();
         } else {
             int u = 0;
             int v = 0;
-            scanf("%d %d", &u, &v);
+            if (scanf("%d %d", &u, &v) != 2) break;
             puts(find_root(u) == find_root(v) ? "YES" : "NO");
         }
     }
