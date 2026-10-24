@@ -1,0 +1,92 @@
+algorithm: enumeration.meet-in-the-middle
+title: Meet in the middle
+summary: Split an exponential search into two halves, enumerate the states of each half, and combine them with sorting and binary search.
+subject: enumeration
+divisions: [gold, platinum]
+importance: common-contest-technique
+complexity:
+    time: "O(n 2^(n/2))"
+    space: "O(2^(n/2))"
+assumptions:
+    - The predicate can be decided from a summary of each half, so the halves can be summarized independently.
+    - Each half has at most about 20 items, so the complete enumeration of a half fits in memory.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and a limit, enumerates the subset sums of each half, sorts the right half and counts the partners with binary search."
+      time: "O(n 2^(n/2))"
+      auxiliarySpace: "O(2^(n/2)) for the two lists of subset sums"
+      status: unverified
+      inputs: "n W, then n integers, where each integer is a value and W is the inclusive limit."
+      outputs: "One line holding the number of subsets whose sum is at most W, including the empty subset."
+      notes: "The program splits the values at n / 2 and builds each half's subset sums by doubling: every old subset either excludes the next value or includes it, so the list size doubles and each subset appears exactly once. The right half is sorted with qsort and each left sum is matched with upper_bound, which counts the entries at most W - a. The two lists are static arrays of 2^20 long long values, and both the sums and the answer are 64-bit."
+      operations: [split, enumerate-half, sort, binary-search, combine]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and a limit, enumerates the subset sums of each half, sorts the right half and counts the partners with binary search."
+      time: "O(n 2^(n/2))"
+      auxiliarySpace: "O(2^(n/2)) for the two lists of subset sums"
+      status: unverified
+      inputs: "n W, then n integers, where each integer is a value and W is the inclusive limit."
+      outputs: "One line holding the number of subsets whose sum is at most W, including the empty subset."
+      notes: "The program splits the values at n / 2 and builds each half's subset sums by doubling: every old subset either excludes the next value or includes it, so the list size doubles and each subset appears exactly once. The right half is sorted with std::sort and each left sum is matched with std::upper_bound, which counts the entries at most W - a. The vectors own the two lists, and both the sums and the answer are long long."
+      operations: [split, enumerate-half, sort, binary-search, combine]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and a limit, enumerates the subset sums of each half, sorts the right half and counts the partners with binary search."
+      time: "O(n 2^(n/2))"
+      auxiliarySpace: "O(2^(n/2)) for the two lists of subset sums"
+      status: unverified
+      inputs: "n W, then n integers, where each integer is a value and W is the inclusive limit."
+      outputs: "One line holding the number of subsets whose sum is at most W, including the empty subset."
+      notes: "The program splits the values at n / 2 and builds each half's subset sums by doubling: every old subset either excludes the next value or includes it, so the list size doubles and each subset appears exactly once. The right half is sorted with Arrays.sort and each left sum is matched with a hand-written upperBound, which counts the entries at most W - a. The class is named Main so the file can be submitted unchanged, and both the sums and the answer are long."
+      operations: [split, enumerate-half, sort, binary-search, combine]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and a limit, enumerates the subset sums of each half, sorts the right half and counts the partners with binary search."
+      time: "O(n 2^(n/2))"
+      auxiliarySpace: "O(2^(n/2)) for the two lists of subset sums"
+      status: unverified
+      inputs: "n W, then n integers, where each integer is a value and W is the inclusive limit."
+      outputs: "One line holding the number of subsets whose sum is at most W, including the empty subset."
+      notes: "The program splits the values at n / 2 and builds each half's subset sums by doubling: every old subset either excludes the next value or includes it, so the list size doubles and each subset appears exactly once. The right half is sorted with list.sort and each left sum is matched with bisect_right, which counts the entries at most W - a and runs inside the C implementation of the module. Python integers are arbitrary precision, so the sums and the answer cannot overflow."
+      operations: [split, enumerate-half, sort, binary-search, combine]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and a limit, enumerates the subset sums of each half, sorts the right half and counts the partners with binary search."
+      time: "O(n 2^(n/2))"
+      auxiliarySpace: "O(2^(n/2)) for the two lists of subset sums"
+      status: unverified
+      inputs: "n W, then n integers, where each integer is a value and W is the inclusive limit."
+      outputs: "One line holding the number of subsets whose sum is at most W, including the empty subset."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program splits the values at n / 2 and builds each half's subset sums by doubling: every old subset either excludes the next value or includes it, so the list size doubles and each subset appears exactly once. The right half is sorted with a merge sort that reuses one buffer, and each left sum is matched with a hand-written binary search, which counts the entries at most W - a. Both the sums and the answer are Int64, and the program reads exactly the number of tokens in the contract."
+      operations: [split, enumerate-half, sort, binary-search, combine]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and a limit, enumerates the subset sums of each half, sorts the right half and counts the partners with binary search."
+      time: "O(n 2^(n/2))"
+      auxiliarySpace: "O(2^(n/2)) for the two lists of subset sums"
+      status: unverified
+      inputs: "n W, then n integers, where each integer is a value and W is the inclusive limit."
+      outputs: "One line holding the number of subsets whose sum is at most W, including the empty subset."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The program splits the values at n / 2 and builds each half's subset sums by doubling: every old subset either excludes the next value or includes it, so the list size doubles and each subset appears exactly once. The right half is sorted with a numeric comparator and each left sum is matched with a hand-written upperBound, which counts the entries at most W - a. Every value is a Number, whose exact integer range extends past 2^53, so the sums and the answer are exact for the stated bounds."
+      operations: [split, enumerate-half, sort, binary-search, combine]

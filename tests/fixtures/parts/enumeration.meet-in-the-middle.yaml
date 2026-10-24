@@ -1,0 +1,9 @@
+- name: every subset fits under the limit
+  input: "4 10\n1 2 3 4\n"
+  expected: "16\n"
+- name: the limit cuts the large subsets
+  input: "5 5\n1 2 3 4 5\n"
+  expected: "10\n"
+- name: edge case with zero values and an empty subset
+  input: "2 0\n0 0\n"
+  expected: "4\n"
