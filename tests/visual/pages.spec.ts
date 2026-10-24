@@ -188,12 +188,16 @@ test.describe("the search", () => {
         await page.setViewportSize({ width: 1440, height: 900 });
         await page.goto("/algorithms/", { waitUntil: "networkidle" });
 
+        const index = page.waitForResponse((response) =>
+            response.url().endsWith("/search-index.json"),
+        );
         await page.getByLabel("Search A.A.Y.N.T.N.").first().click();
+        await index;
         const field = page.getByLabel("Search query");
         await field.fill("disjoint set union");
-        await expect(page.locator(".aayntn-search__result").first()).toBeVisible();
-        await expect(page.locator(".aayntn-search__result").first()).toContainText(
-            "Disjoint set union",
-        );
+        await expect(page.locator(".aayntn-palette__result").first()).toBeVisible();
+        await expect(
+            page.locator('.aayntn-palette__result[href*="/algorithms/graphs/dsu"]'),
+        ).toHaveCount(1);
     });
 });
