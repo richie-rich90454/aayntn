@@ -1,0 +1,92 @@
+algorithm: dynamic-programming.li-chao-tree
+title: "The Li Chao tree"
+summary: Insert lines and answer the smallest value at a point in logarithmic time, with no monotonicity condition on the slopes or on the query coordinates.
+subject: dynamic-programming
+divisions: [platinum]
+importance: advanced-technique
+complexity:
+    time: "O(q log q) preprocessing and O(log q) per insertion or query"
+    space: "O(q) total, O(k) for the tree"
+assumptions:
+    - Lines are inserted and never deleted.
+    - Every query coordinate is known before the tree is built, or the domain of x is a bounded interval.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "Complete program that compresses the query coordinates, builds one Li Chao tree, and replays the insertions and queries from standard input."
+      time: "O(q log q) preprocessing and O(log q) per operation"
+      auxiliarySpace: "O(q) for the operations, the coordinates, and the tree"
+      status: unverified
+      inputs: "q, then q lines of either 1 m b or 2 x."
+      outputs: "One line per 2 x operation, holding the minimum value at x over every line inserted so far."
+      notes: "A line is inserted by comparing it with the line stored at the node, keeping the better line at the midpoint and pushing the loser into the one child where it can still win. A query takes the minimum over every line on the root-to-leaf path. All evaluations use 64-bit integers. The input is read in full first, so the distinct query coordinates can be compressed without changing the order of the operations."
+      operations: [collect-coordinates, compress, insert-line, query-min]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "Complete program that compresses the query coordinates, builds one Li Chao tree, and replays the insertions and queries from standard input."
+      time: "O(q log q) preprocessing and O(log q) per operation"
+      auxiliarySpace: "O(q) for the operations, the coordinates, and the tree"
+      status: unverified
+      inputs: "q, then q lines of either 1 m b or 2 x."
+      outputs: "One line per 2 x operation, holding the minimum value at x over every line inserted so far."
+      notes: "A line is inserted by comparing it with the line stored at the node, keeping the better line at the midpoint and pushing the loser into the one child where it can still win. A query takes the minimum over every line on the root-to-leaf path. All evaluations use 64-bit integers. The input is read in full first, so the distinct query coordinates can be compressed without changing the order of the operations."
+      operations: [collect-coordinates, compress, insert-line, query-min]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "Complete program that compresses the query coordinates, builds one Li Chao tree, and replays the insertions and queries from standard input."
+      time: "O(q log q) preprocessing and O(log q) per operation"
+      auxiliarySpace: "O(q) for the operations, the coordinates, and the tree"
+      status: unverified
+      inputs: "q, then q lines of either 1 m b or 2 x."
+      outputs: "One line per 2 x operation, holding the minimum value at x over every line inserted so far."
+      notes: "A line is inserted by comparing it with the line stored at the node, keeping the better line at the midpoint and pushing the loser into the one child where it can still win. A query takes the minimum over every line on the root-to-leaf path. All evaluations use 64-bit integers. The input is read in full first, so the distinct query coordinates can be compressed without changing the order of the operations."
+      operations: [collect-coordinates, compress, insert-line, query-min]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "Complete program that compresses the query coordinates, builds one Li Chao tree, and replays the insertions and queries from standard input."
+      time: "O(q log q) preprocessing and O(log q) per operation"
+      auxiliarySpace: "O(q) for the operations, the coordinates, and the tree"
+      status: unverified
+      inputs: "q, then q lines of either 1 m b or 2 x."
+      outputs: "One line per 2 x operation, holding the minimum value at x over every line inserted so far."
+      notes: "A line is inserted by comparing it with the line stored at the node, keeping the better line at the midpoint and pushing the loser into the one child where it can still win. A query takes the minimum over every line on the root-to-leaf path. Python integers are arbitrary-precision, so no overflow is possible. The input is read in full first, so the distinct query coordinates can be compressed without changing the order of the operations."
+      operations: [collect-coordinates, compress, insert-line, query-min]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Complete program that compresses the query coordinates, builds one Li Chao tree, and replays the insertions and queries from standard input."
+      time: "O(q log q) preprocessing and O(log q) per operation"
+      auxiliarySpace: "O(q) for the operations, the coordinates, and the tree"
+      status: unverified
+      inputs: "q, then q lines of either 1 m b or 2 x."
+      outputs: "One line per 2 x operation, holding the minimum value at x over every line inserted so far."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. A line is inserted by comparing it with the line stored at the node, keeping the better line at the midpoint and pushing the loser into the one child where it can still win. A query takes the minimum over every line on the root-to-leaf path. All evaluations use Int64, never a 128-bit type, and the source compiles under pas2js: no IOResult, one argument per Read, and uses SysUtils."
+      operations: [collect-coordinates, compress, insert-line, query-min]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Complete program that compresses the query coordinates, builds one Li Chao tree, and replays the insertions and queries from standard input."
+      time: "O(q log q) preprocessing and O(log q) per operation"
+      auxiliarySpace: "O(q) for the operations, the coordinates, and the tree"
+      status: unverified
+      inputs: "q, then q lines of either 1 m b or 2 x."
+      outputs: "One line per 2 x operation, holding the minimum value at x over every line inserted so far."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. A line is inserted by comparing it with the line stored at the node, keeping the better line at the midpoint and pushing the loser into the one child where it can still win. A query takes the minimum over every line on the root-to-leaf path. All arithmetic uses BigInt, because a product of two values near 10^9 is not exactly representable as a double. The input is read in full first, so the distinct query coordinates can be compressed without changing the order of the operations."
+      operations: [collect-coordinates, compress, insert-line, query-min]

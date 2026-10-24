@@ -1,0 +1,28 @@
+id: library-checker.segment-add-get-min
+title: Segment Add Get Min
+source: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/segment_add_get_min
+techniques:
+    - dynamic-programming.li-chao-tree
+prerequisites:
+    - range-queries.segment-tree
+difficulty: 4
+estimatedMinutes: 35
+specialConstraints:
+    - Up to 200000 operations, and every operation must be answered in logarithmic squared time or better.
+    - A line is active only on the half-open interval [l, r), so a query sees only the lines whose interval contains its coordinate.
+    - The coordinates and coefficients reach 10^9 in absolute value, so the evaluation needs 64 bits.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The line is active on a range, so inserting it at a single node would make it invisible to most of the queries in its range.
+    - Decompose the active interval into the O(log n) canonical nodes of a segment tree over the coordinates.
+    - At each canonical node, perform the ordinary Li Chao insertion of the line into the subtree rooted there.
+    - A point query follows one root-to-leaf path and takes the minimum over the lines stored at every node on the path.
+discussion: >-
+    Range insertion is the segment-tree decomposition applied to the Li Chao tree. A line that covers a whole canonical node can be inserted into that node's subtree with the ordinary midpoint rule, and a line that covers only part of a node is passed to the children that its interval intersects. The line is therefore passed to O(log n) canonical nodes, and each ordinary insertion can descend O(log n) levels, which is the source of the extra logarithm. A query is unchanged: every line that covers the queried coordinate is represented on the query path, either by the line itself or by a line that is no worse at that coordinate, so the minimum over the path is the answer. The tree itself still has O(n) nodes; the range insertion reuses them rather than allocating a new structure per canonical node.
+related:
+    - library-checker.line-add-get-min
+    - codeforces.932f.escape-through-leaf

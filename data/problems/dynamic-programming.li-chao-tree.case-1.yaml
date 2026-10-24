@@ -1,0 +1,28 @@
+id: library-checker.line-add-get-min
+title: Line Add Get Min
+source: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/line_add_get_min
+techniques:
+    - dynamic-programming.li-chao-tree
+prerequisites:
+    - range-queries.segment-tree
+difficulty: 3
+estimatedMinutes: 25
+specialConstraints:
+    - Up to 200000 operations, and every operation must be answered in logarithmic time.
+    - The slopes, intercepts, and query coordinates are arbitrary signed integers up to 10^9 in absolute value.
+    - Insertions and queries are interleaved, so the lines cannot be sorted or processed offline in slope order.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Each quote is a line, and a request is a point query, so the operation is exactly an insertion followed by a minimum query.
+    - The convex hull trick needs monotone slopes and monotone queries, and neither order is present in the input.
+    - Build a segment tree over the distinct query coordinates, and keep at each node the better of the two lines being compared at the midpoint of its interval.
+    - An insertion keeps the better line at the midpoint and sends the loser into the only child where it can still be the minimum; a query takes the minimum over the root-to-leaf path.
+discussion: >-
+    The problem is the direct definition of the Li Chao tree. Every insertion and every query can be processed immediately, without sorting the lines or the coordinates, because the tree stores the lower envelope implicitly in a segment tree over the query coordinates. The input is read in full first only to collect and rank the coordinates; the operations are still replayed in their original order. The comparison at the midpoint decides which line stays at a node, and the comparison at the left endpoint decides which child receives the loser. The evaluation uses 64-bit integers because a product of two values near 10^9 does not fit in 32 bits.
+related:
+    - library-checker.segment-add-get-min
+    - codeforces.932f.escape-through-leaf

@@ -1,0 +1,31 @@
+id: codeforces.932f.escape-through-leaf
+title: Escape Through Leaf
+source: Codeforces
+contest: ICM Technex 2018 and Codeforces Round 463 (Div. 1 + Div. 2, combined)
+division: platinum
+url: https://codeforces.com/problemset/problem/932/F
+editorialUrl: https://codeforces.com/blog/entry/57796
+techniques:
+    - dynamic-programming.li-chao-tree
+prerequisites:
+    - trees.tree-dp
+    - range-queries.segment-tree
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The tree has up to 100000 nodes, so trying every descendant as the first jump is quadratic.
+    - The values a and b reach 10^5 in absolute value, so a path cost can be far outside the 32-bit range.
+    - A jump goes to any node in the subtree, and the root is never a leaf even when it has degree one.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Let dp[u] be the minimum cost from u to a leaf; a jump from u to a descendant v costs a[u] * b[v] plus dp[v].
+    - Every node v contributes the line y = b[v] * x + dp[v], and the query for u is that line evaluated at x = a[u].
+    - The lines that u may use are exactly the lines of its subtree, so process the tree bottom-up and merge the children's structures.
+    - Take the largest child structure, insert every line of the smaller ones into it, query before inserting u's own line, and then insert that line.
+discussion: >-
+    The dynamic program is a minimum of lines over a subtree, which is a Li Chao tree with a merge operation. A bottom-up traversal gives every node the structure of its descendants; the query at a[u] is the best first jump, and the node's own line is inserted only after the query so that the zero-length jump is excluded. Merging by size keeps the total number of reinsertions logarithmic in the tree size: a line that moves is always in the smaller structure, so its structure at least doubles. With a compressed coordinate set over the a values, each insertion costs O(log n), and the whole solution is O(n log^2 n). Leaves answer zero without querying, and the root is handled like every other node, which is why the statement forbids treating it as a leaf.
+related:
+    - library-checker.line-add-get-min
+    - library-checker.segment-add-get-min
