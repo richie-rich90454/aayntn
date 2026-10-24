@@ -1,0 +1,31 @@
+id: codeforces.1363a.odd-selection
+title: Odd Selection
+source: Codeforces
+contest: Codeforces Round 646 (Div. 2)
+division: bronze
+url: https://codeforces.com/problemset/problem/1363/A
+editorialUrl: https://codeforces.com/blog/entry/78202
+techniques:
+    - foundations.proof-techniques
+prerequisites:
+    - foundations.complexity
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - The array has at most 1000 values and there are at most 100 test cases.
+    - Exactly x values must be chosen, so the parity of the count matters as much as the parity of the values.
+    - The sum is odd exactly when the number of chosen odd values is odd.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Even values never change the parity of a sum.
+    - Count how many odd values and how many even values the array contains.
+    - Choose an odd number of odd values and fill the remaining slots with evens.
+    - Check that the chosen counts do not exceed the available counts in either category.
+discussion: >-
+    The parity of a sum is the parity of its number of odd terms, so the only decision is how many odd values to take. If j odd values are chosen, j must be odd and at most the number of odds, while the remaining x minus j slots must be filled by evens and so must be at most the number of evens. The loop over odd j checks exactly these conditions. The proof has two directions: any valid selection supplies such a j, and any such j supplies a valid selection by taking arbitrary values from each category. No ordering or greedy choice is involved; the whole problem is a counting argument over parities.
+related:
+    - codeforces.1305c.kuroni-and-impossible-calculation
+    - codeforces.230b.t-primes

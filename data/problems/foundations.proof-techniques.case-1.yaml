@@ -1,0 +1,32 @@
+id: codeforces.1305c.kuroni-and-impossible-calculation
+title: Kuroni and Impossible Calculation
+source: Codeforces
+contest: Ozon Tech Challenge 2020 (Div. 1 + Div. 2)
+division: gold
+url: https://codeforces.com/problemset/problem/1305/C
+editorialUrl: https://codeforces.com/blog/entry/74459
+techniques:
+    - foundations.proof-techniques
+prerequisites:
+    - number-theory.modular-arithmetic
+    - foundations.complexity
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The number of values is up to 200000, so multiplying all pairs is far too slow.
+    - The modulus is at most 1000, which is the bound that makes the pigeonhole argument useful.
+    - The product is zero modulo m as soon as two values share a remainder modulo m.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - There are only m possible remainders modulo m.
+    - If there are more than m values, two of them must share a remainder.
+    - A shared remainder means their difference is a multiple of m, so the whole product is zero.
+    - When the number of values is at most m, the quadratic product is small enough to compute.
+discussion: >-
+    The problem looks like a product over all pairs, but the modulus limits the number of residue classes. If n is greater than m, the pigeonhole principle forces two values into the same class, their difference is divisible by m, and the product is zero. Otherwise n is at most m, which is at most 1000, so the pairwise product is only about half a million factors and fits comfortably. The proof has two directions: a collision forces zero, and the absence of a collision leaves a small instance that the direct algorithm handles. The same argument works when two values are equal, because then their difference is zero.
+related:
+    - codeforces.230b.t-primes
+    - codeforces.1363a.odd-selection

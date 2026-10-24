@@ -1,0 +1,32 @@
+id: codeforces.230b.t-primes
+title: T-primes
+source: Codeforces
+contest: Codeforces Round 142 (Div. 2)
+division: silver
+url: https://codeforces.com/problemset/problem/230/B
+editorialUrl: https://codeforces.com/blog/entry/5437
+techniques:
+    - foundations.proof-techniques
+prerequisites:
+    - number-theory.sieve
+    - foundations.complexity
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - Each value is at most 10^12, so trial division up to the square root is too slow for 100000 queries.
+    - The square root of the largest value is 10^6, which is small enough to sieve once.
+    - The classification is an if-and-only-if, so both directions need an argument.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A prime has exactly two divisors and 1 has exactly one, so a T-prime is composite.
+    - Write the number as a product of two divisors and see how many distinct divisors that forces.
+    - The only way to have exactly one divisor strictly between 1 and the number is for the two factors to be equal.
+    - If the repeated factor were composite, it would contribute another divisor, so it must be prime.
+discussion: >-
+    The classification is that a number has exactly three divisors if and only if it is the square of a prime. One direction is immediate from the divisor list 1, p, p squared. The other direction writes the number as a product of two nontrivial divisors; exactly one divisor can lie strictly between 1 and the number, so the factors are equal and the common factor is prime. The algorithm sieves the primes up to 10^6, checks that the value is a perfect square, and checks that its root is prime. Both directions of the proof are needed: the square test alone accepts 16, and the primality test alone accepts 7.
+related:
+    - codeforces.1305c.kuroni-and-impossible-calculation
+    - codeforces.1363a.odd-selection

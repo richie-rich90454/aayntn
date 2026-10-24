@@ -1,0 +1,96 @@
+algorithm: foundations.proof-techniques
+title: The proof techniques
+summary: Check the identity that the sum of the first n odd numbers is n squared by computing both sides independently, then use the same computation as the running example for direct proof, induction, and a picture proof.
+subject: foundations
+divisions: [bronze, silver]
+importance: core-prerequisite
+prerequisites:
+    required: [foundations.loop-invariants]
+    recommended: [foundations.complexity, foundations.recursion]
+complexity:
+    time: "O(n) to sum the odd numbers, O(1) for the square"
+    space: "O(1) auxiliary"
+assumptions:
+    - The input is one integer n with 0 <= n <= 10^7.
+    - Signed 64-bit integers do not overflow for the stated range, and JavaScript Number is exact there.
+    - The odd sum is computed by a loop rather than from the identity, so the comparison is an independent check.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, prints n squared, prints the sum of the first n odd numbers, and prints MATCH or DIFFER."
+      time: "O(n) to sum the odd numbers, O(1) for the square"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 10^7."
+      outputs: "Three lines: n squared, the sum of the first n odd numbers, and MATCH when the two values agree, DIFFER otherwise."
+      notes: "The square is one multiplication and the odd sum is a loop, so the two sides are computed independently and the comparison is not a tautology. The sum uses 2 * k - 1 for the k-th odd number, and long long keeps n squared exact through 10^14. A negative n is rejected without output because the identity is stated for n >= 0."
+      operations: [multiply, sum-odd-numbers, compare]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, prints n squared, prints the sum of the first n odd numbers, and prints MATCH or DIFFER."
+      time: "O(n) to sum the odd numbers, O(1) for the square"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 10^7."
+      outputs: "Three lines: n squared, the sum of the first n odd numbers, and MATCH when the two values agree, DIFFER otherwise."
+      notes: "The square is one multiplication and the odd sum is a loop, so the two sides are computed independently and the comparison is not a tautology. The sum uses 2 * k - 1 for the k-th odd number, and long long keeps n squared exact through 10^14. A negative n is rejected without output because the identity is stated for n >= 0."
+      operations: [multiply, sum-odd-numbers, compare]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, prints n squared, prints the sum of the first n odd numbers, and prints MATCH or DIFFER."
+      time: "O(n) to sum the odd numbers, O(1) for the square"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 10^7."
+      outputs: "Three lines: n squared, the sum of the first n odd numbers, and MATCH when the two values agree, DIFFER otherwise."
+      notes: "The square is one multiplication and the odd sum is a loop, so the two sides are computed independently and the comparison is not a tautology. The sum uses 2 * k - 1 for the k-th odd number, and long keeps n squared exact through 10^14. The class is Main, and a negative n is rejected without output because the identity is stated for n >= 0."
+      operations: [multiply, sum-odd-numbers, compare]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, prints n squared, prints the sum of the first n odd numbers, and prints MATCH or DIFFER."
+      time: "O(n) to sum the odd numbers, O(1) for the square"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 10^7."
+      outputs: "Three lines: n squared, the sum of the first n odd numbers, and MATCH when the two values agree, DIFFER otherwise."
+      notes: "The square is one multiplication and the odd sum is a loop, so the two sides are computed independently and the comparison is not a tautology. Python integers are arbitrary precision, so no width has to be chosen. A negative n is rejected without output because the identity is stated for n >= 0."
+      operations: [multiply, sum-odd-numbers, compare]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, prints n squared, prints the sum of the first n odd numbers, and prints MATCH or DIFFER."
+      time: "O(n) to sum the odd numbers, O(1) for the square"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 10^7."
+      outputs: "Three lines: n squared, the sum of the first n odd numbers, and MATCH when the two values agree, DIFFER otherwise."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The square is one multiplication and the odd sum is a while loop, so the two sides are computed independently and the comparison is not a tautology. The program uses SysUtils, reads one argument per Read, avoids IOResult, and keeps every value in Int64 so it compiles under pas2js. A negative n is rejected without output."
+      operations: [multiply, sum-odd-numbers, compare]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, prints n squared, prints the sum of the first n odd numbers, and prints MATCH or DIFFER."
+      time: "O(n) to sum the odd numbers, O(1) for the square"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One integer n with 0 <= n <= 10^7."
+      outputs: "Three lines: n squared, the sum of the first n odd numbers, and MATCH when the two values agree, DIFFER otherwise."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The square is one multiplication and the odd sum is a loop, so the two sides are computed independently and the comparison is not a tautology. Number is exact for every integer below 2^53, which covers n <= 10^7 and n squared <= 10^14. A negative n is rejected without output."
+      operations: [multiply, sum-odd-numbers, compare]

@@ -1,0 +1,9 @@
+- name: the empty sum is zero and matches the empty square
+  input: "0\n"
+  expected: "0\n0\nMATCH\n"
+- name: one odd number matches one squared
+  input: "1\n"
+  expected: "1\n1\nMATCH\n"
+- name: four odd numbers match four squared
+  input: "4\n"
+  expected: "16\n16\nMATCH\n"
