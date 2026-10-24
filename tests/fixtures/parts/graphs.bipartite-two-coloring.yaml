@@ -1,0 +1,9 @@
+- name: an even cycle, a matched pair and an isolated vertex
+  input: "7 5\n0 1\n1 2\n2 3\n3 0\n4 5\n"
+  expected: "0 1 0 1 0 1 0\n"
+- name: a triangle with a pendant vertex
+  input: "4 4\n0 1\n1 2\n2 0\n2 3\n"
+  expected: "-1\n"
+- name: a self-loop in a separate component
+  input: "3 2\n0 1\n2 2\n"
+  expected: "-1\n"

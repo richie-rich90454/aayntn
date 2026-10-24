@@ -1,0 +1,91 @@
+algorithm: graphs.bipartite-two-coloring
+title: The two-coloring test for a bipartite graph
+summary: Decide whether an undirected graph can be split into two sides with every edge crossing, by coloring each component from one vertex and checking every edge to an already-colored neighbor.
+subject: graphs
+divisions: [silver, gold]
+importance: common-contest-technique
+complexity:
+    time: "O(V + E)"
+    space: "O(V + E)"
+assumptions:
+    - The graph is undirected, and every edge forbids the two endpoint colors from being equal.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses an undirected graph from stdin, prints the color of every vertex when the graph is bipartite, and prints -1 when it is not."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the color array and the queue of at most V entries"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges."
+      outputs: "One line with the color of every vertex, 0 or 1, separated by spaces; or the single line -1 when the graph is not bipartite."
+      notes: "The adjacency list is a forward-star structure built from two arrays. The queue holds the frontier, so vertices leave it in order of increasing distance and the color of a vertex is the parity of its distance from its component root. Every edge to an already-colored neighbor is checked for a conflict; an edge that names a vertex outside 0..n-1 is ignored. The output is canonical, which makes the six language versions byte-identical."
+      operations: [seed-component, dequeue, discover-neighbor, check-conflict, complete-component]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses an undirected graph from stdin, prints the color of every vertex when the graph is bipartite, and prints -1 when it is not."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the color array and the queue of at most V entries"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges."
+      outputs: "One line with the color of every vertex, 0 or 1, separated by spaces; or the single line -1 when the graph is not bipartite."
+      notes: "The queue is a vector with a head index, so vertices leave it in order of increasing distance and the color of a vertex is the parity of its distance from its component root. Every edge to an already-colored neighbor is checked for a conflict; an edge that names a vertex outside 0..n-1 is ignored. The output is canonical, which makes the six language versions byte-identical."
+      operations: [seed-component, dequeue, discover-neighbor, check-conflict, complete-component]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses an undirected graph from stdin, prints the color of every vertex when the graph is bipartite, and prints -1 when it is not."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the color array and the queue of at most V entries"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges."
+      outputs: "One line with the color of every vertex, 0 or 1, separated by spaces; or the single line -1 when the graph is not bipartite."
+      notes: "The queue is an ArrayDeque, so vertices leave it in order of increasing distance and the color of a vertex is the parity of its distance from its component root. Every edge to an already-colored neighbor is checked for a conflict; an edge that names a vertex outside 0..n-1 is ignored. The scanner reads bytes rather than using java.util.Scanner, because the larger limits make the standard scanner too slow. The output is canonical, which makes the six language versions byte-identical."
+      operations: [seed-component, dequeue, discover-neighbor, check-conflict, complete-component]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it parses an undirected graph from stdin, prints the color of every vertex when the graph is bipartite, and prints -1 when it is not."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the color array and the queue of at most V entries"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges."
+      outputs: "One line with the color of every vertex, 0 or 1, separated by spaces; or the single line -1 when the graph is not bipartite."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The queue is an array with a head index, so vertices leave it in order of increasing distance and the color of a vertex is the parity of its distance from its component root. Every edge to an already-colored neighbor is checked for a conflict; an edge that names a vertex outside 0..n-1 is ignored. The output is canonical, which makes the six language versions byte-identical."
+      operations: [seed-component, dequeue, discover-neighbor, check-conflict, complete-component]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it parses an undirected graph from stdin, prints the color of every vertex when the graph is bipartite, and prints -1 when it is not."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the color array and the queue of at most V entries"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges."
+      outputs: "One line with the color of every vertex, 0 or 1, separated by spaces; or the single line -1 when the graph is not bipartite."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The queue is a dynamic array with a head index, so vertices leave it in order of increasing distance and the color of a vertex is the parity of its distance from its component root. Every edge to an already-colored neighbor is checked for a conflict; an edge that names a vertex outside 0..n-1 is ignored. The output is canonical, which makes the six language versions byte-identical."
+      operations: [seed-component, dequeue, discover-neighbor, check-conflict, complete-component]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it parses an undirected graph from stdin, prints the color of every vertex when the graph is bipartite, and prints -1 when it is not."
+      time: "O(V + E)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the color array and the queue of at most V entries"
+      status: unverified
+      inputs: "n m, then m lines u v with 0-based undirected edges."
+      outputs: "One line with the color of every vertex, 0 or 1, separated by spaces; or the single line -1 when the graph is not bipartite."
+      notes: "The queue is a list with a head index, so vertices leave it in order of increasing distance and the color of a vertex is the parity of its distance from its component root. Every edge to an already-colored neighbor is checked for a conflict; an edge that names a vertex outside 0..n-1 is ignored. The output is canonical, which makes the six language versions byte-identical."
+      operations: [seed-component, dequeue, discover-neighbor, check-conflict, complete-component]
