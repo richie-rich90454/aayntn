@@ -1,0 +1,149 @@
+algorithm: dynamic-programming.aliens-trick
+title: "The aliens trick"
+summary: Split an array into exactly k contiguous groups with minimum total squared group sum by charging a penalty per group and binary searching for the penalty that makes the optimum use k groups.
+subject: dynamic-programming
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [dynamic-programming.0-1-knapsack, foundations.complexity]
+    recommended: [arrays.prefix-sums, dynamic-programming.li-chao-tree, searching.binary-search]
+complexity:
+    time: "O(n log n log(S_n^2))"
+    space: "O(n)"
+assumptions:
+    - Every array element is a nonnegative integer, so prefix sums never decrease and every cost is an integer.
+    - The groups are contiguous and nonempty, and exactly k of them are required.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, k and the array from stdin, binary searches the penalty, and prints the minimum total squared group sum."
+      time: "O(n log n log(S_n^2))"
+      auxiliarySpace: "O(n) for the prefix sums and the Li Chao tree"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "The inner DP is one-dimensional after the penalty is charged, and each transition is a line query evaluated by a Li Chao tree. The tree is a flat array of records allocated for each penalty and released immediately, so the prefix sums are the only long-lived allocation. On equal penalized values the line with more groups wins, which lets the binary search find the largest penalty whose optimum still uses at least k groups. Every cost fits in a signed 64-bit integer under the stated constraints."
+      operations:
+          [
+              read-array,
+              prefix-sums,
+              binary-search-penalty,
+              penalized-dp,
+              insert-line,
+              query-line,
+              subtract-penalty,
+          ]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, k and the array from stdin, binary searches the penalty, and prints the minimum total squared group sum."
+      time: "O(n log n log(S_n^2))"
+      auxiliarySpace: "O(n) for the prefix sums and the Li Chao tree"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "The Li Chao tree is a class over a vector of lines and is rebuilt for each penalty, which keeps the binary search free of stale state. The comparison orders by penalized value, then by more groups on a tie. The final answer subtracts penalty times k from the penalized optimum; the product fits in a signed 64-bit integer under the stated constraints."
+      operations:
+          [
+              read-array,
+              prefix-sums,
+              binary-search-penalty,
+              penalized-dp,
+              insert-line,
+              query-line,
+              subtract-penalty,
+          ]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, k and the array from stdin, binary searches the penalty, and prints the minimum total squared group sum."
+      time: "O(n log n log(S_n^2))"
+      auxiliarySpace: "O(n) for the prefix sums and the Li Chao tree"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "The Li Chao tree is a heap array of Line objects whose null entries mean empty, so each penalty starts from a clean tree without a fill pass. The comparison orders by penalized value, then by more groups on a tie. The final subtraction is performed in long; the product of the penalty and k can reach about 8e17 under the stated constraints, which is still inside the signed 64-bit range."
+      operations:
+          [
+              read-array,
+              prefix-sums,
+              binary-search-penalty,
+              penalized-dp,
+              insert-line,
+              query-line,
+              subtract-penalty,
+          ]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The program reads n, k and the array from stdin, binary searches the penalty, and prints the minimum total squared group sum."
+      time: "O(n log n log(S_n^2))"
+      auxiliarySpace: "O(n) for the prefix sums and the Li Chao tree"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Every value inside the Li Chao tree is below 2^53 under the stated constraints, so ordinary numbers are exact. The final value minus penalty times k can exceed 2^53, so that one subtraction is performed with BigInt. The comparison orders by penalized value, then by more groups on a tie."
+      operations:
+          [
+              read-array,
+              prefix-sums,
+              binary-search-penalty,
+              penalized-dp,
+              insert-line,
+              query-line,
+              subtract-penalty,
+          ]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The program reads n, k and the array from stdin, binary searches the penalty, and prints the minimum total squared group sum."
+      time: "O(n log n log(S_n^2))"
+      auxiliarySpace: "O(n) for the prefix sums and the Li Chao tree"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. All costs are Int64, and the source is written for pas2js: one Read argument per call, SysUtils in the uses clause, no IOResult, and no 128-bit arithmetic. The Li Chao tree is an array of records that is reset for each penalty. The comparison orders by penalized value, then by more groups on a tie."
+      operations:
+          [
+              read-array,
+              prefix-sums,
+              binary-search-penalty,
+              penalized-dp,
+              insert-line,
+              query-line,
+              subtract-penalty,
+          ]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, k and the array from stdin, binary searches the penalty, and prints the minimum total squared group sum."
+      time: "O(n log n log(S_n^2))"
+      auxiliarySpace: "O(n) for the prefix sums and the Li Chao tree"
+      status: unverified
+      inputs: "n k, then n nonnegative integers."
+      outputs: "The minimum possible sum of squared group sums, on one line."
+      notes: "Python integers are arbitrary precision, so no cost overflows and the final penalty subtraction is exact. The Li Chao tree is stored in four parallel lists. The comparison orders by penalized value, then by more groups on a tie, and the binary search finds the largest penalty whose optimum still uses at least k groups."
+      operations:
+          [
+              read-array,
+              prefix-sums,
+              binary-search-penalty,
+              penalized-dp,
+              insert-line,
+              query-line,
+              subtract-penalty,
+          ]

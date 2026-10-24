@@ -1,0 +1,33 @@
+id: ioi.2016.aliens
+title: Aliens
+source: IOI
+contest: IOI 2016 Day 2
+division: platinum
+url: https://oj.uz/problem/view/IOI16_aliens
+editorialUrl: https://ioinformatics.org/files/ioi2016solutions.pdf
+techniques:
+    - dynamic-programming.aliens-trick
+prerequisites:
+    - dynamic-programming.0-1-knapsack
+    - arrays.prefix-sums
+    - dynamic-programming.convex-hull-trick
+difficulty: 5
+estimatedMinutes: 90
+specialConstraints:
+    - There are up to 100000 points of interest in a grid whose side is up to 1000000, so the O(k n^2) partition DP is far too slow.
+    - At most k square photos are allowed, two opposite corners of every photo lie on the main diagonal, and the cost is the number of photographed cells.
+    - Transposing every point below the diagonal orders the points along the diagonal, and a photo then covers a contiguous block whose cost is quadratic in its span.
+    - The span and the cost need 64 bits, and k can be as large as n.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Sort the transformed points and remove the ones that are dominated by another point, because a larger photo already covers them.
+    - With exactly g photos the answer is a partition DP over the sorted points, where the cost of a block is a quadratic function of its span.
+    - Charge a penalty for every photo and binary search the penalty; the penalized DP is one-dimensional and is a line query that a convex hull trick evaluates in linear time.
+    - Resolve ties toward more photos, and binary search for the largest penalty whose optimum still uses at least k photos.
+discussion: >-
+    The geometry reduces to points on a line: a photo is a square whose two opposite corners lie on the main diagonal, so after transposing the points below the diagonal it covers a contiguous block of points, and its cost is the square of the distance between the first and the last point in the block. The direct partition DP has k layers and a quadratic transition. The aliens trick charges a penalty p for every photo, which removes the layer count, and the penalized transition is a line query, so a convex hull trick evaluates the whole layer in linear time. The optimal number of photos is non-increasing in p, so a binary search finds the largest p whose optimum still uses at least k photos, and subtracting p times k recovers the exact k answer. The convexity follows from the quadrangle inequality of the squared distance cost. The implementation needs 64-bit arithmetic and a tie-break toward more photos so that the binary search lands on the correct side of a flat segment.
+related:
+    - codeforces.673e.levels-and-regions
+    - usaco.2017.jan.platinum.tall-barn

@@ -1,0 +1,32 @@
+id: usaco.2017.jan.platinum.tall-barn
+title: Building a Tall Barn
+source: USACO
+contest: 2017 January Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=697
+editorialUrl: https://usaco.org/current/data/sol_tallbarn_platinum_jan17.html
+techniques:
+    - dynamic-programming.aliens-trick
+prerequisites:
+    - foundations.complexity
+    - searching.binary-search
+difficulty: 4
+estimatedMinutes: 60
+specialConstraints:
+    - There are up to 100000 floors and up to 10^12 cows, so simulating every added cow is far too slow.
+    - Every floor must receive at least one cow, and a floor with c cows takes a[i] / c hours.
+    - The marginal benefit of adding one more cow to a floor is a[i] / (c (c + 1)), which decreases as c grows.
+    - The answer is a real number, printed rounded to the nearest integer, and the statement guarantees it is not near a rounding boundary.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Begin with one cow on every floor, then the remaining cows are assigned one at a time to the floor with the largest marginal benefit.
+    - The marginal benefits are decreasing, so charging a price per cow makes each floor's optimal count independent of the others.
+    - Binary search the price, and for each floor take the largest c whose marginal benefit is at least the price.
+    - If the price leaves a different number of cows assigned than K, adjust the total by (K - used) times the price, then round to the nearest integer.
+discussion: >-
+    The cost of a floor with c cows is a[i] / c, so the reduction from c to c + 1 cows is a[i] / (c (c + 1)), and these reductions decrease as c grows. Without a count constraint the best allocation is greedy, but K can be 10^12, so the greedy loop is impossible. Instead, charge a price p for every cow: each floor independently takes every cow whose marginal reduction is at least p, which can be computed in O(1) from the quadratic formula or in O(log K) by binary search. The total number of cows used is non-increasing in p, so a binary search finds the price at which the usage crosses K; the remaining cows are worth exactly p each, so the total is adjusted by (K - used) * p and rounded. The marginal reductions are decreasing, which is the discrete convexity the aliens trick needs.
+related:
+    - ioi.2016.aliens
+    - codeforces.673e.levels-and-regions

@@ -1,0 +1,33 @@
+id: codeforces.673e.levels-and-regions
+title: Levels and Regions
+source: Codeforces
+contest: Codeforces Round 351 (VK Cup 2016 Round 3, Div. 2 Edition)
+division: platinum
+url: https://codeforces.com/problemset/problem/673/E
+editorialUrl: https://codeforces.com/blog/entry/44754
+techniques:
+    - dynamic-programming.aliens-trick
+prerequisites:
+    - dynamic-programming.0-1-knapsack
+    - arrays.prefix-sums
+    - dynamic-programming.convex-hull-trick
+difficulty: 5
+estimatedMinutes: 75
+specialConstraints:
+    - There are up to 200000 levels and at most 50 regions, so the O(k n^2) partition DP is far too slow.
+    - The levels are split into exactly k contiguous nonempty regions, and the expected finishing time of a region is a sum of ratios over its levels.
+    - The costs are real numbers, so the penalty binary search runs on reals and the checker accepts an absolute or relative error of 1e-4.
+    - The ratios and prefix sums need 64-bit or double precision throughout.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The expected time of a region can be written with prefix sums of t and 1/t, so its cost is available in constant time.
+    - The direct DP has k layers; charge a real penalty for every region to remove the layer count.
+    - The penalized transition is a line query, and the convex hull trick evaluates one layer in linear time.
+    - The best number of regions decreases as the penalty grows, so binary search the penalty until the optimum uses k regions.
+discussion: >-
+    The expected time of a region is a double sum of ratios of the t values, which prefix sums of t and of 1/t evaluate in constant time. The resulting partition DP has k layers and a quadratic transition, which is too slow at n = 200000. The aliens trick charges a real penalty p per region, removes the layer count, and turns each transition into a line query; the convex hull trick then evaluates one penalized DP in O(n). The optimal number of regions decreases as p grows, so binary search on p locates the value whose optimum uses k regions, and the answer is the penalized optimum minus p times k. The cost satisfies the quadrangle inequality because extending a region adds a nonnegative pair term. The precision requirement is 1e-4, so a fixed number of binary-search iterations on a double is enough.
+related:
+    - ioi.2016.aliens
+    - usaco.2017.jan.platinum.tall-barn
