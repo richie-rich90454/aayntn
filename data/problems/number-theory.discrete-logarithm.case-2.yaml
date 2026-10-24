@@ -1,0 +1,32 @@
+id: library-checker.discrete-logarithm
+title: Discrete Logarithm
+source: Library Checker
+contest: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/discrete_logarithm_mod
+techniques:
+    - number-theory.discrete-logarithm
+prerequisites:
+    - number-theory.modular-arithmetic
+    - number-theory.extended-euclidean
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The modulus can be 1, in which case every power is 0 modulo 1 and the smallest exponent is 0.
+    - The base and the target are below the modulus, and the modulus can be composite, so the base and the modulus may share a factor.
+    - The statement defines 0^0 = 1 and allows a base of 0, which needs its own case analysis.
+    - The answer is the minimum non-negative exponent, so the exponent-zero case and a minimum beyond the first block both matter.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Decide the cases M = 1 and X = 0 directly from the definition, including the convention 0^0 = 1.
+    - If Y = 1, the answer is 0 before any table is built.
+    - While gcd(X, M) is greater than 1, a solution with K at least 1 must have that factor dividing Y; divide the congruence and add one to a shift counter.
+    - After the peels the base is invertible, so baby-step giant-step returns the smallest reduced exponent; add the counter to get the answer.
+discussion: >-
+    The general case combines the exponent-zero convention with the extended baby-step giant-step method. The boundary cases M = 1 and X = 0 are decided before any arithmetic. For the rest, Y = 1 returns 0, and each common factor between X and M is peeled by dividing the congruence, updating the target with an inverse, and counting a shift. The reduced instance has a base coprime to its modulus, so the plain table applies. The minimum is preserved because every solution with K at least 1 survives exactly the same peels, and the shift is added back at the end.
+related:
+    - codeforces.101853g.hard-equation
+    - codeforces.1106f.lunar-new-year-and-a-recursive-sequence

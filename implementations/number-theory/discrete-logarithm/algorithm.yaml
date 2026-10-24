@@ -1,0 +1,98 @@
+algorithm: number-theory.discrete-logarithm
+title: The discrete logarithm
+summary: Find the smallest exponent x with a to the x congruent to b modulo m by meeting in the middle, with a table of baby steps against giant steps of the square root of m.
+subject: number-theory
+divisions: [gold, platinum]
+importance: advanced-technique
+prerequisites:
+    required: [number-theory.modular-arithmetic]
+    recommended:
+        - number-theory.extended-euclidean
+        - foundations.binary-representation
+complexity:
+    time: "O(sqrt m) modular multiplications per query"
+    space: "O(sqrt m)"
+assumptions:
+    - The base a and the modulus m are coprime, so every power of a is invertible modulo m.
+    - The modulus is at most 2^31 - 1, so the product of two residues fits in a signed 64-bit integer.
+    - The exponent is the smallest non-negative solution, and a^0 = 1.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads q triples and prints the smallest exponent for each, with an open-addressing baby-step table and 64-bit modular products."
+      time: "O(sqrt m) modular multiplications per query"
+      auxiliarySpace: "O(sqrt m)"
+      status: unverified
+      inputs: "q on the first line, then q lines, each holding a, b and m with 1 <= a < m <= 2147483647 and gcd(a, m) = 1, and 0 <= b < m."
+      outputs: "One line per query, holding the smallest non-negative x with a^x = b (mod m), or -1."
+      notes: "The baby-step table is keyed by b * a^q and keeps the largest q, so the first giant-step match is the smallest exponent. The hash table is open addressing with linear probing and sizes itself at the smallest power of two that is at least twice the block size. The product of two residues is formed in uint64_t before the modulo, and the standard output is set to binary mode so its line feeds match the other five programs."
+      operations: [parse, baby-steps, hash-table, giant-steps, answer]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads q triples and prints the smallest exponent for each, with an open-addressing baby-step table and 64-bit modular products."
+      time: "O(sqrt m) modular multiplications per query"
+      auxiliarySpace: "O(sqrt m)"
+      status: unverified
+      inputs: "q on the first line, then q lines, each holding a, b and m with 1 <= a < m <= 2147483647 and gcd(a, m) = 1, and 0 <= b < m."
+      outputs: "One line per query, holding the smallest non-negative x with a^x = b (mod m), or -1."
+      notes: "The baby-step table is keyed by b * a^q and keeps the largest q, so the first giant-step match is the smallest exponent. The vectors hold the keys and the baby-step indices, the hash table probes linearly from a mixed low-bit index, and the product of two residues is formed in std::uint64_t before the modulo. Input and output are untied from the C streams, and every line ends with a line feed."
+      operations: [parse, baby-steps, hash-table, giant-steps, answer]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads q triples and prints the smallest exponent for each, with an open-addressing baby-step table and exact 64-bit modular products."
+      time: "O(sqrt m) modular multiplications per query"
+      auxiliarySpace: "O(sqrt m)"
+      status: unverified
+      inputs: "q on the first line, then q lines, each holding a, b and m with 1 <= a < m <= 2147483647 and gcd(a, m) = 1, and 0 <= b < m."
+      outputs: "One line per query, holding the smallest non-negative x with a^x = b (mod m), or -1."
+      notes: "The class is named Main so the file can be submitted unchanged. The baby-step table is keyed by b * a^q and keeps the largest q, so the first giant-step match is the smallest exponent. Keys are int arrays with -1 as the empty marker, and every product stays below m * m < 2^62 in a signed long. A StringTokenizer over the whole input avoids the per-token overhead of Scanner."
+      operations: [parse, baby-steps, hash-table, giant-steps, answer]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads q triples and prints the smallest exponent for each, with a dictionary baby-step table and exact products."
+      time: "O(sqrt m) modular multiplications per query"
+      auxiliarySpace: "O(sqrt m)"
+      status: unverified
+      inputs: "q on the first line, then q lines, each holding a, b and m with 1 <= a < m <= 2147483647 and gcd(a, m) = 1, and 0 <= b < m."
+      outputs: "One line per query, holding the smallest non-negative x with a^x = b (mod m), or -1."
+      notes: "The dictionary is keyed by b * a^q and keeps the largest q, so the first giant-step match is the smallest exponent. The block size comes from math.isqrt with an explicit round up, and the built-in pow computes the stride. Python integers are arbitrary precision, so the products need no width argument. The output is written as bytes so the line feeds do not depend on the platform."
+      operations: [parse, baby-steps, hash-table, giant-steps, answer]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. It reads q triples and prints the smallest exponent for each, with a static open-addressing table and multiplication by repeated doubling."
+      time: "O(sqrt m log m) word operations per query because multiplication is repeated doubling"
+      auxiliarySpace: "O(sqrt m)"
+      status: unverified
+      inputs: "q on the first line, then q lines, each holding a, b and m with 1 <= a < m <= 2147483647 and gcd(a, m) = 1, and 0 <= b < m."
+      outputs: "One line per query, holding the smallest non-negative x with a^x = b (mod m), or -1."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The browser Pascal compiler has no 128-bit integer, so one modular product is formed by repeated doubling; every partial sum stays below 2^32, which is exact even when Int64 is stored as a double. The table is a fixed array of 131072 LongWord slots, the empty marker is 0xFFFFFFFF, and the block size never exceeds 46341. The program reads one argument per Read call, uses SysUtils, and never calls IOResult."
+      operations: [parse, baby-steps, hash-table, giant-steps, answer]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. It reads q triples and prints the smallest exponent for each, with a Map baby-step table and exact BigInt products."
+      time: "O(sqrt m) modular multiplications per query"
+      auxiliarySpace: "O(sqrt m)"
+      status: unverified
+      inputs: "q on the first line, then q lines, each holding a, b and m with 1 <= a < m <= 2147483647 and gcd(a, m) = 1, and 0 <= b < m."
+      outputs: "One line per query, holding the smallest non-negative x with a^x = b (mod m), or -1."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. BigInt supplies exact products, because a Number loses integer precision above 2^53 and the square of a residue near 2^31 is about 2^62. The baby-step table is a Map from a BigInt residue to its largest baby-step index, so the first giant-step match is the smallest exponent. The whole standard input is read before the queries are answered."
+      operations: [parse, baby-steps, hash-table, giant-steps, answer]

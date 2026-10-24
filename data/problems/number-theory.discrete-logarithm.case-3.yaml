@@ -1,0 +1,33 @@
+id: codeforces.1106f.lunar-new-year-and-a-recursive-sequence
+title: Lunar New Year and a Recursive Sequence
+source: Codeforces
+contest: Codeforces Round 536 (Div. 2)
+division: platinum
+url: https://codeforces.com/problemset/problem/1106/F
+editorialUrl: https://codeforces.com/blog/entry/64928
+techniques:
+    - number-theory.discrete-logarithm
+prerequisites:
+    - number-theory.modular-arithmetic
+    - number-theory.matrix-exponentiation
+    - number-theory.euler-totient
+difficulty: 5
+estimatedMinutes: 90
+specialConstraints:
+    - The modulus is the prime 998244353, and 3 is a primitive root modulo it, so every nonzero residue is a power of 3.
+    - The exponent recurrence lives modulo p - 1 = 998244352, not modulo p.
+    - k is at most 100 and n is at most 10^9, so the coefficient that relates the k-th exponent to the n-th one needs matrix exponentiation.
+    - The final step is a linear congruence c * y = log_3(m) modulo p - 1, which has no solution unless the gcd of c and p - 1 divides the logarithm.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Write every nonzero term as 3 to an exponent; the product recurrence becomes a linear recurrence on the exponents, with all arithmetic modulo p - 1.
+    - The first k - 1 terms have exponent 0 and the k-th term has the unknown exponent y, so the n-th exponent is c * y for a coefficient c independent of y.
+    - Compute c with the companion matrix raised to the power n - k, reducing every entry modulo p - 1.
+    - Compute log_3(m) with baby-step giant-step, solve the linear congruence for y, and print 3^y modulo p.
+discussion: >-
+    Taking a discrete logarithm turns the multiplicative recurrence into a linear one. With 3 as a primitive root, each nonzero term is 3 to an exponent, and the recurrence says that the exponent vector advances by a fixed companion matrix modulo p - 1. The first k - 1 exponents are zero, so the n-th exponent is the top-left entry of the matrix power times the unknown exponent of the k-th term. The baby-step giant-step table supplies the logarithm of m, and a linear congruence supplies the exponent of f_k. The gcd of the coefficient and p - 1 decides whether the target is reachable, and the final modular power returns the value.
+related:
+    - codeforces.101853g.hard-equation
+    - library-checker.discrete-logarithm

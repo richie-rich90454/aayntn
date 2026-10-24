@@ -1,0 +1,30 @@
+id: codeforces.101853g.hard-equation
+title: Hard Equation
+source: Codeforces
+contest: ACM International Collegiate Programming Contest, JUST Collegiate Programming Contest (2018)
+division: gold
+url: https://codeforces.com/gym/101853/problem/G
+techniques:
+    - number-theory.discrete-logarithm
+prerequisites:
+    - number-theory.modular-arithmetic
+    - number-theory.extended-euclidean
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The modulus is at most 10^9 and there are up to 500 queries, so a linear scan is too slow but a square-root table fits.
+    - The base and the modulus need not be coprime, so the common factor has to be peeled before the table is built.
+    - Every test is guaranteed to have a solution, and any exponent in [0, 10^17] is accepted, so the smallest one is not required by the judge.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Write the unknown exponent as x = p * n - q with n about the square root of m, so the congruence becomes a match between a table of baby steps and a walk of giant steps.
+    - The table stores b * a^q, and the giant walk computes a^(p * n); the first match gives the exponent.
+    - When gcd(a, m) is greater than 1, divide the congruence by the common factor and adjust the target before building the table.
+    - Each peel removes one factor from the modulus and shifts the exponent by one, so add the number of peels to the reduced answer.
+discussion: >-
+    The direct baby-step giant-step method works whenever the base is invertible modulo the modulus. The statement does not promise coprimality, so the solution first peels g = gcd(a, m): when g divides b, dividing the congruence by g and multiplying by the inverse of a / g modulo m / g gives a smaller instance with the exponent reduced by one. After at most log m peels the base is coprime to the modulus, the plain table applies, and the accumulated shift restores the original exponent. Every test is guaranteed to have a solution, so a peel whose factor does not divide b cannot occur on the official input; the check is still worth writing.
+related:
+    - library-checker.discrete-logarithm
+    - codeforces.1106f.lunar-new-year-and-a-recursive-sequence
