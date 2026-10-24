@@ -1,0 +1,30 @@
+id: library-checker.assignment
+title: Assignment Problem
+source: Library Checker
+contest: Library Checker
+division: gold
+url: https://judge.yosupo.jp/problem/assignment
+techniques:
+    - graphs.hungarian-algorithm
+prerequisites:
+    - graphs.bipartite-matching
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - n is at most 500, so the cubic Hungarian algorithm is the intended solution and the n! enumeration is impossible.
+    - The entries can be as large as 10^9 in absolute value and may be negative, so a 64-bit accumulator is required and the initial potentials cannot all be zero.
+    - The output asks for the assignment, not only the minimum cost.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The input is a square matrix and the output is a permutation, so this is the assignment problem with no extra structure.
+    - Negative entries rule out the usual claim that the zero potentials are feasible, so initialize each row potential to the minimum of its row.
+    - The alternating search only needs the cheapest slack out of the current tree, which is the same relaxation a shortest-path search performs.
+    - The matching is stored as the row assigned to each column, and the permutation is the inverse of that array.
+discussion: >-
+    A square matrix with entries of either sign is the general assignment problem. The dual potentials have to start at the row minima, because zero potentials violate the constraint u_i + v_j <= c_ij as soon as a cost is negative. The algorithm then behaves like a shortest-path search on the reduced costs, adding the cheapest column outside the tree at every step and shifting the potentials by the slack of that column. The result is the minimum total cost and a permutation, and the sums reach 500 billion at the limit, so a 32-bit accumulator is not enough.
+related:
+    - cses.2129.task-assignment
+    - timus.1076.trash

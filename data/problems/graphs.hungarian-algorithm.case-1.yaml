@@ -1,0 +1,30 @@
+id: cses.2129.task-assignment
+title: Task Assignment
+source: CSES
+contest: CSES Problem Set
+division: gold
+url: https://cses.fi/problemset/task/2129
+techniques:
+    - graphs.hungarian-algorithm
+prerequisites:
+    - graphs.bipartite-matching
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - n is at most 200, so the cubic Hungarian algorithm is fast and enumerating the n! assignments is not.
+    - The statement asks for the assignment as well as the cost, so the matching has to be reconstructed rather than only its value.
+    - The costs are positive, so zero potentials are already feasible and the row-minimum initialization is only a convenience.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Each employee must receive exactly one task and each task must go to exactly one employee, so the answer is a perfect matching.
+    - The cost is a sum over the chosen cells, so the problem is a minimum-cost matching rather than an unweighted one.
+    - Keep a potential for every row and every column, and search for an augmenting path that uses only cells where the two potentials meet the cost.
+    - When no free column is reachable, lower the slack of the cheapest cell leaving the searched rows and columns, then continue.
+discussion: >-
+    The cost matrix is square and the assignment is a permutation, which is exactly the assignment problem. A greedy choice fails because taking the cheapest cell for one employee can force a much more expensive cell later, and enumerating the 200! permutations is impossible. The Hungarian algorithm maintains dual potentials whose sum lower-bounds every assignment, and it augments along a path of cells where the bound is met. The O(n^3) work is about eight million operations at the limit, and the matching is read back from the column-to-row array.
+related:
+    - library-checker.assignment
+    - timus.1076.trash

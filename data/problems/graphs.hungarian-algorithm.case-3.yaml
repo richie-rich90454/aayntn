@@ -1,0 +1,30 @@
+id: timus.1076.trash
+title: Trash
+source: Timus
+contest: Timus Online Judge
+division: gold
+url: http://acm.timus.ru/problem.aspx?space=1&num=1076
+techniques:
+    - graphs.hungarian-algorithm
+prerequisites:
+    - graphs.bipartite-matching
+difficulty: 4
+estimatedMinutes: 35
+specialConstraints:
+    - n is at most 150 and each amount is at most 100, so the cubic algorithm is about three million operations.
+    - Every unit that moves costs one, so the effort depends only on how much of each type is already in the container that receives it.
+    - The input describes the contents of the containers, not the cost of assigning a type to a container; the cost matrix has to be built from the column sums.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Sorting the trash means choosing one container for each type, with every container used once, which is a perfect matching.
+    - Moving one unit between different containers costs one, and moving it inside its own container costs zero, so only the units that stay put are free.
+    - If type j is assigned to container i, the amount a[i][j] stays and the rest of the column, the total of type j minus a[i][j], has to be moved.
+    - Build that cost matrix and run the Hungarian algorithm for the minimum total effort.
+discussion: >-
+    The only decision is which container receives which type. The total amount of trash is fixed, and the amount that does not move is exactly a[i][j] when type j is assigned to container i, so minimizing the effort is the same as maximizing the sum of the kept amounts. The cost matrix entry is the total amount of type j minus a[i][j], which is the number of units that have to move. Every type is assigned once and every container receives one type, which is a perfect matching of the columns to the rows. The limit of 150 rows keeps the cubic algorithm comfortably inside the time limit. The sample has 979 units of trash, 329 of which can stay, so the answer is 650.
+related:
+    - cses.2129.task-assignment
+    - library-checker.assignment

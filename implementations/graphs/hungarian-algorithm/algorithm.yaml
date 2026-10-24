@@ -1,0 +1,98 @@
+algorithm: graphs.hungarian-algorithm
+title: The Hungarian algorithm
+summary: A minimum-cost perfect matching between two equal-sized sides, found by keeping dual potentials feasible and augmenting along the cheapest alternating path.
+subject: graphs
+divisions: [gold]
+importance: common-contest-technique
+complexity:
+    time: "O(n^3)"
+    space: "O(n^2)"
+assumptions:
+    - The two sides have the same size, so a perfect matching exists.
+    - Every cost and every partial sum fits in a signed 64-bit integer.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads an n by n cost matrix and prints the minimum total cost, then a 0-based permutation that assigns each row to a column."
+      time: "O(n^3)"
+      auxiliarySpace: "O(n^2) for the cost matrix and O(n) for the potentials and the matching"
+      status: unverified
+      inputs: "n, then n lines of n integer costs."
+      outputs: "The minimum total cost on the first line, then n 0-based column indices separated by spaces on the second line."
+      notes: "The potentials are initialized to the row minima, which is feasible when a cost is negative. The search keeps a column slack for every column outside the alternating tree, and the potentials are shifted by the smallest slack when no free column is reachable. The costs, the potentials and the total are 64-bit integers, and the assignment is read back from the column-to-row array. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [initialize-potentials, build-tree, shift-potentials, augment-path, report-assignment]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads an n by n cost matrix and prints the minimum total cost, then a 0-based permutation that assigns each row to a column."
+      time: "O(n^3)"
+      auxiliarySpace: "O(n^2) for the cost matrix and O(n) for the potentials and the matching"
+      status: unverified
+      inputs: "n, then n lines of n integer costs."
+      outputs: "The minimum total cost on the first line, then n 0-based column indices separated by spaces on the second line."
+      notes: "The potentials are initialized to the row minima, which is feasible when a cost is negative. The search keeps a column slack for every column outside the alternating tree, and the potentials are shifted by the smallest slack when no free column is reachable. The costs, the potentials and the total are 64-bit integers, and the assignment is read back from the column-to-row array. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [initialize-potentials, build-tree, shift-potentials, augment-path, report-assignment]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads an n by n cost matrix and prints the minimum total cost, then a 0-based permutation that assigns each row to a column."
+      time: "O(n^3)"
+      auxiliarySpace: "O(n^2) for the cost matrix and O(n) for the potentials and the matching"
+      status: unverified
+      inputs: "n, then n lines of n integer costs."
+      outputs: "The minimum total cost on the first line, then n 0-based column indices separated by spaces on the second line."
+      notes: "The potentials are initialized to the row minima, which is feasible when a cost is negative. The search keeps a column slack for every column outside the alternating tree, and the potentials are shifted by the smallest slack when no free column is reachable. The costs, the potentials and the total are 64-bit integers, and the assignment is read back from the column-to-row array. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [initialize-potentials, build-tree, shift-potentials, augment-path, report-assignment]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads an n by n cost matrix and prints the minimum total cost, then a 0-based permutation that assigns each row to a column."
+      time: "O(n^3)"
+      auxiliarySpace: "O(n^2) for the cost matrix and O(n) for the potentials and the matching"
+      status: unverified
+      inputs: "n, then n lines of n integer costs."
+      outputs: "The minimum total cost on the first line, then n 0-based column indices separated by spaces on the second line."
+      notes: "The potentials are initialized to the row minima, which is feasible when a cost is negative. The search keeps a column slack for every column outside the alternating tree, and the potentials are shifted by the smallest slack when no free column is reachable. The integers are arbitrary precision, and the assignment is read back from the column-to-row array. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [initialize-potentials, build-tree, shift-potentials, augment-path, report-assignment]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads an n by n cost matrix and prints the minimum total cost, then a 0-based permutation that assigns each row to a column."
+      time: "O(n^3)"
+      auxiliarySpace: "O(n^2) for the cost matrix and O(n) for the potentials and the matching"
+      status: unverified
+      inputs: "n, then n lines of n integer costs."
+      outputs: "The minimum total cost on the first line, then n 0-based column indices separated by spaces on the second line."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The potentials are initialized to the row minima, which is feasible when a cost is negative. The search keeps a column slack for every column outside the alternating tree, and the potentials are shifted by the smallest slack when no free column is reachable. The costs, the potentials and the total are Int64, and the assignment is read back from the column-to-row array. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [initialize-potentials, build-tree, shift-potentials, augment-path, report-assignment]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads an n by n cost matrix and prints the minimum total cost, then a 0-based permutation that assigns each row to a column."
+      time: "O(n^3)"
+      auxiliarySpace: "O(n^2) for the cost matrix and O(n) for the potentials and the matching"
+      status: unverified
+      inputs: "n, then n lines of n integer costs."
+      outputs: "The minimum total cost on the first line, then n 0-based column indices separated by spaces on the second line."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The potentials are initialized to the row minima, which is feasible when a cost is negative. The search keeps a column slack for every column outside the alternating tree, and the potentials are shifted by the smallest slack when no free column is reachable. The costs and the potentials are numbers, so a total beyond 2^53 would lose precision, and the assignment is read back from the column-to-row array. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [initialize-potentials, build-tree, shift-potentials, augment-path, report-assignment]
