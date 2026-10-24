@@ -1,0 +1,149 @@
+algorithm: graphs.floyd-warshall
+title: Floyd-Warshall and all-pairs shortest paths
+summary: Shortest paths between every ordered pair of vertices, computed by adding one allowed intermediate vertex at a time to a matrix of distances.
+subject: graphs
+divisions: [silver, gold]
+importance: common-contest-technique
+prerequisites:
+    required: [graphs.representation]
+    recommended: [graphs.dijkstra, graphs.bfs, dynamic-programming.dag-dp]
+complexity:
+    time: "O(V^3)"
+    space: "O(V^2)"
+assumptions:
+    - Edge weights may be negative.
+    - The graph has no negative cycle, unless detecting one is the goal.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed weighted graph from standard input, computes all-pairs shortest paths, and prints the distance matrix, with a negative-cycle report when the distances are unbounded."
+      time: "O(V^3)"
+      auxiliarySpace: "O(V^2) for the distance matrix"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'negative cycle' instead."
+      notes: "The matrix is a flat array of 64-bit integers. The diagonal starts at zero, parallel edges keep the cheaper weight, and the outer loop runs over the intermediate vertex. The addition is guarded against the infinity sentinel, so two sentinels are never added. A negative diagonal entry after the loops means the graph has a negative cycle, and the program reports it instead of printing finite distances. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [
+              initialize-matrix,
+              read-edge,
+              relax-through-vertex,
+              improve-pair,
+              skip-unreachable,
+              detect-negative-cycle,
+              report-unreachable,
+          ]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed weighted graph from standard input, computes all-pairs shortest paths, and prints the distance matrix, with a negative-cycle report when the distances are unbounded."
+      time: "O(V^3)"
+      auxiliarySpace: "O(V^2) for the distance matrix"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'negative cycle' instead."
+      notes: "The matrix is a vector of rows of 64-bit integers. The diagonal starts at zero, parallel edges keep the cheaper weight, and the outer loop runs over the intermediate vertex. The addition is guarded against the infinity sentinel, so two sentinels are never added. A negative diagonal entry after the loops means the graph has a negative cycle, and the program reports it instead of printing finite distances. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [
+              initialize-matrix,
+              read-edge,
+              relax-through-vertex,
+              improve-pair,
+              skip-unreachable,
+              detect-negative-cycle,
+              report-unreachable,
+          ]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed weighted graph from standard input, computes all-pairs shortest paths, and prints the distance matrix, with a negative-cycle report when the distances are unbounded."
+      time: "O(V^3)"
+      auxiliarySpace: "O(V^2) for the distance matrix"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'negative cycle' instead."
+      notes: "The matrix is a flat array of 64-bit integers, because the matrix output is quadratic and a two-dimensional array of objects would be slower. The diagonal starts at zero, parallel edges keep the cheaper weight, and the outer loop runs over the intermediate vertex. The addition is guarded against the infinity sentinel, and a negative diagonal entry after the loops means the graph has a negative cycle. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [
+              initialize-matrix,
+              read-edge,
+              relax-through-vertex,
+              improve-pair,
+              skip-unreachable,
+              detect-negative-cycle,
+              report-unreachable,
+          ]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program, written for readability: it reads a directed weighted graph from standard input, computes all-pairs shortest paths, and prints the distance matrix, with a negative-cycle report when the distances are unbounded."
+      time: "O(V^3)"
+      auxiliarySpace: "O(V^2) for the distance matrix"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'negative cycle' instead."
+      notes: "The matrix is a list of rows, and the distances are arbitrary-precision integers, so a shortest path never overflows. The diagonal starts at zero, parallel edges keep the cheaper weight, and the outer loop runs over the intermediate vertex. The addition is guarded against the infinity sentinel, and a negative diagonal entry after the loops means the graph has a negative cycle. The cubic loop is slow in Python, so the variant is recommended only when the vertex count is at most a few hundred."
+      operations:
+          [
+              initialize-matrix,
+              read-edge,
+              relax-through-vertex,
+              improve-pair,
+              skip-unreachable,
+              detect-negative-cycle,
+              report-unreachable,
+          ]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads a directed weighted graph from standard input, computes all-pairs shortest paths, and prints the distance matrix, with a negative-cycle report when the distances are unbounded."
+      time: "O(V^3)"
+      auxiliarySpace: "O(V^2) for the distance matrix"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'negative cycle' instead."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The matrix is a flat array of Int64. The repository compiles Pascal with a Pascal-to-JavaScript toolchain, where Int64 is represented by a JavaScript number, so the infinity sentinel is kept below 2^53 and every distance the fixtures use is exact. The diagonal starts at zero, parallel edges keep the cheaper weight, and the outer loop runs over the intermediate vertex. The addition is guarded against the sentinel, and a negative diagonal entry after the loops means the graph has a negative cycle. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [
+              initialize-matrix,
+              read-edge,
+              relax-through-vertex,
+              improve-pair,
+              skip-unreachable,
+              detect-negative-cycle,
+              report-unreachable,
+          ]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads a directed weighted graph from standard input, computes all-pairs shortest paths, and prints the distance matrix, with a negative-cycle report when the distances are unbounded."
+      time: "O(V^3)"
+      auxiliarySpace: "O(V^2) for the distance matrix"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'negative cycle' instead."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The matrix is a flat array of numbers, and infinity is the number Infinity, so no sentinel can be confused with a real distance. A distance beyond 2^53 would lose precision. The diagonal starts at zero, parallel edges keep the cheaper weight, and the outer loop runs over the intermediate vertex. A negative diagonal entry after the loops means the graph has a negative cycle. The output is canonical, which makes the six language versions byte-identical."
+      operations:
+          [
+              initialize-matrix,
+              read-edge,
+              relax-through-vertex,
+              improve-pair,
+              skip-unreachable,
+              detect-negative-cycle,
+              report-unreachable,
+          ]
