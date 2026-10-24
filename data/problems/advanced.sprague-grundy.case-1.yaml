@@ -1,0 +1,29 @@
+id: codeforces.15c.industrial-nim
+title: Industrial Nim
+source: Codeforces
+contest: Codeforces Beta Round 15
+division: platinum
+url: https://codeforces.com/problemset/problem/15/C
+techniques:
+    - advanced.sprague-grundy
+prerequisites:
+    - advanced.sprague-grundy
+    - foundations.binary-representation
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - Each quarry holds up to 10^16 dumpers, so the dumper sizes can never be enumerated one by one.
+    - A quarry contributes a consecutive range of heap sizes, so its total value is a difference of two prefix XORs.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A dumper is an ordinary Nim heap, so its Grundy value is exactly the number of stones it holds.
+    - The whole position is a disjunctive sum of dumpers, so the first player wins exactly when the XOR of all sizes is nonzero.
+    - A quarry of x stones and m dumpers contributes the XOR of the consecutive range from x to x + m - 1, which is the XOR of two prefixes.
+    - The prefix XOR from 0 to t is t, 1, t + 1, or 0 according to whether t is 0, 1, 2, or 3 modulo four.
+discussion: >-
+    The game is Nim with the heaps listed implicitly, so the Sprague-Grundy theorem reduces it to one XOR over all dumpers. The only difficulty is that a quarry can list 10^16 dumpers, which rules out the direct sum. The XOR of a consecutive range is the difference of two prefix XORs, and the prefix XOR has a closed form with period four, so each quarry costs constant time. The whole solution is a single pass over the quarries.
+related:
+    - codeforces.87c.interesting-game
+    - codeforces.768e.game-of-stones

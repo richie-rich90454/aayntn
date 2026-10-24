@@ -1,0 +1,97 @@
+algorithm: advanced.sprague-grundy
+title: Game theory and Sprague-Grundy theory
+summary: Summarize every impartial game position by one non-negative integer, its Grundy value, so that a sum of independent games is decided by the xor of those values.
+subject: advanced
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [foundations.complexity]
+    recommended:
+        [foundations.recursion, foundations.binary-representation, dynamic-programming.dag-dp]
+complexity:
+    time: "O(M k + h) to tabulate the Grundy values up to the largest heap"
+    space: "O(M + k)"
+assumptions:
+    - Every game is finite and impartial, and the player who cannot move loses under normal play.
+    - The position is a disjunctive sum of independent components, so exactly one component changes per move.
+    - The Grundy table is built up to the largest heap size in the input, and every move removes a fixed positive number of stones.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the allowed moves and the heap sizes, then prints the Grundy value of each heap and the winner of the combined position."
+      time: "O(M k + h)"
+      auxiliarySpace: "O(M + k)"
+      status: unverified
+      inputs: "k, then k allowed move sizes, then h, then h heap sizes, all separated by whitespace."
+      outputs: "One line per heap with its Grundy value, then one line holding first or second."
+      notes: "The table is built up to the largest heap, so a move is used only when it does not exceed the current size. The marker array is stamped with the current size instead of being cleared, and the mex loop stops after at most k + 1 steps because at most k values can be marked. The three arrays are freed on every exit path."
+      operations: [tabulate-grundy, mex, xor-combine]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the allowed moves and the heap sizes, then prints the Grundy value of each heap and the winner of the combined position."
+      time: "O(M k + h)"
+      auxiliarySpace: "O(M + k)"
+      status: unverified
+      inputs: "k, then k allowed move sizes, then h, then h heap sizes, all separated by whitespace."
+      outputs: "One line per heap with its Grundy value, then one line holding first or second."
+      notes: "The C++ variant keeps the table, the marker array and the move list in std::vector, so no allocation is written by hand. Every lookup casts its index to std::size_t, and the marker stamp is the heap size, which is never reused."
+      operations: [tabulate-grundy, mex, xor-combine]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the allowed moves and the heap sizes, then prints the Grundy value of each heap and the winner of the combined position."
+      time: "O(M k + h)"
+      auxiliarySpace: "O(M + k)"
+      status: unverified
+      inputs: "k, then k allowed move sizes, then h, then h heap sizes, all separated by whitespace."
+      outputs: "One line per heap with its Grundy value, then one line holding first or second."
+      notes: "The whole input is read into a StringBuilder and tokenized once, so the parser does not call the reader per number. The output is collected in a second StringBuilder and written once, which keeps the interleaving of the per-heap lines and the summary line exact."
+      operations: [tabulate-grundy, mex, xor-combine]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the allowed moves and the heap sizes, then prints the Grundy value of each heap and the winner of the combined position."
+      time: "O(M k + h)"
+      auxiliarySpace: "O(M + k)"
+      status: unverified
+      inputs: "k, then k allowed move sizes, then h, then h heap sizes, all separated by whitespace."
+      outputs: "One line per heap with its Grundy value, then one line holding first or second."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The variant reads standard input as one string and splits it, because Node has no synchronous line reader worth the complexity here. The Grundy values are small, so Number and the XOR operator are exact."
+      operations: [tabulate-grundy, mex, xor-combine]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the allowed moves and the heap sizes, then prints the Grundy value of each heap and the winner of the combined position."
+      time: "O(M k + h)"
+      auxiliarySpace: "O(M + k)"
+      status: unverified
+      inputs: "k, then k allowed move sizes, then h, then h heap sizes, all separated by whitespace."
+      outputs: "One line per heap with its Grundy value, then one line holding first or second."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The variant gives every Read exactly one argument, uses SysUtils for IntToStr, and avoids IOResult and 128-bit integers, so it compiles under pas2js. The marker array is stamped with the current heap size."
+      operations: [tabulate-grundy, mex, xor-combine]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the allowed moves and the heap sizes, then prints the Grundy value of each heap and the winner of the combined position."
+      time: "O(M k + h)"
+      auxiliarySpace: "O(M + k)"
+      status: unverified
+      inputs: "k, then k allowed move sizes, then h, then h heap sizes, all separated by whitespace."
+      outputs: "One line per heap with its Grundy value, then one line holding first or second."
+      notes: "The variant reads the whole input once, because a per-token read is the slowest part of a Python solution at this size. The mex loop stops at the number of moves, which also bounds every Grundy value, so the XOR stays small."
+      operations: [tabulate-grundy, mex, xor-combine]

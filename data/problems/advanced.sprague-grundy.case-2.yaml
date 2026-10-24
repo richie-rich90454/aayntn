@@ -1,0 +1,30 @@
+id: codeforces.87c.interesting-game
+title: Interesting Game
+source: Codeforces
+contest: Codeforces Beta Round 73 (Div. 1 Only)
+division: platinum
+url: https://codeforces.com/problemset/problem/87/C
+editorialUrl: https://codeforces.com/blog/entry/2121
+techniques:
+    - advanced.sprague-grundy
+prerequisites:
+    - advanced.sprague-grundy
+    - dynamic-programming.dag-dp
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - One pile is replaced by an arithmetic progression of at least two consecutive positive sizes, so a move creates several independent piles.
+    - The sum of a split of length k is at least k(k+1)/2, so only about sqrt(2n) lengths need to be tested.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A move splits one pile into several, and the new piles never interact again, so the value of the move is the XOR of the values of the new piles.
+    - The value of a single pile depends only on its size, so tabulate it in increasing order and use the mex of the move values.
+    - A split of length k with difference one is determined by its largest part, because the sum fixes that part once k is chosen.
+    - After the table, the first move is winning exactly when it leaves XOR zero, so scan the splits of n and keep the smallest k with that property.
+discussion: >-
+    The game is a splitting game, so the Sprague-Grundy theorem has to be applied twice: once inside a single pile, where a move becomes the XOR of the values of the new piles, and once across the whole position, where the single pile is the only component. The mex is taken over the split values, and the table is built in increasing size because every part of a split is smaller than the pile it came from. The length of a split is bounded by the square root of the pile size, which makes the enumeration of all splits cheap enough at 10^5 stones. The second pass over the splits of n recovers the smallest winning first move.
+related:
+    - codeforces.15c.industrial-nim
+    - codeforces.768e.game-of-stones

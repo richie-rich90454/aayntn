@@ -1,0 +1,31 @@
+id: codeforces.768e.game-of-stones
+title: Game of Stones
+source: Codeforces
+contest: "Divide by Zero 2017 and Codeforces Round 399 (Div. 1 + Div. 2, combined)"
+division: platinum
+url: https://codeforces.com/problemset/problem/768/E
+editorialUrl: https://codeforces.com/blog/entry/50550
+techniques:
+    - advanced.sprague-grundy
+prerequisites:
+    - advanced.sprague-grundy
+    - dynamic-programming.bitmask-dp
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - No removal amount may be used twice on the same pile, but the restriction is scoped to one pile, so the piles stay independent.
+    - Every pile holds at most 60 stones, so the closed form for the per-pile value replaces a table over used-move masks.
+    - Sam makes the first move, so Jon wins exactly when the starting position has XOR zero.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The used-removal restriction applies to one pile at a time, so the piles are independent components and the winner is the XOR of their values.
+    - For a pile of s stones with every amount available, the value is the largest k with k(k+1)/2 at most s.
+    - The upper bound holds because the distinct amounts used on one pile have sum at most s, and the bound is reached by taking k, then k - 1, and so on.
+    - Jon moves second, so print YES exactly when the XOR of the pile values is zero.
+discussion: >-
+    The restriction that a removal amount may not be reused looks like it couples the pile's history into the state, and the direct solution does carry a bitmask of used amounts. The saving comes from the fact that the mask is only ever needed for one pile, so each pile still has a single Grundy value, and the values of the piles combine by XOR. For one pile, the value has a closed form: the largest k with k(k+1)/2 at most s. The upper bound is the sum of the distinct amounts, and a decreasing sequence of moves realizes every smaller value, so the mex is exactly k. The only remaining trap is the direction of the answer, because Sam moves first and Jon wins on a zero XOR.
+related:
+    - codeforces.15c.industrial-nim
+    - codeforces.87c.interesting-game

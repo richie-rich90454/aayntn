@@ -1,0 +1,9 @@
+- name: three heaps of a full subtraction game
+  input: "3\n1 2 3\n3\n1 2 3\n"
+  expected: "1\n2\n3\nsecond\n"
+- name: gapped moves leave a non-empty heap with value zero
+  input: "2\n2 5\n4\n2 3 4 5\n"
+  expected: "1\n1\n0\n2\nfirst\n"
+- name: heap zero and a heap below every allowed move
+  input: "2\n3 4\n2\n0 2\n"
+  expected: "0\n0\nsecond\n"
