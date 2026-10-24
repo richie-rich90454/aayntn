@@ -1,0 +1,9 @@
+- name: a chain with a cut and a relink
+  input: "6 11\nlink 0 1\nlink 1 2\nlink 2 3\nlink 3 4\nlink 4 5\npath 0 5\npath 2 2\ncut 2 3\npath 0 2\nlink 2 4\npath 0 5\n"
+  expected: "21\n3\n6\n17\n"
+- name: a star with a cut and a reroot
+  input: "5 10\nlink 0 1\nlink 0 2\nlink 0 3\nlink 0 4\npath 1 2\ncut 0 3\npath 1 0\npath 3 3\nlink 3 4\npath 3 1\n"
+  expected: "6\n3\n4\n12\n"
+- name: a single vertex and a no-op cut
+  input: "1 3\npath 0 0\ncut 0 0\npath 0 0\n"
+  expected: "1\n1\n"

@@ -1,0 +1,33 @@
+id: codeforces.603e.pastoral-oddities
+title: Pastoral Oddities
+source: Codeforces
+contest: "Codeforces Round 334 (Div. 1)"
+division: platinum
+url: https://codeforces.com/problemset/problem/603/E
+editorialUrl: https://codeforces.com/blog/entry/21885
+techniques:
+    - trees.dynamic-trees
+prerequisites:
+    - graphs.mst
+    - graphs.dsu
+    - trees.lca
+difficulty: 5
+estimatedMinutes: 90
+specialConstraints:
+    - There are up to 100,000 pastures and 300,000 paths, so running Kruskal from scratch after every insertion is too slow.
+    - An odd paving exists exactly when every connected component has an even number of vertices.
+    - Edge lengths reach 10^9, and the answer after each insertion is the smallest possible maximum length.
+    - Edges are added online, in the order they are given.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A paving gives every vertex odd degree exactly when every connected component of the paved subgraph has an even number of vertices.
+    - The answer is the largest edge in a minimum spanning forest after the longest removable edges have been dropped.
+    - Maintain the minimum spanning forest of the inserted edges with a link-cut tree, and represent every edge by a node so that the maximum edge on a path can be found.
+    - When an inserted edge closes a cycle, remove the longest edge on that cycle if the new edge is shorter, then keep removing the longest forest edge whose removal leaves both components even.
+discussion: >-
+    The parity condition turns the paving question into a condition on the sizes of the connected components, and the smallest maximum edge is attained by a minimum spanning forest that has been trimmed until no removable long edge remains. A link-cut tree maintains that forest while edges arrive: it answers the maximum edge on the cycle created by a new edge, and its cut and link operations replace the chosen edge. Component sizes are tracked separately, and the trimming stops as soon as a removal would create an odd component. The amortized logarithmic cost of each structural operation gives an overall near-linear bound.
+related:
+    - librarychecker.dynamic-tree-vertex-add-path-sum
+    - librarychecker.dynamic-tree-vertex-set-path-composite

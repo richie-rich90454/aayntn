@@ -1,0 +1,32 @@
+id: librarychecker.dynamic-tree-vertex-add-path-sum
+title: Dynamic Tree Vertex Add Path Sum
+source: Library Checker
+contest: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum
+techniques:
+    - trees.dynamic-trees
+prerequisites:
+    - trees.lca
+    - range-queries.segment-tree
+    - foundations.complexity
+difficulty: 4
+estimatedMinutes: 55
+specialConstraints:
+    - The tree has up to 200,000 vertices, and there are up to 200,000 queries.
+    - A query may delete one edge and add another, so no static decomposition survives.
+    - Vertex values and added amounts reach 10^9, so a path sum needs 64-bit storage.
+    - The graph is guaranteed to remain a tree after every query.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A query asks for the sum on a path while the tree changes, which rules out heavy-light decomposition and binary lifting.
+    - Expose the path between the two vertices as one splay tree and read the sum stored at its root.
+    - A link joins two roots through a path-parent pointer; a cut exposes the edge and removes it only when the endpoints are adjacent.
+    - A rewiring query is a cut of the old edge followed by a link of the new one.
+discussion: >-
+    The query type is a path aggregate, but the tree is not static, so the usual decompositions are invalidated by every rewiring. A link-cut tree keeps the current preferred paths in splay trees, and one access plus one reversal exposes exactly the queried path. The edge replacement is a cut and a link, each of which needs the same access operation. The path sum is commutative, so the lazy reversal does not need a second aggregate, which is the simplest form of the structure.
+related:
+    - librarychecker.dynamic-tree-vertex-set-path-composite
+    - codeforces.603e.pastoral-oddities

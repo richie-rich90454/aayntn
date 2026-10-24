@@ -1,0 +1,32 @@
+id: librarychecker.dynamic-tree-vertex-set-path-composite
+title: Dynamic Tree Vertex Set Path Composite
+source: Library Checker
+contest: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite
+techniques:
+    - trees.dynamic-trees
+prerequisites:
+    - trees.lca
+    - range-queries.segment-tree
+    - foundations.complexity
+difficulty: 5
+estimatedMinutes: 70
+specialConstraints:
+    - The tree has up to 200,000 vertices, and there are up to 200,000 queries.
+    - Each vertex holds a linear function modulo 998244353, and the order of composition matters.
+    - A query may replace an edge, so the path between two vertices is not fixed.
+    - The composed value must be reduced modulo 998244353, so products need 64-bit storage.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The aggregate is a composition of linear functions, which is associative but not commutative, so the direction of the path matters.
+    - Store both the composition from left to right and the composition from right to left at every splay subtree.
+    - A lazy reversal swaps the two stored compositions along with the children.
+    - Read the forward aggregate after exposing the path from u to v; the reverse aggregate is only needed while the path is being maintained.
+discussion: >-
+    The path aggregate is an ordered monoid, so a single sum or maximum is not enough: the answer for u to v differs from the answer for v to u. A link-cut tree already reverses paths lazily when it reroots, so the splay node carries both directions and the reversal swaps them. The set operation changes one vertex value, which is a point update before the path is exposed. All arithmetic is modulo 998244353, and the composition is applied in the order the query names the endpoints.
+related:
+    - librarychecker.dynamic-tree-vertex-add-path-sum
+    - codeforces.603e.pastoral-oddities

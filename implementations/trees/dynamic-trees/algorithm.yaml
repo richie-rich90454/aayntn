@@ -1,0 +1,101 @@
+algorithm: trees.dynamic-trees
+title: Dynamic trees
+summary: Represent a forest as preferred paths stored in splay trees, so that links, cuts, and path aggregates cost amortized logarithmic time.
+subject: trees
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [trees.lca, foundations.complexity]
+    recommended:
+        [
+            trees.heavy-light-decomposition,
+            range-queries.segment-tree,
+            foundations.amortized-analysis,
+        ]
+complexity:
+    time: "O(log n) amortized per operation"
+    space: "O(n)"
+assumptions:
+    - The structure is a forest at every step, so every link joins two different trees.
+    - The operations arrive online and are links, cuts, or path queries.
+    - A path query names two vertices that lie in the same tree.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it maintains a forest under link, cut, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q, then q lines, each 'link u v', 'cut u v', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path, where vertex v carries the value v + 1."
+      notes: "Vertices are stored as 1..n and index 0 is the null node. A vertex v carries the value v + 1, so the answer for a path is the sum of the 1-based labels of its vertices. The operations read 'link u v', 'cut u v', and 'path u v'. A link between vertices that are already connected is ignored, and a cut of an edge that does not exist is ignored. The splay operations are iterative, and the explicit stack of push_path holds at most n entries. The output is one line per path query, so the six language versions are byte-identical."
+      operations: [link, cut, path-sum]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it maintains a forest under link, cut, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q, then q lines, each 'link u v', 'cut u v', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path, where vertex v carries the value v + 1."
+      notes: "Vertices are stored as 1..n and index 0 is the null node. A vertex v carries the value v + 1, so the answer for a path is the sum of the 1-based labels of its vertices. The operations read 'link u v', 'cut u v', and 'path u v'. A link between vertices that are already connected is ignored, and a cut of an edge that does not exist is ignored. The tables live in std::vector, and the lambdas that implement the splay tree are iterative. The output is one line per path query, so the six language versions are byte-identical."
+      operations: [link, cut, path-sum]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it maintains a forest under link, cut, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q, then q lines, each 'link u v', 'cut u v', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path, where vertex v carries the value v + 1."
+      notes: "Vertices are stored as 1..n and index 0 is the null node. A vertex v carries the value v + 1, so the answer for a path is the sum of the 1-based labels of its vertices. The operations read 'link u v', 'cut u v', and 'path u v'. A link between vertices that are already connected is ignored, and a cut of an edge that does not exist is ignored. StreamTokenizer reads the operation words, the path sums use long, and the output is collected in a StringBuilder. The output is one line per path query, so the six language versions are byte-identical."
+      operations: [link, cut, path-sum]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it maintains a forest under link, cut, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q, then q lines, each 'link u v', 'cut u v', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path, where vertex v carries the value v + 1."
+      notes: "Vertices are stored as 1..n and index 0 is the null node. A vertex v carries the value v + 1, so the answer for a path is the sum of the 1-based labels of its vertices. The operations read 'link u v', 'cut u v', and 'path u v'. A link between vertices that are already connected is ignored, and a cut of an edge that does not exist is ignored. The three input tokens of one operation are read at once, and the splay tree is iterative, so the recursion limit is irrelevant. The output is one line per path query, so the six language versions are byte-identical."
+      operations: [link, cut, path-sum]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The program maintains a forest under link, cut, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q on the first line, then q lines, each 'link u v', 'cut u v', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path, where vertex v carries the value v + 1."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Vertices are stored as 1..n and index 0 is the null node. A vertex v carries the value v + 1, so the answer for a path is the sum of the 1-based labels of its vertices. Each operation is read as a whole line, because the pas2js console unit supplies ReadLn for strings but not Read for strings; the line is then split into the operation word and two integers. A link between vertices that are already connected is ignored, and a cut of an edge that does not exist is ignored. Sums are Int64 and the splay tree is iterative. The output is one line per path query, so the six language versions are byte-identical."
+      operations: [link, cut, path-sum]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The program maintains a forest under link, cut, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q, then q lines, each 'link u v', 'cut u v', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path, where vertex v carries the value v + 1."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Vertices are stored as 1..n and index 0 is the null node. A vertex v carries the value v + 1, so the answer for a path is the sum of the 1-based labels of its vertices. A link between vertices that are already connected is ignored, and a cut of an edge that does not exist is ignored. The whole input is split into tokens, and a path sum of at most about 2e10 stays well below the exact integer range of a JavaScript number. The output is one line per path query, so the six language versions are byte-identical."
+      operations: [link, cut, path-sum]
