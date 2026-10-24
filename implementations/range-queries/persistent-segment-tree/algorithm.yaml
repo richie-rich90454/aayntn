@@ -1,0 +1,96 @@
+algorithm: range-queries.persistent-segment-tree
+title: Persistent segment trees
+summary: Keep one frequency segment tree per prefix of a static array, copying only the changed path, so the k-th smallest value in any subarray is found by subtracting two versions.
+subject: range-queries
+divisions: [gold, platinum]
+importance: advanced-technique
+prerequisites:
+    required: [range-queries.segment-tree, arrays.coordinate-compression]
+    recommended: [foundations.sorting, searching.binary-search, range-queries.merge-sort-tree]
+complexity:
+    time: "O(n log n) to build; O(log n) per query"
+    space: "O(n log n)"
+assumptions:
+    - The array is static, so a version is never modified after it is built.
+    - The values are coordinate-compressed, so the leaves index ranks rather than native values.
+    - The queries are order statistics over a contiguous subarray, which the difference of two prefix versions represents.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(n log n) to build; O(log n) per query"
+      auxiliarySpace: "O(n log n) nodes, about (n + 1)(ceil(log2 m) + 2) of them"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "Version i is the frequency tree of the first i values, and only the root-to-leaf path of the new value is copied, so the old versions stay valid. The C variant allocates the three node arrays with calloc, treats node 0 as the empty node, and frees every array after the last query."
+      operations: [build, kth-smallest]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(n log n) to build; O(log n) per query"
+      auxiliarySpace: "O(n log n) nodes, about (n + 1)(ceil(log2 m) + 2) of them"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "Version i is the frequency tree of the first i values, and only the root-to-leaf path of the new value is copied, so the old versions stay valid. The C++ variant keeps the nodes in three std::vector<int>, compresses the values with std::sort, std::unique and std::lower_bound, and recurses only along the copied path."
+      operations: [build, kth-smallest]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(n log n) to build; O(log n) per query"
+      auxiliarySpace: "O(n log n) nodes, about (n + 1)(ceil(log2 m) + 2) of them"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "Version i is the frequency tree of the first i values, and only the root-to-leaf path of the new value is copied, so the old versions stay valid. The Java variant uses three int arrays, a byte scanner instead of java.util.Scanner, and a StringBuilder so the q answers cost one write; System.lineSeparator keeps its output identical to the other five languages."
+      operations: [build, kth-smallest]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(n log n) to build; O(log n) per query"
+      auxiliarySpace: "O(n log n) nodes, about (n + 1)(ceil(log2 m) + 2) of them"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "Version i is the frequency tree of the first i values, and only the root-to-leaf path of the new value is copied, so the old versions stay valid. The Python variant keeps the three node arrays in lists, compresses with sorted(set(...)) and bisect_left, and recurses only to the height of the tree, which stays below the default recursion limit."
+      operations: [build, kth-smallest]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(n log n) to build; O(log n) per query"
+      auxiliarySpace: "O(n log n) nodes, about (n + 1)(ceil(log2 m) + 2) of them"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Version i is the frequency tree of the first i values, and only the root-to-leaf path of the new value is copied, so the old versions stay valid. The Pascal variant uses dynamic arrays, a bottom-up merge sort for the compression, one Read argument per value, and Int64 values so pas2js can run it without 128-bit integers."
+      operations: [build, kth-smallest]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(n log n) to build; O(log n) per query"
+      auxiliarySpace: "O(n log n) nodes, about (n + 1)(ceil(log2 m) + 2) of them"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 1-based inclusive bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the inclusive range [l, r]."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Version i is the frequency tree of the first i values, and only the root-to-leaf path of the new value is copied, so the old versions stay valid. The JavaScript variant stores the nodes in Int32Array buffers, reads standard input through the stream events, and writes with the platform line separator so the six outputs stay byte-identical."
+      operations: [build, kth-smallest]

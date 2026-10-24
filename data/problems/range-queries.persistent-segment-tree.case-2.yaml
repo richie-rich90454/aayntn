@@ -1,0 +1,31 @@
+id: poj.2761.feed-the-dogs
+title: Feed the dogs
+source: POJ
+contest: POJ Monthly--2006.02.26
+division: platinum
+url: http://poj.org/problem?id=2761
+techniques:
+    - range-queries.persistent-segment-tree
+prerequisites:
+    - range-queries.segment-tree
+    - arrays.coordinate-compression
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The array holds fewer than 100,001 pretty values and there are fewer than 50,001 feedings.
+    - Values are not distinct, so the tree must store frequencies rather than a set.
+    - No interval contains another completely, which also permits an offline sweep.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The k-th prettiest dog in [i, j] is the k-th smallest value in that subarray.
+    - Build the prefix versions once; every feeding is an independent range query.
+    - Duplicates are handled automatically because each leaf stores a count.
+    - The non-nesting condition is a hint toward an offline solution, but persistence answers the queries in the input order without it.
+discussion: >-
+    The query asks for an order statistic over a subarray with repeated values, which is exactly the multiset difference between two prefix versions. The persistent tree stores a count at every leaf, so duplicates contribute separately and no deduplication of the array is needed. The intervals never containing one another allows an offline sweep with a balanced search tree, but that condition is not needed by the persistent structure, which answers each feeding online in O(log n). The version chain and the two-root descent handle the repeated values without special cases.
+related:
+    - poj.2104.k-th-number
+    - hdu.2665.kth-number
+    - cses.1734.distinct-values-queries

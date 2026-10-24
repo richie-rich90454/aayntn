@@ -1,0 +1,31 @@
+id: hdu.2665.kth-number
+title: Kth number
+source: HDU
+division: platinum
+url: http://acm.hdu.edu.cn/showproblem.php?pid=2665
+techniques:
+    - range-queries.persistent-segment-tree
+prerequisites:
+    - range-queries.segment-tree
+    - arrays.coordinate-compression
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The input starts with the number of test cases, and every case can hold 100,000 values and 100,000 queries.
+    - The values are not necessarily distinct, so the tree must store counts.
+    - The memory limit is 32 MB, so the node pool must stay close to n log n 32-bit entries.
+    - The node counter has to be reset between test cases.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Treat each test case independently; compress that case's values and rebuild the versions.
+    - Reuse one shared node pool and reset the counter instead of reallocating for every case.
+    - The original values must be kept, because the tree indexes compressed ranks.
+    - The per-case counts never exceed 100,000, so 32-bit counters are enough.
+discussion: >-
+    This is the multi-case version of the classic range order-statistic problem. Each case is an independent array, so the values are compressed per case and the versions are rebuilt from the empty node. The node pool can be shared across cases because every node that a new case reads is written before it is read, but the counter must be reset so that node zero is again the empty node. With a 32 MB limit and 100,000 values, the pool of about n log n nodes is the part that decides whether the submission fits, and 32-bit counters keep it near the limit.
+related:
+    - poj.2104.k-th-number
+    - poj.2761.feed-the-dogs
+    - codeforces.813e.army-creation

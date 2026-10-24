@@ -1,0 +1,31 @@
+id: poj.2104.k-th-number
+title: K-th Number
+source: POJ
+contest: Northeastern Europe 2004, Northern Subregion
+division: platinum
+url: http://poj.org/problem?id=2104
+techniques:
+    - range-queries.persistent-segment-tree
+prerequisites:
+    - range-queries.segment-tree
+    - arrays.coordinate-compression
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The array holds up to 100,000 distinct integers and there are up to 5,000 questions.
+    - Values can be negative and reach 1e9 in absolute value, so coordinate compression is required.
+    - The questions arrive in the input order, so an offline reordering is not part of the intended solution.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The sorted subarray is the difference of the prefix multisets of j and i - 1.
+    - Build one frequency tree per prefix, over the compressed values.
+    - Descend the two roots together, comparing k with the difference of their left counts.
+    - The leaf that the descent reaches is a rank; map it back to the original value before printing.
+discussion: >-
+    The k-th number in a subarray is an order statistic over a multiset, and the multiset of a[i..j] is the difference between the prefix multisets of j and i - 1. A persistent segment tree materializes every prefix multiset as a version while sharing the unchanged subtrees, so each insertion costs one root-to-leaf path of O(log n) new nodes. The query walks the two versions down together; the count in the left half of the difference decides the branch, and one leaf is reached in O(log n). The array is static, so no update is ever required, and the distinct values make the compression straightforward.
+related:
+    - poj.2761.feed-the-dogs
+    - hdu.2665.kth-number
+    - atcoder.abc339.g.smaller-sum
