@@ -1,0 +1,9 @@
+- name: patterns that end inside other patterns
+  input: "4\nhe\nshe\nhis\nhers\nushers\n"
+  expected: "1\n1\n0\n1\n"
+- name: overlapping occurrences and patterns that are prefixes of one another
+  input: "3\na\naa\naaa\naaaa\n"
+  expected: "4\n3\n2\n"
+- name: a pattern longer than the text, a duplicate pattern, and a one-character pattern
+  input: "4\nab\nabc\nab\nb\nab\n"
+  expected: "1\n0\n1\n1\n"

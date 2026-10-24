@@ -1,0 +1,93 @@
+algorithm: strings.aho-corasick
+title: Aho-Corasick
+summary: Build a trie of the patterns, add a failure link to every node, and scan the text once to count the occurrences of every pattern.
+subject: strings
+divisions: [gold, platinum]
+importance: advanced-technique
+complexity:
+    time: "O(26L + n) for a lowercase alphabet"
+    space: "O(26L) for the transitions, where L is the total pattern length"
+assumptions:
+    - The patterns and the text are over a small fixed alphabet, so a node can carry one transition per symbol.
+    - The whole dictionary is known before the text is scanned, so the automaton can be built once.
+    - The total length of the patterns fits in memory with 26 transition entries per node.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton over the patterns and prints the occurrence count of each one."
+      time: "O(26L + n)"
+      auxiliarySpace: "O(26L) for the trie, plus O(L) for the failure links and counters"
+      status: unverified
+      inputs: "n, then the n patterns on separate lines, then the text on the last line; every string is nonempty and over lowercase Latin letters."
+      outputs: "One line per pattern, holding the number of its occurrences in the text, overlapping occurrences included."
+      notes: "Insertion creates one node per distinct pattern prefix. The failure links are built in breadth-first order, missing transitions are filled from the failure link, and the counters are propagated over the failure tree in reverse breadth-first order, so the program counts every occurrence without enumerating them. The C variant allocates the transition table, the failure links and the counters from the total pattern length and reads the pattern lines into heap buffers."
+      operations: [build, scan, count-occurrences]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton over the patterns and prints the occurrence count of each one."
+      time: "O(26L + n)"
+      auxiliarySpace: "O(26L) for the trie, plus O(L) for the failure links and counters"
+      status: unverified
+      inputs: "n, then the n patterns on separate lines, then the text on the last line; every string is nonempty and over lowercase Latin letters."
+      outputs: "One line per pattern, holding the number of its occurrences in the text, overlapping occurrences included."
+      notes: "Insertion creates one node per distinct pattern prefix. The failure links are built in breadth-first order, missing transitions are filled from the failure link, and the counters are propagated over the failure tree in reverse breadth-first order, so the program counts every occurrence without enumerating them. The C++ variant stores the rows in a vector of arrays, so the trie owns its storage."
+      operations: [build, scan, count-occurrences]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton over the patterns and prints the occurrence count of each one."
+      time: "O(26L + n)"
+      auxiliarySpace: "O(26L) for the trie, plus O(L) for the failure links and counters"
+      status: unverified
+      inputs: "n, then the n patterns on separate lines, then the text on the last line; every string is nonempty and over lowercase Latin letters."
+      outputs: "One line per pattern, holding the number of its occurrences in the text, overlapping occurrences included."
+      notes: "Insertion creates one node per distinct pattern prefix. The failure links are built in breadth-first order, missing transitions are filled from the failure link, and the counters are propagated over the failure tree in reverse breadth-first order, so the program counts every occurrence without enumerating them. The Java variant indexes the transition table as a two-dimensional int array and leaves reclamation to the garbage collector."
+      operations: [build, scan, count-occurrences]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton over the patterns and prints the occurrence count of each one."
+      time: "O(26L + n)"
+      auxiliarySpace: "O(26L) for the trie, plus O(L) for the failure links and counters"
+      status: unverified
+      inputs: "n, then the n patterns on separate lines, then the text on the last line; every string is nonempty and over lowercase Latin letters."
+      outputs: "One line per pattern, holding the number of its occurrences in the text, overlapping occurrences included."
+      notes: "Insertion creates one node per distinct pattern prefix. The failure links are built in breadth-first order, missing transitions are filled from the failure link, and the counters are propagated over the failure tree in reverse breadth-first order, so the program counts every occurrence without enumerating them. The Python variant reads bytes, so each character becomes an integer without a decode step, and its integers are arbitrary precision."
+      operations: [build, scan, count-occurrences]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton over the patterns and prints the occurrence count of each one."
+      time: "O(26L + n)"
+      auxiliarySpace: "O(26L) for the trie, plus O(L) for the failure links and counters"
+      status: unverified
+      inputs: "n, then the n patterns on separate lines, then the text on the last line; every string is nonempty and over lowercase Latin letters."
+      outputs: "One line per pattern, holding the number of its occurrences in the text, overlapping occurrences included."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Insertion creates one node per distinct pattern prefix. The failure links are built in breadth-first order, missing transitions are filled from the failure link, and the counters are propagated over the failure tree in reverse breadth-first order, so the program counts every occurrence without enumerating them. The Pascal variant uses a flat dynamic array for the transition table and strips a carriage return from every line it reads."
+      operations: [build, scan, count-occurrences]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton over the patterns and prints the occurrence count of each one."
+      time: "O(26L + n)"
+      auxiliarySpace: "O(26L) for the trie, plus O(L) for the failure links and counters"
+      status: unverified
+      inputs: "n, then the n patterns on separate lines, then the text on the last line; every string is nonempty and over lowercase Latin letters."
+      outputs: "One line per pattern, holding the number of its occurrences in the text, overlapping occurrences included."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Insertion creates one node per distinct pattern prefix. The failure links are built in breadth-first order, missing transitions are filled from the failure link, and the counters are propagated over the failure tree in reverse breadth-first order, so the program counts every occurrence without enumerating them. The JavaScript variant stores each row in an Int32Array and uses BigInt counters, so the answers are exact beyond the safe integer range."
+      operations: [build, scan, count-occurrences]
