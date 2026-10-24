@@ -1,0 +1,96 @@
+algorithm: foundations.loop-invariants
+title: Loop invariants
+summary: State what stays true before and after every iteration, then use that statement to prove the loop correct and to choose its boundary conditions; the running example is lower-bound binary search.
+subject: foundations
+divisions: [bronze, silver]
+importance: core-prerequisite
+prerequisites:
+    required: [foundations.complexity]
+    recommended: [foundations.recursion, searching.binary-search]
+complexity:
+    time: "O(n) to read the array, then O(log n) probes"
+    space: "O(n) for the array, O(1) auxiliary"
+assumptions:
+    - The array is sorted in non-decreasing order.
+    - One probe compares one array element with the target and costs one unit.
+    - The target and the array values fit in the range of the declared value type.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, runs the lower-bound loop, and prints the index and the probe count."
+      time: "O(n) to read the array, then O(log n) probes"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n sorted values, then the target."
+      outputs: "One line with the lower-bound index in 0..n and the number of probes, separated by a space."
+      notes: "The loop keeps the half-open interval [lo, hi) and the invariant that every index below lo is less than the target while every index at or above hi is not. The probe uses a strict comparison, so duplicates of the target settle in the right region and the first occurrence is returned. Values are long long, indices are int, and the midpoint is computed as lo + (hi - lo) / 2 so it cannot overflow."
+      operations: [lower-bound, probe-count, binary-search]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, runs the lower-bound loop, and prints the index and the probe count."
+      time: "O(n) to read the array, then O(log n) probes"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n sorted values, then the target."
+      outputs: "One line with the lower-bound index in 0..n and the number of probes, separated by a space."
+      notes: "The loop keeps the half-open interval [lo, hi) and the invariant that every index below lo is less than the target while every index at or above hi is not. The probe uses a strict comparison, so duplicates of the target settle in the right region and the first occurrence is returned. Values are long long, indices are int, and the midpoint is computed as lo + (hi - lo) / 2 so it cannot overflow."
+      operations: [lower-bound, probe-count, binary-search]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, runs the lower-bound loop, and prints the index and the probe count."
+      time: "O(n) to read the array, then O(log n) probes"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n sorted values, then the target."
+      outputs: "One line with the lower-bound index in 0..n and the number of probes, separated by a space."
+      notes: "The loop keeps the half-open interval [lo, hi) and the invariant that every index below lo is less than the target while every index at or above hi is not. The probe uses a strict comparison, so duplicates of the target settle in the right region and the first occurrence is returned. The class is Main, values are long, indices are int, and the midpoint is computed as lo + (hi - lo) / 2 so it cannot overflow."
+      operations: [lower-bound, probe-count, binary-search]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, runs the lower-bound loop, and prints the index and the probe count."
+      time: "O(n) to read the array, then O(log n) probes"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n sorted values, then the target."
+      outputs: "One line with the lower-bound index in 0..n and the number of probes, separated by a space."
+      notes: "The loop keeps the half-open interval [lo, hi) and the invariant that every index below lo is less than the target while every index at or above hi is not. The probe uses a strict comparison, so duplicates of the target settle in the right region and the first occurrence is returned. Python integers are arbitrary precision, so the values and the index need no explicit width."
+      operations: [lower-bound, probe-count, binary-search]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, runs the lower-bound loop, and prints the index and the probe count."
+      time: "O(n) to read the array, then O(log n) probes"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n sorted values, then the target."
+      outputs: "One line with the lower-bound index in 0..n and the number of probes, separated by a space."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The loop keeps the half-open interval [Lo, Hi) and the invariant that every index below Lo is less than the target while every index at or above Hi is not. The program uses SysUtils, reads one argument per Read, avoids IOResult, and uses Int64 values with LongInt indices so it compiles under pas2js. The midpoint is Lo + (Hi - Lo) div 2."
+      operations: [lower-bound, probe-count, binary-search]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, runs the lower-bound loop, and prints the index and the probe count."
+      time: "O(n) to read the array, then O(log n) probes"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n sorted values, then the target."
+      outputs: "One line with the lower-bound index in 0..n and the number of probes, separated by a space."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The loop keeps the half-open interval [lo, hi) and the invariant that every index below lo is less than the target while every index at or above hi is not. The probe uses a strict comparison, so duplicates of the target settle in the right region and the first occurrence is returned. The values stay exact under the double-precision Number type for every input below 2^53."
+      operations: [lower-bound, probe-count, binary-search]

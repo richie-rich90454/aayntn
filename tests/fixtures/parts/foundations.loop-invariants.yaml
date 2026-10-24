@@ -1,0 +1,9 @@
+- name: duplicates of the target return the first occurrence
+  input: "8\n1 3 3 5 8 8 8 13\n8\n"
+  expected: "4 3\n"
+- name: a target above every value returns the array length
+  input: "6\n2 4 6 8 10 12\n20\n"
+  expected: "6 2\n"
+- name: a single element equal to the target stops after one probe
+  input: "1\n7\n7\n"
+  expected: "0 1\n"

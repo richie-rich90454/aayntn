@@ -1,0 +1,31 @@
+id: codeforces.702c.cellular-network
+title: Cellular Network
+source: Codeforces
+contest: Educational Codeforces Round 15
+division: silver
+url: https://codeforces.com/problemset/problem/702/C
+techniques:
+    - foundations.loop-invariants
+prerequisites:
+    - foundations.complexity
+    - searching.binary-search
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - Both the cities and the towers are already sorted, so the search runs on the tower positions without a sort.
+    - The nearest tower is either the lower bound or its predecessor, so checking only one side is wrong.
+    - Coordinates can be negative and as large as 10^9 in magnitude, so distances approach the 32-bit limit and 64-bit arithmetic is the safe choice.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - For one city, the nearest tower is one of the two towers that surround its position.
+    - The lower-bound loop finds the first tower at or to the right of the city.
+    - The other candidate is the tower just before the lower bound.
+    - The answer is the maximum over all cities of the distance to the nearest tower.
+discussion: >-
+    The lower-bound loop gives the insertion point of the city in the sorted tower array. The invariant says every tower below lo is strictly left of the city and every tower at or above hi is at or to the right. At termination, the first tower at or to the right is lo, and the last tower strictly left is lo minus one. The nearest tower is one of these two, because every other tower on either side is farther away. The answer is the maximum of the per-city minima: no smaller radius can cover the city that needs the most, and that radius covers every city by construction. The scan is O(n log m), and the ends of the tower array are handled by checking whether each neighbor exists.
+related:
+    - codeforces.706b.interesting-drink
+    - codeforces.812c.sagheer-and-nubian-market

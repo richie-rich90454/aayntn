@@ -1,0 +1,32 @@
+id: codeforces.706b.interesting-drink
+title: Interesting drink
+source: Codeforces
+contest: Codeforces Round 367 (Div. 2)
+division: bronze
+url: https://codeforces.com/problemset/problem/706/B
+techniques:
+    - foundations.loop-invariants
+prerequisites:
+    - foundations.complexity
+    - foundations.sorting
+    - searching.binary-search
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - Both the number of shops and the number of days are at most 100000, so scanning every price for every day is too slow.
+    - The prices are not sorted in the input, so the sorted order must be built before any search.
+    - A budget equal to a price still buys that bottle, so the predicate is non-strict.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Only the order of the prices matters, not which shop each price belongs to.
+    - The number of affordable shops is the position of the first price greater than the budget.
+    - That position is an upper bound, which is a lower bound with the predicate price at most the budget.
+    - The invariant is that every index below lo is affordable and every index at or above hi is not.
+discussion: >-
+    Sorting the prices turns each day's question into a boundary query: count the prices at most m. The boundary is the first price greater than m, and it is found by the same half-open loop with a non-strict predicate. Equality must belong to the left region, because a bottle whose price equals the budget is affordable. The invariant is initialized vacuously with lo at zero and hi at the array length, and each probe moves one wall across a whole side that the sorted order has settled. The answer is the index of the first unaffordable price, which is also the count of affordable ones.
+related:
+    - codeforces.702c.cellular-network
+    - codeforces.812c.sagheer-and-nubian-market
