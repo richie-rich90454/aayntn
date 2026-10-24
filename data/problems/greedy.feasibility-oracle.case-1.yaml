@@ -1,0 +1,31 @@
+id: codeforces.1334b.middle-class
+title: Middle Class
+source: Codeforces
+contest: "Educational Codeforces Round 85 (Rated for Div. 2)"
+division: bronze
+url: https://codeforces.com/problemset/problem/1334/B
+editorialUrl: https://codeforces.com/blog/entry/75877
+techniques:
+    - greedy.feasibility-oracle
+prerequisites:
+    - foundations.sorting
+    - arrays.prefix-sums
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - The total number of people over all test cases is at most 100000, and every saving is at most 10^9, so the sums need 64-bit arithmetic.
+    - The question is whether a group of k people has at least k x burles in total, so the average comparison is done by cross multiplication rather than floating point.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A group of k people can all become wealthy exactly when its total savings is at least k x.
+    - A reform only moves savings between people, so the sum of the k largest savings can never increase; if any k people can be made wealthy, the k richest people can.
+    - Sort the savings in descending order, and walk down the list while the prefix sum is at least k x.
+    - The stopping point is the answer, because the feasibility predicate is monotone once the array is sorted.
+discussion: >-
+    A reform redistributes savings inside the chosen group, so the sum of the k largest savings can never increase; this is the majorization fact behind the greedy. A group of k people can therefore be made wealthy exactly when the k richest people have at least k x burles in total, which turns the decision into a prefix-sum comparison. Sorting in descending order and scanning while the test holds is the lightest-first greedy with the inequality reversed, and it is the count form of a feasibility oracle. The 64-bit sum is the implementation detail that decides whether the largest test cases pass.
+related:
+    - usaco.2016.jan.silver.angry-cows
+    - usaco.2018.dec.silver.convention

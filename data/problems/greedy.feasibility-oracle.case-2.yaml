@@ -1,0 +1,31 @@
+id: usaco.2016.jan.silver.angry-cows
+title: Angry Cows
+source: USACO
+contest: 2016 January Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=594
+editorialUrl: https://usaco.org/current/data/sol_angry_silver_jan16.html
+techniques:
+    - greedy.feasibility-oracle
+    - searching.binary-search
+prerequisites:
+    - foundations.sorting
+    - searching.binary-search
+difficulty: 3
+estimatedMinutes: 40
+specialConstraints:
+    - Up to 50000 hay bales at positions up to 10^9, so the radius is searched rather than enumerated.
+    - The feasibility check is a greedy placement, and the radius is an integer, so the search runs over about 30 values.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - If radius R works, every larger radius works, so the answer is the smallest feasible R.
+    - To test R, take the leftmost remaining bale at x and land the cow at x + R, which clears every bale up to x + 2R.
+    - Jump to the first bale beyond x + 2R and repeat, then compare the number of cows used with K.
+    - The check is greedy and the predicate is monotone, so a binary search over the radius finds the minimum.
+discussion: >-
+    The radius is the answer, and the decision problem for a fixed radius is solved greedily: the leftmost uncovered bale must be covered by some cow, and landing that cow as far right as possible covers a superset of what any other landing position could cover. That makes the check exact, and the check is monotone in the radius, so a binary search over the integer radius finds the minimum. The whole problem is the feasibility-oracle architecture with a covering rule in place of a prefix sum.
+related:
+    - usaco.2018.dec.silver.convention
+    - codeforces.1334b.middle-class

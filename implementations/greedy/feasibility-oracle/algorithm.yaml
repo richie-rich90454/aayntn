@@ -1,0 +1,95 @@
+algorithm: greedy.feasibility-oracle
+title: Greedy with a feasibility oracle
+summary: Sort the items by weight and take the lightest ones first, using a monotone feasibility test to decide how many of them fit inside a capacity.
+subject: greedy
+divisions: [silver, gold]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.sorting, foundations.complexity]
+    recommended: [searching.binary-search, arrays.prefix-sums]
+complexity:
+    time: "O(n log n)"
+    space: "O(n)"
+assumptions:
+    - Every item has a nonnegative weight, every item is worth exactly one unit, and the capacity is a nonnegative integer.
+    - Feasibility is monotone in the count, so once k items no longer fit, no larger count can fit either.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the capacity and the n weights, sorts the weights, and prints the largest number of weights whose total is at most the capacity."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the weight array"
+      status: unverified
+      inputs: "n and the capacity W, then the n weights separated by whitespace."
+      outputs: "One line holding the largest number of weights whose total is at most W."
+      notes: "The weights are sorted with qsort and a three-way comparator, so no difference can overflow, and the running total is a long long. The scan stops at the first weight that does not fit, because every later weight is at least as heavy."
+      operations: [sort, scan, count]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the capacity and the n weights, sorts the weights, and prints the largest number of weights whose total is at most the capacity."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the weight vector"
+      status: unverified
+      inputs: "n and the capacity W, then the n weights separated by whitespace."
+      outputs: "One line holding the largest number of weights whose total is at most W."
+      notes: "std::sort orders the weights, and the scan compares each weight against the remaining capacity so the 64-bit accumulator cannot overflow. The loop breaks at the first weight that does not fit, since the sorted order guarantees that no later weight is lighter."
+      operations: [sort, scan, count]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the capacity and the n weights, sorts the weights, and prints the largest number of weights whose total is at most the capacity."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the weight array"
+      status: unverified
+      inputs: "n and the capacity W, then the n weights separated by whitespace."
+      outputs: "One line holding the largest number of weights whose total is at most W."
+      notes: "The class is Main and lives in java/Main.java. A byte-oriented scanner avoids the cost of Scanner, Arrays.sort orders the long array, and the accumulator is a long, so capacities up to 10^18 and total weights up to 2 * 10^14 are exact."
+      operations: [sort, scan, count]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the capacity and the n weights, sorts the weights, and prints the largest number of weights whose total is at most the capacity."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the weight array"
+      status: unverified
+      inputs: "n and the capacity W, then the n weights separated by whitespace."
+      outputs: "One line holding the largest number of weights whose total is at most W."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The comparator is numeric rather than lexicographic, and Number arithmetic is exact under the stated bounds because the largest total, 2 * 10^14, is below 2^53."
+      operations: [sort, scan, count]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the capacity and the n weights, sorts the weights, and prints the largest number of weights whose total is at most the capacity."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the weight array and the merge buffer"
+      status: unverified
+      inputs: "n and the capacity W, then the n weights separated by whitespace."
+      outputs: "One line holding the largest number of weights whose total is at most W."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program uses SysUtils, one argument per Read, no IOResult, and no 128-bit integers, so it compiles under pas2js. The sort is an iterative bottom-up merge sort, and the accumulator is Int64."
+      operations: [sort, scan, count]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the capacity and the n weights, sorts the weights, and prints the largest number of weights whose total is at most the capacity."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the weight list"
+      status: unverified
+      inputs: "n and the capacity W, then the n weights separated by whitespace."
+      outputs: "One line holding the largest number of weights whose total is at most W."
+      notes: "The input is read in one pass over sys.stdin.buffer, the weights are sorted with list.sort, and Python integers remove the overflow concern. The scan compares each weight against the remaining capacity and stops at the first weight that does not fit."
+      operations: [sort, scan, count]

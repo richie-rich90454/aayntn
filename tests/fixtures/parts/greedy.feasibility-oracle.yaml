@@ -1,0 +1,9 @@
+- name: unsorted weights with three items fitting
+  input: "5 12\n4 2 9 1 7\n"
+  expected: "3\n"
+- name: exact capacity stops at two items
+  input: "4 10\n6 4 3 7\n"
+  expected: "2\n"
+- name: zero capacity with zero-weight items
+  input: "4 0\n0 0 1 0\n"
+  expected: "3\n"

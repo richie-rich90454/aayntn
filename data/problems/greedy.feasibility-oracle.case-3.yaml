@@ -1,0 +1,33 @@
+id: usaco.2018.dec.silver.convention
+title: Convention
+source: USACO
+contest: 2018 December Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=858
+editorialUrl: https://usaco.org/current/data/sol_convention_silver_dec18.html
+techniques:
+    - greedy.feasibility-oracle
+    - searching.binary-search
+prerequisites:
+    - foundations.sorting
+    - searching.binary-search
+difficulty: 3
+estimatedMinutes: 40
+specialConstraints:
+    - Up to 100000 cows and 100000 buses, and each bus holds at most C cows.
+    - It is guaranteed that M C >= N, so a seat assignment always exists.
+    - A bus may leave only after every cow assigned to it has arrived, so the waiting bound is checked by filling each bus with a prefix of the remaining arrivals.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - If a maximum wait of T is possible, every larger T is possible, so binary search the answer.
+    - For a fixed T, the first remaining cow starts a bus, and that bus cannot leave later than its arrival plus T.
+    - Fill the bus with at most C cows, all arriving within T of the first cow, then start the next bus at the first cow left over.
+    - The candidate is feasible when the greedy count of buses is at most M.
+discussion: >-
+    The decision problem for a fixed waiting time is greedy: the earliest remaining cow must be on some bus, and that bus may as well leave exactly T after her arrival and take every later cow that fits both the waiting bound and the seat limit. Taking that whole prefix is never worse than leaving earlier, because the cows left behind would expire sooner. The resulting bus count is the minimum for the bound, and the bound is monotone, so a binary search finds the smallest feasible T. This is the same oracle architecture as the count-under-capacity problem, with a packing simulation in place of the prefix sum.
+related:
+    - usaco.2016.jan.silver.angry-cows
+    - codeforces.1334b.middle-class
