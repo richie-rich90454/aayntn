@@ -1,0 +1,30 @@
+id: codeforces.1386c.joker
+title: Joker
+source: Codeforces
+contest: Baltic Olympiad in Informatics 2020, Day 1
+division: platinum
+url: https://codeforces.com/problemset/problem/1386/C
+editorialUrl: https://codeforces.com/blog/entry/80490
+techniques:
+    - advanced.rollback-dsu
+prerequisites:
+    - graphs.dsu
+    - graphs.bipartite-two-coloring
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The number of junctions, streets and days each reach 200000, so rebuilding the graph for every day is too slow.
+    - A plan exists exactly when the unmonitored streets contain an odd cycle, and the monitored streets are a contiguous range of indices.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - An odd cycle exists among the unmonitored streets exactly when the graph formed by the streets outside the range is not bipartite.
+    - Maintain bipartiteness with a union-find that stores the color parity to the parent, and disable path compression so a merge can be undone.
+    - The boundary is monotone as the range moves, so divide and conquer over the days and share the streets that are outside the whole range.
+    - Record a checkpoint before each branch, recurse, and roll back to the checkpoint when the branch returns.
+discussion: >-
+    The question is whether deleting a contiguous block of streets leaves an odd cycle. A graph has an odd cycle exactly when it is not bipartite, so the check is a bipartiteness test on the prefix before the block and the suffix after it. A union-find with a parity to the parent detects a conflict when an edge joins two vertices of the same color. The predicate is monotone as the block grows, because removing more streets can only destroy odd cycles. Divide and conquer over the days inserts the streets common to the current range, recurses into the two halves, and undoes the insertions on return. Path compression is forbidden: the parity pointers must be restored exactly, and the rollback frame records both the parent and the parity of the child root.
+related:
+    - codeforces.891c.envy
+    - usaco.2019.open.platinum.compound-escape

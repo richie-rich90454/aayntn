@@ -1,0 +1,28 @@
+id: cses.2133.dynamic-connectivity
+title: Dynamic Connectivity
+source: CSES
+contest: CSES Problem Set
+division: platinum
+url: https://cses.fi/problemset/task/2133
+techniques:
+    - advanced.rollback-dsu
+prerequisites:
+    - graphs.dsu
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - Both the initial edges and the events are capped at 100000, so an edge can be deleted and a plain union-find cannot maintain the graph online.
+    - The number of components is required after every event, including before the first event.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Read all events first and convert each edge into the interval of time during which it exists.
+    - Place every edge interval into the nodes of a segment tree over the timeline.
+    - Traverse the tree with a union-find that records each merge on a stack, and undo the merges on the way back.
+    - The component counter at a leaf is the answer for that time, because every edge on the path is alive then.
+discussion: >-
+    The graph changes in both directions, so the partition cannot be maintained with a plain union-find. Reading the whole input turns each edge into a half-open interval of times, and a segment tree over the timeline decomposes every interval into a logarithmic number of nodes. A depth-first traversal then keeps exactly the edges of the current root-to-leaf path merged. Union by size keeps the trees shallow without path compression, and each merge is recorded as one child root, one parent root and the old size of the parent root. Undoing a merge restores those two entries, which returns the component counter to its previous value. The total work is logarithmic in the number of times and in the number of vertices.
+related:
+    - usaco.2019.open.platinum.compound-escape
+    - usaco.2018.jan.gold.mootube

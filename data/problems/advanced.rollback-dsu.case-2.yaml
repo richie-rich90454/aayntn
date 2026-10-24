@@ -1,0 +1,29 @@
+id: codeforces.891c.envy
+title: Envy
+source: Codeforces
+contest: Codeforces Round 446 (Div. 1)
+division: platinum
+url: https://codeforces.com/problemset/problem/891/C
+editorialUrl: https://codeforces.com/blog/entry/55841
+techniques:
+    - advanced.rollback-dsu
+prerequisites:
+    - graphs.dsu
+    - graphs.mst
+difficulty: 4
+estimatedMinutes: 55
+specialConstraints:
+    - The graph has up to 500000 edges and the sum of the query sizes is at most 500000, so each query has to be tested in time proportional to its own size.
+    - A query lists distinct edges, but the listed edges may form a cycle.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Kruskal decides membership weight by weight, so an edge of weight w can belong to some MST only if it does not close a cycle with the edges of weight below w.
+    - Group the query edges by weight and maintain one global union-find of all graph edges with strictly smaller weight.
+    - Testing one query dirties the structure, so record a checkpoint, test the query, and roll back to the checkpoint before the next query.
+discussion: >-
+    A set of edges is contained in some minimum spanning tree exactly when, for every weight w, its edges of weight w are acyclic after all edges of weight below w are contracted. The global union-find supplies the contraction of the lighter edges once per weight. The edges of a single query at the current weight are then merged one by one; a redundant merge is a cycle and rejects the query. Because the next query must start from the global state rather than from the previous query's state, every test is wrapped in a checkpoint and a rollback. The rollback is constant time per merge, and union by size keeps the finds logarithmic.
+related:
+    - usaco.2015.feb.silver.superbull
+    - cses.2133.dynamic-connectivity

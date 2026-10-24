@@ -1,0 +1,95 @@
+algorithm: advanced.rollback-dsu
+title: The rollback disjoint set union
+summary: A union-find that disables path compression and records each merge on a stack, so a merge can be undone in constant time and an offline traversal can restore earlier partitions exactly.
+subject: advanced
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [graphs.dsu]
+    recommended: [advanced.parallel-binary-search, range-queries.segment-tree]
+complexity:
+    time: "O(log n) per find or union, O(1) per rollback"
+    space: "O(n + q) for the forest and its history"
+assumptions:
+    - The operations are known in advance and the states are nested, so every merge is undone before an older merge.
+    - Path compression is disabled; one merge changes the parent of the smaller root and the size of the larger root only.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the commands and prints YES or NO for every same query, undoing the most recent union on rollback."
+      time: "O(log n) per find or union, O(1) per rollback"
+      auxiliarySpace: "O(n + q) for the forest and the frame stack"
+      status: unverified
+      inputs: 'n q, then q lines: "union u v" merges the sets of u and v, "rollback" undoes the most recent union, and "same u v" asks whether u and v share a set.'
+      outputs: 'One line per "same" query, holding YES or NO.'
+      notes: "Union by size keeps the depth at most floor(log2 n) without path compression, and a merge records the child root, the parent root, and the old size of the parent root. A union that merges nothing pushes a marker frame, because rollback undoes the most recent union command. Fixed arrays of 200005 entries are enough for the stated limits."
+      operations: [find, union, rollback, same]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the commands and prints YES or NO for every same query, undoing the most recent union on rollback."
+      time: "O(log n) per find or union, O(1) per rollback"
+      auxiliarySpace: "O(n + q) for the forest and the frame stack"
+      status: unverified
+      inputs: 'n q, then q lines: "union u v" merges the sets of u and v, "rollback" undoes the most recent union, and "same u v" asks whether u and v share a set.'
+      outputs: 'One line per "same" query, holding YES or NO.'
+      notes: "Union by size keeps the depth at most floor(log2 n) without path compression, and a merge records the child root, the parent root, and the old size of the parent root. A union that merges nothing pushes a marker frame, because rollback undoes the most recent union command. The frame is a small struct held in a std::vector."
+      operations: [find, union, rollback, same]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the commands and prints YES or NO for every same query, undoing the most recent union on rollback."
+      time: "O(log n) per find or union, O(1) per rollback"
+      auxiliarySpace: "O(n + q) for the forest and the frame stack"
+      status: unverified
+      inputs: 'n q, then q lines: "union u v" merges the sets of u and v, "rollback" undoes the most recent union, and "same u v" asks whether u and v share a set.'
+      outputs: 'One line per "same" query, holding YES or NO.'
+      notes: "Union by size keeps the depth at most floor(log2 n) without path compression, and a merge records the child root, the parent root, and the old size of the parent root. A union that merges nothing pushes a marker frame, because rollback undoes the most recent union command. A BufferedReader reads the command lines and a StringBuilder collects the output."
+      operations: [find, union, rollback, same]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the commands and prints YES or NO for every same query, undoing the most recent union on rollback."
+      time: "O(log n) per find or union, O(1) per rollback"
+      auxiliarySpace: "O(n + q) for the forest and the frame stack"
+      status: unverified
+      inputs: 'n q, then q lines: "union u v" merges the sets of u and v, "rollback" undoes the most recent union, and "same u v" asks whether u and v share a set.'
+      outputs: 'One line per "same" query, holding YES or NO.'
+      notes: "Union by size keeps the depth at most floor(log2 n) without path compression, and a merge records the child root, the parent root, and the old size of the parent root. A union that merges nothing pushes a marker frame, because rollback undoes the most recent union command. The whole input is read once, so the per-token overhead is paid once rather than per command."
+      operations: [find, union, rollback, same]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the commands and prints YES or NO for every same query, undoing the most recent union on rollback."
+      time: "O(log n) per find or union, O(1) per rollback"
+      auxiliarySpace: "O(n + q) for the forest and the frame stack"
+      status: unverified
+      inputs: 'n q, then q lines: "union u v" merges the sets of u and v, "rollback" undoes the most recent union, and "same u v" asks whether u and v share a set.'
+      outputs: 'One line per "same" query, holding YES or NO.'
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Union by size keeps the depth at most floor(log2 n) without path compression, and a merge records the child root, the parent root, and the old size of the parent root. The program reads one command line per ReadLn, takes the command word with Copy, parses the two integers from the remainder, and uses no IOResult, so it compiles under pas2js."
+      operations: [find, union, rollback, same]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the commands and prints YES or NO for every same query, undoing the most recent union on rollback."
+      time: "O(log n) per find or union, O(1) per rollback"
+      auxiliarySpace: "O(n + q) for the forest and the frame stack"
+      status: unverified
+      inputs: 'n q, then q lines: "union u v" merges the sets of u and v, "rollback" undoes the most recent union, and "same u v" asks whether u and v share a set.'
+      outputs: 'One line per "same" query, holding YES or NO.'
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Union by size keeps the depth at most floor(log2 n) without path compression, and a merge records the child root, the parent root, and the old size of the parent root. The whole input is split on whitespace once, and the output uses the platform line separator so it matches the compiled languages byte for byte."
+      operations: [find, union, rollback, same]
