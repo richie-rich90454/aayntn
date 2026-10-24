@@ -1,0 +1,30 @@
+id: library-checker.dominatortree
+title: Dominator Tree
+source: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/dominatortree
+techniques:
+    - graphs.dominator-trees
+prerequisites:
+    - graphs.representation
+    - graphs.dfs
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - N and M are at most 200,000, so removing each vertex and testing reachability is quadratic and far too slow.
+    - The output is the parent of every vertex in the dominator tree, with p_S = S, so the source names itself rather than printing 0.
+    - The graph need not be connected, and every vertex the source cannot reach prints -1.
+    - Vertices are 0-based, unlike the 1-based convention of many judges.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A vertex that lies on every path from the source to v is a dominator of v, and the requested parent is the deepest strict dominator.
+    - The dominators of one vertex form a chain, so storing the immediate dominator of each vertex stores the whole relation in one tree.
+    - A depth-first search from the source gives a reverse postorder, and every tree parent has a smaller reverse-postorder number than its children.
+    - The immediate dominator of v is the deepest common ancestor of the predecessors of v in the tree built so far, and repeating that update until nothing changes reaches the answer.
+discussion: >-
+    This is the direct statement of the technique: read a directed graph and a source, and print the immediate dominator of every vertex. The constraints leave room for the iterative dataflow algorithm, whose passes are cheap on the test data, and Lengauer-Tarjan is also accepted. The two details that differ from the reference program are the convention for the source, which here names itself instead of printing 0, and the 0-based vertex numbering. Unreachable vertices print -1 and must not enter the intersection, because they have no immediate dominator and no reverse-postorder position.
+related:
+    - cses.critical-cities
+    - hdu.4694.important-sisters

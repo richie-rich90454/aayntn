@@ -1,0 +1,135 @@
+algorithm: graphs.dominator-trees
+title: Dominator trees
+summary: The dominator tree of a directed graph with one source, whose parent pointer gives the immediate dominator of every vertex, built with the iterative dataflow algorithm in reverse postorder.
+subject: graphs
+divisions: [platinum]
+importance: advanced-technique
+complexity:
+    time: "O(V E) per pass, two or three passes in practice"
+    space: "O(V + E)"
+assumptions:
+    - The graph is directed and the answers are measured from one source vertex.
+    - A vertex is reachable when a directed path from the source reaches it.
+    - The dominator tree is defined only for the vertices the source can reach.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed graph and a source, builds the dominator tree with the iterative dataflow algorithm, and prints the immediate dominator of every vertex."
+      time: "O(V E) per pass, two or three passes in practice"
+      auxiliarySpace: "O(V + E) for the successor lists, the predecessor lists and the arrays of the search"
+      status: unverified
+      inputs: "n m s, then m lines u v with 0-based directed edges."
+      outputs: "One line with the immediate dominator of every vertex in index order: 0 for the source, -1 for a vertex the source cannot reach, and the parent in the dominator tree otherwise."
+      notes: "The algorithm is the iterative dataflow version of Cooper, Harvey and Kennedy, not Lengauer-Tarjan. The depth-first search is iterative, so a chain of 200,000 vertices does not overflow the call stack. The graph is stored as a head array and linked edge arrays for the successors and for the predecessors. An edge that names a vertex outside 0..n-1 is ignored."
+      operations:
+          [
+              depth-first-search,
+              reverse-postorder,
+              intersect-predecessors,
+              settle-immediate-dominator,
+              print-tree,
+          ]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed graph and a source, builds the dominator tree with the iterative dataflow algorithm, and prints the immediate dominator of every vertex."
+      time: "O(V E) per pass, two or three passes in practice"
+      auxiliarySpace: "O(V + E) for the successor lists, the predecessor lists and the arrays of the search"
+      status: unverified
+      inputs: "n m s, then m lines u v with 0-based directed edges."
+      outputs: "One line with the immediate dominator of every vertex in index order: 0 for the source, -1 for a vertex the source cannot reach, and the parent in the dominator tree otherwise."
+      notes: "The algorithm is the iterative dataflow version of Cooper, Harvey and Kennedy, not Lengauer-Tarjan. The depth-first search is iterative, so a chain of 200,000 vertices does not overflow the call stack. The graph is stored as a vector of successor lists and a vector of predecessor lists. An edge that names a vertex outside 0..n-1 is ignored."
+      operations:
+          [
+              depth-first-search,
+              reverse-postorder,
+              intersect-predecessors,
+              settle-immediate-dominator,
+              print-tree,
+          ]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed graph and a source, builds the dominator tree with the iterative dataflow algorithm, and prints the immediate dominator of every vertex."
+      time: "O(V E) per pass, two or three passes in practice"
+      auxiliarySpace: "O(V + E) for the successor lists, the predecessor lists and the arrays of the search"
+      status: unverified
+      inputs: "n m s, then m lines u v with 0-based directed edges."
+      outputs: "One line with the immediate dominator of every vertex in index order: 0 for the source, -1 for a vertex the source cannot reach, and the parent in the dominator tree otherwise."
+      notes: "The algorithm is the iterative dataflow version of Cooper, Harvey and Kennedy, not Lengauer-Tarjan. The depth-first search is iterative, so a chain of 200,000 vertices does not overflow the call stack. The graph is stored as a head array and linked edge arrays for the successors and for the predecessors. An edge that names a vertex outside 0..n-1 is ignored."
+      operations:
+          [
+              depth-first-search,
+              reverse-postorder,
+              intersect-predecessors,
+              settle-immediate-dominator,
+              print-tree,
+          ]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads a directed graph and a source, builds the dominator tree with the iterative dataflow algorithm, and prints the immediate dominator of every vertex."
+      time: "O(V E) per pass, two or three passes in practice"
+      auxiliarySpace: "O(V + E) for the successor lists, the predecessor lists and the arrays of the search"
+      status: unverified
+      inputs: "n m s, then m lines u v with 0-based directed edges."
+      outputs: "One line with the immediate dominator of every vertex in index order: 0 for the source, -1 for a vertex the source cannot reach, and the parent in the dominator tree otherwise."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The algorithm is the iterative dataflow version of Cooper, Harvey and Kennedy, not Lengauer-Tarjan. The depth-first search is iterative, so a chain of 200,000 vertices does not overflow the call stack. All values are small integers, so the number type is exact. An edge that names a vertex outside 0..n-1 is ignored."
+      operations:
+          [
+              depth-first-search,
+              reverse-postorder,
+              intersect-predecessors,
+              settle-immediate-dominator,
+              print-tree,
+          ]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads a directed graph and a source, builds the dominator tree with the iterative dataflow algorithm, and prints the immediate dominator of every vertex."
+      time: "O(V E) per pass, two or three passes in practice"
+      auxiliarySpace: "O(V + E) for the successor lists, the predecessor lists and the arrays of the search"
+      status: unverified
+      inputs: "n m s, then m lines u v with 0-based directed edges."
+      outputs: "One line with the immediate dominator of every vertex in index order: 0 for the source, -1 for a vertex the source cannot reach, and the parent in the dominator tree otherwise."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The algorithm is the iterative dataflow version of Cooper, Harvey and Kennedy, not Lengauer-Tarjan. The depth-first search is iterative, so a chain of 200,000 vertices does not overflow the call stack. The graph is stored as an array of successor lists and an array of predecessor lists. An edge that names a vertex outside 0..n-1 is ignored."
+      operations:
+          [
+              depth-first-search,
+              reverse-postorder,
+              intersect-predecessors,
+              settle-immediate-dominator,
+              print-tree,
+          ]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed graph and a source, builds the dominator tree with the iterative dataflow algorithm, and prints the immediate dominator of every vertex."
+      time: "O(V E) per pass, two or three passes in practice"
+      auxiliarySpace: "O(V + E) for the successor lists, the predecessor lists and the arrays of the search"
+      status: unverified
+      inputs: "n m s, then m lines u v with 0-based directed edges."
+      outputs: "One line with the immediate dominator of every vertex in index order: 0 for the source, -1 for a vertex the source cannot reach, and the parent in the dominator tree otherwise."
+      notes: "The algorithm is the iterative dataflow version of Cooper, Harvey and Kennedy, not Lengauer-Tarjan. The depth-first search is iterative, so a chain of 200,000 vertices does not overflow the call stack. The graph is stored as a list of successor lists and a list of predecessor lists. An edge that names a vertex outside 0..n-1 is ignored."
+      operations:
+          [
+              depth-first-search,
+              reverse-postorder,
+              intersect-predecessors,
+              settle-immediate-dominator,
+              print-tree,
+          ]

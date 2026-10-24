@@ -1,0 +1,31 @@
+id: cses.critical-cities
+title: Critical Cities
+source: CSES
+contest: CSES Problem Set
+division: platinum
+url: https://cses.fi/problemset/task/1703/
+techniques:
+    - graphs.dominator-trees
+prerequisites:
+    - graphs.representation
+    - graphs.dfs
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The answer is the set of cities that lie on every route from city 1 to city n, which is the dominator chain of city n rather than the whole dominator tree.
+    - The count k is printed first, followed by the critical cities in increasing order.
+    - A route from city 1 to city n is guaranteed to exist, so city n is reachable.
+    - n is at most 100,000 and m at most 200,000, so deleting each city and testing reachability is too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A city x is critical exactly when every route from city 1 to city n passes through x.
+    - Build the dominator tree rooted at city 1 and walk from city n up to the root; the cities on that walk are the dominators of city n.
+    - The walk from city n upward visits the critical cities in decreasing order of depth, so sort the collected labels before printing them.
+    - The dominator tree needs one immediate dominator per reachable city, not a flag per query, so the iterative dataflow algorithm is enough.
+discussion: >-
+    The problem asks a single-path question: which cities cannot be avoided on the way from the start to the finish. Those cities are exactly the dominators of city n, and they form a chain that the dominator tree stores as the ancestor path from city n to the root. Building the whole tree is more work than the answer needs, but it is the same work the general algorithm does anyway, and the output is recovered by one upward walk followed by a sort. The sorting step is what makes the answer independent of the order in which the dominator chain is discovered.
+related:
+    - library-checker.dominatortree
+    - hdu.4694.important-sisters

@@ -1,0 +1,30 @@
+- name: a diamond whose join has the source as its immediate dominator
+  input: |
+      6 7 0
+      0 1
+      0 2
+      1 3
+      2 3
+      3 4
+      1 4
+      4 5
+  expected: |
+      0 0 0 0 0 4
+- name: a source other than 0, a cycle, a self-loop and an unreachable pair
+  input: |
+      7 8 1
+      1 2
+      2 3
+      1 3
+      3 4
+      4 2
+      3 3
+      6 5
+      5 6
+  expected: |
+      -1 0 1 1 3 -1 -1
+- name: "edge case: no edges, so only the source is reachable"
+  input: |
+      3 0 2
+  expected: |
+      -1 -1 0

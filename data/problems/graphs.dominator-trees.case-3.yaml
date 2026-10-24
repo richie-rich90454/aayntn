@@ -1,0 +1,32 @@
+id: hdu.4694.important-sisters
+title: Important Sisters
+source: HDU
+contest: 2013 Multi-University Training Contest 9
+division: platinum
+url: https://acm.hdu.edu.cn/showproblem.php?pid=4694
+techniques:
+    - graphs.dominator-trees
+prerequisites:
+    - graphs.representation
+    - graphs.dfs
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The input holds several test cases and ends at end of file, so every array has to be reinitialized for each case.
+    - N is at most 50,000 and M at most 100,000, so deleting each vertex and testing reachability is too slow.
+    - The answer for a vertex is the sum of the serial numbers of all of its dominators including itself, so a path sum on the dominator tree is needed, not only the parent.
+    - Vertices are numbered from 1, and the source is vertex N, so the output conventions of a 0-based reference program do not apply directly.
+    - Every vertex is reachable from the source by the guarantee of the statement, so no unreachable case has to be printed.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A sister is important for a vertex exactly when she lies on every route from sister N to that vertex, which is the definition of a dominator.
+    - Build the dominator tree rooted at N; the important sisters of a vertex are the labels on the root-to-vertex path, including the vertex itself.
+    - The sum for a vertex is the sum for its parent plus its own label, so one traversal of the dominator tree fills every answer.
+    - Process the test cases until end of file, and clear the graphs, the parent array and the sums between cases.
+discussion: >-
+    The statement is the dominator relation in disguise: an important sister is a dominator, and the requested value is the sum of the labels of all dominators of each vertex. Building the dominator tree turns that sum into a running total from the root, because the dominators of a vertex are exactly its ancestors in the tree plus the vertex itself. The path sum is computed in one pass over the tree, so the whole answer costs one dominator computation per test case. The source is vertex N and the numbering is 1-based, so the implementation shifts the vertices or keeps them 1-based consistently; the reference program's 0-based convention is a detail of this encyclopedia, not of the problem.
+related:
+    - library-checker.dominatortree
+    - cses.critical-cities
