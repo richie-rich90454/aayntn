@@ -331,7 +331,7 @@ The root spine is $1-2-4-5$, and the vertex $3$ hangs off $2$ as a raked subtree
 
 **Cut $2-4$ and relink $2-5$.** The cut exposes the edge $2-4$, removes it, and closes the two clusters: $\{1,2,3\}$ and $\{4,5\}$. A query for $1-5$ now names vertices in different components, and the contract prints $0$. The link $2-5$ joins the clusters, and a query for $1-4$ returns $1 + 1 + 1 + 10 = 13$.
 
-Notice that the build never touched a vertex twice. Every merge was constant work, and the only information that travelled upward was the four numbers (spine sum, spine length, total, count).
+Notice that the build never touched a vertex twice. Every merge was constant work, and the only information that traveled upward was the four numbers (spine sum, spine length, total, count).
 
 ## Correctness proof
 
