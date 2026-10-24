@@ -1,0 +1,29 @@
+id: codeforces.514c.watto-and-mechanism
+title: Watto and Mechanism
+source: Codeforces
+contest: Codeforces Round 291 (Div. 2)
+division: gold
+url: https://codeforces.com/problemset/problem/514/C
+techniques:
+    - strings.subsequence-hashing
+prerequisites:
+    - strings.rolling-hash
+    - strings.subsequence-hashing
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The total input length is at most 600000, so comparing a query with every dictionary string is too slow.
+    - Every string is over the three letters a, b and c, so a query has only two replacement candidates per position.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Two equal-length strings differ in exactly one position precisely when deleting that position from both leaves the same string.
+    - Index the dictionary by length, and store the full hash of every string in a set for that length.
+    - For a query, try every position and every letter other than the one already there.
+    - Rebuild the hash of the changed string from its prefix hash, the new character and its suffix hash in constant time.
+discussion: >-
+    The dictionary match is a one-substitution question, which becomes a subsequence equality once the differing position is deleted from both strings. The position is not known in advance, but it must be one of the query's own positions, so the program tries each position and each of the two other letters. The modified string is never built: its hash is the concatenation of the query's prefix before the position, the new character, and the query's suffix after it. That is one multiplication for the prefix alignment, one for the new character, and one table lookup for the suffix. A set of dictionary hashes keyed by length answers each candidate in expected constant time, so the whole input is linear up to the alphabet factor.
+related:
+    - usaco.2015.feb.silver.censoring
+    - codeforces.1200e.compress-words

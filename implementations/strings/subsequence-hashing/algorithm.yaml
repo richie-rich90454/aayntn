@@ -1,0 +1,96 @@
+algorithm: strings.subsequence-hashing
+title: String hashing of subsequences
+summary: Compare the strings obtained by deleting a character in constant time by recombining a prefix hash and a suffix hash, instead of rebuilding either string.
+subject: strings
+divisions: [gold]
+importance: specialized-technique
+prerequisites:
+    required: [strings.rolling-hash]
+    recommended: [number-theory.modular-arithmetic, foundations.binary-representation]
+complexity:
+    time: "O(n + q) for one string and q queries"
+    space: "O(n) for the prefix, suffix and power tables"
+assumptions:
+    - The string is static, so the prefix and suffix tables are built once and reused by every query.
+    - The modulus is prime and larger than the largest normalized character value, so the polynomial hash is well defined.
+    - A collision is either accepted as negligible, made negligible with a double hash, or removed by comparing the two candidates directly.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it answers each deletion query in constant time from the prefix and suffix tables."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n) for the prefix, suffix and power tables"
+      status: unverified
+      inputs: "One line holding s, one line holding q, then q lines each holding two 0-based indices i and j with 0 <= i, j < |s|. The string is nonempty and over lowercase Latin letters."
+      outputs: "One line per query, SAME when deleting s[i] and deleting s[j] give the same string, DIFFERENT otherwise."
+      notes: "The prefix table stores the hash of every prefix, the suffix table stores the hash of every suffix aligned with the same powers, and the power table supplies B^(n-1-i). The deletion hash is prefix[i] * power[n-1-i] + suffix[i+1]. The C variant uses static 64-bit arrays sized for a string of one million characters, and the modulus is small enough that every product fits a signed 64-bit integer."
+      operations: [build-prefix-hash, build-suffix-hash, compare-deletions]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it answers each deletion query in constant time from the prefix and suffix tables."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n) for the prefix, suffix and power tables"
+      status: unverified
+      inputs: "One line holding s, one line holding q, then q lines each holding two 0-based indices i and j with 0 <= i, j < |s|. The string is nonempty and over lowercase Latin letters."
+      outputs: "One line per query, SAME when deleting s[i] and deleting s[j] give the same string, DIFFERENT otherwise."
+      notes: "The prefix table stores the hash of every prefix, the suffix table stores the hash of every suffix aligned with the same powers, and the power table supplies B^(n-1-i). The deletion hash is prefix[i] * power[n-1-i] + suffix[i+1]. The C++ variant keeps the three tables in std::vector and disables the synchronization with the C streams."
+      operations: [build-prefix-hash, build-suffix-hash, compare-deletions]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it answers each deletion query in constant time from the prefix and suffix tables."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n) for the prefix, suffix and power tables"
+      status: unverified
+      inputs: "One line holding s, one line holding q, then q lines each holding two 0-based indices i and j with 0 <= i, j < |s|. The string is nonempty and over lowercase Latin letters."
+      outputs: "One line per query, SAME when deleting s[i] and deleting s[j] give the same string, DIFFERENT otherwise."
+      notes: "The prefix table stores the hash of every prefix, the suffix table stores the hash of every suffix aligned with the same powers, and the power table supplies B^(n-1-i). The deletion hash is prefix[i] * power[n-1-i] + suffix[i+1]. The Java variant reads with a BufferedReader, stores the three tables in long arrays, and collects the answers in one StringBuilder before writing them."
+      operations: [build-prefix-hash, build-suffix-hash, compare-deletions]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it answers each deletion query in constant time from the prefix and suffix tables."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n) for the prefix, suffix and power tables"
+      status: unverified
+      inputs: "One line holding s, one line holding q, then q lines each holding two 0-based indices i and j with 0 <= i, j < |s|. The string is nonempty and over lowercase Latin letters."
+      outputs: "One line per query, SAME when deleting s[i] and deleting s[j] give the same string, DIFFERENT otherwise."
+      notes: "The prefix table stores the hash of every prefix, the suffix table stores the hash of every suffix aligned with the same powers, and the power table supplies B^(n-1-i). The deletion hash is prefix[i] * power[n-1-i] + suffix[i+1]. The Python variant reads bytes, so every character is already an integer, and its integers do not overflow."
+      operations: [build-prefix-hash, build-suffix-hash, compare-deletions]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it answers each deletion query in constant time from the prefix and suffix tables."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n) for the prefix, suffix and power tables"
+      status: unverified
+      inputs: "One line holding s, one line holding q, then q lines each holding two 0-based indices i and j with 0 <= i, j < |s|. The string is nonempty and over lowercase Latin letters."
+      outputs: "One line per query, SAME when deleting s[i] and deleting s[j] give the same string, DIFFERENT otherwise."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The prefix table stores the hash of every prefix, the suffix table stores the hash of every suffix aligned with the same powers, and the power table supplies B^(n-1-i). The deletion hash is prefix[i] * power[n-1-i] + suffix[i+1]. The Pascal variant uses dynamic arrays of Int64, 1-based string indexing, one argument per Read, and strips a carriage return from the input line. The modulus is small enough that the square of a residue stays below 2^53, so the Int64 products are exact under pas2js."
+      operations: [build-prefix-hash, build-suffix-hash, compare-deletions]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it answers each deletion query in constant time from the prefix and suffix tables."
+      time: "O(n + q)"
+      auxiliarySpace: "O(n) for the prefix, suffix and power tables"
+      status: unverified
+      inputs: "One line holding s, one line holding q, then q lines each holding two 0-based indices i and j with 0 <= i, j < |s|. The string is nonempty and over lowercase Latin letters."
+      outputs: "One line per query, SAME when deleting s[i] and deleting s[j] give the same string, DIFFERENT otherwise."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The prefix table stores the hash of every prefix, the suffix table stores the hash of every suffix aligned with the same powers, and the power table supplies B^(n-1-i). The deletion hash is prefix[i] * power[n-1-i] + suffix[i+1]. The JavaScript variant stores the tables in Float64Array, and the modulus is below the square root of 2^53, so every product is an exact integer in a Number and BigInt is not needed."
+      operations: [build-prefix-hash, build-suffix-hash, compare-deletions]

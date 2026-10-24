@@ -1,0 +1,31 @@
+id: usaco.2015.feb.silver.censoring
+title: Censoring (Silver)
+source: USACO
+contest: 2015 February Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=529
+editorialUrl: https://usaco.org/current/data/sol_censor_silver.html
+techniques:
+    - strings.subsequence-hashing
+prerequisites:
+    - strings.rolling-hash
+    - strings.subsequence-hashing
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The text has up to one million characters, so rescanning the whole string after every deletion is quadratic.
+    - A deletion can expose a new occurrence that crosses the seam, so the scan has to recheck the joined region.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Keep the surviving text in a buffer and append one character at a time.
+    - After an append, the only new occurrence of the censored word ends at the end of the buffer.
+    - Compare the hash of the last |T| characters with the precomputed hash of T, and pop them when they match.
+    - A prefix-hash table over the buffer makes the suffix comparison constant time and the pop a truncation.
+discussion: >-
+    The search and the deletion are entangled, because removing an occurrence can create a new one across the seam. The stack view removes the entanglement. The surviving text is a buffer whose hash table is maintained as characters arrive; after appending a character, the only occurrence that can be new ends at the end of the buffer, so one suffix hash check decides whether to cut. A cut shortens the buffer and the table, and the same check is repeated at the new end. Every character is appended once and removed at most once, so the whole process is linear. The hash comparison uses the range formula on the buffer, which is the same prefix-suffix recombination that compares two single-character deletions.
+related:
+    - usaco.2015.feb.gold.censoring
+    - codeforces.1200e.compress-words

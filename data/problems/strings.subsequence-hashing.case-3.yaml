@@ -1,0 +1,29 @@
+id: codeforces.1200e.compress-words
+title: Compress Words
+source: Codeforces
+contest: Codeforces Round 578 (Div. 2)
+division: gold
+url: https://codeforces.com/problemset/problem/1200/E
+techniques:
+    - strings.subsequence-hashing
+prerequisites:
+    - strings.rolling-hash
+    - strings.subsequence-hashing
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The total length of the words is at most one million, so comparing every overlap character by character can be quadratic.
+    - The overlap is the longest suffix of the accumulated answer that equals a prefix of the next word.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Maintain the prefix hash of the answer as it grows, and build the prefix hash of each new word.
+    - Try the possible overlap lengths from the largest down, and stop at the first match.
+    - Compare a suffix of the answer with a prefix of the word using a range hash and a prefix hash.
+    - The total number of comparisons is bounded by the total length of the words.
+discussion: >-
+    The merge removes a prefix of the next word, so the only quantity that matters is the longest suffix of the answer that equals a prefix of that word. Both sides are ranges of a string, and each range hash is a prefix-suffix recombination: the suffix of the answer comes from its prefix table, and the prefix of the word comes from the word's own table. The lengths are tried from the largest down because the first match is the longest overlap; the predicate is not monotone, so binary search would be wrong. The number of hash comparisons for one word is at most its length, and the sum of the lengths is bounded, which makes the whole merge linear in the input size.
+related:
+    - usaco.2015.feb.silver.censoring
+    - codeforces.514c.watto-and-mechanism
