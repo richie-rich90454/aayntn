@@ -1,0 +1,30 @@
+id: poj.1286.necklace-of-beads
+title: Necklace of Beads
+source: POJ
+contest: Xi'an 2002
+division: gold
+url: http://poj.org/problem?id=1286
+techniques:
+    - combinatorics.burnside-lemma
+prerequisites:
+    - number-theory.euler-totient
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The bead count is below 24, so the exact answer fits in a signed 64-bit integer and no modulus is involved.
+    - Rotations and reflections are both identified, so the group is dihedral and has 2n elements.
+    - The input holds several cases and ends with -1, so the program must loop until the sentinel.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - This is a bracelet count, not a necklace count, because a reflection is also considered the same object.
+    - Burnside over the dihedral group averages the fixed counts of n rotations and n reflections.
+    - The rotations are grouped by gcd as usual, giving a sum over divisors weighted by Euler's totient.
+    - For an odd n every reflection fixes 3^((n+1)/2) colorings; for an even n, half fix 3^(n/2+1) and half fix 3^(n/2).
+discussion: >-
+    The problem is the smallest complete Burnside exercise: the group has only 2n elements, n is below 24, and the three colors are fixed. The rotation half of the sum is the divisor form already used for necklaces. The reflection half depends on the parity of n, because a reflection through two opposite beads fixes two single beads and pairs the rest, while a reflection through two opposite edges pairs every bead. Adding the two halves and dividing by 2n gives the exact bracelet count. The sentinel -1 is the only input detail.
+related:
+    - poj.2154.color
+    - atcoder.abc198.f.cube

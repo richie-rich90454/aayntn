@@ -1,0 +1,9 @@
+- name: four beads in three colors match the sample
+  input: "4 3\n"
+  expected: "24\n"
+- name: one million beads in two colors need the divisor sum
+  input: "1000000 2\n"
+  expected: "757897407\n"
+- name: a single bead can use every color
+  input: "1 1000000000\n"
+  expected: "1000000000\n"

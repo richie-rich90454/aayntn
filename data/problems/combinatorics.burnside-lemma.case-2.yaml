@@ -1,0 +1,32 @@
+id: atcoder.abc198.f.cube
+title: Cube
+source: AtCoder
+contest: AtCoder Beginner Contest 198
+division: platinum
+url: https://atcoder.jp/contests/abc198/tasks/abc198_f
+editorialUrl: https://atcoder.jp/contests/abc198/tasks/abc198_f/editorial
+techniques:
+    - combinatorics.burnside-lemma
+prerequisites:
+    - combinatorics.generating-functions
+    - number-theory.modular-arithmetic
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The sum S can be as large as 10^18, so the count cannot be a dynamic program over the sum.
+    - The six face labels are positive integers, so each cycle of a rotation receives a positive value and contributes its length times that value.
+    - The rotation group of the cube has 24 elements in five cycle types, and every type has to be counted.
+    - The answer is modulo 998244353, which is prime.
+recommendedLanguages:
+    - cpp17
+    - python
+hints:
+    - Two writings are equal exactly when a rotation of the cube maps one to the other, so Burnside averages the number of writings fixed by each of the 24 rotations.
+    - Classify the rotations by their cycle structure on the six faces. The types are the identity, six quarter-turns about a face axis, three half-turns about a face axis, eight turns about a body diagonal, and six half-turns about an edge axis.
+    - A cycle of length L whose faces share the value v contributes L times v to the sum, so each cycle type gives a generating function in x with a factor x^L / (1 - x^L).
+    - The coefficient of x^S in each of the five generating functions is a binomial coefficient of a small number of parts, so each can be evaluated in constant time even when S is 10^18.
+discussion: >-
+    The cube is the smallest three-dimensional object whose rotation group is large enough to make Burnside necessary but small enough to enumerate by hand. The work is in the classification: five cycle types on six faces, with 1, 6, 3, 8, and 6 rotations. Each fixed writing is constant on the cycles, so a cycle of length L consumes L times a positive label from the sum S, and the generating function of one cycle type is a product of x^L / (1 - x^L). The coefficient extraction is the only computational part, and it is constant time because the number of cycles and their lengths are fixed. The modulus is prime, so the final division by 24 is a modular inverse.
+related:
+    - poj.2154.color
+    - poj.1286.necklace-of-beads

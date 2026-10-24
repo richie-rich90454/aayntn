@@ -1,0 +1,96 @@
+algorithm: combinatorics.burnside-lemma
+title: Burnside's lemma
+summary: Count the necklaces with n beads and k colors up to rotation by averaging the colorings that each rotation leaves fixed, grouping the rotations by gcd, and replacing the division by n with a modular inverse.
+subject: combinatorics
+divisions: [silver, gold]
+importance: common-contest-technique
+complexity:
+    time: "O(sqrt(n) * (sqrt(n) + log n))"
+    space: "O(1)"
+assumptions:
+    - Two necklaces are equal exactly when one is a rotation of the other, so the group is the cyclic group of order n and reflections are not counted.
+    - The bead count satisfies 1 <= n <= 1000000, so n is smaller than the prime modulus and has a modular inverse.
+    - A rotation fixes a coloring exactly when the coloring is constant on every cycle of the rotation.
+prerequisites:
+    required: [number-theory.modular-arithmetic, number-theory.euler-totient]
+    recommended: [combinatorics.binomial-coefficients, foundations.complexity]
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and k and prints the number of k-color necklaces with n beads up to rotation, modulo 1000000007."
+      time: "O(sqrt(n) * (sqrt(n) + log n))"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Two integers n and k with 1 <= n <= 1000000 and 1 <= k <= 1000000000."
+      outputs: "One line holding the number of necklaces modulo 1000000007."
+      notes: "The sum runs over the divisors of n, and the term for a divisor d is phi(d) * k^(n/d). Each divisor is met once by pairing i with n / i while i * i <= n, Euler's totient is computed by trial division, and the division by n is a multiplication by n^(1000000005). The term product is at most 10^6 * (10^9 + 6), so a signed 64-bit integer holds it, and the exponentiation multiplies two residues, whose product is below 2^63."
+      operations: [read, divisors, euler-phi, mod-pow, average, print]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and k and prints the number of k-color necklaces with n beads up to rotation, modulo 1000000007."
+      time: "O(sqrt(n) * (sqrt(n) + log n))"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Two integers n and k with 1 <= n <= 1000000 and 1 <= k <= 1000000000."
+      outputs: "One line holding the number of necklaces modulo 1000000007."
+      notes: "The C++ variant keeps every residue in std::int64_t and uses the same divisor pairing and totient routine as the C variant, so the two programs agree on every input. The products in the main term stay below 10^15 and the products in the exponentiation stay below 2^63, so no 128-bit type is needed."
+      operations: [read, divisors, euler-phi, mod-pow, average, print]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and k and prints the number of k-color necklaces with n beads up to rotation, modulo 1000000007."
+      time: "O(sqrt(n) * (sqrt(n) + log n))"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Two integers n and k with 1 <= n <= 1000000 and 1 <= k <= 1000000000."
+      outputs: "One line holding the number of necklaces modulo 1000000007."
+      notes: "The Java variant uses long throughout and reads the two integers with a StringTokenizer over the whole input, and the class is Main so the file can be submitted unchanged. The modulus is written as a long literal, because the products in the exponentiation would overflow an int."
+      operations: [read, divisors, euler-phi, mod-pow, average, print]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and k and prints the number of k-color necklaces with n beads up to rotation, modulo 1000000007."
+      time: "O(sqrt(n) * (sqrt(n) + log n))"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Two integers n and k with 1 <= n <= 1000000 and 1 <= k <= 1000000000."
+      outputs: "One line holding the number of necklaces modulo 1000000007."
+      notes: "The Python variant uses arbitrary-precision integers and calls pow(k, exponent, MODULO) for the power and pow(n, MODULO - 2, MODULO) for the inverse, so it needs no special multiplication routine."
+      operations: [read, divisors, euler-phi, mod-pow, average, print]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and k and prints the number of k-color necklaces with n beads up to rotation, modulo 1000000007."
+      time: "O(sqrt(n) * (sqrt(n) + log n))"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Two integers n and k with 1 <= n <= 1000000 and 1 <= k <= 1000000000."
+      outputs: "One line holding the number of necklaces modulo 1000000007."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Because pas2js maps Int64 to a JavaScript number, two residues cannot be multiplied directly, so the exponentiation uses MulMod, which doubles and reduces and keeps every intermediate below 2 * 1000000007. The totient product stays below 10^15 and is exact, the program reads each integer with one argument per Read, and it uses SysUtils for IntToStr."
+      operations: [read, divisors, euler-phi, mod-pow, average, print]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and k and prints the number of k-color necklaces with n beads up to rotation, modulo 1000000007."
+      time: "O(sqrt(n) * (sqrt(n) + log n))"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Two integers n and k with 1 <= n <= 1000000 and 1 <= k <= 1000000000."
+      outputs: "One line holding the number of necklaces modulo 1000000007."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The totient times the power stays below 10^15, which is exact in a double, while the exponentiation uses mulMod, which doubles and reduces so that no intermediate exceeds 2 * 1000000007. The input is read from standard input as two whitespace-separated tokens."
+      operations: [read, divisors, euler-phi, mod-pow, average, print]

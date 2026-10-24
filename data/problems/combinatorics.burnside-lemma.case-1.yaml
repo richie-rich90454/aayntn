@@ -1,0 +1,31 @@
+id: poj.2154.color
+title: Color
+source: POJ
+contest: POJ Monthly
+division: gold
+url: http://poj.org/problem?id=2154
+techniques:
+    - combinatorics.burnside-lemma
+prerequisites:
+    - number-theory.euler-totient
+    - number-theory.modular-arithmetic
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - There are up to 3500 cases and N can be 10^9, so the direct sum over all N rotations is far too slow and the divisor form is required.
+    - The modulus P is at most 30000 and is not necessarily prime, so multiplying by a modular inverse of N is not always legal.
+    - The colors are not required to all appear, so the count is the number of orbits of all N-colorings of N positions.
+    - The answer is reported modulo P, and the division by N has to be exact before the reduction.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Only rotations are identified, so the symmetry group has N elements and Burnside averages over them.
+    - A rotation by r positions fixes N to the power gcd(N, r) colorings, because the positions split into gcd(N, r) cycles that must each be monochromatic.
+    - Group the rotations by gcd and the sum becomes a sum over the divisors of N, each weighted by Euler's totient.
+    - Since P is not prime, do not invert N modulo P. Accumulate the sum modulo N times P, divide by N, then reduce modulo P.
+discussion: >-
+    The problem is the rotation-only necklace count with a modulus that is deliberately not prime. Burnside gives the sum over divisors of phi(d) times N to the N/d, and the only division is by N. That division is legal over the integers but not over the residues modulo P, so the implementation has to keep enough information to divide before reducing. The usual trick is to work modulo N times P, where the sum is a multiple of N, and then divide exactly. The large N is handled by factoring it and enumerating its divisors, not by iterating over the rotations.
+related:
+    - poj.1286.necklace-of-beads
+    - atcoder.abc198.f.cube
