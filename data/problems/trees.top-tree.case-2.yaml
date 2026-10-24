@@ -1,0 +1,32 @@
+id: librarychecker.dynamic-tree-subtree-add-subtree-sum
+title: Dynamic Tree Subtree Add Subtree Sum
+source: Library Checker
+contest: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/dynamic_tree_subtree_add_subtree_sum
+techniques:
+    - trees.top-tree
+prerequisites:
+    - trees.lca
+    - range-queries.lazy-propagation
+    - foundations.amortized-analysis
+difficulty: 5
+estimatedMinutes: 90
+specialConstraints:
+    - The tree has up to 200,000 vertices, and there are up to 200,000 operations.
+    - An operation can replace an edge, add a value to a whole subtree, or ask for the sum of a whole subtree.
+    - The subtree is named by an edge and the parent side of that edge, so the orientation of the query changes the answer.
+    - A subtree add is applied to every vertex, so a lazy tag has to travel with the cluster and its count.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A subtree is a cluster with one boundary vertex once the edge to its parent is exposed.
+    - Store a pending addition on the cluster, add x times the count to the total, and add x times the spine length to the spine sum.
+    - Push the pending addition before every rotation or split, because a cut or a link reads the children.
+    - A link-cut tree needs virtual subtree sums as well as the lazy tag, or the raked subtrees are missed.
+discussion: >-
+    This is the lazy version of the previous problem. The cluster algebra is unchanged, but every cluster also carries an addition that has not reached its children. The total of a cluster grows by the addition times its vertex count, and the spine sum grows by the addition times the number of vertices on the spine; these are different numbers, so both counts must be stored. The interesting failure is a cut after an add: the tag is still at an ancestor of the edge, and detaching the edge without pushing it loses the update for one side. A top tree makes the push discipline explicit because every split is a sequence of rake and compress operations. An Euler tour tree with a lazy balanced sequence is the other standard solution and is easier to implement if path queries are not needed.
+related:
+    - librarychecker.dynamic-tree-vertex-add-subtree-sum
+    - luogu.p4219.great-fusion

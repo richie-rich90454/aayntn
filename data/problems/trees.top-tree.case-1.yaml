@@ -1,0 +1,32 @@
+id: librarychecker.dynamic-tree-vertex-add-subtree-sum
+title: Dynamic Tree Vertex Add Subtree Sum
+source: Library Checker
+contest: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
+techniques:
+    - trees.top-tree
+prerequisites:
+    - trees.lca
+    - range-queries.segment-tree
+    - foundations.amortized-analysis
+difficulty: 5
+estimatedMinutes: 80
+specialConstraints:
+    - The tree has up to 200,000 vertices, and there are up to 200,000 operations.
+    - Every operation may replace one edge, so no static rooting, ancestor table, or heavy-light decomposition survives.
+    - A subtree query names an edge and the parent side of that edge, so the direction of the subtree is part of the query.
+    - Values and sums reach about 2 * 10^14, so the sums need 64-bit storage.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The edge (v, p) is the only connection between the subtree of v and the rest of the tree.
+    - Expose that edge so that the v side becomes a cluster with a single boundary vertex, then read the total of that cluster.
+    - Replacing an edge is a cut followed by a link, and both operations only restructure the clusters on the exposed paths.
+    - A link-cut tree needs virtual subtree sums for this query, because the subtrees that are not on the preferred path are implicit.
+discussion: >-
+    The query is about a subtree, not a path, so a plain link-cut tree does not store enough information. A top tree does, because a subtree is exactly a one-boundary cluster once the edge to its parent is exposed. The edge replacement is local: the old edge is cut and the new one is linked, and each operation pulls the aggregates along a logarithmic number of clusters. The parent side named by the query decides which of the two clusters is read, so the implementation never needs a fixed root. The values are large enough that a 32-bit accumulator overflows on a chain, and the count of a cluster is needed only when a lazy update is added.
+related:
+    - librarychecker.dynamic-tree-subtree-add-subtree-sum
+    - luogu.p4219.great-fusion

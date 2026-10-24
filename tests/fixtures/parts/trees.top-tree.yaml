@@ -1,0 +1,9 @@
+- name: a chain with a value change, a cut, and a relink
+  input: "6 14\nlink 0 1\nlink 1 2\nlink 2 3\nlink 3 4\nlink 4 5\npath 0 5\nset 2 10\npath 0 5\ncut 2 3\npath 0 2\npath 0 5\npath 3 5\nlink 2 4\npath 0 5\n"
+  expected: "6\n15\n12\n0\n3\n14\n"
+- name: a two-vertex tree with a negative value and repeated operations
+  input: "2 9\npath 0 1\nlink 0 1\nlink 0 1\npath 0 1\nset 1 -3\npath 0 1\ncut 0 1\ncut 0 1\npath 0 1\n"
+  expected: "0\n2\n-2\n0\n"
+- name: one isolated vertex, a self loop, and a self cut
+  input: "1 6\npath 0 0\nset 0 5\npath 0 0\ncut 0 0\nlink 0 0\npath 0 0\n"
+  expected: "1\n5\n5\n"

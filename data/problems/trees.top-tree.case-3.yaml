@@ -1,0 +1,32 @@
+id: luogu.p4219.great-fusion
+title: Great Fusion
+source: Luogu
+contest: BJOI 2014
+division: platinum
+url: https://www.luogu.com.cn/problem/P4219
+techniques:
+    - trees.top-tree
+prerequisites:
+    - graphs.dsu
+    - trees.lca
+    - foundations.amortized-analysis
+difficulty: 4
+estimatedMinutes: 60
+specialConstraints:
+    - There are up to 100,000 planets and 100,000 operations.
+    - Edges are only added, and the graph is guaranteed to stay a forest.
+    - A query names an edge that exists and asks for the number of simple paths that cross it.
+    - The load is a product of two side sizes whose sum is at most 100,000, so it reaches about 2.5 times 10^9 and needs 64-bit storage.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Removing the queried edge splits its tree into exactly two components.
+    - A simple path crosses the edge exactly when its endpoints lie in different components.
+    - The load is therefore the product of the sizes of the two sides, not the product of the sizes of two whole trees.
+    - Expose the edge so that the two sides become one-boundary clusters, and multiply their counts.
+discussion: >-
+    The obvious use of a disjoint set union is wrong here: the two sides of the queried edge are not the two components that the union-find sees, because the edge is inside one component. The edge is a bridge of the current tree, and a top tree exposes it so that the two sides become clusters with one boundary vertex each. Their counts are the two side sizes, and their product is the number of simple paths that cross the edge. The operations are links only, so the structure never has to split a tree into more than the two sides of a query, but the side sizes still change after every link. A link-cut tree with virtual subtree sizes gives the same answer, and the product is formed after making one endpoint the root and exposing the other. DSU can maintain the total component size, but not the split at an arbitrary edge, which is the distinction the problem is testing. The largest possible product is about 2.5 times 10^9, which does not fit a signed 32-bit integer.
+related:
+    - librarychecker.dynamic-tree-vertex-add-subtree-sum
+    - librarychecker.dynamic-tree-subtree-add-subtree-sum

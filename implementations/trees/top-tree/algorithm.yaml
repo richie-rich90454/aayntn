@@ -1,0 +1,102 @@
+algorithm: trees.top-tree
+title: The top-tree and rake-compress formulation
+summary: Decompose a forest into clusters with at most two boundary vertices, merge them by rake and compress, and expose a path so that one cluster answers the query.
+subject: trees
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [trees.lca, foundations.complexity]
+    recommended:
+        [
+            trees.heavy-light-decomposition,
+            trees.dynamic-trees,
+            range-queries.segment-tree,
+            foundations.amortized-analysis,
+        ]
+complexity:
+    time: "O(log n) amortized per operation"
+    space: "O(n)"
+assumptions:
+    - The structure is a forest at every step, so every link joins two different trees.
+    - The operations arrive online and are links, cuts, vertex updates, and path or subtree queries.
+    - A path query names two vertices that lie in the same tree.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it maintains a forest under link, cut, set, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q, then q lines, each 'link u v', 'cut u v', 'set u x', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path. Every vertex starts with the value 1."
+      notes: "The six programs maintain the forest with a link-cut tree, not with an explicit top tree: the preferred paths are the compress clusters and the path-parent edges are the rake clusters. The contract is therefore the same dynamic forest, but the code does not build cluster objects. Vertices are stored as 1..n and index 0 is the null node. A link between vertices that are already connected is ignored, and a cut of an edge that does not exist is ignored. A path query between different trees prints 0. Values and sums are 64-bit signed integers, and the output is one line per path query so the six language versions are byte-identical."
+      operations: [link, cut, set, path-sum]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it maintains a forest under link, cut, set, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q, then q lines, each 'link u v', 'cut u v', 'set u x', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path. Every vertex starts with the value 1."
+      notes: "The six programs maintain the forest with a link-cut tree, not with an explicit top tree: preferred paths are the compress clusters and path-parent edges are the rake clusters. The C++ variant keeps the arrays in std::vector and the splay operations are iterative. A link that would create a cycle is ignored, a cut of an edge that does not exist is ignored, and a path query between different trees prints 0. Values and sums are 64-bit signed integers, and the output is one line per path query so the six language versions are byte-identical."
+      operations: [link, cut, set, path-sum]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it maintains a forest under link, cut, set, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q, then q lines, each 'link u v', 'cut u v', 'set u x', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path. Every vertex starts with the value 1."
+      notes: "The six programs maintain the forest with a link-cut tree, not with an explicit top tree: preferred paths are the compress clusters and path-parent edges are the rake clusters. The Java variant is a single class named Main, reads the operation words with StreamTokenizer, keeps the sums in long, and buffers the output in a StringBuilder. A link that would create a cycle is ignored, a cut of an edge that does not exist is ignored, and a path query between different trees prints 0. The output is one line per path query so the six language versions are byte-identical."
+      operations: [link, cut, set, path-sum]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it maintains a forest under link, cut, set, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q, then q lines, each 'link u v', 'cut u v', 'set u x', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path. Every vertex starts with the value 1."
+      notes: "The six programs maintain the forest with a link-cut tree, not with an explicit top tree: preferred paths are the compress clusters and path-parent edges are the rake clusters. The Python variant reads all tokens at once, uses lists of ints which do not overflow, and keeps the splay operations iterative so the interpreter recursion limit is irrelevant. A link that would create a cycle is ignored, a cut of an edge that does not exist is ignored, and a path query between different trees prints 0. The output is one line per path query so the six language versions are byte-identical."
+      operations: [link, cut, set, path-sum]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The program maintains a forest under link, cut, set, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q, then q lines, each 'link u v', 'cut u v', 'set u x', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path. Every vertex starts with the value 1."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The six programs maintain the forest with a link-cut tree, not with an explicit top tree: preferred paths are the compress clusters and path-parent edges are the rake clusters. The JavaScript variant reads standard input with node:fs, stores the links in Int32Array and the sums in Float64Array, and keeps every intermediate below 2^53. A link that would create a cycle is ignored, a cut of an edge that does not exist is ignored, and a path query between different trees prints 0. The output is one line per path query so the six language versions are byte-identical."
+      operations: [link, cut, set, path-sum]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The program maintains a forest under link, cut, set, and path-sum queries and prints the answer to every path query."
+      time: "O(log n) amortized per operation"
+      auxiliarySpace: "O(n) for the two children, the parent, the reversal flag, the vertex values, and the splay subtree sums"
+      status: unverified
+      inputs: "n q on the first line, then q lines, each 'link u v', 'cut u v', 'set u x', or 'path u v', with 0-based vertices."
+      outputs: "One line per path query, holding the sum of the values on the path. Every vertex starts with the value 1."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The six programs maintain the forest with a link-cut tree, not with an explicit top tree: preferred paths are the compress clusters and path-parent edges are the rake clusters. Each operation is read as a whole line because the pas2js console unit supplies ReadLn for strings but not Read for strings, and the line is then split into the operation word and two Int64 values. A link that would create a cycle is ignored, a cut of an edge that does not exist is ignored, and a path query between different trees prints 0. No 128-bit integer is used. The output is one line per path query so the six language versions are byte-identical."
+      operations: [link, cut, set, path-sum]
