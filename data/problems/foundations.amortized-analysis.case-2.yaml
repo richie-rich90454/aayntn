@@ -1,0 +1,30 @@
+id: codeforces.5c.longest-regular-bracket-sequence
+title: Longest Regular Bracket Sequence
+source: Codeforces
+contest: Codeforces Beta Round 5
+division: gold
+url: https://codeforces.com/problemset/problem/5/C
+techniques:
+    - foundations.amortized-analysis
+prerequisites:
+    - foundations.complexity
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The string has at most one million characters, so a quadratic scan of all substrings is too slow.
+    - The answer is a length and a count, and the count must be tracked separately from the maximum length.
+    - If no nonempty regular substring exists, the required output is 0 1.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Keep a stack of indices of unmatched opening brackets and use -1 as the base of the current regular run.
+    - On a closing bracket, pop the stack; if the stack becomes empty, push the current index as the new base.
+    - When the stack is nonempty after the pop, the segment from the new top plus one to the current index is regular.
+    - Each index is pushed once and popped at most once, so the scan is linear.
+discussion: >-
+    The stack stores the positions that can still begin a regular substring. A closing bracket either matches the most recent unmatched opening bracket, which closes a regular segment, or it breaks the current run and becomes the new base. The length of the segment is the distance from the current index to the index now on top of the stack, and the maximum and its count are updated at every closing bracket. The one-pass scan is linear because every index enters and leaves the stack once, even though a single closing bracket can pop a long run of indices.
+related:
+    - codeforces.797c.minimal-string
+    - kattis.bracketmatching

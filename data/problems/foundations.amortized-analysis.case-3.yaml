@@ -1,0 +1,30 @@
+id: kattis.bracketmatching
+title: Bracket Matching
+source: Kattis
+contest: NUS Competitive Programming
+division: bronze
+url: https://open.kattis.com/problems/bracketmatching
+techniques:
+    - foundations.amortized-analysis
+prerequisites:
+    - foundations.complexity
+difficulty: 1
+estimatedMinutes: 10
+specialConstraints:
+    - The sequence has between 2 and 100000 characters.
+    - The characters are drawn from three bracket types, so a count of each type is not enough.
+    - A closing bracket must match the most recent unmatched opening bracket, which is exactly the stack discipline.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Push every opening bracket onto a stack.
+    - On a closing bracket, the stack must be nonempty and its top must be the matching opening bracket.
+    - Pop after a match, and reject immediately on a mismatch.
+    - The sequence is valid exactly when the stack is empty after the scan.
+discussion: >-
+    The stack invariant is that its contents are the unmatched opening brackets in the order they appeared. A closing bracket can only close the most recent unmatched opening bracket, because an earlier one is separated by an opening bracket that is still waiting. A mismatch therefore proves that the sequence is invalid, and a match removes a pair without disturbing the rest of the invariant. Each character is pushed at most once and popped at most once, so the scan is linear and the total number of pops is bounded by the total number of pushes.
+related:
+    - codeforces.797c.minimal-string
+    - codeforces.5c.longest-regular-bracket-sequence

@@ -1,0 +1,95 @@
+algorithm: foundations.amortized-analysis
+title: Amortized analysis
+summary: A dynamic array that doubles its capacity copies at most a linear number of elements over n pushes, so the total cost is linear even though one push can be expensive.
+subject: foundations
+divisions: [silver, gold]
+importance: core-prerequisite
+prerequisites:
+    required: [foundations.complexity]
+    recommended: [start.algorithm-analysis]
+complexity:
+    time: "O(n) total for n pushes; O(1) amortized per push"
+    space: "O(n) for the array"
+assumptions:
+    - The sequence starts with an empty dynamic array whose capacity is one.
+    - A resize copies every stored element and doubles the capacity before the new element is placed.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reports the total number of copied elements and the final capacity after n pushes."
+      time: "O(log n) to sum the resize events"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One nonnegative integer n, the number of pushes."
+      outputs: "One line with the total number of copied elements and the final capacity, separated by a space."
+      notes: "The copy total is accumulated over resize events, so the array is never materialized. A long long holds both outputs for every input whose final capacity is representable in 64 bits."
+      operations: [push, resize, copy-count, capacity]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reports the total number of copied elements and the final capacity after n pushes."
+      time: "O(log n) to sum the resize events"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One nonnegative integer n, the number of pushes."
+      outputs: "One line with the total number of copied elements and the final capacity, separated by a space."
+      notes: "The copy total is accumulated over resize events, so the array is never materialized. A long long holds both outputs for every input whose final capacity is representable in 64 bits."
+      operations: [push, resize, copy-count, capacity]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reports the total number of copied elements and the final capacity after n pushes."
+      time: "O(log n) to sum the resize events"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One nonnegative integer n, the number of pushes."
+      outputs: "One line with the total number of copied elements and the final capacity, separated by a space."
+      notes: "The class is Main and the accumulator is a long. The copy total is accumulated over resize events, so the array is never materialized."
+      operations: [push, resize, copy-count, capacity]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reports the total number of copied elements and the final capacity after n pushes."
+      time: "O(log n) to sum the resize events"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One nonnegative integer n, the number of pushes."
+      outputs: "One line with the total number of copied elements and the final capacity, separated by a space."
+      notes: "Python integers are arbitrary precision, so no explicit width is needed. The copy total is accumulated over resize events, so the array is never materialized."
+      operations: [push, resize, copy-count, capacity]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reports the total number of copied elements and the final capacity after n pushes."
+      time: "O(log n) to sum the resize events"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One nonnegative integer n, the number of pushes."
+      outputs: "One line with the total number of copied elements and the final capacity, separated by a space."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The accumulator is Int64, the program uses SysUtils, and every Read takes one argument so it compiles under pas2js."
+      operations: [push, resize, copy-count, capacity]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reports the total number of copied elements and the final capacity after n pushes."
+      time: "O(log n) to sum the resize events"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "One nonnegative integer n, the number of pushes."
+      outputs: "One line with the total number of copied elements and the final capacity, separated by a space."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The values stay exact under the double-precision Number type for every input below 2^53."
+      operations: [push, resize, copy-count, capacity]

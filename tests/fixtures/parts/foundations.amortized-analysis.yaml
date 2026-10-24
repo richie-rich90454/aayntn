@@ -1,0 +1,9 @@
+- name: thirteen pushes resize at one, two, four, and eight
+  input: "13\n"
+  expected: "15 16\n"
+- name: one million pushes land just below the next power of two
+  input: "1000000\n"
+  expected: "1048575 1048576\n"
+- name: no pushes leave the initial capacity untouched
+  input: "0\n"
+  expected: "0 1\n"

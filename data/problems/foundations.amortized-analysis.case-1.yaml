@@ -1,0 +1,30 @@
+id: codeforces.797c.minimal-string
+title: Minimal string
+source: Codeforces
+contest: Educational Codeforces Round 19
+division: silver
+url: https://codeforces.com/problemset/problem/797/C
+techniques:
+    - foundations.amortized-analysis
+prerequisites:
+    - foundations.complexity
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The string has between 1 and 100000 lowercase letters.
+    - The auxiliary string t can grow to the full length of s, so its storage is linear.
+    - A character may be moved from s to t once and from t to u once, which is what makes the scan linear.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The smallest character still waiting in s decides whether the top of t can be output.
+    - A suffix-minimum table answers that question in constant time at every step.
+    - The auxiliary string t behaves like a stack, and every character enters and leaves it once.
+    - When the smallest remaining character is no smaller than the top of t, popping the top is safe.
+discussion: >-
+    The greedy rule is forced by the lexicographic order. If a smaller character is still in s, it must appear before the current top of t, so the only way to reach it is to push the characters above it. If no smaller character remains, the top of t is the smallest available character and can be output immediately. The suffix minima make each decision constant time, and the stack t gives the amortized bound: each character is pushed once and popped at most once, so the total work is linear even though one step can pop many characters.
+related:
+    - codeforces.5c.longest-regular-bracket-sequence
+    - kattis.bracketmatching
