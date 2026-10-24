@@ -1,0 +1,31 @@
+id: usaco.2022.feb.silver.redistributing-gifts
+title: Redistributing Gifts
+source: USACO
+contest: 2022 February Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1206
+editorialUrl: https://usaco.org/current/data/sol_prob1_silver_feb22.html
+techniques:
+    - graphs.floyd-warshall
+    - graphs.strongly-connected-components
+prerequisites:
+    - graphs.dfs
+    - graphs.strongly-connected-components
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - Five hundred cows, so the cubic Boolean closure has about a hundred million steps and fits, while enumerating the reassignments does not.
+    - A cow can receive a gift exactly when the two vertices lie on a common cycle of the willingness graph.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Build a directed graph whose vertices are the cows, with an edge from cow i to cow j when cow i is willing to receive gift j, that is, when j is i or appears before i on her list.
+    - A valid reassignment is a partition of this graph into cycles, so cow i can receive gift j exactly when an edge i to j lies on some cycle.
+    - That is the same as saying that i can reach j and j can reach i, so the answer is the first gift on cow i's list that lies in her strongly connected component.
+    - The transitive closure of the graph answers the reachability question for every pair, and the triple loop is short enough to write under contest pressure.
+discussion: >-
+    The reassignment is a permutation, and every permutation decomposes into cycles, so the problem is about which cycles of the willingness graph can be selected. A gift is attainable exactly when the corresponding edge lies on a cycle, which is a mutual-reachability condition rather than a direct-edge condition. The Boolean version of the all-pairs closure computes mutual reachability for every pair in one cubic pass, and the preference lists then select the best attainable gift for each cow. Using only direct edges, or comparing gift numbers instead of list positions, gives the wrong answer on the first nontrivial case.
+related:
+    - usaco.2023.dec.silver.cycle-correspondence
+    - usaco.2015.jan.bronze.cow-routing

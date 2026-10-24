@@ -1,0 +1,29 @@
+id: atcoder.abc184.f.programming-contest
+title: Programming Contest
+source: AtCoder
+contest: AtCoder Beginner Contest 184
+url: https://atcoder.jp/contests/abc184/tasks/abc184_f
+techniques:
+    - enumeration.meet-in-the-middle
+prerequisites:
+    - enumeration.subset-enumeration
+    - searching.binary-search
+difficulty: 4
+estimatedMinutes: 30
+specialConstraints:
+    - There are at most 40 problems, so the 2^40 subsets of the full set cannot be enumerated.
+    - The time limit T can reach 10^9, which rules out a dynamic program indexed by time.
+    - Each problem is either solved or skipped, and the order in which they are solved does not matter.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Enumerate the total time of every subset of the first half and of the second half separately.
+    - Sort the second list; for each first-half total a, the best partner is the largest second-half total at most T - a.
+    - The answer is the maximum of a + b over the pairs found by binary search, and the empty subset is a valid starting point.
+discussion: >-
+    This is the optimization form of meet in the middle. Instead of counting pairs under a bound, it keeps the largest feasible pair, which a predecessor search in a sorted half returns in logarithmic time. The two enumerations dominate the cost, and the binary searches add only a logarithmic factor over 2^(n/2). The empty subset must be allowed, because the best answer may be zero when no problem fits.
+related:
+    - cses.1628.meet-in-the-middle
+    - usaco.2012.open.gold.balanced-cow-subsets

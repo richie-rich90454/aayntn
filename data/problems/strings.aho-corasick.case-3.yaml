@@ -1,0 +1,28 @@
+id: codeforces.710f.string-set-queries
+title: String Set Queries
+source: Codeforces
+contest: Educational Codeforces Round 16
+url: https://codeforces.com/problemset/problem/710/F
+editorialUrl: https://codeforces.com/blog/entry/46761
+techniques:
+    - strings.aho-corasick
+prerequisites:
+    - strings.aho-corasick
+difficulty: 5
+estimatedMinutes: 70
+specialConstraints:
+    - The queries are online and the set changes, so a single static automaton cannot answer them without rebuilding.
+    - The total length of all strings in the input is three hundred thousand, which keeps the logarithmic factor affordable.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Aho-Corasick is static, but the set only changes by insertions and deletions.
+    - Keep the strings in groups whose sizes are powers of two, each with its own automaton, and merge equal-sized groups by rebuilding.
+    - Inserting or deleting a string touches only logarithmically many groups, so each string is rebuilt a logarithmic number of times.
+    - Handle deletion with a second structure over the deleted strings and subtract its answer from the answer of the inserted strings.
+discussion: >-
+    A static Aho-Corasick automaton cannot absorb a new pattern in constant time, because the new trie nodes can change the failure links of nodes that already exist. The standard answer is binary grouping: keep static automata over groups of sizes that are distinct powers of two, rebuild when two groups merge, and answer a query by summing over the groups. A second structure over the deleted strings is subtracted, which makes deletion exact without modifying any automaton.
+related:
+    - cses.2102.finding-patterns
+    - codeforces.1202e.you-are-given-some-strings

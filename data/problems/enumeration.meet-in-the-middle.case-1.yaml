@@ -1,0 +1,29 @@
+id: cses.1628.meet-in-the-middle
+title: Meet in the Middle
+source: CSES
+contest: CSES Problem Set
+url: https://cses.fi/problemset/task/1628
+techniques:
+    - enumeration.meet-in-the-middle
+prerequisites:
+    - enumeration.subset-enumeration
+    - searching.binary-search
+difficulty: 4
+estimatedMinutes: 35
+specialConstraints:
+    - Up to 40 values, so the 2^40 subsets of the whole array cannot be enumerated.
+    - The target and the values reach 10^9, so subset sums need 64-bit arithmetic.
+    - Many different subsets can produce the same sum, so the right half is a multiset rather than a set.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Every subset is exactly one subset of the first half together with one subset of the second half.
+    - Enumerate the 2^(n/2) subset sums of each half, sort the second list, and for each sum of the first list count the entries equal to the remaining target.
+    - Use two binary searches per left sum, or a frequency map of the right sums; collapsing equal sums into a set loses the duplicate counts.
+discussion: >-
+    The problem is the canonical counting form of meet in the middle. The equality x = a + b is answered for each left sum a by the number of right sums equal to x - a, so the right half is sorted and the equal range is measured with two binary searches. The two enumerations cost 2^(n/2) each, and sorting plus searching adds a logarithmic factor. The trap is replacing the right list with a set, which merges the sums produced by different subsets and undercounts the answer.
+related:
+    - atcoder.abc184.f.programming-contest
+    - usaco.2012.open.gold.balanced-cow-subsets

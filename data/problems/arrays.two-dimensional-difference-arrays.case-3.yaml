@@ -1,0 +1,30 @@
+id: usaco.2019.feb.gold.painting-the-barn
+title: Painting the Barn
+source: USACO
+contest: 2019 February Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=923
+editorialUrl: https://usaco.org/current/data/sol_paintbarn_gold_feb19.html
+techniques:
+    - arrays.two-dimensional-difference-arrays
+prerequisites:
+    - arrays.difference-arrays
+    - arrays.two-dimensional-prefix-sums
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - The coordinates are at most 200 in each direction, so a full 200 by 200 grid is affordable.
+    - Up to 100,000 rectangles are painted, so the coat counts must be built with rectangle updates rather than cell-by-cell painting.
+    - The two new rectangles must be disjoint.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Build the coat count of every cell with a two-dimensional difference array and prefix sum.
+    - Only cells with K coats and K-1 coats change the answer when one more rectangle is painted.
+    - Transform the counts into -1, 0, and +1, then find the best rectangle; for two disjoint rectangles, split by a horizontal or vertical line.
+discussion: >-
+    The first half is the two-dimensional difference array: every painted rectangle is four corner writes, and one prefix sum gives the number of coats at every cell. The second half turns a count of K into -1 and a count of K-1 into +1, so the best additional rectangle is a maximum-sum rectangle over that transformed grid. Two disjoint rectangles can always be separated by a horizontal or vertical line, which reduces the pair search to two directional tables and a scan over the separating line.
+related:
+    - atcoder.abc434.d-clouds
+    - atcoder.awc0070.d-switching-the-lights

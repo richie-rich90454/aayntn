@@ -1,0 +1,30 @@
+id: codeforces.1144.f.graph-without-long-directed-paths
+title: Graph Without Long Directed Paths
+source: Codeforces
+contest: Codeforces Round 550 (Div. 3)
+division: gold
+url: https://codeforces.com/problemset/problem/1144/F
+editorialUrl: https://codeforces.com/blog/entry/66307
+techniques:
+    - graphs.bipartite-two-coloring
+prerequisites:
+    - graphs.representation
+    - graphs.bfs
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The graph is connected, so one traversal covers every vertex, but every vertex still has to be classified before any edge is oriented.
+    - The output is one bit per input edge, so the orientation of each edge must be compared with the colors of its endpoints in input order.
+    - The limits are 2 * 10^5 vertices and edges, so trying all orientations is impossible.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A directed path of length two appears exactly at a vertex that has one incoming edge and one outgoing edge.
+    - Every vertex must therefore have all of its incident edges pointing the same way, either all out or all in.
+    - Adjacent vertices must be of opposite kinds, so the underlying undirected graph has to be bipartite.
+discussion: >-
+    The orientation condition looks stronger than it is. A vertex with one incoming and one outgoing edge immediately gives a directed path of length two, so every vertex must be a pure source or a pure sink. Two adjacent vertices cannot both be sources or both be sinks, which means the graph must admit a two-coloring, and the two colors are exactly the source and sink roles. When the graph is bipartite, orienting every edge from one side to the other satisfies the condition, and the printed bit for an edge only has to say whether the input order agrees with that orientation.
+related:
+    - atcoder.abc327.d.good-tuple-problem
+    - cses.1668.building-teams

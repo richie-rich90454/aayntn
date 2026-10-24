@@ -1,0 +1,26 @@
+id: cses.range-updates-and-sums
+title: Range Updates and Sums
+source: CSES
+contest: CSES Problem Set
+url: https://cses.fi/problemset/task/1735
+techniques:
+    - range-queries.lazy-propagation
+prerequisites:
+    - range-queries.segment-tree
+difficulty: 4
+estimatedMinutes: 35
+specialConstraints:
+    - Two hundred thousand values and queries, and the updates are a mix of additions and assignments, so one tag has to remember which operation is pending.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The array has an initial value at every position, so the tree is built from the input rather than starting from zero.
+    - An addition and an assignment do not compose the same way, so a single number cannot serve as the tag.
+    - Store an assignment flag, the assigned value, and an additive part, and read the tag as "assign first, then add".
+    - An assignment clears the additive part because it overwrites everything before it, while an addition accumulates on top of a pending assignment.
+discussion: >-
+    The query is an ordinary range sum, and the difficulty is entirely in the tag. An assignment followed by an addition is the function x -> s + a, while an addition followed by an assignment is just the assignment, so the tag needs both a set flag and an additive part. Push applies the parent's assignment and then its addition to each child, in that order, and clears both parts. With the composition written correctly, the update and query recursions are the standard lazy segment tree.
+related:
+    - usaco.2015.dec.platinum.counting-haybales
+    - usaco.2013.jan.gold.seating

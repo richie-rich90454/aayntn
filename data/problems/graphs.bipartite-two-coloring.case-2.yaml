@@ -1,0 +1,30 @@
+id: atcoder.abc327.d.good-tuple-problem
+title: Good Tuple Problem
+source: AtCoder
+contest: HHKB Programming Contest 2023 (AtCoder Beginner Contest 327)
+division: silver
+url: https://atcoder.jp/contests/abc327/tasks/abc327_d
+editorialUrl: https://atcoder.jp/contests/abc327/editorial/7585
+techniques:
+    - graphs.bipartite-two-coloring
+prerequisites:
+    - graphs.representation
+    - graphs.bfs
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - A pair may name the same value twice, which is a self-loop and an immediate No.
+    - The values are 1-based, and each pair forbids equality in both directions.
+    - N and M reach 2 * 10^5, so trying the 2^N sequences is impossible.
+recommendedLanguages:
+    - cpp17
+    - python
+hints:
+    - Treat every value from 1 to N as a vertex and every pair as an edge that requires the two endpoint bits to differ.
+    - The sequence X exists exactly when this graph is bipartite.
+    - A self-loop is a cycle of length one, so it must be rejected even if the rest of the graph is bipartite.
+discussion: >-
+    The statement is a sequence problem, but the sequence only carries one bit per value and every constraint says that two positions must hold different bits. That is a two-coloring of the graph whose vertices are the values and whose edges are the pairs. The one case that a loop-free graph never produces is a pair with equal endpoints, and it is exactly the case that makes the answer No without any search. Apart from that, the test is the ordinary breadth-first coloring, and the conflict check on already-colored neighbors is the part that turns the construction into a decision.
+related:
+    - codeforces.1144.f.graph-without-long-directed-paths
+    - cses.1668.building-teams

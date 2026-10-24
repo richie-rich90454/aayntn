@@ -1,0 +1,31 @@
+id: usaco.2022.jan.platinum.minimizing-haybales
+title: Minimizing Haybales
+source: USACO
+contest: 2022 January Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=1188
+editorialUrl: https://usaco.org/current/data/sol_prob1_platinum_jan22.html
+techniques:
+    - range-queries.sqrt-decomposition
+prerequisites:
+    - foundations.sorting
+    - range-queries.segment-tree
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - There are up to 100,000 stacks and the time limit is 4 seconds with 512 MB of memory.
+    - A stack may move past a neighbor only when their heights differ by at most K, so the reachable permutations are much more constrained than all permutations.
+    - The number of reachable sequences is exponential in N, so the construction has to commit to one stack at a time.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A stack can move left across a neighbor only when their heights differ by at most K, so a block of stacks is crossed as a unit only when the moving height is within K of both the block's minimum and maximum.
+    - Build the answer from left to right, one input stack at a time, instead of searching the whole remaining suffix after every placement.
+    - Store the answer so far in blocks of about the square root of N, keeping the elements of each block in their final order along with the block's minimum and maximum height.
+    - Walk left over the blocks that the new stack can cross, insert it into the block where it belongs, rotate it past the elements it can cross, and split a block when it grows beyond the square root of N.
+discussion: >-
+    The lexicographically smallest sequence is built from left to right, one input stack at a time, while the answer is kept in a list of blocks. Each block stores its elements in final order together with their minimum and maximum height, so a new stack can decide in O(1) whether it crosses the entire block: that happens exactly when its height is within K of both the block's minimum and maximum. The new stack walks left over the blocks it can cross, and the insertion then places it inside the block where it belongs and rotates it left past the elements it can cross. A block that grows beyond about the square root of N is split in half, which keeps the number of blocks and the size of each block at O(sqrt N). Each insertion therefore costs O(sqrt N) and the whole construction costs O(N sqrt N), which is fast enough for N = 100,000.
+related:
+    - usaco.2018.open.platinum.train-tracking
+    - usaco.2018.jan.platinum.cow-at-large

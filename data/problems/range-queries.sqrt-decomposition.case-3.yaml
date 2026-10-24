@@ -1,0 +1,32 @@
+id: usaco.2018.jan.platinum.cow-at-large
+title: Cow at Large
+source: USACO
+contest: 2018 January Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=793
+editorialUrl: https://usaco.org/current/data/sol_atlarge_platinum_jan18.html
+techniques:
+    - range-queries.sqrt-decomposition
+prerequisites:
+    - graphs.dfs
+    - graphs.tree-dp
+    - range-queries.fenwick-tree
+difficulty: 5
+estimatedMinutes: 55
+specialConstraints:
+    - The farm is a tree with up to 70,000 barns, and an answer is required for every possible starting barn.
+    - Running one depth-first search per starting barn is quadratic and too slow.
+    - The time limit is 4 seconds for C, C++, and Pascal, and 8 seconds for Java and Python.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A farmer reaches a barn no later than Bessie exactly when the barn is at least as close to some exit as it is to Bessie's start.
+    - For a fixed start, the barns that the farmers can cover form a union of subtrees, and the number of farmers is the number of subtrees.
+    - The number of subtrees can be written as a sum of 2 minus the degree over the covered barns, which turns the answer into a range sum over an Euler tour.
+    - Decompose the Euler tour into blocks of about the square root of N, keep a Fenwick tree per block, and lazily tag whole blocks during the depth-first search.
+discussion: >-
+    For a fixed starting barn, a farmer can cover every barn that is at least as close to a leaf as to the start. Those barns form a union of disjoint subtrees, and the number of farmers needed is the number of subtrees in that union. The official analysis turns the count into a weighted sum over the covered barns, where a barn of degree d contributes 2 - d, and then maintains that sum while a depth-first search moves the start from one barn to the next. The Euler tour of the tree turns each update into a range, and square-root decomposition over the tour keeps the work manageable: each block has its own Fenwick tree keyed by the distance difference, whole blocks receive a lazy tag, and only the two partial blocks are touched element by element. The result is O(N sqrt N log N) time and O(N) space, which fits the 70,000-barn limit.
+related:
+    - usaco.2018.open.platinum.train-tracking
+    - usaco.2022.jan.platinum.minimizing-haybales

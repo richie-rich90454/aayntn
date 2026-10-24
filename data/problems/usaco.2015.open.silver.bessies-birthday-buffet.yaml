@@ -1,0 +1,32 @@
+id: usaco.2015.open.silver.bessies-birthday-buffet
+title: Bessie's Birthday Buffet
+source: USACO
+contest: 2015 US Open Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=551
+editorialUrl: https://usaco.org/current/data/sol_buffet_silver.html
+techniques:
+    - graphs.floyd-warshall
+    - graphs.bfs
+    - dynamic-programming.dag-dp
+prerequisites:
+    - graphs.bfs
+    - dynamic-programming.dag-dp
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - A thousand patches, so the all-pairs distance table has a million entries and is affordable, while a dynamic program over subsets of patches is not.
+    - Every move costs the same amount of energy, so a breadth-first search from each patch fills the all-pairs table.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Bessie eats patches in strictly increasing order of quality, so the order in which she eats is a topological order of the patches sorted by quality.
+    - Between two eaten patches she may walk through any other patches without eating, so the energy spent is the shortest distance between them, not the length of a direct path.
+    - Every move costs the same E, so the shortest distance in edges from each patch comes from one breadth-first search, and the all-pairs table is that search repeated from every patch.
+    - With the table in hand, process the patches from the highest quality down and keep the best energy of a route that starts by eating at each patch.
+discussion: >-
+    The difficulty is that the route between two eaten patches is not the direct path, and the search for the next patch has to know how far away every other patch is. Because every move costs the same amount, a breadth-first search from each patch fills the all-pairs table in time proportional to the number of patches times the number of paths. The dynamic program then follows the sorted quality order, which is acyclic, and each transition reads one cell of the table. The direct-edge version fails on the sample, where the best route walks through a patch without eating there.
+related:
+    - usaco.2015.feb.silver.cow-hopscotch
+    - usaco.2016.feb.silver.milk-pails

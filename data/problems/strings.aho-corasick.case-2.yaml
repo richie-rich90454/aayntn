@@ -1,0 +1,27 @@
+id: codeforces.1202e.you-are-given-some-strings
+title: You Are Given Some Strings...
+source: Codeforces
+contest: Educational Codeforces Round 70 (Rated for Div. 2)
+url: https://codeforces.com/problemset/problem/1202/E
+editorialUrl: https://codeforces.com/blog/entry/68972
+techniques:
+    - strings.aho-corasick
+prerequisites:
+    - strings.aho-corasick
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - The text and the total pattern length are both two hundred thousand, so the number of ordered pairs rules out any solution that builds each concatenation.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Every occurrence of s_i + s_j has one split point between the two strings, so the sum can be reorganized around the split.
+    - For each position, count how many patterns end there and how many start there.
+    - The ending counts come from one automaton over the patterns; the starting counts come from a second automaton over the reversed patterns and the reversed text.
+    - Multiply the end count before the split by the start count after it and add over all splits.
+discussion: >-
+    The pair sum looks quadratic because there are n^2 ordered pairs, but the text is fixed and the split between the two patterns is what matters. One automaton counts the patterns ending at every position, and an automaton over the reversed patterns counts the patterns starting at every position. The answer is the sum over split points of the product of the two counts, which is linear in the total input size.
+related:
+    - cses.2102.finding-patterns
+    - codeforces.710f.string-set-queries

@@ -1,0 +1,29 @@
+id: cses.1668.building-teams
+title: Building Teams
+source: CSES
+contest: CSES Problem Set
+division: silver
+url: https://cses.fi/problemset/task/1668
+techniques:
+    - graphs.bipartite-two-coloring
+prerequisites:
+    - graphs.representation
+    - graphs.bfs
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - The friendship graph may be disconnected, so every component has to be colored before the answer can be printed.
+    - The output asks for team numbers 1 and 2, not a 0-based coloring.
+    - The limits are 10^5 pupils and 2 * 10^5 friendships, so the test has to be linear.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A friendship forbids the two pupils from receiving the same team, which is exactly the edge constraint of a two-coloring.
+    - A conflict on an edge proves that the component contains an odd cycle, and then no team assignment exists.
+    - Seed every uncolored pupil with team 1 and sweep its component, so disconnected friendship groups are handled too.
+discussion: >-
+    The task is the canonical two-coloring test with two extra pieces of bookkeeping. The graph is not guaranteed to be connected, so a search from pupil 1 can leave other friendship groups uncolored, and the output asks for the labels 1 and 2 rather than the 0 and 1 that the test produces. Neither detail changes the algorithm: the outer loop seeds every uncolored vertex, and the printing step adds one to each color. The interesting part is the conflict check, because a traversal that colors only newly discovered pupils builds a bipartite tree even when the component contains an odd cycle.
+related:
+    - usaco.2019.open.silver.fence-planning
+    - atcoder.abc327.d.good-tuple-problem

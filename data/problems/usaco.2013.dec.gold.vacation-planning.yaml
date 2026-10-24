@@ -1,0 +1,31 @@
+id: usaco.2013.dec.gold.vacation-planning
+title: Vacation Planning (Gold)
+source: USACO
+contest: 2013 December Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=364
+editorialUrl: https://usaco.org/current/data/sol_vacationgold.html
+techniques:
+    - graphs.floyd-warshall
+    - graphs.dijkstra
+prerequisites:
+    - graphs.dijkstra
+    - graphs.representation
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - Twenty thousand farms and two hundred hubs, so an all-pairs table over every farm is far too large; only the hub table is small.
+    - Every flight leaves a hub or arrives at one, which is the property that makes splitting a route at a hub valid.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Every flight touches a hub, so every route with at least one intermediate farm passes through a hub.
+    - The cheapest route from a to b is therefore the minimum of dist(a, h) + dist(h, b) over the hubs h.
+    - Compute the all-pairs distances among the hubs with Floyd-Warshall, and the distances from each farm to every hub with a run from each hub on the graph and on the reversed graph.
+    - Answer each request by scanning the hubs, and accumulate the total in a 64-bit integer because the sum of many fares overflows a 32-bit one.
+discussion: >-
+    The flight restriction is the whole problem. It says that no route can avoid the hubs, so the distance between two arbitrary farms can be assembled from distances to and from hubs. The hub table is at most two hundred by two hundred, which is exactly the size at which the cubic all-pairs algorithm is comfortable, and the distances from the farms to the hubs come from one single-source run per hub in each direction. The remaining work is a linear scan of the hubs per request.
+related:
+    - usaco.2015.jan.silver.meeting-time
+    - usaco.2023.dec.gold.flight-routes

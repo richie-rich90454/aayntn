@@ -1,0 +1,30 @@
+id: codeforces.220b.little-elephant-and-array
+title: Little Elephant and Array
+source: Codeforces
+contest: "Codeforces Round 136 (Div. 1)"
+division: gold
+url: https://codeforces.com/problemset/problem/220/B
+editorialUrl: https://codeforces.com/blog/entry/5177
+techniques:
+    - range-queries.mos-algorithm
+prerequisites:
+    - arrays.coordinate-compression
+    - foundations.sorting
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The values reach 10^9, but a value larger than the array length can never occur often enough to be counted.
+    - Both the array length and the number of queries reach 100000.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - For each query, a value x matters only when it occurs exactly x times in the range, so the frequency of every value is the only state needed.
+    - Moving one endpoint by one position changes the frequency of one value, which can make that value cross into or out of the "occurs exactly x times" set.
+    - Keep the frequency table and a counter of how many values currently satisfy frequency[x] == x.
+    - Values larger than n can be ignored or compressed, because they cannot occur n times inside any range.
+discussion: >-
+    The answer is a count of values that satisfy a local frequency condition, so it is maintainable in constant time under add and remove: after changing the frequency of x, test whether it just became x or just stopped being x. Mo's algorithm then supplies the order that makes the total number of frequency changes small. The large value bound is handled by compression or by discarding values above n, and the block order is the ordinary square-root decomposition of the left endpoint.
+related:
+    - codeforces.86d.powerful-array
+    - codeforces.617e.xor-and-favorite-number

@@ -1,0 +1,28 @@
+id: usaco.2013.jan.gold.seating
+title: Seating
+source: USACO
+contest: 2013 January Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=231
+editorialUrl: https://usaco.org/current/data/sol_seating.html
+techniques:
+    - range-queries.lazy-propagation
+prerequisites:
+    - range-queries.segment-tree
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - Five hundred thousand seats and three hundred thousand events, so both finding a block of empty seats and emptying a range have to be logarithmic.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A party fits exactly when some maximal run of empty seats is at least as long as the party, and the lowest such run is wanted.
+    - "Store three summaries per node: the empty prefix, the empty suffix, and the longest empty run anywhere in the node."
+    - The longest run that crosses a midpoint is the left child's suffix plus the right child's prefix, so the three summaries are enough to combine two children.
+    - Seating a party assigns a range to full, and a departure assigns a range to empty, so the pending update is a range assignment rather than a range addition.
+discussion: >-
+    The hard part is the query for the lowest block of empty seats, not the update. A node summarizes its empty seats with a prefix length, a suffix length, and a best length, and the crossing gap between the two children is the sum of the left suffix and the right prefix. The descent checks the left child, then the crossing gap, then the right child, which visits the leftmost block first. Seating the party and clearing a range are both assignments over a range, so one lazy tag marking a node full, empty, or unchanged handles every event.
+related:
+    - usaco.2015.dec.platinum.counting-haybales
+    - cses.range-updates-and-sums

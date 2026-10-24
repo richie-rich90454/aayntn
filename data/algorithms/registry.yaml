@@ -57,3 +57,35 @@ algorithms:
       title: Convex hull trick
       subject: dynamic-programming
       manifest: implementations/dynamic-programming/convex-hull-trick/algorithm.yaml
+    - id: enumeration.meet-in-the-middle
+      title: Meet in the middle as its own article
+      subject: enumeration
+      manifest: implementations/enumeration/meet-in-the-middle/algorithm.yaml
+    - id: range-queries.mos-algorithm
+      title: Mo's algorithm
+      subject: range-queries
+      manifest: implementations/range-queries/mos-algorithm/algorithm.yaml
+    - id: arrays.two-dimensional-difference-arrays
+      title: Two-dimensional difference arrays
+      subject: arrays
+      manifest: implementations/arrays/two-dimensional-difference-arrays/algorithm.yaml
+    - id: graphs.bipartite-two-coloring
+      title: The two-coloring test for a bipartite graph
+      subject: graphs
+      manifest: implementations/graphs/bipartite-two-coloring/algorithm.yaml
+    - id: range-queries.lazy-propagation
+      title: Lazy propagation
+      subject: range-queries
+      manifest: implementations/range-queries/lazy-propagation/algorithm.yaml
+    - id: range-queries.sqrt-decomposition
+      title: Square-root decomposition
+      subject: range-queries
+      manifest: implementations/range-queries/sqrt-decomposition/algorithm.yaml
+    - id: strings.aho-corasick
+      title: Aho-Corasick
+      subject: strings
+      manifest: implementations/strings/aho-corasick/algorithm.yaml
+    - id: graphs.floyd-warshall
+      title: Floyd-Warshall and all-pairs shortest paths
+      subject: graphs
+      manifest: implementations/graphs/floyd-warshall/algorithm.yaml

@@ -1,0 +1,30 @@
+id: usaco.2018.open.platinum.train-tracking
+title: Train Tracking
+source: USACO
+contest: 2018 US Open Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=841
+editorialUrl: https://usaco.org/current/data/sol_train_platinum_open18.html
+techniques:
+    - range-queries.sqrt-decomposition
+prerequisites:
+    - arrays.monotonic-queue
+    - searching.sliding-window
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The notebook holds only 5500 integers, far less than the million carriages, so the algorithm has to work in two passes with memory proportional to the square root of the input.
+    - The problem is interactive, so the implementation supplies helpBessie rather than reading from standard input.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The train passes twice, and the notebook is tiny, so the first pass has to summarize the parts of the array that the second pass will not need to see again.
+    - Record the minimum at every block boundary, where a block has about the square root of the number of carriages.
+    - In the second pass, keep one running minimum for each of the next block's windows; once the boundary minimum is reached, those answers are final.
+    - A monotonic queue replaces the repeated rescanning inside a block and brings the time down to O(N).
+discussion: >-
+    The memory limit rules out storing every window minimum and every carriage. The way out is to choose a block size B about the square root of N, spend the first pass finding the minimum at every multiple of B, and spend the second pass filling in the windows between two recorded boundaries. Between consecutive boundaries only O(B) windows are open at once, so both passes fit in O(sqrt N) memory, and a monotonic queue inside each pass brings the total time to O(N). The block boundaries are the square-root decomposition: they divide the windows into groups that can be finished independently.
+related:
+    - usaco.2022.jan.platinum.minimizing-haybales
+    - usaco.2018.jan.platinum.cow-at-large

@@ -1,0 +1,30 @@
+id: codeforces.617e.xor-and-favorite-number
+title: XOR and Favorite Number
+source: Codeforces
+contest: "Codeforces Round 340 (Div. 2)"
+division: platinum
+url: https://codeforces.com/problemset/problem/617/E
+editorialUrl: https://codeforces.com/blog/entry/22971
+techniques:
+    - range-queries.mos-algorithm
+prerequisites:
+    - arrays.prefix-sums
+    - foundations.sorting
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - The array length and the number of queries reach 100000, so enumerating the subarrays of every range is too slow.
+    - The number of qualifying pairs can reach n(n+1)/2, so the counter needs 64 bits.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Replace every subarray xor by the xor of two prefix values, so a query becomes a pair-counting query over the prefix array.
+    - The query [l, r] corresponds to the prefix indices l-1 through r, inclusive, and asks how many pairs of prefix values xor to k.
+    - Keep a frequency table of the prefix values in the current window; when a new prefix value p enters, count the existing values equal to p xor k.
+    - Increment or decrement the frequency after using it, so an index is never paired with itself.
+discussion: >-
+    The subarray transformation is the whole difficulty. Once the prefix-xor array replaces the original, a range query asks for the number of pairs of prefix indices in a window whose values xor to k, and that count can be maintained in constant time when one prefix index enters or leaves. Mo's algorithm orders the windows so the endpoints move O((n + q) sqrt n) times. The pair count is quadratic in n, so it must be accumulated in 64 bits, and the frequency update has to happen after the lookup when adding and before the lookup when removing.
+related:
+    - codeforces.86d.powerful-array
+    - codeforces.220b.little-elephant-and-array

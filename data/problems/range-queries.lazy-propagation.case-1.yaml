@@ -1,0 +1,28 @@
+id: usaco.2015.dec.platinum.counting-haybales
+title: Counting Haybales
+source: USACO
+contest: 2015 December Contest
+division: platinum
+url: https://usaco.org/index.php?page=viewproblem2&cpid=578
+editorialUrl: https://usaco.org/current/data/sol_haybales_platinum_dec15.html
+techniques:
+    - range-queries.lazy-propagation
+prerequisites:
+    - range-queries.segment-tree
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - Two hundred thousand fields and a hundred thousand instructions, so adding a haybale to every field in a range cannot touch the fields one at a time.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The instructions mix a range addition with two different range aggregates, a minimum and a sum.
+    - Adding the same amount to every field in a node shifts that node's minimum by the amount, and increases its sum by the amount times the number of fields.
+    - That means a whole node can absorb the addition in constant time, while its children keep their old values.
+    - Store the pending addition at the node, push it to the two children only when an instruction has to descend into them, and recompute the minimum and the sum on the way back up.
+discussion: >-
+    The addition is the same for every field in the range, which is what lets a node absorb it without visiting its leaves. The node's minimum moves by the added amount and its sum moves by the amount times the node's length, so both aggregates are available in constant time. The remaining work is the deferred tag: a partial overlap pushes the tag to the children before recursing, and a full overlap records the tag and stops. The two aggregates share one tag, and the sum needs a 64-bit accumulator.
+related:
+    - usaco.2013.jan.gold.seating
+    - cses.range-updates-and-sums

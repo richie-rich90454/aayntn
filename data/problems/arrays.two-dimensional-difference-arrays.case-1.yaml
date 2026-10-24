@@ -1,0 +1,29 @@
+id: atcoder.awc0070.d-switching-the-lights
+title: Switching the Lights
+source: AtCoder
+contest: AtCoder Weekday Contest 0070 Beta
+url: https://atcoder.jp/contests/awc0070/tasks/awc0070_d
+editorialUrl: https://atcoder.jp/contests/awc0070/tasks/awc0070_d/editorial
+techniques:
+    - arrays.two-dimensional-difference-arrays
+prerequisites:
+    - arrays.difference-arrays
+    - arrays.two-dimensional-prefix-sums
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - The grid holds more than two million cells and there are 200,000 rectangle operations, so touching every cell of every rectangle is too slow.
+    - The total brightness can exceed the 32-bit range.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Only the parity of the number of toggles at each cell matters.
+    - A rectangle toggle is a rectangle addition modulo two, so the four-corner update applies unchanged.
+    - Build the toggle counts once with a two-dimensional difference array, recover them with a prefix sum, and add the brightness a second time when the count is odd.
+discussion: >-
+    The operation is a rectangle toggle, and parity is addition modulo two, so the problem is a rectangle-addition problem whose values are read only at the end. The four corner markers record every operation in constant time, and one two-dimensional prefix sum recovers the number of toggles at every cell. The final brightness is the base sum plus one extra copy of every cell whose toggle count is odd.
+related:
+    - atcoder.abc434.d-clouds
+    - usaco.2019.feb.gold.painting-the-barn

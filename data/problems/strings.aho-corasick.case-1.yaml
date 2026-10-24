@@ -1,0 +1,26 @@
+id: cses.2102.finding-patterns
+title: Finding Patterns
+source: CSES
+contest: CSES Problem Set
+url: https://cses.fi/problemset/task/2102
+techniques:
+    - strings.aho-corasick
+prerequisites:
+    - strings.aho-corasick
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - The text is a hundred thousand characters and the patterns total half a million, so running a separate search per pattern is too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Every pattern has to be answered against the same text, so the work should be done once for the whole dictionary.
+    - Build a trie of the patterns and add a failure link to each node, which says which shorter prefix survives a mismatch.
+    - A pattern appears exactly when its terminal node is on the failure chain of some state visited by the text.
+    - Mark the states visited by the text and propagate the marks over the failure tree in reverse breadth-first order.
+discussion: >-
+    The direct solution runs KMP once per pattern and pays the text length for every pattern, which is too slow at the stated limits. Aho-Corasick indexes the dictionary instead, so the text is scanned once and every pattern is answered from the same automaton. The failure links turn the trie into an automaton, and propagating a boolean over the failure tree marks every pattern that occurs as a suffix of a visited state.
+related:
+    - codeforces.1202e.you-are-given-some-strings
+    - codeforces.710f.string-set-queries

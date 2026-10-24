@@ -1,0 +1,29 @@
+id: usaco.2012.open.gold.balanced-cow-subsets
+title: Balanced Cow Subsets
+source: USACO
+contest: 2012 US Open Contest
+division: gold
+url: https://usaco.org/index.php?page=viewproblem2&cpid=139
+techniques:
+    - enumeration.meet-in-the-middle
+prerequisites:
+    - enumeration.subset-enumeration
+    - enumeration.backtracking
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - Each cow can be left out, put in the left group, or put in the right group, so the direct search has 3^N leaves.
+    - With N up to 20, each half has at most 3^10 states, but different assignments can describe the same balanced subset.
+    - The milk outputs reach 10^8, so the signed differences approach 2 * 10^9 and 64-bit arithmetic avoids the 32-bit boundary.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Give each cow a coefficient of -1, 0, or 1; a subset is balanced exactly when some assignment of coefficients to its cows has signed sum zero.
+    - Split the cows in half, enumerate all 3^(N/2) signed sums of each half, and match a left difference d with a right difference -d.
+    - Different assignments can select the same subset, so store the selected-cow mask with each state and deduplicate the union masks that pair up.
+discussion: >-
+    The three-way choice makes this the signed-sum variant of meet in the middle: 3^(N/2) states per half instead of 2^(N/2). The hard part is that the summary value does not identify the subset, because a cow may be omitted while another assignment reaches the same difference, so each state must carry a bitmask and the matching must deduplicate the union of masks. It is the standard warning that meet in the middle matches summaries, and two summaries may describe the same object.
+related:
+    - cses.1628.meet-in-the-middle
+    - atcoder.abc184.f.programming-contest

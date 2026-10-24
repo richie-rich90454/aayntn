@@ -1,0 +1,30 @@
+id: codeforces.86d.powerful-array
+title: Powerful array
+source: Codeforces
+contest: "Yandex.Algorithm 2011: Round 2"
+division: platinum
+url: https://codeforces.com/problemset/problem/86/D
+editorialUrl: https://codeforces.com/blog/entry/2028
+techniques:
+    - range-queries.mos-algorithm
+prerequisites:
+    - arrays.coordinate-compression
+    - foundations.sorting
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - Both the array length and the number of queries reach 200000, so rebuilding the frequencies for every query is too slow.
+    - The power is a sum of squared frequencies, so it can exceed the range of a 32-bit integer.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The answer depends only on how many times each value occurs in the range, so moving one endpoint by one position changes exactly one value's contribution.
+    - If a value x currently occurs c times, adding another copy changes its term from c^2*x to (c+1)^2*x, an increase of (2c+1)*x.
+    - Sort the queries by the block of the left endpoint and sweep the right endpoint inside each block, so the window moves only a square-root number of steps per query on average.
+    - Store the answers by the query's original index, because the sort destroys the input order.
+discussion: >-
+    The power of a range is a function of its frequency table, and it can be repaired in constant time when one element enters or leaves. That is exactly the condition Mo's algorithm needs. The block order keeps the total endpoint movement near O((n + q) sqrt n), the frequency table supplies the current count of each value, and the contribution of a single value is updated with a difference of two squares. The squared counts and the value magnitudes make a 64-bit accumulator necessary even though every individual count is small.
+related:
+    - codeforces.220b.little-elephant-and-array
+    - codeforces.617e.xor-and-favorite-number

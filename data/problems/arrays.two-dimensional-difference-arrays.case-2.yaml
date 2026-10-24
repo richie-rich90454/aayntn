@@ -1,0 +1,29 @@
+id: atcoder.abc434.d-clouds
+title: Clouds
+source: AtCoder
+contest: AtCoder Beginner Contest 434
+url: https://atcoder.jp/contests/abc434/tasks/abc434_d
+editorialUrl: https://atcoder.jp/contests/abc434/tasks/abc434_d/editorial
+techniques:
+    - arrays.two-dimensional-difference-arrays
+prerequisites:
+    - arrays.difference-arrays
+    - arrays.two-dimensional-prefix-sums
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The sky is a fixed 2000 by 2000 grid and there are 200,000 clouds.
+    - The coverage count must be built once, because rebuilding it for every cloud is too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Build the coverage count of all clouds once.
+    - Removing a cloud changes only the cells that cloud covers alone.
+    - Record the total covered area and, for every cell covered exactly once, which cloud owns it.
+discussion: >-
+    The coverage count is a sum of rectangle indicators, so a two-dimensional difference array applies all the clouds in linear time and one prefix sum recovers the count at every cell. When a cloud is removed, the covered area shrinks only by the cells whose count is one and whose owner is that cloud. The whole answer is therefore one pass over the recovered grid plus one answer per cloud.
+related:
+    - atcoder.awc0070.d-switching-the-lights
+    - usaco.2019.feb.gold.painting-the-barn
