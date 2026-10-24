@@ -6,6 +6,7 @@ import type { DefaultTheme } from "vitepress";
 import type { LanguageInput } from "shiki";
 import { aayntnDark, aayntnLight } from "./theme/shiki-theme";
 import { katexMacros } from "./theme/katex-macros";
+import { mathPanel } from "./theme/markdown/math-panel";
 import { REPOSITORY_URL } from "./theme/repository";
 
 /**
@@ -480,6 +481,7 @@ export default defineConfig({
         // carries, so that the two can never disagree.
         headers: true,
         config(md) {
+            md.use(mathPanel);
             md.use(katex as never, {
                 delimiters: "dollars",
                 throwOnError: false,
