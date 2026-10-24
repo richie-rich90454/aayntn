@@ -3,7 +3,7 @@ title: Trash
 source: Timus
 contest: Timus Online Judge
 division: gold
-url: http://acm.timus.ru/problem.aspx?space=1&num=1076
+url: https://acm.timus.ru/problem.aspx?space=1&num=1076
 techniques:
     - graphs.hungarian-algorithm
 prerequisites:

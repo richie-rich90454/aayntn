@@ -2,7 +2,7 @@ id: hdu.2665.kth-number
 title: Kth number
 source: HDU
 division: platinum
-url: http://acm.hdu.edu.cn/showproblem.php?pid=2665
+url: https://acm.hdu.edu.cn/showproblem.php?pid=2665
 techniques:
     - range-queries.persistent-segment-tree
 prerequisites:
