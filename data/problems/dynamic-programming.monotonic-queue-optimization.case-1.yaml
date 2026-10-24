@@ -1,0 +1,30 @@
+id: codeforces.1077f2.pictures-with-kittens
+title: Pictures with Kittens (hard version)
+source: Codeforces
+contest: Codeforces Round 521 (Div. 3)
+division: platinum
+url: https://codeforces.com/problemset/problem/1077/F2
+editorialUrl: https://codeforces.com/blog/entry/63274
+techniques:
+    - dynamic-programming.monotonic-queue-optimization
+prerequisites:
+    - arrays.monotonic-queue
+    - dynamic-programming.0-1-knapsack
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - Both n and x reach 5000, so the transition over the previous repost has to be reduced from a scan to a sliding window maximum.
+    - Beauty values reach 10^9 and up to 5000 of them are summed, so the accumulator must hold values near 5 * 10^12.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A valid set of reposted positions leaves at most k - 1 unreposted pictures between consecutive reposts, because a block of k consecutive unreposted pictures would violate the condition.
+    - Let dp[c][i] be the largest beauty with exactly c pictures reposted and picture i reposted last; the previous repost j must lie in [i - k, i - 1].
+    - For a fixed count c, the recurrence is a maximum over a sliding window of the row for c - 1, so one decreasing deque computes the whole row in O(n).
+    - The end of the feed is also a window, because the final repost must be at least n - k + 1, or the last k pictures would contain no repost.
+discussion: >-
+    The condition on every k consecutive pictures is equivalent to a bound on the gap between consecutive reposts, which turns the problem into a layered dynamic program whose transition is a maximum over the previous k positions. That is exactly the shape a monotonic queue handles. One decreasing deque per layer replaces the inner scan, so the layers cost O(n) each and the total is O(nx). Unreachable states use a negative sentinel, and the final answer is the best reachable state whose last repost is close enough to the end.
+related:
+    - codeforces.372c.watching-fireworks-is-fun
+    - codeforces.940e.cashback

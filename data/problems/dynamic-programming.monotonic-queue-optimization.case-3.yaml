@@ -1,0 +1,31 @@
+id: codeforces.940e.cashback
+title: Cashback
+source: Codeforces
+contest: Codeforces Round 466 (Div. 2)
+division: gold
+url: https://codeforces.com/problemset/problem/940/E
+editorialUrl: https://codeforces.com/blog/entry/58033
+techniques:
+    - dynamic-programming.monotonic-queue-optimization
+prerequisites:
+    - arrays.monotonic-queue
+    - arrays.prefix-sums
+difficulty: 4
+estimatedMinutes: 35
+specialConstraints:
+    - The array length reaches 100000, so the partition cannot be enumerated.
+    - A segment of length L drops its floor(L / c) smallest elements, so the discount applies to whole groups of c elements rather than to every segment of length at least c.
+    - The values reach 10^9 and the total can reach 10^14, so the sum needs 64 bits.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A segment shorter than c gets no discount, so its elements are never better off grouped and can be taken one at a time.
+    - A segment longer than c can be cut into blocks of length c plus a remainder, and cutting cannot increase the cost because each block removes its own minimum.
+    - Therefore the only useful grouped move ends at i and covers exactly the c elements from i - c + 1 to i, dropping the smallest of them.
+    - That smallest element is the minimum of the last c positions, which an increasing deque maintains while i advances.
+discussion: >-
+    The discount is one free element per full group of c, so an optimal partition can be assumed to consist of single elements and blocks of exactly c. The dynamic program then has two transitions: pay for the current element, or pay for a block of c and subtract its minimum. Prefix sums give the block sum in constant time, and a monotonic queue gives the block minimum in constant amortized time. The result is O(n) time and O(n) space, and the arithmetic is 64-bit because the total sum is the dominant quantity.
+related:
+    - codeforces.1077f2.pictures-with-kittens
+    - codeforces.372c.watching-fireworks-is-fun

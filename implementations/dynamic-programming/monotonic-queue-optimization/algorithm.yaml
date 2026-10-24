@@ -1,0 +1,95 @@
+algorithm: dynamic-programming.monotonic-queue-optimization
+title: Monotonic queue optimization
+summary: Replace a minimum over the last k states of a dynamic program with a monotonic deque, so that the transition costs constant amortized time and the whole program runs in linear time.
+subject: dynamic-programming
+divisions: [gold]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.complexity, arrays.monotonic-queue]
+    recommended: [dynamic-programming.0-1-knapsack]
+complexity:
+    time: "O(n)"
+    space: "O(n)"
+assumptions:
+    - The transition takes the minimum or maximum over a contiguous window of earlier states.
+    - The window's lower bound never decreases, so candidates expire in the order they were added.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, k, and the array from stdin and prints dp[n], the minimum total cost of a route whose hops cover at most k positions."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the dp table and O(k) for the index deque"
+      status: unverified
+      inputs: "n k, then n integers a[1..n]."
+      outputs: "dp[n], the minimum total cost, on one line."
+      notes: "dp[i] = a[i] + min(dp[j]) for j in [i - k, i - 1], with dp[0] = 0. The deque keeps indices whose dp values strictly increase from front to back, so the front is the minimum of the current window. Expiring an index is a front pop, and discarding a dominated index is a back pop; every index enters once and leaves at most once, which makes the whole run linear. The accumulator is 64 bits, because the answer can reach about 10^15."
+      operations: [expire-window, read-minimum, discard-dominated, push-candidate]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, k, and the array from stdin and prints dp[n], the minimum total cost of a route whose hops cover at most k positions."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the dp table and O(k) for the index deque"
+      status: unverified
+      inputs: "n k, then n integers a[1..n]."
+      outputs: "dp[n], the minimum total cost, on one line."
+      notes: "dp[i] = a[i] + min(dp[j]) for j in [i - k, i - 1], with dp[0] = 0. The deque keeps indices whose dp values strictly increase from front to back, so the front is the minimum of the current window. Expiring an index is a front pop, and discarding a dominated index is a back pop; every index enters once and leaves at most once, which makes the whole run linear. The accumulator is 64 bits, because the answer can reach about 10^15."
+      operations: [expire-window, read-minimum, discard-dominated, push-candidate]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, k, and the array from stdin and prints dp[n], the minimum total cost of a route whose hops cover at most k positions."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the dp table and O(k) for the index deque"
+      status: unverified
+      inputs: "n k, then n integers a[1..n]."
+      outputs: "dp[n], the minimum total cost, on one line."
+      notes: "dp[i] = a[i] + min(dp[j]) for j in [i - k, i - 1], with dp[0] = 0. The deque keeps indices whose dp values strictly increase from front to back, so the front is the minimum of the current window. Expiring an index is a front pop, and discarding a dominated index is a back pop; every index enters once and leaves at most once, which makes the whole run linear. The accumulator is a long, because the answer can reach about 10^15, and the scanner is a byte reader because java.util.Scanner is too slow for the stated bounds."
+      operations: [expire-window, read-minimum, discard-dominated, push-candidate]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, k, and the array from stdin and prints dp[n], the minimum total cost of a route whose hops cover at most k positions."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the dp table and O(k) for the index deque"
+      status: unverified
+      inputs: "n k, then n integers a[1..n]."
+      outputs: "dp[n], the minimum total cost, on one line."
+      notes: "dp[i] = a[i] + min(dp[j]) for j in [i - k, i - 1], with dp[0] = 0. The deque keeps indices whose dp values strictly increase from front to back, so the front is the minimum of the current window. Expiring an index is a front pop, and discarding a dominated index is a back pop; every index enters once and leaves at most once, which makes the whole run linear. Python integers are arbitrary precision, so the accumulator cannot overflow."
+      operations: [expire-window, read-minimum, discard-dominated, push-candidate]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads n, k, and the array from stdin and prints dp[n], the minimum total cost of a route whose hops cover at most k positions."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the Dp table and O(k) for the index deque"
+      status: unverified
+      inputs: "n k, then n integers a[1..n]."
+      outputs: "dp[n], the minimum total cost, on one line."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Dp[i] = a[i] + min(Dp[j]) for j in [i - k, i - 1], with Dp[0] = 0. The deque keeps indices whose Dp values strictly increase from front to back, so the front is the minimum of the current window. Expiring an index is a front pop, and discarding a dominated index is a back pop; every index enters once and leaves at most once, which makes the whole run linear. The accumulator is Int64, and there is no 128-bit arithmetic."
+      operations: [expire-window, read-minimum, discard-dominated, push-candidate]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads n, k, and the array from stdin and prints dp[n], the minimum total cost of a route whose hops cover at most k positions."
+      time: "O(n)"
+      auxiliarySpace: "O(n) for the dp table and O(k) for the index deque"
+      status: unverified
+      inputs: "n k, then n integers a[1..n]."
+      outputs: "dp[n], the minimum total cost, on one line."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. dp[i] = a[i] + min(dp[j]) for j in [i - k, i - 1], with dp[0] = 0. The deque keeps indices whose dp values strictly increase from front to back, so the front is the minimum of the current window. Expiring an index is a front pop, and discarding a dominated index is a back pop; every index enters once and leaves at most once, which makes the whole run linear. The accumulator is BigInt, because a sum beyond 2^53 would lose precision as a Number."
+      operations: [expire-window, read-minimum, discard-dominated, push-candidate]

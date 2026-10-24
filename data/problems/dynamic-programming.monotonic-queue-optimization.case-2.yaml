@@ -1,0 +1,31 @@
+id: codeforces.372c.watching-fireworks-is-fun
+title: Watching Fireworks is Fun
+source: Codeforces
+contest: Codeforces Round 219 (Div. 1)
+division: platinum
+url: https://codeforces.com/problemset/problem/372/C
+editorialUrl: https://codeforces.com/blog/entry/9944
+techniques:
+    - dynamic-programming.monotonic-queue-optimization
+prerequisites:
+    - arrays.monotonic-queue
+    - dynamic-programming.0-1-knapsack
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The street has 150000 sections and there are 300 fireworks, so each layer has to be computed in linear time rather than in quadratic time.
+    - Two fireworks can share a launch time, so the elapsed time between layers can be zero.
+    - The happiness values and the total can be large, so the accumulator needs 64 bits.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The only state that matters at a launch time is the section where you stand, because the happiness of that firework depends only on that section.
+    - If the previous firework was at time t and the current one at time t', you can move at most d * (t' - t) sections, so the reachable previous sections form an interval around the current section.
+    - Write dp[x] for the best total happiness ending at section x, and replace it with b - |a - x| plus the maximum of the old dp over that interval.
+    - As x increases by one, the interval slides by one, so a decreasing deque supplies every interval maximum in constant amortized time.
+discussion: >-
+    The fireworks are processed in time order, and between two of them the reachable positions form a sliding interval whose width is fixed by the elapsed time and the speed. The transition is therefore a sliding window maximum over the previous layer, followed by adding a V-shaped happiness term. A monotonic deque computes each layer in O(n), so the whole program is O(nm) with O(n) memory, which is comfortable for 150000 sections and 300 fireworks. The interval bounds must be clamped to the street, and equal launch times produce a window of a single section.
+related:
+    - codeforces.1077f2.pictures-with-kittens
+    - codeforces.940e.cashback

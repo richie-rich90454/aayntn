@@ -1,0 +1,9 @@
+- name: a five-position path with a two-position hop limit
+  input: "5 2\n3 1 4 1 5\n"
+  expected: "7\n"
+- name: negative entry costs and a three-position window
+  input: "6 3\n-5 10 -3 -8 4 -1\n"
+  expected: "-17\n"
+- name: a one-position window whose total exceeds 32 bits
+  input: "4 1\n1000000000 1000000000 1000000000 1000000000\n"
+  expected: "4000000000\n"
