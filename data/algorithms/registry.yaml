@@ -335,3 +335,39 @@ algorithms:
       title: Suffix trees
       subject: strings
       manifest: implementations/strings/suffix-tree/algorithm.yaml
+    - id: advanced.matroids
+      title: Matroids
+      subject: advanced
+      manifest: implementations/advanced/matroids/algorithm.yaml
+    - id: foundations.proof-techniques
+      title: The proof techniques
+      subject: foundations
+      manifest: implementations/foundations/proof-techniques/algorithm.yaml
+    - id: geometry.half-plane-intersection
+      title: Line arrangements and the half-plane intersection
+      subject: geometry
+      manifest: implementations/geometry/half-plane-intersection/algorithm.yaml
+    - id: geometry.voronoi-diagram
+      title: The Voronoi diagram
+      subject: geometry
+      manifest: implementations/geometry/voronoi-diagram/algorithm.yaml
+    - id: greedy.exchange-argument
+      title: The exchange argument as a general tool
+      subject: greedy
+      manifest: implementations/greedy/exchange-argument/algorithm.yaml
+    - id: greedy.matroid-perspective
+      title: The matroid perspective
+      subject: greedy
+      manifest: implementations/greedy/matroid-perspective/algorithm.yaml
+    - id: strings.subsequence-hashing
+      title: String hashing of subsequences
+      subject: strings
+      manifest: implementations/strings/subsequence-hashing/algorithm.yaml
+    - id: strings.suffix-array-palindrome
+      title: The suffix-array-based palindrome method
+      subject: strings
+      manifest: implementations/strings/suffix-array-palindrome/algorithm.yaml
+    - id: trees.top-tree
+      title: The top-tree and rake-compress formulation
+      subject: trees
+      manifest: implementations/trees/top-tree/algorithm.yaml

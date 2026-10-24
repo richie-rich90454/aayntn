@@ -2405,3 +2405,312 @@ strings.suffix-tree:
       expected: |
           1
           0
+
+advanced.matroids:
+    - name: a small connected graph with a heavy shortcut
+      input: |
+          4 5
+          1 2 1
+          2 3 2
+          3 4 3
+          1 4 10
+          2 4 4
+      expected: |
+          17
+    - name: a disconnected forest with negative weights and a self-loop
+      input: |
+          6 7
+          1 2 5
+          2 3 4
+          1 3 9
+          4 5 -2
+          5 6 -3
+          4 6 -1
+          2 2 100
+      expected: |
+          11
+    - name: the minimal graph with no edges
+      input: |
+          1 0
+      expected: |
+          0
+
+foundations.proof-techniques:
+    - name: the empty sum is zero and matches the empty square
+      input: |
+          0
+      expected: |
+          0
+          0
+          MATCH
+    - name: one odd number matches one squared
+      input: |
+          1
+      expected: |
+          1
+          1
+          MATCH
+    - name: four odd numbers match four squared
+      input: |
+          4
+      expected: |
+          16
+          16
+          MATCH
+
+geometry.half-plane-intersection:
+    - name: the square with corners at zero and two
+      input: |
+          4
+          -1 0 0
+          0 -1 0
+          1 0 2
+          0 1 2
+      expected: |
+          8
+    - name: the right triangle cut by the line with normal one and two
+      input: |
+          3
+          -1 0 0
+          0 -1 0
+          1 2 6
+      expected: |
+          18
+    - name: an unbounded quadrant has no finite area
+      input: |
+          2
+          -1 0 0
+          0 -1 0
+      expected: |
+          UNBOUNDED
+
+geometry.voronoi-diagram:
+    - name: five sites with two ties
+      input: |
+          5 4
+          0 0
+          4 0
+          4 4
+          0 4
+          2 2
+          1 1
+          3 1
+          2 3
+          4 4
+      expected: |
+          1
+          2
+          5
+          3
+    - name: negative coordinates and symmetric ties
+      input: |
+          4 5
+          -3 -2
+          3 -2
+          3 4
+          -3 4
+          0 -2
+          0 0
+          0 3
+          -3 0
+          3 0
+      expected: |
+          1
+          1
+          3
+          1
+          2
+    - name: edge case, a single site and repeated queries
+      input: |
+          1 3
+          0 0
+          0 0
+          -1000000 -1000000
+          1000000 1000000
+      expected: |
+          1
+          1
+          1
+
+greedy.exchange-argument:
+    - name: four overlapping interviews
+      input: |
+          4
+          1 4
+          3 5
+          5 7
+          2 8
+      expected: |
+          2 2
+          MATCH
+    - name: chain of touching intervals
+      input: |
+          4
+          0 5
+          5 10
+          4 6
+          10 12
+      expected: |
+          3 3
+          MATCH
+    - name: shortest-first trap
+      input: |
+          3
+          10 11
+          1 5
+          5 11
+      expected: |
+          2 2
+          MATCH
+
+greedy.matroid-perspective:
+    - name: mixed colors keep the heaviest item of each class
+      input: |
+          5
+          1 4
+          2 9
+          1 7
+          3 2
+          2 5
+      expected: |
+          18
+    - name: a single color keeps only its heaviest item
+      input: |
+          4
+          7 3
+          7 10
+          7 1
+          7 6
+      expected: |
+          10
+    - name: two colors exceed a signed 32-bit total
+      input: |
+          3
+          1 1000000000
+          2 1000000000
+          1 500000000
+      expected: |
+          2000000000
+
+strings.subsequence-hashing:
+    - name: two equal runs, with both SAME and DIFFERENT answers
+      input: |
+          aabbaa
+          6
+          0 1
+          0 2
+          2 3
+          1 4
+          0 5
+          3 5
+      expected: |
+          SAME
+          DIFFERENT
+          SAME
+          DIFFERENT
+          DIFFERENT
+          DIFFERENT
+    - name: one odd character between long equal blocks
+      input: |
+          aaabaaa
+          5
+          0 2
+          0 3
+          3 6
+          4 6
+          1 1
+      expected: |
+          SAME
+          DIFFERENT
+          DIFFERENT
+          SAME
+          SAME
+    - name: edge case with the shortest nontrivial string and reversed indices
+      input: |
+          ab
+          4
+          0 1
+          1 0
+          0 0
+          1 1
+      expected: |
+          DIFFERENT
+          DIFFERENT
+          SAME
+          SAME
+
+strings.suffix-array-palindrome:
+    - name: a string whose longest palindrome is not at the first center
+      input: |
+          banana
+      expected: |
+          5
+          1
+    - name: an even-length palindrome, whose center lies between two characters
+      input: |
+          cbbd
+      expected: |
+          2
+          1
+    - name: the all-equal edge case, which exercises the sentinel and the radius bound
+      input: |
+          aaaa
+      expected: |
+          4
+          0
+
+trees.top-tree:
+    - name: a chain with a value change, a cut, and a relink
+      input: |
+          6 14
+          link 0 1
+          link 1 2
+          link 2 3
+          link 3 4
+          link 4 5
+          path 0 5
+          set 2 10
+          path 0 5
+          cut 2 3
+          path 0 2
+          path 0 5
+          path 3 5
+          link 2 4
+          path 0 5
+      expected: |
+          6
+          15
+          12
+          0
+          3
+          14
+    - name: a two-vertex tree with a negative value and repeated operations
+      input: |
+          2 9
+          path 0 1
+          link 0 1
+          link 0 1
+          path 0 1
+          set 1 -3
+          path 0 1
+          cut 0 1
+          cut 0 1
+          path 0 1
+      expected: |
+          0
+          2
+          -2
+          0
+    - name: one isolated vertex, a self loop, and a self cut
+      input: |
+          1 6
+          path 0 0
+          set 0 5
+          path 0 0
+          cut 0 0
+          link 0 0
+          path 0 0
+      expected: |
+          1
+          5
+          5

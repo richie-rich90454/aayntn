@@ -7,9 +7,12 @@ url: https://codeforces.com/problemset/problem/230/B
 editorialUrl: https://codeforces.com/blog/entry/5437
 techniques:
     - foundations.proof-techniques
+    - number-theory.miller-rabin
 prerequisites:
-    - number-theory.sieve
+    - foundations.binary-representation
     - foundations.complexity
+    - number-theory.modular-arithmetic
+    - number-theory.sieve
 difficulty: 3
 estimatedMinutes: 30
 specialConstraints:
@@ -25,8 +28,7 @@ hints:
     - Write the number as a product of two divisors and see how many distinct divisors that forces.
     - The only way to have exactly one divisor strictly between 1 and the number is for the two factors to be equal.
     - If the repeated factor were composite, it would contribute another divisor, so it must be prime.
-discussion: >-
-    The classification is that a number has exactly three divisors if and only if it is the square of a prime. One direction is immediate from the divisor list 1, p, p squared. The other direction writes the number as a product of two nontrivial divisors; exactly one divisor can lie strictly between 1 and the number, so the factors are equal and the common factor is prime. The algorithm sieves the primes up to 10^6, checks that the value is a perfect square, and checks that its root is prime. Both directions of the proof are needed: the square test alone accepts 16, and the primality test alone accepts 7.
+discussion: "The classification is that a number has exactly three divisors if and only if it is the square of a prime. One direction is immediate from the divisor list 1, p, p squared. The other direction writes the number as a product of two nontrivial divisors; exactly one divisor can lie strictly between 1 and the number, so the factors are equal and the common factor is prime. The algorithm sieves the primes up to 10^6, checks that the value is a perfect square, and checks that its root is prime. Both directions of the proof are needed: the square test alone accepts 16, and the primality test alone accepts 7."
 related:
     - codeforces.1305c.kuroni-and-impossible-calculation
     - codeforces.1363a.odd-selection

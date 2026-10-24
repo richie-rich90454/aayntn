@@ -15,7 +15,7 @@ techniques:
       name: Matroids
       subject: advanced
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: advanced.offline-dynamic-connectivity
       name: Offline dynamic connectivity
@@ -461,7 +461,7 @@ techniques:
       name: The proof techniques
       subject: foundations
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: foundations.recursion
       name: Recursion
@@ -508,7 +508,7 @@ techniques:
       subject: geometry
       synonyms:
           - half-plane intersection
-      status: missing
+      status: published
       divisions: []
     - id: geometry.integer-geometry
       name: Integer geometry
@@ -568,7 +568,7 @@ techniques:
       name: The Voronoi diagram
       subject: geometry
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: graphs.0-1-bfs
       name: 0-1 BFS
@@ -756,7 +756,7 @@ techniques:
       subject: greedy
       synonyms:
           - exchange argument
-      status: missing
+      status: published
       divisions: []
     - id: greedy.feasibility-oracle
       name: Greedy with a feasibility oracle
@@ -778,7 +778,7 @@ techniques:
       subject: greedy
       synonyms:
           - matroid
-      status: missing
+      status: published
       divisions: []
     - id: greedy.multi-key-sorting
       name: Sorting by several keys
@@ -1098,7 +1098,7 @@ techniques:
       name: String hashing of subsequences
       subject: strings
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: strings.suffix-array
       name: Suffix array
@@ -1112,7 +1112,7 @@ techniques:
       name: The suffix-array-based palindrome method
       subject: strings
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: strings.suffix-automaton
       name: The suffix automaton
@@ -1222,7 +1222,7 @@ techniques:
       synonyms:
           - top tree
           - rake-compress
-      status: missing
+      status: published
       divisions: []
     - id: trees.tree-dp
       name: Tree dynamic programming

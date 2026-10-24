@@ -33,20 +33,20 @@ A second reason runs deeper. The recognition of a problem is what actually fails
 
 | Subject | Techniques it contains | Page |
 | --- | --- | --- |
-| Foundations and complexity | Amortized analysis, Binary representation, Complexity analysis, Loop invariants, Recursion, Sorting, The time-memory tradeoff | [Foundations and complexity](/algorithms/foundations/) |
+| Foundations and complexity | Amortized analysis, Binary representation, Complexity analysis, Loop invariants, The proof techniques, Recursion, Sorting, The time-memory tradeoff | [Foundations and complexity](/algorithms/foundations/) |
 | Enumeration and searching | Backtracking, Branch and bound, Complete search, Constraint propagation, Gray codes, Iterative deepening, Meet in the middle, Permutations, Subset enumeration | [Enumeration and searching](/algorithms/enumeration/) |
 | Searching | Binary search on the answer, Binary search, Parametric search, The sliding window variants with a state machine, Sliding window, Search over a sorted range of indices, Ternary search, The individual two-pointer patterns, Two pointers | [Searching](/algorithms/searching/) |
-| Greedy methods | Greedy with a feasibility oracle, Interval scheduling, Sorting by several keys, Scheduling with deadlines and release times | [Greedy methods](/algorithms/greedy/) |
+| Greedy methods | The exchange argument as a general tool, Greedy with a feasibility oracle, Interval scheduling, The matroid perspective, Sorting by several keys, Scheduling with deadlines and release times | [Greedy methods](/algorithms/greedy/) |
 | Arrays and sequences | Coordinate compression, Difference arrays, Monotonic queue, Monotonic stack, Prefix sums over other operators, Prefix sums, Range hashing, Subarray sums, Two-dimensional difference arrays, Two-dimensional prefix sums, Two pointers on an array, Sliding window maximum | [Arrays and sequences](/algorithms/arrays/) |
 | Range query structures | Fenwick tree, Implicit segment trees, Lazy propagation, Merge sort trees, Mo's algorithm, Persistent segment trees, Segment tree beats, Segment tree, Sparse table, Square-root decomposition, Wavelet trees | [Range query structures](/algorithms/range-queries/) |
 | Graphs and shortest paths | 0-1 BFS, Articulation points, Bellman-Ford, Breadth-first search, Bipartite matching, The two-coloring test for a bipartite graph, Bridges, Depth-first search, Dijkstra's algorithm, Dominator trees, Disjoint set union, Euler tours in graphs, Floyd-Warshall and all-pairs shortest paths, The Hungarian algorithm, Johnson's algorithm, Minimum cost flow, Minimum cut, Minimum spanning tree, Graph representation, Strongly connected components, Topological sort | [Graphs and shortest paths](/algorithms/graphs/) |
-| Trees and decompositions | Binary lifting, Centroid decomposition, Dynamic trees, Euler tour for trees, Heavy-light decomposition, Lowest common ancestor, Rerooting, Small-to-large merging, Tree dynamic programming, Tree hashing, Virtual trees | [Trees and decompositions](/algorithms/trees/) |
+| Trees and decompositions | Binary lifting, Centroid decomposition, Dynamic trees, Euler tour for trees, Heavy-light decomposition, Lowest common ancestor, Rerooting, Small-to-large merging, The top-tree and rake-compress formulation, Tree dynamic programming, Tree hashing, Virtual trees | [Trees and decompositions](/algorithms/trees/) |
 | Dynamic programming | 0/1 knapsack, The aliens trick, Bitmask dynamic programming, Convex hull trick, Dynamic programming on a directed acyclic graph, Digit dynamic programming, Divide-and-conquer optimization, Interval dynamic programming, Knuth optimization, The Li Chao tree, Longest increasing subsequence, Monotonic queue optimization, Profile dynamic programming, Subset transforms | [Dynamic programming](/algorithms/dynamic-programming/) |
-| Strings | Aho-Corasick, Knuth-Morris-Pratt, The Manacher algorithm, The minimal rotation of a string, Palindrome trees (eertree), Rolling hash, Suffix array, The suffix automaton, Suffix trees, Trie, The Z algorithm | [Strings](/algorithms/strings/) |
+| Strings | Aho-Corasick, Knuth-Morris-Pratt, The Manacher algorithm, The minimal rotation of a string, Palindrome trees (eertree), Rolling hash, String hashing of subsequences, The suffix-array-based palindrome method, Suffix array, The suffix automaton, Suffix trees, Trie, The Z algorithm | [Strings](/algorithms/strings/) |
 | Number theory | Chinese remainder theorem, The discrete logarithm, Euler's totient function and Euler's theorem, The extended Euclidean algorithm, The fast Fourier transform, Matrix exponentiation, Miller-Rabin primality test, Modular arithmetic, The number-theoretic transform, Pollard's rho, Prime factorization, Sieve of Eratosthenes | [Number theory](/algorithms/number-theory/) |
 | Combinatorics | Binomial coefficients, Burnside's lemma, Counting dynamic programming, Generating functions, The hook-length formula, Inclusion and exclusion, Integer partitions, Multinomial coefficients and the hypergeometric distribution, The reflection principle, Stars and bars | [Combinatorics](/algorithms/combinatorics/) |
-| Computational geometry | Closest pair, Convex hull, Integer geometry, K-D trees, Point in polygon, Robust predicates, Rotating calipers, The smallest enclosing circle, Sweep line | [Computational geometry](/algorithms/geometry/) |
-| Advanced algorithms and special techniques | Berlekamp-Massey, Bitset optimization, Offline dynamic connectivity, Parallel binary search, Persistent data structures, Quickselect and randomized selection, Randomized algorithms, The rollback disjoint set union, Game theory and Sprague-Grundy theory, XOR bases | [Advanced algorithms and special techniques](/algorithms/advanced/) |
+| Computational geometry | Closest pair, Convex hull, Line arrangements and the half-plane intersection, Integer geometry, K-D trees, Point in polygon, Robust predicates, Rotating calipers, The smallest enclosing circle, Sweep line, The Voronoi diagram | [Computational geometry](/algorithms/geometry/) |
+| Advanced algorithms and special techniques | Berlekamp-Massey, Bitset optimization, Matroids, Offline dynamic connectivity, Parallel binary search, Persistent data structures, Quickselect and randomized selection, Randomized algorithms, The rollback disjoint set union, Game theory and Sprague-Grundy theory, XOR bases | [Advanced algorithms and special techniques](/algorithms/advanced/) |
 
 <!-- aayntn:subjects:end -->
 
@@ -60,6 +60,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | --- | --- | --- | --- | --- |
 | Berlekamp-Massey | O(n^2) | O(n) | `number-theory.modular-arithmetic` | [Berlekamp-Massey](/algorithms/advanced/berlekamp-massey) |
 | Bitset optimization | O(nW / 32) | O(W / 32) | `foundations.binary-representation` | [Bitset optimization](/algorithms/advanced/bitset-optimization) |
+| Matroids | O(m log m + (n + m) α(n)) | O(n + m) | `graphs.mst` | [Matroids](/algorithms/advanced/matroids) |
 | Offline dynamic connectivity | O(q log q log n) | O(n + q log q) | `graphs.dsu` | [Offline dynamic connectivity](/algorithms/advanced/offline-dynamic-connectivity) |
 | Parallel binary search | O((N + Q) log^2 N) | O(N + Q) | `searching.binary-search` | [Parallel binary search](/algorithms/advanced/parallel-binary-search) |
 | Persistent data structures | O(1) per operation on the persistent stack | O(q) for q operations, one node per push | `foundations.complexity` | [Persistent data structures](/algorithms/advanced/persistent-data-structures) |
@@ -117,11 +118,13 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Binary representation | O(1) per word operation | O(1) | `start.computational-foundations` | [Binary representation](/algorithms/foundations/binary-representation) |
 | Complexity analysis | a method, not an algorithm | a method, not an algorithm | `start.computational-foundations` | [Complexity analysis](/algorithms/foundations/complexity) |
 | Loop invariants | O(n) to read the array, then O(log n) probes | O(n) for the array, O(1) auxiliary | `foundations.complexity` | [Loop invariants](/algorithms/foundations/loop-invariants) |
+| The proof techniques | a method, not an algorithm | a method, not an algorithm | `foundations.loop-invariants` | [The proof techniques](/algorithms/foundations/proof-techniques) |
 | Recursion | the cost of its recurrence | O(d) for the call stack | `start.computational-foundations` | [Recursion](/algorithms/foundations/recursion) |
 | Sorting | O(n log n) | O(n) for merge sort, O(1) for heapsort | `foundations.complexity` | [Sorting](/algorithms/foundations/sorting) |
 | The time-memory tradeoff | O(n) preprocessing and O(1) per query for the full block table; O(n/B + B) per query for block totals alone | O(n + n/B) = O(n) for the full table; O(n/B) = O(sqrt n) for block totals alone | `foundations.complexity` | [The time-memory tradeoff](/algorithms/foundations/time-memory-tradeoff) |
 | Closest pair | O(n log n) | O(n) | `geometry.convex-hull` | [Closest pair](/algorithms/geometry/closest-pair) |
 | Convex hull | O(n log n) | O(n) | `foundations.sorting` | [Convex hull](/algorithms/geometry/convex-hull) |
+| Line arrangements and the half-plane intersection | O(n^2) for the reference clipping, O(n log n) with the angular sweep | O(n) | `geometry.convex-hull` | [Line arrangements and the half-plane intersection](/algorithms/geometry/half-plane-intersection) |
 | Integer geometry | O(n log C) | O(n) | `number-theory.extended-euclidean` | [Integer geometry](/algorithms/geometry/integer-geometry) |
 | K-D trees | O(n log^2 n) build with a full sort per node; O(log n) average per query and O(n) worst case | O(n) | `foundations.sorting` | [K-D trees](/algorithms/geometry/kd-trees) |
 | Point in polygon | O(n) per query | O(1) per query | `geometry.convex-hull` | [Point in polygon](/algorithms/geometry/point-in-polygon) |
@@ -129,6 +132,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Rotating calipers | O(n log n) for the whole algorithm | O(n) | `geometry.convex-hull` | [Rotating calipers](/algorithms/geometry/rotating-calipers) |
 | The smallest enclosing circle | O(n^3) worst case; O(n) expected with a random shuffle | O(n) for the points, O(1) auxiliary | `geometry.convex-hull` | [The smallest enclosing circle](/algorithms/geometry/smallest-enclosing-circle) |
 | Sweep line | O(n log n) for the decision version | O(n) | `geometry.convex-hull` | [Sweep line](/algorithms/geometry/sweep-line) |
+| The Voronoi diagram | O(n) per nearest-site query; O(n log n) to build the full diagram | O(1) extra for a direct query; O(n) for the full diagram | `geometry.convex-hull` | [The Voronoi diagram](/algorithms/geometry/voronoi-diagram) |
 | 0-1 BFS | O(V + E) | O(V + E) | `graphs.bfs` | [0-1 BFS](/algorithms/graphs/0-1-bfs) |
 | Articulation points | O(V + E) | O(V) | `graphs.representation` | [Articulation points](/algorithms/graphs/articulation-points) |
 | Bellman-Ford | O(VE) | O(V) | `graphs.representation` | [Bellman-Ford](/algorithms/graphs/bellman-ford) |
@@ -150,8 +154,10 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Graph representation | O(V + E) to build | O(V + E) for an adjacency list | `foundations.complexity` | [Graph representation](/algorithms/graphs/representation) |
 | Strongly connected components | O(V + E) | O(V) for Tarjan, O(V + E) for Kosaraju | `graphs.representation` | [Strongly connected components](/algorithms/graphs/strongly-connected-components) |
 | Topological sort | O(V + E) | O(V) | `graphs.representation` | [Topological sort](/algorithms/graphs/topological-sort) |
+| The exchange argument as a general tool | O(n log n) | O(n) | `foundations.sorting` | [The exchange argument as a general tool](/algorithms/greedy/exchange-argument) |
 | Greedy with a feasibility oracle | O(n log n) | O(n) | `foundations.sorting` | [Greedy with a feasibility oracle](/algorithms/greedy/feasibility-oracle) |
 | Interval scheduling | O(n log n) | O(n) | `foundations.sorting` | [Interval scheduling](/algorithms/greedy/interval-scheduling) |
+| The matroid perspective | O(n log n) | O(n) | `foundations.sorting` | [The matroid perspective](/algorithms/greedy/matroid-perspective) |
 | Sorting by several keys | O(n log n) | O(n) | `foundations.sorting` | [Sorting by several keys](/algorithms/greedy/multi-key-sorting) |
 | Scheduling with deadlines and release times | O(n log n) | O(n) | `foundations.sorting` | [Scheduling with deadlines and release times](/algorithms/greedy/scheduling-deadlines-and-release-times) |
 | Chinese remainder theorem | O(k log M) | O(1) | `number-theory.modular-arithmetic` | [Chinese remainder theorem](/algorithms/number-theory/chinese-remainder) |
@@ -192,6 +198,8 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | The minimal rotation of a string | O(n) | O(1) beyond the input string | `foundations.complexity` | [The minimal rotation of a string](/algorithms/strings/minimal-rotation) |
 | Palindrome trees (eertree) | O(n) | O(n) | `foundations.complexity` | [Palindrome trees (eertree)](/algorithms/strings/palindrome-tree) |
 | Rolling hash | O(n) to build, O(1) per substring query | O(n) for the two tables | `foundations.complexity` | [Rolling hash](/algorithms/strings/rolling-hash) |
+| String hashing of subsequences | O(n + q) for one string and q queries | O(n) for the prefix, suffix and power tables | `foundations.complexity` | [String hashing of subsequences](/algorithms/strings/subsequence-hashing) |
+| The suffix-array-based palindrome method | O(n log n) | O(n log n) | `strings.suffix-array` | [The suffix-array-based palindrome method](/algorithms/strings/suffix-array-palindrome) |
 | Suffix array | O(n log n) | O(n) | `foundations.sorting` | [Suffix array](/algorithms/strings/suffix-array) |
 | The suffix automaton | O(26n) for a lowercase alphabet | O(26n) for the transition table | `strings.trie` | [The suffix automaton](/algorithms/strings/suffix-automaton) |
 | Suffix trees | O(n^2) for the published quadratic construction; O(n) for both answers after the build | O(n) nodes with 27 child slots each | `strings.trie` | [Suffix trees](/algorithms/strings/suffix-tree) |
@@ -205,6 +213,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Lowest common ancestor | O((n + m) log n) to build, O(log n) per query | O(n log n) | `graphs.bfs` | [Lowest common ancestor](/algorithms/trees/lca) |
 | Rerooting | O(n) | O(n) | `graphs.dfs` | [Rerooting](/algorithms/trees/rerooting) |
 | Small-to-large merging | O(n log n) expected | O(n) | `graphs.dfs` | [Small-to-large merging](/algorithms/trees/small-to-large-merging) |
+| The top-tree and rake-compress formulation | O(log n) amortized per operation | O(n) | `trees.lca` | [The top-tree and rake-compress formulation](/algorithms/trees/top-tree) |
 | Tree dynamic programming | O(n) | O(n) | `graphs.bfs` | [Tree dynamic programming](/algorithms/trees/tree-dp) |
 | Tree hashing | O(n log n + m log m) | O(n + m) | `trees.tree-dp` | [Tree hashing](/algorithms/trees/tree-hashing) |
 | Virtual trees | O(n log n) to preprocess, O(k log k + k log n) per query | O(n log n) for the ancestor table, O(k) for the virtual tree | `trees.lca` | [Virtual trees](/algorithms/trees/virtual-tree) |
