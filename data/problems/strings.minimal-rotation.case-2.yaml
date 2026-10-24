@@ -1,0 +1,27 @@
+id: poj.1509.glass-beads
+title: Glass Beads
+source: POJ
+contest: Central Europe 1998
+url: http://poj.org/problem?id=1509
+techniques:
+    - strings.minimal-rotation
+prerequisites:
+    - strings.minimal-rotation
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - Each necklace has up to 10000 beads and the input holds several cases, so comparing every rotation per case is too slow in the worst case.
+    - The answer is the 1-based position of the first bead of the worst cut, and ties must report the smallest position.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The worst cut is exactly the starting position of the lexicographically smallest rotation.
+    - The statement counts positions from 1, so add one to the 0-based cut before printing it.
+    - Keep two candidate cuts and the length of the common prefix of their rotations.
+    - When the scan ends, the smaller of the two candidates is the smallest starting position among the minimal rotations, which is the tie rule the statement asks for.
+discussion: >-
+    The necklace is a circular string, and the cut that produces the smallest linear string is the minimal rotation. The only differences from the plain version are the output convention and the tie rule: the position is 1-based, and among equal minimal rotations the smallest position is required. The two-candidate scan returns the smaller of its two surviving cuts, which is exactly the smallest position. Each case is linear in the length of the necklace, and the space is constant beyond the input.
+related:
+    - cses.1110.minimal-rotation
+    - hdu.2609.how-many

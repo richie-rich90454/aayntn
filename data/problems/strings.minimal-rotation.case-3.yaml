@@ -1,0 +1,27 @@
+id: hdu.2609.how-many
+title: How many
+source: HDU
+contest: HDU Problem Archive
+url: https://acm.hdu.edu.cn/showproblem.php?pid=2609
+techniques:
+    - strings.minimal-rotation
+prerequisites:
+    - strings.minimal-rotation
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - There are up to 10000 necklaces of length at most 100, so comparing every pair of necklaces costs 10^8 character comparisons.
+    - Two necklaces are the same when one is a rotation of the other, and a reversal does not count as the same necklace.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Two necklaces are equal up to rotation exactly when their minimal rotations are equal.
+    - Send every necklace to its minimal rotation, which is a canonical representative of its rotation class.
+    - Insert the canonical forms into a hash set and count the distinct keys.
+    - Do not also try the reversed necklace, because the statement allows rotation only and not flipping.
+discussion: >-
+    Counting distinct necklaces is a canonicalization problem. Each necklace is replaced by its lexicographically smallest rotation, which is the same string for two necklaces exactly when one is a rotation of the other. A hash set of those canonical strings then counts the classes without comparing any pair of necklaces. The total work is linear in the input size, plus the expected cost of the hash operations, instead of the quadratic cost of the pairwise comparison. The linear two-candidate scan computes each canonical form in the length of its necklace.
+related:
+    - cses.1110.minimal-rotation
+    - poj.1509.glass-beads

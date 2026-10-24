@@ -1,0 +1,28 @@
+id: cses.1110.minimal-rotation
+title: Minimal Rotation
+source: CSES
+contest: CSES Problem Set
+url: https://cses.fi/problemset/task/1110
+techniques:
+    - strings.minimal-rotation
+prerequisites:
+    - strings.minimal-rotation
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - The string has up to one million characters, so writing down every rotation costs 10^12 characters.
+    - The output is the minimal rotation itself, not the position where it starts.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A rotation is a cut point. The rotation at k is the suffix starting at k followed by the prefix before k.
+    - Comparing all n rotations with each other is quadratic, and on a million characters it is far too slow.
+    - Keep two candidate cuts and the number of characters on which their rotations agree.
+    - When the candidates differ, the loser and every cut inside the matched block can be discarded at once.
+discussion: >-
+    The problem is the direct statement of the minimal rotation, and the linear two-candidate scan is the intended solution. The key is that a mismatch does not reject one cut but a whole block of cuts: if the rotations at i and j agree for k characters and then the character at i is larger, then every cut from i through i + k is beaten by the cut the same distance after j. The scan therefore eliminates at least one cut per step and runs in linear time with constant extra space. The output is the rotation, so the program prints the two pieces around the final cut.
+related:
+    - poj.1509.glass-beads
+    - hdu.2609.how-many

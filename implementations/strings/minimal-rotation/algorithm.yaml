@@ -1,0 +1,96 @@
+algorithm: strings.minimal-rotation
+title: The minimal rotation of a string
+summary: Find the lexicographically smallest rotation of a string in linear time by comparing two candidate cut points and discarding a whole block of starts at every mismatch.
+subject: strings
+divisions: [gold]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.complexity]
+    recommended: [strings.kmp, searching.two-pointers]
+complexity:
+    time: "O(n)"
+    space: "O(1) beyond the input string"
+assumptions:
+    - The input is one nonempty string over an ordered alphabet, and comparing two characters takes constant time.
+    - The whole string is in memory, because the scan reads characters at arbitrary positions modulo its length.
+    - Every rotation has the same length, so two rotations are ordered by their first differing character.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one string and prints its lexicographically smallest rotation."
+      time: "O(n)"
+      auxiliarySpace: "O(1) beyond the input string"
+      status: unverified
+      inputs: "One line holding a nonempty string without spaces, of length at most 10^6."
+      outputs: "One line holding the lexicographically smallest rotation of the input string."
+      notes: "Two candidate start positions i and j advance through the string while k counts the characters on which their rotations agree. At the first mismatch the loser and the k + 1 starts in its matched block are eliminated at once, which is what makes the scan linear. The input buffer holds 10^6 characters, and the comparison casts every character to unsigned char so the order does not depend on whether char is signed."
+      operations: [compare-rotations, eliminate-candidates, emit-rotation]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one string and prints its lexicographically smallest rotation."
+      time: "O(n)"
+      auxiliarySpace: "O(1) beyond the input string"
+      status: unverified
+      inputs: "One line holding a nonempty string without spaces, of length at most 10^6."
+      outputs: "One line holding the lexicographically smallest rotation of the input string."
+      notes: "Two candidate start positions i and j advance through the string while k counts the characters on which their rotations agree. At the first mismatch the loser and the k + 1 starts in its matched block are eliminated at once, which is what makes the scan linear. The C++ variant keeps the input in a std::string, disables the synchronization with the C streams, and indexes the string modulo its length, so no doubled copy is allocated."
+      operations: [compare-rotations, eliminate-candidates, emit-rotation]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one string and prints its lexicographically smallest rotation."
+      time: "O(n)"
+      auxiliarySpace: "O(1) beyond the input string"
+      status: unverified
+      inputs: "One line holding a nonempty string without spaces, of length at most 10^6."
+      outputs: "One line holding the lexicographically smallest rotation of the input string."
+      notes: "Two candidate start positions i and j advance through the string while k counts the characters on which their rotations agree. At the first mismatch the loser and the k + 1 starts in its matched block are eliminated at once, which is what makes the scan linear. The Java variant reads one line with a BufferedReader, builds the answer in a StringBuilder, and prints it with a single write."
+      operations: [compare-rotations, eliminate-candidates, emit-rotation]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one string and prints its lexicographically smallest rotation."
+      time: "O(n)"
+      auxiliarySpace: "O(1) beyond the input string"
+      status: unverified
+      inputs: "One line holding a nonempty string without spaces, of length at most 10^6."
+      outputs: "One line holding the lexicographically smallest rotation of the input string."
+      notes: "Two candidate start positions i and j advance through the string while k counts the characters on which their rotations agree. At the first mismatch the loser and the k + 1 starts in its matched block are eliminated at once, which is what makes the scan linear. The Python variant indexes the string modulo its length and emits the rotation as two slices, so the whole output is built in linear time."
+      operations: [compare-rotations, eliminate-candidates, emit-rotation]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one string and prints its lexicographically smallest rotation."
+      time: "O(n)"
+      auxiliarySpace: "O(1) beyond the input string"
+      status: unverified
+      inputs: "One line holding a nonempty string without spaces, of length at most 10^6."
+      outputs: "One line holding the lexicographically smallest rotation of the input string."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Two candidate start positions i and j advance through the string while k counts the characters on which their rotations agree. At the first mismatch the loser and the k + 1 starts in its matched block are eliminated at once, which is what makes the scan linear. The Pascal variant uses 1-based string indexing, strips a carriage return left by a CRLF line, and prints the rotation as the two pieces around the cut so it never builds a second copy."
+      operations: [compare-rotations, eliminate-candidates, emit-rotation]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads one string and prints its lexicographically smallest rotation."
+      time: "O(n)"
+      auxiliarySpace: "O(1) beyond the input string"
+      status: unverified
+      inputs: "One line holding a nonempty string without spaces, of length at most 10^6."
+      outputs: "One line holding the lexicographically smallest rotation of the input string."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Two candidate start positions i and j advance through the string while k counts the characters on which their rotations agree. At the first mismatch the loser and the k + 1 starts in its matched block are eliminated at once, which is what makes the scan linear. The JavaScript variant collects the standard input with the stream events, then indexes the string modulo its length and writes one line."
+      operations: [compare-rotations, eliminate-candidates, emit-rotation]

@@ -1,0 +1,9 @@
+- name: the sample from the CSES problem, where the cut is in the middle
+  input: "acab\n"
+  expected: "abac\n"
+- name: a word whose minimum wraps around the end
+  input: "amandamanda\n"
+  expected: "aamandamand\n"
+- name: edge case with a single character
+  input: "z\n"
+  expected: "z\n"
