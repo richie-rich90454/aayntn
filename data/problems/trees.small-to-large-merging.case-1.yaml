@@ -1,0 +1,29 @@
+id: cses.1139.distinct-colors
+title: Distinct Colors
+source: CSES
+contest: CSES Problem Set
+url: https://cses.fi/problemset/task/1139
+techniques:
+    - trees.small-to-large-merging
+prerequisites:
+    - trees.tree-dp
+    - graphs.dfs
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The tree holds up to 200,000 vertices, and the sum of the subtree sizes is quadratic on a chain.
+    - Colors reach 10^9, so a frequency array indexed by color needs compression.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Every subtree owns a set of colors, and the answer for a vertex is the size of that set.
+    - A vertex can reuse the largest child's set instead of building a new one from all of its children.
+    - Insert the colors of every smaller child's set into the larger one and keep only the colors that were absent.
+    - Merge each vertex into its parent in reverse index order when the input numbers parents before children.
+discussion: >-
+    The root of the difficulty is that the sets of different subtrees overlap in color, so summing the children's answers double counts. Keeping one set per live subtree and merging the smaller set into the larger one avoids both the double count and the repeated copying. The doubling argument bounds the number of insertions, and a hash set makes each insertion expected constant time.
+related:
+    - codeforces.600e.lomsat-gelral
+    - codeforces.1009f.dominant-indices

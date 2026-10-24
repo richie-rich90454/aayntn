@@ -1,0 +1,94 @@
+algorithm: trees.small-to-large-merging
+title: Small-to-large merging
+summary: Merge the smaller live component into the larger one at every vertex, so each vertex is charged only a logarithmic number of times while every subtree answer is built bottom-up.
+subject: trees
+divisions: [gold, platinum]
+importance: common-contest-technique
+prerequisites:
+    required: [graphs.dfs, foundations.complexity]
+    recommended: [trees.tree-dp, graphs.dsu]
+complexity:
+    time: "O(n log n) expected"
+    space: "O(n)"
+assumptions:
+    - The input is a rooted tree, and every vertex carries one nonnegative color.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a rooted tree from stdin and prints the number of distinct colors in the subtree of every vertex."
+      time: "O(n log n) expected"
+      auxiliarySpace: "O(n) for the live sets, the component weights, the parents and the answers"
+      status: unverified
+      inputs: "n, then the n colors of the vertices 0..n-1, then the n-1 parents of the vertices 1..n-1, each smaller than its child."
+      outputs: "n lines; line v holds the number of distinct colors in the subtree of v."
+      notes: "Each vertex starts with a set that holds its own color. The reverse index sweep is a postorder because every parent is numbered before its child, so when a vertex is reached all of its children are already in its set. The set is merged into the parent's set with the larger live component kept as the base, so every scanned color is charged to a vertex whose component at least doubles; the weight is the number of vertices the component represents and is added after each merge. The C variant uses an open-addressing hash set with -1 as the empty marker, so every color is nonnegative; the set owns its slots, and a child's set is released after the merge. The output is one line per vertex so the six languages are byte-identical."
+      operations: [merge-sets, answer-subtree]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a rooted tree from stdin and prints the number of distinct colors in the subtree of every vertex."
+      time: "O(n log n) expected"
+      auxiliarySpace: "O(n) for the live sets, the component weights, the parents and the answers"
+      status: unverified
+      inputs: "n, then the n colors of the vertices 0..n-1, then the n-1 parents of the vertices 1..n-1, each smaller than its child."
+      outputs: "n lines; line v holds the number of distinct colors in the subtree of v."
+      notes: "Each vertex starts with a set that holds its own color. The reverse index sweep is a postorder because every parent is numbered before its child, so when a vertex is reached all of its children are already in its set. The set is merged into the parent's set with the larger live component kept as the base, so every scanned color is charged to a vertex whose component at least doubles; the weight is the number of vertices the component represents and is added after each merge. The C++ variant uses one std::unordered_set per vertex and swaps the two containers when the child's component is larger, so the large set is never copied. The output is one line per vertex so the six languages are byte-identical."
+      operations: [merge-sets, answer-subtree]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a rooted tree from stdin and prints the number of distinct colors in the subtree of every vertex."
+      time: "O(n log n) expected"
+      auxiliarySpace: "O(n) for the live sets, the component weights, the parents and the answers"
+      status: unverified
+      inputs: "n, then the n colors of the vertices 0..n-1, then the n-1 parents of the vertices 1..n-1, each smaller than its child."
+      outputs: "n lines; line v holds the number of distinct colors in the subtree of v."
+      notes: "Each vertex starts with a set that holds its own color. The reverse index sweep is a postorder because every parent is numbered before its child, so when a vertex is reached all of its children are already in its set. The set is merged into the parent's set with the larger live component kept as the base, so every scanned color is charged to a vertex whose component at least doubles; the weight is the number of vertices the component represents and is added after each merge. The Java variant uses one HashSet per vertex and a byte-level scanner; the garbage collector reclaims a child's set after it is cleared. The output is one line per vertex so the six languages are byte-identical."
+      operations: [merge-sets, answer-subtree]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads a rooted tree from stdin and prints the number of distinct colors in the subtree of every vertex."
+      time: "O(n log n) expected"
+      auxiliarySpace: "O(n) for the live sets, the component weights, the parents and the answers"
+      status: unverified
+      inputs: "n, then the n colors of the vertices 0..n-1, then the n-1 parents of the vertices 1..n-1, each smaller than its child."
+      outputs: "n lines; line v holds the number of distinct colors in the subtree of v."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Each vertex starts with a Set that holds its own color. The reverse index sweep is a postorder because every parent is numbered before its child, so when a vertex is reached all of its children are already in its set. The set is merged into the parent's set with the larger live component kept as the base, so every scanned color is charged to a vertex whose component at least doubles; the weight is the number of vertices the component represents and is added after each merge. The output is one line per vertex so the six languages are byte-identical."
+      operations: [merge-sets, answer-subtree]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads a rooted tree from stdin and prints the number of distinct colors in the subtree of every vertex."
+      time: "O(n log n) expected"
+      auxiliarySpace: "O(n) for the live sets, the component weights, the parents and the answers"
+      status: unverified
+      inputs: "n, then the n colors of the vertices 0..n-1, then the n-1 parents of the vertices 1..n-1, each smaller than its child."
+      outputs: "n lines; line v holds the number of distinct colors in the subtree of v."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Each vertex starts with a TIntSet that holds its own color. The reverse index sweep is a postorder because every parent is numbered before its child, so when a vertex is reached all of its children are already in its set. The set is merged into the parent's set with the larger live component kept as the base, so every scanned color is charged to a vertex whose component at least doubles; the weight is the number of vertices the component represents and is added after each merge. The Pascal variant is a class with an open-addressing table, -1 as the empty marker, and a destructor that releases the slots; a child's instance is freed after the merge. The output is one line per vertex so the six languages are byte-identical."
+      operations: [merge-sets, answer-subtree]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a rooted tree from stdin and prints the number of distinct colors in the subtree of every vertex."
+      time: "O(n log n) expected"
+      auxiliarySpace: "O(n) for the live sets, the component weights, the parents and the answers"
+      status: unverified
+      inputs: "n, then the n colors of the vertices 0..n-1, then the n-1 parents of the vertices 1..n-1, each smaller than its child."
+      outputs: "n lines; line v holds the number of distinct colors in the subtree of v."
+      notes: "Each vertex starts with a set that holds its own color. The reverse index sweep is a postorder because every parent is numbered before its child, so when a vertex is reached all of its children are already in its set. The set is merged into the parent's set with the larger live component kept as the base, so every scanned color is charged to a vertex whose component at least doubles; the weight is the number of vertices the component represents and is added after each merge. The Python variant uses the built-in set and its update method, which iterates the smaller set. The output is written as bytes so the line feed does not depend on the platform, which keeps the six languages byte-identical."
+      operations: [merge-sets, answer-subtree]

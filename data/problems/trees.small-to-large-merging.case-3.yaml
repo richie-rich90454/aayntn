@@ -1,0 +1,30 @@
+id: codeforces.1009f.dominant-indices
+title: Dominant Indices
+source: Codeforces
+contest: Educational Codeforces Round 47 (Rated for Div. 2)
+division: platinum
+url: https://codeforces.com/problemset/problem/1009/F
+editorialUrl: https://codeforces.com/blog/entry/60630
+techniques:
+    - trees.small-to-large-merging
+prerequisites:
+    - trees.tree-dp
+    - graphs.dfs
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - The tree holds up to 1,000,000 vertices, so a recursive traversal over a chain overflows the stack and the total live storage must stay linear.
+    - If several depths attain the maximum count, the answer is the smallest such depth.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - For each vertex, the relevant state is a map from depth to the number of descendants at that depth.
+    - The map of a vertex is the merge of its children's maps, so keep the largest child's map and insert the others.
+    - Store absolute depths, not distances from the current vertex, so merging two maps needs no shift of every key.
+    - Track the depth with the largest count and break ties toward the smaller absolute depth; subtract the vertex's own depth at the end.
+discussion: >-
+    A direct depth array per vertex is quadratic on a chain, and shifting every key when a child's map moves to its parent is just as bad. Absolute depths make the keys compatible across the whole tree, so a merge is only an insertion loop over the smaller map. The best depth is maintained as counts change, with the tie resolved toward the smaller depth, and the answer for a vertex is that absolute depth minus the vertex's depth. The bound is the same doubling argument as for any other small-to-large merge.
+related:
+    - cses.1139.distinct-colors
+    - codeforces.600e.lomsat-gelral

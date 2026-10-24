@@ -1,0 +1,30 @@
+id: codeforces.600e.lomsat-gelral
+title: Lomsat gelral
+source: Codeforces
+contest: Educational Codeforces Round 2
+division: platinum
+url: https://codeforces.com/problemset/problem/600/E
+editorialUrl: https://codeforces.com/blog/entry/21827
+techniques:
+    - trees.small-to-large-merging
+prerequisites:
+    - trees.tree-dp
+    - graphs.dfs
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The tree holds up to 100,000 vertices, and the sum of the dominating colors can exceed the 32-bit range.
+    - Several colors can dominate one subtree, and every one of them is added to the answer.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - For every subtree, keep a map from color to the number of its occurrences, together with the largest frequency and the sum of the colors at that frequency.
+    - The map of a vertex is the union of its children's maps plus its own color, so the largest child's map is the natural base.
+    - Merge every smaller map into the larger one and update the maximum frequency and the sum as each count changes.
+    - A color that reaches the current maximum adds to the sum, and a color that exceeds it replaces both the maximum and the sum.
+discussion: >-
+    The answer depends on the full frequency distribution of a subtree, so a set of distinct colors is not enough. A frequency map merged smaller into larger keeps the work near linear in the number of moved entries, and the maximum frequency and its sum can be maintained during the same insertion. Ties are the delicate part: when a color reaches the current maximum, its value is added, but when it exceeds the maximum, the sum is replaced by that single color. The accumulator must be 64-bit.
+related:
+    - cses.1139.distinct-colors
+    - codeforces.1009f.dominant-indices
