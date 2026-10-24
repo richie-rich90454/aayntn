@@ -1,0 +1,30 @@
+id: codeforces.1514d.cut-and-stick
+title: Cut and Stick
+source: Codeforces
+contest: Codeforces Round 716 (Div. 2)
+division: platinum
+url: https://codeforces.com/problemset/problem/1514/D
+techniques:
+    - advanced.randomized-algorithms
+prerequisites:
+    - foundations.sorting
+    - searching.binary-search
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - n and q can be 3 * 10^5, so a frequency scan per range is too slow.
+    - A piece of length x is beautiful when no value occurs more than ceil(x/2) times in it.
+    - The answer depends only on the range length and the maximum frequency in the range.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Let L be the range length and f the maximum frequency; the answer is max(1, 2f - L).
+    - If f is above L/2, the mode is a strict majority and a random position in the range hits it with probability above 1/2.
+    - Store the sorted positions of each value and verify a sampled value with two binary searches.
+    - Forty samples miss a strict majority with probability below 2^-40, and if no value is above L/2 the answer is 1.
+discussion: >-
+    The combinatorial part is the formula max(1, 2f - L): each piece can hold at most one more copy of the mode than it holds other values, so at least 2f - L pieces are forced when the mode is too frequent, and that many suffice. The algorithmic part is finding f. A scan per query is too slow, but when f is above L/2 the mode is a unique strict majority, so random positions find it with constant probability. Sampling is therefore useful exactly in the case where the answer is greater than one; when no value is a majority, the answer is one and the samples only need to confirm that no candidate passes the threshold. Every sampled candidate is verified by counting its positions, so the only error is missing the majority.
+related:
+    - codeforces.364d.ghd
+    - luogu.p1742.minimum-circle-cover

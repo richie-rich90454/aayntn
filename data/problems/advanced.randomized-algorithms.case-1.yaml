@@ -1,0 +1,29 @@
+id: codeforces.364d.ghd
+title: Ghd
+source: Codeforces
+contest: Codeforces Round 213 (Div. 1)
+division: platinum
+url: https://codeforces.com/problemset/problem/364/D
+techniques:
+    - advanced.randomized-algorithms
+prerequisites:
+    - number-theory.extended-euclidean
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - n can be 10^6 and every value can be 10^12, so a divisor cannot be tested against the whole array for every candidate.
+    - At least half of the values must be divisible by the answer, so a uniformly random value is divisible by it with probability at least 1/2.
+    - The answer is a divisor of an input value, not necessarily an input value itself.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The answer divides at least half of the values, so one random value is divisible by it with probability at least 1/2.
+    - If the answer divides a sampled value x, it is one of the divisors of x, and a value below 10^12 has only a few thousand divisors.
+    - Group the array by gcd with x, then a divisor d is good when the groups whose gcd is a multiple of d contain at least half of the values.
+    - Repeat the sampling about 20 times; all repetitions fail with probability at most 2^-20.
+discussion: >-
+    The search space of all divisors of all values is far too large, but the answer is forced to divide a random value with constant probability. One sample therefore reduces the candidates to the divisors of that value. The count for each candidate is computed without scanning the array once per divisor: every array value is replaced by its gcd with the sample, and the gcd frequencies are combined over the divisor lattice. Twenty samples make the probability that every sample misses the divisible half at most one in a million, which is far below the judge's tolerance for a wrong answer.
+related:
+    - codeforces.1514d.cut-and-stick
+    - luogu.p1742.minimum-circle-cover

@@ -1,0 +1,30 @@
+id: luogu.p1742.minimum-circle-cover
+title: Minimum Circle Cover
+source: Luogu
+contest: Luogu
+division: platinum
+url: https://www.luogu.com.cn/problem/P1742
+techniques:
+    - advanced.randomized-algorithms
+prerequisites:
+    - geometry.smallest-enclosing-circle
+    - geometry.robust-predicates
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - N can be 10^5, so enumerating triples of points is far too slow.
+    - Coordinates are between -10^4 and 10^4, and the checker accepts an absolute error of 10^-9.
+    - The output is the radius on the first line and the center coordinates on the second line.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Process the points in random order and keep the smallest circle of the prefix processed so far.
+    - When a new point lies outside the current circle, it must lie on the boundary of the new circle.
+    - Fix that point, rescan the earlier points, and rebuild through a second boundary point when another violation appears.
+    - The expected number of boundary changes is linear because point i is a boundary point of the prefix circle with probability at most 3/i.
+discussion: >-
+    Randomization removes the dependence on the insertion order, not the geometry. The incremental algorithm repairs the circle only when a new point violates it, and every repair is forced to pass through the violating point. The nested rescans look cubic in the worst case, but a random order makes the probability that the i-th point changes the boundary at most 3/i, so the expected total work is linear. The geometry needs an epsilon in the containment test and an explicit fallback for collinear points, because the circumcenter formula divides by a determinant that can be zero. The output format is part of the problem: print the radius before the center and keep ten decimal places.
+related:
+    - codeforces.364d.ghd
+    - codeforces.1514d.cut-and-stick

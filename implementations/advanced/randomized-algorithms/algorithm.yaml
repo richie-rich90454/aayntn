@@ -1,0 +1,97 @@
+algorithm: advanced.randomized-algorithms
+title: Randomized algorithms
+summary: Make random choices so that no fixed input can force the bad case, then analyze the expected cost and state the failure probability honestly.
+subject: advanced
+divisions: [gold, platinum]
+importance: advanced-technique
+prerequisites:
+    required: [foundations.sorting, foundations.complexity]
+    recommended: [advanced.quickselect, searching.binary-search, foundations.recursion]
+complexity:
+    time: "O(n log n) expected comparisons, O(n^2) worst case"
+    space: "O(n) for the array, O(log n) expected recursion stack, O(n) in the worst case"
+assumptions:
+    - The array holds n >= 1 signed 32-bit integers and every value fits in the same type in all six languages.
+    - The pivot is a uniformly chosen position apart from the negligible modulo bias of the generator.
+    - The reference programs use the same xorshift32 generator seeded with 2463534242, so their pivot sequences and comparison counts agree.
+    - One comparison is counted for each examination of an element against the pivot during a partition.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and the array, sorts it with randomized quicksort, and prints the sorted array and the comparison count."
+      time: "O(n log n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(log n) expected recursion stack, O(n) worst case"
+      status: unverified
+      inputs: "n, then n signed 32-bit integers, separated by whitespace."
+      outputs: "One line with the sorted values separated by single spaces, then one line with the number of pivot comparisons."
+      notes: "The generator state is a uint32_t, so every shift wraps at 32 bits without an explicit mask. The array is heap-allocated and freed on every exit path, and the comparison counter is a long long so it cannot overflow at the stated sizes."
+      operations: [xorshift32, random-pivot, three-way-partition, quicksort]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and the array, sorts it with randomized quicksort, and prints the sorted array and the comparison count."
+      time: "O(n log n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(log n) expected recursion stack, O(n) worst case"
+      status: unverified
+      inputs: "n, then n signed 32-bit integers, separated by whitespace."
+      outputs: "One line with the sorted values separated by single spaces, then one line with the number of pivot comparisons."
+      notes: "The generator uses std::uint32_t so the shifts wrap at 32 bits. The array is a std::vector<int> and the pivot is a value copied before the partition, because the partition moves the element that supplied it. std::sort is deliberately not called, because the partition is the subject of the article."
+      operations: [xorshift32, random-pivot, three-way-partition, quicksort]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and the array, sorts it with randomized quicksort, and prints the sorted array and the comparison count."
+      time: "O(n log n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(log n) expected recursion stack, O(n) worst case"
+      status: unverified
+      inputs: "n, then n signed 32-bit integers, separated by whitespace."
+      outputs: "One line with the sorted values separated by single spaces, then one line with the number of pivot comparisons."
+      notes: "The source is java/Main.java and the class is Main, so the judge entry point is the standard one. The xorshift state is an int, the right shift is the logical >>>, and the pivot index masks the state to 32 unsigned bits before the modulo. A byte-buffer scanner keeps the input cost out of the sort measurement."
+      operations: [xorshift32, random-pivot, three-way-partition, quicksort]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and the array, sorts it with randomized quicksort, and prints the sorted array and the comparison count."
+      time: "O(n log n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(log n) expected recursion stack, O(n) worst case"
+      status: unverified
+      inputs: "n, then n signed 32-bit integers, separated by whitespace."
+      outputs: "One line with the sorted values separated by single spaces, then one line with the number of pivot comparisons."
+      notes: "The whole of standard input is read once and split, because a per-token read is the slowest part of a Python solution. The generator masks every left shift with 0xFFFFFFFF, which reproduces the 32-bit wrap of the C version exactly. Python integers cannot overflow, but the comparison counter follows the same sequence."
+      operations: [xorshift32, random-pivot, three-way-partition, quicksort]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and the array, sorts it with randomized quicksort, and prints the sorted array and the comparison count."
+      time: "O(n log n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(log n) expected recursion stack, O(n) worst case"
+      status: unverified
+      inputs: "n, then n signed 32-bit integers, separated by whitespace."
+      outputs: "One line with the sorted values separated by single spaces, then one line with the number of pivot comparisons."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The generator state and the counter are Int64, and every shift is masked with the Int64 constant 4294967295 so the wrap stays at 32 bits without a 128-bit intermediate. The source uses SysUtils, reads one argument per Read, and avoids IOResult so it stays inside the subset that the browser-based compiler accepts."
+      operations: [xorshift32, random-pivot, three-way-partition, quicksort]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n and the array, sorts it with randomized quicksort, and prints the sorted array and the comparison count."
+      time: "O(n log n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(log n) expected recursion stack, O(n) worst case"
+      status: unverified
+      inputs: "n, then n signed 32-bit integers, separated by whitespace."
+      outputs: "One line with the sorted values separated by single spaces, then one line with the number of pivot comparisons."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The generator keeps its state as an unsigned 32-bit Number by applying >>> 0 after every step, so it reproduces the C sequence. The input is read in one call, the array is a plain Array, and the output uses the platform line separator so the six variants agree after newline normalization."
+      operations: [xorshift32, random-pivot, three-way-partition, quicksort]
