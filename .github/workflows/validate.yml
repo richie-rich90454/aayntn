@@ -68,7 +68,7 @@ jobs:
             - name: Build the site under a path, as a project site is published
               run: pnpm run build
               env:
-                  NODE_OPTIONS: --max-old-space-size=4096
+                  NODE_OPTIONS: --max-old-space-size=3584
                   AAYNTN_BASE: /aayntn/
                   AAYNTN_HOSTNAME: https://example.github.io
 
