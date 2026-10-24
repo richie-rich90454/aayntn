@@ -1,0 +1,29 @@
+id: cses.1111.longest-palindrome
+title: Longest Palindrome
+source: CSES
+contest: CSES Problem Set
+division: gold
+url: https://cses.fi/problemset/task/1111
+techniques:
+    - strings.suffix-array-palindrome
+prerequisites:
+    - strings.suffix-array
+    - searching.binary-search
+difficulty: 3
+estimatedMinutes: 40
+specialConstraints:
+    - The string has up to one million characters, so expanding around every center is quadratic when the whole string is one repeated character.
+    - The output is the palindrome itself, so the winning center and radius have to be reconstructed, not only measured.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Compare the string with its reverse, because a palindrome at a center is a match between the right half and the reversed left half.
+    - Turn the comparison into a longest-common-prefix query between a suffix of the string and a suffix of its reverse.
+    - Build one suffix array over the string, a separator, and the reverse, and answer each longest-common-prefix query with a range minimum over the LCP array.
+    - Binary search the radius at every center and reconstruct the answer from the winning center and its earliest start.
+discussion: >-
+    The longest palindrome at a center is exactly the longest common prefix of the suffix that starts at the center and the suffix that starts at the mirrored position in the reverse string. Building the suffix array and the LCP array of the concatenation turns every such query into a range minimum, and binary search finds the largest radius at each center. The method is exact and returns the first occurrence by breaking ties on the starting position. At the one-million-character bound a linear Manacher pass is the faster practical choice, but the suffix-array method is the one that also answers lexical and range questions about the same index.
+related:
+    - timus.1297.palindrome
+    - uva.11475.extend-to-palindrome

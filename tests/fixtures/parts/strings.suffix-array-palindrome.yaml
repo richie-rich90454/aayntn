@@ -1,0 +1,9 @@
+- name: a string whose longest palindrome is not at the first center
+  input: "banana\n"
+  expected: "5\n1\n"
+- name: an even-length palindrome, whose center lies between two characters
+  input: "cbbd\n"
+  expected: "2\n1\n"
+- name: the all-equal edge case, which exercises the sentinel and the radius bound
+  input: "aaaa\n"
+  expected: "4\n0\n"

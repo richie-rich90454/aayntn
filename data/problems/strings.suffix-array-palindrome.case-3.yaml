@@ -1,0 +1,29 @@
+id: uva.11475.extend-to-palindrome
+title: Extend to Palindrome
+source: UVa
+contest: UVa Volume 114
+division: gold
+url: https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=26&page=show_problem&problem=2470
+techniques:
+    - strings.suffix-array-palindrome
+prerequisites:
+    - strings.suffix-array
+    - searching.binary-search
+difficulty: 3
+estimatedMinutes: 40
+specialConstraints:
+    - The input can hold several lines, and each line has up to 100000 characters, so testing every candidate extension character by character is quadratic.
+    - The shortest extension is determined by the longest suffix of the input that is already a palindrome.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Appending characters can only repair a suffix, so the part that stays unchanged has to be a palindromic suffix of the input.
+    - The longest palindromic suffix is the shortest prefix that has to be mirrored onto the end.
+    - A suffix s[p..n) is a palindrome exactly when it equals the prefix of reverse(s) of length n - p.
+    - Build the suffix array and LCP array of s # reverse(s), and compare the suffix at p with the suffix at the start of the reversed copy.
+discussion: >-
+    If the longest palindromic suffix of the input starts at p, the shortest valid extension is the input followed by the reverse of s[0..p). Finding that suffix is a longest-common-prefix question: the suffix at p is a palindrome exactly when its LCP with the whole reversed string reaches n - p. One suffix array over the string, a separator, and its reverse answers each check in constant time after a range-minimum structure is built, so the scan for the smallest p is linear after the O(n log n) preprocessing.
+related:
+    - cses.1111.longest-palindrome
+    - timus.1297.palindrome

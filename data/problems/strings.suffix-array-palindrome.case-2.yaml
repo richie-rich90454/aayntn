@@ -1,0 +1,29 @@
+id: timus.1297.palindrome
+title: Palindrome
+source: Timus
+contest: IX Open Collegiate Programming Contest of the High School Pupils
+division: silver
+url: https://acm.timus.ru/problem.aspx?space=1&num=1297
+techniques:
+    - strings.suffix-array-palindrome
+prerequisites:
+    - strings.suffix-array
+    - searching.binary-search
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - The string has at most 1000 characters, so expanding around every center is already fast enough.
+    - Several longest palindromes may exist, and the judge asks for the first one.
+recommendedLanguages:
+    - cpp17
+    - python
+hints:
+    - Reverse the string and compare the right half of each candidate palindrome with the reversed left half.
+    - A suffix starting at p is a palindrome exactly when it matches the prefix of the reverse of length n - p.
+    - With the suffix array and LCP array of the concatenation, that match is one range minimum.
+    - Scan the centers from left to right and keep the earliest start when two centers produce the same length.
+discussion: >-
+    The small bound makes the quadratic expansion around every center the intended solution. The task is still the cleanest statement of the mirrored-prefix idea: a palindrome at a center is a common prefix of a suffix of the string and a suffix of its reverse. The suffix-array method is an exact alternative that pays O(n log n) preprocessing, and its left-to-right scan reproduces the required first occurrence when several longest palindromes exist.
+related:
+    - cses.1111.longest-palindrome
+    - uva.11475.extend-to-palindrome

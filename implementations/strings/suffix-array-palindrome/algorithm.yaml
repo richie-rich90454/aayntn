@@ -1,0 +1,96 @@
+algorithm: strings.suffix-array-palindrome
+title: The suffix-array-based palindrome method
+summary: Build the suffix array and longest-common-prefix array of a string and its reverse, then binary search the mirrored match at every center to find the longest palindromic substring.
+subject: strings
+divisions: [gold, platinum]
+importance: advanced-technique
+prerequisites:
+    required: [strings.suffix-array, searching.binary-search]
+    recommended: [range-queries.sparse-table, strings.manacher]
+complexity:
+    time: "O(n log n)"
+    space: "O(n log n) for the suffix array, the longest-common-prefix array, and the sparse table"
+assumptions:
+    - The input is one static string of lowercase Latin letters, with at most 100000 characters.
+    - The separator is smaller than every letter, so a common prefix cannot run from the string into its reverse.
+    - The longest-common-prefix array is indexed by the suffix array, and its first entry is zero.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix array and the LCP array of the string and its reverse, then binary searches the palindrome radius at every center."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n log n) for the suffix array, the LCP array, and the sparse table"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters, at most 100000 characters."
+      outputs: "Two lines: the length of the longest palindromic substring, then its first 0-based starting position."
+      notes: "Prefix doubling builds the suffix array of s # reverse(s), Kasai's algorithm fills the LCP array, and a sparse table answers each longest-common-prefix query. The C variant uses static arrays sized for a combined string of 200001 characters and a counting sort over character codes."
+      operations: [build-suffix-array, build-lcp, query-lcp, binary-search-center]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix array and the LCP array of the string and its reverse, then binary searches the palindrome radius at every center."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n log n) for the suffix array, the LCP array, and the sparse table"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters, at most 100000 characters."
+      outputs: "Two lines: the length of the longest palindromic substring, then its first 0-based starting position."
+      notes: "Prefix doubling builds the suffix array of s # reverse(s), Kasai's algorithm fills the LCP array, and a sparse table answers each longest-common-prefix query. The C++ variant stores every array in a std::vector and uses std::min for the sparse-table merge and the LCP query."
+      operations: [build-suffix-array, build-lcp, query-lcp, binary-search-center]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix array and the LCP array of the string and its reverse, then binary searches the palindrome radius at every center."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n log n) for the suffix array, the LCP array, and the sparse table"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters, at most 100000 characters."
+      outputs: "Two lines: the length of the longest palindromic substring, then its first 0-based starting position."
+      notes: "Prefix doubling builds the suffix array of s # reverse(s), Kasai's algorithm fills the LCP array, and a sparse table answers each longest-common-prefix query. The Java variant uses one-dimensional int arrays and a two-dimensional int table, and reads a single line with a BufferedReader."
+      operations: [build-suffix-array, build-lcp, query-lcp, binary-search-center]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix array and the LCP array of the string and its reverse, then binary searches the palindrome radius at every center."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n log n) for the suffix array, the LCP array, and the sparse table"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters, at most 100000 characters."
+      outputs: "Two lines: the length of the longest palindromic substring, then its first 0-based starting position."
+      notes: "Prefix doubling builds the suffix array of s # reverse(s), Kasai's algorithm fills the LCP array, and a sparse table answers each longest-common-prefix query. The Python variant reads bytes so that each character is already an integer, and stores the sparse-table levels in array('i') objects to keep the memory near sixteen megabytes."
+      operations: [build-suffix-array, build-lcp, query-lcp, binary-search-center]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix array and the LCP array of the string and its reverse, then binary searches the palindrome radius at every center."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n log n) for the suffix array, the LCP array, and the sparse table"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters, at most 100000 characters."
+      outputs: "Two lines: the length of the longest palindromic substring, then its first 0-based starting position."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Prefix doubling builds the suffix array of s # reverse(s), Kasai's algorithm fills the LCP array, and a sparse table answers each longest-common-prefix query. The Pascal variant uses 1-based string indexing, a flat dynamic array for the sparse table, strips a carriage return left by a CRLF line, and reads the line with one ReadLn."
+      operations: [build-suffix-array, build-lcp, query-lcp, binary-search-center]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the suffix array and the LCP array of the string and its reverse, then binary searches the palindrome radius at every center."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n log n) for the suffix array, the LCP array, and the sparse table"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters, at most 100000 characters."
+      outputs: "Two lines: the length of the longest palindromic substring, then its first 0-based starting position."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Prefix doubling builds the suffix array of s # reverse(s), Kasai's algorithm fills the LCP array, and a sparse table answers each longest-common-prefix query. The JavaScript variant stores the suffix array, the ranks, and every sparse-table level in Int32Array, and collects standard input from the stream events."
+      operations: [build-suffix-array, build-lcp, query-lcp, binary-search-center]
