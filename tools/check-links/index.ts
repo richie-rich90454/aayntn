@@ -80,6 +80,13 @@ async function main() {
         absolute: true,
         onlyFiles: true,
     });
+    /*
+     * A judge that does not serve HTTPS is allowed by name. The link opens the
+     * judge in a new tab, so it cannot create mixed content on this site, and
+     * POJ has no working TLS endpoint.
+     */
+    const HTTP_ONLY_HOSTS = new Set(["poj.org"]);
+
     const problems_: Problem[] = [];
     for (const file of problemFiles) {
         const raw = parseYaml(await readFile(file, "utf8")) as Problem;
@@ -92,7 +99,16 @@ async function main() {
                 warnings.push(`${rel(ROOT, file)}: the problem has no ${field}`);
                 continue;
             }
-            if (!/^https:\/\//.test(value)) {
+            let host = "";
+            try {
+                host = new URL(value).hostname;
+            } catch {
+                host = "";
+            }
+            const allowed =
+                /^https:\/\//.test(value) ||
+                (value.startsWith("http://") && HTTP_ONLY_HOSTS.has(host));
+            if (!allowed) {
                 problems.push(`${rel(ROOT, file)}: the ${field} is not an https address`);
             }
         }
