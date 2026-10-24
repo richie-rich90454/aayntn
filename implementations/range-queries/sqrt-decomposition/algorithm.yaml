@@ -1,0 +1,92 @@
+algorithm: range-queries.sqrt-decomposition
+title: Square-root decomposition
+summary: Split an array into blocks of about the square root of its length, store one aggregate per block, and answer a range query by combining whole blocks with the two partial blocks at the ends.
+subject: range-queries
+divisions: [gold, platinum]
+importance: common-contest-technique
+complexity:
+    time: "O(n) to build, O(1) per point update, O(sqrt n) per range query"
+    space: "O(n)"
+assumptions:
+    - The combining operation is associative, so the contents of a whole block may be replaced by one stored aggregate.
+    - The block size is fixed at about the square root of the array length, which balances the boundary work against the number of whole blocks.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(1) per point update, O(sqrt n) per range query"
+      auxiliarySpace: "O(n) for the values and O(sqrt n) for the block sums"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "The C variant allocates the values and the block sums with calloc and releases both with free, so the two arrays live for the whole run. The block size is computed with integer arithmetic, which avoids a libm dependency and the rounding surprises of sqrt."
+      operations: [point-add, range-sum]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(1) per point update, O(sqrt n) per range query"
+      auxiliarySpace: "O(n) for the values and O(sqrt n) for the block sums"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "The C++ variant keeps the values and the block sums in two std::vector objects, so the class owns its storage and releases it automatically. std::ios::sync_with_stdio(false) keeps the input fast enough for the largest stated constraints."
+      operations: [point-add, range-sum]
+    - id: program
+      language: java
+      file: java/program.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(1) per point update, O(sqrt n) per range query"
+      auxiliarySpace: "O(n) for the values and O(sqrt n) for the block sums"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "The Java variant uses a byte-buffer scanner instead of java.util.Scanner and accumulates the answers in a StringBuilder, because both choices matter when there are hundreds of thousands of operations. The long type holds the full 64-bit sum."
+      operations: [point-add, range-sum]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(1) per point update, O(sqrt n) per range query"
+      auxiliarySpace: "O(n) for the values and O(sqrt n) for the block sums"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The variant uses Number, which represents every integer up to 2^53 exactly, so the largest stated sum of about 2 * 10^14 is safe. It writes the platform line separator so its output matches the compiled languages byte for byte."
+      operations: [point-add, range-sum]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(1) per point update, O(sqrt n) per range query"
+      auxiliarySpace: "O(n) for the values and O(sqrt n) for the block sums"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The variant keeps the values and the block sums in dynamic arrays of Int64, computes the block size with integer arithmetic, and writes each answer with WriteLn."
+      operations: [point-add, range-sum]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(1) per point update, O(sqrt n) per range query"
+      auxiliarySpace: "O(n) for the values and O(sqrt n) for the block sums"
+      status: unverified
+      inputs: 'n q, then q operations: "1 i delta" adds delta to the 1-based position i and "2 l r" queries the inclusive range [l, r].'
+      outputs: "One line per query, holding the range sum."
+      notes: "The Python variant reads the whole input at once and slices the value array for the boundary sums, which keeps the per-query work in C rather than in a Python loop. The class models the array, so the instance owns its two lists."
+      operations: [point-add, range-sum]
