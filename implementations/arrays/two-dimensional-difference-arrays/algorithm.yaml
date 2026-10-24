@@ -1,0 +1,92 @@
+algorithm: arrays.two-dimensional-difference-arrays
+title: Two-dimensional difference arrays
+summary: Turn a rectangle update on a grid into four corner writes, and recover the final grid with one two-dimensional prefix sum.
+subject: arrays
+divisions: [silver, gold]
+importance: common-contest-technique
+complexity:
+    time: "O(RC + q)"
+    space: "O(RC)"
+assumptions:
+    - Every update adds a constant to every cell of an axis-aligned rectangle.
+    - The grid is read after all the updates, or the reads can be moved after them.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a grid and a list of rectangle additions, then prints the final grid."
+      time: "O(RC + q)"
+      auxiliarySpace: "O(RC)"
+      status: unverified
+      inputs: "R and C, then R lines of C integers, then q, then q lines with a 1-based inclusive rectangle r1 c1 r2 c2 and a value v."
+      outputs: "R lines of C integers: the grid after every rectangle addition."
+      notes: "The difference array is allocated with two extra rows and columns so the writes at r2+1 and c2+1 need no bounds check. The values are 64-bit because q updates of magnitude 10^9 can reach 10^14."
+      operations: [build-difference-array, rectangle-update, accumulate-prefix]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a grid and a list of rectangle additions, then prints the final grid."
+      time: "O(RC + q)"
+      auxiliarySpace: "O(RC)"
+      status: unverified
+      inputs: "R and C, then R lines of C integers, then q, then q lines with a 1-based inclusive rectangle r1 c1 r2 c2 and a value v."
+      outputs: "R lines of C integers: the grid after every rectangle addition."
+      notes: "The difference array is allocated with two extra rows and columns so the writes at r2+1 and c2+1 need no bounds check. The values are 64-bit because q updates of magnitude 10^9 can reach 10^14."
+      operations: [build-difference-array, rectangle-update, accumulate-prefix]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a grid and a list of rectangle additions, then prints the final grid."
+      time: "O(RC + q)"
+      auxiliarySpace: "O(RC)"
+      status: unverified
+      inputs: "R and C, then R lines of C integers, then q, then q lines with a 1-based inclusive rectangle r1 c1 r2 c2 and a value v."
+      outputs: "R lines of C integers: the grid after every rectangle addition."
+      notes: "The class is named Main so the file can be submitted to a judge unchanged. The difference array is allocated with two extra rows and columns so the writes at r2+1 and c2+1 need no bounds check. The values are 64-bit because q updates of magnitude 10^9 can reach 10^14."
+      operations: [build-difference-array, rectangle-update, accumulate-prefix]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a grid and a list of rectangle additions, then prints the final grid."
+      time: "O(RC + q)"
+      auxiliarySpace: "O(RC)"
+      status: unverified
+      inputs: "R and C, then R lines of C integers, then q, then q lines with a 1-based inclusive rectangle r1 c1 r2 c2 and a value v."
+      outputs: "R lines of C integers: the grid after every rectangle addition."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The difference array is allocated with two extra rows and columns so the writes at r2+1 and c2+1 need no bounds check. The values are BigInt because q updates of magnitude 10^9 can reach 10^14 and a double would lose the low bits."
+      operations: [build-difference-array, rectangle-update, accumulate-prefix]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a grid and a list of rectangle additions, then prints the final grid."
+      time: "O(RC + q)"
+      auxiliarySpace: "O(RC)"
+      status: unverified
+      inputs: "R and C, then R lines of C integers, then q, then q lines with a 1-based inclusive rectangle r1 c1 r2 c2 and a value v."
+      outputs: "R lines of C integers: the grid after every rectangle addition."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The difference array has room for 2000 rows and 2000 columns plus padding, and the values are Int64 because q updates of magnitude 10^9 can reach 10^14."
+      operations: [build-difference-array, rectangle-update, accumulate-prefix]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a grid and a list of rectangle additions, then prints the final grid."
+      time: "O(RC + q)"
+      auxiliarySpace: "O(RC)"
+      status: unverified
+      inputs: "R and C, then R lines of C integers, then q, then q lines with a 1-based inclusive rectangle r1 c1 r2 c2 and a value v."
+      outputs: "R lines of C integers: the grid after every rectangle addition."
+      notes: "The difference array is allocated with two extra rows and columns so the writes at r2+1 and c2+1 need no bounds check. Python integers are unbounded, so the sums stay exact over the whole documented range."
+      operations: [build-difference-array, rectangle-update, accumulate-prefix]
