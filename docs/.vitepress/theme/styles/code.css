@@ -344,6 +344,9 @@ html.dark .aayntn-variant-note__label--conditional {
    stays small to build and to download. The surface and the rhythm are the
    same as a highlighted listing. */
 .aayntn-source {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     margin: var(--space-4) 0;
     padding: var(--space-4) var(--space-6);
     border: 1px solid var(--border-subtle);
