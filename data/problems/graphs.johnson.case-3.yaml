@@ -1,0 +1,31 @@
+id: kattis.allpairspath
+title: All Pairs Shortest Path
+source: Kattis
+division: gold
+url: https://open.kattis.com/problems/allpairspath
+techniques:
+    - graphs.johnson
+prerequisites:
+    - graphs.dijkstra
+    - graphs.bellman-ford
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The input holds several test cases, and the terminating line 0 0 0 must not be processed.
+    - Edge weights may be negative, and a negative cycle makes every pair that can reach and leave it arbitrarily cheap.
+    - A query with no path prints Impossible, while a query affected by a negative cycle prints -Infinity.
+    - V is at most 150 and E is at most 5000 per test case, so the graph is sparse enough that repeated Dijkstra is competitive.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - "The answer to a query is not global: a negative cycle only affects the pairs that can reach the cycle and then leave it."
+    - Run one Bellman-Ford pass from a virtual source to detect a negative cycle, and remember which vertices still relax on the final pass.
+    - In the reweighted graph every edge is nonnegative, so a Dijkstra run from each vertex answers every finite pair.
+    - When a negative cycle exists, mark the vertices that can reach it and the vertices reachable from it, and answer -Infinity exactly for the pairs that cross both marks.
+discussion: >-
+    The problem is the query version of all-pairs shortest paths with negative weights. When no negative cycle exists, Johnson's algorithm answers every query after one Bellman-Ford pass and one Dijkstra run per vertex, and the recovered distance is the sum of the reweighted distance and the two endpoint potentials. The extra work is the negative-cycle case: a single global flag is not enough, because a cycle only makes the pairs -Infinity when the source can reach the cycle and the target is reachable from it. The vertices that relax on the last Bellman-Ford pass identify the region downstream of a cycle, and a forward and backward reachability sweep turns that region into the set of affected queries. The small vertex limit also makes Floyd-Warshall a reasonable choice, and the comparison between the two is a useful check on the reweighting step.
+related:
+    - codeforces.101498.l.the-shortest-path
+    - aoj.grl-1-c.all-pairs-shortest-path
+    - usaco.2013.dec.gold.vacation-planning

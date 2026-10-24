@@ -1,0 +1,31 @@
+id: codeforces.101498.l.the-shortest-path
+title: The Shortest Path
+source: Codeforces
+contest: 2017 ACM Amman Collegiate Programming Contest
+division: platinum
+url: https://codeforces.com/gym/101498/problem/L
+techniques:
+    - graphs.johnson
+prerequisites:
+    - graphs.dijkstra
+    - graphs.bellman-ford
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - V is up to 2000 and E is up to 5000, so Floyd-Warshall needs about eight billion operations on the largest test and does not fit.
+    - The weights may be negative, so Dijkstra cannot run on the original graph.
+    - A path may repeat a vertex, so a negative cycle makes the answer -inf rather than an error.
+    - The minimum is over ordered pairs of distinct vertices, and unreachable pairs are ignored.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Every edge weight may be negative, so start by looking for a negative cycle; if one exists, the answer is -inf immediately.
+    - V is 2000 but E is only 5000, which is the sparse shape where running Dijkstra from every vertex is affordable and Floyd-Warshall is not.
+    - One Bellman-Ford run from a virtual source produces a potential for every vertex, and subtracting the potentials makes every weight nonnegative without changing which path is shortest.
+    - After reweighting, run Dijkstra from every vertex and take the smallest recovered distance over the pairs with two different endpoints.
+discussion: >-
+    The negative weights rule out Dijkstra and the sparse limits rule out Floyd-Warshall, so the problem is exactly the gap that Johnson's algorithm fills. Zero-weight edges from a virtual source turn the potentials into shortest distances from that source, and the Bellman-Ford pass that computes them also decides whether the answer is -inf. When no negative cycle exists, each reweighted edge is nonnegative, so one Dijkstra run per source produces all finite distances in O(VE + V(V + E) log V) time. The recovered distance subtracts the source potential and adds the target potential. The diagonal is excluded from the minimum, and a pair in different components is skipped because its distance is infinite.
+related:
+    - aoj.grl-1-c.all-pairs-shortest-path
+    - kattis.allpairspath

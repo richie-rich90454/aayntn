@@ -1,0 +1,35 @@
+- name: a negative edge with a cheaper detour and no negative cycle
+  input: |
+      4 5
+      0 1 4
+      0 2 5
+      1 2 -3
+      2 3 2
+      3 0 1
+  expected: |
+      0 4 1 3
+      0 0 -3 -1
+      3 7 0 2
+      1 5 2 0
+- name: an unreachable pair and a negative edge in a separate component
+  input: |
+      5 5
+      0 1 3
+      0 2 8
+      1 2 -4
+      2 3 1
+      4 3 -2
+  expected: |
+      0 3 -1 0 -1
+      -1 0 -4 -3 -1
+      -1 -1 0 1 -1
+      -1 -1 -1 0 -1
+      -1 -1 -1 -2 0
+- name: "edge case: a negative cycle is reported"
+  input: |
+      3 3
+      0 1 1
+      1 2 -2
+      2 0 -1
+  expected: |
+      NEGATIVE CYCLE

@@ -1,0 +1,162 @@
+algorithm: graphs.johnson
+title: Johnson's algorithm
+summary: All-pairs shortest paths on a sparse directed graph whose weights may be negative, by computing one set of potentials with Bellman-Ford and then running Dijkstra from every vertex on the reweighted graph.
+subject: graphs
+divisions: [gold]
+importance: common-contest-technique
+prerequisites:
+    required: [graphs.dijkstra, graphs.bellman-ford]
+    recommended: [graphs.representation, graphs.floyd-warshall]
+complexity:
+    time: "O(VE + V(V + E) log V)"
+    space: "O(V + E)"
+assumptions:
+    - Edge weights may be negative.
+    - The graph is directed, because an undirected negative edge is already a negative cycle of length two.
+    - The graph has no negative cycle, unless detecting one is the goal.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed weighted graph from standard input, computes all-pairs shortest paths with one Bellman-Ford pass and a Dijkstra run from every vertex, and prints the distance matrix or NEGATIVE CYCLE."
+      time: "O(VE + V(V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the potentials, the distance array and the heap"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'NEGATIVE CYCLE' instead."
+      notes: "The potentials start at zero for every vertex, which is the same as joining a virtual source to every vertex with an edge of weight zero. Bellman-Ford relaxes the real edges n times, and a change on the n-th pass proves a negative cycle. Every edge is then reweighted by w + h[u] - h[v], which is nonnegative, and Dijkstra runs from every source with a binary min-heap and lazy deletion. The original distance is recovered by subtracting h[source] and adding h[target]. Distances are 64-bit integers."
+      operations:
+          [
+              initialize-potentials,
+              relax-edge,
+              detect-negative-cycle,
+              reweight-edge,
+              push-start,
+              extract-min,
+              discard-stale,
+              recover-distance,
+              report-unreachable,
+          ]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed weighted graph from standard input, computes all-pairs shortest paths with one Bellman-Ford pass and a Dijkstra run from every vertex, and prints the distance matrix or NEGATIVE CYCLE."
+      time: "O(VE + V(V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the potentials, the distance array and the priority queue"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'NEGATIVE CYCLE' instead."
+      notes: "The potentials start at zero for every vertex, which is the same as joining a virtual source to every vertex with an edge of weight zero. Bellman-Ford relaxes the real edges n times, and a change on the n-th pass proves a negative cycle. Every edge is then reweighted by w + h[u] - h[v], which is nonnegative, and Dijkstra runs from every source with std::priority_queue and lazy deletion. The original distance is recovered by subtracting h[source] and adding h[target]. Distances are 64-bit integers."
+      operations:
+          [
+              initialize-potentials,
+              relax-edge,
+              detect-negative-cycle,
+              reweight-edge,
+              push-start,
+              extract-min,
+              discard-stale,
+              recover-distance,
+              report-unreachable,
+          ]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed weighted graph from standard input, computes all-pairs shortest paths with one Bellman-Ford pass and a Dijkstra run from every vertex, and prints the distance matrix or NEGATIVE CYCLE."
+      time: "O(VE + V(V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the potentials, the distance array and the heap"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'NEGATIVE CYCLE' instead."
+      notes: "The adjacency list is a pair of flat integer arrays with a linked list of arcs, so the per-source search allocates nothing. The potentials start at zero for every vertex, which is the same as joining a virtual source to every vertex with an edge of weight zero. Bellman-Ford relaxes the real edges n times, and a change on the n-th pass proves a negative cycle. Every edge is reweighted by w + h[u] - h[v], which is nonnegative, and Dijkstra runs from every source with a binary heap and lazy deletion. Distances are 64-bit integers, and the output is accumulated in a StringBuilder."
+      operations:
+          [
+              initialize-potentials,
+              relax-edge,
+              detect-negative-cycle,
+              reweight-edge,
+              push-start,
+              extract-min,
+              discard-stale,
+              recover-distance,
+              report-unreachable,
+          ]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program, written for readability: it reads a directed weighted graph from standard input, computes all-pairs shortest paths with one Bellman-Ford pass and a Dijkstra run from every vertex, and prints the distance matrix or NEGATIVE CYCLE."
+      time: "O(VE + V(V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the potentials, the distance array and the heap"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'NEGATIVE CYCLE' instead."
+      notes: "The potentials start at zero for every vertex, which is the same as joining a virtual source to every vertex with an edge of weight zero. Bellman-Ford relaxes the real edges n times, and a change on the n-th pass proves a negative cycle. Every edge is then reweighted by w + h[u] - h[v], which is nonnegative, and Dijkstra runs from every source with heapq and lazy deletion. The original distance is recovered by subtracting h[source] and adding h[target]. The distances are arbitrary-precision integers, so a shortest path never overflows."
+      operations:
+          [
+              initialize-potentials,
+              relax-edge,
+              detect-negative-cycle,
+              reweight-edge,
+              push-start,
+              extract-min,
+              discard-stale,
+              recover-distance,
+              report-unreachable,
+          ]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads a directed weighted graph from standard input, computes all-pairs shortest paths with one Bellman-Ford pass and a Dijkstra run from every vertex, and prints the distance matrix or NEGATIVE CYCLE."
+      time: "O(VE + V(V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the potentials, the distance array and the heap"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'NEGATIVE CYCLE' instead."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The adjacency list is a pair of flat arrays with a linked list of arcs. The potentials start at zero for every vertex, which is the same as joining a virtual source to every vertex with an edge of weight zero. Bellman-Ford relaxes the real edges n times, and a change on the n-th pass proves a negative cycle. Every edge is reweighted by w + h[u] - h[v], which is nonnegative, and Dijkstra runs from every source with a binary heap and lazy deletion. The reference compiler represents Int64 as a JavaScript number, so the sentinel is kept below 2^53 and every distance the fixtures use is exact."
+      operations:
+          [
+              initialize-potentials,
+              relax-edge,
+              detect-negative-cycle,
+              reweight-edge,
+              push-start,
+              extract-min,
+              discard-stale,
+              recover-distance,
+              report-unreachable,
+          ]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads a directed weighted graph from standard input, computes all-pairs shortest paths with one Bellman-Ford pass and a Dijkstra run from every vertex, and prints the distance matrix or NEGATIVE CYCLE."
+      time: "O(VE + V(V + E) log V)"
+      auxiliarySpace: "O(V + E) for the adjacency list, the potentials, the distance array and the heap"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based directed edges and integer weights. The input ends after the edges; there is no source vertex."
+      outputs: "n lines of n integers: the distance from i to j, and -1 when j is unreachable from i. A graph with a negative cycle prints the single line 'NEGATIVE CYCLE' instead."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The potentials start at zero for every vertex, which is the same as joining a virtual source to every vertex with an edge of weight zero. Bellman-Ford relaxes the real edges n times, and a change on the n-th pass proves a negative cycle. Every edge is reweighted by w + h[u] - h[v], which is nonnegative, and Dijkstra runs from every source with a binary heap and lazy deletion. The distances are numbers, so a shortest path longer than 2^53 would lose precision."
+      operations:
+          [
+              initialize-potentials,
+              relax-edge,
+              detect-negative-cycle,
+              reweight-edge,
+              push-start,
+              extract-min,
+              discard-stale,
+              recover-distance,
+              report-unreachable,
+          ]

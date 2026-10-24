@@ -1,0 +1,31 @@
+id: aoj.grl-1-c.all-pairs-shortest-path
+title: All Pairs Shortest Path
+source: Aizu Online Judge
+contest: Library of Graph Algorithms
+division: gold
+url: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C
+techniques:
+    - graphs.johnson
+prerequisites:
+    - graphs.dijkstra
+    - graphs.bellman-ford
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - Every edge weight may be negative, so the original graph is not a valid input for repeated Dijkstra.
+    - The graph may contain a negative cycle, in which case the whole output is the line NEGATIVE CYCLE.
+    - Unreachable pairs are printed as INF, which is a different sentinel from the -1 used by the reference program.
+    - V is at most 100, so Floyd-Warshall is the practical choice, but the output contract is the same one Johnson's algorithm must satisfy.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - There is no source vertex in the input, because every vertex is a source.
+    - Detect the negative cycle before printing any distance, since one cycle invalidates the whole matrix.
+    - A virtual source joined to every vertex with a zero-weight edge makes the Bellman-Ford potentials finite even when the graph is disconnected.
+    - Reweight each edge as w + h[u] - h[v], run Dijkstra from every vertex, and add h[v] - h[u] back to the result.
+discussion: >-
+    This is the canonical all-pairs problem with negative weights, and its output format is the one the reference program implements, apart from the INF sentinel. The small vertex limit makes Floyd-Warshall the shortest correct solution, so the problem is most useful as a verification harness for Johnson's algorithm: the potentials must be finite for every vertex, the reweighted graph must have no negative edge, and the recovered matrix must agree with the cubic dynamic program entry by entry. The negative-cycle sample is the important one, because a solution that only checks for improvements after the last relaxation pass can miss it.
+related:
+    - codeforces.101498.l.the-shortest-path
+    - kattis.allpairspath
