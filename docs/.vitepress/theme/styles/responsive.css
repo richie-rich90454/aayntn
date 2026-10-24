@@ -253,3 +253,25 @@
         white-space: nowrap;
     }
 }
+
+/* At the narrowest phone the contest grid and the masthead must be allowed to
+   shrink below the width of their content. Without this the two panels and the
+   last menu group widen the document by ten pixels. */
+@media (max-width: 480px) {
+    .aayntn-contest {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .aayntn-contest > * {
+        min-width: 0;
+    }
+
+    .aayntn-header__inner {
+        min-width: 0;
+    }
+
+    .aayntn-nav {
+        overflow-x: auto;
+        min-width: 0;
+    }
+}
