@@ -1,0 +1,30 @@
+id: codeforces.687c.the-values-you-can-make
+title: The Values You Can Make
+source: Codeforces
+contest: Codeforces Round 360 (Div. 1)
+division: platinum
+url: https://codeforces.com/problemset/problem/687/C
+editorialUrl: https://codeforces.com/blog/entry/45770
+techniques:
+    - advanced.bitset-optimization
+prerequisites:
+    - dynamic-programming.0-1-knapsack
+    - foundations.binary-representation
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - There are up to 500 coins and the price is at most 500, so the paying subset and the value it can make are both bounded by 500.
+    - The question asks for every value x that some paying subset can make, not just whether the price is payable.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Index the outer state by the sum of the paying subset and store the values that subset can make as a bitset.
+    - If coin c is used in the paying subset, the values it adds are the old values and the old values shifted by c, because the coin may or may not be used again inside the value subset.
+    - Iterate the outer sum downward so that each coin is used once, and OR the shifted bitset into the state.
+    - The answer is the set of bits in the state for the exact price k.
+discussion: >-
+    The three-dimensional boolean recurrence has a small third dimension: for a fixed paying sum, the set of reachable values is a bit vector of at most 501 bits. Storing that vector in eight 64-bit words turns the innermost loop over x into a shift and an OR, which reduces the work by the word size. The descending outer loop preserves the 0/1 rule, exactly as in the one-dimensional knapsack, and the coin is shifted into the value set only in the branch where it is part of the paying subset.
+related:
+    - kattis.walrus-weights
+    - codeforces.1856e2.permutree

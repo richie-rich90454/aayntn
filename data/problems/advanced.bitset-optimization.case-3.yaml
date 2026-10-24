@@ -1,0 +1,31 @@
+id: codeforces.1856e2.permutree
+title: PermuTree (hard version)
+source: Codeforces
+contest: Codeforces Round 890 (Div. 2)
+division: platinum
+url: https://codeforces.com/problemset/problem/1856/E2
+editorialUrl: https://codeforces.com/blog/entry/119058
+techniques:
+    - advanced.bitset-optimization
+prerequisites:
+    - trees.tree-dp
+    - graphs.dfs
+    - dynamic-programming.0-1-knapsack
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The tree has up to 10^6 vertices, so the subset sum at each vertex must run on a bitset and the total work must stay near n sqrt n word operations.
+    - The input gives each parent before its child, so the subtree sizes can be computed by a single reverse pass instead of a recursive DFS.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Fix the value placed at a vertex; the pairs whose lowest common ancestor is that vertex are exactly the pairs with one endpoint in a child subtree placed below it and one endpoint in a child subtree placed above it.
+    - The number of such pairs is L times R, where L and R are the total sizes of the children placed on the two sides, so the best split of the child subtree sizes is a subset sum nearest to half.
+    - If one child subtree holds at least half of the total, the best split is forced and no subset sum is needed.
+    - Group equal child sizes by binary splitting, so a vertex with many equal-size children needs only a logarithmic number of shifts, then run the subset sum on a bitset.
+discussion: >-
+    Each vertex contributes L times R, and the choices at different vertices are independent, because a child subtree is entirely below or entirely above the value at its parent. The split that maximizes the product for a fixed total is the one closest to half, which is a subset sum over the child subtree sizes. The hard version cannot afford a table per vertex, so the subset sum runs on a bitset, the largest child is handled directly when it is at least half of the total, and equal sizes are combined by binary splitting before the shifts. Those three reductions are what bring the total down to the intended bound at a million vertices.
+related:
+    - kattis.walrus-weights
+    - codeforces.687c.the-values-you-can-make

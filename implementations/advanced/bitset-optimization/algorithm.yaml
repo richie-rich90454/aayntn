@@ -1,0 +1,100 @@
+algorithm: advanced.bitset-optimization
+title: Bitset optimization
+summary: Store the reachable sums of a subset-sum dynamic program in machine words, so adding one weight shifts the whole set a word of sums at a time.
+subject: advanced
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [foundations.binary-representation, foundations.complexity]
+    recommended:
+        [
+            dynamic-programming.0-1-knapsack,
+            enumeration.subset-enumeration,
+            enumeration.meet-in-the-middle,
+        ]
+complexity:
+    time: "O(nW / 32) word operations"
+    space: "O(W / 32) words"
+assumptions:
+    - Every weight is a positive integer, so a partial sum above the limit can never come back down and may be discarded.
+    - The limit W is at most 100000 and the number of weights is at most 2000, so the bit vector fits in memory in every language.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the limit W and n weights, then prints the number of distinct subset sums at most W."
+      time: "O(nW / 32) word operations"
+      auxiliarySpace: "O(W / 32) words"
+      status: unverified
+      inputs: "n, W, then n positive weights, all separated by whitespace, where 1 <= n <= 2000 and 0 <= W <= 100000."
+      outputs: "One line with the number of distinct subset sums that are at most W, counting the empty subset as 0."
+      notes: "The bit vector is a calloced array of uint32_t words, and each weight shifts the vector left by w with a whole-word offset plus a carry from the word below. The word loop runs downward, so a source word is read before the same weight touches it, and the top word is masked to the bits up to W. The population count uses __builtin_popcount."
+      operations: [shift-or, mask, popcount]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the limit W and n weights, then prints the number of distinct subset sums at most W."
+      time: "O(nW / 32) word operations"
+      auxiliarySpace: "O(W / 32) words"
+      status: unverified
+      inputs: "n, W, then n positive weights, all separated by whitespace, where 1 <= n <= 2000 and 0 <= W <= 100000."
+      outputs: "One line with the number of distinct subset sums that are at most W, counting the empty subset as 0."
+      notes: "The bit vector is a std::vector<std::uint32_t>, and the shift is written by hand as a word offset plus a carry, because the point of the listing is the block arithmetic rather than the standard library. The descending word loop gives the 0/1 rule, the top word is masked after every weight, and __builtin_popcount counts the result."
+      operations: [shift-or, mask, popcount]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the limit W and n weights, then prints the number of distinct subset sums at most W."
+      time: "O(nW / 32) word operations"
+      auxiliarySpace: "O(W / 32) words"
+      status: unverified
+      inputs: "n, W, then n positive weights, all separated by whitespace, where 1 <= n <= 2000 and 0 <= W <= 100000."
+      outputs: "One line with the number of distinct subset sums that are at most W, counting the empty subset as 0."
+      notes: "The words are int values and the carry uses the unsigned right shift, because the sign bit of a word is an ordinary bit 31 of the sum set. The input is read in one block and parsed by hand, and Integer.bitCount supplies the population count. Shifting by 32 never happens: the carry is skipped when the remainder is zero."
+      operations: [shift-or, mask, popcount]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the limit W and n weights, then prints the number of distinct subset sums at most W."
+      time: "O(nW / 32) word operations"
+      auxiliarySpace: "O(W / 32) words"
+      status: unverified
+      inputs: "n, W, then n positive weights, all separated by whitespace, where 1 <= n <= 2000 and 0 <= W <= 100000."
+      outputs: "One line with the number of distinct subset sums that are at most W, counting the empty subset as 0."
+      notes: "The variant keeps a list of 32-bit words instead of one large integer, so the word arithmetic is visible rather than hidden in a big-integer shift. Every value written back to a word is masked with 0xFFFFFFFF, and the population count is int.bit_count on each word, which makes the output independent of the word size."
+      operations: [shift-or, mask, popcount]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the limit W and n weights, then prints the number of distinct subset sums at most W."
+      time: "O(nW / 32) word operations"
+      auxiliarySpace: "O(W / 32) words"
+      status: unverified
+      inputs: "n, W, then n positive weights, all separated by whitespace, where 1 <= n <= 2000 and 0 <= W <= 100000."
+      outputs: "One line with the number of distinct subset sums that are at most W, counting the empty subset as 0."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The bit vector is a dynamic array of LongWord, and the shift uses Shl and Shr on 32-bit words so it compiles under pas2js. The program uses SysUtils, reads exactly one argument per Read, never touches IOResult, and counts bits with a multiplication-free SWAR routine."
+      operations: [shift-or, mask, popcount]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, the limit W and n weights, then prints the number of distinct subset sums at most W."
+      time: "O(nW / 32) word operations"
+      auxiliarySpace: "O(W / 32) words"
+      status: unverified
+      inputs: "n, W, then n positive weights, all separated by whitespace, where 1 <= n <= 2000 and 0 <= W <= 100000."
+      outputs: "One line with the number of distinct subset sums that are at most W, counting the empty subset as 0."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The words are a Uint32Array, every shift result is brought back to 32 bits with >>> 0, and the carry is skipped when the bit offset is zero because JavaScript shifts count modulo 32. The population count is a SWAR routine, and the platform line separator is written so the output matches the compiled languages byte for byte."
+      operations: [shift-or, mask, popcount]

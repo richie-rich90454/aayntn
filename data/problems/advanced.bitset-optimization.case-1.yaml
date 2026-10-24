@@ -1,0 +1,28 @@
+id: kattis.walrus-weights
+title: Walrus Weights
+source: Kattis
+contest: Popup 2015 Session 1
+division: silver
+url: https://open.kattis.com/problems/walrusweights
+techniques:
+    - advanced.bitset-optimization
+prerequisites:
+    - dynamic-programming.0-1-knapsack
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - There are up to 1000 plates, each at most 1000 kilograms, so enumerating the 2^1000 subsets is impossible.
+    - The answer can exceed 1000, as the sample with plates 900, 500, 498 and 4 shows, so a table of 1001 entries is too small.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Only the set of attainable totals matters, so the state is a bit vector over the totals from 0 to 2000.
+    - Adding a plate of weight w shifts the whole vector by w and ORs it back, which is the 0/1 subset-sum step performed a word of totals at a time.
+    - A minimal subset whose total exceeds 1000 has total at most 2000, because removing any one plate leaves at most 1000, so the universe of 0 to 2000 contains the answer.
+    - Scan outward from 1000 for the nearest set bit, and on a tie prefer the larger total.
+discussion: >-
+    The reachable totals form a set, and one shift per plate updates the whole set. The subtlety is the size of the universe: the target is 1000, but the optimal total may lie above it, and a table that stops at 1000 would miss the sample answer of 1002. A minimal subset above the target has total at most 1000 plus its largest plate, hence at most 2000, so 2001 bits suffice. The bitset answers the reachability question in about 31000 word operations, and the nearest bit is then found by a scan of at most 1001 positions on each side.
+related:
+    - codeforces.687c.the-values-you-can-make
+    - codeforces.1856e2.permutree
