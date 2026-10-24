@@ -38,15 +38,15 @@ A second reason runs deeper. The recognition of a problem is what actually fails
 | Searching | Binary search on the answer, Binary search, Sliding window, Search over a sorted range of indices, Ternary search, Two pointers | [Searching](/algorithms/searching/) |
 | Greedy methods | Interval scheduling | [Greedy methods](/algorithms/greedy/) |
 | Arrays and sequences | Coordinate compression, Difference arrays, Monotonic queue, Monotonic stack, Prefix sums, Range hashing, Subarray sums, Two-dimensional difference arrays, Two-dimensional prefix sums, Two pointers on an array, Sliding window maximum | [Arrays and sequences](/algorithms/arrays/) |
-| Range query structures | Fenwick tree, Implicit segment trees, Lazy propagation, Merge sort trees, Mo's algorithm, Persistent segment trees, Segment tree, Sparse table, Square-root decomposition, Wavelet trees | [Range query structures](/algorithms/range-queries/) |
-| Graphs and shortest paths | 0-1 BFS, Articulation points, Bellman-Ford, Breadth-first search, Bipartite matching, The two-coloring test for a bipartite graph, Bridges, Depth-first search, Dijkstra's algorithm, Disjoint set union, Euler tours in graphs, Floyd-Warshall and all-pairs shortest paths, The Hungarian algorithm, Johnson's algorithm, Minimum cut, Minimum spanning tree, Graph representation, Strongly connected components, Topological sort | [Graphs and shortest paths](/algorithms/graphs/) |
-| Trees and decompositions | Binary lifting, Centroid decomposition, Euler tour for trees, Heavy-light decomposition, Lowest common ancestor, Rerooting, Small-to-large merging, Tree dynamic programming, Virtual trees | [Trees and decompositions](/algorithms/trees/) |
+| Range query structures | Fenwick tree, Implicit segment trees, Lazy propagation, Merge sort trees, Mo's algorithm, Persistent segment trees, Segment tree beats, Segment tree, Sparse table, Square-root decomposition, Wavelet trees | [Range query structures](/algorithms/range-queries/) |
+| Graphs and shortest paths | 0-1 BFS, Articulation points, Bellman-Ford, Breadth-first search, Bipartite matching, The two-coloring test for a bipartite graph, Bridges, Depth-first search, Dijkstra's algorithm, Disjoint set union, Euler tours in graphs, Floyd-Warshall and all-pairs shortest paths, The Hungarian algorithm, Johnson's algorithm, Minimum cost flow, Minimum cut, Minimum spanning tree, Graph representation, Strongly connected components, Topological sort | [Graphs and shortest paths](/algorithms/graphs/) |
+| Trees and decompositions | Binary lifting, Centroid decomposition, Dynamic trees, Euler tour for trees, Heavy-light decomposition, Lowest common ancestor, Rerooting, Small-to-large merging, Tree dynamic programming, Virtual trees | [Trees and decompositions](/algorithms/trees/) |
 | Dynamic programming | 0/1 knapsack, Bitmask dynamic programming, Convex hull trick, Dynamic programming on a directed acyclic graph, Digit dynamic programming, Interval dynamic programming, Longest increasing subsequence | [Dynamic programming](/algorithms/dynamic-programming/) |
-| Strings | Aho-Corasick, Knuth-Morris-Pratt, The Manacher algorithm, The minimal rotation of a string, Palindrome trees (eertree), Rolling hash, Suffix array, Trie, The Z algorithm | [Strings](/algorithms/strings/) |
+| Strings | Aho-Corasick, Knuth-Morris-Pratt, The Manacher algorithm, The minimal rotation of a string, Palindrome trees (eertree), Rolling hash, Suffix array, The suffix automaton, Trie, The Z algorithm | [Strings](/algorithms/strings/) |
 | Number theory | Chinese remainder theorem, The discrete logarithm, Euler's totient function and Euler's theorem, The extended Euclidean algorithm, Matrix exponentiation, Miller-Rabin primality test, Modular arithmetic, Prime factorization, Sieve of Eratosthenes | [Number theory](/algorithms/number-theory/) |
 | Combinatorics | Binomial coefficients, Counting dynamic programming, Generating functions, Inclusion and exclusion, Stars and bars | [Combinatorics](/algorithms/combinatorics/) |
 | Computational geometry | Closest pair, Convex hull, Point in polygon, Rotating calipers, Sweep line | [Computational geometry](/algorithms/geometry/) |
-| Advanced algorithms and special techniques | Parallel binary search, XOR bases | [Advanced algorithms and special techniques](/algorithms/advanced/) |
+| Advanced algorithms and special techniques | Parallel binary search, Quickselect and randomized selection, The rollback disjoint set union, Game theory and Sprague-Grundy theory, XOR bases | [Advanced algorithms and special techniques](/algorithms/advanced/) |
 
 <!-- aayntn:subjects:end -->
 
@@ -59,6 +59,9 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Technique | Time | Space | Requires | Article |
 | --- | --- | --- | --- | --- |
 | Parallel binary search | O((N + Q) log^2 N) | O(N + Q) | `searching.binary-search` | [Parallel binary search](/algorithms/advanced/parallel-binary-search) |
+| Quickselect and randomized selection | O(n) expected with a random pivot, O(n^2) worst case | O(1) auxiliary in the iterative form, O(n) stack in the worst recursive form | `foundations.sorting` | [Quickselect and randomized selection](/algorithms/advanced/quickselect) |
+| The rollback disjoint set union | O(log n) per find or union, O(1) per rollback | O(n + q) for the forest and its history | `graphs.dsu` | [The rollback disjoint set union](/algorithms/advanced/rollback-dsu) |
+| Game theory and Sprague-Grundy theory | O(M k + h) to tabulate the Grundy values up to the largest heap, where k moves are allowed | O(M + k) | `foundations.complexity` | [Game theory and Sprague-Grundy theory](/algorithms/advanced/sprague-grundy) |
 | XOR bases | O((n + q) log A) | O(log A) | `foundations.binary-representation` | [XOR bases](/algorithms/advanced/xor-bases) |
 | Coordinate compression | O(n log n + q log n) | O(n) | `foundations.sorting` | [Coordinate compression](/algorithms/arrays/coordinate-compression) |
 | Difference arrays | O(n + q) | O(n) | `arrays.prefix-sums` | [Difference arrays](/algorithms/arrays/difference-arrays) |
@@ -111,6 +114,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Floyd-Warshall and all-pairs shortest paths | O(V^3) | O(V^2) | `graphs.representation` | [Floyd-Warshall and all-pairs shortest paths](/algorithms/graphs/floyd-warshall) |
 | The Hungarian algorithm | O(n^3) | O(n^2) | `graphs.bipartite-matching` | [The Hungarian algorithm](/algorithms/graphs/hungarian-algorithm) |
 | Johnson's algorithm | O(VE + V(V + E) log V) | O(V + E) | `graphs.dijkstra` | [Johnson's algorithm](/algorithms/graphs/johnson) |
+| Minimum cost flow | O(F (V + E) log V) | O(V + E) | `graphs.representation` | [Minimum cost flow](/algorithms/graphs/minimum-cost-flow) |
 | Minimum cut | O(V E^2) for Edmonds-Karp, O(V^2 E) for Dinic | O(V + E) | `graphs.representation` | [Minimum cut](/algorithms/graphs/minimum-cut) |
 | Minimum spanning tree | O(E log E) | O(V + E) | `graphs.representation` | [Minimum spanning tree](/algorithms/graphs/mst) |
 | Graph representation | O(V + E) to build | O(V + E) for an adjacency list | `foundations.complexity` | [Graph representation](/algorithms/graphs/representation) |
@@ -132,6 +136,7 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Merge sort trees | O(log^2 n) per rank query; O(log C log^2 n) per k-th smallest query | O(n log n) | `range-queries.segment-tree` | [Merge sort trees](/algorithms/range-queries/merge-sort-tree) |
 | Mo's algorithm | O((n + q) sqrt n) for the batch, plus O(q log q) to sort | O(n + q) | `arrays.prefix-sums` | [Mo's algorithm](/algorithms/range-queries/mos-algorithm) |
 | Persistent segment trees | O(n log n) to build; O(log n) per query | O(n log n) | `range-queries.segment-tree` | [Persistent segment trees](/algorithms/range-queries/persistent-segment-tree) |
+| Segment tree beats | amortized O(log n) per operation | O(n) | `range-queries.segment-tree` | [Segment tree beats](/algorithms/range-queries/segment-tree-beats) |
 | Segment tree | O(log n) per operation | O(n) | `arrays.prefix-sums` | [Segment tree](/algorithms/range-queries/segment-tree) |
 | Sparse table | O(n log n) to build, O(1) per query | O(n log n) | `arrays.prefix-sums` | [Sparse table](/algorithms/range-queries/sparse-table) |
 | Square-root decomposition | O(n) to build, O(1) per point update, O(sqrt n) per range query | O(n) | `arrays.prefix-sums` | [Square-root decomposition](/algorithms/range-queries/sqrt-decomposition) |
@@ -149,10 +154,12 @@ Every technique in the encyclopedia appears below with the bound it achieves, th
 | Palindrome trees (eertree) | O(n) | O(n) | `foundations.complexity` | [Palindrome trees (eertree)](/algorithms/strings/palindrome-tree) |
 | Rolling hash | O(n) to build, O(1) per substring query | O(n) for the two tables | `foundations.complexity` | [Rolling hash](/algorithms/strings/rolling-hash) |
 | Suffix array | O(n log n) | O(n) | `foundations.sorting` | [Suffix array](/algorithms/strings/suffix-array) |
+| The suffix automaton | O(26n) for a lowercase alphabet | O(26n) for the transition table | `strings.trie` | [The suffix automaton](/algorithms/strings/suffix-automaton) |
 | Trie | O(L) per word | O(N) nodes, plus one pointer per alphabet symbol per node when the children are stored densely | `foundations.complexity` | [Trie](/algorithms/strings/trie) |
 | The Z algorithm | O(n) to build, O(n + m) for a search | O(n) | `foundations.complexity` | [The Z algorithm](/algorithms/strings/z-algorithm) |
 | Binary lifting | O(n log n) to build, O(log n) per query | O(n log n) | `graphs.bfs` | [Binary lifting](/algorithms/trees/binary-lifting) |
 | Centroid decomposition | O(n log n) | O(n) | `graphs.dfs` | [Centroid decomposition](/algorithms/trees/centroid-decomposition) |
+| Dynamic trees | O(log n) amortized per operation | O(n) | `trees.lca` | [Dynamic trees](/algorithms/trees/dynamic-trees) |
 | Euler tour for trees | O(n) to build, O(log n) per query with a Fenwick tree | O(n) | `graphs.dfs` | [Euler tour for trees](/algorithms/trees/euler-tour) |
 | Heavy-light decomposition | O(n) to build, O(log n) per path query | O(n) | `graphs.bfs` | [Heavy-light decomposition](/algorithms/trees/heavy-light-decomposition) |
 | Lowest common ancestor | O((n + m) log n) to build, O(log n) per query | O(n log n) | `graphs.bfs` | [Lowest common ancestor](/algorithms/trees/lca) |

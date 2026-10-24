@@ -143,3 +143,31 @@ algorithms:
       title: Palindrome trees, also called the eertree
       subject: strings
       manifest: implementations/strings/palindrome-tree/algorithm.yaml
+    - id: advanced.rollback-dsu
+      title: The rollback disjoint set union
+      subject: advanced
+      manifest: implementations/advanced/rollback-dsu/algorithm.yaml
+    - id: advanced.sprague-grundy
+      title: Game theory and Sprague-Grundy theory
+      subject: advanced
+      manifest: implementations/advanced/sprague-grundy/algorithm.yaml
+    - id: graphs.minimum-cost-flow
+      title: Minimum cost flow
+      subject: graphs
+      manifest: implementations/graphs/minimum-cost-flow/algorithm.yaml
+    - id: advanced.quickselect
+      title: Quickselect and randomized selection
+      subject: advanced
+      manifest: implementations/advanced/quickselect/algorithm.yaml
+    - id: range-queries.segment-tree-beats
+      title: Segment tree beats
+      subject: range-queries
+      manifest: implementations/range-queries/segment-tree-beats/algorithm.yaml
+    - id: strings.suffix-automaton
+      title: The suffix automaton
+      subject: strings
+      manifest: implementations/strings/suffix-automaton/algorithm.yaml
+    - id: trees.dynamic-trees
+      title: Dynamic trees
+      subject: trees
+      manifest: implementations/trees/dynamic-trees/algorithm.yaml

@@ -41,7 +41,7 @@ techniques:
       subject: advanced
       synonyms:
           - randomized selection
-      status: missing
+      status: published
       divisions: []
     - id: advanced.randomized-algorithms
       name: Randomized algorithms
@@ -55,7 +55,7 @@ techniques:
       synonyms:
           - rollback DSU
           - undoable union find
-      status: missing
+      status: published
       divisions: []
     - id: advanced.sprague-grundy
       name: Game theory and Sprague-Grundy theory
@@ -63,7 +63,7 @@ techniques:
       synonyms:
           - Grundy numbers
           - Nim theory
-      status: missing
+      status: published
       divisions: []
     - id: advanced.xor-bases
       name: XOR bases
@@ -701,7 +701,7 @@ techniques:
       synonyms:
           - min cost flow
           - MCMF
-      status: missing
+      status: published
       divisions: []
     - id: graphs.minimum-cut
       name: Minimum cut
@@ -954,7 +954,7 @@ techniques:
       name: Segment tree beats
       subject: range-queries
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: range-queries.sparse-table
       name: Sparse table
@@ -1119,7 +1119,7 @@ techniques:
       subject: strings
       synonyms:
           - SAM
-      status: missing
+      status: published
       divisions: []
     - id: strings.suffix-tree
       name: Suffix trees
@@ -1167,7 +1167,7 @@ techniques:
       synonyms:
           - link-cut tree
           - top tree
-      status: missing
+      status: published
       divisions: []
     - id: trees.euler-tour
       name: Euler tour for trees
