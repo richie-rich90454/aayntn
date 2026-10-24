@@ -16,7 +16,7 @@ async function pages(): Promise<{ file: string; body: string }[]> {
     const result: { file: string; body: string }[] = [];
     for (const file of files) {
         const relative = file.replace(/\\/g, "/").replace(`${ROOT.replace(/\\/g, "/")}/`, "");
-        if (relative.includes("/docs/implementations/")) continue;
+        if (relative.includes("docs/implementations/")) continue;
         const source = await readFile(file, "utf8");
         const parsed = parseMarkdownFrontmatter(source);
         result.push({ file: relative, body: parsed ? parsed.body : source });
