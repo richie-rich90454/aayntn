@@ -1,0 +1,31 @@
+id: kattis.divisions
+title: Divisions
+source: Kattis
+contest: German Collegiate Programming Contest (GCPC) 2015
+division: platinum
+url: https://open.kattis.com/problems/divisions
+techniques:
+    - number-theory.pollard-rho
+prerequisites:
+    - number-theory.modular-arithmetic
+    - number-theory.miller-rabin
+    - number-theory.prime-factorization
+difficulty: 4
+estimatedMinutes: 35
+specialConstraints:
+    - The single value N can be as large as 10^18, so trial division to its square root reaches 10^9 and is too slow.
+    - The answer is the number of divisors, so the prime exponents are needed rather than the factors in any particular order.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Factor N first; the number of positive divisors is the product of each exponent plus one.
+    - A prime has two divisors, and N = 100000007700000049 is the product of 100000007 and 1000000007, so it has four.
+    - Pollard's rho finds a factor of a semiprime in expected fourth-root time, and Miller-Rabin decides when a cofactor is prime.
+    - The divisor count fits in a signed 64-bit integer for every N below 10^18, so no modular reduction is needed.
+discussion: >-
+    The divisor count is a multiplicative function of the prime exponents, so the whole problem is a factorization problem. The sample at the top of the range is a product of two primes near 10^9, which is exactly the case where trial division is too slow and rho is fast. After the factorization, the count is a short product of exponent-plus-one terms, and the only care needed is to divide out each prime completely before moving to the next factor.
+related:
+    - library-checker.factorize
+    - kattis.big-factoring

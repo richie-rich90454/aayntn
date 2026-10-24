@@ -171,3 +171,39 @@ algorithms:
       title: Dynamic trees
       subject: trees
       manifest: implementations/trees/dynamic-trees/algorithm.yaml
+    - id: advanced.offline-dynamic-connectivity
+      title: Offline dynamic connectivity
+      subject: advanced
+      manifest: implementations/advanced/offline-dynamic-connectivity/algorithm.yaml
+    - id: dynamic-programming.divide-and-conquer-optimization
+      title: Divide-and-conquer optimization
+      subject: dynamic-programming
+      manifest: implementations/dynamic-programming/divide-and-conquer-optimization/algorithm.yaml
+    - id: dynamic-programming.knuth-optimization
+      title: Knuth optimization
+      subject: dynamic-programming
+      manifest: implementations/dynamic-programming/knuth-optimization/algorithm.yaml
+    - id: dynamic-programming.li-chao-tree
+      title: The Li Chao tree
+      subject: dynamic-programming
+      manifest: implementations/dynamic-programming/li-chao-tree/algorithm.yaml
+    - id: dynamic-programming.monotonic-queue-optimization
+      title: Monotonic queue optimization
+      subject: dynamic-programming
+      manifest: implementations/dynamic-programming/monotonic-queue-optimization/algorithm.yaml
+    - id: enumeration.gray-codes
+      title: Gray codes
+      subject: enumeration
+      manifest: implementations/enumeration/gray-codes/algorithm.yaml
+    - id: greedy.multi-key-sorting
+      title: Sorting by several keys
+      subject: greedy
+      manifest: implementations/greedy/multi-key-sorting/algorithm.yaml
+    - id: number-theory.pollard-rho
+      title: Pollard's rho
+      subject: number-theory
+      manifest: implementations/number-theory/pollard-rho/algorithm.yaml
+    - id: searching.parametric-search
+      title: The parametric search generalization
+      subject: searching
+      manifest: implementations/searching/parametric-search/algorithm.yaml

@@ -21,7 +21,7 @@ techniques:
       name: Offline dynamic connectivity
       subject: advanced
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: advanced.parallel-binary-search
       name: Parallel binary search
@@ -301,7 +301,7 @@ techniques:
       subject: dynamic-programming
       synonyms:
           - D&C optimization
-      status: missing
+      status: published
       divisions: []
     - id: dynamic-programming.interval-dp
       name: Interval dynamic programming
@@ -315,14 +315,14 @@ techniques:
       subject: dynamic-programming
       synonyms:
           - Knuth-Yao optimization
-      status: missing
+      status: published
       divisions: []
     - id: dynamic-programming.li-chao-tree
       name: The Li Chao tree
       subject: dynamic-programming
       synonyms:
           - Li Chao segment tree
-      status: missing
+      status: published
       divisions: []
     - id: dynamic-programming.longest-increasing-subsequence
       name: Longest increasing subsequence
@@ -338,7 +338,7 @@ techniques:
       subject: dynamic-programming
       synonyms:
           - sliding window optimization
-      status: missing
+      status: published
       divisions: []
     - id: dynamic-programming.profile-dp
       name: Profile dynamic programming
@@ -390,7 +390,7 @@ techniques:
       subject: enumeration
       synonyms:
           - Gray code
-      status: missing
+      status: published
       divisions: []
     - id: enumeration.iterative-deepening
       name: Iterative deepening
@@ -785,7 +785,7 @@ techniques:
       subject: greedy
       synonyms:
           - multi-key sorting
-      status: missing
+      status: published
       divisions: []
     - id: greedy.scheduling-deadlines-and-release-times
       name: Scheduling with deadlines and release times
@@ -873,7 +873,7 @@ techniques:
       subject: number-theory
       synonyms:
           - Pollard rho
-      status: missing
+      status: published
       divisions: []
     - id: number-theory.prime-factorization
       name: Prime factorization
@@ -1000,7 +1000,7 @@ techniques:
       subject: searching
       synonyms:
           - parametric search
-      status: missing
+      status: published
       divisions: []
     - id: searching.sliding-window
       name: Sliding window

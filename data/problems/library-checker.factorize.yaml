@@ -1,0 +1,29 @@
+id: library-checker.factorize
+title: Factorize
+source: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/factorize
+techniques:
+    - number-theory.pollard-rho
+prerequisites:
+    - number-theory.modular-arithmetic
+    - number-theory.miller-rabin
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - There are up to 100 values, each at most 10^18, so trial division to 10^9 per value is too slow.
+    - The output lists every prime factor with multiplicity, not only the distinct primes.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The expected cost of Pollard's rho is the square root of the smallest prime factor, so a 64-bit semiprime needs roughly 10^5 rho steps.
+    - Strip the small primes first, then use deterministic Miller-Rabin on each cofactor before starting rho.
+    - When rho returns the whole number rather than a proper factor, change c and restart; never accept an untested composite as a factor.
+    - Print the number of factors before the factors themselves.
+discussion: >-
+    Each query is independent, so the only decision is how to factor one value below 10^18. Trial division reaches 10^9, while the smallest prime factor of a hard query is near 10^9 and rho needs about 30,000 steps to reach it. The twelve-base Miller-Rabin test is exact on the whole range and stops the recursion at primes. The factors are collected, sorted, and printed with their count; the rho loop itself is the same for every query.
+related:
+    - kattis.divisions
+    - kattis.big-factoring

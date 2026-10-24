@@ -1252,3 +1252,320 @@ trees.dynamic-trees:
       expected: |
           1
           1
+
+advanced.offline-dynamic-connectivity:
+    - name: an edge is removed and the next query sees the split
+      input: |
+          3 5
+          1 1 2
+          3 1 2
+          2 1 2
+          3 1 2
+          3 2 3
+      expected: |
+          YES
+          NO
+          NO
+    - name: removing a bridge splits a three-edge path
+      input: |
+          4 9
+          1 1 2
+          1 2 3
+          1 3 4
+          3 1 4
+          2 2 3
+          3 1 4
+          3 1 2
+          2 1 2
+          3 1 2
+      expected: |
+          YES
+          NO
+          YES
+          NO
+    - name: a self-loop and an edge that is added again after removal
+      input: |
+          6 11
+          3 1 2
+          1 1 1
+          3 1 1
+          1 1 2
+          3 1 2
+          2 1 2
+          3 1 2
+          1 1 2
+          3 1 2
+          2 1 1
+          3 1 1
+      expected: |
+          NO
+          YES
+          YES
+          NO
+          YES
+          YES
+    - name: add, remove, and query with no other edges
+      input: |
+          5 6
+          1 4 5
+          3 4 5
+          2 4 5
+          3 4 5
+          3 5 4
+          3 1 2
+      expected: |
+          YES
+          NO
+          NO
+          NO
+
+dynamic-programming.divide-and-conquer-optimization:
+    - name: two groups over an increasing array
+      input: |
+          5 2
+          1 2 3 4 5
+      expected: |
+          117
+    - name: three groups with a large element in the middle
+      input: |
+          7 3
+          3 1 4 1 5 9 2
+      expected: |
+          221
+    - name: edge case where every element is its own group
+      input: |
+          4 4
+          0 0 0 0
+      expected: |
+          0
+
+dynamic-programming.knuth-optimization:
+    - name: three matrices where the left grouping is cheaper
+      input: |
+          3
+          10 30 5 60
+      expected: |
+          4500
+    - name: six matrices with a narrow window at the end
+      input: |
+          6
+          30 35 15 5 10 20 25
+      expected: |
+          15125
+    - name: edge case with a single matrix and no multiplication
+      input: |
+          1
+          7 13
+      expected: |
+          0
+
+dynamic-programming.li-chao-tree:
+    - name: interleaved insertions and queries
+      input: |
+          7
+          1 1 0
+          1 -1 6
+          2 0
+          2 5
+          1 3 -4
+          2 2
+          2 6
+      expected: |
+          0
+          1
+          2
+          0
+    - name: a single coordinate with a duplicate slope and a replacing line
+      input: |
+          7
+          1 0 -5
+          2 7
+          1 0 -5
+          1 2 -20
+          2 7
+          2 7
+          2 7
+      expected: |
+          -5
+          -6
+          -6
+          -6
+    - name: many lines that never beat the first
+      input: |
+          9
+          1 0 10
+          1 1 100
+          1 -1 100
+          1 2 100
+          2 -5
+          2 0
+          2 5
+          2 100
+          2 -100
+      expected: |
+          10
+          10
+          10
+          0
+          -100
+
+dynamic-programming.monotonic-queue-optimization:
+    - name: a five-position path with a two-position hop limit
+      input: |
+          5 2
+          3 1 4 1 5
+      expected: |
+          7
+    - name: negative entry costs and a three-position window
+      input: |
+          6 3
+          -5 10 -3 -8 4 -1
+      expected: |
+          -17
+    - name: a one-position window whose total exceeds 32 bits
+      input: |
+          4 1
+          1000000000 1000000000 1000000000 1000000000
+      expected: |
+          4000000000
+
+enumeration.gray-codes:
+    - name: edge case with one bit
+      input: |
+          1
+      expected: |
+          0
+          1
+    - name: two bits form the reflected square
+      input: |
+          2
+      expected: |
+          00
+          01
+          11
+          10
+    - name: four bits preserve the leading zeros
+      input: |
+          4
+      expected: |
+          0000
+          0001
+          0011
+          0010
+          0110
+          0111
+          0101
+          0100
+          1100
+          1101
+          1111
+          1110
+          1010
+          1011
+          1001
+          1000
+
+greedy.multi-key-sorting:
+    - name: mixed directions on five records
+      input: |
+          5
+          2 5 1
+          1 3 4
+          2 9 2
+          1 3 1
+          2 9 1
+      expected: |
+          1 3 1
+          1 3 4
+          2 9 1
+          2 9 2
+          2 5 1
+    - name: negative keys and repeated secondary keys
+      input: |
+          6
+          -1 0 5
+          -1 0 3
+          -1 2 7
+          0 -5 0
+          0 -5 -2
+          -2 100 100
+      expected: |
+          -2 100 100
+          -1 2 7
+          -1 0 3
+          -1 0 5
+          0 -5 -2
+          0 -5 0
+    - name: a single record with extreme keys
+      input: |
+          1
+          -1000000000 1000000000 -1000000000
+      expected: |
+          -1000000000 1000000000 -1000000000
+
+number-theory.pollard-rho:
+    - name: boundary values, repeated factors and a prime
+      input: |
+          8
+          1
+          2
+          3
+          4
+          8
+          64
+          729
+          999983
+      expected: |
+
+          2
+          3
+          2 2
+          2 2 2
+          2 2 2 2 2 2
+          3 3 3 3 3 3
+          999983
+    - name: ordinary composites and a product of two large primes
+      input: |
+          4
+          6
+          600851475143
+          100000007700000049
+          1234567890123456789
+      expected: |
+          2 3
+          71 839 1471 6857
+          100000007 1000000007
+          3 3 101 3541 3607 3803 27961
+    - name: the top of the signed 64-bit range
+      input: |
+          3
+          9223372036854775807
+          4294967297
+          9007199254740991
+      expected: |
+          7 7 73 127 337 92737 649657
+          641 6700417
+          6361 69431 20394401
+
+searching.parametric-search:
+    - name: a mixed array with a partial budget
+      input: |
+          4
+          4 9 2 7
+          12
+      expected: |
+          3
+    - name: a budget that covers the whole array
+      input: |
+          3
+          5 1 4
+          100
+      expected: |
+          5
+    - name: edge case with one large value and a budget just below it
+      input: |
+          1
+          1000000000
+          999999999
+      expected: |
+          999999999

@@ -1,0 +1,30 @@
+id: kattis.big-factoring
+title: Big Factoring
+source: Kattis
+division: platinum
+url: https://open.kattis.com/problems/bigfactoring
+techniques:
+    - number-theory.pollard-rho
+prerequisites:
+    - number-theory.modular-arithmetic
+    - number-theory.miller-rabin
+    - number-theory.prime-factorization
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The value can be as large as 10^24, which does not fit in a signed 64-bit integer, so the modular product needs about 160 bits.
+    - Every prime factor must be printed with multiplicity in ascending order, so the whole factorization is required.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The smallest prime factor can be near 10^12, so trial division is impossible, but rho still needs about its square root, around 10^6 steps.
+    - With 10^24, a 128-bit type holds the value but not the 160-bit product, so C and C++ need a multiword or multiprecision product, while Java and Python already have arbitrary precision.
+    - The 64-bit Pascal reference in this article needs a third limb before it can accept the largest inputs; the other five languages can be widened directly.
+    - Test the input parser on the largest value before writing the factorization, because a silent 64-bit truncation changes the number being factored.
+discussion: >-
+    The algorithm is unchanged from the 64-bit case, but the arithmetic is not. A value near 10^24 is about 2^80, and the product of two residues near that bound is about 2^160, so a 64-bit or even a 128-bit intermediate is not enough for the full range. C and C++ need a multiword product or a multiprecision type, Java and Python have arbitrary precision, and JavaScript's BigInt is exact. The twelve-base Miller-Rabin guarantee extends to 3.3 times 10^24, so it still covers the input; the change is in the arithmetic, not in the bases.
+related:
+    - library-checker.factorize
+    - kattis.divisions
