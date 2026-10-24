@@ -1,0 +1,31 @@
+id: atcoder.abc359.g.sum-of-tree-distance
+title: Sum of Tree Distance
+source: AtCoder
+contest: AtCoder Beginner Contest 359
+division: platinum
+url: https://atcoder.jp/contests/abc359/tasks/abc359_g
+editorialUrl: https://atcoder.jp/contests/abc359/editorial/10284
+techniques:
+    - trees.virtual-tree
+prerequisites:
+    - trees.lca
+    - trees.tree-dp
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - N is at most 200000, so each color class must be handled on a virtual tree of size proportional to that class.
+    - The total distance can exceed the range of a 32-bit integer, so the accumulator must be 64-bit.
+    - A virtual edge represents an original path, so its weight is the number of edges on that path rather than 1.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The distance is nonzero only for pairs of equal color, so each color class can be solved independently.
+    - Build the virtual tree of one color class; a virtual edge has weight equal to the number of original edges on the path it represents.
+    - If a virtual edge separates the color class into s and k - s vertices, it lies on exactly s(k - s) of the pairs.
+    - Compute the subtree count of marked vertices in postorder and add weight * s * (k - s) for every virtual edge.
+discussion: >-
+    For one color, the marked vertices and their lowest common ancestors form a virtual tree. A virtual edge from an ancestor to a descendant represents the original path between them, so its weight is the difference of the root distances. Removing that virtual edge splits the color class into s and k - s vertices, and the edge lies on exactly s(k - s) of the pairs, so it contributes weight * s * (k - s). A postorder pass supplies every s, and summing over the virtual edges and the colors gives the answer in O(N log N). The total can reach about 4 * 10^15, so the accumulator must be 64-bit.
+related:
+    - codeforces.613d.kingdom-and-its-cities
+    - atcoder.abc340.g.leaf-color

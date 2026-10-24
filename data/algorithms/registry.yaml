@@ -1,13 +1,3 @@
-# The algorithm registry.
-#
-# The canonical metadata for every algorithm lives in the manifest beside its
-# source, in implementations/<domain>/<algorithm>/algorithm.yaml. This file is
-# the index of those manifests, so that a reader can see the whole set at a
-# glance and so that a tool can find a manifest by identifier.
-#
-# The build checks that every entry here names a manifest that exists, and that
-# every manifest is listed.
-
 algorithms:
     - id: searching.binary-search
       title: Binary search
@@ -89,3 +79,35 @@ algorithms:
       title: Floyd-Warshall and all-pairs shortest paths
       subject: graphs
       manifest: implementations/graphs/floyd-warshall/algorithm.yaml
+    - id: searching.sorted-range-search
+      title: Search over a sorted range of indices
+      subject: searching
+      manifest: implementations/searching/sorted-range-search/algorithm.yaml
+    - id: arrays.range-hashing
+      title: Range hashing
+      subject: arrays
+      manifest: implementations/arrays/range-hashing/algorithm.yaml
+    - id: number-theory.euler-totient
+      title: Euler's totient function and Euler's theorem
+      subject: number-theory
+      manifest: implementations/number-theory/euler-totient/algorithm.yaml
+    - id: range-queries.implicit-segment-tree
+      title: Implicit segment trees
+      subject: range-queries
+      manifest: implementations/range-queries/implicit-segment-tree/algorithm.yaml
+    - id: range-queries.merge-sort-tree
+      title: Merge sort trees
+      subject: range-queries
+      manifest: implementations/range-queries/merge-sort-tree/algorithm.yaml
+    - id: trees.small-to-large-merging
+      title: Small-to-large merging
+      subject: trees
+      manifest: implementations/trees/small-to-large-merging/algorithm.yaml
+    - id: trees.virtual-tree
+      title: Virtual trees
+      subject: trees
+      manifest: implementations/trees/virtual-tree/algorithm.yaml
+    - id: number-theory.miller-rabin
+      title: Miller-Rabin
+      subject: number-theory
+      manifest: implementations/number-theory/miller-rabin/algorithm.yaml

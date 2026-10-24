@@ -124,7 +124,7 @@ techniques:
       name: Range hashing
       subject: arrays
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: arrays.subarray-sums
       name: Subarray sums
@@ -815,7 +815,7 @@ techniques:
       synonyms:
           - phi function
           - Euler theorem
-      status: missing
+      status: published
       divisions: []
     - id: number-theory.extended-euclidean
       name: The extended Euclidean algorithm
@@ -848,7 +848,7 @@ techniques:
       subject: number-theory
       synonyms:
           - Miller Rabin
-      status: missing
+      status: published
       divisions: []
     - id: number-theory.modular-arithmetic
       name: Modular arithmetic
@@ -910,7 +910,7 @@ techniques:
       synonyms:
           - dynamic segment tree
           - sparse segment tree
-      status: missing
+      status: published
       divisions: []
     - id: range-queries.lazy-propagation
       name: Lazy propagation
@@ -924,7 +924,7 @@ techniques:
       subject: range-queries
       synonyms:
           - merge sort tree
-      status: missing
+      status: published
       divisions: []
     - id: range-queries.mos-algorithm
       name: Mo's algorithm
@@ -1020,7 +1020,7 @@ techniques:
       name: Search over a sorted range of indices
       subject: searching
       synonyms: []
-      status: missing
+      status: published
       divisions: []
     - id: searching.ternary-search
       name: Ternary search
@@ -1214,7 +1214,7 @@ techniques:
       synonyms:
           - small to large
           - DSU on tree
-      status: missing
+      status: published
       divisions: []
     - id: trees.top-tree
       name: The top-tree and rake-compress formulation
@@ -1246,5 +1246,5 @@ techniques:
       subject: trees
       synonyms:
           - virtual tree
-      status: missing
+      status: published
       divisions: []

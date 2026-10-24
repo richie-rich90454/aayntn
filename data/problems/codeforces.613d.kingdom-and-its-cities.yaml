@@ -1,0 +1,31 @@
+id: codeforces.613d.kingdom-and-its-cities
+title: Kingdom and its Cities
+source: Codeforces
+contest: Codeforces Round 339 (Div. 1)
+division: platinum
+url: https://codeforces.com/problemset/problem/613/D
+editorialUrl: https://codeforces.com/blog/entry/22832
+techniques:
+    - trees.virtual-tree
+prerequisites:
+    - trees.lca
+    - graphs.dfs
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The sum of the plan sizes is at most 100000, so each plan must be solved in time proportional to its own important cities rather than to n.
+    - Two important cities joined by a direct road cannot be separated, because neither of them may be captured.
+    - Only non-important cities may be captured.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The total number of important cities over all plans is at most 100000, so every plan has a small virtual tree.
+    - If two important cities share a direct road, the plan is impossible and the answer is -1.
+    - Build the virtual tree of the important cities, then run a postorder DP that records whether an uncut important city is still connected to the current vertex.
+    - When a non-important virtual vertex has two children that still carry an important city, capture that vertex once and disconnect both branches.
+discussion: >-
+    The plans are independent, and the sum of their sizes is only 100000, so each plan is solved on its virtual tree. A plan is impossible exactly when two important cities are adjacent in the original tree, because neither endpoint can be captured. Otherwise a postorder DP on the virtual tree tracks whether the processed part still has an important city connected to the current vertex; a non-important vertex with two such children is captured once and clears both branches. The virtual tree has at most twice as many vertices as the important set, so all plans together cost O((n + sum k) log n).
+related:
+    - atcoder.abc340.g.leaf-color
+    - atcoder.abc359.g.sum-of-tree-distance

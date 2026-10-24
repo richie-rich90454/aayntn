@@ -1,0 +1,31 @@
+id: atcoder.abc340.g.leaf-color
+title: Leaf Color
+source: AtCoder
+contest: AtCoder Beginner Contest 340
+division: platinum
+url: https://atcoder.jp/contests/abc340/tasks/abc340_g
+editorialUrl: https://atcoder.jp/contests/abc340/editorial/9256
+techniques:
+    - trees.virtual-tree
+prerequisites:
+    - trees.lca
+    - trees.tree-dp
+difficulty: 5
+estimatedMinutes: 75
+specialConstraints:
+    - N is at most 200000, so the color classes must be processed together in total linear or near-linear time.
+    - The answer is taken modulo 998244353.
+    - A one-vertex subset has no vertex of degree 1, so the leaf condition is vacuous for it.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Only the vertices of one color and their lowest common ancestors can appear in a valid subtree whose leaves have that color.
+    - Build one virtual tree per color; the sum of the sizes of all these virtual trees is O(N).
+    - A non-color vertex with only one relevant child is bypassed by the virtual tree, which is exactly the compression the DP needs.
+    - "Use two DP states per virtual vertex: whether the part below it is connected to the vertex, and whether the vertex already has a selected child."
+discussion: >-
+    For one color c, the useful vertices are the vertices of color c and their lowest common ancestors. Their virtual tree has at most twice as many vertices as the color class, and every virtual edge is a path whose internal vertices have no other useful descendant. A postorder DP on that tree counts connected induced subtrees whose leaves all have color c. The state at a vertex records whether the selected part below it is connected to the vertex and whether a selected child already exists; a vertex of color c can close a branch as a leaf or continue it as an internal vertex, and a singleton is counted for the color of its own vertex. Summing over the colors keeps the total work O(N log N).
+related:
+    - codeforces.613d.kingdom-and-its-cities
+    - atcoder.abc359.g.sum-of-tree-distance
