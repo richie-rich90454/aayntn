@@ -1,0 +1,31 @@
+id: cses.2193.polygon-lattice-points
+title: Polygon Lattice Points
+source: CSES
+contest: CSES Problem Set
+division: gold
+url: https://cses.fi/problemset/task/2193
+techniques:
+    - geometry.integer-geometry
+prerequisites:
+    - geometry.integer-geometry
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The polygon is simple, so Pick's theorem applies without a correction for self-intersections.
+    - The vertex count reaches 100000, so the pass over the edges has to stay linear apart from the gcd.
+    - The coordinates reach 10^9 in absolute value, so twice the area can exceed the signed 64-bit range.
+    - The output order is the number of interior points first and the number of boundary points second.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The area and the number of boundary lattice points are both sums over the edges.
+    - The shoelace sum gives twice the area as an exact integer, so no division is needed until the end.
+    - An edge whose coordinate differences are dx and dy carries gcd(|dx|, |dy|) new boundary points, because the endpoint is charged by the next edge.
+    - Pick's theorem says the area is the interior count plus half the boundary count minus one, so the interior count is (twiceArea - boundary + 2) / 2.
+discussion: >-
+    The task is the canonical three-quantity lattice polygon problem. The shoelace sum produces twice the signed area in one pass, the gcd of each edge produces the boundary count in the same pass, and Pick's theorem converts the two into the interior count. The two details that decide whether the solution passes are the boundary convention, which charges the start of each edge and not its end, and the width of the accumulator, because the stated coordinate bound lets twice the area reach far beyond 64 bits even though every individual coordinate fits.
+related:
+    - poj.1265.area
+    - kattis.polygonarea

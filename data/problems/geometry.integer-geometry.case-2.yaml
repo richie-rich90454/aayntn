@@ -1,0 +1,31 @@
+id: poj.1265.area
+title: Area
+source: POJ
+contest: Northwestern Europe 2001
+division: gold
+url: http://poj.org/problem?id=1265
+techniques:
+    - geometry.integer-geometry
+prerequisites:
+    - geometry.integer-geometry
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The input gives moves rather than absolute vertices, so the polygon has to be reconstructed or the sums accumulated along the walk.
+    - The path is closed and simple, and it runs counterclockwise around the building.
+    - The polygon fits inside a 100 by 100 square, so every coordinate and every product is small.
+    - The area is printed with one digit after the decimal point, and each scenario ends with a blank line.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Start at (0, 0) and treat each reported move as the edge vector to the next vertex.
+    - The gcd of a move is the number of new boundary points on that edge.
+    - The shoelace term of an edge can be accumulated from the current point and the move alone, without storing the whole polygon.
+    - The statement asks for the interior count, the boundary count and the area, in that order, and the area is the double area divided by two.
+discussion: >-
+    The problem is the three-quantity lattice polygon computation with the vertices supplied as edge vectors. It is a good exercise in seeing that the shoelace sum and the boundary count are local to an edge: the running point is enough, and the polygon never has to be stored. The small coordinate bound removes the overflow question and leaves the boundary convention and the area formatting as the parts that decide the verdict. The output order is interior, boundary, area, which is Pick's theorem read from the middle outward.
+related:
+    - cses.2193.polygon-lattice-points
+    - kattis.polygonarea

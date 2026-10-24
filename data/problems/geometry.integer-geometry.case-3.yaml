@@ -1,0 +1,31 @@
+id: kattis.polygonarea
+title: Polygon Area
+source: Kattis
+contest: KTH CSC Popup 2005
+division: silver
+url: https://open.kattis.com/problems/polygonarea
+techniques:
+    - geometry.integer-geometry
+prerequisites:
+    - geometry.integer-geometry
+difficulty: 2
+estimatedMinutes: 15
+specialConstraints:
+    - The input holds up to 25 polygons and is terminated by a line containing 0.
+    - Each polygon has at most 1000 vertices and coordinates within 10^4 of zero.
+    - The vertices may be given clockwise or counterclockwise.
+    - The area is printed with exactly one digit after the decimal point, together with the orientation.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The shoelace sum is twice the signed area, so its sign is the orientation and its absolute value is twice the area.
+    - There is no need for a separate orientation test; the total sign already decides it.
+    - Accumulate in integers and divide by two only when formatting the answer.
+    - A clockwise polygon produces a negative total, so compare against zero rather than taking the absolute value first.
+discussion: >-
+    The problem asks for the two halves of the shoelace sum at once: the sign is the orientation and the magnitude is twice the area. It is the smallest complete use of the signed sum, without the gcd or Pick's theorem, and it is the right first exercise because the boundary convention cannot hide an error here. The multi-test-case format and the terminating zero are the only implementation details beyond the edge loop.
+related:
+    - cses.2193.polygon-lattice-points
+    - poj.1265.area

@@ -1,0 +1,97 @@
+algorithm: geometry.integer-geometry
+title: Integer geometry
+summary: Read a lattice polygon, then print twice its area from the shoelace sum, the number of boundary lattice points from a gcd on every edge, and the number of interior lattice points from Pick's theorem.
+subject: geometry
+divisions: [gold, platinum]
+importance: common-contest-technique
+prerequisites:
+    required: [number-theory.extended-euclidean, foundations.complexity]
+    recommended: [geometry.convex-hull, geometry.point-in-polygon]
+complexity:
+    time: "O(n log C)"
+    space: "O(n)"
+assumptions:
+    - The vertices are lattice points given in order around a simple polygon with at least three vertices.
+    - Consecutive vertices are distinct, so every edge has a nonzero direction vector.
+    - The coordinates have absolute value at most 10000 and the vertex count is at most 100000, so twice the area stays below 2^53 and the JavaScript and Pascal variants are exact.
+    - The polygon is simple, because Pick's theorem has no plain form for a self-intersecting boundary.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a lattice polygon and prints twice its area, its boundary count and its interior count."
+      time: "O(n log C)"
+      auxiliarySpace: "O(n) for the vertices"
+      status: unverified
+      inputs: "n, then n lines holding the integer coordinates x y of the vertices in order, clockwise or counterclockwise."
+      outputs: "Three lines: twice the area, the number of lattice points on the boundary, and the number of interior lattice points."
+      notes: "The shoelace sum is accumulated as an exact integer and the absolute value is taken once at the end, so a clockwise polygon needs no special case. Each edge contributes gcd(|dx|, |dy|) boundary points, which charges the start of the edge and not its end, so every vertex is counted exactly once. The interior count is (twiceArea - boundary + 2) / 2, and the division is exact because the numerator is twice the interior count."
+      operations: [shoelace, gcd-boundary, pick]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a lattice polygon and prints twice its area, its boundary count and its interior count."
+      time: "O(n log C)"
+      auxiliarySpace: "O(n) for the vertices"
+      status: unverified
+      inputs: "n, then n lines holding the integer coordinates x y of the vertices in order, clockwise or counterclockwise."
+      outputs: "Three lines: twice the area, the number of lattice points on the boundary, and the number of interior lattice points."
+      notes: "The shoelace sum is accumulated as an exact integer and the absolute value is taken once at the end, so a clockwise polygon needs no special case. Each edge contributes gcd(|dx|, |dy|) boundary points, which charges the start of the edge and not its end, so every vertex is counted exactly once. The interior count is (twiceArea - boundary + 2) / 2, and the division is exact because the numerator is twice the interior count. std::gcd from <numeric> supplies the boundary step."
+      operations: [shoelace, gcd-boundary, pick]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a lattice polygon and prints twice its area, its boundary count and its interior count."
+      time: "O(n log C)"
+      auxiliarySpace: "O(n) for the vertices"
+      status: unverified
+      inputs: "n, then n lines holding the integer coordinates x y of the vertices in order, clockwise or counterclockwise."
+      outputs: "Three lines: twice the area, the number of lattice points on the boundary, and the number of interior lattice points."
+      notes: "The shoelace sum is accumulated as an exact integer and the absolute value is taken once at the end, so a clockwise polygon needs no special case. Each edge contributes gcd(|dx|, |dy|) boundary points, which charges the start of the edge and not its end, so every vertex is counted exactly once. The interior count is (twiceArea - boundary + 2) / 2, and the division is exact because the numerator is twice the interior count. class Main reads its input through a token scanner so that the 100000-vertex bound costs one pass."
+      operations: [shoelace, gcd-boundary, pick]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a lattice polygon and prints twice its area, its boundary count and its interior count."
+      time: "O(n log C)"
+      auxiliarySpace: "O(n) for the vertices"
+      status: unverified
+      inputs: "n, then n lines holding the integer coordinates x y of the vertices in order, clockwise or counterclockwise."
+      outputs: "Three lines: twice the area, the number of lattice points on the boundary, and the number of interior lattice points."
+      notes: "The shoelace sum is accumulated as an exact integer and the absolute value is taken once at the end, so a clockwise polygon needs no special case. Each edge contributes gcd(|dx|, |dy|) boundary points, which charges the start of the edge and not its end, so every vertex is counted exactly once. The interior count is (twiceArea - boundary + 2) // 2, and the floor division is exact because the numerator is twice the interior count. math.gcd returns a non-negative value and handles a zero argument, which is the axis-parallel edge."
+      operations: [shoelace, gcd-boundary, pick]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a lattice polygon and prints twice its area, its boundary count and its interior count."
+      time: "O(n log C)"
+      auxiliarySpace: "O(n) for the vertices"
+      status: unverified
+      inputs: "n, then n lines holding the integer coordinates x y of the vertices in order, clockwise or counterclockwise."
+      outputs: "Three lines: twice the area, the number of lattice points on the boundary, and the number of interior lattice points."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The shoelace sum is accumulated in Int64 and the absolute value is taken once at the end, so a clockwise polygon needs no special case. Each edge contributes gcd(|dx|, |dy|) boundary points, which charges the start of the edge and not its end, so every vertex is counted exactly once. The interior count is (twiceArea - boundary + 2) div 2, and the division is exact because the numerator is twice the interior count. Every coordinate is read with its own Read call, there is no IOResult and no 128-bit integer, and the program compiles under both Free Pascal and the browser Pascal compiler used by the tests."
+      operations: [shoelace, gcd-boundary, pick]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a lattice polygon and prints twice its area, its boundary count and its interior count."
+      time: "O(n log C)"
+      auxiliarySpace: "O(n) for the vertices"
+      status: unverified
+      inputs: "n, then n lines holding the integer coordinates x y of the vertices in order, clockwise or counterclockwise."
+      outputs: "Three lines: twice the area, the number of lattice points on the boundary, and the number of interior lattice points."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The shoelace sum is accumulated as an exact integer and the absolute value is taken once at the end, so a clockwise polygon needs no special case. Each edge contributes gcd(|dx|, |dy|) boundary points, which charges the start of the edge and not its end, so every vertex is counted exactly once. The interior count is (twiceArea - boundary + 2) / 2, and the division is exact because the numerator is twice the interior count. Numbers are exact below 2^53, which the stated coordinate bound keeps the sums under."
+      operations: [shoelace, gcd-boundary, pick]
