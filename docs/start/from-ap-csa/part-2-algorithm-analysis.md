@@ -78,13 +78,13 @@ Each iteration performs one comparison, one array read, one addition, and one as
 
 Asymptotic notation compares growth rates while ignoring everything that does not grow.
 
-<MathPanel type="definition" title="Asymptotic bounds">
+::: math definition Asymptotic bounds
 Let $f$ and $g$ be functions from the natural numbers to the reals.
 
 - $f(n) = \O(g(n))$ if and only if there exist constants $c > 0$ and $n_0$ such that $0 \le f(n) \le c\,g(n)$ for all $n \ge n_0$. That is, $g$ is eventually an upper bound on $f$.
 - $f(n) = \Omega(g(n))$ if and only if there exist constants $c > 0$ and $n_0$ such that $f(n) \ge c\,g(n)$ for all $n \ge n_0$. That is, $g$ is eventually a lower bound on $f$.
 - $f(n) = \Theta(g(n))$ if and only if both hold. That is, $f$ and $g$ have the same growth rate.
-</MathPanel>
+:::
 
 Two consequences are worth memorising because they are the source of most misstatements.
 
@@ -92,14 +92,9 @@ First, an upper bound is not a statement about tightness. If an algorithm runs i
 
 Second, $\O$ is not a synonym for "roughly". When a contest solution claims "$O(n \log n)$", the reader wants a guarantee that the program will not take $n^2$ steps for some large input, and a claim of $\O(n^2)$ for an algorithm that actually runs in $\Theta(n)$ will be judged incorrect even though it is formally true.
 
-<MathPanel type="counterexample" title="A formally true but useless bound">
-An algorithm that runs in $\Theta(n)$ time also runs in $\O(n^2)$ time,
-because $n \le c\,n^2$ for $c = 1$ and every $n \ge 1$. Writing "this is
-$O(n^2)$" about an $O(n)$ algorithm is a true statement that gives the
-reader strictly less information than the truth, and it is the reason
-contest solutions are expected to state $\Theta$ when they mean the growth
-rate.
-</MathPanel>
+::: math counterexample A formally true but useless bound
+An algorithm that runs in $\Theta(n)$ time also runs in $\O(n^2)$ time, because $n \le c\,n^2$ for $c = 1$ and every $n \ge 1$. Writing "this is $O(n^2)$" about an $O(n)$ algorithm is a true statement that gives the reader strictly less information than the truth, and it is the reason contest solutions are expected to state $\Theta$ when they mean the growth rate.
+:::
 
 Two derived rules cover most manipulations. If $f(n) = \O(g(n))$ and $g(n) = \O(h(n))$, then $f(n) = \O(h(n))$: bounds compose. And $f(n) + g(n) = \O(\max\{f(n), g(n)\})$: a sum of two costs is bounded by the larger one.
 
@@ -154,13 +149,11 @@ With the notation in place, it is worth having the standard ladder memorised, be
 
 The interesting boundary in contests is usually between $n^2$ and $n \log n$, and occasionally between $n$ and $\log n$. Knowing that a comparison sort must cost $\Omega(n \log n)$ means that once you need sorted order, there is no asymptotically cheaper option, only different constants.
 
-<MathPanel type="theorem" title="Lower bound for comparison sorting">
-Any algorithm that sorts $n$ distinct elements by comparing pairs
-performs at least $\lceil \log_2 (n!) \rceil$ comparisons, which is
-$\Omega(n \log n)$.
+::: math theorem Lower bound for comparison sorting
+Any algorithm that sorts $n$ distinct elements by comparing pairs performs at least $\lceil \log_2 (n!) \rceil$ comparisons, which is $\Omega(n \log n)$.
 
 _Proof._ A sorting algorithm that only compares elements can be modeled as a binary decision tree whose leaves are the $n!$ possible orderings. The tree must have at least $n!$ leaves, because each leaf must correspond to a distinct permutation of the input. A binary tree of height $h$ has at most $2^h$ leaves, so $h \ge \log_2 (n!)$. By Stirling's formula $\log_2 (n!) = n \log_2 n - n \log_2 e + O(\log n)$, which is $\Omega(n \log n)$. _End of proof._
-</MathPanel>
+:::
 
 Now the halving loop, which is the cheapest logarithm you will ever derive:
 
@@ -237,12 +230,9 @@ $$
 
 The summation is the closed form of an arithmetic series, and it is the single most useful formula in this module: $\sum_{i=1}^{n} i = n(n+1)/2$. Multiplying the two bounds instead, as beginners instinctively do, would give $n^2$ and lands on the right answer here only by accident. It is wrong in general: the inner loop does not run $n$ times, it runs an average of $(n+1)/2$ times.
 
-<MathPanel type="complexity" title="Dependent bounds">
-For a loop whose inner bound is a function of the outer index, the cost
-is $\sum_{i=0}^{n-1} b(i)$ where $b(i)$ is the inner iteration count. If
-$b(i)$ is non-decreasing in $i$, this sum is $\Theta(n \cdot b(n-1))$,
-because the last iteration dominates the average.
-</MathPanel>
+::: math complexity Dependent bounds
+For a loop whose inner bound is a function of the outer index, the cost is $\sum_{i=0}^{n-1} b(i)$ where $b(i)$ is the inner iteration count. If $b(i)$ is non-decreasing in $i$, this sum is $\Theta(n \cdot b(n-1))$, because the last iteration dominates the average.
+:::
 
 Compare the two loops directly. The halving loop of module 2.3 does $\lfloor \log_2 n \rfloor$ steps; the dependent nested loop does $n(n+1)/2$ steps. For $n = 10^6$ that is 20 steps against roughly $5 \times 10^{11}$. Both loops are short to write. Only one of them finishes.
 
@@ -305,16 +295,15 @@ for (int i = 0; i < n; i++)
 
 A recursive algorithm does not have loops to count. It has a recurrence relation: an equation that defines the cost of the problem on $n$ in terms of the cost on smaller inputs.
 
-<MathPanel type="recurrence" title="Master theorem">
-Let $T(n) = a\,T(n/b) + f(n)$ with $a \ge 1$, $b > 1$, and
-$f(n) = \Omega(n^{\log_b a - \epsilon})$ for some $\epsilon > 0$. Then
+::: math recurrence Master theorem
+Let $T(n) = a\,T(n/b) + f(n)$ with $a \ge 1$, $b > 1$, and $f(n) = \Omega(n^{\log_b a - \epsilon})$ for some $\epsilon > 0$. Then
 
 $$
 T(n) = \Theta\!\left(n^{\log_b a}\right).
 $$
 
 The quantity $\log_b a$ is called the exponent of the recurrence, and it alone determines the answer when $f(n)$ is small enough.
-</MathPanel>
+:::
 
 The three cases of the master theorem are:
 
@@ -334,9 +323,7 @@ Naive recursive Fibonacci satisfies $T(n) = T(n-1) + T(n-2) + \Theta(1)$, which 
 
 **Why it matters.** Many of the algorithms you will meet are naturally recursive, and their complexity is not visible from the source code without solving the recurrence.
 
-**Worked example.** Quicksort's recurrence is $T(n) = T(k) + T(n - k - 1)
-
-- \Theta(n)$, where $k$ is the pivot's rank. The worst case is $k = 0$ every time, giving $T(n) = T(n-1) + \Theta(n) = \Theta(n^2)$; the average case is $\Theta(n \log n)$. The difference is entirely in the pivot choice, which is why randomised pivoting is standard.
+**Worked example.** Quicksort's recurrence is $T(n) = T(k) + T(n - k - 1) + \Theta(n)$, where $k$ is the pivot's rank. The worst case is $k = 0$ every time, giving $T(n) = T(n-1) + \Theta(n) = \Theta(n^2)$; the average case is $\Theta(n \log n)$. The difference is entirely in the pivot choice, which is why randomised pivoting is standard.
 
 **What you must get right.** Solve the recurrence, do not guess the answer and then justify it. And state the assumption that goes into the answer: a complexity claim about a recursive algorithm is a claim about a particular input, unless you have shown it holds for all inputs.
 
@@ -382,13 +369,9 @@ Three different questions get confused under the name "complexity".
 
 **Amortised cost** bounds the average cost of an operation in a _sequence_, without any randomness. It is a statement about the sum of costs over a sequence of $k$ operations divided by $k$, and it holds for every sequence. It does not say that any individual operation is cheap.
 
-<MathPanel type="definition" title="Amortised constant time">
-An operation sequence has amortised cost $\O(g(n))$ if there is a
-constant $c > 0$ such that the total cost of any sequence of $k$
-operations is at most $c\,k\,g(n) + c\,n_0$, where $n_0$ is the size of
-the data structure at the start. The additive term accounts for the
-initial build.
-</MathPanel>
+::: math definition Amortised constant time
+An operation sequence has amortised cost $\O(g(n))$ if there is a constant $c > 0$ such that the total cost of any sequence of $k$ operations is at most $c\,k\,g(n) + c\,n_0$, where $n_0$ is the size of the data structure at the start. The additive term accounts for the initial build.
+:::
 
 **Worked example.** A dynamic array that doubles when it is full. The first append copies 1 element, the second growth copies 2, the next 4, and so on. Over a sequence of $m$ appends starting from an empty array, the total copying cost is
 
@@ -461,15 +444,9 @@ So an $\O(n \log n)$ sort in C++ can beat an $\O(n)$ scan in Python. This is a r
 
 Memory layout produces comparable effects. A C++ `vector<vector<int>>` stores each vertex's neighbor list in a separate allocation, so a traversal chases pointers across the heap and misses the cache. The same graph stored as two flat arrays, offsets and destinations, is contiguous and can be several times faster for exactly the same asymptotic work. That layout is called the compressed sparse row format, and it is the standard representation for large graph traversals.
 
-<MathPanel type="complexity" title="When a constant decides">
-For two algorithms with costs $a\,f(n)$ and $b\,g(n)$, the larger
-constant wins whenever $a f(n) < b g(n)$. If $f(n) = n$ and $g(n) = n
-\log n$, the linear algorithm with a constant 100 times larger wins for
-$n < 2^{100}$, which is every $n$ that exists. This does not make the
-quadratic algorithm acceptable; it means that the choice between two
-algorithms of the *same* complexity is a constant-factor decision, and
-the choice between different complexity classes is not.
-</MathPanel>
+::: math complexity When a constant decides
+For two algorithms with costs $a\,f(n)$ and $b\,g(n)$, the larger constant wins whenever $a f(n) < b g(n)$. If $f(n) = n$ and $g(n) = n \log n$, the linear algorithm with a constant 100 times larger wins for $n < 2^{100}$, which is every $n$ that exists. This does not make the quadratic algorithm acceptable; it means that the choice between two algorithms of the _same_ complexity is a constant-factor decision, and the choice between different complexity classes is not.
+:::
 
 **Why it matters.** The decision to use C++ instead of Python is a constant-factor decision with a multiplier of ten or more. The decision to use $O(n \log n)$ instead of $O(n^2)$ is a complexity decision, and it beats any constant factor.
 

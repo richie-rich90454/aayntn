@@ -82,36 +82,41 @@ And the same observation detects the negative cycle. If some edge can still be r
 
 Let $G = (V, E)$ be a directed graph with a weight function $w : E \to \mathbb{R}$, and let $s \in V$ be the source.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **walk** from $s$ to $v$ is a sequence of edges
 $(s = v_0, v_1), \ldots, (v_{k-1}, v_k = v)$ that exist in $G$. Its
 **length** is $\sum_{i=0}^{k-1} w(v_i, v_{i+1})$. A **path** is a walk with
 no repeated vertex, and a **cycle** is a closed walk with no repeated vertex
 apart from its ends.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **distance** $\delta(v)$ is the smallest length of any walk from $s$ to
 $v$. It is written $\infty$ when no walk exists. It is well defined as a
 finite number exactly when no negative cycle is reachable from $s$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A cycle $C$ is **negative** if the sum of its edge weights is negative. A
 negative cycle is **reachable** from $s$ if a walk from $s$ reaches some
 vertex of $C$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 If no negative cycle is reachable from $s$, then for every vertex $v$ there
 is a path from $s$ to $v$ whose length is $\delta(v)$, and that path uses at
 most $|V| - 1$ edges.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 A negative cycle is reachable from $s$ if and only if the relaxation of some
 edge still succeeds after $|V| - 1$ passes.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -125,10 +130,11 @@ The derivation of the number of passes follows the lemma about simple paths. A c
 
 The order of the edges within a pass does not affect the final answer. It affects how quickly the answer appears: a pass that happens to relax a long path in the right order can produce the final distances in a single sweep. This is worth knowing, because a contest solution that stops at the first pass with no change is correct, and one that does not stop is also correct but slower.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 After $k$ passes, `distance[v]` is the length of the shortest walk from $s$ to
 $v$ that uses at most $k$ edges, or $\infty$ if there is no such walk.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -154,13 +160,14 @@ The distances are still decreasing at the end, which is the signature of a negat
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 If no negative cycle is reachable from the source, then after $|V| - 1$ passes
 the recorded distance of every vertex is its true shortest-path distance, and
 the detection pass finds no improvement.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 We prove the invariant by induction on the number of passes.
 
 Before any pass, the recorded distance of $v$ is the length of the shortest walk from $s$ to $v$ using at most zero edges, which is $0$ for $v = s$ and $\infty$ for every other vertex. The invariant holds.
@@ -170,28 +177,32 @@ Suppose the invariant holds after $k$ passes, and consider the $(k+1)$-st pass. 
 If a relaxation of an edge $(u, v)$ succeeds, the new value is $d(u) + w(u, v)$. By the induction hypothesis, $d(u)$ is the length of a walk from $s$ to $u$ using at most $k$ edges, so the new value is the length of a walk to $v$ using at most $k + 1$ edges. The new value is therefore never smaller than the true minimum over such walks.
 
 Conversely, let $W$ be a walk from $s$ to $v$ using at most $k + 1$ edges that is shortest among all such walks. Write it as $s = v_0, v_1, \ldots, v_{k+1} = v$, where the last $k$ edges are dropped to give a walk to $v_{k+1}$ using at most $k$ edges. By the induction hypothesis, after $k$ passes the recorded distance of $v_{k+1}$ is at most the length of that walk. When the edge $(v_{k+1}, v)$ is relaxed in the $(k+1)$-st pass, the candidate is therefore at most the length of $W$. So the recorded distance of $v$ is at most the length of $W$, and by the first half it is at least that length. It is therefore equal to it, which is the invariant. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 After $|V| - 1$ passes, and when no negative cycle is reachable from the
 source, the recorded distance of every vertex is its shortest-path distance.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 By the lemma about simple paths, when no negative cycle is reachable, the
 shortest walk from $s$ to any vertex $v$ is a simple path, and such a path
 uses at most $|V| - 1$ edges. The invariant says that after $|V| - 1$ passes
 the recorded distance of $v$ is the length of the shortest walk from $s$ to
 $v$ using at most $|V| - 1$ edges, which is the length of that simple path,
 which is $\delta(v)$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The detection pass finds an improvement if and only if a negative cycle is
 reachable from the source.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Suppose the detection pass, which is pass $|V|$, improves the distance of
 some vertex $v$. Then there is a walk from $s$ to $v$ using $|V|$ edges that
 is cheaper than the cheapest walk using at most $|V| - 1$ edges. A walk
@@ -201,7 +212,8 @@ walk with fewer edges that is no longer than the original, contradicting the
 strict improvement. So a negative cycle is reachable from $s$.
 
 Conversely, suppose a negative cycle $C$ is reachable from $s$. After $|V| - 1$ passes the recorded distances are finite for every vertex on $C$, because a walk from $s$ to each of them exists. Traversing the cycle once more from any vertex of $C$ produces a walk that is cheaper than the walk that does not traverse it, so some edge of $C$ can still be relaxed, and the detection pass finds it. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -209,11 +221,12 @@ Conversely, suppose a negative cycle $C$ is reachable from $s$. After $|V| - 1$ 
 
 **Auxiliary space: $O(V)$.** The distance array holds $V$ entries, and the edge list is the input rather than an auxiliary structure. The algorithm does not copy the graph, and it does not need to.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Bellman-Ford: time $O(VE)$, auxiliary space $O(V)$ beyond the input graph.
 Dijkstra's algorithm on the same graph costs $O((V + E) \log V)$, so
 Bellman-Ford is the slower of the two by a factor of roughly $E / \log V$.
-</MathPanel>
+:::
+
 
 Two practical warnings belong here. First, the distances must be stored in a type that can hold a sum of $|V|$ weights of magnitude $10^9$, and the negative cycle detection makes the intermediate values grow without bound, so a 64-bit type is required. Second, the algorithm can stop early: if a pass changes nothing, the distances are final and the remaining passes cannot change them. That optimization is valid for the distances, but it removes the detection pass, so it cannot be used when the question is whether a negative cycle exists.
 

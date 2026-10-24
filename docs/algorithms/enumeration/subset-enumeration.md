@@ -109,23 +109,26 @@ The second insight is that $2^n$ need not be the count. Meet in the middle repla
 
 Let $S = \{s_0, s_1, \dots, s_{n-1}\}$ be a set of $n$ distinct items.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **bitmask** for $S$ is a sequence $m = (m_0, m_1, \dots, m_{n-1})$ of
 bits. It denotes the subset $S(m) = \{s_i : m_i = 1\}$. The map from masks
 to subsets is a bijection, and the **weight** of a mask is the number of
 set bits in it.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A **multiset** over a domain $D$ is a function $c : D \to \mathbb{N}$ that
 gives the multiplicity of each value. Its sub-multisets are the functions
 $c'$ with $0 \le c'(d) \le c(d)$ for every $d \in D$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 A multiset with multiplicities $c_1, c_2, \dots, c_m$ has exactly
 $\prod_{i=1}^{m}(c_i + 1)$ sub-multisets.
-</MathPanel>
+:::
+
 
 Two results are proved below. The first is that the loop over the masks $0, 1, \dots, 2^n - 1$ visits every subset of $S$ exactly once. The second is that the meet in the middle procedure decides whether a set of $n$ items has a subset with sum $W$ in $O(2^{n/2})$ expected time when the partial sums are maintained incrementally, and in $O(n\,2^{n/2})$ expected time when each mask is scanned, using $O(2^{n/2})$ space in either case.
 
@@ -247,12 +250,13 @@ The order of the answers is not the order of the subsets in the lexicographic li
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The loop over the masks $0, 1, \dots, 2^n - 1$ visits every subset of $S$
 exactly once.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 **Injectivity.** Suppose two masks $m$ and $m'$ denote the same subset. Then
 for every $i$, $s_i \in S(m)$ if and only if $s_i \in S(m')$, which means
 $m_i = m'_i$ for every $i$ because the items are distinct. So $m = m'$.
@@ -260,14 +264,16 @@ $m_i = m'_i$ for every $i$ because the items are distinct. So $m = m'$.
 **Surjectivity.** Let $T$ be any subset of $S$. Define the mask $m$ by $m_i = 1$ when $s_i \in T$ and $m_i = 0$ otherwise. Every $m_i$ is $0$ or $1$, so $0 \le m \le \sum_{i=0}^{n-1} 2^i = 2^n - 1$, so $m$ is one of the values the loop visits, and by construction $S(m) = T$.
 
 Every subset is therefore visited, and no subset is visited twice. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The meet in the middle procedure decides whether a set of $n$ items has a
 subset with sum $W$ in $O(2^{n/2})$ expected time and $O(2^{n/2})$ space.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 **Correctness.** Suppose a solution exists, that is, a subset $T$ with sum
 $W$. Write $T_L = T \cap L$ and $T_R = T \cap R$. By the bijection proved
 above, the left enumeration visits the mask of $T_L$ and the right
@@ -279,7 +285,8 @@ reports a solution.
 Conversely, suppose the procedure reports a solution. It found a left subset and a right subset whose sums add to $W$. Their union is a subset of the $n$ items with sum $W$, so a solution exists.
 
 **Cost.** Each half has $\lceil n/2 \rceil$ or $\lfloor n/2 \rfloor$ items, so each enumeration visits at most $2^{\lceil n/2 \rceil}$ masks. Each mask costs $O(n)$ to sum naively, and each lookup costs $O(1)$ expected, so the total is $O(n\,2^{n/2})$ expected time. The table holds one entry per distinct left sum, so it uses at most $O(2^{n/2})$ space. Enumerating the masks of a half in Gray code order, where consecutive masks differ in one bit, lets the partial sum be updated in constant time, and that removes the factor of $n$ and gives $O(2^{n/2})$ expected time. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

@@ -119,41 +119,46 @@ The second insight is that a power can be computed from its own squares. Since $
 
 ## Formal model
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 For integers $a, b$ and a positive integer $m$, write $a \equiv b \pmod m$
 and say that $a$ and $b$ are **congruent modulo $m$** when $m$ divides
 $a - b$. The **residue** of $a$ modulo $m$ is the unique integer $r$ with
 $0 \le r < m$ and $a \equiv r \pmod m$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 For $m > 1$, the **multiplicative inverse** of $a$ modulo $m$ is an
 integer $b$ with $ab \equiv 1 \pmod m$. It is written $a^{-1} \bmod m$ and
 is only defined when $\gcd(a, m) = 1$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 The inverse of $a$ modulo $m$ exists if and only if $\gcd(a, m) = 1$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Suppose $ab \equiv 1 \pmod m$, so $ab - km = 1$ for some integer $k$. Any
 common divisor of $a$ and $m$ divides $ab$ and divides $km$, so it divides
 $ab - km = 1$, and it is therefore $1$.
 
 Conversely, suppose $\gcd(a, m) = 1$. The extended Euclidean algorithm produces integers $x$ and $y$ with $xa + ym = \gcd(a, m) = 1$. Reducing modulo $m$ gives $xa \equiv 1 \pmod m$, so $x$ is an inverse of $a$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Fermat's little theorem">
+
+::: math theorem Fermat's little theorem
 Let $p$ be a prime and let $a$ be an integer with $p \nmid a$. Then
 $$
 a^{p-1} \equiv 1 \pmod p.
 $$
 Consequently, when $p$ is prime, $a^{-1} \equiv a^{p-2} \pmod p$ for every
 $a$ with $p \nmid a$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The numbers $a, 2a, \ldots, (p-1)a$ are a permutation of $1, 2, \ldots,
 p-1$ modulo $p$, because multiplication by a nonzero residue is injective
 modulo a prime: if $ia \equiv ja \pmod p$ then $p \mid (i-j)a$, and
@@ -166,14 +171,16 @@ Since $p$ is prime, $(p-1)!$ is not divisible by $p$, so it can be
 canceled, leaving $a^{p-1} \equiv 1 \pmod p$.
 
 Finally, multiplying that congruence by $a^{-1}$ gives $a^{p-2} \equiv a^{-1} \pmod p$, which is the stated formula. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The algorithm `mod_pow(a, e, m)` returns the unique residue $r$ with
 $0 \le r < m$ and $r \equiv a^e \pmod m$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Write the exponent as $e = \sum_i b_i 2^i$ with $b_i \in \{0, 1\}$. The
 algorithm maintains an accumulator `result` and a running square `a`, and
 the invariant is
@@ -184,7 +191,8 @@ $$
 $$
 
 The invariant holds initially, because `result` is $1$ and $e$ is the full exponent. When the low bit of the remaining exponent is $1$, the algorithm multiplies `result` by the running square, which preserves the invariant because the square contributes exactly that factor of $a$. When the bit is $0$, `result` is unchanged and the invariant is preserved. In both cases the running square is replaced by its own square and the exponent is halved, which changes $a^{e_{\text{remaining}}}$ into $\left(a^{e_{\text{remaining}}}\right)^2$ and keeps the product unchanged. When the remaining exponent is zero the invariant reads $\text{result} \equiv a^{e_{\text{initial}}} \pmod m$, and `result` is already reduced into $[0, m)$, so it is the required residue. $\square$
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -276,12 +284,13 @@ The answer is $24$, and $2^{10} = 1024$ confirms it. Notice that the multiplicat
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 `mod_inverse(a, m)` returns the inverse of $a$ modulo $m$ when one exists,
 and returns $-1$ when none exists.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 **The invariant.** After each iteration, there are integers $x$ and $y$ with
 $x a + y m = r_0$, and the next remainder and coefficient satisfy
 $r_1 = r_0 - q r_1$ and $x_1 = x_0 - q x_1$ in the same step.
@@ -297,13 +306,15 @@ where $y_2 = y_0 - q y_1$. The invariant is preserved.
 **Termination.** The remainders are strictly decreasing non-negative integers, so the loop terminates with $r_0 = \gcd(a, m)$.
 
 **The answer.** If the loop ends with $r_0 = 1$, the invariant gives $x_0 a + y_0 m = 1$, and reducing modulo $m$ gives $x_0 a \equiv 1 \pmod m$, so the normalized value of $x_0$ is the inverse. If the loop ends with $r_0 = d > 1$, then $d = \gcd(a, m) > 1$, and by the lemma no inverse exists, so $-1$ is the correct report. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 Throughout the extended Euclidean algorithm, the pair of coefficients
 satisfies $x_i a + y_i m = r_i$, and the remainders satisfy
 $r_{i+1} = r_{i-1} \bmod r_i$.
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

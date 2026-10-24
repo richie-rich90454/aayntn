@@ -105,7 +105,7 @@ So the resume point after a mismatch is not a guess and not a fresh start. It is
 
 Let $P$ be a pattern of length $m$ over some alphabet, indexed $0$ through $m-1$, and let $T$ be a text of length $n$.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **border** of a string $S$ of length $k$ is a string of length $j < k$
 that is both a prefix and a suffix of $S$. The **prefix function** of $P$ is
 the array $\pi$ with
@@ -114,29 +114,33 @@ $$
 $$
 In words, $\pi[i]$ is the length of the longest proper prefix of $P[0..i]$
 that is also a suffix of $P[0..i]$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **state** of the search is the number $k$ of pattern characters
 currently matched, meaning that the last $k$ characters of the text read so
 far equal $P[0..k-1]$. The **failure function** of the pattern is the
 function that sends a state $k$ with $k > 0$ to the state $\pi[k-1]$, and
 sends the state $0$ to itself.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 An occurrence of $P$ in $T$ is an index $s$ with $0 \le s \le n - m$ such
 that $T[s..s+m-1] = P$. Two occurrences **overlap** when their index ranges
 intersect.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 If the state is $k > 0$ and the comparison fails, then the largest state
 that can still be reached without re-reading a text character is
 $\pi[k-1]$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 At the moment of the failure the text ends with $P[0..k-1]$. Suppose a new
 match starts so that $j$ characters of it have already been matched, for
 some $0 \le j < k$. The last $j$ characters of the text are then equal to
@@ -145,7 +149,8 @@ candidate match, so they equal $P[0..j-1]$. Hence $P[0..j-1]$ is a suffix
 of $P[0..k-1]$, and by the definition of the prefix function $j \le \pi[k-1]$.
 
 Conversely, $j = \pi[k-1]$ is achievable: the text ends with $P[0..k-1]$, whose last $j$ characters equal $P[0..j-1]$ by the definition of the border, so the state $j$ is a consistent state of the search. $\square$
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -249,12 +254,13 @@ The search ends in state $4$, never reaches $9$, and reports nothing. The text i
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The KMP search reports exactly the set of occurrences of the pattern in the
 text, and it reads every text character exactly once.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 **The state is always truthful.** Before the text character at index $i$ is
 read, the state $j$ is such that the last $j$ characters of the text read
 so far equal $P[0..j-1]$. This holds initially, because $j = 0$ and the
@@ -273,7 +279,8 @@ Before $T[s]$ is read the state is some $j \ge 0$, and the text suffix of length
 After reading $T[s+m-1]$ the state is at least $m$, and the state never exceeds $m$, because a state of $m$ is reported and reset at once. The state is therefore exactly $m$ and the occurrence is reported.
 
 **Each text character is read once.** The loop index increases by one on every iteration, and the inner fallback loop reads only $T[i]$ again. Each text character therefore costs $O(1)$ comparisons apart from the fallback steps, and the amortized argument bounds the fallback steps by $n$. The total is $O(n + m)$. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

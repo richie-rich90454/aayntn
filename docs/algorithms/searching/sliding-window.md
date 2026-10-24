@@ -150,37 +150,41 @@ The `distinct` counter is 3 because three of the four counts are positive. Addin
 
 Let $a_1, a_2, \ldots, a_n$ be the array, and let a window be a pair of indices $(l, r)$ with $1 \le l \le r \le n$.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A condition $C$ on a window is **monotone under growth** if, for every
 $l \le r \le r'$, $C(l, r)$ implies $C(l, r')$. A condition is
 **monotone under shrinkage** if $C(l, r)$ implies $C(l', r)$ for every
 $l \le l' \le r$. A window condition that is monotone under both is
 **monotone**, and a window algorithm that relies on the left end never
 retreating requires the condition to be monotone under shrinkage.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A **frequency map** of a window $[l, r]$ is a map `count` from the
 values in the array to the non-negative integers such that `count[v]` is
 the number of occurrences of $v$ in the window. The **distinct counter**
 is $|\{v : \text{count}[v] > 0\}|$ and the **over counter** is
 $|\{v : \text{count}[v] > 1\}|$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $C$ be monotone under shrinkage. If the window $[l, r]$ violates $C$
 and $[l+1, r]$ satisfies $C$, then no window ending at $r$ and starting
 at or before $l$ satisfies $C$.
-</MathPanel>
+:::
+
 
 The lemma is the formal reason the left pointer never has to move backwards. The proof is in the correctness section.
 
-<MathPanel type="lemma" title="Lemma">
+::: math lemma Lemma
 Adding or removing one element from a window changes the distinct
 counter by at most one and the over counter by at most one, and the
 change is determined by the count of the affected value before and after
 the update.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -188,18 +192,20 @@ The state is the window $(l, r)$ together with the maintained value: a running s
 
 **The fixed-size window.** The window always holds exactly $k$ elements. The update rule is: subtract $a_{l}$ from the sum, add $a_{r+1}$, advance both ends.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 After the window has been moved to $[l, r]$, the maintained sum equals
 $\sum_{k=l}^{r} a_k$, and the window holds exactly $k$ elements.
-</MathPanel>
+:::
+
 
 **The variable-size window.** The right end advances by one at every step. The left end advances while the condition is violated.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 After the inner loop for a right end $r$ finishes, the window $[l, r]$
 satisfies the condition, and every window ending at $r$ that starts
 before $l$ violates it.
-</MathPanel>
+:::
+
 
 **The frequency map.** The state is `count`, a map from values to their occurrences in the window, together with `distinct` and, when the condition needs it, `over`.
 
@@ -239,12 +245,13 @@ The answer is 5, and the window is `dabra`. The whole scan took 11 right-pointer
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 Let $C$ be a window condition that is monotone under shrinkage. The
 variable-size sliding window finds the longest window satisfying $C$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Fix a right end $r$. We show that the window $[l, r]$ produced for this
 $r$ is the longest valid window ending at $r$.
 
@@ -255,14 +262,16 @@ Suppose the left end advanced during this iteration, and let $l'$ be the index i
 Now suppose the left end did not advance during this iteration. Then it was left where an earlier iteration left it, and the same argument applied at that earlier iteration shows that every window starting before $l$ and ending at the earlier right end violated $C$. Monotonicity under growth then implies that every window starting before $l$ and ending at $r \ge$ the earlier right end also violates $C$.
 
 In both cases, every window ending at $r$ that starts before $l$ is invalid, so $[l, r]$ is the longest valid window ending at $r$. Taking the maximum of the lengths over all $r$ gives the longest valid window in the array. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The frequency map and the derived counters describe the window exactly at
 every point of the scan.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The claim is by induction on the number of updates.
 
 Initially the window is empty, every count is zero, and `distinct` and `over` are both zero, which is correct.
@@ -270,19 +279,22 @@ Initially the window is empty, every count is zero, and `distinct` and `over` ar
 Suppose the state is correct before an update that adds a value $v$. The count of $v$ increases by one, and no other count changes, so the frequency map is still correct. The distinct counter changes if and only if the count of $v$ crosses zero, which happens exactly when it was 0 before the update, and the rule increments it in exactly that case. The over counter changes if and only if the count of $v$ crosses one, which happens exactly when it was 1 before the update, and the rule increments it in exactly that case.
 
 The argument for a removal is the same with the inequalities reversed. By induction, the state is correct at every point of the scan. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The fixed-size window maintains the correct sum.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The sum of the window $[l, r]$ is $\sum_{k=l}^{r} a_k$. Moving the window
 to $[l+1, r+1]$ removes $a_l$ and adds $a_{r+1}$, so the update
 $\text{sum} \gets \text{sum} - a_l + a_{r+1}$ preserves the equality. The
 window also continues to hold exactly $k$ elements, because one leaves
 and one enters. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -290,10 +302,11 @@ and one enters. $\square$
 
 **Auxiliary space: $O(1)$** for a fixed-size window over a sum, and **$O(\sigma)$** for a window over a frequency map, where $\sigma$ is the number of distinct values in the data. When the values are small integers the map is an array of counters of size $\sigma$; when they are characters it is an array of 26 or 128 counters; when they are arbitrary, a hash map costs $O(1)$ expected time per update instead of $O(1)$ worst case.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Sliding window: $O(n)$ time. The space is $O(1)$ for a running sum and
 $O(\sigma)$ for a frequency map over $\sigma$ distinct values.
-</MathPanel>
+:::
+
 
 The bound on the left pointer is what makes the scan linear rather than quadratic, and it holds only because the left pointer never retreats. The moment a solution moves the left pointer backwards, the argument that the total work is $O(n)$ no longer applies.
 
@@ -327,7 +340,7 @@ The recursion question belongs to the alternatives. A segment tree that answers 
 | Pascal | The operating system stack | Depends on the platform | The loop |
 | JavaScript | The V8 engine limit | About $10^4$ frames | The loop |
 
-<MathPanel type="counterexample" title="Counterexample">
+::: math counterexample Counterexample
 A log of $10^6$ entries scanned with a recursive formulation that tries every
 possible left end for a given right end makes $10^6$ nested calls. In C++ on
 Linux, with an 8 MB stack and a frame of roughly 64 bytes, the stack is
@@ -335,7 +348,8 @@ exhausted after about $130\,000$ frames, so the program dies with a
 segmentation fault before it has scanned $13\%$ of the log. The loop scans the
 same log in $10^6$ steps with a constant-size state. The input is legal and
 the answer is well defined; only the choice of implementation is wrong.
-</MathPanel>
+:::
+
 
 The rule of thumb is simple: if the recursion depth would be proportional to the length of the array, write the loop.
 

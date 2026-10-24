@@ -126,24 +126,26 @@ The strong form follows by the same picture. If every box must be nonempty, then
 
 Let $n$ be a nonnegative integer and $k$ a positive integer.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **weak composition** of $n$ into $k$ parts is a tuple
 $(x_1, x_2, \ldots, x_k)$ of nonnegative integers with
 $x_1 + x_2 + \cdots + x_k = n$. A **strong composition** of $n$ into $k$
 parts is a tuple of positive integers with the same sum. The number of
 weak compositions is written $W(n,k)$ and the number of strong compositions
 is written $S(n,k)$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A **$k$-element multiset** drawn from a set of $m$ types is a collection in
 which each type may appear any number of times, and two collections are equal
 when they contain the same number of copies of each type. The number of
 such multisets is the number of ways to choose $k$ positions in a row of
 $m+k-1$ positions, so it is $\binom{m+k-1}{k}$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 For all $n \ge 0$ and $k \ge 1$,
 $$
 W(n,k) = \binom{n+k-1}{k-1},
@@ -152,9 +154,10 @@ and for all $n \ge k \ge 1$,
 $$
 S(n,k) = \binom{n-1}{k-1}.
 $$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The map from a weak composition to a string sends
 $(x_1, \ldots, x_k)$ to $x_1$ stars, a bar, $x_2$ stars, a bar, and so on,
 ending with $x_k$ stars. The string contains $n$ stars in total and $k-1$
@@ -167,9 +170,10 @@ the $k-1$ bar positions among $n+k-1$ positions, namely
 $\binom{n+k-1}{k-1}$.
 
 For the strong count, the map from a strong composition to a string never places two bars in the same gap, so it lands among the strings in which each group is nonempty. Deleting one star from the first group of each such string gives a string with $n-k$ stars and $k-1$ bars in which the groups may be empty, and this map is again a bijection. Therefore $S(n,k) = W(n-k, k) = \binom{n-k+k-1}{k-1} = \binom{n-1}{k-1}$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 During the multiplicative evaluation of $\binom{n+k-1}{k-1}$, after the $j$-th
 step the running product equals
 $$
@@ -179,7 +183,8 @@ $$
 which is the exact value of $\binom{N}{j}$ as a rational number. The loop
 stops at $j = k-1$, where the invariant says the running product is the
 answer.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -216,14 +221,15 @@ The strong count for the same $n$ and $k$ is $\binom{4}{2} = 6$, and the six dis
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The stars and bars count of the weak compositions of $n$ into $k$ parts is
 $\binom{n+k-1}{k-1}$, the count of the strong compositions is
 $\binom{n-1}{k-1}$, and the multiplicative evaluation returns the exact
 value of that binomial coefficient.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The bijection of the lemma gives the two counts: every weak composition
 corresponds to exactly one string of $n$ stars and $k-1$ bars, and the
 strings are counted by choosing the bar positions among the $n+k-1$
@@ -235,7 +241,8 @@ $n-k$ into $k$ parts, which is $\binom{n-1}{k-1}$.
 Now the evaluation. Let $N = n+k-1$ and $r = k-1$. The loop maintains the invariant that after step $j$ the running numerator is $\prod_{i=0}^{j-1}(N-i)$ and the running denominator is $j!$. The initialization holds with empty products. Each step multiplies the numerator by $N-j+1$ and the denominator by $j$, so the invariant is preserved. At termination $j = r$, the ratio is $N(N-1)\cdots(N-r+1) \,/\, r!$, which is $\binom{N}{r}$ by the definition of the binomial coefficient as the number of $r$-element subsets of an $N$-element set.
 
 Finally, the division is exact. The numerator and the denominator are both integers and the ratio is the integer $\binom{N}{r}$, so no information is lost. When the answer is required modulo a prime $p$ with $r < p$, the denominator $r!$ is not divisible by $p$ and therefore has an inverse modulo $p$, and the same computation in the residues returns the residue of the exact count. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

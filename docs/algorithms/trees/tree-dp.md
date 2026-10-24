@@ -100,29 +100,33 @@ The third insight is that **the whole tree can be re-rooted for free**. The bott
 
 ## Formal model
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 Let $T$ be a tree rooted at $r$, and let $S(u)$ be the subtree of a vertex
 $u$, that is, $u$ together with all its descendants. The **parent** of $u$
 is its unique neighbor on the path to $r$, and the **children** of $u$ are
 its other neighbors.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A selection of vertices is **valid** if no two selected vertices are
 adjacent. Its **weight** is the sum of the values of its selected vertices.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 For a vertex $u$ and a state $s \in \{0, 1\}$, let $\text{down}[u][s]$ be
 the maximum weight of a valid selection inside $S(u)$ in which $u$ is
 selected if and only if $s = 1$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 For a vertex $u$ whose parent is $p$, let $\text{up}[u][s]$ be the maximum
 weight of a valid selection inside $V \setminus S(u)$ in which $p$ is
 selected if and only if $s = 1$.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -172,14 +176,15 @@ $$
 
 which are the maximum weight of a valid selection of the **whole** tree that excludes $u$, and of one that includes $u$.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 $\text{down}[u][s]$ is the maximum weight of a valid selection inside
 $S(u)$ in which $u$ is selected if and only if $s = 1$. The invariant is
 preserved by the merge because the child subtrees of $u$ are pairwise
 disjoint and there is no edge between any two of them, so the choices
 inside them are independent once the state of $u$ is fixed, and the best
 combined choice is the sum of the best individual choices.
-</MathPanel>
+:::
+
 
 ### Why the merge is an addition and not a search
 
@@ -222,13 +227,14 @@ Read the table as a check. Excluding vertex $1$, the best selection is $\{2, 3\}
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 For every vertex $u$ and every state $s$, $\text{down}[u][s]$ is the
 maximum weight of a valid selection inside the subtree of $u$ in which $u$
 is selected if and only if $s = 1$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The claim is by induction on the height of $u$, processing the vertices in
 the reverse traversal order.
 
@@ -237,15 +243,17 @@ For a leaf $u$, the subtree is the single vertex $u$. A valid selection containi
 Now let $u$ be an internal vertex and suppose the claim holds for all its children. Consider a valid selection of $S(u)$ in which $u$ is selected. No child of $u$ may be selected, because each is adjacent to $u$. For each child $c$, the restriction of the selection to $S(c)$ is therefore a valid selection that excludes $c$, whose weight is at most $\text{down}[c][0]$ by the induction hypothesis. The total weight is at most $\text{value}[u] + \sum_c \text{down}[c][0]$, and that bound is attained by combining the optimal selections of the children that exclude them, which is valid because the subtrees are disjoint and no edge joins two of them. So the first recurrence is exact.
 
 Now consider a valid selection in which $u$ is not selected. Each child $c$ may be selected or not, and the restriction to $S(c)$ has weight at most $\max(\text{down}[c][0], \text{down}[c][1])$. The same independence argument shows that the bounds can be attained simultaneously, so the second recurrence is exact. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The top-down pass computes, for every vertex $u$, the maximum weight of a
 valid selection of the whole tree that contains $u$, and of one that
 excludes $u$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The claim is by induction on the depth of $u$. For the root, the outside
 of its subtree is empty, so both states are $0$, which is correct.
 
@@ -256,7 +264,8 @@ If $u$ is not selected, then $u$ imposes no constraint on its parent, so the bes
 If $u$ is selected, then $u$'s parent may not be selected, so the outside of $S(u)$ contributes $\text{up}[u][0]$; $u$ contributes its own value; and none of $u$'s children may be selected, so each sibling subtree contributes $\text{down}[c'][0]$. That is the recurrence for $\text{up}[c][1]$.
 
 Finally, a valid selection of the whole tree that excludes $u$ is a valid selection of $S(u)$ that excludes $u$, together with a valid selection of the outside of $S(u)$ in which $u$'s parent is free, which is $\text{fullSkip}[u]$. A valid selection that includes $u$ forces $u$'s parent to be excluded, which is $\text{fullTake}[u]$. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -268,11 +277,12 @@ Finally, a valid selection of the whole tree that excludes $u$ is a valid select
 
 **Space: $O(n)$**, for the two tables of two values per vertex.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Tree dynamic programming over a tree of $n$ vertices: $O(n)$ time and
 $O(n)$ space for the bottom-up pass, and the same again for the
 change-of-root pass.
-</MathPanel>
+:::
+
 
 The bottom-up pass alone is $O(n)$, and the change of root is another $O(n)$, so the whole thing is linear. The naive alternative, running the bottom-up pass once per root, is $O(n^2)$, and at $n = 200\,000$ that is $4 \cdot 10^{10}$ steps.
 

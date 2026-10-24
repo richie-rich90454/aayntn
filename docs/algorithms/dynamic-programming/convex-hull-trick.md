@@ -132,12 +132,13 @@ and the line with the larger slope is the smaller one for every $x < x^{\star}$ 
 
 Therefore:
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 The middle line of three lines with strictly increasing slopes is
 **redundant** if and only if its switch point with the lower line is at
 most its switch point with the upper line:
 $x^*_{12} \le x^*_{23}$.
-</MathPanel>
+:::
+
 
 **The chain.** The lines that survive the redundancy test form a stack whose switch points strictly decrease as the stack grows. The line on top of the stack has the largest slope, and it is the smallest line for the smallest $x$.
 
@@ -163,43 +164,49 @@ The laboratory below draws the lines, the envelope, and the stack beside them, a
 
 Let the lines be $L_j(x) = m_j x + b_j$.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 The **switch point** of two lines with $m_1 < m_2$ is
 $x^*_{12} = (b_1 - b_2)/(m_2 - m_1)$. For $x < x^*_{12}$ the line with the
 larger slope is the smaller one, and for $x > x^*_{12}$ the line with the
 smaller slope is the smaller one.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **lower envelope** of a set of lines is the function
 $E(x) = \min_j L_j(x)$. A line is **on the envelope** if it attains $E(x)$
 for some $x$, and **redundant** if it does not.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $L_1, L_2, L_3$ have strictly increasing slopes. Then $L_2$ is
 redundant if and only if $x^*_{12} \le x^*_{23}$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $L_1$ and $L_2$ have slopes $m_1 < m_2$, and suppose
 $L_1(x) < L_2(x)$ at some point $x$. Then $L_1(x') < L_2(x')$ for every
 $x' > x$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let the stack hold the lines of the envelope from the bottom up, in
 increasing order of slope, and let $x^*_i$ be the switch point of the
 $i$-th and the $(i+1)$-th lines of the stack. Then
 $x^*_1 > x^*_2 > \cdots$, that is, the switch points strictly decrease as
 the stack grows.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A **monotone** convex hull trick is one in which the lines are added with
 non-decreasing slopes and the queries are made at non-decreasing values
 of $x$.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -220,14 +227,15 @@ The query rule, at the point $x$:
 
 The query rule is correct by the second lemma: a top line that is beaten at $x$ is beaten at every larger $x$, so once the queries are known to be non-decreasing, popping it loses nothing.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 After every add, the stack holds exactly the lines of the lower envelope
 of the lines added so far, in increasing order of slope from the bottom,
 and the switch points of the stack strictly decrease as the stack grows.
 After every query, the popped lines are below the envelope of the
 remaining lines for every larger $x$, so they can never be the answer to
 a later query.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -245,13 +253,14 @@ Use the lines from the reference implementation: $L_1(x) = x$, $L_2(x) = 2x - 1$
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The stack always holds the lines of the lower envelope of the lines added
 so far, and every query returns the smallest value of those lines at the
 queried point.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 First the redundancy lemma. Let $L_1, L_2, L_3$ have strictly increasing
 slopes. Because $m_1 < m_2$, the difference $L_2(x) - L_1(x)$ is
 decreasing in $x$, and it vanishes at $x^*_{12}$, so
@@ -261,9 +270,10 @@ $L_2$ is therefore the smallest of the three exactly when
 $x^*_{23} < x < x^*_{12}$, which is a nonempty interval exactly when
 $x^*_{12} > x^*_{23}$. So $L_2$ is redundant exactly when
 $x^*_{12} \le x^*_{23}$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The add operation preserves the envelope. A line that the redundancy test
 removes is redundant among the three lines involved, so it is not on the
 envelope of that set, and a fortiori not on the envelope of the whole
@@ -273,9 +283,10 @@ another line with the same slope and a smaller intercept, so again the
 envelope is unchanged. The new line is then pushed, and the envelope of
 the enlarged set is the envelope of the old set with the new line added,
 which is exactly what the stack now describes.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The query operation returns the smallest value. The query rule pops the
 top line only when the line below it is strictly smaller at the current
 $x$. By the second lemma, the line below stays smaller at every larger
@@ -285,7 +296,8 @@ on. When the loop stops, the top line is smaller than the line below it,
 and the switch points of the stack strictly decrease, so the top line is
 smaller than every other line of the stack at $x$. Since the stack
 describes the envelope, it is the smallest of all the lines added so far.
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -295,11 +307,12 @@ describes the envelope, it is the smallest of all the lines added so far.
 
 **Space: $O(n)$** for the stack of slopes and intercepts.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Monotone convex hull trick with $n$ lines and $q$ queries: $O(n + q)$
 amortized time in total, $O(1)$ amortized time per operation, and $O(n)$
 extra space.
-</MathPanel>
+:::
+
 
 The amortized bound is the whole point. A single query may pop $n$ lines, and a single add may pop $n$ lines, but the total number of pops over the whole run is at most $n$, so the average is constant.
 

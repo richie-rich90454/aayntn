@@ -139,32 +139,36 @@ The third piece is the **order of the search**. A bound that is tight enough sti
 
 Let $T$ be the tree of partial solutions, rooted at the empty one, with a cost $c(P)$ attached to each node and a set of complete solutions $\mathcal{C}(P)$ below it.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A function $b : T \to \mathbb{R}$ is a **bound** on the tree if it satisfies
 $$
 b(P) \le c(S) \quad \text{for every } P \in T \text{ and every } S \in \mathcal{C}(P).
 $$
 Such a function is **admissible**. A bound that can exceed the cost of some
 completion is **inadmissible**, and pruning with it can discard the optimum.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 Let $\text{best}$ be the cost of the cheapest complete solution found so far,
 or $+\infty$ if none has been found. The **pruning rule** abandons a node $P$
 when $b(P) \ge \text{best}$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 If $b$ is admissible and the pruning rule abandons a node $P$, then no
 solution in $\mathcal{C}(P)$ is strictly better than the current `best`.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At every moment, `best` is the cost of the cheapest complete solution the
 search has found, and every node that has been abandoned lies in a subtree
 whose solutions are all at least as expensive as `best` at the moment of the
 abandonment.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -217,12 +221,13 @@ The final answer is 15, which is the true optimum. The search visited nine of th
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 If the bound is admissible, the search returns the cost of a cheapest complete
 solution.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The invariant states that `best` is the cost of the cheapest complete
 solution found so far, and that every abandoned subtree contains only
 solutions at least as expensive as the `best` at the moment of abandonment.
@@ -238,13 +243,15 @@ If $P$ is complete, its cost $c(P)$ is a candidate for `best`, and the algorithm
 Otherwise the algorithm recurses into the children of $P$, and each child is handled by the same argument.
 
 The search terminates because the tree is finite. At the end, `best` is the cost of some complete solution, and every solution that was not examined lives in an abandoned subtree whose solutions were all at least as expensive as `best` at the time of abandonment. Since `best` only decreases afterwards, no unexplored solution is cheaper than the reported one. The reported cost is therefore the optimum. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The theorem depends on admissibility and on nothing else. If the bound can
 exceed the cost of some completion, the lemma fails, the pruning can discard
 the optimum, and the conclusion does not follow.
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -252,12 +259,13 @@ the optimum, and the conclusion does not follow.
 
 **Auxiliary space: $O(n)$ per level for the bound's working values, and $O(n)$ frames of recursion**, so the total is $O(n^2)$ for a naive implementation of the bound and $O(n)$ for one that keeps the state in a single array updated on the way down.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Branch and bound: $O(b \cdot V)$ time, where $V$ is the number of surviving
 nodes and $b$ the cost of one bound, and $O(n)$ auxiliary space when the
 bound is maintained incrementally. The worst case is the full tree, so the
 technique trades a bound computation at every node for a much smaller tree.
-</MathPanel>
+:::
+
 
 ## Algorithm selection
 

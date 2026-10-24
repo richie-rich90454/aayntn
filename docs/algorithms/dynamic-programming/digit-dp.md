@@ -133,49 +133,55 @@ The second half of the insight is about the bound. A number is at most $B$ exact
 
 Let $B$ be a bound, and write its decimal representation as $d_0 d_1 \cdots d_{D-1}$, so that $B = \sum_{i=0}^{D-1} d_i \cdot 10^{D-1-i}$. Let $C$ be a condition on a digit string.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A digit string $s = s_0 s_1 \cdots s_{D-1}$ **represents** the number
 $\operatorname{val}(s) = \sum_{i=0}^{D-1} s_i \cdot 10^{D-1-i}$. A string is
 **canonical** for its value if it has no leading zero, unless the value is
 zero, in which case the canonical string is `0`.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A digit string $s$ is **bounded by** $B$ if, letting $k$ be the first index
 with $s_k \ne d_k$, either no such index exists, or $s_k < d_k$. The
 **tight flag** of a prefix $s_0 \cdots s_i$ is true when
 $s_0 s_1 \cdots s_i = d_0 d_1 \cdots d_i$, and false otherwise.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **started flag** of a prefix is false while every digit of the prefix is
 zero, and true once a nonzero digit has appeared. The started flag is what
 distinguishes the canonical representation of $2$, which is `2`, from the
 padded representation `002`.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 Let $A$ be an accumulator over the digits read so far, with an update rule
 $A' = A \oplus c$ where $c$ is a contribution of the digit just read. The
 accumulator is **sufficient** for a condition $C$ if two prefixes with the
 same position, the same tight flag, the same started flag, and the same
 accumulator value have the same number of completions that satisfy $C$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 The accumulator is sufficient for every condition that is stated as a
 predicate over the digits, the running digit sum, the running remainder, the
 running count of occurrences of a pattern, or any finite combination of
 these.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Such a condition is a predicate over the sequence of digits read so far and
 the digits yet to come, and it reads the past only through the statistics it
 names. Two prefixes with equal statistics therefore satisfy the same
 predicates about the same continuations, so each continuation contributes to
 both counts equally, and the totals agree. $\square$
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -205,20 +211,22 @@ For every $e$ with $0 \le e \le L(i, t)$:
 - the new started flag is $s \vee (e \ne 0)$,
 - the new accumulator is $A \oplus c(e, s)$, where the contribution $c$ may depend on whether the number had already started. This is the entire leading-zero mechanism: when $s$ is false and $e = 0$, the digit is a padding zero and contributes nothing.
 
-<MathPanel type="recurrence" title="Recurrence">
+::: math recurrence Recurrence
 $$
 F(i, A, t, s) = \sum_{e=0}^{L(i,t)} F\bigl(i+1,\; A \oplus c(e,s),\; t \wedge (e = d_i),\; s \vee (e \ne 0)\bigr).
 $$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At the moment the program is about to read the digit at position $i$, the
 state $(A, t, s)$ describes every prefix that has been read, and every
 prefix with that state has exactly the same number of completions. The
 program therefore never has to keep more than the state, and every number
 that satisfies the condition is counted on exactly one path through the
 state graph.
-</MathPanel>
+:::
+
 
 ### The two ways to handle the leading zero
 
@@ -266,12 +274,13 @@ Notice the last row. The prefix `9` is tight, and the second digit must be at mo
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 $F(0, A_0, \text{true}, \text{false})$ is the number of integers in
 $[0, B]$ whose digits satisfy $C$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The proof has three parts: that the program counts only valid numbers, that
 it counts every valid number, and that it counts each one exactly once.
 
@@ -282,14 +291,16 @@ The started flag is false exactly while every digit read is zero, so the string 
 **Every valid number is counted.** Let $n$ be a number in $[0, B]$ that satisfies $C$, and let $s$ be its canonical representation, padded with leading zeros to length $D$. Follow the path that reads exactly these digits. At each position the digit is legal: while the prefix is tight, the digit is a digit of $n$ and $n \le B$ forces it to be at most $d_i$; once the prefix is below the bound, every digit is legal. The accumulator ends at the value that encodes the condition, and the final condition holds because $n$ satisfies $C$. So the path reaches a terminal state that contributes $1$.
 
 **Each number is counted once.** The path that reads $s$ is uniquely determined by $s$, and two different numbers have different canonical representations, hence different paths. Therefore every valid number contributes exactly $1$ and no other path contributes. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 The four parts of the state are sufficient: the position, the accumulator,
 the tight flag, and the started flag determine the number of completions.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Every path leaving a state reads a digit string of the remaining length. The
 set of legal digit strings depends only on the tight flag, because the tight
 flag determines the allowed range of the next digit and, once it becomes
@@ -301,7 +312,8 @@ whether the number is zero. The accumulator carries the rest of the
 condition, by the sufficiency lemma. The position determines how many
 digits remain. Hence two states with equal components have equal numbers of
 accepting continuations, and the program may merge them. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

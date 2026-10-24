@@ -113,38 +113,43 @@ The third consequence is bookkeeping rather than mathematics: the search mutates
 
 Let $D$ be the set of decisions available at each step, and let a **partial solution** be a sequence $d_1, d_2, \ldots, d_k$ of decisions taken from $D$ in order.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **search tree** for a problem instance is a rooted tree whose root is the
 empty partial solution and whose nodes are partial solutions. A node $v$ has
 one child for each way of extending $v$ by one more decision. A node is
 **complete** when no further decision can be appended.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A node of the search tree is **feasible** if it extends to at least one
 complete solution. **Pruning** is the removal of an infeasible node together
 with the whole subtree below it.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **state** of a search is the collection of values that the choices have
 changed and that the rest of the algorithm reads. The state is **restored**
 at a node if, on returning from that node, the state is exactly what it was
 when the node was entered.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Pruning an infeasible node removes no solution from the tree. Therefore a
 search that prunes only infeasible nodes and visits every remaining node
 finds every solution of the instance.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At the moment the search enters the node for a partial solution, the state
 equals the state obtained by applying the decisions on the root-to-node path,
 in order, to the initial state. When the search leaves the node, the state
 equals the state it had on entry.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -196,13 +201,14 @@ Two things in the trace are worth naming. At step 5 the search does not descend 
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The backtracking search reports every solution of the instance exactly once,
 provided that the prune test rejects only infeasible nodes and that the state
 is restored on the way back.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 **Soundness.** Every reported solution is feasible. A solution is reported
 only at a complete node. Along the path to that node, every ancestor passed
 the prune test, so no ancestor was infeasible, and an infeasible node cannot
@@ -212,14 +218,16 @@ complete node is feasible, and the values it reports constitute a solution.
 **Completeness.** Every solution is reported. Let $S$ be a solution and let $v$ be the node of the search tree whose root-to-node path is the sequence of decisions of $S$. Every node on that path is feasible, because $S$ extends it. By the lemma, pruning removes only infeasible subtrees, so no node on the path is ever pruned, and the search descends the whole path and reaches $v$. At $v$ the solution is recorded.
 
 **No duplicates.** Each solution determines exactly one root-to-node path, because the decisions of the path are the decisions of the solution. Two different nodes therefore cannot report the same solution, and by completeness every solution is reported. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The state seen at every node is the state determined by the root-to-node
 path.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The claim is the invariant. It holds at the root, where the state is the
 initial state and the path is empty. Suppose it holds when a node is entered
 and the search descends to a child by applying a choice. The choice changes
@@ -230,7 +238,8 @@ The invariant is preserved. When the search returns from the child, the
 restore has undone exactly the change that was applied, so the state is again
 the state of the parent. By induction the invariant holds at every node, and
 in particular a leaf sees exactly the values of its path. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

@@ -124,36 +124,41 @@ The second is the stale entry. When a shorter route to a vertex is found, the al
 
 Let $G = (V, E)$ be a directed or undirected graph with a weight function $w : E \to \mathbb{R}_{\ge 0}$, and let $s \in V$ be the source.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 The **distance** $\delta(v)$ of a vertex $v$ from $s$ is the length of a
 shortest path from $s$ to $v$, that is the smallest sum of edge weights over
 all paths from $s$ to $v$. It is undefined, and written $\infty$, when no
 such path exists.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A vertex $v$ is **settled** at a moment of the algorithm if it has been
 extracted from the priority queue with a key equal to its current tentative
 distance, so that the edge relaxation of its outgoing edges has just been
 performed. A settled vertex is never relaxed again.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 An edge $(u, v)$ of weight $c$ is **relaxed** at a moment of the algorithm
 if the algorithm replaces the tentative distance of $v$ by
 $d(u) + c$ whenever $d(u) + c < d(v)$ holds.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 At every moment of the algorithm, $d(v) \ge \delta(v)$ for every vertex $v$.
 The equality holds exactly when $d(v)$ is the length of a path from $s$ to
 $v$, which is true of every value the algorithm ever writes.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 When a vertex $v$ is settled, $d(v) = \delta(v)$, provided every weight in
 the graph is nonnegative.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -170,12 +175,13 @@ The heap is the second half of the derivation, and it is where the greedy step e
 
 The initialization is a detail worth stating. The source has distance zero and is pushed onto the heap before the loop starts; every other vertex starts at infinity. If the source is not pushed separately, it is discovered again through its own neighbors and the search starts from the wrong place.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 At every moment of the search, every settled vertex has its true distance
 recorded, and every unsettled vertex has a tentative distance that is the
 length of some path from the source to it. The heap holds exactly the pairs
 whose key is a tentative distance that has not yet been settled.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -202,12 +208,13 @@ Removing that check does not change the answer, but it does change the work: the
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 When the search terminates, $d(v) = \delta(v)$ for every vertex $v$ reachable
 from the source, and $d(v) = \infty$ for every vertex that is not reachable.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 We prove the key lemma first: when a vertex is settled, its tentative
 distance is its true distance.
 
@@ -230,13 +237,15 @@ d(u) \le d(x) = \delta(x) \le \delta(u),
 $$
 
 which says $d(u) \le \delta(u)$, contradicting the assumption $d(u) > \delta(u)$. Hence $d(u) = \delta(u)$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The search terminates, and every reachable vertex is settled.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Every relaxation pushes at most one entry onto the heap, and there is one
 relaxation per edge per settled vertex. A vertex is settled at most once,
 because after it is settled its distance never changes and its heap entry is
@@ -245,7 +254,8 @@ The heap therefore holds at most $E + 1$ entries and is emptied by the
 search.
 
 Every reachable vertex is settled: let $w$ be reachable, and let $v_0, \ldots, v_k = w$ be a simple path from the source to $w$. By induction on the index, each $v_i$ is settled: $v_0$ is the source, and when $v_i$ is settled the edge to $v_{i+1}$ is relaxed, so $v_{i+1}$ enters the heap and is eventually extracted. A vertex that is never settled is never given a finite distance, so its recorded value stays infinity, which is correct. $\square$
-</MathPanel>
+:::
+
 
 The exchange argument behind the induction is worth stating in words, because it is the part that is easy to get wrong. The proof does not assume that the settled region is already correct; it assumes only that the vertices _already settled_ are correct, and then shows that the next one is correct too. The exchange is the step where the suffix of the path is charged to the vertex $x$ that leaves the settled region: the algorithm pays for the rest of the route with the single value $d(x)$, and the nonnegative weights make that payment safe.
 
@@ -257,12 +267,13 @@ The exchange argument behind the induction is worth stating in words, because it
 
 The graph itself is an adjacency list with $O(V + E)$ entries, so the total working set is the $O(V + E)$ figure recorded in the manifest.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Dijkstra's algorithm with a binary min-heap: time $O((V + E) \log V)$,
 auxiliary space $O(V + E)$ for the distance array and the heap. A variant
 that supports decrease-key keeps the heap at $O(V)$ entries and does not
 change the time bound.
-</MathPanel>
+:::
+
 
 Two practical warnings belong here. First, the distances must be stored in a type that can hold a sum of weights: with $V$ edges of weight up to $10^9$, a shortest path can be $2 \cdot 10^{14}$, which overflows a 32-bit integer. The reference implementations use 64-bit integers, except in JavaScript, where a number beyond $2^{53}$ loses precision. Second, the heap operations dominate the running time, so a contest solution that pushes and pops manually should use a real priority queue rather than a sorted array.
 

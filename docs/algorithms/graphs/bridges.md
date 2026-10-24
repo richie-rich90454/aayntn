@@ -137,47 +137,54 @@ This is exactly where the bridge test differs from the [articulation point](/alg
 
 Let $G = (V, E)$ be an undirected graph.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 An edge $e \in E$ is a **bridge** of $G$ if the number of connected components
 of $G - e$ is strictly greater than the number of connected components of $G$.
 It is also called a cut edge.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 An edge $e$ is a **bridge** if and only if it lies on no cycle. More precisely,
 $G - e$ has more components than $G$ exactly when there is no path in $G - e$
 between the two endpoints of $e$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 Fix a depth-first search of $G$. The **discovery time** $\text{disc}[v]$ is the
 counter value when $v$ is first visited. The **low link** $\text{low}[v]$ is
 the smallest discovery time reachable from $v$ by descending tree edges and
 then taking at most one back edge, where a back edge joins a vertex to one of
 its proper ancestors.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 An **edge-biconnected component** is a maximal set of edges such that any two
 of them lie on a common cycle. Contracting every edge-biconnected component of
 a connected graph into a single vertex produces a tree, called the **bridge
 tree**, and its edges are exactly the bridges of the original graph.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $\{v, u\}$ be a tree edge of the search, with $u$ a child of $v$. Then
 $\{v, u\}$ is a bridge if and only if $\text{low}[u] > \text{disc}[v]$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 No non-tree edge of the search is a bridge.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $G$ be connected with at least three vertices. If an edge $\{u, v\}$ is a
 bridge, then $u$ and $v$ are both articulation points of $G$. The converse
 does not hold.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -204,18 +211,20 @@ The update is correct because the three sources of a smaller low value are exhau
 
 The test is taken on the return from the child, because only then is $\text{low}[w]$ final. Taking it before the recursive call would compare an unfinished value.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 When the search leaves a vertex $v$, $\text{low}[v]$ is the smallest discovery
 time reachable from $v$ by descending tree edges and taking at most one back
 edge, and every edge on the path from $v$ to the root of the search tree has
 already been tested for being a bridge.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At every moment of the search, the set of marked bridges is exactly the set of
 bridges of the subgraph induced by the vertices visited so far, restricted to
 the edges of that subgraph.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -241,11 +250,12 @@ Now add the component $6 - 7 - 8$. The outer loop restarts the search at $6$ and
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The algorithm marks exactly the bridges of the graph.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 First, the low link. We show that when the search leaves a vertex $v$,
 $\text{low}[v]$ is the smallest discovery time reachable from $v$ by descending
 tree edges and then taking at most one back edge. On entry the algorithm sets
@@ -266,7 +276,8 @@ Suppose instead that $\text{low}[u] \le \text{disc}[v]$. Then there is a vertex 
 Finally, a non-tree edge $\{u, w\}$: the search tree already contains a path between $u$ and $w$, so the edge together with that path forms a cycle, and by the cycle characterization the edge is not a bridge. The algorithm never marks such an edge, which is correct.
 
 The outer loop visits every vertex, so every tree edge of every search tree is tested exactly once, and the result is the set of all bridges. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -274,12 +285,13 @@ The outer loop visits every vertex, so every tree edge of every search tree is t
 
 **Auxiliary space: $O(V)$** beyond the adjacency list, for the discovery times, the low links, the flags, and either the recursion stack or an explicit stack of the same size.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Bridges in an undirected graph with $V$ vertices and $E$ edges: time
 $O(V + E)$, auxiliary space $O(V)$ beyond the adjacency list. The edge
 biconnected components and the bridge tree are extracted from the same
 traversal at no extra asymptotic cost.
-</MathPanel>
+:::
+
 
 The bridge answer and the [articulation point](/algorithms/graphs/articulation-points) answer cost exactly the same, which is the practical reason to compute both in one traversal whenever a statement mentions either. A problem that asks "which stations and which links are critical" is one search, not two.
 
@@ -313,7 +325,7 @@ The bridge computation is recursive in the same way the articulation point compu
 
 The failure mode is a crash rather than a wrong answer: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
-<MathPanel type="counterexample" title="Counterexample">
+::: math counterexample Counterexample
 A path graph on $10^6$ vertices, that is, a chain $0 - 1 - 2 - \cdots - 10^6 - 1$.
 Every one of the $10^6 - 1$ edges of this graph is a bridge, since removing any
 of them leaves two separate chains. The recursive form makes one nested call
@@ -321,7 +333,8 @@ per vertex, so in C++ on Linux with an 8 MB stack and a frame of roughly 64
 bytes the stack is exhausted after about $130\,000$ frames. The program dies
 with a segmentation fault after visiting $13\%$ of the graph, having reported
 the first $130\,000$ bridges. The iterative form finishes normally.
-</MathPanel>
+:::
+
 
 The iterative form needs the index of the next neighbor to examine stored alongside the vertex, so that it can tell "just entered this vertex" from "returned to this vertex from a child". The bridge test belongs to the second case only.
 

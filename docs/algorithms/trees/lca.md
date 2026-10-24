@@ -139,47 +139,29 @@ The laboratory below draws the tree and the table together, and highlights the e
 
 Let $T$ be a tree with vertex set $V$ and a chosen root $r$.
 
-<MathPanel type="definition" title="Definition">
-The **parent** of a vertex $v \ne r$ is its unique neighbor on the path
-from $v$ to $r$. The **depth** of a vertex is the number of edges on the
-path from the root to it, so $\operatorname{depth}(r) = 0$. A vertex $u$ is
-an **ancestor** of $v$ if $u$ lies on the path from $v$ to $r$, and $u$ is
-a **strict ancestor** if $u \ne v$.
-</MathPanel>
+::: math definition Definition
+The **parent** of a vertex $v \ne r$ is its unique neighbor on the path from $v$ to $r$. The **depth** of a vertex is the number of edges on the path from the root to it, so $\operatorname{depth}(r) = 0$. A vertex $u$ is an **ancestor** of $v$ if $u$ lies on the path from $v$ to $r$, and $u$ is a **strict ancestor** if $u \ne v$.
+:::
 
-<MathPanel type="definition" title="Definition">
-The **lowest common ancestor** of $u$ and $v$ is the deepest vertex that is
-an ancestor of both. It is unique, because the ancestors of $u$ and the
-ancestors of $v$ are both chains ending at the root, and two chains in a
-tree that share two vertices share the whole path between them.
-</MathPanel>
+::: math definition Definition
+The **lowest common ancestor** of $u$ and $v$ is the deepest vertex that is an ancestor of both. It is unique, because the ancestors of $u$ and the ancestors of $v$ are both chains ending at the root, and two chains in a tree that share two vertices share the whole path between them.
+:::
 
-<MathPanel type="definition" title="Definition">
-The **binary lifting table** is
-$\text{up}[k][v] = $ the ancestor of $v$ that lies $2^k$ edges above it,
-with the root declared to be its own ancestor. The table has
-$\lfloor \log_2 n \rfloor + 1$ rows, because a tree of depth $n - 1$ needs
-only that many powers of two to express every distance.
-</MathPanel>
+::: math definition Definition
+The **binary lifting table** is $\text{up}[k][v]$ is the ancestor of $v$ that lies $2^k$ edges above it, with the root declared to be its own ancestor. The table has $\lfloor \log_2 n \rfloor + 1$ rows, because a tree of depth $n - 1$ needs only that many powers of two to express every distance.
+:::
 
-<MathPanel type="lemma" title="Lemma">
-Let $u$ and $v$ be distinct vertices at the same depth $d$ above their
-lowest common ancestor $w$. Then $\text{up}[k][u] \ne \text{up}[k][v]$ if
-and only if $d \ge 2^k + 1$.
-</MathPanel>
+::: math lemma Lemma
+Let $u$ and $v$ be distinct vertices at the same depth $d$ above their lowest common ancestor $w$. Then $\text{up}[k][u] \ne \text{up}[k][v]$ if and only if $d \ge 2^k + 1$.
+:::
 
-<MathPanel type="lemma" title="Lemma">
-Let $u$ and $v$ be at the same depth $d$ above their lowest common
-ancestor $w$, and let the greedy descent take jumps of sizes
-$2^{k_1} > 2^{k_2} > \cdots > 2^{k_t}$. Then
-$d - \sum_{i=1}^{t} 2^{k_i} = 1$, so the two vertices end up as the two
-children of $w$.
-</MathPanel>
+::: math lemma Lemma
+Let $u$ and $v$ be at the same depth $d$ above their lowest common ancestor $w$, and let the greedy descent take jumps of sizes $2^{k_1} > 2^{k_2} > \cdots > 2^{k_t}$. Then $d - \sum_{i=1}^{t} 2^{k_i} = 1$, so the two vertices end up as the two children of $w$.
+:::
 
-<MathPanel type="lemma" title="Lemma">
-The distance between two vertices $u$ and $v$ is
-$\operatorname{depth}(u) + \operatorname{depth}(v) - 2\operatorname{depth}(\operatorname{lca}(u, v))$.
-</MathPanel>
+::: math lemma Lemma
+The distance between two vertices $u$ and $v$ is $\operatorname{depth}(u) + \operatorname{depth}(v) - 2\operatorname{depth}(\operatorname{lca}(u, v))$.
+:::
 
 ## Algorithm derivation
 
@@ -194,12 +176,9 @@ The query rule has two phases.
 
 The update in phase two is correct by the lemma: the jump is taken exactly when it keeps both vertices strictly below the lowest common ancestor, so the ancestor is unchanged and the two vertices stay distinct.
 
-<MathPanel type="invariant" title="Invariant">
-During phase two, the two vertices stand at the same depth, they are
-distinct, and their lowest common ancestor is the same vertex $w$ as at the
-start of the phase. The distance from either vertex to $w$ is a positive
-integer that decreases by $2^k$ whenever a jump of size $2^k$ is taken.
-</MathPanel>
+::: math invariant Invariant
+During phase two, the two vertices stand at the same depth, they are distinct, and their lowest common ancestor is the same vertex $w$ as at the start of the phase. The distance from either vertex to $w$ is a positive integer that decreases by $2^k$ whenever a jump of size $2^k$ is taken.
+:::
 
 ## Step-by-step execution
 
@@ -237,19 +216,12 @@ Notice in the first query that every level was rejected. That is the common case
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
-The binary lifting query returns the lowest common ancestor of the two
-queried vertices.
-</MathPanel>
+::: math theorem Theorem
+The binary lifting query returns the lowest common ancestor of the two queried vertices.
+:::
 
-<MathPanel type="proof" title="Proof">
-First, the table is correct. The claim is by induction on $k$. For $k = 0$
-the entry is the parent, which is the ancestor one edge above. Suppose the
-row $k - 1$ is correct. The $2^k$-th ancestor of $v$ is the ancestor of
-$v$ that lies $2^{k-1}$ edges above the $2^{k-1}$-th ancestor of $v$, which
-is exactly the entry the recurrence stores. Every entry is therefore
-correct, and the root being its own ancestor keeps the table defined
-everywhere.
+::: math proof Proof
+First, the table is correct. The claim is by induction on $k$. For $k = 0$ the entry is the parent, which is the ancestor one edge above. Suppose the row $k - 1$ is correct. The $2^k$-th ancestor of $v$ is the ancestor of $v$ that lies $2^{k-1}$ edges above the $2^{k-1}$-th ancestor of $v$, which is exactly the entry the recurrence stores. Every entry is therefore correct, and the root being its own ancestor keeps the table defined everywhere.
 
 Now the query. Let $w$ be the lowest common ancestor of the original pair.
 
@@ -258,14 +230,11 @@ The lifting phase moves the deeper vertex up by exactly the difference in depth,
 Otherwise the two vertices are distinct and equally deep, at distance $d \ge 1$ above $w$. Consider phase two. By the lemma, the jump of size $2^k$ is taken exactly when $2^k \le d - 1$, where $d$ is the current distance. Processing the levels in decreasing order, the taken jumps are exactly the set bits of the binary representation of $d - 1$: the largest power of two that fits in $d - 1$ is taken first, the remaining amount is $d - 1$ minus that power, and the argument repeats on the remaining levels. The total lift is therefore $d - 1$, and the final distance is $d - (d - 1) = 1$.
 
 So the two vertices finish at distance one above $w$, which means they are the two children of $w$, and the answer $\text{up}[0][u]$ is $w$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
-The table has $\lfloor \log_2 n \rfloor + 1$ rows because the largest
-distance between two vertices of a tree with $n$ vertices is $n - 1$, and
-the largest power of two that can appear in the binary representation of a
-distance of at most $n - 1$ is at most $n - 1$ itself.
-</MathPanel>
+::: math proof Proof
+The table has $\lfloor \log_2 n \rfloor + 1$ rows because the largest distance between two vertices of a tree with $n$ vertices is $n - 1$, and the largest power of two that can appear in the binary representation of a distance of at most $n - 1$ is at most $n - 1$ itself.
+:::
 
 ## Complexity analysis
 
@@ -277,11 +246,9 @@ distance of at most $n - 1$ is at most $n - 1$ itself.
 
 **Space: $O(n \log n)$** for the table, plus $O(n)$ for the depth array and the traversal queue.
 
-<MathPanel type="complexity" title="Complexity">
-Binary lifting over a tree of $n$ vertices and $m$ edges: $O((n + m)
-\log n)$ time to build, $O(\log n)$ per query, and $O(n \log n)$ extra
-space.
-</MathPanel>
+::: math complexity Complexity
+Binary lifting over a tree of $n$ vertices and $m$ edges: $O((n + m) \log n)$ time to build, $O(\log n)$ per query, and $O(n \log n)$ extra space.
+:::
 
 The width of the entries matters. The table stores vertex indices, so $4n \log_2 n$ bytes are needed at $n = 200\,000$, which is about $14$ MB. Storing a whole table of distances instead of ancestor indices would cost $O(n^2)$ and is not an option.
 

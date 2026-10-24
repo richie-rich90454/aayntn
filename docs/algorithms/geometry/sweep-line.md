@@ -126,28 +126,31 @@ at the sweep position $X$, and two segments are compared by comparing these frac
 
 Let $S$ be a set of line segments.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 The **sweep line** is the vertical line $x = X$. A segment is **active** at
 $X$ when $X$ lies between its endpoints' $x$-coordinates. The **active set**
 is the collection of active segments. The **status structure** is the
 active set ordered by the height of the segments at $X$, and the **height**
 of a segment is the $y$-coordinate at which the sweep line meets it.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 Two segments **intersect** when they have a point in common, including a
 shared endpoint. The **event list** is the multiset of the two endpoints of
 every segment, and the **sweep** processes the events in increasing order of
 their $x$-coordinate, inserting a segment at its left endpoint and removing
 it at its right endpoint.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 If any two segments of the set intersect, then at some moment of the sweep
 two segments that are adjacent in the active set intersect.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Let $p$ be the intersection point with the smallest $x$-coordinate among
 all intersection points, and let $T$ be the set of segments that contain
 $p$. Every segment of $T$ is active just before the sweep reaches the
@@ -157,16 +160,18 @@ sweep approaches it.
 Order the segments of $T$ by their heights just before that moment, and take two that are adjacent in that order, say $a$ and $b$. Suppose some segment $c$ of the whole active set had its height strictly between those of $a$ and $b$ at that moment. Its height would still be between them as the sweep approaches $p$, because the order of two segments in the active set can change only at an intersection, and no intersection occurs before $p$. So the height of $c$ would also tend to the height of $p$, and $c$ would contain $p$, which puts $c$ in $T$ and contradicts the choice of $a$ and $b$ as adjacent within $T$.
 
 Therefore $a$ and $b$ are adjacent in the whole active set, and they intersect at $p$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At every moment of the sweep, the status structure contains exactly the
 active segments, ordered by their height at the current sweep position, and
 every pair of segments that has been adjacent in the status structure has
 been tested for intersection. The invariant is established when the first
 segment is inserted and preserved by the two update rules, which test the
 new neighbors whenever the status structure changes.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -241,12 +246,13 @@ A program that tests only the neighbor pairs at insertions still finds the inter
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The sweep reports an intersection if and only if two of the segments
 intersect. When it reports, the two segments it reports do intersect.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 **The report is sound.** Every reported pair has been tested with the exact
 segment intersection test, which is the standard orientation test on the
 four endpoints, and the test is exact for integer coordinates. So every
@@ -255,7 +261,8 @@ reported pair really does intersect.
 **The report is complete.** Suppose two segments intersect. By the lemma, there is a moment at which two segments that are adjacent in the active set intersect. Consider the first moment at which that adjacent pair is formed. It is formed either by an insertion, in which case the algorithm tests the new segment against its new neighbors, or by a deletion, in which case the algorithm tests the two segments that become neighbors. Either way the pair is tested, and since the two segments do intersect, the algorithm reports.
 
 **The status structure is maintained.** Between two consecutive events, no segment starts and no segment ends, so the set of active segments does not change. The order of two active segments can change only if they intersect, and the algorithm reports an intersection as soon as it finds one, so up to the moment of the report the order is the order of the heights, and the status structure stays correctly sorted. Insertions and deletions place the segment at the position its height dictates, which is what the search tree finds by comparison. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

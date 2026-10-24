@@ -127,30 +127,33 @@ That is the whole reuse argument, and it is the same shape as the [Z box](/algor
 
 Let $s$ be a string of length $n$.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 For a string $s$ of length $n$, the **odd radius** $d_1[i]$ is the largest
 $k \ge 1$ such that $s[i-k+1 \dots i+k-1]$ is a palindrome, and the
 **even radius** $d_2[i]$ is the largest $k \ge 0$ such that
 $s[i-k \dots i+k-1]$ is a palindrome. The even radius at position $i$ is
 the radius of the palindrome centered in the gap before $s[i]$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **rightmost palindrome** at a moment of the algorithm is a range
 $[l, r]$ such that $s[l \dots r]$ is a palindrome, and every palindrome
 already found lies inside $[l, r]$. Its **center** is $c$, so that
 $r - c = c - l$ for an odd palindrome and $r = 2c - l - 1$ for an even one.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $[l, r]$ be a palindrome centered at $c$, and let $i$ be a center
 strictly inside it. Then the radius of the palindrome at $i$ is at least
 $\min(\operatorname{radius}(2c - i),\; c - l)$, and it is exactly that
 value unless the palindrome at $i$ extends past the left edge of the big
 palindrome.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Reflect the center $i$ about $c$ to get $i' = 2c - i$. For every position
 $j$ with $l \le j \le r$, the symmetry of the palindrome gives
 $s[j] = s[2c - j]$. So the characters around $i$ are the mirror images of
@@ -159,13 +162,15 @@ the characters around $i'$.
 The palindrome at $i'$ has some radius $t$, so the characters $s[i' - t + 1 \dots i' + t - 1]$ form a palindrome. Their mirror images are $s[i - t + 1 \dots i + t - 1]$, and they too form a palindrome, because a mirror image of a palindrome is a palindrome. So the radius at $i$ is at least $t$, provided the whole reflected palindrome stays inside $[l, r]$. The reflection of $i' - t + 1$ is $2c - (i' - t + 1)$, and the leftmost position of the reflected palindrome is $2c - (i' + t - 1) = i - t + 1$. The reflected palindrome stays inside $[l, r]$ exactly when $i - t + 1 \ge l$, that is, when $t \le i - l + 1$.
 
 So the radius at $i$ is at least $\min(t, i - l + 1)$. When the minimum is $t$, the copy is exact. When it is $i - l + 1$, the palindrome at $i$ reaches the left edge of the big palindrome, and the algorithm must compare further characters itself. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At the start of every iteration, the range $[l, r]$ is the palindrome with
 the rightmost right edge among all the palindromes already found, and
 every radius already computed is final. The right edge never decreases.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -259,13 +264,14 @@ The row for $i = 3$ in the even case is the only one that uses the copy, and it 
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The algorithm computes the odd radius $d_1[i]$ correctly for every
 position $i$, and the even radius $d_2[i]$ correctly for every position
 $i$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The two cases have the same shape, so the proof is given for the odd case
 and the even case is identical with the index shifts.
 
@@ -278,13 +284,15 @@ The proof is an induction on $i$. The invariant is that every radius already com
 **The starting value is never too high.** The lemma gives a lower bound, so the copy is never too high. When $i > r$ there is no known palindrome containing $i$, and the algorithm starts at the smallest possible radius, which is $1$ for an odd palindrome, and that is a lower bound too.
 
 The induction closes, and the update of $[l, r]$ keeps the invariant because the new palindrome is a palindrome and its right edge is compared against the old one. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The algorithm performs $O(n)$ character comparisons.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Consider the successful comparisons at position $i$. Each of them extends
 the palindrome at $i$ by one character on the right, so the rightmost
 character of the palindrome at $i$ is $i + k - 1$ where $k$ is the final
@@ -293,7 +301,8 @@ $\max(0, i + k - 1 - r)$ plus the number of comparisons that stay inside
 the old rightmost palindrome, which is at most $1$ by the copy.
 
 Summed over all positions, the first term telescopes: the right edge increases from its initial value to at most $n - 1$ and never decreases, so the sum of the increases is at most $n$. The second term contributes at most $n$. The failing comparisons number at most one per position. So the total is at most $3n$. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

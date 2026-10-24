@@ -126,30 +126,34 @@ Two consequences shape the algorithm.
 
 Let $G = (L, R, E)$ be a bipartite graph with the two sides $L$ and $R$.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **matching** is a set $M \subseteq E$ such that no two edges of $M$ share an
 endpoint. A matching is **maximal** if no edge can be added to it while
 keeping it a matching, and **maximum** if it has the largest possible size
 among all matchings. The size of a matching is written $\lvert M \rvert$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A path in $G$ is **alternating** with respect to a matching $M$ if its edges
 alternate between those in $M$ and those not in $M$. It is an **augmenting
 path** if it is alternating and both of its endpoints are unmatched by $M$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **neighborhood** of a set $S \subseteq L$ is
 $N(S) = \{v \in R : \text{some } u \in S \text{ is joined to } v\}$.
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem (Berge's lemma)">
+
+::: math theorem Theorem (Berge's lemma)
 A matching $M$ is maximum if and only if there is no augmenting path with
 respect to $M$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 First, if an augmenting path $P$ exists, flip the edges of $P$: the edges of
 $P$ that were in $M$ are removed and the edges of $P$ that were not in $M$ are
 added. The result is still a matching, because the only vertices of $P$ that
@@ -160,19 +164,22 @@ new matching has size $\lvert M \rvert + 1$. So $M$ was not maximum.
 Conversely, suppose $M$ is not maximum, and let $M^{\ast}$ be a maximum matching. Consider the symmetric difference $M \triangle M^{\ast}$, the set of edges that are in exactly one of the two matchings. Every vertex of $G$ has degree at most two in this subgraph, because it is incident to at most one edge of $M$ and at most one edge of $M^{\ast}$. So the symmetric difference is a disjoint union of alternating paths and even alternating cycles. A cycle contains as many edges of $M$ as of $M^{\ast}$, and each path contains equal numbers of the two as well, unless it has one more edge of $M^{\ast}$ than of $M$, in which case it has one more edge of $M$ than of $M^{\ast}$ and ends at two vertices that are matched by $M$ and not by $M^{\ast}$.
 
 Since $\lvert M^{\ast} \rvert > \lvert M \rvert$, the number of paths with one more edge of $M^{\ast}$ than of $M$ exceeds the number with the opposite imbalance, so at least one such path exists. That path starts and ends at vertices that are matched by $M$ and not by $M^{\ast}$, which means they are unmatched in $M^{\ast}$ and matched in $M$... careful: the endpoints of such a path are incident to one more $M^{\ast}$-edge, so their other incident edge in the symmetric difference is absent, which means they are unmatched by $M$. Hence the path is an augmenting path for $M$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem (König's theorem)">
+
+::: math theorem Theorem (König's theorem)
 In a bipartite graph, the size of a maximum matching equals the size of a
 minimum vertex cover, where a vertex cover is a set of vertices meeting every
 edge.
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem (Hall's marriage theorem)">
+
+::: math theorem Theorem (Hall's marriage theorem)
 A bipartite graph with parts $L$ and $R$, where $\lvert L \rvert \le \lvert R \rvert$,
 has a matching that covers every vertex of $L$ if and only if
 $\lvert N(S) \rvert \ge \lvert S \rvert$ for every subset $S \subseteq L$.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -214,18 +221,20 @@ repeat:
 
 Each phase finds a **maximal set of vertex-disjoint shortest augmenting paths**. The bound on the number of phases comes from the fact that after each phase the length of the shortest augmenting path strictly increases, and Berge's lemma guarantees that the last phase finds nothing.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 At every moment of the simple algorithm, the assignment is a valid matching:
 no two matched edges share an endpoint, and every left vertex is matched to at
 most one right vertex.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At every moment of either algorithm, the current matching is contained in
 some maximum matching. Flipping an augmenting path preserves this, because the
 path's edges outside the current matching can be exchanged with the edges of a
 maximum matching without changing the maximum size.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -252,11 +261,12 @@ If step 3 had been written as "give up as soon as the recursive call fails", the
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The simple algorithm returns a maximum matching.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 First, the matching stays valid. Suppose the search from a free left vertex
 $u$ reaches a free right vertex $v$ and assigns $v$ to $u$. Every right vertex
 on the search path was matched before, and each was reassigned to a different
@@ -268,13 +278,15 @@ result is a valid matching, one edge larger than before.
 Second, the search finds an augmenting path whenever one exists. The search visits right vertices and, for each, follows the matched edge backwards to the left vertex holding it. This is exactly a traversal of the alternating paths that start at $u$: every alternating path consists of an unmatched edge from a left vertex to a right vertex followed by the matched edge back to a left vertex, and the search explores every unmatched edge out of every left vertex it reaches. The marks on the right vertices prevent the search from looping without preventing it from reaching any vertex, because a right vertex is reached in exactly one way: through the left vertex that is matched to it.
 
 Third, the algorithm terminates with a maximum matching. Each successful search adds one edge to the matching, so there are at most $\min(\lvert L \rvert, \lvert R \rvert)$ successful searches, and each search touches each vertex at most once, so there are at most $V$ searches in total. When the algorithm ends, no augmenting path exists: if one existed, the search from its left endpoint would find it, because the search explores every alternating path from that endpoint. By Berge's lemma, a matching with no augmenting path is maximum. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 Hopcroft-Karp returns a maximum matching in $O(E \sqrt{V})$ time.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Each phase computes the layer graph, which is a shortest-path layering of the
 alternating paths from the free left vertices, and then finds a maximal set of
 vertex-disjoint shortest augmenting paths in it. Because the paths are
@@ -284,7 +296,8 @@ valid.
 Let $L_i$ be the length of the shortest augmenting path at the start of a phase. The layer graph shows that the augmenting paths in the phase have length $L_i$, and the maximality of the set means that afterwards no augmenting path of length at most $L_i$ remains: any such path would have been found by the depth-first search over the layers. So $L_i$ strictly increases from phase to phase.
 
 After $k$ phases, let $d$ be the length of the shortest augmenting path. The standard counting argument shows that the remaining paths are vertex-disjoint in a layered sense and that $k$ and $d$ satisfy $k \le V / d$ and $d \le V / k$ together, so $k \le O(\sqrt{V})$ until $d$ exceeds $\sqrt{V}$; after that, each phase can be charged to at least $\sqrt{V}$ additional matched edges, which can happen at most $V$ times. The number of phases is therefore $O(\sqrt{V})$, and each phase costs $O(E)$, for a total of $O(E \sqrt{V})$. Berge's lemma then gives maximality at the end. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -294,11 +307,12 @@ After $k$ phases, let $d$ be the length of the shortest augmenting path. The sta
 
 **Auxiliary space: $O(V)$** beyond the adjacency list, for the match array in each direction, the visited marks, the layer array, and the queue.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Maximum matching in a bipartite graph with $V$ vertices and $E$ edges:
 $O(V E)$ time for the simple augmenting-path algorithm, $O(E \sqrt{V})$ for
 Hopcroft-Karp. Auxiliary space $O(V)$ beyond the adjacency list.
-</MathPanel>
+:::
+
 
 |  | Simple augmenting path | Hopcroft-Karp | Maximum flow |
 | --- | --- | --- | --- |
@@ -340,7 +354,7 @@ The recursive search is the natural shape of the algorithm, because the search f
 
 The failure mode is a crash rather than a wrong answer: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
-<MathPanel type="counterexample" title="Counterexample">
+::: math counterexample Counterexample
 A bipartite graph with $10^5$ left vertices and $10^5$ right vertices, where
 left vertex $s_i$ is joined to right vertices $c_1, c_2, \ldots, c_i$, and
 each right vertex $c_j$ is joined to left vertices $s_j, s_{j+1}, \ldots$,
@@ -350,7 +364,8 @@ in C++ on Linux with an 8 MB stack and a frame of roughly 64 bytes the stack
 is exhausted after about $130\,000$ frames, and the program dies with a
 segmentation fault. The iterative form, which keeps the path in an explicit
 stack of left vertices, finishes normally.
-</MathPanel>
+:::
+
 
 The iterative form stores the path in a stack of left vertices and rewinds it when a dead end is reached, which is the same traversal with a different allocation.
 

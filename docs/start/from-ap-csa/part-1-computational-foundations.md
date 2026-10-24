@@ -33,14 +33,15 @@ Why this matters in a contest:
 - The time limit is wall-clock time on the judge's machine, and the same algorithm costs different amounts in different languages. Python interpreted loops run roughly fifty to a hundred times slower than equivalent C++ loops. That gap is large enough that an $O(n^2)$ Python solution can time out where the C++ version passes easily.
 - Undefined behavior gives the compiler permission to assume your program never does it. If you trigger it, the compiler may remove the very check you relied on, and the program may then behave differently on the judge's machine than on yours.
 
-<MathPanel type="definition" title="Undefined behavior">
+::: math definition Undefined behavior
 Undefined behavior is a situation in which the language standard places
 no requirement on the program. The compiler may assume the situation does
 not occur, and may transform the program in ways that are valid for
 programs where it does not occur. Signed integer overflow, dereferencing a
 null or out-of-range pointer, and reading an uninitialized variable are
 all undefined behavior in C and C++.
-</MathPanel>
+:::
+
 
 **Worked example.** The following C++ program prints a different answer depending on the compiler, because signed overflow is undefined:
 
@@ -253,13 +254,14 @@ What happens when a value leaves the range depends on the language, and this mat
 
 Floating point is a separate trap. A `double` stores a 64-bit value with a 53-bit significand, so it represents integers exactly only up to $2^{53} \approx 9.0 \times 10^{15}$. Below that magnitude the problem is not magnitude but representation: $0.1$ is not representable in binary, so $0.1 + 0.2 \ne 0.3$ exactly, and the same is true of every decimal fraction.
 
-<MathPanel type="counterexample" title="Float equality">
+::: math counterexample Float equality
 In IEEE 754 double precision, `0.1 + 0.2 == 0.3` evaluates to false. The
 left-hand side is the double nearest to $0.30000000000000004$, which is
 not the double nearest to $0.3$. Comparing floating-point values for
 equality with `==` therefore fails on values that are mathematically
 equal.
-</MathPanel>
+:::
+
 
 **Why it matters.** Count the pairs of $n$ items: with $n = 10^6$ there are $n(n-1)/2 \approx 5 \times 10^{11}$ pairs, which overflows a 32-bit integer by a factor of about 233. In Java the answer silently comes out negative, and in C++ the behavior is undefined.
 

@@ -97,7 +97,7 @@ Pages do not paste that code by hand. They refer to it by identifier, and the th
 
 The identifiers are the whole contract. If a manifest does not exist for an identifier, the panel renders nothing and the page silently loses that section, which is why the academy pages do not use these components. There is no implementation manifest for academy material: the snippets in these parts are teaching examples written inline, not files the project compiles and tests.
 
-Two other components are used throughout the academy. `<MathPanel>` gives definitions, lemmas, proofs, invariants, recurrences, counterexamples and complexity results a distinct visual treatment, so you can tell at a glance what kind of mathematical object you are reading. `<PrerequisiteGraph>` renders the dependency map that the build computes from the frontmatter of every lesson, so the picture always matches the data.
+Two other conveniences are used throughout the academy. A `::: math` container gives definitions, lemmas, proofs, invariants, recurrences, counterexamples and complexity results a distinct visual treatment, so you can tell at a glance what kind of mathematical object you are reading, and the formulas inside it are compiled as mathematics rather than printed as source. `<PrerequisiteGraph>` renders the dependency map that the build computes from the frontmatter of every lesson, so the picture always matches the data.
 
 <PrerequisiteGraph focus="start.algorithm-analysis" />
 

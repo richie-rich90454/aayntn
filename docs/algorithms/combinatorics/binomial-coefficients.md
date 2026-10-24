@@ -1,7 +1,7 @@
 ---
 id: combinatorics.binomial-coefficients
 title: Binomial coefficients
-summary: Count the ways to choose $k$ items from $n$ with a counting argument instead of an enumeration, and compute the count exactly or modulo a prime without overflowing.
+summary: Count the ways to choose k items from n with a counting argument instead of an enumeration, and compute the count exactly or modulo a prime without overflowing.
 division: [silver, gold]
 subjects: [combinatorics]
 level: intermediate
@@ -113,65 +113,54 @@ The second insight is that the count satisfies a recurrence, and the recurrence 
 
 Let $X$ be a set of $n$ distinct objects.
 
-<MathPanel type="definition" title="Definition">
-A **$k$-element subset** of $X$ is a set $S$ with $S \subseteq X$ and
-$|S| = k$. The **binomial coefficient** $\binom{n}{k}$ is the number of
-$k$-element subsets of an $n$-element set. It is defined to be $0$ when
-$k > n$.
-</MathPanel>
+::: math definition Definition
+A **$k$-element subset** of $X$ is a set $S$ with $S \subseteq X$ and $|S| = k$. The **binomial coefficient** $\binom{n}{k}$ is the number of $k$-element subsets of an $n$-element set. It is defined to be $0$ when $k > n$.
+:::
 
-<MathPanel type="definition" title="Definition">
-The **factorial** of a non-negative integer $n$ is $n! = n(n-1)\cdots 1$
-with $0! = 1$. The two identities that connect the count to the
-factorials are
+::: math definition Definition
+The **factorial** of a non-negative integer $n$ is $n! = n(n-1)\cdots 1$ with $0! = 1$. The two identities that connect the count to the factorials are
+
 $$
 \binom{n}{k} = \frac{n!}{k!(n-k)!}
 \qquad\text{and}\qquad
 \binom{n}{k} = \binom{n}{n-k}.
 $$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Pascal's identity">
+::: math theorem Pascal's identity
 For $1 \le k \le n$,
+
 $$
 \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k},
 $$
-with the boundary values $\binom{n}{0} = \binom{n}{n} = 1$.
-</MathPanel>
 
-<MathPanel type="proof" title="Proof">
-Let $X$ be a set of $n$ objects and fix an object $x \in X$. Let
-$\mathcal{A}$ be the family of $k$-element subsets of $X$ that contain
-$x$, and let $\mathcal{B}$ be the family of those that do not.
+with the boundary values $\binom{n}{0} = \binom{n}{n} = 1$.
+:::
+
+::: math proof Proof
+Let $X$ be a set of $n$ objects and fix an object $x \in X$. Let $\mathcal{A}$ be the family of $k$-element subsets of $X$ that contain $x$, and let $\mathcal{B}$ be the family of those that do not.
 
 The map that removes $x$ is a bijection from $\mathcal{A}$ to the $(k-1)$-element subsets of $X \setminus \{x\}$, which has $n-1$ elements, so $|\mathcal{A}| = \binom{n-1}{k-1}$. The identity map restricted to $\mathcal{B}$ is a bijection from $\mathcal{B}$ to the $k$-element subsets of $X \setminus \{x\}$, so $|\mathcal{B}| = \binom{n-1}{k}$.
 
 Every $k$-element subset of $X$ either contains $x$ or does not, and the two cases are mutually exclusive, so $\mathcal{A}$ and $\mathcal{B}$ partition the family. Their sizes therefore add, which is the identity. The boundary values hold because there is exactly one empty subset and exactly one subset of size $n$, which is $X$ itself. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="recurrence" title="Recurrence">
+::: math recurrence Recurrence
 The multiplicative recurrence, for $1 \le k \le n$, is
+
 $$
 \binom{n}{k} = \binom{n}{k-1}\cdot\frac{n-k+1}{k},
 \qquad\text{with}\qquad \binom{n}{0} = 1.
 $$
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
-In the recurrence above, the quantity $\binom{n}{k-1}(n-k+1)$ is divisible
-by $k$, so the division is always exact.
-</MathPanel>
+::: math lemma Lemma
+In the recurrence above, the quantity $\binom{n}{k-1}(n-k+1)$ is divisible by $k$, so the division is always exact.
+:::
 
-<MathPanel type="proof" title="Proof">
-The counting argument counts the $k$-element subsets of an $n$-element set
-as $\frac{n!}{k!(n-k)!}$ and counts the same subsets as the number of
-ordered selections divided by $k!$. Substituting the first expression into
-the identity
-$\binom{n}{k-1} = \frac{n!}{(k-1)!(n-k+1)!}$ and rearranging gives
-$\binom{n}{k-1}(n-k+1) = k\binom{n}{k}$, and the right-hand side is a
-product of integers, so the left-hand side is divisible by $k$.
-$\square$
-</MathPanel>
+::: math proof Proof
+The counting argument counts the $k$-element subsets of an $n$-element set as $\frac{n!}{k!(n-k)!}$ and counts the same subsets as the number of ordered selections divided by $k!$. Substituting the first expression into the identity $\binom{n}{k-1} = \frac{n!}{(k-1)!(n-k+1)!}$ and rearranging gives $\binom{n}{k-1}(n-k+1) = k\binom{n}{k}$, and the right-hand side is a product of integers, so the left-hand side is divisible by $k$. $\square$
+:::
 
 ## Algorithm derivation
 
@@ -267,22 +256,12 @@ Now $6 \times 6^{-1} \equiv 6 \times 6 = 36 \equiv 1 \pmod 7$, because $6 \times
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
-For $0 \le k \le n$, the counting argument gives
-$\binom{n}{k} = \frac{n!}{k!(n-k)!}$, and the multiplicative recurrence
-computes that value exactly.
-</MathPanel>
+::: math theorem Theorem
+For $0 \le k \le n$, the counting argument gives $\binom{n}{k} = \frac{n!}{k!(n-k)!}$, and the multiplicative recurrence computes that value exactly.
+:::
 
-<MathPanel type="proof" title="Proof">
-**The counting argument.** Consider the ordered $k$-tuples of distinct
-elements of $X$. There are $n$ choices for the first position, $n-1$ for
-the second, and $n-k+1$ for the last, so there are
-$n(n-1)\cdots(n-k+1) = \frac{n!}{(n-k)!}$ of them. Every $k$-element
-subset has exactly $k!$ orderings, because its elements are distinct, and
-every ordered tuple is the ordering of exactly one $k$-element subset. The
-map from ordered tuples to the underlying subset is therefore a union of
-fibers of size $k!$, so the number of subsets is
-$\frac{n!}{(n-k)!k!}$.
+::: math proof Proof
+**The counting argument.** Consider the ordered $k$-tuples of distinct elements of $X$. There are $n$ choices for the first position, $n-1$ for the second, and $n-k+1$ for the last, so there are $n(n-1)\cdots(n-k+1) = \frac{n!}{(n-k)!}$ of them. Every $k$-element subset has exactly $k!$ orderings, because its elements are distinct, and every ordered tuple is the ordering of exactly one $k$-element subset. The map from ordered tuples to the underlying subset is therefore a union of fibers of size $k!$, so the number of subsets is $\frac{n!}{(n-k)!k!}$.
 
 **The recurrence.** After iteration $i$, the running value equals $\binom{n}{i}$. At $i = 0$ it is $1 = \binom{n}{0}$. Suppose it equals $\binom{n}{i-1}$ at the start of iteration $i$. The step multiplies it by $n-k+i$ and divides by $i$, and the lemma shows the division is exact, so the new value is
 
@@ -291,38 +270,35 @@ $$
 $$
 
 where the last equality is the recurrence. By induction the loop ends with $\binom{n}{k}$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
-When $p$ is prime and $k < p$, the modular computation returns
-$\binom{n}{k} \bmod p$.
-</MathPanel>
+::: math theorem Theorem
+When $p$ is prime and $k < p$, the modular computation returns $\binom{n}{k} \bmod p$.
+:::
 
-<MathPanel type="proof" title="Proof">
+::: math proof Proof
 The loop accumulates
+
 $$
 \text{num} \equiv \prod_{i=1}^{k}(n-k+i) = \frac{n!}{(n-k)!}
 \quad\text{and}\quad
 \text{den} \equiv k! \pmod p.
 $$
-Since $k < p$ and $p$ is prime, none of $1, 2, \ldots, k$ is divisible by
-$p$, so $k! \not\equiv 0 \pmod p$ and the inverse of `den` exists. In the
-field of residues modulo $p$ the division is therefore exact, and
+
+Since $k < p$ and $p$ is prime, none of $1, 2, \ldots, k$ is divisible by $p$, so $k! \not\equiv 0 \pmod p$ and the inverse of `den` exists. In the field of residues modulo $p$ the division is therefore exact, and
+
 $$
 \text{num} \cdot \text{den}^{-1}
 \equiv \frac{n!}{(n-k)!}\cdot(k!)^{-1}
 \equiv \binom{n}{k} \pmod p,
 $$
-because the integer identity
-$\binom{n}{k}(k!)(n-k)! = n!$ holds and every factor on the right is
-invertible. $\square$
-</MathPanel>
 
-<MathPanel type="invariant" title="Invariant">
-After iteration $i$ of the multiplicative loop, the running value equals
-$\binom{n}{i}$, and in the modular loop the accumulators equal
-$\frac{n!}{(n-k)! \cdot i!}$ and $i!$ modulo $p$.
-</MathPanel>
+because the integer identity $\binom{n}{k}(k!)(n-k)! = n!$ holds and every factor on the right is invertible. $\square$
+:::
+
+::: math invariant Invariant
+After iteration $i$ of the multiplicative loop, the running value equals $\binom{n}{i}$, and in the modular loop the accumulators equal $\frac{n!}{(n-k)! \cdot i!}$ and $i!$ modulo $p$.
+:::
 
 ## Complexity analysis
 

@@ -91,13 +91,14 @@ A **set** stores distinct elements with membership testing. A **map** (or dictio
 
 **Hash-based** structures give $O(1)$ expected membership and lookup, with $O(n)$ worst case when every key collides. **Ordered** structures, usually balanced binary search trees, give $O(\log n)$ guaranteed lookup and additionally give you sorted iteration and the ability to ask for the successor of a key.
 
-<MathPanel type="definition" title="Hash table">
+::: math definition Hash table
 A hash table stores keys in an array of buckets. A hash function maps a
 key to a bucket index, and each bucket holds the keys that map to it,
 either as a linked list (chaining) or in a probe sequence that searches
 for a free slot (open addressing). The **load factor** is the ratio of
 the number of stored keys to the number of buckets.
-</MathPanel>
+:::
+
 
 The load factor drives everything. Chaining tolerates a load factor above one; open addressing needs the table to stay below one, typically around $0.7$, and resizes when it exceeds the threshold. A table that is resized halves the effective capacity temporarily, so the amortised cost of an insertion stays $O(1)$.
 
@@ -153,12 +154,13 @@ The operations:
 | Build from $n$ elements | $O(n)$      | sift down from the last internal node                  |
 | Change a key            | $O(\log n)$ | sift in the appropriate direction                      |
 
-<MathPanel type="invariant" title="Heap invariant">
+::: math invariant Heap invariant
 A binary heap stored in an array satisfies the heap property when, for
 every index $i$ with $2i + 1 < n$, the value at $i$ is at least the
 values at $2i + 1$ and $2i + 2$. The invariant is established by the
 sift-down operation, and it guarantees that the root is the maximum.
-</MathPanel>
+:::
+
 
 The $O(n)$ build is the surprise most people meet: heapifying an existing array bottom-up costs $O(n)$, not $O(n \log n)$, because most nodes are near the leaves and sift down only a short distance. The sum is $\sum_{h} \frac{n}{2^h} h = O(n)$.
 
@@ -210,13 +212,14 @@ The cost of every operation on a search tree is proportional to its height, $h$.
 | Sorted-array search tree | $h = n$                      | $O(n)$               |
 | Random insertion order   | $h = O(\log n)$ expected     | $O(\log n)$ expected |
 
-<MathPanel type="counterexample" title="A search tree can be a list">
+::: math counterexample A search tree can be a list
 Insert the keys $1, 2, 3, \dots, n$ into a binary search tree in that
 order. Every insertion goes to the right of the last node, so the tree
 becomes a path of height $n$. Searching it takes $O(n)$ time, which is
 no better than scanning an array, and the insertion order was a perfectly
 legal sequence of operations.
-</MathPanel>
+:::
+
 
 This is why the _balanced_ in balanced search tree matters. AVL trees keep the heights of the two subtrees within one of each other, and red-black trees keep the longest root-to-leaf path at most twice the shortest. Both guarantee $h = O(\log n)$.
 
@@ -314,12 +317,13 @@ There are two standard ways to store a graph in memory.
 
 **Adjacency matrix.** Store a table of $V \times V$ booleans or values. The memory is $O(V^2)$, and testing whether an edge exists costs $O(1)$.
 
-<MathPanel type="definition" title="Adjacency representations">
+::: math definition Adjacency representations
 An adjacency list stores, for every vertex $v$, the set of its
 neighbors. An adjacency matrix stores a table $M$ where $M[u][v]$ is
 the weight of the edge from $u$ to $v$, or a sentinel when there is no
 edge.
-</MathPanel>
+:::
+
 
 The choice is forced by the density of the graph.
 
@@ -408,12 +412,13 @@ The alternative is **disjoint set union**, which processes edges in any order an
 
 **Cycle detection** in an undirected graph uses depth-first search with parent tracking. When you encounter a visited neighbor that is not the parent of the current vertex, you have found a cycle. The parent exclusion is essential: without it, every edge back to your parent looks like a cycle, and the answer is always "yes".
 
-<MathPanel type="theorem" title="Cycle count in a forest">
+::: math theorem Cycle count in a forest
 In an undirected graph with $V$ vertices, $E$ edges and $C$ connected
 components, the graph is acyclic if and only if $E = V - C$. Each
 component of an acyclic graph is a tree, and a tree on $v$ vertices has
 $v - 1$ edges, so an acyclic graph has $V - C$ edges in total.
-</MathPanel>
+:::
+
 
 For **directed** graphs, cycle detection has a clean characterisation: a directed graph is acyclic exactly when a topological sort succeeds. The depth-first-search method, which colors vertices white, gray and black and reports a cycle when it finds a gray neighbor, is an alternative.
 

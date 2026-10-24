@@ -133,42 +133,29 @@ The two queries are then immediate.
 
 Let $T$ be a tree with vertex set $V$, rooted at a vertex $r$, and let $\operatorname{depth}(v)$ be the number of edges on the path from $r$ to $v$.
 
-<MathPanel type="definition" title="Definition">
-The **binary lifting table** is
-$\text{up}[k][v] = $ the ancestor of $v$ that lies $2^k$ edges above it, with
-the root declared to be its own ancestor. The table has
-$K = \lfloor \log_2 n \rfloor + 1$ rows, with $k$ running from $0$ to
-$K - 1$.
-</MathPanel>
+::: math definition Definition
+The **binary lifting table** is $\text{up}[k][v]$ is the ancestor of $v$ that lies $2^k$ edges above it, with the root declared to be its own ancestor. The table has $K = \lfloor \log_2 n \rfloor + 1$ rows, with $k$ running from $0$ to $K - 1$.
+:::
 
-<MathPanel type="definition" title="Definition">
-The **$k$-th ancestor** of a vertex $v$ is the ancestor of $v$ that lies $k$
-edges above it. It exists exactly when $k \le \operatorname{depth}(v)$.
-</MathPanel>
+::: math definition Definition
+The **$k$-th ancestor** of a vertex $v$ is the ancestor of $v$ that lies $k$ edges above it. It exists exactly when $k \le \operatorname{depth}(v)$.
+:::
 
-<MathPanel type="definition" title="Definition">
-The **level ancestor** of a vertex $v$ at level $d$ is the unique ancestor of
-$v$ whose depth is $d$. It exists exactly when
-$0 \le d \le \operatorname{depth}(v)$.
-</MathPanel>
+::: math definition Definition
+The **level ancestor** of a vertex $v$ at level $d$ is the unique ancestor of $v$ whose depth is $d$. It exists exactly when $0 \le d \le \operatorname{depth}(v)$.
+:::
 
-<MathPanel type="lemma" title="Lemma">
-For every $k$ and every vertex $v$, $\text{up}[k][v]$ is the ancestor of $v$
-that lies $2^k$ edges above it, where the root is its own ancestor.
-</MathPanel>
+::: math lemma Lemma
+For every $k$ and every vertex $v$, $\text{up}[k][v]$ is the ancestor of $v$ that lies $2^k$ edges above it, where the root is its own ancestor.
+:::
 
-<MathPanel type="lemma" title="Lemma">
-The table has $K = \lfloor \log_2 n \rfloor + 1$ rows because the greatest
-distance between two vertices of a tree with $n$ vertices is $n - 1$, and the
-greatest power of two that can appear in the binary representation of an
-integer at most $n - 1$ is at most $n - 1$ itself.
-</MathPanel>
+::: math lemma Lemma
+The table has $K = \lfloor \log_2 n \rfloor + 1$ rows because the greatest distance between two vertices of a tree with $n$ vertices is $n - 1$, and the greatest power of two that can appear in the binary representation of an integer at most $n - 1$ is at most $n - 1$ itself.
+:::
 
-<MathPanel type="lemma" title="Lemma">
-Let $v_0 = v$ and let $v_1, \ldots, v_t$ be obtained by moving $v_{i-1}$ to
-$\text{up}[j_i][v_{i-1}]$ for some indices $j_i$. Then the depth of $v_t$ is
-$\operatorname{depth}(v) - \sum_{i=1}^{t} 2^{j_i}$, clamped at zero.
-</MathPanel>
+::: math lemma Lemma
+Let $v_0 = v$ and let $v_1, \ldots, v_t$ be obtained by moving $v_{i-1}$ to $\text{up}[j_i][v_{i-1}]$ for some indices $j_i$. Then the depth of $v_t$ is $\operatorname{depth}(v) - \sum_{i=1}^{t} 2^{j_i}$, clamped at zero.
+:::
 
 ## Algorithm derivation
 
@@ -201,17 +188,13 @@ level_ancestor(v, d):
 
 Both updates are correct because the jumps compose and their total distance is the sum of the powers of two that were used, which the lemma records.
 
-<MathPanel type="invariant" title="Invariant">
-When the build reaches row $k$, row $k-1$ is complete and correct, and
-$\text{up}[k-1][v]$ is the ancestor of $v$ that lies $2^{k-1}$ edges above it
-for every vertex $v$.
-</MathPanel>
+::: math invariant Invariant
+When the build reaches row $k$, row $k-1$ is complete and correct, and $\text{up}[k-1][v]$ is the ancestor of $v$ that lies $2^{k-1}$ edges above it for every vertex $v$.
+:::
 
-<MathPanel type="invariant" title="Invariant">
-During a query, the accumulated lift is exactly the sum of the powers of two
-whose bits have been set so far, and the current vertex is the ancestor of the
-original vertex at distance that sum above it.
-</MathPanel>
+::: math invariant Invariant
+During a query, the accumulated lift is exactly the sum of the powers of two whose bits have been set so far, and the current vertex is the ancestor of the original vertex at distance that sum above it.
+:::
 
 ## Step-by-step execution
 
@@ -248,53 +231,35 @@ Now the level ancestor query for the pair $(4, 1)$, that is, the ancestor of ver
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
-The build produces a table in which $\text{up}[k][v]$ is the ancestor of $v$
-that lies $2^k$ edges above it.
-</MathPanel>
+::: math theorem Theorem
+The build produces a table in which $\text{up}[k][v]$ is the ancestor of $v$ that lies $2^k$ edges above it.
+:::
 
-<MathPanel type="proof" title="Proof">
-The claim is an induction on $k$. For $k = 0$, the entry is the parent of $v$,
-which is the ancestor one edge above it, and the root is its own parent by
-convention.
+::: math proof Proof
+The claim is an induction on $k$. For $k = 0$, the entry is the parent of $v$, which is the ancestor one edge above it, and the root is its own parent by convention.
 
 Suppose row $k - 1$ is correct. The ancestor of $v$ that lies $2^k$ edges above it is the ancestor of the ancestor of $v$ that lies $2^{k-1}$ edges above it, and that ancestor is the one that lies a further $2^{k-1}$ edges above it. The recurrence stores exactly that value, because $\text{up}[k-1][\text{up}[k-1][v]]$ is by the induction hypothesis the $2^{k-1}$-th ancestor of the $2^{k-1}$-th ancestor of $v$. If $v$ is close enough to the root that the jump would go past it, the root's self-ancestor property clamps the value at the root, which is the only sensible answer. So every entry is correct. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
-The query returns the $k$-th ancestor of the queried vertex, and the
-level-ancestor query returns the ancestor at the requested depth.
-</MathPanel>
+::: math theorem Theorem
+The query returns the $k$-th ancestor of the queried vertex, and the level-ancestor query returns the ancestor at the requested depth.
+:::
 
-<MathPanel type="proof" title="Proof">
-Let $v_0$ be the queried vertex and let $j_1, \ldots, j_t$ be the indices of
-the set bits of $k$, in the order the query takes them. The query replaces
-$v_{i-1}$ by $\text{up}[j_i][v_{i-1}]$, which by the table lemma is the
-ancestor of $v_{i-1}$ that lies $2^{j_i}$ edges above it. Since the
-ancestors of a vertex are totally ordered, the ancestor of $v_{i-1}$ at
-distance $2^{j_i}$ is also the ancestor of $v_0$ at distance
-$\sum_{s \le i} 2^{j_s}$. By induction on $i$, $v_i$ is the ancestor of $v_0$
-at distance $\sum_{s \le i} 2^{j_s}$ above it.
+::: math proof Proof
+Let $v_0$ be the queried vertex and let $j_1, \ldots, j_t$ be the indices of the set bits of $k$, in the order the query takes them. The query replaces $v_{i-1}$ by $\text{up}[j_i][v_{i-1}]$, which by the table lemma is the ancestor of $v_{i-1}$ that lies $2^{j_i}$ edges above it. Since the ancestors of a vertex are totally ordered, the ancestor of $v_{i-1}$ at distance $2^{j_i}$ is also the ancestor of $v_0$ at distance $\sum_{s \le i} 2^{j_s}$. By induction on $i$, $v_i$ is the ancestor of $v_0$ at distance $\sum_{s \le i} 2^{j_s}$ above it.
 
 The binary representation of $k$ is the sum of the powers of two corresponding to its set bits, so $\sum_{s=1}^{t} 2^{j_s} = k$. Hence $v_t$ is the ancestor of $v_0$ at distance $k$, which is the $k$-th ancestor.
 
 For the level ancestor, the ancestors of $v$ at the depths $\operatorname{depth}(v), \operatorname{depth}(v) - 1, \ldots, 0$ are exactly the $0$-th, $1$-th, $\ldots$, $\operatorname{depth}(v)$-th ancestors. The ancestor at depth $d$ is therefore the $\operatorname{depth}(v) - d$-th ancestor, and the query computes exactly that. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
-The table has $K = \lfloor \log_2 n \rfloor + 1$ rows, and that many rows are
-sufficient for every query the tree can produce.
-</MathPanel>
+::: math theorem Theorem
+The table has $K = \lfloor \log_2 n \rfloor + 1$ rows, and that many rows are sufficient for every query the tree can produce.
+:::
 
-<MathPanel type="proof" title="Proof">
-The greatest distance between two vertices of a tree with $n$ vertices is
-$n - 1$, so a query never asks for a climb longer than $n - 1$. The largest
-power of two that appears in the binary representation of an integer at most
-$n - 1$ is at most $n - 1$, and it is at most $2^{\lfloor \log_2 n \rfloor}$,
-which is the jump of the last row. So $K$ rows cover every query, and the
-largest jump the table offers is $2^{K-1} \ge n - 1$ when $n$ is a power of
-two, which is more than enough. $\square$
-</MathPanel>
+::: math proof Proof
+The greatest distance between two vertices of a tree with $n$ vertices is $n - 1$, so a query never asks for a climb longer than $n - 1$. The largest power of two that appears in the binary representation of an integer at most $n - 1$ is at most $n - 1$, and it is at most $2^{\lfloor \log_2 n \rfloor}$, which is the jump of the last row. So $K$ rows cover every query, and the largest jump the table offers is $2^{K-1} \ge n - 1$ when $n$ is a power of two, which is more than enough. $\square$
+:::
 
 ## Complexity analysis
 
@@ -306,10 +271,9 @@ two, which is more than enough. $\square$
 
 **Space: $O(n \log n)$** for the table, plus $O(n)$ for the depths and the traversal queue.
 
-<MathPanel type="complexity" title="Complexity">
-Binary lifting over a tree with $n$ vertices: $O(n \log n)$ time to build,
-$O(\log n)$ per query, and $O(n \log n)$ extra space.
-</MathPanel>
+::: math complexity Complexity
+Binary lifting over a tree with $n$ vertices: $O(n \log n)$ time to build, $O(\log n)$ per query, and $O(n \log n)$ extra space.
+:::
 
 The width of the entries matters, because the table is the largest object in the program. At $n = 200\,000$ there are $19$ rows, so $3.8$ million entries, which is about $15$ MB with 32-bit indices and $30$ MB with 64-bit indices. A table of distances instead of ancestor indices would cost $O(n^2)$ and is not an option.
 
@@ -344,14 +308,9 @@ The table is built with two loops and the query is a loop over the rows. Neither
 
 The failure mode is a crash rather than a wrong answer: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
-<MathPanel type="counterexample" title="Counterexample">
-A tree that is a chain on $10^6$ vertices, rooted at one end. The table is
-built correctly and every query is answered correctly, but the recursive
-traversal makes one nested call per vertex, so in C++ on Linux with an 8 MB
-stack and a frame of roughly 64 bytes the stack is exhausted after about
-$130\,000$ frames, and the program dies with a segmentation fault after
-building $13\%$ of the table. The iterative traversal finishes normally.
-</MathPanel>
+::: math counterexample Counterexample
+A tree that is a chain on $10^6$ vertices, rooted at one end. The table is built correctly and every query is answered correctly, but the recursive traversal makes one nested call per vertex, so in C++ on Linux with an 8 MB stack and a frame of roughly 64 bytes the stack is exhausted after about $130\,000$ frames, and the program dies with a segmentation fault after building $13\%$ of the table. The iterative traversal finishes normally.
+:::
 
 The iterative traversal needs the index of the next neighbor to examine, stored alongside the vertex, so that it can tell "just entered this vertex" from "returned to this vertex from a child". That distinction matters for the table as well, because the table is built from the parents and the parents come from the traversal.
 

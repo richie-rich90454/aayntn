@@ -41,14 +41,15 @@ C++17 is a larger language than Java in surface area and a less opinionated one 
 
 **Iteration and templates.** Java's enhanced for loop has one shape. C++17 has the range-based for loop, which is the direct equivalent, plus the whole template machinery, which is what makes the standard containers composable.
 
-<MathPanel type="counterexample" title="The 64-bit trap">
+::: math counterexample The 64-bit trap
 In C++, `long` is 64 bits on Linux and macOS when compiled with the
 LP64 model, and 32 bits on Windows with the LLP64 model. Code that
 computes `long long x = a * b;` where `a` and `b` are `int` is doubly
 wrong: the multiplication is performed in `int` and overflows before the
 result is widened. The fix is to make one operand a 64-bit type before
 multiplying.
-</MathPanel>
+:::
+
 
 **Worked example.** The same loop in both languages:
 

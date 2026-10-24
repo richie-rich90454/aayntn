@@ -138,35 +138,40 @@ With the array in hand, every range-query structure becomes available. A prefix-
 
 Let $T$ be a tree with vertex set $V$ rooted at a vertex $r$, and let $\text{ch}(v)$ be the set of children of $v$.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 Fix a depth-first search of $T$ from $r$ and a counter that starts at zero and
 is increased once for every vertex entered. The **entry position**
 $\text{tin}[v]$ is the counter value at the moment $v$ is entered, and the
 **exit position** $\text{tout}[v]$ is the counter value at the moment the
 search leaves $v$. The **flattened array** is
 $\text{order}[i] = \text{the vertex with entry position } i$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **subtree interval** of a vertex $v$ is the half-open interval
 $I(v) = [\text{tin}[v], \text{tout}[v])$ of positions in the flattened array.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma (the subtree interval property)">
+
+::: math lemma Lemma (the subtree interval property)
 For every vertex $v$, the set of vertices in the subtree of $v$ is exactly
 $\{ \text{order}[i] : \text{tin}[v] \le i < \text{tout}[v] \}$. In particular,
 the subtree has $\text{tout}[v] - \text{tin}[v]$ vertices.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 For every pair of vertices $u$ and $v$, $u$ is an ancestor of $v$ if and only
 if $\text{tin}[u] \le \text{tin}[v] < \text{tout}[u]$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 The entries of the flattened array are distinct, so the map from a position to
 a vertex and the map from a vertex to a position are inverse to each other.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -193,19 +198,21 @@ Two offline techniques turn the interval into an answer.
 
 The sweep is what makes the threshold version work. Sort the vertices by their value, and sort the queries by their threshold. Then activate the vertices in increasing order of value, adding each one at its entry position, and answer the queries in increasing order of threshold. When a query with threshold $k$ is answered, exactly the vertices with value at least $k$ are active.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 During the build, the vertices already numbered form a set $S$ such that the
 subtree of every vertex that has been entered but not yet left is exactly a
 contiguous suffix of the numbered positions, and the subtree of every vertex
 that has been left is exactly a contiguous block.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 During the Fenwick sweep, the Fenwick tree holds, at position $\text{tin}[u]$,
 the weight of the vertex $u$ if and only if $u$ has been activated, and zero
 otherwise. When a query with threshold $k$ is answered, the activated vertices
 are exactly those with value at least $k$.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -240,13 +247,14 @@ The sweep works because the active set only grows, and the queries are answered 
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The build produces an array and two bounds per vertex such that the subtree of
 every vertex $v$ is exactly the half-open interval
 $[\text{tin}[v], \text{tout}[v])$ of the array.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Fix a vertex $v$. The counter is increased exactly once per vertex, at the
 moment that vertex is entered, so the positions $0, 1, \ldots, n-1$ are
 assigned to the vertices in the order of their entry, and each vertex gets a
@@ -256,14 +264,16 @@ positions and vertices, and it is the inverse of the map $v \mapsto \text{tin}[v
 The search enters $v$ at the moment the counter is $\text{tin}[v]$. From that moment until the moment it leaves $v$, the search visits exactly the vertices in the subtree of $v$ and no others. To see the first part, the search leaves $v$ only after exploring every child of $v$, and by induction on the depth each child is explored exactly through its own subtree. To see the second part, the search never returns to $v$ once it has left it, because a vertex is expanded only once.
 
 The positions assigned during that period are therefore $\text{tin}[v], \text{tin}[v] + 1, \ldots, \text{tout}[v] - 1$, where $\text{tout}[v]$ is the counter value at the moment of leaving $v$, because the counter has been increased once for each of those vertices and not since. So the vertices of the subtree occupy exactly the interval $[\text{tin}[v], \text{tout}[v])$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The Fenwick sweep answers every query "how many vertices in the subtree of $v$
 satisfy the condition" correctly.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The queries are answered in non-decreasing order of their threshold. Before a
 query with threshold $k$ is answered, the sweep has activated every vertex
 whose value is at least $k$ and no vertex whose value is below $k$: the
@@ -272,7 +282,8 @@ activated exactly when the sweep reaches its value, which happens before the
 first query with a threshold at least that value.
 
 The Fenwick tree therefore holds, at position $\text{tin}[u]$, the weight of $u$ if $u$ satisfies the condition and zero otherwise. The range sum over $[\text{tin}[v], \text{tout}[v])$ is, by the subtree interval property, the sum of the weights of exactly the vertices in the subtree of $v$, which is the count the query asks for. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -284,12 +295,13 @@ The Fenwick tree therefore holds, at position $\text{tin}[u]$, the weight of $u$
 
 **Auxiliary space: $O(n)$** for the entry and exit bounds, the flattened array, the value array, and the Fenwick tree, plus $O(q)$ for the sorted queries.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Flattening a tree with $n$ vertices: $O(n)$ time and $O(n)$ space. Answering
 $q$ subtree queries with a threshold: $O((n + q) \log n)$ time with a Fenwick
 tree, or $O(n + q)$ when the query is a plain sum and a difference array
 suffices.
-</MathPanel>
+:::
+
 
 The difference-array case deserves the emphasis, because it is much faster than the Fenwick case and it is often the right answer. When the query asks for a sum over a subtree, the answer for **every** subtree is a prefix-sum computation on the flattened array, and it costs one linear pass. The Fenwick tree is needed only when the query has a threshold that is not known in advance, so the vertices cannot all be activated at once.
 
@@ -322,7 +334,7 @@ The flattening is produced by a depth-first search, and the search is the only p
 
 The failure mode is a crash rather than a wrong answer: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
-<MathPanel type="counterexample" title="Counterexample">
+::: math counterexample Counterexample
 A tree that is a path on $10^6$ vertices, rooted at one end. The flattening is
 trivially correct and the whole computation is linear, but the recursive search
 makes one nested call per vertex, so in C++ on Linux with an 8 MB stack and a
@@ -330,7 +342,8 @@ frame of roughly 64 bytes the stack is exhausted after about $130\,000$
 frames, and the program dies with a segmentation fault before it has numbered
 $13\%$ of the vertices. The iterative form, which keeps the current vertex and
 the index of the next child to explore on an explicit stack, finishes normally.
-</MathPanel>
+:::
+
 
 The iterative form needs one extra piece of state: the index of the next child to explore. Without it, the search cannot tell "just entered this vertex" from "returned from the first child", and the exit bound would be recorded too early.
 

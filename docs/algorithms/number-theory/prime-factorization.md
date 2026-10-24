@@ -132,16 +132,17 @@ The third insight is that **when many numbers are factored, the smallest prime f
 
 ## Formal model
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **prime** is an integer greater than one whose only positive divisors are
 $1$ and itself. The **prime factorization** of an integer $n > 1$ is the
 unique expression $n = p_1^{a_1} p_2^{a_2} \cdots p_k^{a_k}$ with distinct
 primes $p_1, \ldots, p_k$ and positive integers $a_1, \ldots, a_k$. The
 **divisor-count function** $\tau(n)$ is the number of positive divisors of
 $n$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **smallest prime factor** of an integer $m > 1$ is the least prime that
 divides $m$. The **sieve of smallest prime factors** is an array
 $\operatorname{spf}[1 \ldots N]$ with $\operatorname{spf}[m]$ equal to the
@@ -150,14 +151,16 @@ constructed by initializing $\operatorname{spf}[m] = m$ for all $m$, and
 then, for each prime $p$ in increasing order up to $\sqrt{N}$, setting
 $\operatorname{spf}[m] = p$ for the multiples $m$ of $p$ with
 $p^2 \le m \le N$ whose entry is still $m$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 If $n = p_1^{a_1} \cdots p_k^{a_k}$ is the prime factorization of $n$, then
 $\tau(n) = \prod_{i=1}^{k} (a_i + 1)$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Every positive divisor $d$ of $n$ has a unique factorization
 $d = p_1^{b_1} \cdots p_k^{b_k}$ with $0 \le b_i \le a_i$, because the
 exponents of a divisor cannot exceed the exponents of $n$ and the
@@ -166,9 +169,10 @@ $(b_1, \ldots, b_k)$ is therefore a bijection between the divisors of $n$
 and the set of tuples with $b_i \in \{0, 1, \ldots, a_i\}$. The number of
 such tuples is $\prod_{i=1}^{k}(a_i + 1)$, since the choices are
 independent. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 In the sieve, after the primes up to $p$ have been processed, the entry
 $\operatorname{spf}[m]$ is $m$ when $m$ has no prime factor at most $p$, and
 otherwise it is the smallest prime factor of $m$. The invariant holds
@@ -178,7 +182,8 @@ upward are marked, and only those whose entry is still unmarked, so a
 number is marked by the first prime that divides it, which is its smallest
 prime factor. The numbers below $p^2$ are not marked, because they have a
 prime factor below $p$ and were marked earlier.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -251,14 +256,15 @@ $$
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The trial division algorithm returns the prime factorization of its input.
 The sieve computes the smallest prime factor of every integer up to its
 limit. The divisor count computed from a prime factorization is the number
 of positive divisors of the number.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 **Trial division.** The loop maintains the invariant that the recorded
 factors multiply to $n_{\text{original}} / n$, and that $n$ has no prime
 factor smaller than the current trial divisor $d$. The invariant holds
@@ -279,7 +285,8 @@ complete prime factorization.
 **The divisor count.** The lemma proves it.
 
 **The sieve-based factorization.** The walk divides $n$ by $\operatorname{spf}[n]$, which is a prime factor of $n$, until the quotient is $1$. The recorded factors multiply to the original $n$, and every one of them is prime, so they are the prime factorization. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

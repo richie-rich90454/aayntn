@@ -124,34 +124,39 @@ The second insight is the one that distinguishes the linear sieve. Every composi
 
 Let $n$ be a positive integer, and let the numbers $2, 3, \ldots, n$ be the objects the sieve ranges over.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 The **smallest prime factor** of an integer $m \ge 2$ is the smallest prime
 $p$ that divides $m$. It is written $\operatorname{spf}(m)$, and
 $\operatorname{spf}(m) = m$ exactly when $m$ is prime.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **sieve of Eratosthenes** produces the array of smallest prime factors
 by, for each prime $p$ in increasing order, writing $\operatorname{spf}(m)
 = p$ for every multiple $m$ of $p$ that has not been marked yet.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Every composite number $m$ has a prime factor at most $\sqrt m$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Write $m = a \cdot b$ with $a \le b$ and $a, b \ge 2$. Then
 $a^2 \le a \cdot b = m$, so $a \le \sqrt m$. The number $a$ has a prime
 factor $p$, and $p \le a \le \sqrt m$, and $p$ divides $m$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 In the sieve of Eratosthenes, at the moment the outer loop reaches the
 prime $p$, every composite number whose smallest prime factor is at most
 $p$ has been marked, and no prime has been marked. The first prime that
 marks a number is therefore its smallest prime factor.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -200,13 +205,14 @@ Two details carry the whole technique.
 
 Because the loop over the primes runs at most $\operatorname{spf}(i)$ times for each $i$, and the sum of the smallest prime factors over all $i$ is $O(n)$, the total number of inner iterations is $O(n)$.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 In the linear sieve, when the outer loop reaches the number $i$, the array
 holds the smallest prime factor of every number at most $i$, and the list
 holds exactly the primes at most $i$. Every composite number at most $i$
 has been generated exactly once, by the multiplication of its quotient by
 its smallest prime factor.
-</MathPanel>
+:::
+
 
 ### The amortization of the linear sieve
 
@@ -250,13 +256,14 @@ Every composite from $2$ to $12$ was generated exactly once: $4 = 2 \cdot 2$, $6
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The sieve of Eratosthenes computes the smallest prime factor of every
 number up to $n$, and the primes are exactly the numbers whose smallest
 prime factor is themselves.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 **No prime is marked.** A number is marked only if it is a multiple of
 some prime $p$ with $p \ge 2$, and it is marked only if it has not been
 marked before. A prime $q$ is a multiple of $p$ only when $p = q$, so the
@@ -266,14 +273,16 @@ $q$ starts at $q \cdot q > q$. So a prime is never marked.
 **Every composite is marked.** Let $m$ be composite and let $p$ be its smallest prime factor. By the lemma, $p \le \sqrt m$, so the outer loop reaches $p$. The inner loop for $p$ starts at $p \cdot p \le m$ and steps by $p$, so it reaches $m$ and marks it, unless $m$ was already marked, in which case it is marked anyway.
 
 **The mark is the smallest prime factor.** The number $m$ is first marked by the smallest prime $q$ that divides it and satisfies $q \cdot q \le m$. Every prime $q' < q$ that divides $m$ has $q' \le q \le \sqrt m$, so $q' \cdot q' \le m$, and the inner loop for $q'$ would have marked $m$ earlier. So the first prime to mark $m$ is its smallest prime factor. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The linear sieve computes the smallest prime factor of every number up to
 $n$, in $O(n)$ time.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 **The values written are correct.** The algorithm writes
 $\operatorname{spf}(p \cdot i) = p$ only when $p \le \operatorname{spf}(i)$.
 Since $p$ divides $p \cdot i$ and every prime factor of $i$ is at least
@@ -285,13 +294,15 @@ exactly $p$. So every value written is correct.
 **Each composite is written once.** The number $m$ is written only by the pair $(i, p)$ with $i = m / p$ and $p$ a prime with $p \le \operatorname{spf}(i)$. If $m$ were written by two different pairs, then $m$ would have two distinct prime factors $p < q$ both of which satisfy $p \le \operatorname{spf}(m / p)$ and $q \le \operatorname{spf}(m / q)$. But $p < q$ and $p$ divides $m$ imply $p$ divides $m / q$ when $q$ divides $m$ and $p \ne q$, so $\operatorname{spf}(m/q) \le p < q$, a contradiction for the pair $(m / q, q)$. So $m$ is written once.
 
 **The time bound.** Each iteration of the inner loop writes a distinct composite, and there are at most $n$ composites, so the inner loop performs at most $n$ iterations in total. The outer loop performs $n$ iterations. The total is $O(n)$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 After the linear sieve has processed the number $i$, the array holds the
 smallest prime factor of every number at most $i$, and every composite
 number at most $i$ was marked exactly once.
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

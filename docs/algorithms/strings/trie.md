@@ -123,41 +123,46 @@ The second property is what separates the trie from the sorted array, and the fi
 
 Let $\Sigma$ be the alphabet, and let $W$ be the set of stored words.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **trie** over an alphabet $\Sigma$ is a rooted tree in which every edge
 is labeled with a character of $\Sigma$, such that no node has two
 children with the same label. The **key** of a node is the string spelled
 by the path from the root to that node. A node is **terminal** if some
 stored word ends there, and **the words below a node** are the stored
 words whose key has the node's key as a prefix.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **word count** of a node is the number of stored words in its subtree.
 It equals $1$ for a terminal node and the sum of the word counts of the
 children otherwise.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 A lookup of a word $w$ succeeds if and only if the path labeled by $w$
 exists and ends at a terminal node.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 By the definition of the trie, the path labeled by $w$ exists exactly when
 every prefix of $w$ is the key of some node, which is exactly the
 condition that $w$ is a prefix of some stored word. The path ends at a
 terminal node exactly when some stored word equals $w$. So the lookup
 succeeds exactly when $w$ is one of the stored words. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At every moment, the set of terminal nodes is exactly the set of stored
 words, and the word count of every node is the number of stored words in
 its subtree. Inserting a word marks one node as terminal and increases
 the word count of every node on the path to it by one, so the invariant
 is preserved.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -260,13 +265,14 @@ The compressed form of this trie has three nodes: the root, the node whose key i
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 After any sequence of insertions, the terminal nodes of the trie are
 exactly the inserted words, and the word count of every node is the number
 of inserted words in its subtree.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The proof is an induction on the number of insertions.
 
 **Base case.** The empty trie has one node, the root, which is not terminal, and its word count is $0$. There are no inserted words, so both claims hold.
@@ -274,33 +280,38 @@ The proof is an induction on the number of insertions.
 **Inductive step.** Suppose the claims hold before an insertion of the word $w$. The insertion walks the path labeled by $w$, creating any node that does not exist, and marks the last node of the path as terminal. The path exists exactly when every prefix of $w$ is the key of a node, so after the insertion the terminal nodes are exactly the previously inserted words together with $w$.
 
 The word count of a node changes only if the node is on the path, and for those nodes the count increases by exactly one, which is correct because the new word $w$ is in the subtree of every node on the path and in no other subtree. For a node off the path, neither the set of terminal nodes below it nor the set of words below it changes, so the count stays correct. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The prefix query returns the number of stored words that begin with the
 given prefix.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 If the walk fails, some prefix of the query is not the key of any node,
 and by the lemma no stored word has that prefix, so the answer is $0$.
 
 If the walk succeeds and ends at the node $v$, then $v$'s key is the query, so the stored words that begin with the query are exactly the stored words in the subtree of $v$, whose number is the word count of $v$ by the previous theorem. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 A lookup of a word of length $L$ takes $O(L)$ time, and a prefix query
 for a prefix of length $L$ takes $O(L)$ time, independently of the number
 of stored words.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The walk follows one edge per character of the key, so it performs $L$
 steps. Each step is a lookup in the children container of a node, which
 costs $O(1)$ for a dense array, $O(\log |\Sigma|)$ for a sorted vector,
 and $O(1)$ expected for a hash map. No stored word is examined, so the
 cost does not depend on the number of words. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

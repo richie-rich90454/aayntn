@@ -115,7 +115,7 @@ That truncation is the only place the algorithm does real work, and it is bounde
 
 Let $s$ be a string of length $n$ over an arbitrary alphabet.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 The **Z-array** of a string $s$ of length $n$ is the array $z$ of length
 $n$ with $z[0] = n$ and, for $1 \le i < n$,
 $$
@@ -124,31 +124,35 @@ $$
 The **Z-box** at a moment of the algorithm is a range $[l, r)$ with
 $l < r$ such that $s[l \dots r)$ equals $s[0 \dots r-l)$, that is,
 $z[l] = r - l$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $[l, r)$ be a Z-box and let $l < i < r$. Then
 $$
 z[i] \ge \min\bigl(z[i-l],\; r - i\bigr).
 $$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The box says $s[l \dots r) = s[0 \dots r-l)$, so for every $j$ with
 $0 \le j < r - i$, the characters $s[l + j]$ and $s[j]$ are equal.
 
 Write $t = i - l$, so that $0 < t < r - l$. The equality above gives $s[i + j] = s[l + (t + j)] = s[t + j]$ for every $j$ with $0 \le j < r - l - t = r - i$. So the first $r - i$ characters of the suffix at $i$ match the first $r - i$ characters of the suffix at $t = i - l$.
 
 If $z[t] \ge r - i$, that gives $z[i] \ge r - i$ directly. Otherwise $z[t] < r - i$, and the match at $t$ has length $z[t]$, so $s[t + j] = s[j]$ for every $j < z[t]$, and therefore $s[i + j] = s[j]$ for every $j < z[t]$, which gives $z[i] \ge z[t] = \min(z[t], r-i)$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At the start of every iteration, the range $[l, r)$ is a Z-box, so
 $z[l] = r - l$, and every $z[j]$ already computed for $l < j < i$ holds its
 final value. The algorithm never decreases $r$, and the value of $r$ is
 the sum of the lengths of all the character comparisons that were not
 copied.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -218,11 +222,12 @@ The answer checks out by hand. The suffix at position $2$ is `acaba` and the str
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The algorithm computes the Z array of the string correctly.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The proof is an induction on the position $i$.
 
 **The copy is a valid lower bound.** Suppose $i < r$. The box $[l, r)$ is a Z-box, so by the lemma $z[i] \ge \min(z[i-l], r-i)$. The algorithm assigns exactly this value to $z[i]$, so the value it starts from is a lower bound on the true one, and it never exceeds it.
@@ -232,13 +237,15 @@ The proof is an induction on the position $i$.
 **The box is maintained.** The algorithm sets the box to $[i, i + z[i])$ whenever the match reaches past the old right end, and $z[i]$ was just shown to be correct, so the new range is a Z-box. When the match does not reach past the old right end, the box is left alone and remains a Z-box.
 
 **Nothing is lost.** The induction hypothesis says the Z values before $i$ are correct, and the copy uses $z[i-l]$ with $i - l < i$, which is one of them. The proof closes. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The algorithm performs $O(n)$ character comparisons.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Every comparison that fails is the last comparison of its position, so
 there are at most $n$ of them. Every comparison that succeeds is part of
 the extension loop at some position, and it advances the right end of the
@@ -246,7 +253,8 @@ match at that position by one. After the extension loop, the algorithm
 sets $r$ to $i + z[i]$ if that is larger than the old $r$. The value $r$
 never decreases and never exceeds $n$, so the total number of successful
 comparisons is at most $n$. The total is therefore at most $2n$. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

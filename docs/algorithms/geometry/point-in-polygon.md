@@ -141,16 +141,17 @@ The third insight is that **the boundary is a different question and needs a dif
 
 Let $P$ be a polygon with vertices $v_0, v_1, \ldots, v_{n-1}$ in order, and let $p$ be a query point.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 The polygon $P$ is **simple** when its boundary is a closed curve that does
 not cross itself. A point $p$ is **strictly inside** $P$ when a small disk
 around $p$ is contained in the interior of $P$, **on the boundary** when
 $p$ lies on one of the edges, and **outside** otherwise. The **crossing
 number** of $p$ with respect to $P$ is the number of times the ray
 $\{(p_x + t, p_y) : t > 0\}$ meets the boundary of $P$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 For points $a, b, c$, the **orientation test** is
 $$
 \operatorname{cross}(a, b, c) = (b_x - a_x)(c_y - a_y) - (b_y - a_y)(c_x - a_x).
@@ -158,18 +159,20 @@ $$
 It is positive when $c$ is to the left of the directed line from $a$ to
 $b$, negative when $c$ is to the right, and zero when the three points are
 collinear.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $a$ and $b$ be the endpoints of an edge and let $p$ not lie on the
 line through them. If the edge crosses the horizontal line through $p$ and
 $x_{\text{int}}$ is the $x$-coordinate of the crossing, then
 $$
 (x_{\text{int}} - p_x) \cdot (b_y - a_y) = \operatorname{cross}(a, b, p).
 $$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The crossing point is $a + t(b - a)$ where
 $t = \frac{p_y - a_y}{b_y - a_y}$, so
 $x_{\text{int}} = a_x + t(b_x - a_x)$. Then
@@ -179,16 +182,18 @@ $$
 = (b_x - a_x)(p_y - a_y) - (b_y - a_y)(p_x - a_x),
 $$
 which is the cross product. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 After the loop has processed the first $j$ edges, the variable `crossings`
 equals the number of those edges that cross the ray from $p$ to the right.
 Each edge either crosses the line through $p$ or does not, and in the first
 case the lemma decides whether it also crosses to the right of $p$. The
 invariant is preserved by each iteration, and the parity of `crossings` at
 the end is the crossing number of $p$ with respect to $P$.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -237,13 +242,14 @@ The point is inside even though the "left of every edge" test would call it outs
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The algorithm reports `boundary` exactly when the query point lies on the
 boundary of the polygon, and reports `inside` exactly when the point lies
 strictly inside it, for every simple polygon and every query point.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 **The boundary.** The point $p$ lies on the boundary exactly when it lies
 on one of the edges. The point lies on the segment from $a$ to $b$ exactly
 when it is collinear with $a$ and $b$ and it is between them, and being
@@ -255,7 +261,8 @@ box test gives the between-ness, so the boundary answer is exact.
 **The crossing count.** Consider one edge from $a$ to $b$. The edge meets the horizontal line through $p$ if and only if $a$ and $b$ are on opposite sides of it, and the half-open test $(a_y > p_y) \ne (b_y > p_y)$ is exactly that condition, with the half-open convention ensuring that a vertex exactly at height $p_y$ is counted once. When the edge meets the line, the lemma gives $(x_{\text{int}} - p_x)(b_y - a_y) = \operatorname{cross}(a, b, p)$, so the crossing is to the right of $p$ exactly when the cross product and $b_y - a_y$ have the same sign, which is the test $(c > 0) == (b_y > a_y)$ since neither is zero when $p$ is not on the edge. The loop therefore counts exactly the edges that cross the ray, and the invariant holds.
 
 **The parity.** The polygon is simple, so its boundary is a closed curve and the interior of the polygon is a single connected region. The ray from $p$ to the right starts at $p$ and ends outside the polygon, since the polygon is bounded. Each crossing moves the ray between the interior and the exterior, and the ray cannot cross the boundary at a place where it touches it and turns back, because the ray is a straight line and the boundary of a simple polygon is a closed curve, so the crossings are transversal except at the finitely many vertices, which the half-open convention handles exactly once each. Hence the number of crossings is odd when $p$ is inside and even when $p$ is outside. The algorithm reports `inside` exactly when the count is odd. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

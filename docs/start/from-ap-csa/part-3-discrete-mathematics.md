@@ -46,13 +46,14 @@ Three properties classify functions:
 - **Surjective** (onto): every element of $B$ is the image of some element of $A$. Then $|A| \ge |B|$.
 - **Bijective**: both, which forces $|A| = |B|$.
 
-<MathPanel type="definition" title="Function">
+::: math definition Function
 A function $f : A \to B$ is a relation in which every $a \in A$ is
 associated with exactly one $f(a) \in B$. The set $A$ is the domain, $B$
 is the codomain, and $f(A) \subseteq B$ is the image. A function is
 injective when $f(a) = f(a')$ implies $a = a'$, and surjective when
 $f(A) = B$.
-</MathPanel>
+:::
+
 
 **Why it matters.** Modeling a problem as a function is the central skill. A disjoint set union maintains a function from each element to the representative of its component. A hash table maintains a function from each key to the bucket that key lands in, and that function is generally _not_ injective, which is exactly why a hash table can suffer collisions. A graph is a relation, and a directed graph is a relation that need not be a function.
 
@@ -94,10 +95,11 @@ $f(A) = B$.
 
 A statement $P \to Q$ reads "if $P$ then $Q$". It is _false_ only in one case: when $P$ is true and $Q$ is false.
 
-<MathPanel type="definition" title="Implication">
+::: math definition Implication
 $P \to Q$ is false exactly when $P$ is true and $Q$ is false. In every
 other case it is true.
-</MathPanel>
+:::
+
 
 From an implication you can form four related statements:
 
@@ -110,13 +112,14 @@ From an implication you can form four related statements:
 
 The **contrapositive** is always logically equivalent to the original implication. The converse is not: it happens to be equivalent for some statements and not for others, and the difference is exactly the kind of mistake that appears in a competition proof.
 
-<MathPanel type="counterexample" title="The converse need not hold">
+::: math counterexample The converse need not hold
 The statement "if $n > 2$ then $n$ is composite" is false, because $5 >
 2$ and $5$ is prime. Its converse, "if $n$ is composite then $n > 2$",
 is true for every positive composite integer. So the implication and its
 converse have different truth values, and an argument that swaps them is
 invalid.
-</MathPanel>
+:::
+
 
 Two statements are **logically equivalent** when they have the same truth value for every assignment of truth values to their atoms. The equivalences you will use constantly are:
 
@@ -181,12 +184,13 @@ $$
 \end{aligned}
 $$
 
-<MathPanel type="definition" title="Negating a quantified statement">
+::: math definition Negating a quantified statement
 The negation of a universally quantified statement is an existentially
 quantified statement, and the negation of an existentially quantified
 statement is a universally quantified statement. In both cases the
 predicate is negated as well.
-</MathPanel>
+:::
+
 
 **Why it matters.** Contest specifications are quantified statements. "Your program must print the correct answer for every valid input" is a universal claim, and a single counterexample refutes it. That asymmetry is the whole basis of the counterexample method in module 6.5, and it is also why a problem saying "find an input for which your program fails" is asking for one example, not a family.
 
@@ -227,12 +231,13 @@ predicate is negated as well.
 
 Induction is the method of proof for statements indexed by the natural numbers.
 
-<MathPanel type="theorem" title="Principle of mathematical induction">
+::: math theorem Principle of mathematical induction
 Let $P(n)$ be a statement about the natural numbers. If there is an
 integer $n_0$ such that $P(n_0)$ holds, and for every $k \ge n_0$ the
 implication $P(k) \Rightarrow P(k+1)$ holds, then $P(n)$ holds for every
 $n \ge n_0$.
-</MathPanel>
+:::
+
 
 The proof has two parts, and the second part must use the _general_ statement $P(k)$, not a special case. The version where the step assumes $P(j)$ for every $j \le k$ is _strong_ induction, and it is occasionally more convenient.
 
@@ -288,12 +293,13 @@ A **loop invariant** is a property that is true immediately before and immediate
 2. **Maintenance.** If the invariant holds before an iteration, it holds after it.
 3. **Termination.** When the loop exits, the invariant plus the exit condition give the postcondition.
 
-<MathPanel type="invariant" title="Loop invariant">
+::: math invariant Loop invariant
 A loop invariant is a statement $I$ about the program state such that
 $I$ holds before the loop, $I$ is preserved by each iteration, and $I$
 together with the negation of the loop condition implies the desired
 postcondition.
-</MathPanel>
+:::
+
 
 **Proof by contradiction** (reductio ad absurdum) assumes the negation of what you want and derives something impossible: a contradiction with an assumption, with the laws of arithmetic, or with a previously proved theorem.
 
@@ -336,12 +342,13 @@ A contradiction proof that binary search terminates: suppose it did not. Then so
 
 The summation notation $\sum_{i=a}^{b} f(i)$ means $f(a) + f(a+1) + \dots + f(b)$. It is the bridge between a formula and a loop, and it is how you count the work a nested loop performs.
 
-<MathPanel type="theorem" title="Arithmetic series">
+::: math theorem Arithmetic series
 For every $n \ge 1$,
 $$
 \sum_{i=1}^{n} i = \frac{n(n+1)}{2}.
 $$
-</MathPanel>
+:::
+
 
 _Proof._ Add the sum to its reverse. The sum is $1 + 2 + 3 + \dots + n$ and the reverse is $n + (n-1) + \dots + 1$. Adding them term by term pairs $1$ with $n$, $2$ with $n-1$, and so on: each of the $n$ pairs sums to $n+1$, so $2\sum_{i=1}^{n} i = n(n+1)$, which gives the result. _End of proof._
 
@@ -471,13 +478,14 @@ The factorial $n! = n \cdot (n-1) \cdots 1$ counts the orderings of $n$ distinct
 
 The **binomial coefficient** $\binom{n}{k}$ counts the $k$-element subsets of an $n$-element set. It satisfies the recurrences that make it computable by dynamic programming.
 
-<MathPanel type="theorem" title="Pascal's identity">
+::: math theorem Pascal's identity
 For $1 \le k \le n$,
 $$
 \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k},
 $$
 with $\binom{n}{0} = \binom{n}{n} = 1$.
-</MathPanel>
+:::
+
 
 _Proof._ Partition the $k$-element subsets of an $n$-element set by whether they contain a fixed element $x$. Those that do are in bijection with the $(k-1)$-element subsets of the remaining $n-1$ elements, giving $\binom{n-1}{k-1}$. Those that do not are in bijection with the $k$-element subsets of the remaining $n-1$ elements, giving $\binom{n-1}{k}$. The two classes are disjoint and exhaustive, so their sizes add. _End of proof._
 
@@ -545,11 +553,12 @@ The `//` is exact at every step because $\binom{n}{i+1}$ is always an integer. W
 
 Modular arithmetic is arithmetic in the _residues_ of a division. We write $a \equiv b \pmod m$ when $m$ divides $a - b$. The residue classes modulo $m$ form a ring, and the addition and multiplication tables of that ring behave like the ordinary ones.
 
-<MathPanel type="definition" title="Modular inverse">
+::: math definition Modular inverse
 Let $m > 1$ and suppose $\gcd(a, m) = 1$. Then there is an integer $b$
 such that $ab \equiv 1 \pmod m$, called the multiplicative inverse of
 $a$ modulo $m$. It exists exactly when $a$ and $m$ are coprime.
-</MathPanel>
+:::
+
 
 Because the modulus lets you reduce after every operation, intermediate values stay small: with a modulus of $10^9 + 7$, every value you ever hold is below $10^9 + 7$, which fits comfortably in a 64-bit integer.
 
@@ -625,12 +634,13 @@ $$
 
 The Euclidean algorithm computes the gcd by repeatedly replacing the larger argument with the remainder.
 
-<MathPanel type="lemma" title="Euclid's step">
+::: math lemma Euclid's step
 For integers $a \ge b > 0$,
 $$
 \gcd(a, b) = \gcd(b, a \bmod b).
 $$
-</MathPanel>
+:::
+
 
 _Proof._ Write $a = qb + r$ with $0 \le r < b$. Any common divisor of $a$ and $b$ divides $a - qb = r$, and any common divisor of $b$ and $r$ divides $qb + r = a$. So the two pairs have exactly the same common divisors, and in particular the same greatest common divisor. _End of proof._
 
@@ -640,9 +650,10 @@ Each step reduces the larger argument to less than half of itself, so the algori
 
 The **sieve of Eratosthenes** marks the multiples of every prime up to $n$, giving $O(n \log \log n)$ time and $O(n)$ space, and it produces every prime up to $n$ at once. Trial division by primes up to $\sqrt n$ is $O(\sqrt n)$ per primality test.
 
-<MathPanel type="theorem" title="Smallest prime factor">
+::: math theorem Smallest prime factor
 If $n$ is composite then $n$ has a prime factor at most $\sqrt n$.
-</MathPanel>
+:::
+
 
 _Proof._ Suppose every prime factor of $n$ exceeded $\sqrt n$. Then $n$ would be a product of at least two primes, each exceeding $\sqrt n$, so $n > (\sqrt n)^2 = n$, a contradiction. _End of proof._
 
@@ -698,26 +709,28 @@ The inner loop starts at $p^2$ rather than $p$ because the smaller multiples of 
 
 A **sample space** is the set of all possible outcomes of an experiment, and an **event** is a subset of it. The probability of an event is its size divided by the size of the sample space, when the space is finite and the outcomes are equally likely.
 
-<MathPanel type="definition" title="Expected value">
+::: math definition Expected value
 For a random variable $X$ taking values in a finite set, the expected
 value is
 $$
 \mathbb{E}[X] = \sum_x x \cdot \Pr[X = x].
 $$
-</MathPanel>
+:::
+
 
 The expected value is a weighted average, so it lies between the smallest and largest possible values of $X$. It is _not_ the most likely value, and it need not be an achievable value at all: the expected number of heads in one fair coin flip is $\frac{1}{2}$.
 
 **Linearity of expectation** is the workhorse.
 
-<MathPanel type="lemma" title="Linearity of expectation">
+::: math lemma Linearity of expectation
 For random variables $X_1, \dots, X_k$ and coefficients
 $a_1, \dots, a_k$,
 $$
 \mathbb{E}\left[\sum_{i=1}^{k} a_i X_i\right] = \sum_{i=1}^{k} a_i\, \mathbb{E}[X_i].
 $$
 No independence assumption is needed.
-</MathPanel>
+:::
+
 
 _Proof._ By the definition of expectation, $\mathbb{E}[Y] = \sum_y y \Pr[Y = y]$; expand $Y = \sum_i a_i X_i$ by the definition of a sum of random variables and group the terms by $i$. Each group contributes $a_i \mathbb{E}[X_i]$. Independence would be needed to factor $\Pr[X = x, X' = x']$, and the proof never does. _End of proof._
 
@@ -763,11 +776,12 @@ _Proof._ By the definition of expectation, $\mathbb{E}[Y] = \sum_y y \Pr[Y = y]$
 
 **The pigeonhole principle** is the most frequently used theorem in competition mathematics, and it is worth stating precisely.
 
-<MathPanel type="theorem" title="Pigeonhole principle">
+::: math theorem Pigeonhole principle
 If $n + 1$ objects are placed into $n$ boxes, then at least one box
 contains at least two objects. More generally, if $n$ objects are placed
 into $k$ boxes, some box contains at least $\lceil n/k \rceil$ objects.
-</MathPanel>
+:::
+
 
 _Proof._ Suppose every box contained at most one object. Then the boxes would hold at most $n$ objects in total, contradicting the placement of $n+1$. For the general form, suppose every box held at most $\lceil n/k \rceil - 1$ objects; then the total capacity would be $k(\lceil n/k \rceil - 1) < n$, a contradiction. _End of proof._
 

@@ -136,48 +136,54 @@ The root is a special case, because the root has no ancestor. A root with two or
 
 Let $G = (V, E)$ be an undirected graph.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 For a vertex $v$, let $G - v$ be the graph obtained by deleting $v$ and every
 edge incident to it. The vertex $v$ is an **articulation point** of $G$ if the
 number of connected components of $G - v$ is strictly greater than the number
 of connected components of $G$. It is also called a cut vertex.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 Fix a depth-first search of $G$ with a counter that starts at zero. The
 **discovery time** $\text{disc}[v]$ is the counter value when $v$ is first
 visited. The **low link** $\text{low}[v]$ is the smallest discovery time
 reachable from $v$ by a path that goes down zero or more tree edges of the
 search and then uses at most one edge from a vertex to one of its proper
 ancestors.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 An edge $\{u, w\}$ examined while $u$ is being expanded is a **back edge** if
 $w$ is an ancestor of $u$ in the search tree and $w$ is not the parent of $u$.
 In an undirected graph every edge that is not a tree edge is a back edge in
 exactly one direction.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $v$ be a vertex that is not a root of the search, and let $u$ be a child
 of $v$ in the search tree. Then the subtree of $u$ is connected to the
 vertices outside the subtree of $v$ without passing through $v$ if and only if
 $\text{low}[u] < \text{disc}[v]$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $r$ be a root of the search. Then $r$ is an articulation point if and
 only if it has at least two children in the search tree.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $v$ be a vertex and let $c_1, \ldots, c_k$ be its children in the search
 tree. Then the number of connected components of $G - v$ is $k$ if $v$ is not a
 root and every child $c_i$ satisfies $\text{low}[c_i] \ge \text{disc}[v]$, and
 is at most $k$ otherwise. A root contributes $k - 1$ instead, since one of its
 child subtrees is the rest of the component.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -200,20 +206,22 @@ else:
 
 The update is correct because the three terms of the low link are exhaustive: the smallest discovery time reachable from $v$ is either the vertex $v$ itself, or lies in one of its child subtrees, or is reached by a single back edge out of $v$. There is no other way out of the subtree, because every edge leaving the subtree of a child goes to an ancestor of $v$.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 When the search enters a vertex $v$, $\text{low}[v] = \text{disc}[v]$, and
 $\text{low}[v]$ is the smallest discovery time reachable from $v$ by descending
 tree edges and taking at most one back edge. When the search leaves $v$, this
 value has been minimized over every child subtree and every back edge out of
 $v$, and it is final.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 When the search leaves a non-root vertex $v$, the flag of $v$ is set exactly
 when the subtree of some child of $v$ has no route to a strict ancestor of
 $v$. Such a subtree is disconnected from the rest of the graph by the removal
 of $v$.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -239,11 +247,12 @@ Now add a second component: the path $6-7-8$. The search restarts at $6$. Vertex
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The algorithm marks exactly the articulation points of the graph.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 First the low link. We show that when the search leaves a vertex $v$,
 $\text{low}[v]$ is the smallest discovery time reachable from $v$ by descending
 tree edges and then taking at most one back edge.
@@ -255,7 +264,8 @@ Now a non-root vertex $v$ with a child $u$. By the lemma, the subtree of $u$ sur
 Now the root $r$ of a search tree. The child subtrees of $r$ are pairwise disconnected except through $r$, because in an undirected graph every non-tree edge joins a vertex to one of its ancestors, and no ancestor of $r$ exists. Removing $r$ therefore leaves exactly one component per child subtree, so the component count increases precisely when there are at least two children. The algorithm applies exactly that test.
 
 Finally, every vertex belongs to exactly one search tree, and the outer loop starts one search per connected component, so every vertex is tested by exactly one of the two rules above, and the rule that applies to it is the right one. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -263,11 +273,12 @@ Finally, every vertex belongs to exactly one search tree, and the outer loop sta
 
 **Auxiliary space: $O(V)$** beyond the adjacency list. The three arrays (discovery times, low links, and the flags) hold one entry per vertex. The recursion stack holds one frame per vertex on the current path, which is also $O(V)$; an iterative implementation replaces it with an explicit stack of the same size.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Articulation points in an undirected graph with $V$ vertices and $E$ edges:
 time $O(V + E)$, auxiliary space $O(V)$ beyond the adjacency list. One
 depth-first search answers the question for every connected component at once.
-</MathPanel>
+:::
+
 
 The bound is tight for a different reason than it is for a traversal. The search cannot stop early: every vertex must be visited, because a vertex that is not visited might still be an articulation point of its own component. The linear bound is a statement about the whole graph, not about the answer.
 
@@ -300,7 +311,7 @@ The low-link computation is naturally recursive, because the low value of a vert
 
 The failure mode is a crash rather than a wrong answer: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
-<MathPanel type="counterexample" title="Counterexample">
+::: math counterexample Counterexample
 A path graph on $10^6$ vertices, that is, a chain $0 - 1 - 2 - \cdots - 10^6 - 1$.
 The graph is undirected, it satisfies every constraint above, and its
 articulation points are exactly the $10^6 - 2$ interior vertices. The recursive
@@ -308,7 +319,8 @@ form makes one nested call per vertex, so in C++ on Linux with an 8 MB stack
 and a frame of roughly 64 bytes the stack is exhausted after about $130\,000$
 frames, and the program dies with a segmentation fault after visiting $13\%$ of
 the graph. The iterative form finishes normally and reports the right set.
-</MathPanel>
+:::
+
 
 The iterative form needs one extra piece of state that the recursive form gets for free: the index of the next neighbor to examine, stored alongside the vertex on the stack. That is what allows the iterative version to distinguish "just entered this vertex" from "returned to this vertex from a child", which is exactly what the articulation test needs.
 

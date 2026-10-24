@@ -108,7 +108,7 @@ The third insight is that the queries are independent. Nothing in the answer of 
 
 Let there be $N$ positions. Update $j$ adds a non-negative weight $w_j$ to position $p_j$, and the updates are applied in time order $1, 2, \ldots, N$. Query $i$ gives a threshold $x_i$ and a time $y_i$ with $0 \le y_i \le N$.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 The **prefix count** is
 $$
 f(k, y) = \sum_{p=1}^{k} \sum_{\substack{j \le y \\ p_j = p}} w_j,
@@ -116,40 +116,46 @@ $$
 the total weight in positions $1$ through $k$ after the first $y$ updates.
 The **answer** of query $i$ is the smallest $k$ with $f(k, y_i) \ge x_i$,
 or $N+1$ when no such $k$ exists.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A predicate $P$ on the positions is **monotone** if there is an index $k$
 such that $P(j)$ is false for every $j < k$ and true for every $j \ge k$.
 The predicate of query $i$ is $P_i(j) = [f(j, y_i) \ge x_i]$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 The predicate $P_i$ is monotone in $j$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Because every weight $w_j$ is non-negative, the prefix count
 $f(j, y_i)$ is non-decreasing in $j$: adding position $j+1$ adds a
 non-negative amount. Therefore the set $\{j : f(j, y_i) \ge x_i\}$ is a
 suffix of $\{1, \ldots, N\}$, which is exactly the definition of a
 monotone predicate. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let the answer of query $i$ be $k^\ast$, let $[lo, hi]$ be a range that
 contains $k^\ast$, and let $mid = \lfloor (lo + hi)/2 \rfloor$. Then:
 
 - if $P_i(mid)$ is true then $k^\ast \le mid$;
 - if $P_i(mid)$ is false then $k^\ast > mid$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 If $P_i(mid)$ is true, that is $f(mid, y_i) \ge x_i$, and the answer is
 the smallest position satisfying that inequality, so $k^\ast \le mid$.
 
 If $P_i(mid)$ is false, then $f(mid, y_i) < x_i$. Suppose $k^\ast \le mid$. Since $k^\ast$ is the smallest position with $f(k^\ast, y_i) \ge x_i$ and $f$ is non-decreasing, every position from $k^\ast$ to $mid$ also satisfies the inequality, in particular $f(mid, y_i) \ge x_i$, which is a contradiction. Therefore $k^\ast > mid$. $\square$
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -243,11 +249,12 @@ Note the second row of round 2. B and C share the same midpoint $3$ and the same
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The parallel binary search returns the correct answer for every query.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Maintain the invariant that the range $[lo_i, hi_i]$ of query $i$ contains
 its answer $k^\ast_i$.
 
@@ -256,7 +263,8 @@ The invariant holds at the start, because the range of every query begins as $[1
 In a round, the midpoint $mid_i$ of query $i$'s range is computed, and the predicate is evaluated at $mid_i$. By the lemma, $P_i(mid_i)$ being true means $k^\ast_i \le mid_i$, and being false means $k^\ast_i > mid_i$. The query's range is narrowed accordingly to $[lo_i, mid_i]$ or $[mid_i + 1, hi_i]$, so the invariant is preserved.
 
 Every range shrinks by at least a factor of two each round, so after at most $\lceil \log_2 N \rceil$ rounds every non-empty range is a single point, and the lemma forces that point to be $k^\ast_i$. The query whose predicate is false at every position is reported as having no answer. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

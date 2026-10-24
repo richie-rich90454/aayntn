@@ -150,7 +150,7 @@ The multiplication by $B^{r-l}$ shifts the hash of the prefix into the right pla
 
 Let $s$ be a string of length $n$ over an alphabet whose characters have values $s_0, \ldots, s_{n-1}$, all less than the modulus $M$. Let $B$ be the base and $M$ the modulus.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 For a base $B$, a modulus $M$, and a string $s$ of length $n$ with
 character values $s_0, \ldots, s_{n-1}$, the **prefix hash** $H$ is
 $H[0] = 0$ and
@@ -161,16 +161,18 @@ The **hash of the substring** $s[l \dots r)$ is
 $$
 \operatorname{hash}(s[l \dots r)) = \bigl(H[r] - H[l] \cdot B^{r-l}\bigr) \bmod M.
 $$
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 For every $0 \le l \le r \le n$, the value
 $\bigl(H[r] - H[l] \cdot B^{r-l}\bigr) \bmod M$ is the polynomial hash of
 the substring $s[l \dots r)$, that is, the hash of that substring computed
 as if it were a string on its own.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Unrolling the definition of $H$ gives
 $H[r] = \sum_{i=0}^{r-1} s_i B^{r-1-i}$. Similarly
 $H[l] = \sum_{i=0}^{l-1} s_i B^{l-1-i}$, so
@@ -178,7 +180,8 @@ $H[l] B^{r-l} = \sum_{i=0}^{l-1} s_i B^{r-1-i}$. Subtracting removes the
 first $l$ terms of $H[r]$ and leaves
 $\sum_{i=l}^{r-1} s_i B^{r-1-i}$, which is the polynomial hash of the
 substring of length $r - l$. $\square$
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -211,29 +214,32 @@ The modulus should be a **large prime**, for two reasons. A large modulus makes 
 
 The standard choice for a single hash is a prime near $10^9$, such as $1\,000\,000\,007$ or $998\,244\,353$. The standard choice for a double hash is two such primes, with two independent bases, which are reduced to a single 64-bit key.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 At every moment, $H[i]$ is the polynomial hash of the first $i$ characters
 of the string, and `power[i]` is $B^i \bmod M$. The two are consistent
 because both are built by the same recurrence, and the lemma then makes
 every substring query exact as a polynomial evaluation.
-</MathPanel>
+:::
+
 
 ### The collision probability
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 Two distinct strings $s$ and $t$ of the same length **collide** under the
 parameters $(B, M)$ when
 $\sum_{i} (s_i - t_i) B^{n-1-i} \equiv 0 \pmod M$.
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 Let $M$ be a prime, let $B$ be chosen uniformly at random from
 $\{1, 2, \ldots, M-1\}$, and let $s$ and $t$ be two distinct strings of
 length $k$ over an alphabet whose values are all less than $M$. Then the
 probability that they collide is at most $\frac{k-1}{M-1}$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The difference of the two hashes is the polynomial
 $P(B) = \sum_{i=0}^{k-1} (s_i - t_i) B^{k-1-i}$ evaluated at the chosen
 base. Because $s \ne t$, the coefficients are not all zero, so $P$ is a
@@ -241,15 +247,17 @@ nonzero polynomial of degree at most $k-1$ over the field of residues
 modulo $M$. A nonzero polynomial of degree $d$ over a field has at most
 $d$ roots, so at most $k-1$ of the $M-1$ choices of $B$ make $P(B) = 0$.
 The probability is therefore at most $\frac{k-1}{M-1}$. $\square$
-</MathPanel>
+:::
+
 
 The bound is much better than the naive "the probability is one in $M$" for a single comparison, because it grows with the length of the strings being compared. The bound that matters in practice, however, is the **birthday bound**, which concerns many comparisons at once.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 The **birthday bound** says that among $m$ strings hashed into a table of
 size $N$, the probability that some pair collides is approximately
 $1 - e^{-m^2/(2N)}$.
-</MathPanel>
+:::
+
 
 For $M \approx 10^9$ and $m = 10^6$ distinct substrings, the expected number of collisions is about
 
@@ -292,12 +300,13 @@ The point of the trace is not the number $2\,987\,973$. It is that the query use
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The function `hash(l, r)` returns the polynomial hash of the substring
 $s[l \dots r)$ under the parameters $(B, M)$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 By the lemma, the value returned is the polynomial hash of the substring,
 provided the tables $H$ and `power` hold the values the definitions
 require. The table $H$ is built by the recurrence $H[i+1] = H[i] \cdot B +
@@ -306,28 +315,32 @@ s_i$, which is exactly its definition, and the table `power` is built by
 are computed modulo $M$, and the reduction is compatible with addition and
 multiplication, so the reduced values satisfy the same definitions.
 $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 If two substrings are equal, their hashes are equal. The converse does not
 hold in general: two distinct substrings may have the same hash.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 If the substrings are equal, their characters are equal at every
 position, so the two polynomial expressions are identical, and so are
 their residues. The converse fails exactly when the difference polynomial
 is zero at the chosen base, which is the definition of a collision, and
 the theorem on the collision probability shows that such bases exist. A
 concrete instance is given in the common mistakes section. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 Every value written into the prefix table is the hash of the prefix it
 belongs to, and every value written into the power table is $B^i \bmod M$.
 Neither table is ever modified after it is written, so every query sees
 the same values that the definitions give.
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

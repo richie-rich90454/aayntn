@@ -118,40 +118,44 @@ There is no other edge to cross. Every vertex's answer is determined by messages
 
 Let $T$ be a tree rooted at $r$, and let $w(v)$ be the value of a vertex. The running example asks for the largest total collectible along a path that starts at $v$ and does not revisit a vertex.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 The **down message** of a vertex $v$ is
 $$
 \text{down}[v] = \max\Bigl(0,\ \max_{c \in \text{ch}(v)} \bigl(w(c) + \text{down}[c]\bigr)\Bigr),
 $$
 the largest total obtainable by a path that starts at $v$ and goes strictly
 downward, not counting $w(v)$ itself. It is defined for every vertex.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **up message** of a vertex $v$ is the largest contribution that the part
 of the tree outside the subtree of $v$ can make to $v$, measured from the
 parent of $v$. For the root it is $0$, since nothing lies outside its subtree.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **answer** at a vertex $v$ is
 $$
 \text{answer}[v] = w(v) + \max\Bigl(0,\ \text{up}[v],\ \max_{c \in \text{ch}(v)} \bigl(w(c) + \text{down}[c]\bigr)\Bigr).
 $$
 The $0$ allows the path to stop at $v$, which matters when every direction
 leads to a smaller total.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma (the change of root)">
+
+::: math lemma Lemma (the change of root)
 Let $u$ and $v$ be adjacent vertices, and let $T_u$ be the component of
 $T - \{u, v\}$ that contains $u$. The contribution that $u$ makes to the
 answer at $v$ depends only on $T_u$, and the contribution that $v$ makes to
 the answer at $u$ depends only on the other component. In particular, the
 answer at $v$ is determined by the messages crossing the edges incident to
 $v$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma (the up recurrence)">
+
+::: math lemma Lemma (the up recurrence)
 For a child $c$ of a vertex $v$,
 $$
 \text{up}[c] = w(v) + \max\Bigl(0,\ \text{up}[v],\ \max_{s \in \text{ch}(v),\ s \ne c} \bigl(w(s) + \text{down}[s]\bigr)\Bigr).
@@ -159,7 +163,8 @@ $$
 The children other than $c$ are excluded because their subtrees are inside
 the subtree of $v$, and reporting to $c$ must not count the direction that
 leads back to $c$.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -182,25 +187,28 @@ The exclusion of $c$ from the sibling list is the only fiddly part, and it is wh
 
 The update rule for the up message is correct by the change-of-root lemma: the best path from $v$ that avoids the edge to $c$ either stops at $v$, continues into the parent side, or continues into a sibling subtree. Those are exactly the three terms.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 After the first pass, for every vertex $v$, $\text{down}[v]$ is the largest
 total obtainable by a downward path from $v$, and the down message of every
 child of $v$ is final.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At every moment of the second pass, for the vertex $v$ being processed,
 $\text{up}[v]$ is the correct contribution from outside the subtree of $v$, and
 every vertex strictly above $v$ has already been processed with a correct up
 message.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At every moment of the second pass, the down messages are unchanged, and the
 answer computed for a vertex $v$ uses the contribution of every direction:
 each child contributes $w(c) + \text{down}[c]$ and the parent side contributes
 $\text{up}[v]$.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -224,11 +232,12 @@ Step 5 is where the exclusion matters. When the message is sent to vertex $0$, t
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The two passes compute the correct answer for every vertex.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 First, the down messages. We prove by induction on the height of the subtree
 that $\text{down}[v]$ is the largest total obtainable by a downward path from
 $v$ that does not count $w(v)$.
@@ -244,20 +253,23 @@ For the inductive step, let $v$ be a vertex at depth $d > 0$, with parent $p$. B
 Since every vertex other than the root has a parent, and the second pass processes the vertices in increasing depth, every vertex is reached and every up message is correct.
 
 Finally, the answer. By the change-of-root lemma, the answer at $v$ is determined by the contributions of its neighbors. Each child $c$ contributes $w(c) + \text{down}[c]$, by the first part of the proof, and the parent side contributes $\text{up}[v]$, by the second part. Adding $w(v)$ and taking the largest of those contributions and $0$ is therefore the correct answer. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The two passes together touch every vertex a constant number of times, so the
 whole computation is linear.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The first pass visits every vertex once and examines every edge twice, once
 from each endpoint. The second pass visits every vertex once, and for each
 child it scans the children of the parent, whose total over the whole pass is
 at most the number of edges, that is $n - 1$. So the total work is $O(n)$.
 $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -265,10 +277,11 @@ $\square$
 
 **Auxiliary space: $O(n)$** for the down messages, the up messages, the answers, the parent and depth arrays, and the traversal order.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Rerooting a tree dynamic program over a tree with $n$ vertices: $O(n)$ time
 and $O(n)$ space, with two passes.
-</MathPanel>
+:::
+
 
 The exclusion of a child is the only part that can make the implementation quadratic, and the two-largest trick is what prevents it. A naive implementation that rescans all the children of the parent for each child costs $O(\sum_v \text{ch}(v)^2)$, which is $O(n^2)$ on a star.
 
@@ -302,7 +315,7 @@ The two passes are naturally expressed as loops over the vertices in a fixed ord
 
 The failure mode is a crash rather than a wrong answer: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
-<MathPanel type="counterexample" title="Counterexample">
+::: math counterexample Counterexample
 A tree that is a chain on $10^6$ vertices. The two passes are linear and the
 answers are correct, but the recursive traversal that produces the vertex
 order makes one nested call per vertex, so in C++ on Linux with an 8 MB stack
@@ -311,7 +324,8 @@ $130\,000$ frames, and the program dies with a segmentation fault after
 processing $13\%$ of the tree. The iterative traversal, which keeps the
 current vertex and the index of the next child to explore on an explicit
 stack, finishes normally.
-</MathPanel>
+:::
+
 
 The iterative form is not harder to write here than in any other tree technique. The first pass needs the vertices in decreasing depth, which is the reverse of the traversal order, and the second pass needs them in increasing depth, which is the traversal order itself.
 

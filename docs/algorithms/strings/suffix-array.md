@@ -122,31 +122,34 @@ That is the whole construction. The rank array is the state, and the doubling is
 
 Let $s$ be a string of length $n$ over an ordered alphabet.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 For a string $s$ of length $n$, the **suffix** $S_i$ is the string
 $s[i \dots n)$. The **suffix array** $\operatorname{SA}$ is the array of
 length $n$ with $\operatorname{SA}[j] = i$ when $S_i$ is the $j$-th
 suffix in lexicographic order. The **inverse suffix array**, or **rank
 array**, is $\operatorname{rank}[i] = j$, so that $\operatorname{rank}$ and
 $\operatorname{SA}$ are inverses of each other.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **longest common prefix array** is the array $\operatorname{lcp}$ of
 length $n$ with $\operatorname{lcp}[0] = 0$ and, for $j \ge 1$,
 $\operatorname{lcp}[j]$ the length of the longest common prefix of the
 suffixes $\operatorname{SA}[j-1]$ and $\operatorname{SA}[j]$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $\operatorname{rank}$ be the ranks of the suffixes by their first $k$
 characters, where $k \ge 1$, and let the rank of a position past the end
 of the string be $-1$. Then the order of the suffixes by their first $2k$
 characters is the order of the pairs
 $\bigl(\operatorname{rank}[i], \operatorname{rank}[i+k]\bigr)$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Take two positions $i$ and $j$. The first $2k$ characters of the suffix
 at $i$ are the first $k$ characters of the suffix at $i$, followed by the
 first $k$ characters of the suffix at $i + k$; the same holds for $j$.
@@ -158,15 +161,17 @@ against $\operatorname{rank}[j+k]$. So the comparison of the pairs decides
 the comparison of the $2k$-character prefixes. The rank of a position past
 the end is $-1$ because a shorter prefix is a proper prefix of a longer
 one and therefore comes first. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 After a round that ranks the suffixes by their first $k$ characters, the
 rank array satisfies: $\operatorname{rank}[i] < \operatorname{rank}[j]$
 exactly when the first $k$ characters of the suffix at $i$ are lexicographically
 smaller than the first $k$ characters of the suffix at $j$, with a shorter
 prefix that is a proper prefix of the other coming first.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -227,13 +232,14 @@ for i from 0 to n - 1:
 
 The amortization is the same idea as the Z algorithm's. The value $k$ carries over from one position to the next, and it is decremented by one rather than reset, because the longest common prefix of the suffix at $i$ and its predecessor in the order is at least one less than the longest common prefix of the suffix at $i-1$ and its predecessor. The total number of increments of $k$ is therefore $O(n)$.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 At the start of the iteration for position $i$, the value $k$ is a lower
 bound on the length of the longest common prefix of the suffix at $i$ and
 the suffix that precedes it in the order. The extension loop then raises
 $k$ until the two suffixes differ, so the value written into
 $\operatorname{lcp}$ is exact.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -305,11 +311,12 @@ so $\operatorname{lcp} = [0, 1, 3, 0, 0, 2]$. The entry $\operatorname{lcp}[2] =
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The doubling construction computes the suffix array of the string.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The proof is an induction on the number of rounds.
 
 **Base case.** After the first round, the suffixes are ranked by their first character, which is exactly the invariant with $k = 1$.
@@ -317,13 +324,15 @@ The proof is an induction on the number of rounds.
 **Inductive step.** Suppose the invariant holds with $k$: the rank array orders the suffixes by their first $k$ characters. By the lemma, the order of the suffixes by their first $2k$ characters is the order of the pairs $\bigl(\operatorname{rank}[i], \operatorname{rank}[i+k]\bigr)$, so sorting those pairs and assigning new ranks establishes the invariant with $2k$. The counting sort computes exactly that order, because it sorts by the second key using the previous order and then, stably, by the first key.
 
 **Termination.** The loop ends when every rank is distinct or when $2k \ge n$. In the first case, two suffixes with equal ranks would have equal prefixes of length $k$, which is impossible when the ranks are distinct, so the order is the full lexicographic order of the suffixes. In the second case, $k \ge n$, so the prefixes are the whole suffixes, and the order is again the full lexicographic order. In both cases the array produced is the suffix array. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 Kasai's algorithm computes the longest common prefix array correctly.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Two facts are needed.
 
 First, the carry-over is sound. Suppose the longest common prefix of the suffixes at $i-1$ and $j-1$, where $j-1$ precedes $i-1$ in the order, has length $h$. The suffixes at $i$ and $j$ are the suffixes at $i-1$ and $j-1$ with their first characters removed, so they agree on their first $h - 1$ characters, provided $h \ge 1$. Hence the longest common prefix of the suffixes at $i$ and $j$ is at least $h - 1$. So the value $k$ carried into the iteration is a valid starting point.
@@ -331,7 +340,8 @@ First, the carry-over is sound. Suppose the longest common prefix of the suffixe
 Second, the extension loop is exact. Starting from a lower bound $k$ on the common prefix, the loop compares the next pair of characters and continues while they are equal, stopping at the first difference or at the end of one of the suffixes. The value at the end is therefore the exact length of the longest common prefix.
 
 The special case $\operatorname{rank}[i] = 0$ is the first suffix in the order, which has no predecessor, so its entry is $0$ by definition, and the carry-over is reset. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

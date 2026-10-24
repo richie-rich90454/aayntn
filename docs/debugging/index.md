@@ -137,9 +137,10 @@ Differential testing is the strongest tool in this laboratory, because it is the
 
 Let $A$ be the implementation you want to trust, usually the fast one. Let $B$ be a reference implementation that you believe correct, usually the slow and obviously correct one. Both are functions from the input space $\mathcal{I}$ to the output space $\mathcal{O}$. Let $X \subseteq \mathcal{I}$ be the set of test inputs you generate.
 
-<MathPanel type="definition" title="Differential testing">
+::: math definition Differential testing
 For every $x \in X$, check that $A(x) = B(x)$. The test passes when no input in $X$ produces a disagreement.
-</MathPanel>
+:::
+
 
 The property you actually want is the universal statement
 
@@ -272,9 +273,10 @@ The vertex is marked finalized at the moment it is discovered, not when it is re
 
 **Step six, the counterexample.** On the minimal graph, the queue pops $s$ first and relaxes its two edges, so $p$ is reached with distance 1 and $q$ with distance 2. The queue pops $p$ next, and $p$ relaxes the edge of weight 10, so $v$ is discovered with distance 11, marked as seen, and pushed. The queue then pops $q$, and $q$ relaxes the edge of weight 3, which would give $v$ the distance 5. The guard `if (seen[v]) continue;` throws that improvement away, because $v$ was marked when it was first pushed. So $v$ keeps the distance 11, is expanded with it, and $w$ is reported as 12 instead of 6.
 
-<MathPanel type="counterexample" title="Counterexample">
+::: math counterexample Counterexample
 On the graph $s \to p \to v \to w$ with weights 1, 10, 1 and $s \to q \to v$ with weights 2 and 3, the true distance to $v$ is 5 and to $w$ is 6. The code finalizes $v$ on discovery with distance 11 and never improves it, so the reported distances are 11 and 12.
-</MathPanel>
+:::
+
 
 **Step seven, the fix.** Finalize a vertex when it is removed from the queue, and discard the stale entries:
 

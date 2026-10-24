@@ -141,33 +141,37 @@ That is the first reason it is not used in contests. The second is more fundamen
 
 Let $f : [lo, hi] \to \mathbb{R}$ be a function on a real interval.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A function $f$ is **unimodal** on $[lo, hi]$ if there is a point $p$ in the
 interval such that $f$ is non-decreasing on $[lo, p]$ and non-increasing on
 $[p, hi]$. The point $p$ is a **peak**. The function is **weakly unimodal**
 if the monotonicity is non-strict, and **strictly unimodal** if it is strict
 on both sides.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **discrete unimodal array** is a sequence $A_1, \dots, A_n$ with an index
 $p$ such that $A_1 \le \cdots \le A_p \ge \cdots \ge A_n$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $f$ be unimodal on $[lo, hi]$ and let $m_1 < m_2$ be two interior points.
 If $f(m_1) < f(m_2)$ then every peak of $f$ lies in $[m_1, hi]$. If
 $f(m_1) > f(m_2)$ then every peak of $f$ lies in $[lo, m_2]$. If
 $f(m_1) = f(m_2)$ then every peak of $f$ lies in $[m_1, m_2]$.
-</MathPanel>
+:::
+
 
 The lemma is the whole technique. The third case is the one that the discrete version gets wrong, because a discrete sequence can be weakly unimodal with a plateau, and then the equal values need not be at the peak.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 Throughout the search, the interval still contains a peak of $f$. Every
 iteration reduces the interval to about two thirds of its previous length,
 so after $k$ iterations the interval has length at most $L \cdot (2/3)^k$.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -199,11 +203,12 @@ Now take the weakly unimodal array $[1, 4, 4, 1]$, whose peak is a plateau of tw
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 If $f$ is unimodal on $[lo, hi]$, the continuous ternary search returns a point within $\varepsilon$ of a peak, and it terminates.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The invariant states that the interval contains a peak of $f$ and that its
 length is at most $L \cdot (2/3)^k$ after $k$ iterations.
 
@@ -212,15 +217,17 @@ The invariant holds initially, because the whole interval contains a peak.
 Suppose it holds at the start of an iteration. Let $m_1$ and $m_2$ be the two probes. By the lemma, the peak lies in the half chosen by the comparison of $f(m_1)$ and $f(m_2)$, and the chosen half has length at most $(hi - lo) - \lfloor (hi - lo)/3 \rfloor$, which is at most $(hi - lo) \cdot (2/3) + 1$. So the new interval still contains a peak and its length has shrunk by roughly the factor two thirds.
 
 The length shrinks by a factor of at least one third at every iteration, so after $k$ iterations the length is at most $L \cdot (2/3)^k$. The loop terminates when this is at most $\varepsilon$, which happens for $k \ge \log_{3/2}(L/\varepsilon)$, and the midpoint of the final interval is within $\varepsilon$ of the peak it contains. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The proof depends on the unimodality assumption and on nothing else. In
 particular, it does not depend on the array version, whose equality branch
 discards the middle third. The discrete proof fails at exactly that step,
 because a weakly unimodal array may have its peak inside the discarded
 middle third.
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -230,11 +237,12 @@ middle third.
 
 For the discrete version the complexity is $O(\log n)$ iterations, but each iteration performs two array lookups, so the number of lookups is about $2 \log_{3/2} n \approx 3.42 \log_2 n$, which is more than the $n$ lookups of a plain scan for small $n$. A scan is better than a search until the array is large enough for the logarithm to win.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Ternary search on a unimodal function: $O(\log_{3/2}(L / \varepsilon))$
 iterations and $O(1)$ auxiliary space, with two function evaluations per
 iteration. The discrete version: $O(\log n)$ iterations and $O(1)$ space.
-</MathPanel>
+:::
+
 
 ## Algorithm selection
 

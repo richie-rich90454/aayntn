@@ -133,41 +133,47 @@ There are two standard ways to exploit it.
 
 Let $G = (V, E)$ be a directed graph.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **strongly connected component** of $G$ is a maximal set $C \subseteq V$ such
 that for every pair of vertices $u, v \in C$ there is a path from $u$ to $v$ and
 a path from $v$ to $u$, both entirely within $C$. The components partition
 $V$, because strong reachability is an equivalence relation.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **condensation** of $G$ is the graph whose vertices are the strongly
 connected components of $G$, with an edge from the component of $u$ to the
 component of $v$ whenever $G$ has an edge $u \to v$ and the two components are
 different.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 Fix a depth-first search of $G$. The **finishing time** $\text{FT}[v]$ is the
 counter value at the moment the search leaves $v$, with the counter increased
 on every finish. For a component $C$, $f(C) = \max_{v \in C} \text{FT}[v]$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 If $C$ and $D$ are different strongly connected components and $G$ has an edge
 from $C$ to $D$, then $f(C) > f(D)$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 The condensation of any directed graph is a directed acyclic graph.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $G^T$ be the transpose of $G$, that is, the graph with an edge $v \to u$
 for every edge $u \to v$ of $G$. Then $u$ and $v$ are in the same strongly
 connected component of $G$ if and only if they are in the same strongly
 connected component of $G^T$.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -214,20 +220,22 @@ The low link has the same meaning as in the undirected case: it is the smallest 
 
 The `onStack` test is essential. A vertex that has been visited but already popped belongs to a component that is finished, and an edge to it must not lower the low link. The counterexample below shows exactly what happens when that distinction is lost.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 In Tarjan's algorithm, the stack always holds a set of vertices that have been
 visited and not yet assigned to a component, ordered so that the discovery
 times increase from the bottom of the stack to the top. For every vertex $v$
 on the stack, $\text{low}[v]$ is the smallest discovery time reachable from
 $v$ by descending tree edges and taking at most one edge to a vertex on the
 stack.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 In Kosaraju's second pass, when the search starts at an unassigned vertex $v$,
 every unassigned vertex it reaches belongs to the same strongly connected
 component as $v$, and it reaches every vertex of that component.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -277,12 +285,13 @@ Two facts are worth pulling out of this trace. First, the vertex with the larges
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 Kosaraju's algorithm assigns every vertex of $G$ to its strongly connected
 component.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 We first prove the two facts used by the algorithm.
 
 Fact one: let $C$ be a strongly connected component and $r_C$ the first vertex of $C$ discovered by the first pass. Every vertex of $C$ is reachable from $r_C$ by a path lying entirely within $C$, and the search explores every edge of every vertex it reaches. Hence every vertex of $C$ is discovered while $r_C$ is on the stack, so $r_C$ is an ancestor of all of them and it finishes after all of them. Therefore $f(C) = \text{FT}[r_C]$.
@@ -296,14 +305,16 @@ The second pass runs on the transpose. Suppose it reaches an unassigned vertex $
 Conversely, the search reaches every vertex of $C$, because the transpose restricted to $C$ is strongly connected: reversing all edges of a strongly connected digraph preserves strong connectivity, which follows from fact two applied in both directions. So the search from $r_C$ reaches all of $C$ and nothing else, and $C$ is exactly one component.
 
 The algorithm repeats this argument on the remaining components, so every vertex is assigned to its own component. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 Tarjan's algorithm assigns every vertex of $G$ to its strongly connected
 component.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Consider a vertex $v$ on the stack when it is popped. The stack is popped only
 when the algorithm leaves a vertex $u$ with $\text{low}[u] = \text{disc}[u]$.
 At that moment the vertices popped are those above $u$.
@@ -317,7 +328,8 @@ So the popped set is a set of mutually reachable vertices.
 Third, the popped set is maximal. Any vertex outside it that is mutually reachable with $u$ would have to be on the stack, because the stack holds exactly the visited and unassigned vertices, and it would have to be below $u$ on the stack, since a vertex below $u$ on the stack was discovered before $u$ and has a smaller discovery time. But then that vertex would have been popped as well, since the pop takes everything above $u$ and the vertex is above $u$ when $u$ was pushed. Contradiction.
 
 So each popped set is exactly one strongly connected component, and the algorithm pops each vertex exactly once. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -327,11 +339,12 @@ So each popped set is exactly one strongly connected component, and the algorith
 
 **Auxiliary space: $O(V)$** beyond the adjacency list for both. Kosaraju needs the transpose, which is $O(V + E)$, so its total working set is $O(V + E)$. Tarjan needs no transpose, which is its main practical advantage: it avoids allocating a second copy of a graph that may have millions of edges.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Strongly connected components in a directed graph with $V$ vertices and $E$
 edges: time $O(V + E)$ for both Kosaraju and Tarjan. Auxiliary space $O(V)$
 for Tarjan, and $O(V + E)$ for Kosaraju because of the transpose.
-</MathPanel>
+:::
+
 
 |  | Kosaraju | Tarjan |
 | --- | --- | --- |
@@ -372,7 +385,7 @@ Tarjan's algorithm is recursive by nature, because the low link of a vertex is o
 
 The failure mode is a crash rather than a wrong answer: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
-<MathPanel type="counterexample" title="Counterexample">
+::: math counterexample Counterexample
 A directed path $0 \to 1 \to 2 \to \cdots \to 10^6 - 1$. The graph is legal,
 it satisfies every constraint above, and its strongly connected components are
 $10^6$ singleton sets, since a path has no cycle. The recursive form of
@@ -381,7 +394,8 @@ Tarjan's algorithm makes one nested call per vertex, so in C++ on Linux with an
 $130\,000$ frames, and the program dies with a segmentation fault after
 visiting $13\%$ of the graph. The iterative form finishes normally and reports
 $10^6$ components.
-</MathPanel>
+:::
+
 
 The iterative form of Tarjan's algorithm stores the index of the next neighbor to examine alongside each vertex, so that it can distinguish "just entered this vertex" from "returned to this vertex from a child". The stack of unassigned vertices is separate from the stack of the traversal, and keeping them apart is what stops the two from being confused.
 

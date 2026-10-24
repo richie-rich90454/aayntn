@@ -104,32 +104,36 @@ The second insight is about **ties**. Two elements with equal keys are _equivale
 
 Let $A = (a_0, a_1, \dots, a_{n-1})$ be a sequence of records, each with a key $k(a_i)$.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A sorting algorithm is **comparison-based** if the only information it
 obtains about the input is obtained by comparing pairs of elements. A sort
 that inspects the keys themselves is **non-comparison**.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A sort is **stable** if for every two elements $a_i$ and $a_j$ with
 $i < j$ and $k(a_i) = k(a_j)$, the sorted output places $a_i$ before
 $a_j$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A comparator is a **strict weak ordering** if it is irreflexive, that is,
 never reports that an element is less than itself; transitive; and
 asymmetric on distinct elements, so that exactly one of "less than" and
 "greater than" holds between any two distinct elements. The standard
 sorting functions require this, and a comparator that does not provide it
 produces undefined behavior.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A **key** of an element is the value it is ordered by. A sort is by
 **lexicographic** order on a tuple of keys when it compares the first key
 that differs.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -262,12 +266,13 @@ The result is $(1,a), (1,b), (1,c)$, and the original order of the three equal k
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 Merge sort produces a non-decreasing ordering of the keys and preserves the
 relative order of elements with equal keys.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 We prove both claims by induction on the length $n$ of the sequence.
 
 **Base case.** For $n \le 1$ the sequence is already sorted and there are no equal keys to reorder.
@@ -277,15 +282,17 @@ We prove both claims by induction on the length $n$ of the sequence.
 The merge maintains the invariant that the output written so far is sorted by key and contains the smallest elements of $L \cup R$. At each step it compares the front elements of the two runs and copies the smaller one. If the keys differ, copying the smaller one keeps the output sorted and keeps the invariant. If the keys are equal, the algorithm copies from the left run, and the element copied from $L$ originally preceded the element copied from $R$ in the original sequence, because $L$ consists of the earlier elements and $R$ of the later ones. So equal keys keep their original relative order. When one run is exhausted, the remaining elements of the other are already sorted and are copied in order.
 
 The output therefore contains every element exactly once, sorted by key, with equal keys in their original relative order. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 Any comparison-based sorting algorithm on $n$ distinct elements performs
 at least $\lceil \log_2 (n!) \rceil$ comparisons, and therefore at least
 $\Omega(n \log n)$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Model the algorithm as a binary decision tree whose internal nodes are
 comparisons and whose leaves are outcomes. Sorting $n$ distinct elements
 has $n!$ possible outcomes, one for each ordering of the input, and the
@@ -294,7 +301,8 @@ binary tree of height $h$ has at most $2^h$ leaves, so the height is at
 least $\log_2(n!)$. By Stirling's formula,
 $\log_2(n!) = n \log_2 n - n \log_2 e + O(\log n)$, which is
 $\Omega(n \log n)$. $\square$
-</MathPanel>
+:::
+
 
 The lower bound says nothing about counting sort or radix sort, because neither is a comparison sort. They read the keys, and they are not bound by the theorem.
 

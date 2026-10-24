@@ -130,42 +130,47 @@ That is the whole algorithm, and the proof below shows both halves.
 
 Let $G = (V, E)$ be a directed graph with a source $s$, a sink $t$, and a capacity $c(u, v) \ge 0$ on each edge.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **flow** is a function $f : E \to \mathbb{R}_{\ge 0}$ satisfying the
 capacity constraint $f(u, v) \le c(u, v)$ for every edge, and the conservation
 condition
 $\sum_{u} f(u, v) = \sum_{w} f(v, w)$ for every vertex $v \notin \{s, t\}$.
 Its **value** is $\lvert f \rvert = \sum_{u} f(s, u)$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 An **$s$-$t$ cut** is a partition $(S, T)$ of $V$ with $s \in S$ and $t \in T$.
 Its **capacity** is
 $c(S, T) = \sum_{\substack{(u, v) \in E \\ u \in S,\ v \in T}} c(u, v)$,
 the total capacity of the edges that leave $S$. Only the edges in the
 direction from $S$ to $T$ are counted.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **residual graph** of a flow $f$ has, for each edge $(u,v)$ of $G$, an
 edge $u \to v$ of residual capacity $c(u,v) - f(u,v)$ and an edge $v \to u$ of
 residual capacity $f(u,v)$. The reverse edge exists so that material already
 committed can be withdrawn.
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem (the max-flow min-cut theorem)">
+
+::: math theorem Theorem (the max-flow min-cut theorem)
 For every flow network, the maximum value of a flow equals the minimum
 capacity of an $s$-$t$ cut. That is, there exist a flow $f$ and a cut $(S, T)$
 such that $\lvert f \rvert = c(S, T)$, and for every flow and every cut,
 $\lvert f \rvert \le c(S', T')$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma (weak duality)">
+
+::: math lemma Lemma (weak duality)
 For every flow $f$ and every $s$-$t$ cut $(S, T)$,
 $\lvert f \rvert \le c(S, T)$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 By conservation, the net flow out of $S$ equals the net flow into $T$, and the
 net flow out of $S$ is $\lvert f \rvert$ because $s$ is the only vertex of $S$
 that is not conserved and $t$ is outside $S$. Writing the net flow as a sum
@@ -176,7 +181,8 @@ $$
 $$
 
 because the second sum is nonnegative and the capacity constraint bounds the first term. $\square$
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -207,17 +213,19 @@ The three standard implementations differ in how the augmenting path is found.
 
 To recover the cut, once no augmenting path remains, compute the set $S$ of vertices reachable from $s$ in the residual graph. Then $(S, V \setminus S)$ is a minimum cut, and the edges leaving $S$ are the ones to close.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 At every moment, the current assignment is a valid flow: every edge carries at
 most its capacity, and every vertex other than $s$ and $t$ is conserved. The
 residual capacities are exactly the capacities that could still be used.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At every moment, $\lvert f \rvert \le c(S', T')$ for every $s$-$t$ cut
 $(S', T')$, by weak duality. In particular, the current flow never exceeds the
 value of the cut that will eventually be found.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -235,13 +243,14 @@ Now consider a modification: add an edge $t \to a$ of capacity $5$. The flow doe
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 When the algorithm stops, the set $S$ of vertices reachable from $s$ in the
 residual graph defines a cut whose capacity equals the flow value, and the
 flow is maximum.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 First, the flow is valid at every stage. The initial flow of zero is valid.
 Suppose the current flow is valid and an augmenting path $P$ is found. Let
 $\delta$ be the smallest residual capacity on $P$. Pushing $\delta$ along $P$
@@ -263,15 +272,17 @@ $$
 $$
 
 By weak duality, every flow has value at most the capacity of every $s$-$t$ cut, and in particular at most $c(S, V \setminus S) = \lvert f \rvert$. So $\lvert f \rvert$ is at least the maximum flow value, and it is a valid flow, so it is exactly the maximum flow value, and the cut found is a minimum cut. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem (the global minimum cut)">
+
+::: math theorem Theorem (the global minimum cut)
 Let $G$ be a directed graph and fix any vertex $s$. Then the global minimum
 cut of $G$, that is, the minimum capacity over all partitions of $V$ into two
 nonempty parts, equals $\min_{t \ne s} \operatorname{mincut}(s, t)$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Every $s$-$t$ cut is a partition of $V$ into two nonempty parts, so
 $\operatorname{mincut}(s,t) \ge \lambda$, where $\lambda$ is the global minimum cut. Now let
 $(S, T)$ be a partition achieving $\lambda$. Some vertex $u$ lies in $S$ and
@@ -279,7 +290,8 @@ some vertex $v$ lies in $T$. Then the $u$-$v$ cut $(S, T)$ has capacity
 $\lambda$, so $\operatorname{mincut}(u,v) \le \lambda$.
 
 We need a bound involving the fixed vertex $s$. If $s \in S$, take $t = v$: the $s$-$v$ cut $(S,T)$ has capacity $\lambda$, so $\operatorname{mincut}(s,v) \le \lambda$, and therefore $\min_{t} \operatorname{mincut}(s,t) \le \lambda$. If $s \in T$, take $t = u$ and the same argument applies with the roles of the two parts exchanged. Together with the opposite inequality this gives equality. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -293,12 +305,13 @@ We need a bound involving the fixed vertex $s$. If $s \in S$, take $t = v$: the 
 
 **Auxiliary space: $O(V + E)$** for the network, the residual graph, and the arrays of capacities and flows.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Maximum flow and minimum cut in a network with $V$ vertices and $E$ edges:
 $O(V E^2)$ time for Edmonds-Karp, $O(V^2 E)$ for Dinic in general and
 $O(E \sqrt{V})$ for unit networks. Global minimum cut of an undirected graph:
 $O(V^3)$ time by Stoer-Wagner, or $V - 1$ maximum-flow computations.
-</MathPanel>
+:::
+
 
 Two practical warnings belong here. The capacities must be stored in a type wide enough for the total flow, which can reach the sum of all capacities and is routinely larger than $2^{31}$. And the residual graph must be built explicitly, with the reverse edges, because the reverse edges are what makes the algorithm able to undo an early mistake.
 
@@ -333,7 +346,7 @@ The augmenting path search is the only part of the algorithm that could recurse,
 
 The failure mode is a crash rather than a wrong answer: a segmentation fault in C, a `StackOverflowError` in Java, a `RecursionError` in Python.
 
-<MathPanel type="counterexample" title="Counterexample">
+::: math counterexample Counterexample
 A directed path $s \to v_1 \to v_2 \to \cdots \to v_{10^6} \to t$, with every
 capacity equal to one. The maximum flow is one, and every augmenting path has
 $10^6 + 2$ vertices. A recursive path search makes one nested call per vertex,
@@ -341,7 +354,8 @@ so in C++ on Linux with an 8 MB stack and a frame of roughly 64 bytes the stack
 is exhausted after about $130\,000$ frames, and the program dies with a
 segmentation fault before it has sent a single unit. The iterative breadth-first
 search sends one unit and stops.
-</MathPanel>
+:::
+
 
 The breadth-first search in Edmonds-Karp is naturally a queue, so there is no reason to write it recursively. Dinic's level graph is a layered structure built by a single breadth-first sweep, and its blocking flow is a depth-first search over the levels, which is the one place where an explicit stack is needed.
 

@@ -103,12 +103,13 @@ Every other interval ends at or after it does. So after taking the earliest-fini
 
 The consequence is that the choice of the next interval depends only on the finish time, and only on the earliest one. The rest of the algorithm is bookkeeping: sort by finish time, then sweep.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 After the greedy algorithm has chosen $k$ intervals, there is an optimal
 solution for the sub-problem of the intervals that start at or after the
 finish time of the last chosen interval, and that optimal solution has
 $k$ more intervals.
-</MathPanel>
+:::
+
 
 The invariant is the statement that the greedy choice never costs anything. The proof is in the correctness section.
 
@@ -131,31 +132,35 @@ The picture to hold is that of a "greedy cursor" that only ever moves right and 
 
 Let $\{I_1, I_2, \ldots, I_n\}$ be a family of intervals, where $I_i = [s_i, e_i)$ with $s_i < e_i$.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 Two intervals $I$ and $J$ are **compatible** if they do not overlap, that
 is, if $s_J \ge e_I$ or $s_I \ge e_J$. A **schedule** is a set of pairwise
 compatible intervals. The **optimum** is the largest number of intervals
 in a schedule.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The interval with the **earliest finish time** is the interval $I^*$ with
 $s_i \le e_{I^*}$ for every $i$, that is, the one whose right edge is
 leftmost. The **greedy rule** is: among the intervals that are still
 available, take the one with the earliest finish time, and repeat.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 An interval $I_j$ is **compatible with a prefix** ending at time $t$ if
 $s_j \ge t$. After the greedy algorithm has chosen a set of intervals, the
 remaining candidate intervals are exactly those that are compatible with
 the prefix.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $I^*$ be the interval with the earliest finish time, and let $O$ be
 any optimal schedule. There is an optimal schedule that contains $I^*$.
-</MathPanel>
+:::
+
 
 The lemma is the exchange statement, and it is proved below.
 
@@ -169,11 +174,12 @@ Sorting by finish time turns "the earliest finish time among the available inter
 
 The sort key is the part that people get wrong. Sorting by start time, by length, or by value produces a different scan, and only one of them is correct.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 During the scan, the intervals that have been examined are exactly the
 intervals that finish at or before the current time $t$, plus the ones
 skipped because they start before $t$.
-</MathPanel>
+:::
+
 
 ## Step-by-step execution
 
@@ -199,12 +205,13 @@ The same four interviews sorted by length would be A and D first, since both hav
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The greedy algorithm that repeatedly takes the compatible interval with the
 earliest finish time produces a schedule of maximum size.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 We prove the exchange lemma first.
 
 Let $I^*$ be the interval with the earliest finish time, and let $O$ be an optimal schedule. Write $O$ as $O_1, O_2, \ldots, O_k$ in order of increasing finish time.
@@ -230,9 +237,10 @@ $$
 where the middle inequality holds because the finish times increase along the schedule and the last holds because $e_{I^{\star}} \le e\_{O_1}$. So $I^{\star}$ ends before each of $O_2, \ldots, O_k$ begins, and $O'$ is a schedule.
 
 The schedule $O'$ has exactly $k$ intervals, and $k$ is the size of an optimal schedule, so $O'$ is optimal. It contains $I^{\star}$. Therefore an optimal schedule containing $I^{\star}$ exists. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The greedy algorithm is optimal, by induction on the number of available
 intervals.
 
@@ -243,12 +251,14 @@ Otherwise, let $I^{\star}$ be the available interval with the earliest finish ti
 That sub-problem has fewer available intervals than the original, so by the induction hypothesis the greedy algorithm applied to it produces an optimal schedule of it. The greedy algorithm takes $I^{\star}$ first, because $I^{\star}$ is the compatible interval with the earliest finish time, and then proceeds on exactly that sub-problem. Its schedule therefore has $1 + \text{(the size of the optimal schedule of the sub-problem)}$ intervals, which is the size of the optimal schedule $O$.
 
 Therefore the greedy algorithm is optimal. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Two intervals $I = [s_I, e_I)$ and $J = [s_J, e_J)$ are compatible if and
 only if $s_J \ge e_I$ or $s_I \ge e_J$.
-</MathPanel>
+:::
+
 
 The lemma is what the "one ends exactly when the next begins" convention rests on. A talk that starts exactly when the previous one ends is allowed, and the implementation uses `start >= free_time` rather than `start > free_time`.
 
@@ -260,11 +270,12 @@ The lemma is what the "one ends exactly when the next begins" convention rests o
 
 **Auxiliary space: $O(n)$** for the sorted array, or $O(1)$ extra space beyond the input if the sort is done in place.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Interval scheduling: $O(n \log n)$ time for the sort and $O(n)$ for the
 scan, so $O(n \log n)$ in total. $O(n)$ space for the sorted intervals, or
 $O(1)$ extra space with an in-place sort.
-</MathPanel>
+:::
+
 
 The sort dominates, and that is worth remembering when the time limit is tight. When the intervals arrive in order of start time, one can avoid the sort by keeping a small heap of the intervals currently in progress, and the algorithm becomes $O(n \log n)$ with a smaller constant, or $O(n)$ if a counting arrangement on the time axis is possible.
 

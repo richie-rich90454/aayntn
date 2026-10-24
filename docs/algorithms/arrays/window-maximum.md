@@ -129,39 +129,44 @@ $$
 M_i = \max(a_{i-k+1}, a_{i-k+2}, \ldots, a_i).
 $$
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 An element at position $j$ is **dominated** at position $i$ if $j < i$ and
 $a_j \le a_i$. A dominated element cannot be the maximum of any window whose
 right end is $i$ or greater, because every such window that contains $j$
 also contains $i$ and $a_i \ge a_j$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **candidate deque** for the window ending at $i$ is the sequence of
 indices $d_1 < d_2 < \cdots < d_t$ with
 $d_1 \ge i - k + 1$ and $a_{d_1} > a_{d_2} > \cdots > a_{d_t}$, obtained from
 the full candidate list by removing every dominated index.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $j < i$ and $a_j \le a_i$. Then $j$ is not the maximum of any window
 whose right end is $i$ or greater.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 The candidate deque for the window ending at $i$ is exactly the list of
 indices in $[i-k+1, i]$ that are not dominated by any later index in the
 same interval, and the maximum of that window is the value at the front.
-</MathPanel>
+:::
+
 
 The second lemma is the correctness of the structure. The front of the deque is the largest surviving candidate, and every removed candidate is dominated by a surviving one, so the front holds the maximum of the whole window.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 At the end of the iteration for position $i$, the deque holds exactly the
 undominated indices of the window $[i-k+1, i]$, in increasing index order,
 with their values strictly decreasing from front to back. Every index of the
 window that is absent from the deque is dominated by an index that is present.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -196,12 +201,13 @@ Notice that in this run the deque never held more than two indices. That is not 
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 For every $i \ge k$, the algorithm outputs the maximum of the window
 $[i-k+1, i]$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The invariant states that after the iteration for $i$, the deque holds exactly
 the undominated indices of the window $[i-k+1, i]$, in increasing index order,
 with values strictly decreasing from front to back, and that every index of
@@ -220,7 +226,8 @@ After these two steps the deque holds the indices of $[i-k+1, i]$ that are not d
 Appending $i$ in step 4 restores the decreasing-value order, because every remaining value is greater than $a_i$ and $i$ is now the last index. The invariant is preserved.
 
 By the second lemma, the front of the deque holds the maximum of the window, so step 5 outputs the correct value. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -230,11 +237,12 @@ The naive $nk$ bound is not achieved, because the removals are charged to the el
 
 **Auxiliary space: $O(k)$.** The deque never holds more than $k$ indices, because every index in it is inside the current window. The output list holds $n - k + 1$ values if every answer must be stored, which is $O(n)$ and is usually unavoidable.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Sliding window maximum by a monotonic deque: $O(n)$ time, amortized over the
 whole scan, and $O(k)$ auxiliary space besides the output. The same idea
 with a priority queue: $O(n \log n)$ time and $O(n)$ space.
-</MathPanel>
+:::
+
 
 ## Algorithm selection
 

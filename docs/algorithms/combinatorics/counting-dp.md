@@ -122,15 +122,16 @@ The third insight is about the arithmetic. Every entry of the table is a count, 
 
 Let $C$ be the set of configurations, and let $v(c)$ be the number of constraints that configuration $c$ violates.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **state** is a description of a partial configuration that determines,
 for every way of completing it, whether the completion is valid. A
 **counting dynamic program** assigns to every state $s$ a value $D(s)$,
 the number of valid partial configurations that reach $s$, computed by a
 recurrence over a set of predecessors.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 For a grid of $n$ rows and $m$ columns with a set $B$ of blocked cells, let
 $P(r,c)$ be the number of paths from $(0,0)$ to $(r,c)$ that move only right
 or down and never enter a blocked cell. Then $P$ satisfies
@@ -139,16 +140,18 @@ P(r,c) = P(r-1,c) + P(r,c-1)
 $$
 for every cell that is neither blocked nor the origin, with $P(r,c) = 0$ on
 blocked cells, $P(0,0) = 1$, and $P$ taken to be $0$ outside the grid.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 For every cell $(r,c)$, the paths counted by $P(r,c)$ partition into the
 paths whose last step is downward and the paths whose last step is
 rightward, and these two classes have sizes $P(r-1,c)$ and $P(r,c-1)$
 respectively.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Every path to $(r,c)$ ends with a step from $(r-1,c)$ or from $(r,c-1)$,
 because those are the only cells from which a rightward or a downward step
 enters $(r,c)$. A path whose last step is downward is obtained uniquely by
@@ -156,16 +159,18 @@ appending that step to a path counted by $P(r-1,c)$, provided the last step
 does not enter a blocked cell, which is excluded by the convention that
 $P$ is $0$ on blocked cells. The two classes are disjoint, because a path
 has exactly one last step, so their sizes add. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 After the outer loop has processed the first $r$ rows, the table entry
 $D(r,c)$ equals the number of valid paths from the origin to $(r,c)$, taken
 modulo $m$, for every column $c$ of those rows. The base case holds
 because the only path to the origin is the empty path, and the step from
 row $r-1$ to row $r$ preserves the invariant by the lemma, since the two
 predecessor entries are already correct.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -235,13 +240,14 @@ The answer is $2$. The path that goes all the way right along the top row and th
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The counting dynamic program computes, for every cell, the number of valid
 paths to that cell modulo the modulus, and in particular the number of
 valid paths from the origin to the target.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The invariant is the statement in the panel above.
 
 **Initialization.** Before the first row is processed, the table is all zeros, and the cell $(0,0)$ is set to $1$, which is the number of paths from the origin to itself: the empty path. Every other cell of the first row takes its value from the cell to its left, so the invariant holds for the first row.
@@ -249,7 +255,8 @@ The invariant is the statement in the panel above.
 **Maintenance.** Suppose the invariant holds for the first $r$ rows. Consider a cell $(r,c)$ of row $r$ that is not blocked and is not the origin. By the lemma, the paths to $(r,c)$ partition into those arriving from above and those arriving from the left, and their counts are $D(r-1,c)$ and $D(r,c-1)$. Both values are the residues of the true counts, by the invariant, because row $r-1$ has been processed and the cell $(r,c-1)$ of the current row has already been written. The update stores $(D(r-1,c) + D(r,c-1)) \bmod m$, which by the compatibility of reduction with addition is the residue of the true count. A blocked cell is set to zero, which is the correct count because no path may enter it, and the invariant is preserved.
 
 **Termination.** When the last row has been processed, the invariant says that the entry for the target cell is the residue of the number of valid paths to it, which is the answer the problem asks for. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

@@ -132,41 +132,46 @@ The second insight is about the enumeration. A backtracking that tries the avail
 
 Let $B = \{b_1 < b_2 < \cdots < b_n\}$ be a set of distinct elements.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **permutation** of $B$ is a sequence $(a_1, \ldots, a_n)$ of the elements of
 $B$ in which every element appears exactly once. Two permutations
 $a = (a_1, \ldots, a_n)$ and $c = (c_1, \ldots, c_n)$ are in **lexicographic
 order** if $a < c$ when, at the smallest index $t$ at which they differ,
 $a_t < c_t$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **successor** of a permutation $a$ is the smallest permutation $c$ with
 $a < c$ in lexicographic order. It does not exist when $a$ is
 non-increasing, because that is the largest permutation.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $a$ be a permutation of $B$ that is not non-increasing, and let $i$ be the
 largest index with $a_i < a_{i+1}$. Then the suffix $a_{i+1}, \ldots, a_n$ is
 non-increasing, and for every $k > i$ the element $a_k$ is less than or equal
 to $a_i$ or is larger than $a_i$ with the elements larger than $a_i$ appearing
 before the elements smaller than $a_i$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 The successor of $a$ is obtained by swapping $a_i$ with the smallest element
 of the suffix that is larger than $a_i$, and then arranging the suffix in
 increasing order.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 After the swap, the prefix $a_1, \ldots, a_i$ is strictly smaller than the
 prefix of any permutation larger than the original one, and the suffix is the
 smallest arrangement of its elements that is larger than the original suffix.
 Together they make the whole permutation the smallest one larger than the
 original.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -194,11 +199,12 @@ The result is $213$, which is the permutation immediately after $132$ in the lis
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The successor algorithm returns the smallest permutation larger than the given one, and reports that no successor exists exactly when the given permutation is the largest one.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Suppose the arrangement is not non-increasing, and let $i$ be the pivot. The
 suffix after $i$ is non-increasing, so it is the largest arrangement of its
 own elements. No permutation that agrees with $a$ on the positions before $i$
@@ -213,7 +219,8 @@ Now $c_i > a_i$, and $c$ must be the smallest permutation that agrees with $a$ b
 After the swap, the suffix is still non-increasing, and its elements are the same as before. The smallest arrangement of the suffix is its reverse, since the suffix is non-increasing and reversing makes it increasing. The algorithm reverses it, so the suffix is as small as possible, and the whole permutation is the smallest one larger than $a$.
 
 Finally, if no pivot exists then the arrangement is non-increasing, which is the largest arrangement of its elements, and there is no successor. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -223,11 +230,12 @@ Finally, if no pivot exists then the arrangement is non-increasing, which is the
 
 **Auxiliary space: $O(n)$** for the arrangement and the used flags. The backtracking version also uses $O(n)$ frames of recursion, which is the same bound.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 One successor: $O(n)$ time and $O(1)$ extra space beyond the arrangement.
 All of them by stepping: $O(n \cdot n!)$ time and $O(n)$ space. All of them
 by backtracking: $O(n \cdot n!)$ time and $O(n)$ space.
-</MathPanel>
+:::
+
 
 ## Algorithm selection
 

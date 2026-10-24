@@ -644,9 +644,10 @@ where $A(x)$ and $B(x)$ are the outputs of the two implementations on the same i
 
 **The claim the method establishes.** If the test finds an $x \in T$ with $A(x) \ne B(x)$, then the triple $(x, B(x), A(x))$ is a **counterexample**: a witness that $A$ and $B$ disagree, and therefore a witness that $A$ is not equivalent to the reference on all legal inputs. Since $B$ is correct by assumption, $A$ is not correct either.
 
-<MathPanel type="definition" title="Differential test">
+::: math definition Differential test
 A differential test is a finite procedure that compares an implementation under test with a trusted reference on a finite set of inputs, and reports a counterexample if any comparison fails. It is a one-sided check: a failure is conclusive, and a pass is not.
-</MathPanel>
+:::
+
 
 **The claim the method does not establish.** If every comparison passes, then $A$ and $B$ agree on $T$. It does **not** follow that they agree on every legal input:
 
@@ -654,11 +655,12 @@ $$A \equiv_T B \quad\not\Longrightarrow\quad A \equiv B$$
 
 The implication fails because $T$ is finite and the space of legal inputs is not. There are inputs outside $T$ on which the two differ, unless a separate argument (a proof, or an exhaustive test over a complete and finite input space) rules them out. **A passing differential test is not a proof of correctness.** It is evidence, and good evidence, but it is not a proof.
 
-<MathPanel type="theorem" title="Soundness of the differential test">
+::: math theorem Soundness of the differential test
 The differential test never reports success while the implementation under test
 disagrees with the reference on any input in the test set. Its conclusion is
 therefore sound, and its silence is inconclusive.
-</MathPanel>
+:::
+
 
 **The three conditions that make the test meaningful.**
 

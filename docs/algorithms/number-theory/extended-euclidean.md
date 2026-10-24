@@ -158,33 +158,37 @@ At the end, the last nonzero remainder is the gcd, and its coefficients are the 
 
 Let $a$ and $b$ be integers, not both zero, and let $m > 0$ be a modulus.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 Two integers $a$ and $b$ are **coprime** when their greatest common divisor
 is $1$. The **Bezout identity** states that there exist integers $x$ and
 $y$ with $ax + by = \gcd(a, b)$, and the pair $(x, y)$ is a **Bezout
 coefficient pair**.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **modular inverse** of $a$ modulo $m$ is an integer $x$ with
 $ax \equiv 1 \pmod m$. It exists if and only if $\gcd(a, m) = 1$, and
 then it is unique modulo $m$.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At every moment of the algorithm, each remainder $r_i$ in the sequence
 satisfies $r_i = s_i a + t_i b$, and the coefficients satisfy
 $s_{i+1} = s_{i-1} - q_i s_i$ and $t_{i+1} = t_{i-1} - q_i t_i$. When
 the algorithm stops, the last nonzero remainder is the greatest common
 divisor, and its coefficients are a Bezout coefficient pair.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 The extended Euclidean algorithm returns a pair $(x, y)$ with
 $ax + by = \gcd(a, b)$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The invariant says that every remainder is a linear combination of $a$ and
 $b$, and the base cases establish it for the first two remainders. The
 recurrence for the coefficients is exactly the division step rewritten as
@@ -195,7 +199,8 @@ with the coefficients the recurrence produces. So the invariant holds for
 every remainder.
 
 The last nonzero remainder is the greatest common divisor, because the ordinary Euclidean algorithm's last nonzero remainder divides every remainder before it, and therefore divides $a$ and $b$; and every common divisor of $a$ and $b$ divides every remainder, and hence divides the last one. So the last nonzero remainder is the greatest common divisor, and by the invariant it equals $s a + t b$ for the coefficients the algorithm returns. $\square$
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -301,13 +306,14 @@ for every integer $t$, because $b / g = 105 / 21 = 5$ and $a / g = 252 / 21 = 12
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The extended Euclidean algorithm applied to the positive integers $a$ and
 $b$ returns the greatest common divisor $g$ of $a$ and $b$ and integers
 $x$ and $y$ with $ax + by = g$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The proof of the invariant is given in the lemma above: every remainder
 is a linear combination of $a$ and $b$, and the coefficients obey the
 recurrence, which is the division step rewritten.
@@ -317,15 +323,17 @@ It remains to show that the last nonzero remainder is the greatest common diviso
 Conversely, let $c$ be any common divisor of $a$ and $b$. Then $c$ divides $r_0$ and $r_1$, and the division step shows that if $c$ divides $r_{i-1}$ and $r_i$ then it divides $r_{i+1} = r_{i-1} - q_i r_i$. By induction $c$ divides every remainder, and therefore it divides $r_k$.
 
 So $r_k$ is a common divisor and every common divisor divides it, which means $r_k$ is the greatest common divisor. The invariant then gives $r_k = s a + t b$ for the coefficients the algorithm returns. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 If $\gcd(a, m) = 1$, the modular inverse of $a$ modulo $m$ is
 $x \bmod m$, where $(x, y)$ are the coefficients returned by the extended
 Euclidean algorithm applied to $(a, m)$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The algorithm returns $x$ and $y$ with $ax + my = 1$. Reducing the
 equation modulo $m$ gives $ax \equiv 1 \pmod m$, so $x$ is an inverse.
 Every other inverse $x'$ satisfies $ax' \equiv 1 \equiv ax \pmod m$, and
@@ -333,23 +341,26 @@ since $\gcd(a, m) = 1$ the number $a$ is invertible modulo $m$, so
 multiplying by its inverse gives $x' \equiv x \pmod m$. The inverse is
 therefore unique modulo $m$, and $x \bmod m$ is its representative in
 $[0, m)$. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="theorem" title="Theorem">
+
+::: math theorem Theorem
 The equation $ax + by = c$ has an integer solution if and only if
 $\gcd(a, b)$ divides $c$, and when it does, all the solutions are
 $x = x_0 + (b/g)t$ and $y = y_0 - (a/g)t$ for $t \in \mathbb{Z}$, where
 $(x_0, y_0)$ is a Bezout coefficient pair and $g = \gcd(a, b)$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 If $(x, y)$ is a solution, then $g$ divides $ax + by = c$, so $g$ divides
 $c$.
 
 If $g$ divides $c$, write $c = g c'$, and let $(x_0, y_0)$ satisfy $ax_0 + by_0 = g$. Then $(x_0, y_0)$ scaled by $c'$ is not quite the solution; instead, the pair $(c' x_0, c' y_0)$ satisfies $a (c' x_0) + b (c' y_0) = c$, so a solution exists.
 
 For the general form, suppose $(x, y)$ and $(x_0, y_0)$ are two solutions. Subtracting gives $a(x - x_0) = -b(y - y_0)$. Write $g = \gcd(a, b)$, $a = g a'$, $b = g b'$ with $\gcd(a', b') = 1$. Then $a'(x - x_0) = -b'(y - y_0)$, and since $a'$ and $b'$ are coprime, $b'$ divides $x - x_0$, so $x - x_0 = b' t$ for some integer $t$, that is, $x = x_0 + (b/g)t$. Substituting back gives $y = y_0 - (a/g)t$. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

@@ -129,21 +129,25 @@ These two parts are proved separately and compose. The search part is inherited 
 
 Let $A$ be the set of candidate answers, a finite totally ordered set, and let $P : A \to \{\text{true}, \text{false}\}$ be the feasibility predicate.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A predicate $P$ over $A$ is **monotone increasing** if there is a threshold $k^*$ in $A$ such that $P(k)$ is false for every $k < k^*$ and true for every $k \ge k^*$. The value $k^*$ is the **answer**. The predicate is **monotone decreasing** when the truth values run the other way, and then the answer is the largest acceptable value.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 A **check** for $P$ is a function that, given a candidate $k$, returns true if and only if $k$ is acceptable. The check is **exact** when it agrees with $P$ on every candidate.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $P$ be monotone increasing on $A$, and let $k^*$ be its threshold. The condition $P(k)$ implies $P(k')$ for every $k' \ge k$ is exactly the property that allows the answer to be found by halving.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 Throughout the search, the answer $k^*$ lies in the current interval $[lo, hi]$. Every candidate below $lo$ has been proved unacceptable, and every candidate above $hi$ has been proved acceptable.
-</MathPanel>
+:::
+
 
 The invariant is what the halving maintains, and it is the same invariant as in binary search. The interesting part is the predicate it depends on.
 
@@ -184,11 +188,12 @@ Three checks were made over a range of width 9, and the answer 4 is right: any c
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 If the check is exact and the predicate is monotone increasing over $[L, U]$, the search returns the smallest acceptable candidate.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The invariant states that the answer lies in $[lo, hi]$, that every candidate
 below $lo$ has been proved unacceptable, and that every candidate above $hi$
 has been proved acceptable.
@@ -202,16 +207,18 @@ If the check is true at $mid$, then by the monotonicity every candidate at or ab
 If the check is false at $mid$, then by the monotonicity every candidate at or below $mid$ is also unacceptable, and the answer is greater than $mid$. Setting $lo = mid + 1$ therefore keeps the answer in the interval, and every candidate below the new $lo$ was already proved unacceptable.
 
 In both cases the invariant is preserved. The interval strictly shrinks, so the loop terminates with $lo = hi$, and the invariant says the answer is that value. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The composition of the two parts is what the theorem relies on: the proof of
 the search uses the monotonicity of the predicate, and the monotonicity is a
 property of the meaning of the check. If the check is not exact, that is, if
 it disagrees with the true feasibility somewhere, then the predicate of the
 theorem is not the predicate the check implements, and the conclusion does
 not follow.
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -219,11 +226,12 @@ not follow.
 
 **Auxiliary space:** whatever the check itself needs, usually $O(n)$ for a copy of the data or $O(1)$ for a running state. The search itself uses $O(1)$.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Binary search on the answer: $O(c \log R)$ time and $O(1)$ auxiliary space
 beyond the check's working space. The dominant term is the product of the
 check cost and the number of checks, so both are worth tightening.
-</MathPanel>
+:::
+
 
 ## Algorithm selection
 

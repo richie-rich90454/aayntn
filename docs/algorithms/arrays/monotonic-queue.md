@@ -106,37 +106,42 @@ The order of the removals is what makes the structure cheap. The expired candida
 
 Let $a_1, a_2, \ldots, a_n$ be the array and let the range at step $i$ be the window $[i-k+1, i]$.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **decreasing monotone queue** for the window ending at $i$ is a sequence of
 indices $d_1 < d_2 < \cdots < d_t$ with $d_1 \ge i-k+1$ and
 $a_{d_1} > a_{d_2} > \cdots > a_{d_t}$. Every index of the window that is
 absent from the queue is dominated by an index that is present, where an index
 $j$ is **dominated** by $i$ when $j < i$ and $a_j \le a_i$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **increasing monotone queue** is the same object with the values in
 increasing order, and it is used to answer the minimum of the window.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $j < i$ and $a_j \le a_i$. Then $j$ is not the maximum of any window
 whose right end is at least $i$. A window whose right end is before $i$ has
 already been answered, and a window whose right end is at least $i$ contains
 $i$ as well as $j$, so its maximum is at least $a_i \ge a_j$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 The front of the decreasing monotone queue holds the maximum of the window,
 and the front of the increasing monotone queue holds the minimum.
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At the end of the iteration for position $i$, the queue holds exactly the
 undominated indices of the window $[i-k+1, i]$, in increasing index order and
 strictly decreasing value order. Every index of the window that is absent
 from the queue is dominated by an index that is present.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -168,12 +173,13 @@ The answers are $4, 4, 5$, as expected. Notice that at step 5 the queue holds a 
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 For every $i \ge k$, the algorithm reports the maximum of the window
 $[i-k+1, i]$, and the mirrored algorithm reports its minimum.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The invariant states that after the iteration for $i$, the queue holds exactly
 the undominated indices of the window $[i-k+1, i]$, in increasing index order
 and strictly decreasing value order, and that every absent index of the
@@ -190,7 +196,8 @@ Step 3 removes the indices at the back whose values are at most $a_i$. By the do
 After these two steps the queue holds the indices of $[i-k+1, i]$ that are not dominated by a later index in the window, together with the indices that were already dominated and are still waiting to expire. Appending $i$ in step 4 restores the decreasing-value order, because every remaining value is greater than $a_i$, and the index order, because $i$ is the largest index so far. The invariant is preserved.
 
 By the second lemma the front of the queue holds the maximum of the window, so step 5 reports the correct value. The proof for the minimum is identical with every comparison reversed. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -198,11 +205,12 @@ By the second lemma the front of the queue holds the maximum of the window, so s
 
 **Auxiliary space: $O(k)$** for a window of size $k$, because every index in the queue is inside the current window. Without a window the bound is $O(n)$, and it is reached on a decreasing array where nothing is ever removed.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Monotonic queue: $O(n)$ time amortized and $O(k)$ auxiliary space for a
 window of size $k$. The same technique with a balanced tree: $O(n \log k)$
 time and $O(k)$ space.
-</MathPanel>
+:::
+
 
 ## Algorithm selection
 

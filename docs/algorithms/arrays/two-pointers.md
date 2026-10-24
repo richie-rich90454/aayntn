@@ -141,37 +141,41 @@ $$
 
 be the set of ordered index pairs.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A condition $C(i, j)$ on ordered pairs is **monotone in the array order** if
 there is an index $k$ such that $C(i, j)$ is true for every pair with $i < j$
 and $a_i + a_j \ge a_k$, and false for every pair with $i < j$ and
 $a_i + a_j < a_k$. In the counting problems below, $C(i, j)$ is the predicate
 $a_i + a_j < K$, and the condition is monotone because the sorted order makes
 $a_i + a_j$ grow with both indices.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 An index $l$ is **retired** at a moment when every pair $(l, j)$ with
 $l < j$ has either been counted or proved to fail. Retiring an index is
 permanent: the array does not change, so a proof obtained at one moment
 remains valid at every later moment.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let $a$ be sorted and let $l < r$. If $a_l + a_r < K$ then $C(l, j)$ holds for
 every $j$ with $l < j \le r$, so exactly $r - l$ pairs of the block qualify.
 If $a_l + a_r \ge K$ then $C(i, r)$ fails for every $i$ with $l \le i < r$, so
 no pair of the column qualifies.
-</MathPanel>
+:::
+
 
 The lemma is the whole engine. The first case retires $l$ and counts $r - l$ pairs; the second case retires $r$ and counts none.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 At the start of every iteration of the sweep, every pair $(i, j)$ with $i < l$
 has been counted or proved to fail, and every pair $(i, j)$ with $j > r$ has
 been proved to fail. The pairs that are neither counted nor ruled out are
 exactly the pairs $(i, j)$ with $l \le i < j \le r$.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -202,12 +206,13 @@ The answer is 6, and the six qualifying pairs of values are $(1, 3), (1, 4), (1,
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The sweep returns the number of ordered pairs $(i, j)$ with $1 \le i < j \le n$
 and $a_i + a_j < K$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The invariant states that every pair with a smaller index below $l$ has been
 counted or proved to fail, and every pair with a larger index above $r$ has
 been proved to fail, so the unsettled pairs are exactly those with
@@ -222,7 +227,8 @@ If $a_l + a_r < K$, then by the lemma every pair $(l, j)$ with $l < j \le r$ qua
 If $a_l + a_r \ge K$, then by the lemma no pair $(i, r)$ with $l \le i < r$ qualifies, and the pairs $(i, r)$ with $i < l$ were already settled by the first half of the invariant. The algorithm retires $r$, and the invariant is preserved for the new value of $r$.
 
 In both cases exactly one index is retired, so after at most $n - 1$ steps the indices meet. At that moment the unsettled set of pairs is empty, so every pair has been counted or proved to fail. The count is therefore the number of qualifying pairs. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -232,12 +238,13 @@ In both cases exactly one index is retired, so after at most $n - 1$ steps the i
 
 The sort is a real cost and must be counted. If the array arrives unsorted, sorting it costs $O(n \log n)$ and the sweep then costs $O(n)$, so the total is $O(n \log n)$ and not $O(n)$. On $n = 200\,000$ the sort is about $3.6 \cdot 10^6$ comparisons against the sweep's $2 \cdot 10^5$, and the sort dominates. When the answer must be $O(n)$, the frequency-map variant is the one to reach for, because it needs no sort.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 Two pointers on one array: $O(n)$ time and $O(1)$ auxiliary space, provided
 the array is already monotone in the way the pattern needs. With a
 frequency map in place of the second index: $O(n)$ expected time and $O(n)$
 space. With a sort in front: $O(n \log n)$ total.
-</MathPanel>
+:::
+
 
 ## Algorithm selection
 

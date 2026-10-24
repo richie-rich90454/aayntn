@@ -119,7 +119,7 @@ The third insight is that **the diameter is found among the antipodal pairs, and
 
 Let $P$ be a convex polygon with vertices $v_0, v_1, \ldots, v_{h-1}$ in counterclockwise order.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A line is a **supporting line** of $P$ when it meets $P$ and the whole
 polygon lies in one of its closed half-planes. Two vertices $u$ and $v$ of
 $P$ are an **antipodal pair** when there are two parallel supporting lines
@@ -127,19 +127,22 @@ of $P$, one through $u$ and the other through $v$. The vertex
 $\operatorname{opp}(i)$ opposite the edge $v_i v_{i+1}$ is the vertex that
 maximizes the distance to the line through that edge, that is, the vertex
 maximizing $\operatorname{cross}(v_i, v_{i+1}, v_j)$.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 The **diameter** of a set of points is the greatest distance between any two
 of them, and the **diameter pair** is a pair attaining it.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 If $p$ and $q$ are a diameter pair of a convex polygon, then they are an
 antipodal pair.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 Draw the line $\ell_q$ through $q$ perpendicular to the segment $pq$. If
 $\ell_q$ were not a supporting line, there would be a vertex $r$ of the
 polygon strictly on the other side of $\ell_q$ from $p$. The distance from
@@ -150,16 +153,18 @@ contradicts the fact that $p$ and $q$ are a diameter pair, so $\ell_q$ is a
 supporting line.
 
 The same argument at $p$ shows that the line $\ell_p$ through $p$ perpendicular to $pq$ is a supporting line. The lines $\ell_p$ and $\ell_q$ are both perpendicular to $pq$, so they are parallel, and each passes through one of the two vertices. Hence $p$ and $q$ are an antipodal pair. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 As the edge index $i$ advances around the polygon, the opposite index
 $\operatorname{opp}(i)$ never decreases, once the indices are read on a
 circle. Equivalently, the total number of steps taken by the opposite
 pointer over a full turn of the edge pointer is at most $2h$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The line through $v_i v_{i+1}$ rotates monotonically as $i$ advances,
 because the edges of a convex polygon turn in one direction. The
 supporting line parallel to it on the other side of the polygon touches a
@@ -171,9 +176,10 @@ adjacent, so the index advances by one. Over a full turn of the edge
 pointer the line turns through $2\pi$, and the opposite pointer makes one
 full turn as well, so the total number of steps is at most $h$ per
 direction and at most $2h$ in total. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="invariant" title="Invariant">
+
+::: math invariant Invariant
 At the start of the iteration for the edge $v_i v_{i+1}$, the opposite
 pointer $j$ satisfies $\operatorname{cross}(v_i, v_{i+1}, v_j) \ge
 \operatorname{cross}(v_i, v_{i+1}, v_{j-1})$ and
@@ -182,7 +188,8 @@ $\operatorname{cross}(v_i, v_{i+1}, v_{j+1}) \le
 distance to the line through the edge. The inner loop restores this
 invariant for the next edge, and the loop is the only place where $j$
 moves, so the total movement of $j$ over the whole sweep is $O(h)$.
-</MathPanel>
+:::
+
 
 ## Algorithm derivation
 
@@ -226,12 +233,13 @@ The opposite pointer visited the indices $3$, $3$, $4$ and $6$, counting $v_0$ a
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The rotating calipers sweep returns the squared diameter of the convex
 polygon.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 **The loop finds the opposite vertex.** Fix an edge $v_i v_{i+1}$. The
 values $\operatorname{cross}(v_i, v_{i+1}, v_j)$ over the vertices $j$ are
 proportional to the signed distances from the vertices to the line through
@@ -245,7 +253,8 @@ maximizer for every edge.
 **The examined pairs include the diameter pair.** Let $p$ and $q$ be a diameter pair. By the lemma they are antipodal, so there are two parallel supporting lines through them. Rotate this pair of parallel lines continuously. The two contact points move along the boundary of the polygon and remain at vertices, except at the finitely many angles at which one of the lines lies along an edge. Because the normal cones of $p$ and $q$ are angular intervals and the direction perpendicular to $pq$ lies in both of them, a rotation of the lines stays with $p$ and $q$ as the contact points until one of the lines reaches an edge of the polygon. At that moment the first line lies along the edge $v_i v_{i+1}$ with $p$ one of its endpoints, and the second line still touches $q$, so $q$ is the opposite vertex of that edge. The pair $(p, q)$ is therefore one of the two pairs examined for that edge, and the algorithm computes its distance.
 
 **The maximum is the diameter.** Every examined pair is a pair of vertices, so its distance is at most the diameter. The diameter pair is among the examined pairs, so the maximum over the examined distances is exactly the diameter. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 

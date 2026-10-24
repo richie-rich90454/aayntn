@@ -152,21 +152,23 @@ The laboratory below steps through the same table one cell at a time; the descri
 
 Let $n$ be the number of items. Item $i$ has weight $w_i$ and value $v_i$, with $w_i \ge 1$. Let $W$ be the capacity.
 
-<MathPanel type="definition" title="Definition">
+::: math definition Definition
 A **feasible selection** is a subset $S \subseteq \{1, 2, \ldots, n\}$ such that
 $\sum_{i \in S} w_i \le W$. Its **value** is $\sum_{i \in S} v_i$. The
 **optimum** is the largest value of any feasible selection. The prefix
 $\text{0/1}$ records that each item is either selected once or not selected
 at all.
-</MathPanel>
+:::
 
-<MathPanel type="definition" title="Definition">
+
+::: math definition Definition
 Let $F(i, c)$ be the optimum of the instance formed by the first $i$ items
 and the capacity $c$, so that $F(i, c) = 0$ for every $c \ge 0$ when
 $i = 0$.
-</MathPanel>
+:::
 
-<MathPanel type="recurrence" title="Recurrence">
+
+::: math recurrence Recurrence
 For $1 \le i \le n$ and $0 \le c \le W$,
 
 $$
@@ -178,9 +180,10 @@ F(i-1, c), & \text{if } c < w_i, \\
 $$
 
 The answer is $F(n, W)$.
-</MathPanel>
+:::
 
-<MathPanel type="lemma" title="Lemma">
+
+::: math lemma Lemma
 Let `table` be an array of $W + 1$ entries, and let the sweep for item $i$
 visit the capacities in the order $W, W-1, \ldots, w_i$, assigning
 
@@ -189,7 +192,8 @@ $$
 $$
 
 If every entry of `table` holds $F(i-1, \cdot)$ before the sweep begins, then every entry holds $F(i, \cdot)$ after the sweep ends.
-</MathPanel>
+:::
+
 
 The lemma is the heart of the article, and it is proved in the correctness proof below. The condition it assumes is exactly the condition that the direction of the sweep exists to guarantee.
 
@@ -201,10 +205,11 @@ The update rule for item $i$ is: for every capacity $c$ from $W$ down to $w_i$, 
 
 The rule is correct by the recurrence, provided one thing holds: when `table[c]` is updated, the cell `table[c - w_i]` must still hold $F(i-1, c - w_i)$ and not $F(i, c - w_i)$.
 
-<MathPanel type="invariant" title="Invariant">
+::: math invariant Invariant
 At the moment the sweep for item $i$ updates the cell with capacity $c$,
 the cell with capacity $c - w_i$ still holds $F(i-1, c - w_i)$.
-</MathPanel>
+:::
+
 
 The descending order establishes the invariant. The sweep visits capacities from $W$ downwards, so when it reaches $c$ it has already visited every capacity greater than $c$ and none that are smaller. Since $w_i \ge 1$, the capacity $c - w_i$ is strictly smaller than $c$, so that cell has not been touched during this sweep and still belongs to the previous row.
 
@@ -267,12 +272,13 @@ The selection that achieves it is items 3 and 4: weight $5 + 2 = 7$ and value $7
 
 ## Correctness proof
 
-<MathPanel type="theorem" title="Theorem">
+::: math theorem Theorem
 The descending sweep computes $F(n, W)$, the maximum value of any feasible
 selection of the $n$ items with capacity $W$.
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 First, the two-dimensional recurrence is correct. For $i = 0$ there are no
 items, so the only selection is the empty one, and $F(0, c) = 0$ is right.
 
@@ -283,9 +289,10 @@ If it omits item $i$, it is a feasible selection of the first $i - 1$ items with
 If it includes item $i$, then $c \ge w_i$, and removing item $i$ from it leaves a feasible selection of the first $i - 1$ items with capacity $c - w_i$, so its value is at most $F(i-1, c - w_i) + v_i$, and the bound is attained by adding item $i$ to a selection that reaches that bound.
 
 So the optimum is the larger of the two candidates, and when $c < w_i$ only the first is available. That is exactly the recurrence. By induction the recurrence computes $F$ correctly. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 The one-dimensional sweep computes the same table as the two-dimensional
 recurrence. This is the proof of the descending order.
 
@@ -304,14 +311,16 @@ which is the recurrence for $F(i, c)$. So the cell holds $F(i, c)$ after the ass
 The capacities below $w_i$ are not visited. For those, $c < w_i$, and the recurrence gives $F(i, c) = F(i-1, c)$, which is the value the cell already holds.
 
 Every cell therefore holds $F(i, \cdot)$ when the sweep ends, which establishes the induction hypothesis for the next item. After the last item, `table[W]` holds $F(n, W)$, and by the first theorem that is the optimum. $\square$
-</MathPanel>
+:::
 
-<MathPanel type="proof" title="Proof">
+
+::: math proof Proof
 An ascending sweep does not compute $F$, and the difference is exactly the
 double counting of the current item.
 
 In an ascending sweep, the cell `table[c - w_i]` is visited before the cell `table[c]`. If the sweep for item $i$ is the first one, then at the moment `table[c]` is assigned, `table[c - w_i]` already holds $F(i, c - w_i)$, the optimum that already includes item $i$. The candidate that is computed is therefore $F(i, c - w_i) + v_i$, which counts item $i$ twice. The sweep solves the unbounded problem, in which each item may be taken any number of times. $\square$
-</MathPanel>
+:::
+
 
 ## Complexity analysis
 
@@ -323,11 +332,12 @@ The bound is pseudo-polynomial, and the distinction matters. The running time de
 
 Two practical details belong in this section because they decide whether the answer is right. The accumulator must be 64 bits: with $n = 2000$ items of value $10^9$ each, the optimum can reach $2 \cdot 10^{12}$, which does not fit in a 32-bit signed integer. And the table itself is $8(W + 1)$ bytes with a 64-bit entry, so at $W = 10^6$ it costs about 8 MB, which is comfortable; at $W = 10^7$ it costs 80 MB, which may not be.
 
-<MathPanel type="complexity" title="Complexity">
+::: math complexity Complexity
 0/1 knapsack with $n$ items and capacity $W$: $O(nW)$ time and $O(W)$
 auxiliary space, with a 64-bit accumulator. The bound is
 pseudo-polynomial in the value of $W$.
-</MathPanel>
+:::
+
 
 ## Algorithm selection
 
