@@ -1,0 +1,30 @@
+id: codeforces.616d.longest-k-good-segment
+title: Longest k-Good Segment
+source: Codeforces
+contest: "Educational Codeforces Round 5"
+division: silver
+url: https://codeforces.com/problemset/problem/616/D
+editorialUrl: https://codeforces.com/blog/entry/22712
+techniques:
+    - searching.sliding-window-variants
+prerequisites:
+    - searching.sliding-window
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - The array length reaches 500,000, so trying every segment is about 125 billion segments at the limit.
+    - Values reach 1,000,000, so a frequency array indexed by value is practical, while a hash map is the alternative when the value range is unbounded.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The condition depends only on how many different values the segment contains, not on their order or their frequencies beyond being nonzero.
+    - Keep a window, a count of each value in it, and a distinct counter. The window is good exactly when the distinct counter is at most k.
+    - Push the right end one element at a time, and while the distinct counter exceeds k remove the left end. The remaining window is the longest good segment ending at that right end.
+    - Record both endpoints when the length improves, because the problem asks for indices rather than for the length.
+discussion: >-
+    This is the longest mode of the window state machine with a frequency map and a distinct counter. The right end advances exactly once per element, and the left end advances only while the segment contains too many different values, so every index enters and leaves the window at most once and the scan is linear. The only subtlety is the output: the problem asks for the two endpoints of any longest segment, so the machine records the start and the end together rather than only the best length.
+related:
+    - codeforces.279b.books
+    - usaco.2012.mar.silver.flowerpot

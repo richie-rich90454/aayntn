@@ -1,0 +1,30 @@
+id: codeforces.279b.books
+title: Books
+source: Codeforces
+contest: "Codeforces Round 171 (Div. 2)"
+division: silver
+url: https://codeforces.com/problemset/problem/279/B
+editorialUrl: https://codeforces.com/blog/entry/6864
+techniques:
+    - searching.sliding-window-variants
+prerequisites:
+    - searching.sliding-window
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - The number of books reaches 100,000, so trying every starting book is quadratic.
+    - A prefix of the reading times can sum to 10^9, so a 64-bit accumulator is the safe choice even though a signed 32-bit type is just wide enough.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The books are read in order, so the chosen books are always a contiguous window rather than an arbitrary subset.
+    - The time spent is the sum of the window, and adding a book can only increase that sum.
+    - Grow the right end, add its reading time, and while the sum exceeds the free time remove the left end.
+    - Record the largest number of books remaining in the window after the shrink loop.
+discussion: >-
+    The state machine is the same longest mode as the canonical distinct-character program, but the maintained summary is a running sum instead of a frequency map. Reading times are positive, so removing a book always decreases the sum and the longest-window shrink rule is valid. The right end advances once per book and the left end at most once per book, which gives a linear scan after the input is read. Sorting would destroy the reading order, so the input order must be preserved.
+related:
+    - codeforces.616d.longest-k-good-segment
+    - usaco.2012.mar.silver.flowerpot

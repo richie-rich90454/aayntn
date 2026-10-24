@@ -1,0 +1,101 @@
+algorithm: searching.sliding-window-variants
+title: The sliding window variants with a state machine
+summary: Run the window as a five-state machine that grows, checks, shrinks, and records, so the longest, shortest, fixed-size, and counting variants differ only in their transition table.
+subject: searching
+divisions: [silver, gold]
+importance: common-contest-technique
+prerequisites:
+    required: [searching.sliding-window, foundations.complexity]
+    recommended: [searching.two-pointers, searching.binary-search]
+complexity:
+    time: "O(n)"
+    space: "O(1) for a fixed byte alphabet, O(sigma) for a hash map"
+assumptions:
+    - The window predicate is monotone in the direction the selected variant relies on.
+    - The alphabet is small enough to index a frequency array, or the implementation uses a hash map.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a string and k, then prints the length of the longest substring with at most k distinct characters."
+      time: "O(n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A string s of lowercase English letters, then an integer k."
+      outputs: "The length of the longest substring of s with at most k distinct characters."
+      notes: "The program buffers the string, so it holds O(n) input characters; the window state is a 256-entry counter array plus one distinct count, which is O(1) auxiliary space. The string is the first whitespace-delimited token and k is the second, so a missing or truncated input prints 0. A negative k is treated as 0."
+      operations:
+          [read-string, push-right, update-frequency, shrink-left, track-distinct, record-length]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a string and k, then prints the length of the longest substring with at most k distinct characters."
+      time: "O(n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A string s of lowercase English letters, then an integer k."
+      outputs: "The length of the longest substring of s with at most k distinct characters."
+      notes: "The program buffers the string, so it holds O(n) input characters; the window state is a 256-entry counter array plus one distinct count, which is O(1) auxiliary space. The string is the first whitespace-delimited token and k is the second, so a missing or truncated input prints 0. A negative k is treated as 0."
+      operations:
+          [read-string, push-right, update-frequency, shrink-left, track-distinct, record-length]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a string and k, then prints the length of the longest substring with at most k distinct characters."
+      time: "O(n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A string s of lowercase English letters, then an integer k."
+      outputs: "The length of the longest substring of s with at most k distinct characters."
+      notes: "The class is named Main so the file can be submitted to a judge unchanged. The scanner reads the string and k as tokens, so leading whitespace and a one-line or two-line layout both work; the program holds O(n) input characters. The window state is a 256-entry counter array plus one distinct count, which is O(1) auxiliary space. Missing input prints 0 and a negative k is treated as 0."
+      operations:
+          [read-string, push-right, update-frequency, shrink-left, track-distinct, record-length]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a string and k, then prints the length of the longest substring with at most k distinct characters."
+      time: "O(n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A string s of lowercase English letters, then an integer k."
+      outputs: "The length of the longest substring of s with at most k distinct characters."
+      notes: "The input is tokenized into a list, so the program holds O(n) input characters; the frequency map holds at most one entry per distinct character in the window, which is O(sigma) auxiliary space and O(1) for a fixed alphabet. The string is the first token and k is the second; missing input prints 0 and a negative k is treated as 0."
+      operations:
+          [read-string, push-right, update-frequency, shrink-left, track-distinct, record-length]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a string and k, then prints the length of the longest substring with at most k distinct characters."
+      time: "O(n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A string s of lowercase English letters, then an integer k."
+      outputs: "The length of the longest substring of s with at most k distinct characters."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program reads the string with one ReadLn, reads k with one Read, and uses SysUtils. The window state is a 256-entry counter array plus one distinct count, which is O(1) auxiliary space. The source compiles under pas2js: no IOResult, one argument per Read, and no 128-bit integers. A missing k leaves the value at 0, and a negative k is treated as 0."
+      operations:
+          [read-string, push-right, update-frequency, shrink-left, track-distinct, record-length]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a string and k, then prints the length of the longest substring with at most k distinct characters."
+      time: "O(n)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "A string s of lowercase English letters, then an integer k."
+      outputs: "The length of the longest substring of s with at most k distinct characters."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The program tokenizes the whole input, so it holds O(n) input characters; the window state is a 256-entry counter array plus one distinct count, which is O(1) auxiliary space. The string is the first token and k is the second; missing input prints 0 and a negative k is treated as 0."
+      operations:
+          [read-string, push-right, update-frequency, shrink-left, track-distinct, record-length]

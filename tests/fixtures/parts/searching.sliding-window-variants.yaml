@@ -1,0 +1,9 @@
+- name: two distinct values on a short string
+  input: "abcba\n2\n"
+  expected: "3\n"
+- name: repeated characters under a larger bound
+  input: "aabacbebebe\n3\n"
+  expected: "7\n"
+- name: zero distinct values forces the empty window
+  input: "aaaa\n0\n"
+  expected: "0\n"

@@ -1,0 +1,31 @@
+id: usaco.2012.mar.silver.flowerpot
+title: Flowerpot
+source: USACO
+contest: 2012 March Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=125
+editorialUrl: https://usaco.org/current/data/sol_fpot.html
+techniques:
+    - searching.sliding-window-variants
+prerequisites:
+    - foundations.sorting
+    - searching.sliding-window
+difficulty: 3
+estimatedMinutes: 40
+specialConstraints:
+    - The number of raindrops reaches 100,000, so trying every pair of pot edges is about 5 billion intervals.
+    - Coordinates reach 1,000,000, and the answer is an x-width while the rain duration is a y-difference, so the two axes must not be confused.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Sort the drops by x. A flowerpot placed on the x-axis then captures a contiguous range of the sorted drops.
+    - The width of the pot is the x difference between its outermost drops, while the time it collects rain is the y difference between the highest and lowest drops inside it.
+    - Adding a drop to a window can only increase the y range, so the predicate is monotone under growth and the shortest window rule applies.
+    - Maintain the minimum and maximum y of the window with two monotonic deques, record the width while the range is at least D, and then remove the left drop.
+discussion: >-
+    In the state machine language this is the shortest mode with a min-max summary. Sorting by x turns a choice of pot edges into a choice of a contiguous window, and the rain duration is the range of the y values in that window. The range is monotone under growth, so the machine expands until the range reaches D and then shrinks while it remains at least D, recording the x-width after every expansion and before every removal. Two monotonic deques keep the minimum and the maximum in constant amortized time, which makes the scan linear after the sort.
+related:
+    - codeforces.616d.longest-k-good-segment
+    - codeforces.279b.books
