@@ -1,0 +1,9 @@
+- name: a string with overlapping repeats, where the smallest character occurs three times
+  input: "ababa\n"
+  expected: "9\n3\n"
+- name: a clone split, where the repeated character is not the smallest one
+  input: "abb\n"
+  expected: "5\n1\n"
+- name: the single-character edge case, with no clone and no propagation
+  input: "a\n"
+  expected: "1\n1\n"

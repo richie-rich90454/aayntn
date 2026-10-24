@@ -1,0 +1,29 @@
+id: cses.2108.substring-order-i
+title: Substring Order I
+source: CSES
+contest: CSES Problem Set
+division: platinum
+url: https://cses.fi/problemset/task/2108
+techniques:
+    - strings.suffix-automaton
+prerequisites:
+    - strings.suffix-automaton
+    - foundations.complexity
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The string has up to 100000 characters, so the number of distinct substrings is quadratic and they cannot all be generated.
+    - k can be as large as n(n+1)/2, so the path counts and the rank are 64-bit values.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Every distinct substring is a unique path from the initial state, so lexicographic order is the order of the outgoing characters.
+    - Let f[v] be the number of nonempty strings spellable from v, including the one that stops immediately.
+    - A transition to u starts a block of f[u] strings that share the next character.
+    - Walk the characters in alphabetical order, subtract whole blocks, and stop when the remaining rank is one.
+discussion: >-
+    The automaton is a deterministic acyclic graph whose paths from the initial state are exactly the distinct substrings, so counting strings from a state is a path-counting dynamic program. Because every transition increases the length, decreasing length order evaluates the recurrence in one pass. The k-th string is then found by descending the automaton, subtracting the size of each alphabetical block until the rank falls inside one. The same dynamic program answers the counting version of the problem, where the task is the number of distinct substrings smaller than a given string.
+related:
+    - cses.2105.distinct-substrings
+    - cses.2109.substring-order-ii

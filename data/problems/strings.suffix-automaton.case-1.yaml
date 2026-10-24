@@ -1,0 +1,29 @@
+id: cses.2105.distinct-substrings
+title: Distinct Substrings
+source: CSES
+contest: CSES Problem Set
+division: gold
+url: https://cses.fi/problemset/task/2105
+techniques:
+    - strings.suffix-automaton
+prerequisites:
+    - strings.trie
+    - foundations.complexity
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The string has up to 100000 characters, so the number of distinct substrings can reach about 5 billion and does not fit in a 32-bit integer.
+    - Writing down every substring needs quadratic memory, so the count has to be accumulated from the automaton.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Group substrings by the set of positions where they end, and let one state represent each group.
+    - A state knows the longest string in its group and the longest proper suffix in a different group.
+    - The strings in a state are exactly the suffixes whose lengths lie between the two stored lengths.
+    - Sum len[v] - len[link[v]] over every non-initial state.
+discussion: >-
+    The classes of equal end-position sets partition the distinct substrings, and each class contributes a contiguous interval of lengths. That turns the quadratic enumeration into a linear sum over the states. The construction adds one state per character and at most one clone, so the automaton stays linear even though the answer is quadratic in size. A suffix array with the longest-common-prefix formula is an equally valid solution, but the automaton also supports the occurrence queries that the other problems in this section need.
+related:
+    - cses.2108.substring-order-i
+    - cses.2109.substring-order-ii

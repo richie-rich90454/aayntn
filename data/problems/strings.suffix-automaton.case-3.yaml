@@ -1,0 +1,29 @@
+id: cses.2109.substring-order-ii
+title: Substring Order II
+source: CSES
+contest: CSES Problem Set
+division: platinum
+url: https://cses.fi/problemset/task/2109
+techniques:
+    - strings.suffix-automaton
+prerequisites:
+    - strings.suffix-automaton
+    - foundations.complexity
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The string has up to 100000 characters, so the substrings counted with multiplicity number about 5 billion and cannot be enumerated.
+    - k can be as large as n(n+1)/2, so the weighted path counts and the rank are 64-bit values.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The automaton groups equal substrings, and each state also knows how many times its strings occur.
+    - From a state, the copies of the string that stops there come first, because it is a prefix of all its proper extensions.
+    - Let ways[v] be cnt[v] plus the sum of ways over the outgoing transitions, and compute it in decreasing length order.
+    - Subtract cnt[u] before descending into a state, because those copies are all the same string.
+discussion: >-
+    The k-th distinct substring walk counts every string once, but this problem counts the copies, so each stop at a state is weighted by the size of its end-position set. The weighted path count is computed in the same decreasing length order as the occurrence counts, and every transition still goes to a longer state. The walk then subtracts whole alphabetical blocks, and inside a chosen block it either stops among the identical copies of the current string or subtracts them and continues. The result is linear in the string length plus the length of the answer, although the number of substrings is quadratic.
+related:
+    - cses.2105.distinct-substrings
+    - cses.2108.substring-order-i

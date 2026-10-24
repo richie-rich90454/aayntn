@@ -1,0 +1,93 @@
+algorithm: strings.suffix-automaton
+title: The suffix automaton
+summary: Build the minimal automaton of all substrings in one pass, then read the number of distinct substrings from the class intervals and the occurrence counts from the suffix-link tree.
+subject: strings
+divisions: [gold, platinum]
+importance: advanced-technique
+complexity:
+    time: "O(26n) for a lowercase alphabet"
+    space: "O(26n) for the transition table"
+assumptions:
+    - The string is fixed before the queries, so the automaton is built once and reused.
+    - The alphabet is small and fixed, so a state can carry one transition per symbol.
+    - The number of distinct substrings is accumulated in 64 bits, because it can exceed 2^31.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton in one pass and prints the distinct-substring count and the occurrence count of the smallest substring."
+      time: "O(26n)"
+      auxiliarySpace: "O(26n) for the transition table, plus O(n) for the lengths, links, counts and order"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the number of occurrences of the lexicographically smallest nonempty substring."
+      notes: "The string is read into a growable buffer. The transition table is a flat int array with 26 entries per state, every prefix state is seeded with one, every clone with zero, and the counts are propagated over the suffix-link tree in decreasing length order after a counting sort. The distinct count is a long long."
+      operations: [build, count-distinct-substrings, count-occurrences]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton in one pass and prints the distinct-substring count and the occurrence count of the smallest substring."
+      time: "O(26n)"
+      auxiliarySpace: "O(26n) for the transition table, plus O(n) for the lengths, links, counts and order"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the number of occurrences of the lexicographically smallest nonempty substring."
+      notes: "Each state owns a std::array of 26 transitions, initialized to -1. The construction follows suffix links, clones a class when the new suffix does not fit, seeds prefixes with one and clones with zero, and propagates the counts in decreasing length order. The distinct count is a long long."
+      operations: [build, count-distinct-substrings, count-occurrences]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton in one pass and prints the distinct-substring count and the occurrence count of the smallest substring."
+      time: "O(26n)"
+      auxiliarySpace: "O(26n) for the transition table, plus O(n) for the lengths, links, counts and order"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the number of occurrences of the lexicographically smallest nonempty substring."
+      notes: "The class Main stores the transition table in a flat int array, so the 26 entries of a state are contiguous. Cloning copies a row with System.arraycopy. The prefix seeds and the clone zeros are propagated by decreasing length, and the distinct count is a long."
+      operations: [build, count-distinct-substrings, count-occurrences]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton in one pass and prints the distinct-substring count and the occurrence count of the smallest substring."
+      time: "O(26n)"
+      auxiliarySpace: "O(26n) for the transition table, plus O(n) for the lengths, links, counts and order"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the number of occurrences of the lexicographically smallest nonempty substring."
+      notes: "The transition table is a flat Python list indexed by state and character. The clone copies a 26-element slice of the row. Counts are propagated by decreasing length, and Python's arbitrary-precision integers make the distinct count exact without a special type."
+      operations: [build, count-distinct-substrings, count-occurrences]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton in one pass and prints the distinct-substring count and the occurrence count of the smallest substring."
+      time: "O(26n)"
+      auxiliarySpace: "O(26n) for the transition table, plus O(n) for the lengths, links, counts and order"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the number of occurrences of the lexicographically smallest nonempty substring."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The transition table is a flat dynamic array of Integer, cloned with an explicit 26-entry copy. Prefix states are seeded with one and clones with zero; the counts are Int64 and are propagated by decreasing length. The listing reads the string with a single ReadLn and uses SysUtils."
+      operations: [build, count-distinct-substrings, count-occurrences]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the automaton in one pass and prints the distinct-substring count and the occurrence count of the smallest substring."
+      time: "O(26n)"
+      auxiliarySpace: "O(26n) for the transition table, plus O(n) for the lengths, links, counts and order"
+      status: unverified
+      inputs: "One line holding a nonempty string of lowercase Latin letters."
+      outputs: "The first line holds the number of distinct nonempty substrings; the second holds the number of occurrences of the lexicographically smallest nonempty substring."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The transition table is an Int32Array with 26 entries per state, cloned with copyWithin. Occurrence counts fit in 32-bit integers because they never exceed the string length, and the distinct count is a BigInt so it stays exact."
+      operations: [build, count-distinct-substrings, count-occurrences]
