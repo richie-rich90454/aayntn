@@ -1,0 +1,30 @@
+id: codeforces.44.g.shooting-gallery
+title: Shooting Gallery
+source: Codeforces
+contest: School Team Contest 2 (Winter Computer School 2010/11)
+division: platinum
+url: https://codeforces.com/problemset/problem/44/G
+techniques:
+    - geometry.kd-trees
+prerequisites:
+    - geometry.kd-trees
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - There are up to 10^5 targets and 10^5 shots, so a scan over the remaining targets per shot is too slow.
+    - Each target is an axis-aligned rectangle in the shooting plane, and every target has a distinct z coordinate.
+    - A shot hits the target of smallest z among the rectangles that contain the shot point, and that target is then removed.
+    - All coordinates are integers at most 10^7, and the answer for a shot that hits nothing is 0.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The targets are not equivalent, because among those containing a shot point, the one with the smallest z is the only one that matters.
+    - Store the targets in a two-dimensional spatial structure and keep the minimum z of each subtree, together with the bounding rectangle of the subtree.
+    - A point query descends only into subtrees whose bounding rectangle contains the point and whose minimum z is no worse than the best target found so far.
+    - When a shot hits a target, mark the target as removed and update the minimum z on the path back to the root; the bounding rectangles can stay unchanged.
+discussion: >-
+    The problem is a three-dimensional question that becomes a two-dimensional structure with an extra aggregate. The rectangles live in the shooting plane, the z coordinate supplies the priority, and the shots ask for the minimum-priority rectangle containing a point. A kd-tree over the rectangle boxes stores the minimum z of each subtree, so a query can discard a subtree either because the point is outside its box or because every target in it is behind the best hit so far. Deletions are lazy: the target's z becomes infinite and the aggregate is repaired on the way back. The average-case bound is good enough for the limits, but an adversary can still force a linear query, which is why the problem sits at the top of the division.
+related:
+    - cses.2194.minimum-euclidean-distance
+    - kattis.closestpair1

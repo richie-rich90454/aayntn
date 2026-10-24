@@ -1,0 +1,31 @@
+id: kattis.closestpair1
+title: Closest Pair (Uniform)
+source: Kattis
+contest: KTH CSC Popup 2005
+division: gold
+url: https://open.kattis.com/problems/closestpair1
+techniques:
+    - geometry.kd-trees
+prerequisites:
+    - geometry.kd-trees
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The input holds several test cases and is terminated by a case beginning with 0, so the tree must be rebuilt from scratch for each case.
+    - Each test case has up to 100000 points with floating-point coordinates of at most two decimals and absolute value at most 100000.
+    - The points are promised to be independent and uniform in the square, which is exactly the distribution on which a kd-tree behaves well.
+    - Any closest pair may be printed, and the four coordinates are printed on one line per test case.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Scale every coordinate by 100 and store it as an integer, so squared distances are exact and the comparison never depends on floating-point rounding.
+    - Build one kd-tree per test case over the scaled points, then ask for the nearest neighbor of each point and ignore the point itself.
+    - Keep the original two-decimal coordinates alongside the scaled integers so the winning pair can be printed directly.
+    - Reset the best distance and the best pair for every test case, and stop as soon as the terminating zero is read.
+discussion: >-
+    The uniform promise is the point of the problem: a kd-tree has no worst-case guarantee on an arbitrary point set, but on independent uniform points the rectangles shrink quickly and a nearest-neighbor query visits only a logarithmic number of nodes on average. Scaling by 100 removes the decimal formatting from the geometry and makes the squared-distance comparisons exact. The output accepts any closest pair, so the tie rule is irrelevant here, but the per-case reset and the terminating zero are the two places where a correct search produces the wrong file.
+related:
+    - cses.2194.minimum-euclidean-distance
+    - codeforces.44.g.shooting-gallery

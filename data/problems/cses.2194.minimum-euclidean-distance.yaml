@@ -1,0 +1,31 @@
+id: cses.2194.minimum-euclidean-distance
+title: Minimum Euclidean Distance
+source: CSES
+contest: CSES Problem Set
+division: gold
+url: https://cses.fi/problemset/task/2194
+techniques:
+    - geometry.kd-trees
+prerequisites:
+    - geometry.kd-trees
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - There are up to 2 * 10^5 points, so comparing every pair is too slow.
+    - The coordinates reach 10^9 in absolute value, so a squared distance reaches 8 * 10^18 and needs a signed 64-bit integer, while the answer itself is guaranteed to be exact.
+    - The output is d^2 rather than d, so the whole computation can stay in integers and no square root is needed.
+    - The points are distinct, so the minimum distance is positive.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The answer is a minimum over pairs, but the pair is not known in advance, so a structure is needed that can rule out whole regions of the plane.
+    - Build a tree by splitting alternately on x and y at the median of the current range, so every subtree fits in a rectangle and the depth is O(log n).
+    - For each point, search for its nearest neighbor, visiting the nearer child first and skipping the far child when the squared distance to the splitting plane already exceeds the best squared distance found.
+    - Query with every point and ignore the point itself; the smallest answer over the queries is the minimum squared distance.
+discussion: >-
+    The task is the closest-pair problem with squared-distance output. A kd-tree turns it into n nearest-neighbor queries, each expected logarithmic on a balanced tree, and the pruning test uses the splitting plane instead of a strip around a divide-and-conquer cut. The integer bound is the main trap: the coordinate difference reaches 2 * 10^9 and the sum of two squares reaches 8 * 10^18, which fits a signed 64-bit integer but not a 32-bit one. The answer is already squared, so no floating-point step is needed anywhere.
+related:
+    - kattis.closestpair1
+    - codeforces.44.g.shooting-gallery

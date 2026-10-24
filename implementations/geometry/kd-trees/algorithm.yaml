@@ -1,0 +1,96 @@
+algorithm: geometry.kd-trees
+title: K-D trees
+summary: A balanced tree that splits alternately on x and y at the median answers nearest-neighbor queries by descending the nearer side and pruning any subtree that the splitting plane puts out of reach.
+subject: geometry
+divisions: [gold, platinum]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.sorting]
+    recommended: [foundations.complexity, geometry.closest-pair, searching.binary-search]
+complexity:
+    time: "O(n log^2 n) build with a full sort per node; O(log n) average per query and O(n) worst case"
+    space: "O(n)"
+assumptions:
+    - The points are two-dimensional and the distance is the squared Euclidean distance.
+    - The coordinates are integers of magnitude at most 10^7, so every squared distance is exact below 2^53 and fits in a signed 64-bit integer.
+    - The point set is static; insertion and deletion are out of scope.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical C program: it builds the tree over the input points and prints the nearest point for each query."
+      time: "O(n log^2 n) build, O(log n) average per query"
+      auxiliarySpace: "O(n) for the points, the traversal order and the two child arrays"
+      status: unverified
+      inputs: "n, then n lines with an integer x and y, then q, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest input point, with ties broken by the lowest index."
+      notes: "The build sorts each subrange by the current axis and takes the middle element as the node, so the tree is balanced and the axes alternate by depth. The query visits the child on the query's side first and enters the other child only when the squared distance to the splitting plane is at most the best squared distance, which keeps equal-distance candidates with a lower index reachable."
+      operations: [build, nearest-neighbor, prune]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical C++17 program: it builds the tree over the input points and prints the nearest point for each query."
+      time: "O(n log^2 n) build, O(log n) average per query"
+      auxiliarySpace: "O(n) for the points, the traversal order and the two child arrays"
+      status: unverified
+      inputs: "n, then n lines with an integer x and y, then q, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest input point, with ties broken by the lowest index."
+      notes: "The build sorts each subrange by the current axis and takes the middle element as the node, so the tree is balanced and the axes alternate by depth. The query visits the child on the query's side first and enters the other child only when the squared distance to the splitting plane is at most the best squared distance, which keeps equal-distance candidates with a lower index reachable. Replacing the per-node sort with std::nth_element would reduce the build to O(n log n) expected time."
+      operations: [build, nearest-neighbor, prune]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical Java program: it builds the tree over the input points and prints the nearest point for each query."
+      time: "O(n log^2 n) build, O(log n) average per query"
+      auxiliarySpace: "O(n) for the points, the traversal order and the two child arrays"
+      status: unverified
+      inputs: "n, then n lines with an integer x and y, then q, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest input point, with ties broken by the lowest index."
+      notes: "The build sorts a subrange of the boxed index array by the current axis and takes the middle element as the node, so the tree is balanced and the axes alternate by depth. The query visits the child on the query's side first and enters the other child only when the squared distance to the splitting plane is at most the best squared distance, which keeps equal-distance candidates with a lower index reachable."
+      operations: [build, nearest-neighbor, prune]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical Python program: it builds the tree over the input points and prints the nearest point for each query."
+      time: "O(n log^2 n) build, O(log n) average per query"
+      auxiliarySpace: "O(n) for the points, the traversal order and the two child arrays"
+      status: unverified
+      inputs: "n, then n lines with an integer x and y, then q, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest input point, with ties broken by the lowest index."
+      notes: "The build sorts a list of indices for each node by the current axis and takes the middle element as the node, so the tree is balanced and the axes alternate by depth. Python's integers do not overflow, and the query visits the child on the query's side first and enters the other child only when the squared distance to the splitting plane is at most the best squared distance."
+      operations: [build, nearest-neighbor, prune]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical Pascal program: it builds the tree over the input points and prints the nearest point for each query."
+      time: "O(n log^2 n) build, O(log n) average per query"
+      auxiliarySpace: "O(n) for the points, the traversal order and the two child arrays"
+      status: unverified
+      inputs: "n, then n lines with an integer x and y, then q, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest input point, with ties broken by the lowest index."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The build uses an explicit merge sort over the index array because Free Pascal has no library median selection, then takes the middle element as the node. The query visits the child on the query's side first and enters the other child only when the squared distance to the splitting plane is at most the best squared distance. The program uses Int64, one argument per Read, and no IOResult so that it compiles under pas2js."
+      operations: [build, nearest-neighbor, prune]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical JavaScript program: it builds the tree over the input points and prints the nearest point for each query."
+      time: "O(n log^2 n) build, O(log n) average per query"
+      auxiliarySpace: "O(n) for the points, the traversal order and the two child arrays"
+      status: unverified
+      inputs: "n, then n lines with an integer x and y, then q, then q lines with an integer x and y."
+      outputs: "One line per query holding the 1-based index of the nearest input point, with ties broken by the lowest index."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The build sorts a copy of each index subrange by the current axis and takes the middle element as the node, so the tree is balanced and the axes alternate by depth. Every squared distance stays below 2^53 for the stated coordinate bound, so Number comparisons are exact."
+      operations: [build, nearest-neighbor, prune]

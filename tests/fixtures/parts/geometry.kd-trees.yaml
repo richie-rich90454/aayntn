@@ -1,0 +1,9 @@
+- name: five points and four queries
+  input: "5\n0 0\n5 5\n10 0\n2 8\n9 9\n4\n1 1\n8 8\n4 4\n10 1\n"
+  expected: "1\n5\n2\n3\n"
+- name: ties are broken by the lowest index
+  input: "4\n0 0\n2 0\n0 2\n2 2\n4\n1 0\n2 1\n1 1\n1 2\n"
+  expected: "1\n2\n1\n3\n"
+- name: edge case, duplicate points and an exact match
+  input: "3\n7 -3\n7 -3\n-4 2\n3\n7 -3\n-4 2\n0 0\n"
+  expected: "1\n3\n3\n"
