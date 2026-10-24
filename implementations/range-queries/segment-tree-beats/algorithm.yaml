@@ -1,0 +1,96 @@
+algorithm: range-queries.segment-tree-beats
+title: Segment tree beats
+summary: A segment tree that stores the largest value, the second largest value, and the count of the largest value at every node, so a range chmin that lands between the two largest values is absorbed by a whole node and range sums stay correct.
+subject: range-queries
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [range-queries.segment-tree]
+    recommended: [range-queries.lazy-propagation, foundations.complexity]
+complexity:
+    time: "amortized O(log n) per range chmin and per range sum"
+    space: "O(n)"
+assumptions:
+    - The only update is a chmin, a cap of every value in a range at a common bound.
+    - Every value and every bound is nonnegative, so a missing second maximum can be stored as -1.
+    - The range sum is accumulated in a signed 64-bit integer.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "amortized O(log n) per operation"
+      auxiliarySpace: "O(n) for the sum, maximum, second maximum, and count arrays"
+      status: unverified
+      inputs: 'n q, then the n values, then q operations: "1 l r x" caps every position in [l, r] at x, and "2 l r" queries the inclusive range sum.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every node stores the sum of its range, its maximum, the second largest distinct value, and how many positions hold the maximum. A chmin with max2 < x < max1 changes only the maximum group, so one subtraction settles the whole node; any other overlap descends after pushing the node's cap to its children. The C variant allocates the four arrays with malloc and frees them before returning."
+      operations: [range-chmin, range-sum]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "amortized O(log n) per operation"
+      auxiliarySpace: "O(n) for the sum, maximum, second maximum, and count arrays"
+      status: unverified
+      inputs: 'n q, then the n values, then q operations: "1 l r x" caps every position in [l, r] at x, and "2 l r" queries the inclusive range sum.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every node stores the sum of its range, its maximum, the second largest distinct value, and how many positions hold the maximum. A chmin with max2 < x < max1 changes only the maximum group, so one subtraction settles the whole node; any other overlap descends after pushing the node's cap to its children. The C++ variant keeps the four arrays in std::vector, so the class owns its storage and the destructor releases it."
+      operations: [range-chmin, range-sum]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "amortized O(log n) per operation"
+      auxiliarySpace: "O(n) for the sum, maximum, second maximum, and count arrays"
+      status: unverified
+      inputs: 'n q, then the n values, then q operations: "1 l r x" caps every position in [l, r] at x, and "2 l r" queries the inclusive range sum.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every node stores the sum of its range, its maximum, the second largest distinct value, and how many positions hold the maximum. A chmin with max2 < x < max1 changes only the maximum group, so one subtraction settles the whole node; any other overlap descends after pushing the node's cap to its children. The Java variant keeps the arrays on the heap and reads through a byte-buffered scanner."
+      operations: [range-chmin, range-sum]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "amortized O(log n) per operation"
+      auxiliarySpace: "O(n) for the sum, maximum, second maximum, and count arrays"
+      status: unverified
+      inputs: 'n q, then the n values, then q operations: "1 l r x" caps every position in [l, r] at x, and "2 l r" queries the inclusive range sum.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Every node stores the sum of its range, its maximum, the second largest distinct value, and how many positions hold the maximum. A chmin with max2 < x < max1 changes only the maximum group, so one subtraction settles the whole node; any other overlap descends after pushing the node's cap to its children. The JavaScript variant models the tree as a class, and its sums are exact only below 2^53."
+      operations: [range-chmin, range-sum]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "amortized O(log n) per operation"
+      auxiliarySpace: "O(n) for the sum, maximum, second maximum, and count arrays"
+      status: unverified
+      inputs: 'n q, then the n values, then q operations: "1 l r x" caps every position in [l, r] at x, and "2 l r" queries the inclusive range sum.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Every node stores the sum of its range, its maximum, the second largest distinct value, and how many positions hold the maximum. A chmin with max2 < x < max1 changes only the maximum group, so one subtraction settles the whole node; any other overlap descends after pushing the node's cap to its children. The Pascal variant is a class whose constructor allocates the four arrays and whose destructor releases them."
+      operations: [range-chmin, range-sum]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "amortized O(log n) per operation"
+      auxiliarySpace: "O(n) for the sum, maximum, second maximum, and count arrays"
+      status: unverified
+      inputs: 'n q, then the n values, then q operations: "1 l r x" caps every position in [l, r] at x, and "2 l r" queries the inclusive range sum.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Every node stores the sum of its range, its maximum, the second largest distinct value, and how many positions hold the maximum. A chmin with max2 < x < max1 changes only the maximum group, so one subtraction settles the whole node; any other overlap descends after pushing the node's cap to its children. The Python variant models the tree as a class, and its integers do not overflow."
+      operations: [range-chmin, range-sum]

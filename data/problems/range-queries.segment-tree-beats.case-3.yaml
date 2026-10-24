@@ -1,0 +1,30 @@
+id: codeforces.438d.the-child-and-sequence
+title: The Child and Sequence
+source: Codeforces
+contest: "Codeforces Round 250 (Div. 1)"
+division: platinum
+url: https://codeforces.com/problemset/problem/438/D
+editorialUrl: https://codeforces.com/blog/entry/12513
+techniques:
+    - range-queries.segment-tree-beats
+prerequisites:
+    - range-queries.segment-tree
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The array length and the number of operations reach 100000, so a modulo cannot visit every position in its range.
+    - A modulo leaves a value unchanged when it is below the modulus, so a subtree whose maximum is small can be skipped.
+    - The answers exceed a 32-bit integer, so the sums are 64-bit.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A value v is unchanged by "mod x" exactly when v < x, so the maximum of a node decides whether the whole node can be skipped.
+    - If the maximum is at least x, descend; a value that actually changes is at least halved.
+    - A point assignment resets one value, so the path from the leaf to the root has to be repaired.
+    - Store the maximum and the sum at every node, and prune the modulo recursion with the maximum.
+discussion: >-
+    This is the pruning cousin of segment tree beats rather than the chmin version. The operation is "replace every value by its remainder modulo x", which is the identity on a value below x, so a node whose maximum is below x can be skipped without looking inside. When the maximum is at least x, the recursion descends, and every value that actually changes is at least halved. Between two assignments a position can therefore change only logarithmically many times, and each point assignment costs one root path. The maximum is the summary that makes the skip test exact; the sum answers the queries.
+related:
+    - hdu.5306.gorgeous-sequence
+    - library-checker.range-chmin-chmax-add-range-sum

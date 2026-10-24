@@ -1,0 +1,29 @@
+id: hdu.5306.gorgeous-sequence
+title: Gorgeous Sequence
+source: HDU
+contest: 2015 Multi-University Training Contest 2
+division: platinum
+url: https://acm.hdu.edu.cn/showproblem.php?pid=5306
+techniques:
+    - range-queries.segment-tree-beats
+prerequisites:
+    - range-queries.segment-tree
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - A million positions and a million operations over all test cases, so a cap has to settle whole nodes rather than positions.
+    - Values are below 2^31 and a range sum can reach about 2^51, so the sum needs 64 bits.
+    - The input is large and the statement asks for efficient I/O, so the scanner must be buffered.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The update is a chmin, so a node whose maximum is already at most t needs no work at all.
+    - If t is above the second largest value of the node, only the positions holding the maximum change, and the sum drops by (maximum - t) times their count.
+    - Store the maximum, the second largest distinct value, and the count of the maximum at every node, and let the sum fall out of them.
+    - If t is not above the second largest value, push the node's cap to its children and recurse; the extra descents are amortized.
+discussion: >-
+    The operation is a cap, so the only values that move are the ones above t. A node whose maximum is at most t is untouched, and a node whose second maximum is below t has only its maximum group moved, which is one subtraction once the count of that group is known. The second maximum is exactly the threshold that separates those two cases. When the threshold is not met the update descends, and the standard potential argument bounds the total number of descents, so the structure stays near logarithmic. Two aggregates are needed: the maximum with its count for the cap, and the sum for the query. The sum is accumulated in 64 bits.
+related:
+    - library-checker.range-chmin-chmax-add-range-sum
+    - codeforces.438d.the-child-and-sequence

@@ -1,0 +1,30 @@
+id: library-checker.range-chmin-chmax-add-range-sum
+title: Range Chmin Chmax Add Range Sum
+source: Library Checker
+contest: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
+techniques:
+    - range-queries.segment-tree-beats
+prerequisites:
+    - range-queries.segment-tree
+    - range-queries.lazy-propagation
+difficulty: 5
+estimatedMinutes: 70
+specialConstraints:
+    - Half a million positions and operations, so every bound has to be absorbed by whole nodes rather than by leaves.
+    - The updates mix chmin, chmax, and addition, so one node keeps both an upper and a lower summary.
+    - The range sums exceed a 32-bit integer, so the sum and the pending addition are 64-bit.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A chmin needs the maximum and the second maximum; a chmax needs the minimum and the second minimum.
+    - Keep both pairs, the count of the maxima, the count of the minima, and the sum.
+    - An addition shifts all four extreme values and the sum by the same amount, so it composes with the bounds.
+    - Push the pending addition and both bounds to the children before descending.
+discussion: >-
+    This is the full segment tree beats: a node carries a lower and an upper bound summary, the counts of the extreme groups, a sum, and an additive tag. A chmin is absorbed when its bound lies strictly between the maximum and the second maximum, and a chmax is absorbed symmetrically between the minimum and the second minimum. An addition shifts every value in the node, so it shifts both extreme summaries and adds the delta times the length to the sum. Pushing has to restore the children's summaries before a descent, which is why the additive tag is applied before the two bounds. The combined structure is the one the original technique was designed for.
+related:
+    - hdu.5306.gorgeous-sequence
+    - codeforces.438d.the-child-and-sequence

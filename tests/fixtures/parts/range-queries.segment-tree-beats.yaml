@@ -1,0 +1,9 @@
+- name: caps that cross the second maximum
+  input: "4 6\n9 1 8 2\n1 1 4 7\n2 1 4\n1 1 4 4\n2 1 4\n1 2 3 1\n2 1 4\n"
+  expected: "17\n11\n8\n"
+- name: a cap below every value and a no-op cap
+  input: "3 4\n10 20 30\n1 1 3 5\n2 1 3\n1 1 3 100\n2 1 3\n"
+  expected: "15\n15\n"
+- name: single position, a query before and after each cap
+  input: "1 5\n7\n2 1 1\n1 1 1 3\n2 1 1\n1 1 1 10\n2 1 1\n"
+  expected: "7\n3\n3\n"
