@@ -1,0 +1,29 @@
+id: number-theory.euler-totient.case-1
+title: Exponentiation II
+source: CSES
+contest: CSES Problem Set
+url: https://cses.fi/problemset/task/1712
+techniques:
+    - number-theory.euler-totient
+    - number-theory.modular-arithmetic
+prerequisites:
+    - number-theory.modular-arithmetic
+difficulty: 4
+estimatedMinutes: 30
+specialConstraints:
+    - The exponent is b^c, which is far too large to build; only its residue modulo 10^9 + 6 is needed.
+    - The modulus is prime, so Euler's theorem applies to every nonzero base below it, but a zero base needs the statement's own convention.
+    - The statement defines 0^0 = 1, so a zero base is 1 exactly when the exponent b^c is zero, which happens when b = 0 and c > 0.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The modulus is the prime 10^9 + 7, so Fermat's little theorem says every nonzero base has period 10^9 + 6.
+    - Reduce b^c modulo 10^9 + 6 with binary exponentiation, then raise a to that residue modulo 10^9 + 7.
+    - A base of 0 is not invertible, so handle it separately instead of trusting the reduced exponent.
+discussion: >-
+    The modulus is the prime 10^9 + 7, so every nonzero base below it is invertible and Fermat's little theorem turns the exponent into a residue modulo 10^9 + 6. The only uncovered base is 0, and the statement's convention 0^0 = 1 decides it: the answer is 1 exactly when a is 0 and the exponent b^c is 0, which happens when b = 0 and c > 0. Every other zero base has a positive exponent and gives 0. Reducing the exponent first and then exponentiating keeps both powers logarithmic, so the whole answer costs O(log c + log p) per query.
+related:
+    - number-theory.euler-totient.case-2
+    - number-theory.euler-totient.case-3

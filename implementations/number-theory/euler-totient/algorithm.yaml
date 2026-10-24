@@ -1,0 +1,99 @@
+algorithm: number-theory.euler-totient
+title: Euler's totient function and Euler's theorem
+summary: Count the integers coprime to n from its prime factorization, and use Euler's theorem to replace an exponent modulo a modulus that is coprime to the base.
+subject: number-theory
+divisions: [silver, gold, platinum]
+importance: common-contest-technique
+prerequisites:
+    required: [number-theory.modular-arithmetic]
+    recommended:
+        - number-theory.prime-factorization
+        - number-theory.sieve
+        - number-theory.extended-euclidean
+complexity:
+    time: "O(sqrt n) for one totient, O(log m) for one power"
+    space: "O(1)"
+assumptions:
+    - n and m are positive integers, and the base is reduced modulo m before it is exponentiated.
+    - The exponent is at most m - 1, so the product of two residues is below m * m and a signed 64-bit integer holds it for m at most 10^9.
+    - Euler's theorem is applied only to a base coprime to the modulus; a base that shares a factor with the modulus needs the corrected reduction described in the article.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, m and the base a from stdin and prints phi(n) and a^phi(m) mod m."
+      time: "O(sqrt n + log m)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Three integers n, m and a on one line, with 1 <= n <= 10^12, 1 <= m <= 10^9 and 0 <= a <= 10^9."
+      outputs: "Two lines: phi(n), then a^phi(m) mod m in the range [0, m)."
+      notes: "The totient removes one factor (1 - 1 / p) for each distinct prime p of n, and a leftover rest greater than 1 is the last prime factor. The exponent is at most m - 1, so the modular product stays inside signed 64 bits for m at most 10^9, and 1 % m handles the modulus m = 1."
+      operations: [totient, factorize, mod-pow]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, m and the base a from stdin and prints phi(n) and a^phi(m) mod m."
+      time: "O(sqrt n + log m)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Three integers n, m and a on one line, with 1 <= n <= 10^12, 1 <= m <= 10^9 and 0 <= a <= 10^9."
+      outputs: "Two lines: phi(n), then a^phi(m) mod m in the range [0, m)."
+      notes: "The totient removes one factor (1 - 1 / p) for each distinct prime p of n, and a leftover rest greater than 1 is the last prime factor. The C++ variant keeps the same arithmetic in signed 64-bit integers, and 1 % m handles the modulus m = 1."
+      operations: [totient, factorize, mod-pow]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, m and the base a from stdin and prints phi(n) and a^phi(m) mod m."
+      time: "O(sqrt n + log m)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Three integers n, m and a on one line, with 1 <= n <= 10^12, 1 <= m <= 10^9 and 0 <= a <= 10^9."
+      outputs: "Two lines: phi(n), then a^phi(m) mod m in the range [0, m)."
+      notes: "The class is named Main so the file can be submitted to a judge unchanged. Java has no unsigned 64-bit integer, but the stated bounds keep every product below m * m and inside a signed long. Scanner is sufficient because the input is three tokens."
+      operations: [totient, factorize, mod-pow]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, m and the base a from stdin and prints phi(n) and a^phi(m) mod m."
+      time: "O(sqrt n + log m)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Three integers n, m and a on one line, with 1 <= n <= 10^12, 1 <= m <= 10^9 and 0 <= a <= 10^9."
+      outputs: "Two lines: phi(n), then a^phi(m) mod m in the range [0, m)."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The totient is small enough for a Number, because n is below 2^53, but the products in the power reach 10^18 and lose their low bits in a double, so the power uses BigInt. The program writes the platform line ending so the output matches the compiled languages."
+      operations: [totient, factorize, mod-pow]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, m and the base a from stdin and prints phi(n) and a^phi(m) mod m."
+      time: "O(sqrt n + log m)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Three integers n, m and a on one line, with 1 <= n <= 10^12, 1 <= m <= 10^9 and 0 <= a <= 10^9."
+      outputs: "Two lines: phi(n), then a^phi(m) mod m in the range [0, m)."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The totient is computed in Int64, where p * p stays below 10^12. The three inputs are read one at a time, because the compiler's Read routine takes a single argument per call."
+      operations: [totient, factorize, mod-pow]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, m and the base a from stdin and prints phi(n) and a^phi(m) mod m."
+      time: "O(sqrt n + log m)"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "Three integers n, m and a on one line, with 1 <= n <= 10^12, 1 <= m <= 10^9 and 0 <= a <= 10^9."
+      outputs: "Two lines: phi(n), then a^phi(m) mod m in the range [0, m)."
+      notes: "The totient removes one factor (1 - 1 / p) for each distinct prime p of n, and a leftover rest greater than 1 is the last prime factor. Python integers are arbitrary precision, so the products inside the power need no width argument, and 1 % m handles the modulus m = 1."
+      operations: [totient, factorize, mod-pow]

@@ -1,0 +1,9 @@
+- name: a square-free n and a prime modulus
+  input: "10 7 3\n"
+  expected: "4\n1\n"
+- name: n and m at the top of their ranges with a base that shares a factor with m
+  input: "1000000000000 1000000000 2\n"
+  expected: "400000000000\n787109376\n"
+- name: the smallest possible n, m and base, which makes every value an edge case
+  input: "1 1 0\n"
+  expected: "1\n0\n"

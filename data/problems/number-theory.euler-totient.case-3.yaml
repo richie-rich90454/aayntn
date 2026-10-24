@@ -1,0 +1,27 @@
+id: number-theory.euler-totient.case-3
+title: Sum of Totient Function
+source: Library Checker
+contest: Library Checker
+url: https://judge.yosupo.jp/problem/sum_of_totient_function
+techniques:
+    - number-theory.euler-totient
+prerequisites:
+    - number-theory.sieve
+difficulty: 5
+estimatedMinutes: 90
+specialConstraints:
+    - N reaches 10^10, so a sieve over every value up to N is impossible in both time and memory.
+    - The answer is the whole prefix sum modulo 998244353, not the totient of a single number.
+    - Only the O(sqrt N) distinct values of floor(N / i) are needed, and they must be memoized.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The identity sum of phi(d) over the divisors d of n equals n turns the prefix sum into a recurrence over floor(N / d).
+    - Enumerate the distinct quotients in blocks, and cache the prefix sum for every quotient that is actually requested.
+    - N * (N + 1) / 2 reaches 5 * 10^19 at the limit, so reduce the factors modulo 998244353 before multiplying.
+discussion: >-
+    The identity that the totients of the divisors of n sum to n gives S(N) = N(N+1)/2 - sum of S(floor(N/d)) for d from 2 to N, where S is the prefix sum of phi. The quotients floor(N/d) take only O(sqrt N) distinct values, and the sums for those values are memoized, so the recurrence is evaluated once per quotient. A sieve up to a cutoff supplies the small values directly, and the cutoff balances the two halves of the work. The prefactor N(N+1)/2 exceeds a signed 64-bit integer at N = 10^10, so the multiplication is reduced modulo 998244353.
+related:
+    - number-theory.euler-totient.case-1
+    - number-theory.euler-totient.case-2

@@ -1,0 +1,28 @@
+id: number-theory.euler-totient.case-2
+title: Exponial
+source: Kattis
+contest: Nordic Collegiate Programming Contest (NCPC) 2016
+url: https://open.kattis.com/problems/exponial
+techniques:
+    - number-theory.euler-totient
+    - number-theory.modular-arithmetic
+prerequisites:
+    - number-theory.modular-arithmetic
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - n and m reach 10^9, so the tower n^(n-1)^(...)^1 cannot be built.
+    - The base is not necessarily coprime to the modulus, so the exponent needs the correction term phi(m) as well as the reduction.
+    - The chain m, phi(m), phi(phi(m)), ... reaches 1 in O(log m) steps, which is what bounds the recurrence.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Reduce the problem for n and m to the same problem for n - 1 and phi(m).
+    - Once the remaining exponent is at least log2(m), a^e mod m equals a^(e mod phi(m) + phi(m)) mod m even when the base shares a factor with m.
+    - The top of the tower is small for n at most 4, so compute those cases directly instead of applying the correction.
+discussion: >-
+    The tower is right-associative and enormous, but only its value modulo m is needed, and phi(m) is smaller than m, so the modulus chain m, phi(m), and so on reaches 1 within O(log m) steps. The congruence a^e = a^(e mod phi(m) + phi(m)) modulo m holds once e is at least log2(m), so each level passes the reduced exponent plus one totient to the level below. For n at most 4 the whole tower is below 10^9 and the exponent can be smaller than the correction threshold, so those values are computed directly. Each level costs one binary exponentiation, which gives O(log^2 m) time overall.
+related:
+    - number-theory.euler-totient.case-1
+    - number-theory.euler-totient.case-3
