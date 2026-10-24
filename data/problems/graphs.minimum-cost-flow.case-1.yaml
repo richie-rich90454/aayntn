@@ -1,0 +1,31 @@
+id: aoj.grl-6-b.min-cost-flow
+title: Minimum Cost Flow
+source: Aizu Online Judge
+contest: Library of Graph Algorithms
+division: gold
+url: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
+techniques:
+    - graphs.minimum-cost-flow
+prerequisites:
+    - graphs.dijkstra
+    - graphs.representation
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The source is fixed at vertex 0 and the sink at vertex |V| - 1, so the statement asks for exactly F units rather than for the maximum flow.
+    - V is at most 100, E is at most 1000 and F is at most 1000, so at most 1000 shortest-path augmentations are comfortable.
+    - If F units cannot be sent, the answer is -1, so a maximum-flow program has to compare the flow it found with F.
+    - Capacities and costs are nonnegative, so the zero potentials are feasible at the start.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The input fixes the amount of flow, so the successive shortest path loop stops after F units rather than when the sink becomes unreachable.
+    - Every edge has a capacity and a cost, and the objective is the sum of flow times cost, which is the minimum cost flow objective exactly.
+    - Run Dijkstra on reduced costs; the potentials make every residual arc nonnegative after each augmentation.
+    - If the sink becomes unreachable before F units have been sent, print -1.
+discussion: >-
+    This is the library form of the problem: a directed network with capacities and costs, a fixed source and sink, and a required amount of flow. Each augmentation follows the cheapest residual path, so the total cost is minimal for the flow sent so far, and the potentials keep the reduced costs nonnegative so Dijkstra can find that path. The only difference from the maximum-flow version is the stopping rule and the failure case: the loop ends when F units have been sent, and if the sink is unreachable first the answer is -1. With at most 1000 units and 1000 edges, at most 1000 Dijkstra runs are needed.
+related:
+    - atcoder.abc247.g.dream-team
+    - kattis.catering

@@ -1,0 +1,150 @@
+algorithm: graphs.minimum-cost-flow
+title: Minimum cost flow
+summary: Maximum flow of minimum total cost in a directed network, found by augmenting along shortest paths in the residual graph while potentials keep every reduced cost nonnegative.
+subject: graphs
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [graphs.dijkstra]
+    recommended: [graphs.representation, graphs.bellman-ford]
+complexity:
+    time: "O(F (V + E) log V)"
+    space: "O(V + E)"
+assumptions:
+    - The network is directed, and every edge has an integer capacity and an integer cost.
+    - Every edge cost is nonnegative, so the zero potentials are feasible at the start.
+    - Capacities are integral, so every augmentation moves at least one unit and the loop terminates.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed network from standard input and prints the maximum flow and the minimum cost of that flow, using successive shortest paths with potentials."
+      time: "O(F (V + E) log V)"
+      auxiliarySpace: "O(V + E) for the residual adjacency list, the potentials, the distance array and the heap"
+      status: unverified
+      inputs: "n m s t, then m lines u v capacity cost with 0-based directed edges, nonnegative capacities and nonnegative costs."
+      outputs: "One line with the maximum flow from s to t and the minimum cost of that flow, separated by a space."
+      notes: "The residual graph stores each edge together with its reverse, so an augmentation is a cap decrease on the forward arc and a cap increase on the reverse arc. Dijkstra runs on the reduced cost cost + height[u] - height[v], which is nonnegative while the potentials are feasible, and the potentials grow by the final distance of each reachable vertex. An edge with an endpoint outside 0..n-1 or a negative capacity is ignored. Distances and the cost accumulator are 64-bit integers."
+      operations:
+          [
+              read-network,
+              initialize-potentials,
+              find-shortest-path,
+              update-potentials,
+              augment-flow,
+              accumulate-cost,
+              report-result,
+          ]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed network from standard input and prints the maximum flow and the minimum cost of that flow, using successive shortest paths with potentials."
+      time: "O(F (V + E) log V)"
+      auxiliarySpace: "O(V + E) for the residual adjacency list, the potentials, the distance array and the priority queue"
+      status: unverified
+      inputs: "n m s t, then m lines u v capacity cost with 0-based directed edges, nonnegative capacities and nonnegative costs."
+      outputs: "One line with the maximum flow from s to t and the minimum cost of that flow, separated by a space."
+      notes: "The residual graph stores an index for the reverse arc, so an augmentation updates both directions without searching. Dijkstra runs on the reduced cost cost + height[u] - height[v], which is nonnegative while the potentials are feasible, and the potentials grow by the final distance of each reachable vertex. An edge with an endpoint outside 0..n-1 or a negative capacity is ignored. Distances and the cost accumulator are 64-bit integers."
+      operations:
+          [
+              read-network,
+              initialize-potentials,
+              find-shortest-path,
+              update-potentials,
+              augment-flow,
+              accumulate-cost,
+              report-result,
+          ]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a directed network from standard input and prints the maximum flow and the minimum cost of that flow, using successive shortest paths with potentials."
+      time: "O(F (V + E) log V)"
+      auxiliarySpace: "O(V + E) for the residual adjacency list, the potentials, the distance array and the priority queue"
+      status: unverified
+      inputs: "n m s t, then m lines u v capacity cost with 0-based directed edges, nonnegative capacities and nonnegative costs."
+      outputs: "One line with the maximum flow from s to t and the minimum cost of that flow, separated by a space."
+      notes: "The scanner reads standard input as bytes, so parsing does not depend on StringTokenizer. The residual graph stores an index for the reverse arc, and the priority queue orders states by reduced distance. Dijkstra runs on the reduced cost cost + height[u] - height[v], which is nonnegative while the potentials are feasible, and the potentials grow by the final distance of each reachable vertex. Distances and the cost accumulator are 64-bit integers."
+      operations:
+          [
+              read-network,
+              initialize-potentials,
+              find-shortest-path,
+              update-potentials,
+              augment-flow,
+              accumulate-cost,
+              report-result,
+          ]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program, written for readability: it reads a directed network from standard input and prints the maximum flow and the minimum cost of that flow, using successive shortest paths with potentials."
+      time: "O(F (V + E) log V)"
+      auxiliarySpace: "O(V + E) for the residual adjacency list, the potentials, the distance array and the heap"
+      status: unverified
+      inputs: "n m s t, then m lines u v capacity cost with 0-based directed edges, nonnegative capacities and nonnegative costs."
+      outputs: "One line with the maximum flow from s to t and the minimum cost of that flow, separated by a space."
+      notes: "The residual graph stores each edge as a mutable list, so an augmentation updates both directions through the stored reverse index. Dijkstra runs on the reduced cost cost + height[u] - height[v], which is nonnegative while the potentials are feasible, and the potentials grow by the final distance of each reachable vertex. An edge with an endpoint outside 0..n-1 or a negative capacity is ignored. The integers are arbitrary precision, so a large cost never overflows."
+      operations:
+          [
+              read-network,
+              initialize-potentials,
+              find-shortest-path,
+              update-potentials,
+              augment-flow,
+              accumulate-cost,
+              report-result,
+          ]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads a directed network from standard input and prints the maximum flow and the minimum cost of that flow, using successive shortest paths with potentials."
+      time: "O(F (V + E) log V)"
+      auxiliarySpace: "O(V + E) for the residual adjacency list, the potentials, the distance array and the heap"
+      status: unverified
+      inputs: "n m s t, then m lines u v capacity cost with 0-based directed edges, nonnegative capacities and nonnegative costs."
+      outputs: "One line with the maximum flow from s to t and the minimum cost of that flow, separated by a space."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The residual graph is a linked list of arcs, and the reverse of an arc is its index xor 1, so an augmentation updates both directions in constant time. Dijkstra runs on the reduced cost cost + height[u] - height[v]. The reference compiler maps Int64 to a JavaScript number, so the sentinel is kept below 2^53 and every value the fixtures use is exact."
+      operations:
+          [
+              read-network,
+              initialize-potentials,
+              find-shortest-path,
+              update-potentials,
+              augment-flow,
+              accumulate-cost,
+              report-result,
+          ]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads a directed network from standard input and prints the maximum flow and the minimum cost of that flow, using successive shortest paths with potentials."
+      time: "O(F (V + E) log V)"
+      auxiliarySpace: "O(V + E) for the residual adjacency list, the potentials, the distance array and the heap"
+      status: unverified
+      inputs: "n m s t, then m lines u v capacity cost with 0-based directed edges, nonnegative capacities and nonnegative costs."
+      outputs: "One line with the maximum flow from s to t and the minimum cost of that flow, separated by a space."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The residual graph stores each edge with its reverse index, and the binary heap supports lazy deletion by comparing the popped key with the recorded distance. Dijkstra runs on the reduced cost cost + height[u] - height[v]. The numbers are doubles, so a cost above 2^53 would lose precision."
+      operations:
+          [
+              read-network,
+              initialize-potentials,
+              find-shortest-path,
+              update-potentials,
+              augment-flow,
+              accumulate-cost,
+              report-result,
+          ]

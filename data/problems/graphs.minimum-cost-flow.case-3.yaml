@@ -1,0 +1,32 @@
+id: atcoder.abc247.g.dream-team
+title: Dream Team
+source: AtCoder
+contest: AtCoder Beginner Contest 247
+division: platinum
+url: https://atcoder.jp/contests/abc247/tasks/abc247_g
+techniques:
+    - graphs.minimum-cost-flow
+prerequisites:
+    - graphs.dijkstra
+    - graphs.representation
+difficulty: 5
+estimatedMinutes: 70
+specialConstraints:
+    - N is at most 30,000, but there are only 150 universities and 150 subjects, so the flow network has at most 302 vertices.
+    - A dream team uses each university and each subject at most once, so its members form a matching between the two sets.
+    - The powers are positive, so turning the objective into a minimization makes the costs negative and the zero potentials are no longer feasible.
+    - Every team size from 1 to k has to be answered, not only the maximum size.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A team is a matching between universities and subjects, and its size is the number of matched pairs.
+    - Build source to university, university to subject, and subject to sink, with capacity one on every edge and cost minus the power on the person edge.
+    - Negative costs mean the initial potentials must come from Bellman-Ford or another shortest-path pass that accepts them.
+    - One augmentation adds one member, so after each augmentation the negated total cost is the best power for that team size.
+discussion: >-
+    The two team conditions are exactly the two sides of a matching: each university appears at most once and each subject appears at most once. A matching of size i is a flow of i units from the source through a university and a subject to the sink, so the largest possible team is the maximum flow and the best power for each size is the minimum cost at that flow value. The person edges carry the negated power, which makes the costs negative, so the first potentials cannot all be zero; one Bellman-Ford pass over the 302-vertex network supplies a feasible set, after which every reduced cost is nonnegative. The network has at most 150 units of flow and at most 45,000 person edges, so successive shortest paths is fast.
+related:
+    - kattis.catering
+    - aoj.grl-6-b.min-cost-flow
+    - cses.2129.task-assignment

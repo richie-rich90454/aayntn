@@ -1,0 +1,29 @@
+- name: a cheaper route that the first augmentation has to undo
+  input: |
+      4 5 0 3
+      0 1 1 1
+      0 2 1 2
+      1 2 1 1
+      1 3 1 5
+      2 3 1 1
+  expected: |
+      2 9
+- name: parallel edges, a zero-cost edge and a bottleneck
+  input: |
+      4 5 0 3
+      0 1 2 5
+      0 1 1 1
+      1 3 2 1
+      1 2 1 0
+      2 3 1 0
+  expected: |
+      3 13
+- name: "edge case: a zero-capacity edge blocks the only route"
+  input: |
+      4 4 0 3
+      0 1 0 1
+      1 2 5 1
+      2 3 5 1
+      3 0 1 1
+  expected: |
+      0 0

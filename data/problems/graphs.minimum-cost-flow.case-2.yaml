@@ -1,0 +1,32 @@
+id: kattis.catering
+title: Catering
+source: Kattis
+contest: International Collegiate Programming Contest World Finals 2015
+division: platinum
+url: https://open.kattis.com/problems/catering
+techniques:
+    - graphs.minimum-cost-flow
+prerequisites:
+    - graphs.dijkstra
+    - graphs.representation
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - n and k are at most 100, so a min-cost flow with at most 100 augmentations fits comfortably.
+    - Every pair i < j can be served in order, so the movement graph is a complete acyclic graph and the only choice is how to split the requests into at most k chains.
+    - The cost of moving equipment from the company to the first request of a chain is included, and the cost of returning it to the company is not.
+    - Using fewer than k teams is allowed, so the number of starts is at most k rather than exactly k.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Each request belongs to exactly one chain, and a chain is one team moving from event to event in time order.
+    - Split every request into an incoming and an outgoing copy, and let a transition edge from i to j carry the movement cost.
+    - A chain starts at a request with no predecessor, so the start edges carry the cost of moving from the company to that request.
+    - Limit the total number of starts with one capacity-k edge, then send one unit per request through the network at minimum cost.
+discussion: >-
+    Servicing every request with at most k teams means partitioning the ordered requests into at most k chains, and the cost of a chain is the move from the company to its first event plus every transition between consecutive events. That is a minimum-cost path cover of a complete acyclic graph, which is an assignment problem with a cardinality limit on the paths. The flow construction sends one unit per request: a request either receives its unit from a predecessor or from the shared start edge, and the start edge has capacity k. Because transitions only go forward in time, no cycle can form, so the number of starts is exactly the number of teams used. Successive shortest paths finds the cheapest such cover.
+related:
+    - aoj.grl-6-b.min-cost-flow
+    - atcoder.abc247.g.dream-team
+    - cses.2129.task-assignment
