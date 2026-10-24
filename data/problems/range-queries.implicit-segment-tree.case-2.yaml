@@ -1,0 +1,29 @@
+id: izho.2012.monkey-and-apple-trees
+title: Monkey and Apple-trees
+source: International Zhautykov Olympiad
+contest: 2012 Day 2
+division: platinum
+url: https://oj.uz/problem/view/IZhO12_apple
+techniques:
+    - range-queries.implicit-segment-tree
+prerequisites:
+    - range-queries.segment-tree
+    - range-queries.lazy-propagation
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The trees are numbered up to 10^9, so a tree with one node per tree cannot be allocated.
+    - A paint covers a whole interval, so the structure needs lazy assignment as well as on-demand nodes.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A missing node means that every tree in its interval is still unripe.
+    - Store the number of ripe trees in each node, together with a tag that says the whole interval was painted.
+    - A fully covered paint sets the count to the length of the interval and records the tag.
+    - Push the tag into the children before descending into a partial overlap.
+discussion: >-
+    The range is far too large for one node per tree, but the number of paints is not. Only the paths that a paint touches are allocated, and an absent node is known to be entirely unripe, which is exactly the identity for a count. The new ingredient is the paint tag: a fully covered node records that all of its positions are ripe, and a later partial paint pushes that tag to the two children before continuing. A query is the sum of the ripe counts of the covered nodes, with absent nodes contributing zero. This is the lazy variant of the implicit tree, not a different structure.
+related:
+    - usaco.2013.jan.gold.seating
+    - usaco.2015.dec.platinum.counting-haybales

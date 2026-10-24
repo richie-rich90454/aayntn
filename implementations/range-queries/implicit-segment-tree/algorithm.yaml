@@ -1,0 +1,93 @@
+algorithm: range-queries.implicit-segment-tree
+title: Implicit segment trees
+summary: A segment tree that allocates a node only when an update reaches its interval, so a domain of a billion positions costs memory proportional to the operations rather than to the domain.
+subject: range-queries
+divisions: [platinum]
+importance: specialized-technique
+complexity:
+    time: "O(log C) per operation"
+    space: "O(k log C) for k touched positions"
+assumptions:
+    - The coordinate domain is a fixed interval [1, C], and C may be far larger than the number of operations.
+    - Every position starts at the identity value, so a node that was never created stands for a range whose values are all zero.
+    - The operations are point additions and range sums; a range assignment or a range addition needs the lazy variant.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log C) per operation"
+      auxiliarySpace: "O(k log C) nodes for k touched positions"
+      status: unverified
+      inputs: 'm q, then q operations: "1 p v" adds v to the 1-based position p and "2 l r" queries the inclusive range [l, r]. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Node 0 is the null node, so a missing child needs no special case beyond returning zero. The pool is sized from q and the height of the domain, and every update creates at most one node per level. The sum is a 64-bit integer because a total can reach 2 * 10^14."
+      operations: [point-add, range-sum]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log C) per operation"
+      auxiliarySpace: "O(k log C) nodes for k touched positions"
+      status: unverified
+      inputs: 'm q, then q operations: "1 p v" adds v to the 1-based position p and "2 l r" queries the inclusive range [l, r]. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Node 0 is the null node, and the pool is a std::vector that grows with the nodes actually created. The root covers [1, m], a missing child returns zero, and the sum is a 64-bit integer."
+      operations: [point-add, range-sum]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log C) per operation"
+      auxiliarySpace: "O(k log C) nodes for k touched positions"
+      status: unverified
+      inputs: 'm q, then q operations: "1 p v" adds v to the 1-based position p and "2 l r" queries the inclusive range [l, r]. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "The node pool is three parallel arrays sized from q and the height of the domain. Node 0 is the null node, missing children return zero, and the sum is a long."
+      operations: [point-add, range-sum]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log C) per operation"
+      auxiliarySpace: "O(k log C) nodes for k touched positions"
+      status: unverified
+      inputs: 'm q, then q operations: "1 p v" adds v to the 1-based position p and "2 l r" queries the inclusive range [l, r]. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Node 0 is the null node, and the pool grows by appending to three arrays. Number arithmetic is exact here because every sum stays below 2^53."
+      operations: [point-add, range-sum]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log C) per operation"
+      auxiliarySpace: "O(k log C) nodes for k touched positions"
+      status: unverified
+      inputs: 'm q, then q operations: "1 p v" adds v to the 1-based position p and "2 l r" queries the inclusive range [l, r]. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Node 0 is the null node, the three dynamic arrays are sized from q and the height of the domain, and the sum is an Int64."
+      operations: [point-add, range-sum]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log C) per operation"
+      auxiliarySpace: "O(k log C) nodes for k touched positions"
+      status: unverified
+      inputs: 'm q, then q operations: "1 p v" adds v to the 1-based position p and "2 l r" queries the inclusive range [l, r]. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Node 0 is the null node, and the pool is three lists that grow only when an update creates a node. Python integers are unbounded, so the 64-bit note is about the reference contract rather than about this listing."
+      operations: [point-add, range-sum]

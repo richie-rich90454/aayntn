@@ -1,0 +1,9 @@
+- name: updates on a wide domain
+  input: "1000000000 5\n1 3 5\n1 1000000000 7\n2 1 1000000000\n1 500000000 -2\n2 3 3\n"
+  expected: "12\n5\n"
+- name: negative updates and repeated positions
+  input: "10 7\n1 2 -4\n1 2 9\n2 1 2\n1 10 -3\n2 10 10\n1 1 5\n2 1 10\n"
+  expected: "5\n-3\n7\n"
+- name: a single position and a query before any update
+  input: "1 6\n2 1 1\n1 1 4\n2 1 1\n1 1 -4\n2 1 1\n2 1 1\n"
+  expected: "0\n4\n0\n0\n"

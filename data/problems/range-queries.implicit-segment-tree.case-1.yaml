@@ -1,0 +1,28 @@
+id: cses.1144.salary-queries
+title: Salary Queries
+source: CSES
+contest: CSES Problem Set
+division: gold
+url: https://cses.fi/problemset/task/1144
+techniques:
+    - range-queries.implicit-segment-tree
+prerequisites:
+    - range-queries.segment-tree
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - Salaries reach 10^9, so an array indexed by salary would need a billion counters.
+    - Updates and queries alternate online, so the tree has to grow when a salary that was never seen arrives.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Store the counts in a tree over salary values, not over employees.
+    - Changing an employee's salary removes one from the old value and adds one at the new value.
+    - A query for the range [a, b] is the difference of two prefix counts.
+    - A node over a salary interval is needed only if some employee has held a salary inside it.
+discussion: >-
+    The employee index is a distraction: the tree is indexed by salary, and each employee contributes a single count at the current salary. A change is two point updates, and a query is a range sum of counts. The salary domain reaches 10^9, but at most n distinct salaries are ever seen, so an implicit segment tree over [1, 10^9] stores only the paths to those values. Coordinate compression is an equally good offline alternative, and it produces a smaller tree, but it requires reading every query before answering the first one.
+related:
+    - usaco.2015.dec.platinum.counting-haybales
+    - cses.range-updates-and-sums

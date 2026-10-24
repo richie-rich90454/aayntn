@@ -1,0 +1,29 @@
+id: balkan.2015.happiness
+title: Happiness
+source: Balkan Olympiad in Informatics
+contest: "2015"
+division: platinum
+url: https://oj.uz/problem/view/Balkan15_HAPPINESS
+techniques:
+    - range-queries.implicit-segment-tree
+prerequisites:
+    - range-queries.segment-tree
+difficulty: 5
+estimatedMinutes: 70
+specialConstraints:
+    - The values reach 10^12, so a tree indexed by value cannot be allocated in full.
+    - "The task is a library problem: the grader calls insert, erase, and check rather than feeding one stdin stream."
+    - Each check has to run in logarithmic time while the multiset changes between calls.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Maintain the count and the sum of the elements in a tree over the value domain.
+    - A prefix query gives both the number of elements at most x and their total.
+    - Start at x = 1 and jump to prefix_sum(x) + 1 whenever the condition fails at x.
+    - The candidate grows geometrically at every jump, so only logarithmically many prefix queries are needed.
+discussion: >-
+    The check asks whether some x below the total sum has a prefix sum smaller than x. If the condition holds at x, it also holds for every value up to prefix_sum(x), because enlarging the set of included elements cannot lower the prefix sum. The next value worth testing is therefore prefix_sum(x) + 1, and that sequence grows geometrically, so a check makes O(log V) prefix queries. The tree is over values up to 10^12 and stores a count and a sum; insert and erase are point updates, and a prefix query is the usual range sum. An implicit tree is what makes the enormous value domain affordable, and its node count is proportional to the number of distinct values inserted.
+related:
+    - cses.1144.salary-queries
+    - cses.range-updates-and-sums
