@@ -1,0 +1,96 @@
+algorithm: advanced.offline-dynamic-connectivity
+title: Offline dynamic connectivity
+summary: Read every operation first, store each edge on the segment-tree nodes covering the times it is alive, and traverse the tree with a rollback union-find so each query at a leaf sees exactly the edges alive then.
+subject: advanced
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [graphs.dsu]
+    recommended:
+        [advanced.rollback-dsu, range-queries.segment-tree, advanced.parallel-binary-search]
+complexity:
+    time: "O(q log q log n) for q operations"
+    space: "O(n + q log q)"
+assumptions:
+    - Every operation is known before the first answer is produced, so the whole timeline can be decomposed in advance.
+    - Each edge is alive during one or more intervals of time, and a query reads the graph at a single moment.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations, builds the edge intervals, answers each connectivity query from the rollback union-find, and prints YES or NO."
+      time: "O(q log q log n)"
+      auxiliarySpace: "O(n + q log q) for the forest and the interval buckets"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" adds an edge, "2 u v" removes it, and "3 u v" asks whether u and v are connected.'
+      outputs: "One line per type-3 operation, holding YES or NO."
+      notes: "Reading the whole input first turns every edge into the intervals between its addition and its removal, and every interval is stored in the segment tree over time. The depth-first traversal merges the edges of each node and undoes them with a checkpoint. Union by size without path compression keeps the trees shallow and makes every merge reversible. The active edges are tracked in an open-addressing hash table keyed by the unordered pair, and the buckets are head and next arrays."
+      operations: [add-edge, remove-edge, connectivity-query, rollback, segment-tree-over-time]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations, builds the edge intervals, answers each connectivity query from the rollback union-find, and prints YES or NO."
+      time: "O(q log q log n)"
+      auxiliarySpace: "O(n + q log q) for the forest and the interval buckets"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" adds an edge, "2 u v" removes it, and "3 u v" asks whether u and v are connected.'
+      outputs: "One line per type-3 operation, holding YES or NO."
+      notes: "Reading the whole input first turns every edge into the intervals between its addition and its removal, and every interval is stored in the segment tree over time. The depth-first traversal merges the edges of each node and undoes them with a checkpoint. Union by size without path compression keeps the trees shallow and makes every merge reversible. The active edges are tracked in a std::map keyed by the unordered pair, and the buckets are std::vectors."
+      operations: [add-edge, remove-edge, connectivity-query, rollback, segment-tree-over-time]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations, builds the edge intervals, answers each connectivity query from the rollback union-find, and prints YES or NO."
+      time: "O(q log q log n)"
+      auxiliarySpace: "O(n + q log q) for the forest and the interval buckets"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" adds an edge, "2 u v" removes it, and "3 u v" asks whether u and v are connected.'
+      outputs: "One line per type-3 operation, holding YES or NO."
+      notes: "Reading the whole input first turns every edge into the intervals between its addition and its removal, and every interval is stored in the segment tree over time. The depth-first traversal merges the edges of each node and undoes them with a checkpoint. Union by size without path compression keeps the trees shallow and makes every merge reversible. The active edges are tracked in a HashMap keyed by a packed pair, and a BufferedReader reads the operations."
+      operations: [add-edge, remove-edge, connectivity-query, rollback, segment-tree-over-time]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations, builds the edge intervals, answers each connectivity query from the rollback union-find, and prints YES or NO."
+      time: "O(q log q log n)"
+      auxiliarySpace: "O(n + q log q) for the forest and the interval buckets"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" adds an edge, "2 u v" removes it, and "3 u v" asks whether u and v are connected.'
+      outputs: "One line per type-3 operation, holding YES or NO."
+      notes: "Reading the whole input first turns every edge into the intervals between its addition and its removal, and every interval is stored in the segment tree over time. The depth-first traversal merges the edges of each node and undoes them with a checkpoint. Union by size without path compression keeps the trees shallow and makes every merge reversible. The active edges are tracked in a dict keyed by the unordered pair, and the whole input is read once."
+      operations: [add-edge, remove-edge, connectivity-query, rollback, segment-tree-over-time]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations, builds the edge intervals, answers each connectivity query from the rollback union-find, and prints YES or NO."
+      time: "O(q log q log n)"
+      auxiliarySpace: "O(n + q log q) for the forest and the interval buckets"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" adds an edge, "2 u v" removes it, and "3 u v" asks whether u and v are connected.'
+      outputs: "One line per type-3 operation, holding YES or NO."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Reading the whole input first turns every edge into the intervals between its addition and its removal, and every interval is stored in the segment tree over time. The depth-first traversal merges the edges of each node and undoes them with a checkpoint. Union by size without path compression keeps the trees shallow and makes every merge reversible. The active edges are tracked in an open-addressing hash table keyed by the unordered pair, and the buckets are dynamic arrays. The program reads one integer per Read, uses no IOResult, and avoids 128-bit integers, so it compiles under pas2js."
+      operations: [add-edge, remove-edge, connectivity-query, rollback, segment-tree-over-time]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations, builds the edge intervals, answers each connectivity query from the rollback union-find, and prints YES or NO."
+      time: "O(q log q log n)"
+      auxiliarySpace: "O(n + q log q) for the forest and the interval buckets"
+      status: unverified
+      inputs: 'n q, then q operations: "1 u v" adds an edge, "2 u v" removes it, and "3 u v" asks whether u and v are connected.'
+      outputs: "One line per type-3 operation, holding YES or NO."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Reading the whole input first turns every edge into the intervals between its addition and its removal, and every interval is stored in the segment tree over time. The depth-first traversal merges the edges of each node and undoes them with a checkpoint. Union by size without path compression keeps the trees shallow and makes every merge reversible. The active edges are tracked in a Map keyed by a packed pair, the whole input is split on whitespace once, and the output uses the platform line separator."
+      operations: [add-edge, remove-edge, connectivity-query, rollback, segment-tree-over-time]

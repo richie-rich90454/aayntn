@@ -1,0 +1,12 @@
+- name: an edge is removed and the next query sees the split
+  input: "3 5\n1 1 2\n3 1 2\n2 1 2\n3 1 2\n3 2 3\n"
+  expected: "YES\nNO\nNO\n"
+- name: removing a bridge splits a three-edge path
+  input: "4 9\n1 1 2\n1 2 3\n1 3 4\n3 1 4\n2 2 3\n3 1 4\n3 1 2\n2 1 2\n3 1 2\n"
+  expected: "YES\nNO\nYES\nNO\n"
+- name: a self-loop and an edge that is added again after removal
+  input: "6 11\n3 1 2\n1 1 1\n3 1 1\n1 1 2\n3 1 2\n2 1 2\n3 1 2\n1 1 2\n3 1 2\n2 1 1\n3 1 1\n"
+  expected: "NO\nYES\nYES\nNO\nYES\nYES\n"
+- name: add, remove, and query with no other edges
+  input: "5 6\n1 4 5\n3 4 5\n2 4 5\n3 4 5\n3 5 4\n3 1 2\n"
+  expected: "YES\nNO\nNO\nNO\n"

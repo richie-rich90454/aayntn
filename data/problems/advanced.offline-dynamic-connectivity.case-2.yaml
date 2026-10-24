@@ -1,0 +1,30 @@
+id: codeforces.1140f.extending-set-of-points
+title: Extending Set of Points
+source: Codeforces
+contest: Educational Codeforces Round 62 (Rated for Div. 2)
+division: platinum
+url: https://codeforces.com/problemset/problem/1140/F
+editorialUrl: https://codeforces.com/blog/entry/66147
+techniques:
+    - advanced.offline-dynamic-connectivity
+prerequisites:
+    - graphs.dsu
+    - range-queries.segment-tree
+difficulty: 5
+estimatedMinutes: 65
+specialConstraints:
+    - There are up to 300000 toggle queries, so a point can be inserted and erased many times and every insertion is a union of time intervals rather than one moment.
+    - Coordinates are up to 300000, so the x-coordinates and y-coordinates have to be treated as two separate sets of vertices.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Model every distinct x-coordinate and every distinct y-coordinate as a vertex, and every point (x, y) as an edge between them.
+    - Closing a set of points under the rectangle rule fills every missing edge inside each connected component.
+    - A component with a distinct x-coordinates and b distinct y-coordinates contributes the product of the two counts to the closure.
+    - Keep those two counts at the root of a rollback union-find, and maintain the sum of their products over all roots as one running total.
+discussion: >-
+    The closure operation completes every rectangle whose three other corners are present, which is exactly the statement that each connected component of the bipartite graph of x-coordinates and y-coordinates becomes a complete bipartite graph. A component holding a distinct x-coordinates and b distinct y-coordinates therefore contributes the product of the two counts, and the answer is the sum of those products over all components. Reading all queries first turns each point into the intervals between an insertion and the following erasure. A segment tree over time stores the intervals, and its depth-first traversal maintains the rollback union-find. Each root keeps the number of x-vertices and the number of y-vertices in its component, and the running sum is adjusted by subtracting the old product and adding the new one when two roots merge. Undoing a merge restores both counts and the sum, so every leaf reports the size of the closure at that moment.
+related:
+    - codeforces.813f.bipartite-checking
+    - codeforces.576e.painting-edges

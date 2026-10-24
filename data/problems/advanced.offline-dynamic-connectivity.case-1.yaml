@@ -1,0 +1,30 @@
+id: codeforces.813f.bipartite-checking
+title: Bipartite Checking
+source: Codeforces
+contest: Educational Codeforces Round 22
+division: platinum
+url: https://codeforces.com/problemset/problem/813/F
+editorialUrl: https://codeforces.com/blog/entry/52410
+techniques:
+    - advanced.offline-dynamic-connectivity
+prerequisites:
+    - graphs.dsu
+    - graphs.bipartite-two-coloring
+difficulty: 4
+estimatedMinutes: 55
+specialConstraints:
+    - Both n and q reach 100000, and an edge can be added and removed many times, so one edge becomes several disjoint intervals of time.
+    - The answer is required after every query, including a query that only removes an edge.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The answer depends only on the input sequence, so all queries can be read before any of them is answered.
+    - Each query toggles one edge; turn every maximal run during which the edge exists into an interval of time.
+    - Store the intervals in a segment tree over the timeline and traverse it with a union-find that records each merge on a stack.
+    - Store the color parity to the parent in the union-find, so a merge that joins two vertices of the same color detects an odd cycle.
+discussion: >-
+    The graph changes in both directions, so a plain union-find cannot maintain it. Reading the whole input first turns every edge into the union of the intervals between a query that adds it and the next query that removes it. A segment tree over the q moments receives each interval in O(log q) nodes, and the edges on the path from the root to a leaf are exactly the edges present at that moment. The union-find stores a color bit for every vertex relative to its parent. A merge that joins two different components aligns their colors; a merge inside one component succeeds exactly when the two endpoints have opposite colors, so an edge that joins two vertices of the same color is the first edge of an odd cycle. Union by size keeps the trees shallow, path compression is disabled, and every merge is undone after the node's children return. The leaf answers YES exactly while no component holds an odd cycle.
+related:
+    - codeforces.1140f.extending-set-of-points
+    - codeforces.576e.painting-edges

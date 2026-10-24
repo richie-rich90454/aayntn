@@ -1,0 +1,30 @@
+id: codeforces.576e.painting-edges
+title: Painting Edges
+source: Codeforces
+contest: Codeforces Round 319 (Div. 1)
+division: platinum
+url: https://codeforces.com/problemset/problem/576/E
+editorialUrl: https://codeforces.com/blog/entry/20226
+techniques:
+    - advanced.offline-dynamic-connectivity
+prerequisites:
+    - graphs.dsu
+    - graphs.bipartite-two-coloring
+difficulty: 5
+estimatedMinutes: 70
+specialConstraints:
+    - There are up to 500000 edges, 500000 repaint queries and 50 colors, and each color class must stay bipartite after every accepted repaint.
+    - A rejected repaint leaves the edge in its previous color, so the color of an edge after a query depends on the answers to the earlier queries.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Maintain one parity union-find for each color; a repaint is valid exactly when adding the edge to the requested color creates no odd cycle.
+    - The existence interval of an edge in its new color is not known before the query is answered, so schedule it at the leaf after the answer is known.
+    - At a leaf, the queried edge is absent from every color, so test the requested color by adding it temporarily and rolling the test back.
+    - Read all queries first, so the next repaint query of the same edge is known and the new interval can be inserted into the segment tree.
+discussion: >-
+    Each color class is an independent graph, and a repaint is valid exactly when the requested color class remains bipartite. A parity union-find per color detects an odd cycle when an edge joins two vertices that already have the same color. The difficulty is that the input is adaptive: whether an edge changes color depends on the answers to earlier queries, so the interval during which it keeps a color is not known in advance. The segment tree is therefore filled as the traversal proceeds. An edge is scheduled from its current moment until its next repaint query; at that leaf the edge has been removed from its old structure, and the new color is tested by a temporary merge. If the merge preserves bipartiteness the query is accepted and the edge is scheduled in the new color until its next repaint; otherwise it is scheduled in the old color. Each query schedules one interval, so the total number of stored copies stays O(q log q), and the rollback restores every color structure between branches. The color array persists across the traversal, which lets the right child see the decisions made in the left.
+related:
+    - codeforces.813f.bipartite-checking
+    - codeforces.1140f.extending-set-of-points
