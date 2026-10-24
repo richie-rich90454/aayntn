@@ -1,0 +1,34 @@
+id: codeforces.1613c.poisoned-dagger
+title: Poisoned Dagger
+source: Codeforces
+contest: "Educational Codeforces Round 118 (Rated for Div. 2)"
+division: gold
+url: https://codeforces.com/problemset/problem/1613/C
+editorialUrl: https://codeforces.com/blog/entry/97467
+techniques:
+    - searching.parametric-search
+prerequisites:
+    - searching.binary-search
+    - foundations.complexity
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - h reaches 10^18, so simulating the battle second by second is far too slow.
+    - The battle lasts 100^500 seconds in the story, so the check has to use the gaps between attacks rather than simulate the timeline.
+    - The attacks are already sorted, and their total span is at most 10^9, so the damage total fits in 64 bits.
+    - The check can stop once the damage reaches h, because the exact total past that point does not matter.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - For a fixed poison duration k, the last attack deals k damage and every earlier attack contributes min(k, gap) seconds, where gap is the time to the next attack.
+    - That total is nondecreasing in k, so the smallest k that reaches h is a boundary search over the answer.
+    - The upper bound is h, because a poison lasting h seconds always deals at least h damage.
+    - Stop accumulating once the total reaches h; the exact total past that point does not matter.
+discussion: >-
+    The damage of a poison lasting k seconds is k plus the sum over consecutive gaps of min(k, gap): each attack either runs its full k seconds or is cut short by the next attack. That function is nondecreasing in k, so the smallest k whose damage reaches h can be found by binary search instead of simulating the battle. The check is one pass over the n attacks, and the search adds a factor of log h, which is at most 60. The trap is the timeline: the battle lasts 100^500 seconds, so the check must use the gaps rather than simulate seconds. The damage total is at most k plus the attack span, which fits in 64 bits.
+related:
+    - codeforces.1873e.building-an-aquarium
+    - atcoder.abc146.c.buy-an-integer
+    - codeforces.474b.worms

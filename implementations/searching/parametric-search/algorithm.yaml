@@ -1,0 +1,96 @@
+algorithm: searching.parametric-search
+title: Parametric search
+summary: Find the largest level whose capped sum fits a budget by binary searching a monotone predicate over the level, not over the data.
+subject: searching
+divisions: [gold]
+importance: common-contest-technique
+prerequisites:
+    required: [searching.binary-search, foundations.complexity]
+    recommended: [searching.two-pointers]
+complexity:
+    time: "O(n log U)"
+    space: "O(1)"
+assumptions:
+    - The level is an integer in the closed range from 0 to the largest value.
+    - Every value and the budget are nonnegative.
+    - The capped sum is nondecreasing in the level, so feasibility is a prefix.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, n values and a budget, then prints the largest level whose capped sum is within budget."
+      time: "O(n log U)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n nonnegative values, then the budget."
+      outputs: "The largest level in [0, max value] with the capped sum at most the budget."
+      notes: "The values are held in a heap array of 64-bit integers; under the stated bounds the full sum is at most 2 times 10^14, and the check also stops as soon as the running sum exceeds the budget. The level is clamped at the tallest value, because above it the capped sum no longer changes. n <= 0 prints 0."
+      operations: [read-values, evaluate-predicate, discard-left, discard-right]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, n values and a budget, then prints the largest level whose capped sum is within budget."
+      time: "O(n log U)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n nonnegative values, then the budget."
+      outputs: "The largest level in [0, max value] with the capped sum at most the budget."
+      notes: "The values are held in a vector of 64-bit integers; under the stated bounds the full sum is at most 2 times 10^14, and the check also stops as soon as the running sum exceeds the budget. The level is clamped at the tallest value, because above it the capped sum no longer changes. n <= 0 prints 0."
+      operations: [read-values, evaluate-predicate, discard-left, discard-right]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, n values and a budget, then prints the largest level whose capped sum is within budget."
+      time: "O(n log U)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n nonnegative values, then the budget."
+      outputs: "The largest level in [0, max value] with the capped sum at most the budget."
+      notes: "The class is named Main so the file can be submitted unchanged. The values are held in a long array, and the check stops as soon as the running sum exceeds the budget. The level is clamped at the tallest value. n <= 0 prints 0."
+      operations: [read-values, evaluate-predicate, discard-left, discard-right]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, n values and a budget, then prints the largest level whose capped sum is within budget."
+      time: "O(n log U)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n nonnegative values, then the budget."
+      outputs: "The largest level in [0, max value] with the capped sum at most the budget."
+      notes: "Python integers are unbounded, so the accumulator cannot overflow. The level is clamped at the tallest value, because above it the capped sum no longer changes. n <= 0 or a truncated input prints 0."
+      operations: [read-values, evaluate-predicate, discard-left, discard-right]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, n values and a budget, then prints the largest level whose capped sum is within budget."
+      time: "O(n log U)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n nonnegative values, then the budget."
+      outputs: "The largest level in [0, max value] with the capped sum at most the budget."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The values and the accumulator are Int64. Every running sum is at most 2 times 10^14, below 2^53, so the compiler's JavaScript-backed Int64 keeps the sums exact; a larger budget is effectively infinite for the comparison. n <= 0 prints 0."
+      operations: [read-values, evaluate-predicate, discard-left, discard-right]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n, n values and a budget, then prints the largest level whose capped sum is within budget."
+      time: "O(n log U)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n nonnegative values, then the budget."
+      outputs: "The largest level in [0, max value] with the capped sum at most the budget."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The values and the running sum stay below 2^53, and a budget above that is effectively infinite for the comparison, so the decision is exact. n <= 0 or a truncated input prints 0."
+      operations: [read-values, evaluate-predicate, discard-left, discard-right]

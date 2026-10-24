@@ -1,0 +1,33 @@
+id: codeforces.1873e.building-an-aquarium
+title: Building an Aquarium
+source: Codeforces
+contest: "Codeforces Round 898 (Div. 4)"
+division: silver
+url: https://codeforces.com/problemset/problem/1873/E
+editorialUrl: https://codeforces.com/blog/entry/120634
+techniques:
+    - searching.parametric-search
+prerequisites:
+    - searching.binary-search
+    - foundations.complexity
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - The tank height can exceed the tallest column, so the upper bound must include the budget rather than stopping at the maximum column.
+    - The safe upper bound reaches about 2 times 10^9, and the water total can exceed the 32-bit range, so the accumulator must be 64-bit.
+    - The sum of n over all test cases is 2 times 10^5, so one linear check per candidate height is affordable.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - For a fixed height h, the water used is the sum of max(0, h - a[i]).
+    - Rewrite that quantity as n times h minus the sum of min(a[i], h) to see the capped sum from the other side.
+    - The water used is nondecreasing in h, so the largest height that fits the budget is a boundary search.
+    - A height of max(a) + x + 1 is already infeasible, which supplies a safe upper bound.
+discussion: >-
+    The water above a column is zero until the height passes the column, then grows by one unit for every extra unit of height. Summing those contributions gives a nondecreasing function of h, so the largest height within the budget is a boundary search. The upper bound cannot be max(a), because with a large budget the tank rises above every column; max(a) + x + 1 is provably infeasible. Each check is linear and uses 64-bit arithmetic, and the search adds about 31 checks for the stated limits.
+related:
+    - codeforces.1613c.poisoned-dagger
+    - atcoder.abc146.c.buy-an-integer
+    - codeforces.474b.worms

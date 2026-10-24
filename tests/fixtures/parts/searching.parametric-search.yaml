@@ -1,0 +1,9 @@
+- name: a mixed array with a partial budget
+  input: "4\n4 9 2 7\n12\n"
+  expected: "3\n"
+- name: a budget that covers the whole array
+  input: "3\n5 1 4\n100\n"
+  expected: "5\n"
+- name: edge case with one large value and a budget just below it
+  input: "1\n1000000000\n999999999\n"
+  expected: "999999999\n"

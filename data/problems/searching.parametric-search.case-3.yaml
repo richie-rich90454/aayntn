@@ -1,0 +1,33 @@
+id: atcoder.abc146.c.buy-an-integer
+title: Buy an Integer
+source: AtCoder
+contest: AtCoder Beginner Contest 146
+division: silver
+url: https://atcoder.jp/contests/abc146/tasks/abc146_c
+editorialUrl: https://atcoder.jp/contests/abc146/tasks/abc146_c/editorial
+techniques:
+    - searching.parametric-search
+prerequisites:
+    - searching.binary-search
+    - foundations.complexity
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - A times N reaches 10^18, so the price must be accumulated in 64-bit arithmetic.
+    - The digit count changes only at powers of ten, so the price has ten digit groups.
+    - The answer is 0 when even N = 1 costs more than X.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - For a fixed N, the price A times N plus B times d(N) is easy to compute, where d(N) is the number of decimal digits.
+    - The price is nondecreasing in N, so the largest affordable N is a boundary search.
+    - Search N from 1 to 10^9; check N = 1 first to handle the case where nothing is affordable.
+    - Count digits with a small loop or with a logarithm, and keep A times N in 64 bits.
+discussion: >-
+    The shop sells a contiguous range of integers from 1 through 10^9, and the price never decreases as N grows, because both A times N and the digit count are nondecreasing. That makes the affordable set a prefix, so the largest affordable integer can be found by binary search over N. The check is constant time apart from counting at most ten digits, and the search performs about thirty checks. The two traps are the 64-bit product and the answer 0, which is required when the first integer is already too expensive.
+related:
+    - codeforces.1613c.poisoned-dagger
+    - codeforces.1873e.building-an-aquarium
+    - codeforces.474b.worms
