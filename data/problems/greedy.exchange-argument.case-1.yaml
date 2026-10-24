@@ -1,0 +1,28 @@
+id: poj.3045.cow-acrobats
+title: Cow Acrobats
+source: POJ
+contest: USACO 2005 November Contest (Silver)
+division: silver
+url: http://poj.org/problem?id=3045
+techniques: [greedy.exchange-argument]
+prerequisites:
+    - foundations.sorting
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - There are up to 50,000 cows, so trying every ordering is impossible.
+    - The risk of a cow can be negative, and the answer is the maximum risk in the best ordering.
+    - The weights are small but the strengths reach 10^9, so the intermediate totals need 64-bit arithmetic.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Only the relative order of two adjacent cows matters when the rest of the stack is fixed.
+    - Compare the two possible orders of a pair and write the maximum risk of each.
+    - The comparison reduces to w_i + s_i against w_j + s_j.
+    - Sort by that key from the top of the stack downward, then sweep once with a running total of the weight above.
+discussion: >-
+    The whole problem is an adjacent exchange. With a fixed total weight W above a pair, placing cow i above cow j produces the risks W - s_i and W + w_i - s_j, while placing j above i produces W - s_j and W + w_j - s_i. If w_i + s_i is at most w_j + s_j, every risk in the first order is at most the larger risk in the second order, so swapping the pair cannot increase the maximum. An optimal ordering with an adjacent inversion can therefore be improved or left equal by swapping the inversion, which means the sorted order is optimal. The implementation sorts by w_i + s_i ascending from the top, keeps the total weight above the current cow, and records the largest above - s_i.
+related:
+    - usaco.2017.feb.silver.helpcross
+    - codeforces.276c.little-girl-and-maximum-sum

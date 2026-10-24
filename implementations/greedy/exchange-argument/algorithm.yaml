@@ -1,0 +1,95 @@
+algorithm: greedy.exchange-argument
+title: The exchange argument as a general tool
+summary: Prove a greedy rule by swapping the greedy choice into an optimal solution without making the solution worse.
+subject: greedy
+divisions: [silver, gold]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.sorting, foundations.complexity]
+    recommended: [greedy.interval-scheduling, searching.binary-search]
+complexity:
+    time: "O(n log n)"
+    space: "O(n)"
+assumptions:
+    - The objective is a total order on solutions, so two solutions can be compared as better, equal, or worse.
+    - Feasible solutions are closed under taking subsets, and the greedy algorithm stops only when no item can be added.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n intervals and prints the earliest-finish greedy count, the exhaustive optimum for n at most 12, and MATCH or DIFFER."
+      time: "O(n log n) for the greedy, O(n^2 2^n) for the oracle"
+      auxiliarySpace: "O(n) for the interval arrays"
+      status: unverified
+      inputs: "n, then n lines each holding a start and an end, with 1 <= n <= 12."
+      outputs: 'One line holding "greedy optimum", then one line holding "MATCH" or "DIFFER".'
+      notes: "The greedy sorts by end and then by start and scans once. The oracle enumerates every mask and rejects a mask when two selected intervals overlap. The comparator uses comparisons rather than subtraction, so no endpoint difference can overflow, and the free time starts at the smallest 64-bit value divided by four."
+      operations: [sort, scan, enumerate, verify]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n intervals and prints the earliest-finish greedy count, the exhaustive optimum for n at most 12, and MATCH or DIFFER."
+      time: "O(n log n) for the greedy, O(n^2 2^n) for the oracle"
+      auxiliarySpace: "O(n) for the interval vectors"
+      status: unverified
+      inputs: "n, then n lines each holding a start and an end, with 1 <= n <= 12."
+      outputs: 'One line holding "greedy optimum", then one line holding "MATCH" or "DIFFER".'
+      notes: "std::sort orders a copy of the input by end and then by start, and the scan compares each start against the free time. The oracle enumerates the masks and checks pairwise compatibility. The lambda comparator and the 64-bit free time keep the implementation exact at the stated bounds."
+      operations: [sort, scan, enumerate, verify]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n intervals and prints the earliest-finish greedy count, the exhaustive optimum for n at most 12, and MATCH or DIFFER."
+      time: "O(n log n) for the greedy, O(n^2 2^n) for the oracle"
+      auxiliarySpace: "O(n) for the interval array"
+      status: unverified
+      inputs: "n, then n lines each holding a start and an end, with 1 <= n <= 12."
+      outputs: 'One line holding "greedy optimum", then one line holding "MATCH" or "DIFFER".'
+      notes: "The class is Main and lives in java/Main.java. The Interval class implements Comparable, Arrays.sort orders a clone of the input, and the free time starts at Long.MIN_VALUE divided by four. A Scanner is sufficient because the input has at most twelve pairs."
+      operations: [sort, scan, enumerate, verify]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n intervals and prints the earliest-finish greedy count, the exhaustive optimum for n at most 12, and MATCH or DIFFER."
+      time: "O(n log n) for the greedy, O(n^2 2^n) for the oracle"
+      auxiliarySpace: "O(n) for the interval array"
+      status: unverified
+      inputs: "n, then n lines each holding a start and an end, with 1 <= n <= 12."
+      outputs: 'One line holding "greedy optimum", then one line holding "MATCH" or "DIFFER".'
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The comparator is numeric rather than lexicographic, the free time starts at negative infinity, and the oracle uses the small masks that n at most 12 allows. Number arithmetic is exact for the stated endpoint range because every value is far below 2^53."
+      operations: [sort, scan, enumerate, verify]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n intervals and prints the earliest-finish greedy count, the exhaustive optimum for n at most 12, and MATCH or DIFFER."
+      time: "O(n log n) for the greedy, O(n^2 2^n) for the oracle"
+      auxiliarySpace: "O(n) for the interval arrays"
+      status: unverified
+      inputs: "n, then n lines each holding a start and an end, with 1 <= n <= 12."
+      outputs: 'One line holding "greedy optimum", then one line holding "MATCH" or "DIFFER".'
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program uses SysUtils, one argument per Read, no IOResult, fixed arrays of twelve intervals, and Int64 arithmetic, so it compiles under pas2js. The sort is a small selection sort and the oracle is an iterative bitmask."
+      operations: [sort, scan, enumerate, verify]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads n intervals and prints the earliest-finish greedy count, the exhaustive optimum for n at most 12, and MATCH or DIFFER."
+      time: "O(n log n) for the greedy, O(n^2 2^n) for the oracle"
+      auxiliarySpace: "O(n) for the interval list"
+      status: unverified
+      inputs: "n, then n lines each holding a start and an end, with 1 <= n <= 12."
+      outputs: 'One line holding "greedy optimum", then one line holding "MATCH" or "DIFFER".'
+      notes: "The input is read in one pass over sys.stdin.buffer, the intervals are sorted by the tuple (end, start), and Python integers remove the overflow concern. The oracle enumerates the masks and rejects a mask as soon as two selected intervals overlap."
+      operations: [sort, scan, enumerate, verify]

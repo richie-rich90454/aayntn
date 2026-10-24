@@ -1,0 +1,28 @@
+id: usaco.2017.feb.silver.helpcross
+title: Why Did the Cow Cross the Road
+source: USACO
+contest: 2017 February Contest
+division: silver
+url: https://usaco.org/index.php?page=viewproblem2&cpid=714
+techniques: [greedy.exchange-argument]
+prerequisites:
+    - foundations.sorting
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - There are up to 20,000 chickens and 20,000 cows, so an all-pairs matching is too slow.
+    - A chicken is available at one instant T_i, and a cow can use it only when A_j <= T_i <= B_j.
+    - Times can repeat and the input order is arbitrary.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Process the chickens in increasing time.
+    - At a given time, every cow whose start is at most that time is available, unless its end has already passed.
+    - Among the available cows, the one with the earliest end is the most urgent.
+    - Keep the available end times in a min-heap, discard the expired ones, and pair the top with the current chicken.
+discussion: >-
+    The greedy processes chickens in time order and always serves the available cow whose compatibility window closes earliest. The exchange argument compares an optimal matching that agrees with the greedy on earlier chickens. If the optimal matching uses cow x for the current chicken while the urgent cow y is available, either y is unmatched and can replace x, or y is matched to a later chicken t and the two cows can be swapped. Cow x is compatible with t because its start is at most the current time and its end is at least y's end, which is at least t. The number of pairs never changes, so an optimal matching can be made to agree with the greedy at every chicken. A min-heap of end times implements the urgency rule in logarithmic time per cow.
+related:
+    - poj.3045.cow-acrobats
+    - codeforces.276c.little-girl-and-maximum-sum

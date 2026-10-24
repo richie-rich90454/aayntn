@@ -1,0 +1,29 @@
+id: codeforces.276c.little-girl-and-maximum-sum
+title: Little Girl and Maximum Sum
+source: Codeforces
+contest: Codeforces Round 169 (Div. 2)
+division: silver
+url: https://codeforces.com/problemset/problem/276/C
+techniques: [greedy.exchange-argument]
+prerequisites:
+    - foundations.sorting
+    - arrays.prefix-sums
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - There are up to 200,000 values and 200,000 queries.
+    - The total can reach about 8e15, so the accumulator must be 64-bit.
+    - The array may be permuted, but the queries are fixed and must not be reordered.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Each position contributes its value once for every query that covers it.
+    - The coefficient of a position is the number of queries whose interval contains it.
+    - Pair the largest value with the largest coefficient.
+    - Compute all coefficients with a difference array and a prefix sum, then sort both lists.
+discussion: >-
+    The sum of all query answers is a weighted sum of the array values, where the weight of a position is its query coverage. If an assignment puts a larger value on a smaller coefficient while a smaller value sits on a larger coefficient, swapping the two values changes the total by the product of two positive differences and strictly increases it. An optimal assignment therefore has no such inversion, so sorting the values and the coefficients in the same order is optimal. The coefficients are computed in linear time with a difference array: add one at the left endpoint of each query and subtract one after the right endpoint, then take the prefix sum. The final dot product needs a 64-bit accumulator.
+related:
+    - poj.3045.cow-acrobats
+    - usaco.2017.feb.silver.helpcross
