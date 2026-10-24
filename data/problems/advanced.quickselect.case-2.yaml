@@ -1,0 +1,30 @@
+id: poj.2388.whos-in-the-middle
+title: Who's in the Middle
+source: POJ
+contest: USACO 2004 November
+division: bronze
+url: http://poj.org/problem?id=2388
+techniques:
+    - advanced.quickselect
+prerequisites:
+    - foundations.sorting
+    - foundations.complexity
+difficulty: 1
+estimatedMinutes: 10
+specialConstraints:
+    - N is odd and less than 10000.
+    - Every milk output is between 1 and 1000000.
+    - The median is a single element, so averaging the two middle values is not part of this problem.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The median of an odd count is the value at index N / 2 of the sorted array.
+    - At N below 10000 the sort baseline is already fast enough, so the exercise is to see the order statistic underneath it.
+    - Select index N / 2 with a partition, and discard the side that cannot contain it.
+    - Repeated milk outputs are common, so make the partition handle equal values as one block.
+discussion: >-
+    The problem is a single median query on a small static array. The sorted array is not required, only its middle position, and selection reaches that position without ordering the rest. Because N is below 10000, the sort baseline comfortably passes; the selection version is the order-statistic solution and costs linear expected time. The odd count is the detail that removes the average: the answer is exactly one input value, at index N / 2 of the zero-based sorted order.
+related:
+    - hackerrank.find-the-median
+    - kattis.median

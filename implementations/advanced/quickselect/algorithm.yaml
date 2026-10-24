@@ -1,0 +1,96 @@
+algorithm: advanced.quickselect
+title: Quickselect and randomized selection
+summary: Find the k-th smallest element of an array by partitioning around a median-of-three pivot and keeping only the side that holds the rank, which costs linear time in expectation and constant extra space.
+subject: advanced
+divisions: [silver, gold]
+importance: advanced-technique
+prerequisites:
+    required: [foundations.sorting, foundations.complexity]
+    recommended: [searching.binary-search, foundations.recursion]
+complexity:
+    time: "O(n) expected with a random pivot, O(n^2) worst case"
+    space: "O(1) auxiliary in the iterative form, O(n) stack in the worst recursive form"
+assumptions:
+    - The array holds n >= 1 integers and the rank k satisfies 1 <= k <= n, so the answer always exists.
+    - Every value fits in a signed 32-bit integer, so the comparison order is the same in all six languages.
+    - The reference programs use the median of the first, middle, and last elements, so they follow the same deterministic sequence of partitions.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the rank, then prints the k-th smallest value with an in-place partition."
+      time: "O(n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n integers, then k with 1 <= k <= n, all separated by whitespace."
+      outputs: "One line with the k-th smallest value."
+      notes: "The array is heap-allocated so the bound is set by the input rather than by a compile-time constant, and it is freed on every exit path. The pivot is the median of the values at lo, mid, and hi, and the three-way loop moves every copy of the pivot into one block, so duplicates disappear in a single round."
+      operations: [median-of-three, three-way-partition, select]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the rank, then prints the k-th smallest value with an in-place partition."
+      time: "O(n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n integers, then k with 1 <= k <= n, all separated by whitespace."
+      outputs: "One line with the k-th smallest value."
+      notes: "The array is a std::vector<int> and the swaps use std::swap, so the listing shows the partition rather than the storage. It deliberately does not call std::nth_element, because the pivot rule and the three-way block are the subject of the article."
+      operations: [median-of-three, three-way-partition, select]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the rank, then prints the k-th smallest value with an in-place partition."
+      time: "O(n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n integers, then k with 1 <= k <= n, all separated by whitespace."
+      outputs: "One line with the k-th smallest value."
+      notes: "The source is java/Main.java and the class is Main, so the judge entry point is the standard one. A byte-buffer scanner reads the tokens, because java.util.Scanner is the slowest part of a Java solution at a million values, and the array is a plain int[]."
+      operations: [median-of-three, three-way-partition, select]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the rank, then prints the k-th smallest value with an in-place partition."
+      time: "O(n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n integers, then k with 1 <= k <= n, all separated by whitespace."
+      outputs: "One line with the k-th smallest value."
+      notes: "The variant reads the whole input once and splits it, then selects on a list. The loop is iterative, so a bad pivot sequence cannot raise the interpreter recursion limit; only the number of rounds changes."
+      operations: [median-of-three, three-way-partition, select]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the rank, then prints the k-th smallest value with an in-place partition."
+      time: "O(n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n integers, then k with 1 <= k <= n, all separated by whitespace."
+      outputs: "One line with the k-th smallest value."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The array is a dynamic array of LongInt, every Read takes exactly one argument, and there is no IOResult, so the program stays inside the subset that the browser-based compiler accepts. Comparisons and swaps only, so no value is ever added or multiplied."
+      operations: [median-of-three, three-way-partition, select]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the rank, then prints the k-th smallest value with an in-place partition."
+      time: "O(n) expected, O(n^2) worst case"
+      auxiliarySpace: "O(1) beyond the array"
+      status: unverified
+      inputs: "n, then n integers, then k with 1 <= k <= n, all separated by whitespace."
+      outputs: "One line with the k-th smallest value."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Standard input is read as one string and split, the values are Numbers, and the pivot index uses Math.floor((hi - lo) / 2), which matches the integer division of the compiled languages. The output line uses the platform separator so the six variants agree byte for byte."
+      operations: [median-of-three, three-way-partition, select]

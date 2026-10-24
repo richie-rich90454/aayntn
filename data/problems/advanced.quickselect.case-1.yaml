@@ -1,0 +1,30 @@
+id: hackerrank.find-the-median
+title: Find the Median
+source: HackerRank
+contest: HackerRank Algorithms
+division: bronze
+url: https://www.hackerrank.com/challenges/find-the-median/problem
+techniques:
+    - advanced.quickselect
+prerequisites:
+    - foundations.sorting
+    - foundations.complexity
+difficulty: 1
+estimatedMinutes: 10
+specialConstraints:
+    - The number of elements is odd, so the median is a single element and no averaging step is needed.
+    - The input array is unsorted, so the middle position of the original array is not the answer.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The median of an odd number of values is the order statistic with rank (n + 1) / 2, which is index n / 2 in a zero-based sorted array.
+    - Sorting is the simplest correct solution and costs O(n log n).
+    - A selection finds the same position without ordering the other elements, and it needs no second array.
+    - Partition around a pivot and keep only the side that contains index n / 2.
+discussion: >-
+    The task is one order statistic of one static array. The sorted array is not needed: only the value at the middle position is, so a partition that places the pivot at its final sorted position can discard the side that does not contain the rank. A median-of-three pivot keeps sorted and reverse-sorted input balanced, and a three-way partition collapses duplicates so the rank is found in one round. The expected cost is linear, against O(n log n) for the sort baseline, and the array is rearranged in place.
+related:
+    - poj.2388.whos-in-the-middle
+    - kattis.median

@@ -1,0 +1,9 @@
+- name: a middle rank in a shuffled array
+  input: "9\n9 2 8 1 7 3 6 4 5\n6\n"
+  expected: "6\n"
+- name: duplicate values and negative values
+  input: "8\n5 -1 5 0 -3 5 2 -3\n3\n"
+  expected: "-1\n"
+- name: a single element is also the highest rank
+  input: "1\n42\n1\n"
+  expected: "42\n"
