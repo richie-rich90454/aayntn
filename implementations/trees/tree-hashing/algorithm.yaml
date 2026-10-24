@@ -1,0 +1,95 @@
+algorithm: trees.tree-hashing
+title: Tree hashing
+summary: Hash every subtree bottom-up from the sorted hashes of its children, so two rooted trees can be compared in near-linear time regardless of their labels.
+subject: trees
+divisions: [gold, platinum]
+importance: common-contest-technique
+prerequisites:
+    required: [trees.tree-dp, foundations.complexity]
+    recommended: [graphs.dfs, foundations.binary-representation]
+complexity:
+    time: "O(n log n + m log m)"
+    space: "O(n + m)"
+assumptions:
+    - Each input is a rooted tree given by a parent array, with -1 marking the root and every other parent inside 0..n-1.
+    - The comparison is probabilistic; equal hashes are evidence of isomorphism, not a proof.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two rooted trees as parent arrays and prints whether they are isomorphic as rooted trees."
+      time: "O(n log n + m log m)"
+      auxiliarySpace: "O(n + m) for the parent arrays, the children lists and the two hash lanes"
+      status: unverified
+      inputs: "n, then n parents (0-based; -1 marks the root); then m, then m parents with the same convention for the second tree."
+      outputs: "SAME when the two rooted trees are isomorphic as rooted trees, DIFFERENT otherwise."
+      notes: "The parent array is turned into a compact children list, a breadth-first order is reversed into a postorder, and every vertex sorts the hashes of its children before folding them. Two 32-bit lanes are folded with different bases and different xorshift permutations, so a leaf hashes to the pair (1, 1) and a collision must hit both lanes. The arithmetic is uint32_t, which wraps modulo 2^32 without undefined behavior, and the two components are compared as a pair."
+      operations: [build-children, hash-subtree, compare-roots]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two rooted trees as parent arrays and prints whether they are isomorphic as rooted trees."
+      time: "O(n log n + m log m)"
+      auxiliarySpace: "O(n + m) for the parent arrays, the children lists and the two hash lanes"
+      status: unverified
+      inputs: "n, then n parents (0-based; -1 marks the root); then m, then m parents with the same convention for the second tree."
+      outputs: "SAME when the two rooted trees are isomorphic as rooted trees, DIFFERENT otherwise."
+      notes: "The parent array is turned into a compact children list, a breadth-first order is reversed into a postorder, and every vertex sorts the hashes of its children with std::sort before folding them. Two 32-bit lanes are folded with different bases and different xorshift permutations, so a leaf hashes to the pair (1, 1) and a collision must hit both lanes. The arithmetic is std::uint32_t, which wraps modulo 2^32, and the two components are compared as a pair."
+      operations: [build-children, hash-subtree, compare-roots]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two rooted trees as parent arrays and prints whether they are isomorphic as rooted trees."
+      time: "O(n log n + m log m)"
+      auxiliarySpace: "O(n + m) for the parent arrays, the children lists and the two hash lanes"
+      status: unverified
+      inputs: "n, then n parents (0-based; -1 marks the root); then m, then m parents with the same convention for the second tree."
+      outputs: "SAME when the two rooted trees are isomorphic as rooted trees, DIFFERENT otherwise."
+      notes: "The class is named Main so the file can be submitted to a judge unchanged. The parent array is turned into a compact children list, a breadth-first order is reversed into a postorder, and every vertex sorts the hashes of its children. The two 32-bit lanes are stored in longs; the child pair is packed into one long and the sign bit is flipped so a signed sort agrees with the unsigned lexicographic order. A leaf hashes to (1, 1)."
+      operations: [build-children, hash-subtree, compare-roots]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads two rooted trees as parent arrays and prints whether they are isomorphic as rooted trees."
+      time: "O(n log n + m log m)"
+      auxiliarySpace: "O(n + m) for the parent arrays, the children lists and the two hash lanes"
+      status: unverified
+      inputs: "n, then n parents (0-based; -1 marks the root); then m, then m parents with the same convention for the second tree."
+      outputs: "SAME when the two rooted trees are isomorphic as rooted trees, DIFFERENT otherwise."
+      notes: "The parent array is turned into a compact children list, a breadth-first order is reversed into a postorder, and every vertex sorts its child hash pairs as tuples before folding them. Each lane is reduced modulo 2^32 with (1 << 32) - 1, so the two 32-bit components follow the same recurrence as the compiled languages. A leaf hashes to (1, 1)."
+      operations: [build-children, hash-subtree, compare-roots]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript/Pascal is not a USACO submission language. The canonical program: it reads two rooted trees as parent arrays and prints whether they are isomorphic as rooted trees."
+      time: "O(n log n + m log m)"
+      auxiliarySpace: "O(n + m) for the parent arrays, the children lists and the two hash lanes"
+      status: unverified
+      inputs: "n, then n parents (0-based; -1 marks the root); then m, then m parents with the same convention for the second tree."
+      outputs: "SAME when the two rooted trees are isomorphic as rooted trees, DIFFERENT otherwise."
+      notes: "Educational reference implementation: JavaScript/Pascal is not a USACO submission language. The lanes are Int64 values masked with 4294967295, so every product stays below 2^53 and no 128-bit integer is needed. The parent array is turned into a compact children list, a breadth-first order is reversed into a postorder, and each vertex's child hashes are sorted by a merge sort with a shared scratch array. A leaf hashes to (1, 1), and Read takes one argument at a time."
+      operations: [build-children, hash-subtree, compare-roots]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript/Pascal is not a USACO submission language. The canonical program: it reads two rooted trees as parent arrays and prints whether they are isomorphic as rooted trees."
+      time: "O(n log n + m log m)"
+      auxiliarySpace: "O(n + m) for the parent arrays, the children lists and the two hash lanes"
+      status: unverified
+      inputs: "n, then n parents (0-based; -1 marks the root); then m, then m parents with the same convention for the second tree."
+      outputs: "SAME when the two rooted trees are isomorphic as rooted trees, DIFFERENT otherwise."
+      notes: "Educational reference implementation: JavaScript/Pascal is not a USACO submission language. The parent array is turned into a compact children list, a breadth-first order is reversed into a postorder, and every vertex sorts the hashes of its children. Every intermediate value stays below 2^53, so the multiplication in the fold is exact, and >>> 0 reduces each lane modulo 2^32. A leaf hashes to (1, 1)."
+      operations: [build-children, hash-subtree, compare-roots]

@@ -1,0 +1,9 @@
+- name: the same shape with the labeled child swapped
+  input: "5\n-1 0 0 1 1\n5\n-1 0 0 2 2\n"
+  expected: "SAME\n"
+- name: a chain and a star with four vertices
+  input: "4\n-1 0 1 2\n4\n-1 0 0 0\n"
+  expected: "DIFFERENT\n"
+- name: edge case of two single-vertex trees
+  input: "1\n-1\n1\n-1\n"
+  expected: "SAME\n"

@@ -1,0 +1,30 @@
+id: cses.1701.tree-isomorphism-ii
+title: Tree Isomorphism II
+source: CSES
+contest: CSES Problem Set
+url: https://cses.fi/problemset/task/1701
+techniques:
+    - trees.tree-hashing
+prerequisites:
+    - trees.tree-dp
+    - foundations.sorting
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The trees are not rooted, so the two inputs may choose different vertices as their natural starting point.
+    - There are up to 1000 tests, and the sum of n over all tests is at most 100000.
+    - A tree has either one center or two adjacent centers, and both cases must be handled.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - An isomorphism preserves distances, so it maps the center set of one tree onto the center set of the other.
+    - Find the centers by repeatedly removing the leaves, or by taking the middle of a longest path.
+    - Root each tree at a center, hash the resulting rooted trees, and compare the hash pairs.
+    - When a tree has two centers, try both ways of pairing the two rooted versions; either pairing is enough.
+discussion: >-
+    The unrooted version reduces to the rooted version once a root is chosen, but the root must be a structural invariant rather than the input label. The center of a tree is invariant under isomorphism, and there is only one center or two adjacent centers. Rooting at a center therefore turns an arbitrary labeling into a comparison of one or two rooted pairs. The two-center case needs both pairings because an isomorphism may map the first center of one tree to either center of the other. Each rooted comparison costs a postorder pass and a sort of the child lists.
+related:
+    - cses.1700.tree-isomorphism-i
+    - codeforces.1800g.symmetree

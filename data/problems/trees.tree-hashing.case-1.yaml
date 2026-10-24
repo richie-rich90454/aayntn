@@ -1,0 +1,30 @@
+id: cses.1700.tree-isomorphism-i
+title: Tree Isomorphism I
+source: CSES
+contest: CSES Problem Set
+url: https://cses.fi/problemset/task/1700
+techniques:
+    - trees.tree-hashing
+prerequisites:
+    - trees.tree-dp
+    - graphs.dfs
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - There are up to 1000 tests, and the sum of n over all tests is at most 100000, so each test must cost time proportional to its own size.
+    - Both trees have the same n and are rooted at node 1, while the labels of the other nodes carry no meaning.
+    - A single test can be a chain of 100000 nodes, so a recursive traversal would need 100000 stack frames.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The root of a tree determines the parent of every other vertex, so root both trees at node 1 before comparing anything.
+    - Two roots are isomorphic exactly when their multisets of child subtrees are isomorphic, so the child order in the input must not affect the answer.
+    - Replace every child subtree by a hash, sort those hashes, and fold the sorted sequence into the hash of the parent.
+    - Process the vertices from the leaves upward, because a parent cannot be hashed until all of its children are finished.
+discussion: >-
+    Rooted tree isomorphism has a recursive shape: a vertex is determined by the multiset of isomorphism classes of its children, and nothing else. Hashing turns each class into a 32-bit pair, and sorting the child hashes turns the multiset into a sequence that can be folded in one pass. The postorder makes every child's hash available before its parent's, so the whole comparison is two linear passes over the vertices plus the cost of sorting the child lists. The resulting test is probabilistic, which is the usual trade for a constant-size fingerprint per subtree.
+related:
+    - cses.1701.tree-isomorphism-ii
+    - codeforces.1800g.symmetree

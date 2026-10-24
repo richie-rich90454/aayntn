@@ -1,0 +1,32 @@
+id: codeforces.1800g.symmetree
+title: Symmetree
+source: Codeforces
+contest: Codeforces Round 855 (Div. 3)
+division: platinum
+url: https://codeforces.com/problemset/problem/1800/G
+editorialUrl: https://codeforces.com/blog/entry/113477
+techniques:
+    - trees.tree-hashing
+prerequisites:
+    - trees.tree-dp
+    - foundations.sorting
+difficulty: 5
+estimatedMinutes: 60
+specialConstraints:
+    - The sum of n over all test cases is at most 200000, and there are up to 10000 test cases.
+    - Symmetry is recursive; the children are paired by mirror isomorphism, and at most one unpaired middle child must itself be symmetric.
+    - A vertex can have 200000 children, so pairing every two child subtrees directly is quadratic.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Two child subtrees can be paired exactly when they are isomorphic, and a subtree hash names that class.
+    - At one vertex, count the child hashes; every class needs an even count, except possibly one class.
+    - If one class has an odd count, its child subtrees must themselves be symmetric; all other classes pair up immediately.
+    - Process the vertices bottom-up, so the symmetry flag of every child is known before its parent is tested.
+discussion: >-
+    The symmetry condition is a matching condition on the children of every vertex. Within one vertex, two children can be paired exactly when their subtrees are isomorphic, so the only thing that matters is the parity of each hash class. At most one class may have an odd count, and that class must contain a child that is already known to be symmetric. A postorder supplies those flags, and a sort or a hash map collects the classes. The total work is the cost of hashing the tree plus the cost of grouping the children by hash.
+related:
+    - cses.1700.tree-isomorphism-i
+    - cses.1701.tree-isomorphism-ii
