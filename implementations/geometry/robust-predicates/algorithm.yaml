@@ -1,0 +1,96 @@
+algorithm: geometry.robust-predicates
+title: Robust predicates
+summary: Read triples of integer points and print the exact orientation sign of each triple, keeping every intermediate value inside a stated integer width.
+subject: geometry
+divisions: [gold, platinum]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.binary-representation]
+    recommended: [geometry.convex-hull, geometry.integer-geometry]
+complexity:
+    time: "O(1) per query"
+    space: "O(1)"
+assumptions:
+    - Every coordinate is an integer with absolute value at most 1000000, so every product and every cross product stays below 2^53 and the Pascal variant is exact; the JavaScript variant uses BigInt.
+    - A query is a triple of points; duplicate points are allowed and produce the collinear answer.
+    - The input holds q triples, one per line.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical C program: it reads q triples and prints the exact orientation sign of each triple."
+      time: "O(1) per query"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "q, then q lines with six integers x1 y1 x2 y2 x3 y3."
+      outputs: "One line per triple: 1 for a counterclockwise turn, 0 for collinear points, -1 for a clockwise turn."
+      notes: "The determinant is formed from the two coordinate differences and compared with zero, so no division and no floating point appears. The coordinates and the products are long long, which holds the largest product and the largest cross product at the stated bound."
+      operations: [orientation, sign, collinearity]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical C++17 program: it reads q triples and prints the exact orientation sign of each triple."
+      time: "O(1) per query"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "q, then q lines with six integers x1 y1 x2 y2 x3 y3."
+      outputs: "One line per triple: 1 for a counterclockwise turn, 0 for collinear points, -1 for a clockwise turn."
+      notes: "The determinant is formed from the two coordinate differences and compared with zero, so no division and no floating point appears. The coordinates and the products are long long, and the output uses a newline rather than std::endl so that many queries do not flush the stream."
+      operations: [orientation, sign, collinearity]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical Java program: it reads q triples and prints the exact orientation sign of each triple."
+      time: "O(1) per query"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "q, then q lines with six integers x1 y1 x2 y2 x3 y3."
+      outputs: "One line per triple: 1 for a counterclockwise turn, 0 for collinear points, -1 for a clockwise turn."
+      notes: "The determinant is formed from the two coordinate differences in long arithmetic and compared with zero, so no division and no floating point appears. class Main reads its input through a buffered reader and accumulates the output so that the 100000-query bound costs one pass."
+      operations: [orientation, sign, collinearity]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical Python program: it reads q triples and prints the exact orientation sign of each triple."
+      time: "O(1) per query"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "q, then q lines with six integers x1 y1 x2 y2 x3 y3."
+      outputs: "One line per triple: 1 for a counterclockwise turn, 0 for collinear points, -1 for a clockwise turn."
+      notes: "The determinant is formed from the two coordinate differences and compared with zero, so no division and no floating point appears. Python integers are unbounded, but the program states the same bound as the other five so that the width analysis is uniform and the outputs agree byte for byte."
+      operations: [orientation, sign, collinearity]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical Pascal program: it reads q triples and prints the exact orientation sign of each triple."
+      time: "O(1) per query"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "q, then q lines with six integers x1 y1 x2 y2 x3 y3."
+      outputs: "One line per triple: 1 for a counterclockwise turn, 0 for collinear points, -1 for a clockwise turn."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The determinant is formed from the two coordinate differences in Int64 arithmetic and compared with zero. Every value is read with its own Read call, there is no IOResult and no 128-bit integer, and the stated bound keeps every intermediate value below 2^53, which the browser compiler's double-backed Int64 represents exactly."
+      operations: [orientation, sign, collinearity]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical JavaScript program: it reads q triples and prints the exact orientation sign of each triple."
+      time: "O(1) per query"
+      auxiliarySpace: "O(1)"
+      status: unverified
+      inputs: "q, then q lines with six integers x1 y1 x2 y2 x3 y3."
+      outputs: "One line per triple: 1 for a counterclockwise turn, 0 for collinear points, -1 for a clockwise turn."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The determinant is formed from the two coordinate differences and compared with zero. The coordinates and the determinant are BigInt values, so every intermediate value is exact without a floating-point representation, and the stated bound keeps the six input contracts identical."
+      operations: [orientation, sign, collinearity]

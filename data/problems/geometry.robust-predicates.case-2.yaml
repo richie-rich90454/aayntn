@@ -1,0 +1,31 @@
+id: cses.2190.line-segment-intersection
+title: Line Segment Intersection
+source: CSES
+contest: CSES Problem Set
+division: gold
+url: https://cses.fi/problemset/task/2190
+techniques:
+    - geometry.robust-predicates
+prerequisites:
+    - geometry.robust-predicates
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - There are up to 100000 pairs of segments, so each pair must be tested in constant time.
+    - Coordinates are between -10^9 and 10^9, so the orientation products need 64-bit arithmetic.
+    - Collinear segments that overlap or touch at an endpoint count as intersecting.
+    - Each segment has distinct endpoints, but the two segments may share an endpoint.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Two segments intersect when each pair of endpoints straddles the other segment's supporting line.
+    - The straddle test is two orientation signs per segment.
+    - The collinear cases are separate, because a segment may touch the other at an endpoint or overlap along a line.
+    - For a collinear point, test whether it lies inside the bounding box of the other segment; no division is needed.
+discussion: >-
+    The problem is four orientation predicates and a set of degenerate cases. The general case is two straddle tests, and the degenerate cases are the collinear endpoints and the collinear overlap, which the strict straddle test misses. Both are decided by the same exact zero that the rest of the page uses, and both are tested with bounding boxes rather than divisions. The input bound of 10^9 makes the arithmetic 64-bit, and the bound is the only difference from the small-coordinate version of the same code.
+related:
+    - cses.2189.point-location-test
+    - kattis.pointinpolygon

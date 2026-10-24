@@ -1,0 +1,31 @@
+id: cses.2189.point-location-test
+title: Point Location Test
+source: CSES
+contest: CSES Problem Set
+division: silver
+url: https://cses.fi/problemset/task/2189
+techniques:
+    - geometry.robust-predicates
+prerequisites:
+    - geometry.robust-predicates
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - There are up to 100000 triples, so each one has to be answered in constant time.
+    - Every coordinate is between -10^9 and 10^9, so the cross product is at most 8e18 and needs a signed 64-bit type.
+    - The first two points are distinct, but the third may coincide with either of them.
+    - The output words are LEFT for a positive cross product, RIGHT for a negative one and TOUCH for zero.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The answer depends only on which side of the directed line from the first point to the second the third point lies.
+    - The sign of the cross product of the two difference vectors is positive for LEFT, negative for RIGHT and zero for TOUCH.
+    - Do not compute a slope, because the line can be vertical and the coordinates reach 10^9.
+    - Multiply the coordinate differences in 64-bit integers, because the cross product is at most 8e18 at the top of the range.
+discussion: >-
+    The problem is the orientation predicate in its purest form. The sign of the cross product of the two difference vectors is the answer, and the only engineering decisions are the order of the arguments and the width of the arithmetic. The sample already contains one case of each output, so it is a direct check of the convention. At the coordinate bound of 10^9 the two products can reach 4e18 and their difference is at most 8e18, which fits a signed 64-bit integer but not a double, so the solution must not use floating point.
+related:
+    - cses.2190.line-segment-intersection
+    - kattis.pointinpolygon

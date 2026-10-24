@@ -1,0 +1,32 @@
+id: kattis.pointinpolygon
+title: Point in Polygon
+source: Kattis
+contest: KTH CSC Popup 2005
+division: silver
+url: https://open.kattis.com/problems/pointinpolygon
+techniques:
+    - geometry.robust-predicates
+prerequisites:
+    - geometry.robust-predicates
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - Several test cases are given, terminated by a case whose first line is 0.
+    - Each polygon has at most 1000 vertices and each test case at most 100 query points.
+    - Coordinates have absolute value at most 10000, so 32-bit products are enough, but the boundary test still needs exact zero.
+    - The polygon is simple but may be given clockwise or counterclockwise.
+    - A query point exactly on an edge must print on, not in or out.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - A point is on the boundary when it is collinear with an edge and lies between the edge's endpoints.
+    - Otherwise, cast a horizontal ray and count the edges it crosses.
+    - An exact crossing test uses the orientation sign together with the half-open rule that compares the y-coordinates of the edge's endpoints with the query point's y-coordinate.
+    - The polygon may be clockwise or counterclockwise, and the crossing parity works for both.
+discussion: >-
+    The problem combines the two uses of the orientation predicate. The zero case answers whether a query point is on an edge, and the sign case answers whether an edge crosses the horizontal ray from the point. The half-open rule for the y-coordinates is what makes a ray through a vertex count exactly once, and the boundary check must run before the parity so that a point on an edge is not classified by a ray that runs along the edge. The coordinates are small enough for 32-bit products, but the boundary test is still an exact comparison, not an epsilon.
+related:
+    - cses.2189.point-location-test
+    - cses.2190.line-segment-intersection
