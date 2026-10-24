@@ -1,0 +1,32 @@
+id: codeforces.840d.destiny
+title: Destiny
+source: Codeforces
+contest: Codeforces Round 429 (Div. 1)
+division: platinum
+url: https://codeforces.com/problemset/problem/840/D
+editorialUrl: https://codeforces.com/blog/entry/53943
+techniques:
+    - range-queries.wavelet-tree
+prerequisites:
+    - range-queries.wavelet-tree
+    - searching.binary-search
+difficulty: 5
+estimatedMinutes: 50
+specialConstraints:
+    - The array and the number of queries both reach 300,000.
+    - The order parameter k is between 2 and 5, so at most k - 1 values can be frequent enough to answer a query.
+    - A value must occur strictly more than (r - l + 1) / k times, and the smallest such value is required.
+    - The array values are between 1 and n, so the value domain itself is small but a frequency scan per query is still too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A range of length L can contain at most k - 1 values whose frequency is greater than L / k, because their frequencies are disjoint and each one exceeds L / k.
+    - Descend the wavelet tree while carrying the position range; at every node, the number of elements in the range is known from the two endpoints of the mapped range.
+    - Prune a branch when its element count is at most L / k, because no value below it can reach the threshold.
+    - At most k - 1 branches survive at each level, so the query costs O(k log n); verify the surviving leaves and report the smallest value that passes.
+discussion: >-
+    The threshold L / k is what makes the query small. Every value that can answer a query occupies more than L / k positions, and those position sets are disjoint, so fewer than k values can qualify. A wavelet tree lets the search prune by value: at each node the mapped half-open range gives the number of elements in that node, and a node with at most L / k elements cannot contain a qualifying value. Descending only the surviving branches keeps at most k - 1 ranges alive at every level, so the search visits O(k log N) nodes. Each surviving leaf is a compressed value whose frequency is the final range length, and the smallest leaf that clears the threshold is the answer. The same pruning works on the uncompressed value bits, because the values already lie in [1, n].
+related:
+    - librarychecker.range-kth-smallest
+    - cses.1734.distinct-values-queries

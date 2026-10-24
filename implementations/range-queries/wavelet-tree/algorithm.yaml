@@ -1,0 +1,97 @@
+algorithm: range-queries.wavelet-tree
+title: Wavelet trees
+summary: A wavelet tree stable-partitions a static array by the bits of its values, so a range rank query or a range k-th smallest query descends one logarithmic level at a time.
+subject: range-queries
+divisions: [gold, platinum]
+importance: advanced-technique
+prerequisites:
+    required:
+        [range-queries.merge-sort-tree, searching.binary-search, arrays.coordinate-compression]
+    recommended: [range-queries.segment-tree, range-queries.fenwick-tree, foundations.sorting]
+complexity:
+    time: "O(log sigma) per k-th smallest or rank query; O(n log sigma) to build"
+    space: "O(n log sigma) prefix counts, plus O(n) working arrays"
+assumptions:
+    - The array is static, because an update has to repair one stable partition at every level.
+    - The values are coordinate-compressed to ranks, so the height of the tree is the logarithm of the number of distinct values.
+    - A query names a 0-based half-open position range [l, r) and an order k with 1 <= k <= r - l.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log sigma) per query; O(n log sigma) to build"
+      auxiliarySpace: "O(n log sigma) int prefix counts, plus two O(n) rank buffers"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 0-based half-open bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the half-open range [l, r)."
+      notes: "Every level stores a prefix count of the elements that descend to the left child, and the elements are stable partitioned before the next level. A query maps [l, r) through the prefix counts and subtracts the zeros from k when it descends right. The C variant owns every level with malloc and frees each one after the last query, so the whole structure is released on every exit path."
+      operations: [build, kth-smallest]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log sigma) per query; O(n log sigma) to build"
+      auxiliarySpace: "O(n log sigma) int prefix counts, plus two O(n) rank buffers"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 0-based half-open bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the half-open range [l, r)."
+      notes: "Every level stores a prefix count of the elements that descend to the left child, and std::swap rotates the two rank buffers instead of copying them. The values are sorted and deduplicated once, and std::lower_bound turns each value into its rank. The answer is collected in one string so the q answers cost one write."
+      operations: [build, kth-smallest]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log sigma) per query; O(n log sigma) to build"
+      auxiliarySpace: "O(n log sigma) int prefix counts, plus two O(n) rank buffers"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 0-based half-open bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the half-open range [l, r)."
+      notes: "The levels are a ragged int[][] whose prefix arrays are allocated once, and the answer is collected in a StringBuilder so the q answers cost one write. The FastScanner keeps the input far below the cost of java.util.Scanner, and the garbage collector reclaims the level arrays."
+      operations: [build, kth-smallest]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log sigma) per query; O(n log sigma) to build"
+      auxiliarySpace: "O(n log sigma) int prefix counts, plus two O(n) rank buffers"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 0-based half-open bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the half-open range [l, r)."
+      notes: "The levels are a list of prefix-count lists, and a dictionary maps each value to its compressed rank in one pass. The interpreter owns every list, and the algorithm is the same as the other five versions; the constant factor is larger because every level of every query crosses the interpreter."
+      operations: [build, kth-smallest]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log sigma) per query; O(n log sigma) to build"
+      auxiliarySpace: "O(n log sigma) longint prefix counts, plus two O(n) rank buffers"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 0-based half-open bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the half-open range [l, r)."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The levels are a dynamic array of dynamic LongInt arrays, and a bottom-up merge sort removes the recursion from the preprocessing. SetLength owns every level, and the two rank buffers are rotated instead of copied. Values and k use Int64 so the order statistic is not narrowed to 32 bits."
+      operations: [build, kth-smallest]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the array and the order-statistic queries from stdin and prints one k-th smallest value per query."
+      time: "O(log sigma) per query; O(n log sigma) to build"
+      auxiliarySpace: "O(n log sigma) int prefix counts, plus two O(n) rank buffers"
+      status: unverified
+      inputs: 'n q, then the n values, then q lines "l r k" with 0-based half-open bounds.'
+      outputs: "One line per query, holding the k-th smallest value in the half-open range [l, r)."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The prefix counts and the rank buffers are Int32Array instances, so the levels are compact and the two buffers are rotated instead of copied."
+      operations: [build, kth-smallest]

@@ -1,0 +1,32 @@
+id: librarychecker.range-kth-smallest
+title: Range K-th Smallest
+source: Library Checker
+contest: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/range_kth_smallest
+techniques:
+    - range-queries.wavelet-tree
+prerequisites:
+    - arrays.coordinate-compression
+    - foundations.sorting
+    - searching.binary-search
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The array and the number of queries both reach 200,000.
+    - The values are 32-bit integers, so the value domain cannot be indexed directly.
+    - The bounds are 0-based and half-open, and k is 1-based inside the range.
+    - The queries are independent, but the answer to each one is a value, so a sorted copy per query is far too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Coordinate-compress the values, so every value becomes a rank in [0, m) and the value bits are only log m deep.
+    - Build the wavelet tree over the ranks; every level stores how many of the first i elements descend to the left child.
+    - In a range, the number of elements that descend left is the difference of two prefix counts, so one subtraction decides the next branch.
+    - If the left branch holds at least k elements, descend left; otherwise subtract that count from k and descend right, then map the range through the counts.
+discussion: >-
+    The query asks for one value out of a subarray, so sorting the whole array once is not enough: the order statistic is local to the range. A wavelet tree indexes the value bits instead of the positions. Coordinate compression turns each value into a rank of at most log N bits, and every level stable-partitions the current sequence by one bit while recording a prefix count of the zeros. A query keeps the half-open range [l, r) of the current level, reads the number of zeros in that range in constant time, and either stays on the left or subtracts the zeros from k and moves to the right. After log N levels the accumulated rank is the answer, and the compressed table turns it back into the original value. The build is O(N log N), and each query is O(log N) with no binary search over the value axis.
+related:
+    - codeforces.840d.destiny
+    - cses.1734.distinct-values-queries
