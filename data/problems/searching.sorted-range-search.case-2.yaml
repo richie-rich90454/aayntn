@@ -1,0 +1,30 @@
+id: codeforces.600b.queries-about-less-or-equal-elements
+title: Queries about less or equal elements
+source: Codeforces
+contest: "Educational Codeforces Round 2"
+division: silver
+url: https://codeforces.com/problemset/problem/600/B
+editorialUrl: https://codeforces.com/blog/entry/21827
+techniques:
+    - searching.sorted-range-search
+prerequisites:
+    - foundations.sorting
+    - searching.binary-search
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - Both arrays reach 200,000 elements, so a scan of the first array for every query is too slow.
+    - The values reach 10^9 in magnitude, so the answer is a count rather than an index into a value table.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Sort the first array once; the order of equal values does not matter for a count.
+    - The number of elements at most x is the first index at which the sorted array exceeds x.
+    - That index is a boundary search, so each query costs O(log n) after the sort.
+discussion: >-
+    Sorting the first array turns every query into a boundary search rather than a scan. The predicate a[i] <= x is monotone, so the set of qualifying elements is a prefix and its length is exactly the boundary index. The same index answers "how many are strictly less than x" after one comparison adjustment, which is why the lower-bound and upper-bound forms of the search are the whole technique. The sort dominates at O(n log n), and the queries add O(m log n).
+related:
+    - codeforces.474b.worms
+    - atcoder.abc143.d-triangles

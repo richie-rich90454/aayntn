@@ -1,0 +1,29 @@
+id: atcoder.abc143.d-triangles
+title: Triangles
+source: AtCoder
+contest: AtCoder Beginner Contest 143
+url: https://atcoder.jp/contests/abc143/tasks/abc143_d
+editorialUrl: https://atcoder.jp/contests/abc143/tasks/abc143_d/editorial
+techniques:
+    - searching.sorted-range-search
+prerequisites:
+    - foundations.sorting
+    - searching.binary-search
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - There are up to 2,000 sticks, so the cubic enumeration of triples is too slow.
+    - Stick lengths are at most 1,000, but the count uses the sorted index range rather than the length values.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Sort the lengths and name the three chosen sticks a <= b <= c; only the condition a + b > c has to be checked.
+    - Fix a and b, then every c with b <= c < a + b completes a triangle.
+    - In the sorted suffix, those valid c form a contiguous range, so its upper end is found by one boundary search.
+discussion: >-
+    After sorting, the triangle inequality reduces to a + b > c for the two shorter sides. Fixing the two shorter sides leaves a contiguous block of candidate longest sides in the sorted suffix, because the valid lengths lie between b and a + b. A boundary search finds the first length at least a + b, and the block length is the number of valid third sides. The two nested loops cost O(n^2) and each boundary search costs O(log n), which fits the 2,000-stick limit comfortably.
+related:
+    - codeforces.600b.queries-about-less-or-equal-elements
+    - codeforces.474b.worms

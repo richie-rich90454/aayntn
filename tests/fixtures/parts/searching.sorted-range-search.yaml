@@ -1,0 +1,9 @@
+- name: a point inside an interior interval
+  input: "4\n1 3\n5 7\n10 12\n20 20\n11\n"
+  expected: "2\n"
+- name: negative coordinates on a left boundary
+  input: "4\n-1000000000 -999999999\n0 0\n42 42\n999999999 1000000000\n-999999999\n"
+  expected: "0\n"
+- name: empty interval list
+  input: "0\n5\n"
+  expected: "-1\n"

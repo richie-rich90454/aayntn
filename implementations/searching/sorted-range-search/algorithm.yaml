@@ -1,0 +1,92 @@
+algorithm: searching.sorted-range-search
+title: Search over a sorted range of indices
+summary: Locate the interval that contains a point by halving a sorted array of disjoint intervals, or report that no interval contains it.
+subject: searching
+divisions: [bronze, silver]
+importance: common-contest-technique
+complexity:
+    time: "O(log n)"
+    space: "O(1)"
+assumptions:
+    - The intervals are sorted by their left endpoint.
+    - The intervals are pairwise disjoint, so at most one of them contains a given point.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array of disjoint intervals and a point, then prints the index of the containing interval, or -1."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n pairs of interval endpoints sorted by left endpoint and pairwise disjoint, then the query point."
+      outputs: "The 0-based index of the interval that contains the point, or -1 when no interval contains it."
+      notes: "The endpoints are 64-bit integers and both ends of every interval are inclusive. The program holds the intervals in two heap arrays; the search itself needs O(1) extra space. Bad or missing input prints -1."
+      operations: [read-intervals, compare-bounds, discard-left, discard-right]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array of disjoint intervals and a point, then prints the index of the containing interval, or -1."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n pairs of interval endpoints sorted by left endpoint and pairwise disjoint, then the query point."
+      outputs: "The 0-based index of the interval that contains the point, or -1 when no interval contains it."
+      notes: "The endpoints are 64-bit integers and both ends of every interval are inclusive. The program stores the intervals in two vectors; the search itself needs O(1) extra space. Bad or missing input prints -1."
+      operations: [read-intervals, compare-bounds, discard-left, discard-right]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array of disjoint intervals and a point, then prints the index of the containing interval, or -1."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n pairs of interval endpoints sorted by left endpoint and pairwise disjoint, then the query point."
+      outputs: "The 0-based index of the interval that contains the point, or -1 when no interval contains it."
+      notes: "The class is named Main so the file can be submitted to a judge unchanged. The endpoints are 64-bit integers and both ends of every interval are inclusive. The program holds the intervals in two long arrays; the search itself needs O(1) extra space. Bad or missing input prints -1."
+      operations: [read-intervals, compare-bounds, discard-left, discard-right]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array of disjoint intervals and a point, then prints the index of the containing interval, or -1."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n pairs of interval endpoints sorted by left endpoint and pairwise disjoint, then the query point."
+      outputs: "The 0-based index of the interval that contains the point, or -1 when no interval contains it."
+      notes: "Both ends of every interval are inclusive. The program builds a list of pairs; the search itself needs O(1) extra space. Bad or missing input prints -1."
+      operations: [read-intervals, compare-bounds, discard-left, discard-right]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array of disjoint intervals and a point, then prints the index of the containing interval, or -1."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n pairs of interval endpoints sorted by left endpoint and pairwise disjoint, then the query point."
+      outputs: "The 0-based index of the interval that contains the point, or -1 when no interval contains it."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The endpoints are 64-bit integers and both ends of every interval are inclusive. The program holds the intervals in two dynamic arrays; the search itself needs O(1) extra space. Bad or missing input prints -1."
+      operations: [read-intervals, compare-bounds, discard-left, discard-right]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array of disjoint intervals and a point, then prints the index of the containing interval, or -1."
+      time: "O(log n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n pairs of interval endpoints sorted by left endpoint and pairwise disjoint, then the query point."
+      outputs: "The 0-based index of the interval that contains the point, or -1 when no interval contains it."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Both ends of every interval are inclusive. The program builds an array of pairs; the search itself needs O(1) extra space. Bad or missing input prints -1."
+      operations: [read-intervals, compare-bounds, discard-left, discard-right]

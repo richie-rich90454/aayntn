@@ -1,0 +1,30 @@
+id: codeforces.474b.worms
+title: Worms
+source: Codeforces
+contest: "Codeforces Round 271 (Div. 2)"
+division: silver
+url: https://codeforces.com/problemset/problem/474/B
+editorialUrl: https://codeforces.com/blog/entry/14136
+techniques:
+    - searching.sorted-range-search
+prerequisites:
+    - arrays.prefix-sums
+    - searching.binary-search
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - The piles hold up to a million worms in total, so a table from every label to its pile is possible but unnecessary.
+    - Up to 100,000 queries arrive, so scanning the piles for each query is too slow.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Replace the pile sizes with prefix sums, which are strictly increasing.
+    - Pile i owns the labels from prefix[i - 1] + 1 through prefix[i], so each pile is an inclusive interval of labels.
+    - A query asks for the first prefix sum that is at least the label, which is a boundary search over the sorted prefix array.
+discussion: >-
+    The piles partition the worm labels into consecutive disjoint intervals, and those intervals are already sorted by their left endpoint. Building the prefix sums turns the pile ends into the right endpoints of those intervals, so each query is exactly the point-in-interval search. The first prefix sum at least the label identifies the only candidate pile, and because the intervals are disjoint that candidate is the answer with no second check. The whole solution is one prefix pass and one binary search per query.
+related:
+    - codeforces.600b.queries-about-less-or-equal-elements
+    - atcoder.abc143.d-triangles
