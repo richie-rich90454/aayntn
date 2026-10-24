@@ -1,0 +1,95 @@
+algorithm: trees.virtual-tree
+title: Virtual trees
+summary: Compress a tree to the marked vertices and their lowest common ancestors, so a query touches a set proportional to the marked vertices instead of the whole tree.
+subject: trees
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [trees.lca, graphs.dfs]
+    recommended: [trees.heavy-light-decomposition]
+complexity:
+    time: "O((n + m) log n) to preprocess, O(k log k + k log n) per query"
+    space: "O(n log n) for the ancestor table, O(k) for the virtual tree"
+assumptions:
+    - The tree is static, so the ancestor table and the preorder intervals stay valid.
+    - Each query supplies its marked set before the virtual tree is built.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the ancestor table of a weighted tree, answers each marked set with a virtual tree and prints the total weight of the virtual edges."
+      time: "O((n + m) log n) to preprocess, O(k log k + k log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and O(k) for the virtual tree, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected weighted edges, then q, then q lines k a_1 ... a_k with the marked vertices."
+      outputs: "One line per query, holding the total weight of the edges of the virtual tree of the marked vertices."
+      notes: "The root is the vertex 0. Duplicate marks count once, a mark outside 0..n-1 or outside the root's component is ignored, and a query with fewer than two distinct marks prints 0. The virtual tree is the marked set plus the lowest common ancestor of every pair of adjacent marks in preorder, and a stack reconstructs its edges. The total is accumulated as a signed 64-bit integer, and the output is one canonical line per query so the six language versions agree."
+      operations: [build-ancestor-table, build-virtual-tree, sum-edge-weights]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the ancestor table of a weighted tree, answers each marked set with a virtual tree and prints the total weight of the virtual edges."
+      time: "O((n + m) log n) to preprocess, O(k log k + k log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and O(k) for the virtual tree, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected weighted edges, then q, then q lines k a_1 ... a_k with the marked vertices."
+      outputs: "One line per query, holding the total weight of the edges of the virtual tree of the marked vertices."
+      notes: "The root is the vertex 0. Duplicate marks count once, a mark outside 0..n-1 or outside the root's component is ignored, and a query with fewer than two distinct marks prints 0. The virtual tree is the marked set plus the lowest common ancestor of every pair of adjacent marks in preorder, and a stack reconstructs its edges. The total is accumulated as a signed 64-bit integer, and the output is one canonical line per query so the six language versions agree."
+      operations: [build-ancestor-table, build-virtual-tree, sum-edge-weights]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the ancestor table of a weighted tree, answers each marked set with a virtual tree and prints the total weight of the virtual edges."
+      time: "O((n + m) log n) to preprocess, O(k log k + k log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and O(k) for the virtual tree, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected weighted edges, then q, then q lines k a_1 ... a_k with the marked vertices."
+      outputs: "One line per query, holding the total weight of the edges of the virtual tree of the marked vertices."
+      notes: "The root is the vertex 0. Duplicate marks count once, a mark outside 0..n-1 or outside the root's component is ignored, and a query with fewer than two distinct marks prints 0. The virtual tree is the marked set plus the lowest common ancestor of every pair of adjacent marks in preorder, and a stack reconstructs its edges. The total is accumulated as a signed 64-bit integer, and the output is one canonical line per query so the six language versions agree."
+      operations: [build-ancestor-table, build-virtual-tree, sum-edge-weights]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it builds the ancestor table of a weighted tree, answers each marked set with a virtual tree and prints the total weight of the virtual edges."
+      time: "O((n + m) log n) to preprocess, O(k log k + k log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and O(k) for the virtual tree, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected weighted edges, then q, then q lines k a_1 ... a_k with the marked vertices."
+      outputs: "One line per query, holding the total weight of the edges of the virtual tree of the marked vertices."
+      notes: "The root is the vertex 0. Duplicate marks count once, a mark outside 0..n-1 or outside the root's component is ignored, and a query with fewer than two distinct marks prints 0. The virtual tree is the marked set plus the lowest common ancestor of every pair of adjacent marks in preorder, and a stack reconstructs its edges. Python integers are unbounded, so the total cannot overflow, and the output is one canonical line per query so the six language versions agree."
+      operations: [build-ancestor-table, build-virtual-tree, sum-edge-weights]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it builds the ancestor table of a weighted tree, answers each marked set with a virtual tree and prints the total weight of the virtual edges."
+      time: "O((n + m) log n) to preprocess, O(k log k + k log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and O(k) for the virtual tree, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected weighted edges, then q, then q lines k a_1 ... a_k with the marked vertices."
+      outputs: "One line per query, holding the total weight of the edges of the virtual tree of the marked vertices."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The root is the vertex 0. Duplicate marks count once, a mark outside 0..n-1 or outside the root's component is ignored, and a query with fewer than two distinct marks prints 0. The virtual tree is the marked set plus the lowest common ancestor of every pair of adjacent marks in preorder, and a stack reconstructs its edges. The total is accumulated as an Int64 and the marks are ordered with an iterative merge sort, so no recursive call can exhaust the stack."
+      operations: [build-ancestor-table, build-virtual-tree, sum-edge-weights]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it builds the ancestor table of a weighted tree, answers each marked set with a virtual tree and prints the total weight of the virtual edges."
+      time: "O((n + m) log n) to preprocess, O(k log k + k log n) per query"
+      auxiliarySpace: "O(n log n) for the ancestor table and O(k) for the virtual tree, plus O(n + m) for the adjacency list"
+      status: unverified
+      inputs: "n m, then m lines u v w with 0-based undirected weighted edges, then q, then q lines k a_1 ... a_k with the marked vertices."
+      outputs: "One line per query, holding the total weight of the edges of the virtual tree of the marked vertices."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The root is the vertex 0. Duplicate marks count once, a mark outside 0..n-1 or outside the root's component is ignored, and a query with fewer than two distinct marks prints 0. The virtual tree is the marked set plus the lowest common ancestor of every pair of adjacent marks in preorder, and a stack reconstructs its edges. The table uses Int32Array, the totals are numbers, and a total beyond 2^53 would lose precision, so the contract keeps the answer inside the safe-integer range."
+      operations: [build-ancestor-table, build-virtual-tree, sum-edge-weights]
