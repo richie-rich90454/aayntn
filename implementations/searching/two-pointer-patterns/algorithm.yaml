@@ -1,0 +1,95 @@
+algorithm: searching.two-pointer-patterns
+title: The individual two-pointer patterns
+summary: Count the pairs of a sorted array whose sum is at most a target by moving two converging pointers, so that each step counts a whole row of the pair table or discards a whole column.
+subject: searching
+divisions: [silver, gold]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.complexity]
+    recommended: [searching.two-pointers, searching.binary-search, searching.sliding-window]
+complexity:
+    time: "O(n)"
+    space: "O(1)"
+assumptions:
+    - The array is sorted in non-decreasing order before the scan.
+    - Every pair sum that is compared fits in the signed 64-bit type used by the programs.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, then prints the number of index pairs whose sum is at most the target."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target."
+      outputs: "The number of pairs i < j with values[i] + values[j] at most the target."
+      notes: "The array is buffered, so the program holds O(n) values; the scan itself needs O(1) extra space. The target is the last token, and a missing or truncated input prints 0. Values, sums, and the total use signed 64-bit integers."
+      operations: [read-array, compare-sum, count-row, advance-left, discard-right]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, then prints the number of index pairs whose sum is at most the target."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target."
+      outputs: "The number of pairs i < j with values[i] + values[j] at most the target."
+      notes: "The vector is buffered, so the program holds O(n) values; the scan itself needs O(1) extra space. The target is the last token, and a missing or truncated input prints 0. Values, sums, and the total use signed 64-bit integers."
+      operations: [read-array, compare-sum, count-row, advance-left, discard-right]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, then prints the number of index pairs whose sum is at most the target."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target."
+      outputs: "The number of pairs i < j with values[i] + values[j] at most the target."
+      notes: "The class is named Main so the file can be submitted to a judge unchanged. The array is buffered, so the program holds O(n) values; the scan itself needs O(1) extra space. The target is the last token, and a missing or truncated input prints 0. Values, sums, and the total use signed 64-bit integers."
+      operations: [read-array, compare-sum, count-row, advance-left, discard-right]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, then prints the number of index pairs whose sum is at most the target."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target."
+      outputs: "The number of pairs i < j with values[i] + values[j] at most the target."
+      notes: "The input is tokenized into a list, so the program holds O(n) values; the scan itself needs O(1) extra space. The target is the last token, and a missing or truncated input prints 0. Python integers are unbounded, so the total cannot overflow."
+      operations: [read-array, compare-sum, count-row, advance-left, discard-right]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, then prints the number of index pairs whose sum is at most the target."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target."
+      outputs: "The number of pairs i < j with values[i] + values[j] at most the target."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The array is buffered, so the program holds O(n) values; the scan itself needs O(1) extra space. Values, sums, and the total use Int64, with no 128-bit arithmetic, and the source compiles under pas2js with one argument per Read."
+      operations: [read-array, compare-sum, count-row, advance-left, discard-right]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a sorted array and a target, then prints the number of index pairs whose sum is at most the target."
+      time: "O(n)"
+      auxiliarySpace: "O(n)"
+      status: unverified
+      inputs: "n, then n integers in non-decreasing order, then the target."
+      outputs: "The number of pairs i < j with values[i] + values[j] at most the target."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The input is tokenized into an array, so the program holds O(n) values; the scan itself needs O(1) extra space. The target is the last token, and a missing or truncated input prints 0. Every count below 2^53 is represented exactly."
+      operations: [read-array, compare-sum, count-row, advance-left, discard-right]

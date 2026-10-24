@@ -1,0 +1,30 @@
+id: codeforces.1324d.pair-of-topics
+title: Pair of Topics
+source: Codeforces
+contest: "Codeforces Round 627 (Div. 3)"
+division: silver
+url: https://codeforces.com/problemset/problem/1324/D
+editorialUrl: https://codeforces.com/blog/entry/74714
+techniques:
+    - searching.two-pointer-patterns
+prerequisites:
+    - foundations.sorting
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - Both arrays reach 100,000 elements, so comparing every pair is 10 billion comparisons.
+    - The differences a_i - b_i are negative, zero, or positive, so the scan cannot assume non-negative values.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Move the comparison onto one array by defining c_i = a_i - b_i; a pair is good exactly when c_i + c_j > 0.
+    - Sort c, then count the pairs with a positive sum with the converging two pointers.
+    - When the two ends sum to at most zero, the left end cannot form a good pair with anything to its right, so discard it.
+    - Count the complementary pairs and subtract from the total if the strict inequality is easier to handle that way.
+discussion: >-
+    The two conditions a_i + a_j > b_i + b_j collapse into one inequality on the difference array, so the problem becomes the standard pair count under a sum bound. Sorting the differences restores the monotone pair table, and the converging scan counts an entire row whenever the two ends satisfy the bound. The strict inequality is the only delicate part: it becomes a bound of zero with a strict comparison, or a bound of minus one with the non-strict scan. The total is O(n log n) for the sort and O(n) for the scan.
+related:
+    - codeforces.1538c.number-of-pairs
+    - codeforces.580b.kefa-and-company

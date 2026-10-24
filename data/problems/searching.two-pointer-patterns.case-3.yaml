@@ -1,0 +1,30 @@
+id: codeforces.580b.kefa-and-company
+title: Kefa and Company
+source: Codeforces
+contest: "Codeforces Round 321 (Div. 2)"
+division: gold
+url: https://codeforces.com/problemset/problem/580/B
+editorialUrl: https://codeforces.com/blog/entry/20468
+techniques:
+    - searching.two-pointer-patterns
+prerequisites:
+    - foundations.sorting
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - Up to 100,000 friends, so trying every contiguous group is 10 billion operations.
+    - Friendship factors reach 10^9 and their total reaches 10^14, so the running sum needs 64 bits.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Sort the friends by money. A valid company is then a contiguous window, because only the poorest and richest members decide whether someone feels poor.
+    - The window is valid exactly when richest - poorest < d.
+    - Grow the right end one friend at a time and move the left end while the gap is at least d, keeping the running friendship sum.
+    - The best window is the largest running sum seen during the scan.
+discussion: >-
+    This is the same-direction sibling of the converging pattern. Sorting by money makes every valid company a contiguous window: if the poorest and richest fit the gap condition, every friend between them does too. The right pointer adds one friend per step, and the left pointer removes friends only while the gap is too large. Each friend enters and leaves the window at most once, so the scan is linear after the sort. The objective is a window sum rather than a count of pairs, which is what separates this form from the converging count.
+related:
+    - codeforces.1538c.number-of-pairs
+    - codeforces.1324d.pair-of-topics

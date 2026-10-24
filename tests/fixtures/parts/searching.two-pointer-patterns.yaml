@@ -1,0 +1,9 @@
+- name: duplicates on the boundary
+  input: "4\n2 2 2 2\n4\n"
+  expected: "6\n"
+- name: negative values with repeated endpoints
+  input: "7\n-5 -3 -1 -1 0 2 4\n-4\n"
+  expected: "6\n"
+- name: empty array
+  input: "0\n10\n"
+  expected: "0\n"

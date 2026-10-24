@@ -1,0 +1,30 @@
+id: codeforces.1538c.number-of-pairs
+title: Number of Pairs
+source: Codeforces
+contest: "Codeforces Round 725 (Div. 3)"
+division: silver
+url: https://codeforces.com/problemset/problem/1538/C
+editorialUrl: https://codeforces.com/blog/entry/91637
+techniques:
+    - searching.two-pointer-patterns
+prerequisites:
+    - foundations.sorting
+difficulty: 2
+estimatedMinutes: 25
+specialConstraints:
+    - The sum of n over all test cases is at most 200,000, so the total work must be near-linear per test case rather than per pair.
+    - The answer is quadratic in n and reaches about 20 billion, so a 32-bit counter overflows.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Sorting the array makes the pair predicate monotone along every row and every column of the pair table.
+    - Let F(x) be the number of pairs whose sum is at most x. The answer is F(r) - F(l - 1).
+    - In F(x), when the two ends fit, every pair that uses the left end and an index not past the right end also fits, so add right - left and advance the left pointer.
+    - When the two ends do not fit, the right end cannot pair with any remaining left end, so discard it.
+discussion: >-
+    The lower and upper bounds turn one interval count into the difference of two prefix counts. Each prefix count is the converging two-pointer scan: a fit at the two ends counts a whole row of the pair table at once, and a miss discards the right end for every remaining left end. Sorting once per test case makes both scans linear, so the total is O(n log n). The only traps are the strict lower bound, which becomes l - 1, and the 64-bit answer.
+related:
+    - codeforces.1324d.pair-of-topics
+    - codeforces.600b.queries-about-less-or-equal-elements
