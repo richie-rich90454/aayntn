@@ -1,0 +1,96 @@
+algorithm: advanced.berlekamp-massey
+title: Berlekamp-Massey
+summary: Recover the shortest linear recurrence satisfied by a sequence over a prime field in quadratic time, then extend the sequence from the recurrence instead of from the process that generated it.
+subject: advanced
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [number-theory.modular-arithmetic, foundations.complexity]
+    recommended: [number-theory.matrix-exponentiation, number-theory.fft, advanced.xor-bases]
+complexity:
+    time: "O(n^2)"
+    space: "O(n)"
+assumptions:
+    - The terms are residues modulo a prime, so every nonzero discrepancy has a modular inverse.
+    - The recurrence is linear, homogeneous, and has constant coefficients, and terms before index zero count as zero.
+    - The requested order is the shortest one for the supplied prefix, which is unique when at least twice the order is supplied.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a prefix, prints the order of its shortest recurrence and the next term."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) for the three coefficient arrays"
+      status: unverified
+      inputs: "n, then n residues modulo 1000000007, separated by whitespace."
+      outputs: "One line with the order of the shortest recurrence and the next term, separated by one space."
+      notes: "The coefficients live in three heap arrays of long long, and the snapshot of the current polynomial is taken before the correction so the backup is always the polynomial that failed. A nonzero discrepancy is repaired with the shifted backup scaled by the ratio of the two discrepancies, and the order grows only when twice the current order is at most the index. Every product is reduced modulo 1000000007, and the modular inverse is computed by fast exponentiation."
+      operations: [discrepancy, connection-polynomial-correction, next-term]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a prefix, prints the order of its shortest recurrence and the next term."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) for the three coefficient arrays"
+      status: unverified
+      inputs: "n, then n residues modulo 1000000007, separated by whitespace."
+      outputs: "One line with the order of the shortest recurrence and the next term, separated by one space."
+      notes: "The current polynomial and the backup are std::vector values, so the snapshot is a vector copy and the swap of the two roles is an assignment. The discrepancy loop is bounded by the order rather than by the allocated size, which keeps the coefficients that the correction wrote beyond the order out of the next dot product. The correction is an index shift by the number of positions since the last order increase."
+      operations: [discrepancy, connection-polynomial-correction, next-term]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a prefix, prints the order of its shortest recurrence and the next term."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) for the three coefficient arrays"
+      status: unverified
+      inputs: "n, then n residues modulo 1000000007, separated by whitespace."
+      outputs: "One line with the order of the shortest recurrence and the next term, separated by one space."
+      notes: "The source is java/Main.java and the class is Main, so the judge entry point is the standard one. A byte-buffer scanner reads the tokens, because java.util.Scanner is the slowest part of a Java solution at the largest stated input. The coefficients are long arrays, and the two polynomial roles are swapped by swapping the array references rather than by copying their contents."
+      operations: [discrepancy, connection-polynomial-correction, next-term]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a prefix, prints the order of its shortest recurrence and the next term."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) for the three coefficient lists"
+      status: unverified
+      inputs: "n, then n residues modulo 1000000007, separated by whitespace."
+      outputs: "One line with the order of the shortest recurrence and the next term, separated by one space."
+      notes: "The variant reads the whole input once and splits it, because a per-token read is the slowest part of a Python solution. The coefficients are arbitrary-precision integers, so no product can overflow, and the inverse uses pow(b, MODULO - 2, MODULO). The lists grow with the order, and the slice current[:] is the snapshot that the backup keeps."
+      operations: [discrepancy, connection-polynomial-correction, next-term]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a prefix, prints the order of its shortest recurrence and the next term."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) for the three coefficient arrays"
+      status: unverified
+      inputs: "n, then n residues modulo 1000000007, separated by whitespace."
+      outputs: "One line with the order of the shortest recurrence and the next term, separated by one space."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The coefficients are Int64, and every product is computed by splitting one factor at 2^15 so that each intermediate product stays below 2^53 and the program is exact under pas2js as well as Free Pascal. The source uses SysUtils, reads one argument per Read, and avoids IOResult and 128-bit integers. The snapshot is an explicit Copy, so the backup is not affected by the later SetLength and writes on the current polynomial."
+      operations: [discrepancy, connection-polynomial-correction, next-term]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a prefix, prints the order of its shortest recurrence and the next term."
+      time: "O(n^2)"
+      auxiliarySpace: "O(n) for the three coefficient arrays"
+      status: unverified
+      inputs: "n, then n residues modulo 1000000007, separated by whitespace."
+      outputs: "One line with the order of the shortest recurrence and the next term, separated by one space."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The coefficients are BigInt, because a product of two residues near 10^9 is about 10^18 and a Number loses the low bits above 2^53. The modular inverse is a BigInt exponentiation by MODULO - 2n, and the output uses the platform line separator so the six variants agree byte for byte after newline normalization."
+      operations: [discrepancy, connection-polynomial-correction, next-term]

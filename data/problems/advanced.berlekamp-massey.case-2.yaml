@@ -1,0 +1,32 @@
+id: luogu.p5487.berlekamp-massey
+title: "Template: Berlekamp-Massey algorithm"
+source: Luogu
+contest: Luogu
+division: platinum
+url: https://www.luogu.com.cn/problem/P5487
+techniques:
+    - advanced.berlekamp-massey
+prerequisites:
+    - number-theory.modular-arithmetic
+    - number-theory.matrix-exponentiation
+difficulty: 4
+estimatedMinutes: 60
+specialConstraints:
+    - The prefix length satisfies 1 <= n <= 10000, and the wanted index m satisfies n < m <= 10^9.
+    - The shortest recurrence has order at most 5000 and is guaranteed to be unique.
+    - The modulus is 998244353, so the inverses in the correction exist.
+    - The output has two lines, the shortest recurrence and the m-th term.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - The first phase is Berlekamp-Massey on the given prefix.
+    - The second phase is the m-th term of a known recurrence, which is a polynomial exponentiation modulo the characteristic polynomial.
+    - Reduce x^m modulo the characteristic polynomial by binary exponentiation, then take the dot product with the first terms.
+    - A matrix of the recurrence's order is too large and too slow at order 5000.
+discussion: >-
+    The problem deliberately combines the two halves of the technique. The prefix has at most ten thousand terms, so Berlekamp-Massey costs about 10^8 coefficient operations, which is the intended upper bound. The far index is up to 10^9 and the order can reach 5000, so matrix exponentiation is out of reach; the polynomial form of the same computation costs O(L^2 log m) and fits. The recurrence is unique by the statement, which removes the ambiguity that a short prefix can otherwise have.
+related:
+    - library-checker.find-linear-recurrence
+    - codeforces.506e.mr-kitayutas-gift

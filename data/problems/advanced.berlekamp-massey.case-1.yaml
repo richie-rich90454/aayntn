@@ -1,0 +1,30 @@
+id: library-checker.find-linear-recurrence
+title: Find Linear Recurrence
+source: Library Checker
+contest: Library Checker
+division: platinum
+url: https://judge.yosupo.jp/problem/find_linear_recurrence
+techniques:
+    - advanced.berlekamp-massey
+prerequisites:
+    - number-theory.modular-arithmetic
+difficulty: 3
+estimatedMinutes: 40
+specialConstraints:
+    - The terms are residues modulo 998244353, a prime, so the correction always has an inverse.
+    - The output is the shortest recurrence itself, so the sign convention of the coefficients matters.
+    - The order can be large relative to the number of terms, so the quadratic method is the intended one.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Maintain the connection polynomial of the current prefix and compute its discrepancy on the next term.
+    - A nonzero discrepancy is repaired with a shifted copy of the last polynomial that forced an order increase.
+    - The order grows only when twice the current order is at most the current index.
+    - The recurrence coefficients are the negatives of the connection polynomial's coefficients.
+discussion: >-
+    The problem is the algorithm itself. The sequence is over the field modulo 998244353, so every nonzero discrepancy is invertible and the shortest recurrence is well defined for the supplied prefix. The connection polynomial is corrected at each failure by the polynomial that last raised the order, divided by its own discrepancy. The quadratic bound is the reason the problem is rated platinum: trying every order and solving a linear system is too slow for the largest prefixes, and the incremental correction is the intended route.
+related:
+    - luogu.p5487.berlekamp-massey
+    - codeforces.506e.mr-kitayutas-gift

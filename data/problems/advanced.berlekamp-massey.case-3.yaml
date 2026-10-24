@@ -1,0 +1,31 @@
+id: codeforces.506e.mr-kitayutas-gift
+title: Mr. Kitayuta's Gift
+source: Codeforces
+contest: Codeforces Round 286 (Div. 1)
+division: platinum
+url: https://codeforces.com/problemset/problem/506/E
+techniques:
+    - advanced.berlekamp-massey
+prerequisites:
+    - number-theory.modular-arithmetic
+    - dynamic-programming.interval-dp
+difficulty: 5
+estimatedMinutes: 120
+specialConstraints:
+    - The string has at most 200 lowercase letters, and the number of inserted letters is up to 10^9.
+    - The answer counts distinct palindromes, not insertion sequences.
+    - There are only 26 letters, so the interval DP transition has a constant number of cases.
+    - The modulus is 10007, which is prime, so the divisions in the correction are valid.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Build a DP that matches the two ends of the string while inserting letters into a palindrome.
+    - The transition does not depend on the number of inserted letters, only on the current boundary state.
+    - The answer as a function of the number of insertions satisfies a linear recurrence of order O(|s|); generate enough terms and recover it.
+    - Evaluate the wanted term with Kitamasa instead of exponentiating the full transition matrix.
+discussion: >-
+    The interval DP is a fixed linear map, so Cayley-Hamilton gives a recurrence whose order is proportional to the string length. The route is to generate the first few terms with the DP, recover the recurrence with Berlekamp-Massey, and then jump to the large index. The modulus is small but prime, so the inverses in the correction exist. The counting must treat each final palindrome once: the DP matches the given string as a subsequence of the palindrome rather than counting the positions of the inserted letters.
+related:
+    - library-checker.find-linear-recurrence
+    - luogu.p5487.berlekamp-massey

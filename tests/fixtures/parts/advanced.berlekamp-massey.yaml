@@ -1,0 +1,9 @@
+- name: a Fibonacci prefix
+  input: "6\n1 1 2 3 5 8\n"
+  expected: "2 13\n"
+- name: a third-order recurrence
+  input: "7\n1 1 2 4 7 13 24\n"
+  expected: "3 44\n"
+- name: the all-zero edge case
+  input: "4\n0 0 0 0\n"
+  expected: "0 0\n"
