@@ -111,3 +111,35 @@ algorithms:
       title: Miller-Rabin
       subject: number-theory
       manifest: implementations/number-theory/miller-rabin/algorithm.yaml
+    - id: range-queries.persistent-segment-tree
+      title: Persistent segment trees
+      subject: range-queries
+      manifest: implementations/range-queries/persistent-segment-tree/algorithm.yaml
+    - id: advanced.xor-bases
+      title: XOR bases
+      subject: advanced
+      manifest: implementations/advanced/xor-bases/algorithm.yaml
+    - id: graphs.hungarian-algorithm
+      title: The Hungarian algorithm
+      subject: graphs
+      manifest: implementations/graphs/hungarian-algorithm/algorithm.yaml
+    - id: graphs.johnson
+      title: Johnson's algorithm
+      subject: graphs
+      manifest: implementations/graphs/johnson/algorithm.yaml
+    - id: number-theory.discrete-logarithm
+      title: The discrete logarithm
+      subject: number-theory
+      manifest: implementations/number-theory/discrete-logarithm/algorithm.yaml
+    - id: range-queries.wavelet-tree
+      title: Wavelet trees
+      subject: range-queries
+      manifest: implementations/range-queries/wavelet-tree/algorithm.yaml
+    - id: strings.minimal-rotation
+      title: The minimal rotation of a string
+      subject: strings
+      manifest: implementations/strings/minimal-rotation/algorithm.yaml
+    - id: strings.palindrome-tree
+      title: Palindrome trees, also called the eertree
+      subject: strings
+      manifest: implementations/strings/palindrome-tree/algorithm.yaml

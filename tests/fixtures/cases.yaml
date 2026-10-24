@@ -725,3 +725,277 @@ trees.virtual-tree:
       expected: |
           5000000000
           2000000000
+
+range-queries.persistent-segment-tree:
+    - name: duplicates and interior order statistics
+      input: |
+          7 4
+          4 1 4 2 4 3 4
+          1 7 1
+          1 7 7
+          2 6 3
+          4 4 1
+      expected: |
+          1
+          4
+          3
+          2
+    - name: negative values and both boundaries
+      input: |
+          5 4
+          -3 -1 -3 0 -2
+          1 5 1
+          1 5 5
+          2 4 2
+          5 5 1
+      expected: |
+          -3
+          0
+          -1
+          -2
+    - name: a single position queried repeatedly
+      input: |
+          1 3
+          -1000000000
+          1 1 1
+          1 1 1
+          1 1 1
+      expected: |
+          -1000000000
+          -1000000000
+          -1000000000
+
+advanced.xor-bases:
+    - name: a dependent value disappears from the basis
+      input: |
+          5
+          3 5 6 6 0
+          3
+          0
+          4
+          6
+      expected: |
+          6
+          7
+          6
+    - name: values at the top of the 30-bit range
+      input: |
+          4
+          536870912 268435456 134217728 1
+          3
+          134217728
+          2
+          0
+      expected: |
+          939524097
+          939524099
+          939524097
+    - name: a single zero value cannot improve any query
+      input: |
+          1
+          0
+          3
+          0
+          1073741823
+          1
+      expected: |
+          0
+          1073741823
+          1
+
+range-queries.wavelet-tree:
+    - name: duplicates and interior order statistics
+      input: |
+          8 4
+          5 2 8 1 9 3 7 4
+          1 7 3
+          0 8 1
+          0 8 8
+          2 3 1
+      expected: |
+          3
+          1
+          9
+          8
+    - name: negative values and shifted ranges
+      input: |
+          5 4
+          -5 -1 0 -3 2
+          0 5 1
+          0 5 5
+          1 4 2
+          3 4 1
+      expected: |
+          -5
+          2
+          -1
+          -3
+    - name: a single position, duplicates, and repeated extremes
+      input: |
+          3 5
+          -2 5 -2
+          0 3 1
+          0 3 2
+          0 3 3
+          0 1 1
+          2 3 1
+      expected: |
+          -2
+          -2
+          5
+          -2
+          -2
+
+graphs.johnson:
+    - name: a negative edge with a cheaper detour and no negative cycle
+      input: |
+          4 5
+          0 1 4
+          0 2 5
+          1 2 -3
+          2 3 2
+          3 0 1
+      expected: |
+          0 4 1 3
+          0 0 -3 -1
+          3 7 0 2
+          1 5 2 0
+    - name: an unreachable pair and a negative edge in a separate component
+      input: |
+          5 5
+          0 1 3
+          0 2 8
+          1 2 -4
+          2 3 1
+          4 3 -2
+      expected: |
+          0 3 -1 0 -1
+          -1 0 -4 -3 -1
+          -1 -1 0 1 -1
+          -1 -1 -1 0 -1
+          -1 -1 -1 -2 0
+    - name: "edge case: a negative cycle is reported"
+      input: |
+          3 3
+          0 1 1
+          1 2 -2
+          2 0 -1
+      expected: |
+          NEGATIVE CYCLE
+
+graphs.hungarian-algorithm:
+    - name: the CSES sample with a unique optimum
+      input: |
+          4
+          17 8 16 9
+          7 15 12 19
+          6 9 10 11
+          14 7 13 10
+      expected: |
+          33
+          3 0 2 1
+    - name: five rows with negative costs
+      input: |
+          5
+          4 -2 6 3 1
+          2 5 -1 7 4
+          6 1 3 -2 5
+          1 4 2 3 -3
+          5 0 4 1 2
+      expected: |
+          -3
+          1 2 3 4 0
+    - name: "edge case: a single row and a negative cost"
+      input: |
+          1
+          -7
+      expected: |
+          -7
+          0
+
+number-theory.discrete-logarithm:
+    - name: powers of a small base, including the exponent zero
+      input: |
+          6
+          2 1 7
+          2 2 7
+          2 4 7
+          3 5 7
+          4 2 7
+          5 1 12
+      expected: |
+          0
+          1
+          2
+          5
+          2
+          0
+    - name: composite moduli and targets outside the generated subgroup
+      input: |
+          6
+          2 5 9
+          2 3 9
+          3 1 10
+          3 7 10
+          7 2 10
+          4 4 9
+      expected: |
+          5
+          -1
+          0
+          3
+          -1
+          1
+    - name: the edge values and a modulus near the top of the range
+      input: |
+          6
+          1 1 2
+          1 0 2
+          2 0 7
+          3 2 1000000007
+          2 1 1000000007
+          123456789 987654321 2147483647
+      expected: |
+          0
+          -1
+          -1
+          316884446
+          0
+          -1
+
+strings.minimal-rotation:
+    - name: the sample from the CSES problem, where the cut is in the middle
+      input: |
+          acab
+      expected: |
+          abac
+    - name: a word whose minimum wraps around the end
+      input: |
+          amandamanda
+      expected: |
+          aamandamand
+    - name: edge case with a single character
+      input: |
+          z
+      expected: |
+          z
+
+strings.palindrome-tree:
+    - name: even and odd palindromes around a repeated pair
+      input: |
+          abba
+      expected: |
+          4
+          6
+    - name: a run of one character, where every substring is a palindrome
+      input: |
+          aaaa
+      expected: |
+          4
+          10
+    - name: the shortest nonempty string, exercising the length-one suffix link
+      input: |
+          a
+      expected: |
+          1
+          1

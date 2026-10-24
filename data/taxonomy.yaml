@@ -71,7 +71,7 @@ techniques:
       synonyms:
           - linear basis
           - XOR basis
-      status: missing
+      status: published
       divisions: []
     - id: arrays.coordinate-compression
       name: Coordinate compression
@@ -686,14 +686,14 @@ techniques:
       subject: graphs
       synonyms:
           - Kuhn-Munkres
-      status: missing
+      status: published
       divisions: []
     - id: graphs.johnson
       name: Johnson's algorithm
       subject: graphs
       synonyms:
           - Johnson algorithm
-      status: missing
+      status: published
       divisions: []
     - id: graphs.minimum-cost-flow
       name: Minimum cost flow
@@ -807,7 +807,7 @@ techniques:
       subject: number-theory
       synonyms:
           - discrete log
-      status: missing
+      status: published
       divisions: []
     - id: number-theory.euler-totient
       name: Euler's totient function and Euler's theorem
@@ -938,7 +938,7 @@ techniques:
       subject: range-queries
       synonyms:
           - persistent segment tree
-      status: missing
+      status: published
       divisions: []
     - id: range-queries.segment-tree
       name: Segment tree
@@ -977,7 +977,7 @@ techniques:
       subject: range-queries
       synonyms:
           - wavelet tree
-      status: missing
+      status: published
       divisions: []
     - id: searching.binary-search
       name: Binary search
@@ -1076,7 +1076,7 @@ techniques:
       synonyms:
           - Booth's algorithm
           - minimal rotation
-      status: missing
+      status: published
       divisions: []
     - id: strings.palindrome-tree
       name: Palindrome trees, also called the eertree
@@ -1084,7 +1084,7 @@ techniques:
       synonyms:
           - eertree
           - palindromic tree
-      status: missing
+      status: published
       divisions: []
     - id: strings.rolling-hash
       name: Rolling hash
