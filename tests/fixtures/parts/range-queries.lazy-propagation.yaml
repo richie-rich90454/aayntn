@@ -1,0 +1,9 @@
+- name: overlapping range additions
+  input: "5 4\n1 1 5 2\n1 2 3 -1\n2 1 5\n2 2 3\n"
+  expected: "8\n2\n"
+- name: a negative update and a single position
+  input: "1 4\n1 1 1 -5\n2 1 1\n1 1 1 15\n2 1 1\n"
+  expected: "-5\n10\n"
+- name: a query before any update, then both boundaries of a full-range addition
+  input: "4 4\n2 1 4\n1 1 4 -3\n2 1 1\n2 4 4\n"
+  expected: "0\n-3\n-3\n"

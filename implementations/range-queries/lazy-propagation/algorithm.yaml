@@ -1,0 +1,95 @@
+algorithm: range-queries.lazy-propagation
+title: Lazy propagation
+summary: A segment tree records a range update at the nodes it fully covers and defers the update to their children until a query needs them, so range updates and range queries both take logarithmic time.
+subject: range-queries
+divisions: [gold, platinum]
+importance: common-contest-technique
+prerequisites:
+    required: [range-queries.segment-tree]
+    recommended: [range-queries.fenwick-tree, arrays.difference-arrays]
+complexity:
+    time: "O(log n) per range update and per range query"
+    space: "O(n)"
+assumptions:
+    - The query aggregate is associative and has an identity, so a node can cache the aggregate of its range.
+    - A pending update can be applied to a whole node in constant time and composed with another pending update in constant time.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per range update and per range query"
+      auxiliarySpace: "O(n) for the tree and the lazy tags"
+      status: unverified
+      inputs: 'n q, then q operations: "1 l r delta" adds delta to every position in the inclusive range [l, r], and "2 l r" queries the inclusive range sum. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "tree[i] holds the sum of the node's range and lazy[i] holds the addition that is already included in tree[i] but not yet in its children. A full cover applies the delta and stops; a partial cover pushes the tag to both children before descending. The C variant allocates both arrays in an explicit init and releases them in a destroy, so every successful init must be matched by exactly one destroy."
+      operations: [range-add, range-sum]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per range update and per range query"
+      auxiliarySpace: "O(n) for the tree and the lazy tags"
+      status: unverified
+      inputs: 'n q, then q operations: "1 l r delta" adds delta to every position in the inclusive range [l, r], and "2 l r" queries the inclusive range sum. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "tree[i] holds the sum of the node's range and lazy[i] holds the addition that is already included in tree[i] but not yet in its children. A full cover applies the delta and stops; a partial cover pushes the tag to both children before descending. The C++ variant keeps both arrays in std::vector, so the tree owns its storage and the destructor releases it without an explicit destroy call."
+      operations: [range-add, range-sum]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per range update and per range query"
+      auxiliarySpace: "O(n) for the tree and the lazy tags"
+      status: unverified
+      inputs: 'n q, then q operations: "1 l r delta" adds delta to every position in the inclusive range [l, r], and "2 l r" queries the inclusive range sum. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "tree[i] holds the sum of the node's range and lazy[i] holds the addition that is already included in tree[i] but not yet in its children. A full cover applies the delta and stops; a partial cover pushes the tag to both children before descending. The Java variant keeps both arrays on the heap and leaves their reclamation to the garbage collector."
+      operations: [range-add, range-sum]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per range update and per range query"
+      auxiliarySpace: "O(n) for the tree and the lazy tags"
+      status: unverified
+      inputs: 'n q, then q operations: "1 l r delta" adds delta to every position in the inclusive range [l, r], and "2 l r" queries the inclusive range sum. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language, and its numbers are exact only below 2^53. tree[i] holds the sum of the node's range and lazy[i] holds the addition that is already included in tree[i] but not yet in its children. A full cover applies the delta and stops; a partial cover pushes the tag to both children before descending. The JavaScript variant models the tree as a class, so the instance owns its arrays."
+      operations: [range-add, range-sum]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per range update and per range query"
+      auxiliarySpace: "O(n) for the tree and the lazy tags"
+      status: unverified
+      inputs: 'n q, then q operations: "1 l r delta" adds delta to every position in the inclusive range [l, r], and "2 l r" queries the inclusive range sum. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Tree[i] holds the sum of the node's range and Lazy[i] holds the addition that is already included in Tree[i] but not yet in its children. A full cover applies the delta and stops; a partial cover pushes the tag to both children before descending. The Pascal variant is a class whose constructor allocates both arrays and whose destructor releases them, so the caller owns the instance and must free it."
+      operations: [range-add, range-sum]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the operations from stdin and prints one range sum per query."
+      time: "O(log n) per range update and per range query"
+      auxiliarySpace: "O(n) for the tree and the lazy tags"
+      status: unverified
+      inputs: 'n q, then q operations: "1 l r delta" adds delta to every position in the inclusive range [l, r], and "2 l r" queries the inclusive range sum. Every position starts at zero.'
+      outputs: "One line per query, holding the range sum."
+      notes: "tree[i] holds the sum of the node's range and lazy[i] holds the addition that is already included in tree[i] but not yet in its children. A full cover applies the delta and stops; a partial cover pushes the tag to both children before descending. The Python variant models the tree as a class, so the instance owns its lists and its integers do not overflow."
+      operations: [range-add, range-sum]
