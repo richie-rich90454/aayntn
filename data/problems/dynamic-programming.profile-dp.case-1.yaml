@@ -1,0 +1,29 @@
+id: cses.2181.counting-tilings
+title: Counting Tilings
+source: CSES
+contest: CSES Problem Set
+division: gold
+url: https://cses.fi/problemset/task/2181
+techniques:
+    - dynamic-programming.profile-dp
+prerequisites:
+    - dynamic-programming.bitmask-dp
+difficulty: 3
+estimatedMinutes: 35
+specialConstraints:
+    - The short side n is at most 10, so the profile has at most 2^10 masks.
+    - The long side m is at most 1000, so the count is required modulo 10^9+7.
+    - Both horizontal and vertical 1x2 tiles are allowed, with no blocked cells.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The short side is at most 10, so a mask of 2^10 states is affordable even when the long side is 1000.
+    - Process one cell at a time and keep a mask of the next n cells; bit 0 is the current cell and bit n - 1 is the cell one row below.
+    - A free cell is either already covered, paired with the cell to its right, or paired with the cell one row below.
+    - On the last row a downward placement would leave the board, so it is not allowed.
+discussion: >-
+    The board is the all-free case of the domino-tiling profile dynamic program. The profile width is the short side n, and the sweep runs over all n times m cells. The only change from the exact-count version is that every addition is reduced modulo 10^9+7, so the counters stay small even though the number of tilings is enormous. The final answer is the state with mask 0 after the last cell. Transposing the board when n is larger than m keeps the profile on the shorter side, but the stated constraint n at most 10 already fixes the width. The intended mistake is to use m as the profile width, which would create 2^1000 states.
+related:
+    - poj.2411.mondriaans-dream
+    - atcoder.abc196.d.hanjo

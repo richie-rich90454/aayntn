@@ -1,0 +1,29 @@
+id: poj.2411.mondriaans-dream
+title: Mondriaan's Dream
+source: POJ
+contest: Ulm Local 2000
+division: gold
+url: http://poj.org/problem?id=2411
+techniques:
+    - dynamic-programming.profile-dp
+prerequisites:
+    - dynamic-programming.bitmask-dp
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - Each test case gives h and w with 1 <= h, w <= 11, and the input ends with 0 0.
+    - The count is exact, so it needs a 64-bit counter; a 10 x 11 board already has 3852472573499 tilings.
+    - The board has no blocked cells, so every cell is free.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - The width is at most 11, so the mask has at most 2048 states and the whole table is tiny.
+    - Process the cells in row-major order and keep a mask of the next w cells; a vertical domino sets the bit for the cell one row below.
+    - A horizontal domino may only be placed when the cell to its right is free and not already covered by a vertical domino from the row above.
+    - On the last row only horizontal placements are legal, so every state at the end must have mask 0.
+discussion: >-
+    This is the clean domino-tiling instance that the profile technique was popularized on. The width is at most 11, so a dense mask table is affordable, and the height is also at most 11, so the total work per test case is tiny. The interest is in the exact count and in the multiple test cases: the answer for 10 x 11 is 3852472573499, which does not fit in a signed 32-bit integer, so a 32-bit accumulator silently truncates it. The board has no blocked cells, which means the grid parser can be replaced by an all-zero grid, but the transition logic is unchanged. The answer is the state with mask 0 after the last cell.
+related:
+    - cses.2181.counting-tilings
+    - atcoder.abc196.d.hanjo

@@ -1,0 +1,93 @@
+algorithm: dynamic-programming.profile-dp
+title: "Profile dynamic programming"
+summary: Count the tilings of a grid with dominoes by sweeping one cell at a time and carrying a bitmask of the next c cells, the only part of the past that can still affect the future.
+subject: dynamic-programming
+divisions: [gold, platinum]
+importance: common-contest-technique
+complexity:
+    time: "O(rc 2^c)"
+    space: "O(2^c)"
+assumptions:
+    - The grid has a small number of columns c, so that 2^c masks fit in memory.
+    - Every domino covers two adjacent free cells, and a blocked cell must stay uncovered.
+    - The reference programs use 64-bit counters, so the board is at most 12 by 12.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a grid of 0/1 cells and prints the number of domino tilings, using one c-bit profile."
+      time: "O(rc 2^c)"
+      auxiliarySpace: "O(2^c) for the two profile arrays"
+      status: unverified
+      inputs: "r c, then r rows of c characters, where 0 is a free cell and 1 is blocked."
+      outputs: "The number of ways to tile every free cell with 1 x 2 and 2 x 1 dominoes, on one line."
+      notes: "Before cell k the mask describes the next c cells, and bit d is set when cell k + d is already covered. Bit 0 is the current cell. The update shifts the mask right, sets bit 0 for a horizontal domino, and sets bit c - 1 for a vertical domino. The counters are long long; the largest count at 12 by 12 is 53060477521960000."
+      operations: [init-profile, shift-profile, place-horizontal, place-vertical, skip-blocked]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a grid of 0/1 cells and prints the number of domino tilings, using one c-bit profile."
+      time: "O(rc 2^c)"
+      auxiliarySpace: "O(2^c) for the two profile arrays"
+      status: unverified
+      inputs: "r c, then r rows of c characters, where 0 is a free cell and 1 is blocked."
+      outputs: "The number of ways to tile every free cell with 1 x 2 and 2 x 1 dominoes, on one line."
+      notes: "Before cell k the mask describes the next c cells, and bit d is set when cell k + d is already covered. Bit 0 is the current cell. The update shifts the mask right, sets bit 0 for a horizontal domino, and sets bit c - 1 for a vertical domino. The counters are long long; the largest count at 12 by 12 is 53060477521960000."
+      operations: [init-profile, shift-profile, place-horizontal, place-vertical, skip-blocked]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a grid of 0/1 cells and prints the number of domino tilings, using one c-bit profile."
+      time: "O(rc 2^c)"
+      auxiliarySpace: "O(2^c) for the two profile arrays"
+      status: unverified
+      inputs: "r c, then r rows of c characters, where 0 is a free cell and 1 is blocked."
+      outputs: "The number of ways to tile every free cell with 1 x 2 and 2 x 1 dominoes, on one line."
+      notes: "Before cell k the mask describes the next c cells, and bit d is set when cell k + d is already covered. Bit 0 is the current cell. The update shifts the mask right, sets bit 0 for a horizontal domino, and sets bit c - 1 for a vertical domino. The counters are long; the largest count at 12 by 12 is 53060477521960000."
+      operations: [init-profile, shift-profile, place-horizontal, place-vertical, skip-blocked]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a grid of 0/1 cells and prints the number of domino tilings, using one c-bit profile."
+      time: "O(rc 2^c)"
+      auxiliarySpace: "O(2^c) for the two profile arrays"
+      status: unverified
+      inputs: "r c, then r rows of c characters, where 0 is a free cell and 1 is blocked."
+      outputs: "The number of ways to tile every free cell with 1 x 2 and 2 x 1 dominoes, on one line."
+      notes: "Before cell k the mask describes the next c cells, and bit d is set when cell k + d is already covered. Bit 0 is the current cell. The update shifts the mask right, sets bit 0 for a horizontal domino, and sets bit c - 1 for a vertical domino. Python integers are arbitrary precision, so this variant has no overflow limit."
+      operations: [init-profile, shift-profile, place-horizontal, place-vertical, skip-blocked]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. It reads a grid of 0/1 cells and prints the number of domino tilings, using one c-bit profile."
+      time: "O(rc 2^c)"
+      auxiliarySpace: "O(2^c) for the two profile arrays"
+      status: unverified
+      inputs: "r c, then r rows of c characters, where 0 is a free cell and 1 is blocked."
+      outputs: "The number of ways to tile every free cell with 1 x 2 and 2 x 1 dominoes, on one line."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. Before cell k the mask describes the next c cells, and bit d is set when cell k + d is already covered. Bit 0 is the current cell. The update shifts the mask right, sets bit 0 for a horizontal domino, and sets bit c - 1 for a vertical domino. The counters are Int64, and the input is read a line at a time so that pas2js never needs IOResult."
+      operations: [init-profile, shift-profile, place-horizontal, place-vertical, skip-blocked]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. It reads a grid of 0/1 cells and prints the number of domino tilings, using one c-bit profile."
+      time: "O(rc 2^c)"
+      auxiliarySpace: "O(2^c) for the two profile arrays"
+      status: unverified
+      inputs: "r c, then r rows of c characters, where 0 is a free cell and 1 is blocked."
+      outputs: "The number of ways to tile every free cell with 1 x 2 and 2 x 1 dominoes, on one line."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. Before cell k the mask describes the next c cells, and bit d is set when cell k + d is already covered. Bit 0 is the current cell. The update shifts the mask right, sets bit 0 for a horizontal domino, and sets bit c - 1 for a vertical domino. The counters are BigInt because a full 12 by 12 board has more than 2^53 tilings."
+      operations: [init-profile, shift-profile, place-horizontal, place-vertical, skip-blocked]

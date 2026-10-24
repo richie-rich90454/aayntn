@@ -1,0 +1,9 @@
+- name: two by four board with five tilings
+  input: "2 4\n0000\n0000\n"
+  expected: "5\n"
+- name: three by three board with the center blocked
+  input: "3 3\n000\n010\n000\n"
+  expected: "2\n"
+- name: edge case with a single free cell and no domino that fits
+  input: "1 1\n0\n"
+  expected: "0\n"

@@ -1,0 +1,30 @@
+id: atcoder.abc196.d.hanjo
+title: Hanjo
+source: AtCoder
+contest: AtCoder Beginner Contest 196
+division: gold
+url: https://atcoder.jp/contests/abc196/tasks/abc196_d
+editorialUrl: https://atcoder.jp/contests/abc196/tasks/abc196_d/editorial
+techniques:
+    - dynamic-programming.profile-dp
+prerequisites:
+    - dynamic-programming.bitmask-dp
+difficulty: 4
+estimatedMinutes: 40
+specialConstraints:
+    - The room area H times W is at most 16, so the board can be 1 x 16 or 4 x 4.
+    - Exactly A rectangular 2 x 1 mats and B square 1 x 1 mats must be used, with 2A + B = HW.
+    - The 2 x 1 mats may be horizontal or vertical, and rotations or reflections count as different layouts.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A 1 x 1 mat is a monomer; at a free cell it covers only the current cell and sets no new bit in the profile.
+    - Because exactly A rectangular mats are required, the state must also remember how many have been placed, or the count must be derived from the covered area.
+    - Transpose the room so that the profile width is the smaller of H and W.
+    - At the end, accept only the states that used exactly A rectangular mats and cover every cell.
+discussion: >-
+    This is the monomer extension of the domino-tiling profile. A free cell now has three choices: place a horizontal 2 x 1 mat, place a vertical 2 x 1 mat, or place a 1 x 1 mat that occupies only the current cell. The third choice leaves the shifted mask unchanged, because no future cell is covered. The number of rectangular mats is fixed, so the state carries how many have been used; alternatively, the number of 1 x 1 mats is determined by the area, but the rectangular count is the one the answer filters on. The area bound HW at most 16 keeps the profile width at most 4 after a transpose, so the table is tiny. The common wrong approach is to count every tiling with any number of 2 x 1 mats and sum the results, which includes layouts that use the wrong number of mats.
+related:
+    - cses.2181.counting-tilings
+    - poj.2411.mondriaans-dream
