@@ -1,0 +1,30 @@
+id: usaco.2017.jan.bronze.dont-be-last
+title: Don't Be Last!
+source: USACO
+contest: 2017 January Contest
+division: bronze
+url: https://usaco.org/index.php?page=viewproblem2&cpid=687
+editorialUrl: https://usaco.org/current/data/sol_notlast_bronze_jan17.html
+techniques:
+    - greedy.multi-key-sorting
+prerequisites:
+    - foundations.sorting
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - Only seven cows can appear, and a cow absent from the log produces zero, so the totals start from zero rather than from the first entry.
+    - The answer is a name or the word Tie, so a second cow with the same second-smallest total changes the output.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Total the log per cow first; the seven cow names are fixed.
+    - Order the seven (total, name) pairs by total ascending, then by name ascending.
+    - The first distinct total is the minimum, and the next distinct total is the one the answer needs.
+    - If exactly one cow has that total, print its name; otherwise print Tie.
+discussion: >-
+    The problem is a two-key sort over a fixed set of seven records after a counting pass over the log. The total is the primary key and the name is the tie-break, and the second distinct total is found by skipping the first group in the sorted order. The tie handling is the part that is easy to miss: the second group may contain several cows, and the statement asks for Tie rather than for the alphabetically first one.
+related:
+    - codeforces.166a.rank-list
+    - atcoder.abc308.c.standings

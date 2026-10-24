@@ -1,0 +1,30 @@
+id: codeforces.166a.rank-list
+title: Rank List
+source: Codeforces
+contest: "Codeforces Round 113 (Div. 2)"
+division: bronze
+url: https://codeforces.com/problemset/problem/166/A
+editorialUrl: https://codeforces.com/blog/entry/4173
+techniques:
+    - greedy.multi-key-sorting
+prerequisites:
+    - foundations.sorting
+difficulty: 2
+estimatedMinutes: 20
+specialConstraints:
+    - There are at most 50 teams, so even a quadratic comparison is fast enough, but the tie group still has to be found exactly.
+    - The place is shared by every team with the same number of solved problems and the same penalty, so counting records equal to the selected one is enough.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - "The ranking is a two-key order: more solved problems first, then smaller total penalty."
+    - Sort the teams by that order and locate the team at index k - 1.
+    - Every team with the same pair of keys shares the same place, so the answer is the size of that equal block.
+    - Sorting equal-problem teams by descending penalty is the comparator mistake the samples do not catch.
+discussion: >-
+    The ranking is a lexicographic order on two keys, with the first key descending and the second ascending. Once the teams are sorted, the teams that share the k-th place form one contiguous block of equal pairs, so the answer is the size of that block rather than a second scan over all teams. The whole difficulty is the comparator: reversing the second key is the only difference from the obvious order, and the common wrong version passes the samples while failing the hidden tests.
+related:
+    - atcoder.abc308.c.standings
+    - usaco.2017.jan.bronze.dont-be-last

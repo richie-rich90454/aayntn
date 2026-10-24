@@ -1,0 +1,30 @@
+id: atcoder.abc308.c.standings
+title: Standings
+source: AtCoder
+contest: AtCoder Beginner Contest 308
+division: silver
+url: https://atcoder.jp/contests/abc308/tasks/abc308_c
+editorialUrl: https://atcoder.jp/contests/abc308/tasks/abc308_c/editorial
+techniques:
+    - greedy.multi-key-sorting
+prerequisites:
+    - foundations.sorting
+difficulty: 3
+estimatedMinutes: 30
+specialConstraints:
+    - The success rate is a fraction of two values up to a billion, so a double can map two distinct rates to the same value.
+    - The comparison has to be exact, and the cross products reach about two times ten to the eighteenth, so a 64-bit integer is required.
+recommendedLanguages:
+    - cpp17
+    - java
+    - python
+hints:
+    - Person i is ranked by A_i / (A_i + B_i) descending, with the index ascending as the tie-break.
+    - Compare two rates by cross multiplying instead of dividing, because both denominators are positive.
+    - Store (A_i, B_i, i) and let the comparator compute the two products and then compare the indices.
+    - The index makes the order total, so the output is unique even when two rates are equal.
+discussion: >-
+    The first key is not stored directly but computed from two integers, and the comparison is exact only if it is done by cross multiplication. The tie-break on the index turns the order into a strict total order, so the sorted sequence is unique. The technique is the same two-key lexicographic order as a plain record sort, with the added step that the first key is a fraction and the products need 64 bits.
+related:
+    - codeforces.166a.rank-list
+    - usaco.2017.jan.bronze.dont-be-last

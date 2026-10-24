@@ -1,0 +1,94 @@
+algorithm: greedy.multi-key-sorting
+title: Sorting by several keys
+summary: Order records by a lexicographic comparison, where the first key decides and later keys only break ties.
+subject: greedy
+divisions: [bronze, silver]
+importance: common-contest-technique
+prerequisites:
+    required: [foundations.sorting, foundations.complexity]
+    recommended: [foundations.recursion]
+complexity:
+    time: "O(n log n)"
+    space: "O(n)"
+assumptions:
+    - Every record carries the same fixed list of keys, and the required order is lexicographic with a stated direction for each key.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the records, sorts them by a ascending, b descending, c ascending, and prints the sorted records."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the record array"
+      status: unverified
+      inputs: "n, then n lines holding the three integers a, b and c of one record."
+      outputs: "The n records in sorted order, one record per line with the three fields separated by single spaces."
+      notes: "The comparator uses explicit three-way comparisons rather than subtraction, so no difference can overflow, and qsort is given a strict weak ordering because the final branch returns zero only when all three keys agree."
+      operations: [sort, compare, print]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the records, sorts them by a ascending, b descending, c ascending, and prints the sorted records."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the record vector"
+      status: unverified
+      inputs: "n, then n lines holding the three integers a, b and c of one record."
+      outputs: "The n records in sorted order, one record per line with the three fields separated by single spaces."
+      notes: "The comparator returns at the first key that differs and negates no stored value, so the descending key is safe even at the minimum representable integer. std::sort requires a strict weak ordering, and the comparator supplies one."
+      operations: [sort, compare, print]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the records, sorts them by a ascending, b descending, c ascending, and prints the sorted records."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the record array and the output buffer"
+      status: unverified
+      inputs: "n, then n lines holding the three integers a, b and c of one record."
+      outputs: "The n records in sorted order, one record per line with the three fields separated by single spaces."
+      notes: "The class is Main and lives in java/Main.java. A byte-oriented scanner avoids the cost of Scanner, and the comparator uses Integer.compare rather than subtraction, so a difference near the integer limits cannot overflow. The output is accumulated in a StringBuilder."
+      operations: [sort, compare, print]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the records, sorts them by a ascending, b descending, c ascending, and prints the sorted records."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the record array"
+      status: unverified
+      inputs: "n, then n lines holding the three integers a, b and c of one record."
+      outputs: "The n records in sorted order, one record per line with the three fields separated by single spaces."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The comparator compares the keys explicitly and returns a negative number, zero or a positive number, which is the contract Array.prototype.sort expects."
+      operations: [sort, compare, print]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the records, sorts them by a ascending, b descending, c ascending, and prints the sorted records."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the record array and the merge buffer"
+      status: unverified
+      inputs: "n, then n lines holding the three integers a, b and c of one record."
+      outputs: "The n records in sorted order, one record per line with the three fields separated by single spaces."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The program uses SysUtils, one argument per Read, no IOResult, and no 128-bit integers, so it compiles under pas2js. The sort is an iterative bottom-up merge sort, which keeps the listing free of recursion."
+      operations: [sort, compare, print]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the records, sorts them by a ascending, b descending, c ascending, and prints the sorted records."
+      time: "O(n log n)"
+      auxiliarySpace: "O(n) for the record list"
+      status: unverified
+      inputs: "n, then n lines holding the three integers a, b and c of one record."
+      outputs: "The n records in sorted order, one record per line with the three fields separated by single spaces."
+      notes: "The sort key is the tuple (a, -b, c), which is lexicographic by construction. Negating b is safe because Python integers are arbitrary precision, and the whole input is parsed in one pass over sys.stdin.buffer."
+      operations: [sort, compare, print]
