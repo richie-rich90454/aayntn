@@ -1,0 +1,30 @@
+id: codeforces.845g.shortest-path-problem
+title: Shortest Path Problem?
+source: Codeforces
+contest: Educational Codeforces Round 27
+division: platinum
+url: https://codeforces.com/problemset/problem/845/G
+editorialUrl: https://codeforces.com/blog/entry/53986
+techniques:
+    - advanced.xor-bases
+prerequisites:
+    - foundations.binary-representation
+    - graphs.dfs
+difficulty: 4
+estimatedMinutes: 50
+specialConstraints:
+    - The graph has up to 100000 vertices and 100000 edges, with multiple edges and loops allowed, so the DFS must tolerate repeated visits to the same vertex.
+    - Path length is the XOR of the edge weights, which is not a metric, so Dijkstra and its ordering argument do not apply.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Run a DFS and record the XOR distance from vertex 1 along the tree edges.
+    - Every non-tree edge closes a fundamental cycle whose XOR is dist[u] XOR dist[v] XOR w; insert those values into a basis.
+    - Every walk from 1 to n is the tree path to n XOR a combination of cycles, so the achievable lengths form one coset of the cycle span.
+    - Minimize the coset from the highest bit down by xoring a pivot whenever that clears the current bit.
+discussion: >-
+    The closed walks of a graph form the cycle space, a vector space over GF(2), and the fundamental cycles of any spanning forest span it. The XOR distance along the DFS tree gives one representative of the coset of achievable 1-to-n walks, and the cycle basis gives the directions that can be added to it. The minimum of the coset is found greedily from the highest bit, clearing each bit whenever a pivot owns it. The graph being connected guarantees that vertex n is reached by the tree.
+related:
+    - codeforces.1101g.zero-xor-subset-less
+    - codeforces.959f.mahmoud-and-ehab-and-yet-another-xor-task

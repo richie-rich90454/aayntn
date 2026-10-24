@@ -1,0 +1,29 @@
+id: codeforces.1101g.zero-xor-subset-less
+title: (Zero XOR Subset)-less
+source: Codeforces
+contest: Educational Codeforces Round 58 (Rated for Div. 2)
+division: platinum
+url: https://codeforces.com/problemset/problem/1101/G
+editorialUrl: https://codeforces.com/blog/entry/64483
+techniques:
+    - advanced.xor-bases
+prerequisites:
+    - foundations.binary-representation
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - The array has up to 200000 values below 10^9, so the basis has at most 30 vectors and so does any valid division.
+    - When the XOR of the whole array is zero, the full set of segments is a nonempty zero-XOR subset, so no division exists.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - A division is valid exactly when the XOR values of its segments are linearly independent over GF(2), because a zero-XOR subset of segments is a linear dependence.
+    - The segment XORs are differences of prefix XORs, so their span equals the span of the array values.
+    - If the total XOR is zero, every division has the full set of segments as a zero-XOR subset, so print -1.
+    - Otherwise the maximum number of segments is the rank of the array, which the basis counts.
+discussion: >-
+    The segments are contiguous, but the XOR of a segment is a difference of two prefix XORs, so the segment values live in the span of the array. Independence of the segment values is a matroid condition, and the rank bounds the number of segments from above. A basis of the prefix XORs, taken in increasing index order and cut at those indices, realizes the bound whenever the total XOR is nonzero. The total XOR being zero is the only obstruction, because then the full set of segments is itself a zero-XOR subset.
+related:
+    - codeforces.959f.mahmoud-and-ehab-and-yet-another-xor-task
+    - codeforces.845g.shortest-path-problem

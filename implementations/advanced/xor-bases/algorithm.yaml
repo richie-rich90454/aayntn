@@ -1,0 +1,95 @@
+algorithm: advanced.xor-bases
+title: XOR bases
+summary: Store the subset XORs of a set as an independent basis over the field of two elements, so each query asks for the maximum of a coset with a greedy pass over the bits.
+subject: advanced
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [foundations.binary-representation]
+    recommended: [enumeration.subset-enumeration, range-queries.segment-tree]
+complexity:
+    time: "O(n log A) to build the basis, O(log A) per query"
+    space: "O(log A)"
+assumptions:
+    - Every input value and every query value is a non-negative integer below 2^30, so 30 bits cover the whole input.
+    - The queries are independent, so the basis is built once and never changes while they are answered.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the set and the queries, then prints the maximum XOR of each query with a subset of the set."
+      time: "O(n log A) to build the basis, O(log A) per query"
+      auxiliarySpace: "O(log A) for the pivot slots"
+      status: unverified
+      inputs: "n, then n values, then q, then q query values, all separated by whitespace."
+      outputs: "One line per query, holding the maximum of x XOR a subset XOR."
+      notes: "The basis is an array of 30 unsigned integers, one slot per bit, and each insertion reduces its value against the slots that already own a bit. The query greedy uses an unsigned comparison, so the top bit of a 30-bit value is never mistaken for a sign bit."
+      operations: [insert, maximum-xor-query]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the set and the queries, then prints the maximum XOR of each query with a subset of the set."
+      time: "O(n log A) to build the basis, O(log A) per query"
+      auxiliarySpace: "O(log A) for the pivot slots"
+      status: unverified
+      inputs: "n, then n values, then q, then q query values, all separated by whitespace."
+      outputs: "One line per query, holding the maximum of x XOR a subset XOR."
+      notes: "The basis is a std::array of std::uint32_t with one slot per bit. The query compares the candidate against the current value before committing to the XOR, which states the greedy rule without relying on the sign of a shift."
+      operations: [insert, maximum-xor-query]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the set and the queries, then prints the maximum XOR of each query with a subset of the set."
+      time: "O(n log A) to build the basis, O(log A) per query"
+      auxiliarySpace: "O(log A) for the pivot slots"
+      status: unverified
+      inputs: "n, then n values, then q, then q query values, all separated by whitespace."
+      outputs: "One line per query, holding the maximum of x XOR a subset XOR."
+      notes: "The basis is an int array of 30 slots, which is safe because every value is below 2^30 and the sign bit is never set. A byte-buffer scanner reads the tokens and a StringBuilder collects the output, so the program stays fast at the largest stated input."
+      operations: [insert, maximum-xor-query]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the set and the queries, then prints the maximum XOR of each query with a subset of the set."
+      time: "O(n log A) to build the basis, O(log A) per query"
+      auxiliarySpace: "O(log A) for the pivot slots"
+      status: unverified
+      inputs: "n, then n values, then q, then q query values, all separated by whitespace."
+      outputs: "One line per query, holding the maximum of x XOR a subset XOR."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. The variant uses Number with unsigned shifts, which is exact for values below 2^30. It writes the platform line separator so its output matches the compiled languages byte for byte."
+      operations: [insert, maximum-xor-query]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the set and the queries, then prints the maximum XOR of each query with a subset of the set."
+      time: "O(n log A) to build the basis, O(log A) per query"
+      auxiliarySpace: "O(log A) for the pivot slots"
+      status: unverified
+      inputs: "n, then n values, then q, then q query values, all separated by whitespace."
+      outputs: "One line per query, holding the maximum of x XOR a subset XOR."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The variant uses LongInt for the 32-bit XOR operations and reads one argument per Read, with no IOResult, so it compiles under pas2js. The basis has one slot for each of the 30 bits."
+      operations: [insert, maximum-xor-query]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads the set and the queries, then prints the maximum XOR of each query with a subset of the set."
+      time: "O(n log A) to build the basis, O(log A) per query"
+      auxiliarySpace: "O(log A) for the pivot slots"
+      status: unverified
+      inputs: "n, then n values, then q, then q query values, all separated by whitespace."
+      outputs: "One line per query, holding the maximum of x XOR a subset XOR."
+      notes: "The variant reads the whole input once, because a per-token read is the slowest part of a Python solution at this size. The basis is a 30-element list, and the queries are answered from a local copy of each value."
+      operations: [insert, maximum-xor-query]

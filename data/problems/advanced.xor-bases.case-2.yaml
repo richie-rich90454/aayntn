@@ -1,0 +1,30 @@
+id: codeforces.959f.mahmoud-and-ehab-and-yet-another-xor-task
+title: Mahmoud and Ehab and yet another xor task
+source: Codeforces
+contest: Codeforces Round 473 (Div. 2)
+division: platinum
+url: https://codeforces.com/problemset/problem/959/F
+editorialUrl: https://codeforces.com/blog/entry/58712
+techniques:
+    - advanced.xor-bases
+prerequisites:
+    - foundations.binary-representation
+    - arrays.prefix-sums
+difficulty: 4
+estimatedMinutes: 45
+specialConstraints:
+    - There are up to 100000 values and 100000 queries, and every value is below 2^20, so a basis has at most 20 vectors.
+    - Each query restricts the subsequences to the first l elements, so the basis must describe a prefix rather than the whole array.
+recommendedLanguages:
+    - cpp17
+    - java
+hints:
+    - Insert the values from left to right and record a snapshot of the basis whenever its rank grows.
+    - The rank grows at most 20 times, so there are at most 20 snapshots and a query can pick the last one at or before its l.
+    - Reduce x against the snapshot; if the reduction does not reach zero, x is outside the span and the answer is 0.
+    - Otherwise the answer is 2^(l - r), where r is the rank of the snapshot, because every reachable value has exactly that many subsequences.
+discussion: >-
+    The subsequences of a prefix form a vector space over GF(2), and the map from the 2^l subsequences onto that space is linear. Its kernel has dimension l minus the rank, so every reachable XOR has exactly 2^(l-r) preimages. The prefix restriction is handled by snapshotting the basis at the few moments when its rank increases; the basis changes at most 20 times because the values use 20 bits. The answer is then one reduction and one modular power per query.
+related:
+    - codeforces.1101g.zero-xor-subset-less
+    - codeforces.845g.shortest-path-problem

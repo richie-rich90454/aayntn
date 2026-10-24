@@ -1,0 +1,9 @@
+- name: a dependent value disappears from the basis
+  input: "5\n3 5 6 6 0\n3\n0\n4\n6\n"
+  expected: "6\n7\n6\n"
+- name: values at the top of the 30-bit range
+  input: "4\n536870912 268435456 134217728 1\n3\n134217728\n2\n0\n"
+  expected: "939524097\n939524099\n939524097\n"
+- name: a single zero value cannot improve any query
+  input: "1\n0\n3\n0\n1073741823\n1\n"
+  expected: "0\n1073741823\n1\n"
