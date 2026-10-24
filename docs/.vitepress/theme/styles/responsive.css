@@ -274,4 +274,22 @@
         overflow-x: auto;
         min-width: 0;
     }
+
+    /* A fieldset has an intrinsic minimum width that min-width cannot
+       override. Clamp the contest subtree and clip the last two pixels its
+       default border adds, so the phone page stays exactly as wide as the
+       screen. */
+    .aayntn-contest {
+        overflow-x: clip;
+    }
+
+    .aayntn-contest,
+    .aayntn-contest * {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .aayntn-contest__fieldset {
+        min-inline-size: 0;
+    }
 }
