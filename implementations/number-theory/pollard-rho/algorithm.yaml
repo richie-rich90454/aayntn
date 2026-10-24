@@ -1,0 +1,97 @@
+algorithm: number-theory.pollard-rho
+title: Pollard's rho
+summary: Factor a 64-bit integer by following the sequence x^2 + c modulo n until a difference shares a nontrivial factor with n, then split the cofactor and repeat.
+subject: number-theory
+divisions: [platinum]
+importance: advanced-technique
+prerequisites:
+    required: [number-theory.modular-arithmetic]
+    recommended: [number-theory.miller-rabin, number-theory.prime-factorization]
+complexity:
+    time: "expected O(n^{1/4}) iterations for a semiprime, each O(log n)"
+    space: "O(log n) for the stack of pending cofactors"
+assumptions:
+    - Every input is a positive integer below 2^63.
+    - The rho sequence uses the fixed starting value x0 = 2 and the fixed constants c = 1, 2, 3, ..., so no randomness is involved.
+    - The modular product is formed exactly, with a 128-bit intermediate in C and C++ and with a wider type or 32-bit limbs in the other languages.
+    - Primality is decided by the deterministic Miller-Rabin bases 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37.
+reviewed: false
+variants:
+    - id: program
+      language: c
+      file: c/program.c
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a count and that many 64-bit integers and prints the prime factors of each in ascending order, with a deterministic rho and a 128-bit intermediate product."
+      time: "expected O(n^{1/4}) rho iterations per semiprime, each O(log n) for the gcd"
+      auxiliarySpace: "O(log n) for the stack and the factor list"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one positive integer below 2^63."
+      outputs: "One line per integer, holding its prime factors in ascending order separated by single spaces. The factorization of 1 is an empty line."
+      notes: "The product of two residues is formed in unsigned __int128 before the modulo, so no 64-bit multiplication can wrap. Small primes up to 37 are removed first, which keeps rho away from the cases where the polynomial has a fixed point. The standard output is set to binary mode so its line feeds match the other five programs."
+      operations: [parse, strip-small-primes, primality-test, rho-split, sort, print]
+    - id: program
+      language: cpp17
+      file: cpp17/program.cpp
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a count and that many 64-bit integers and prints the prime factors of each in ascending order, with a deterministic rho and a 128-bit intermediate product."
+      time: "expected O(n^{1/4}) rho iterations per semiprime, each O(log n) for the gcd"
+      auxiliarySpace: "O(log n) for the stack and the factor list"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one positive integer below 2^63."
+      outputs: "One line per integer, holding its prime factors in ascending order separated by single spaces. The factorization of 1 is an empty line."
+      notes: "The product of two residues is formed in unsigned __int128 before the modulo, so no 64-bit multiplication can wrap. Small primes up to 37 are removed first, and the pending cofactors live in a vector used as an explicit stack. Input and output are untied from the C streams, and every line ends with a line feed."
+      operations: [parse, strip-small-primes, primality-test, rho-split, sort, print]
+    - id: program
+      language: java
+      file: java/Main.java
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a count and that many 64-bit integers and prints the prime factors of each in ascending order, with a deterministic rho and an exact product."
+      time: "expected O(n^{1/4}) rho iterations per semiprime, each O(log n) for the gcd"
+      auxiliarySpace: "O(log n) for the stack and the factor list"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one positive integer below 2^63."
+      outputs: "One line per integer, holding its prime factors in ascending order separated by single spaces. The factorization of 1 is an empty line."
+      notes: "Java has no 128-bit integer, so mulMod uses the long product whenever it cannot overflow and BigInteger otherwise; both paths return the same exact residue. The byte-array scanner reads the count and then exactly that many values. Small primes up to 37 are removed before the rho loop."
+      operations: [parse, strip-small-primes, primality-test, rho-split, sort, print]
+    - id: program
+      language: python
+      file: python/program.py
+      kind: program
+      recommended: recommended
+      reason: "The canonical program: it reads a count and that many 64-bit integers and prints the prime factors of each in ascending order, with a deterministic rho."
+      time: "expected O(n^{1/4}) rho iterations per semiprime, each O(log n) for the gcd"
+      auxiliarySpace: "O(log n) for the stack and the factor list"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one positive integer below 2^63."
+      outputs: "One line per integer, holding its prime factors in ascending order separated by single spaces. The factorization of 1 is an empty line."
+      notes: "Python integers are arbitrary precision, so the product of two residues is exact without special handling and the built-in pow computes the modular power. Small primes up to 37 are removed first. The output is written as bytes so the line feeds do not depend on the platform."
+      operations: [parse, strip-small-primes, primality-test, rho-split, sort, print]
+    - id: program
+      language: pascal
+      file: pascal/program.pas
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: Pascal is not a USACO submission language. The canonical program: it reads a count and that many 64-bit integers and prints the prime factors of each in ascending order, with a deterministic rho."
+      time: "expected O(n^{1/4}) rho iterations per semiprime, with O(log n) limb additions per multiplication"
+      auxiliarySpace: "O(log n) for the stack and the factor list"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one positive integer below 2^63."
+      outputs: "One line per integer, holding its prime factors in ascending order separated by single spaces. The factorization of 1 is an empty line."
+      notes: "Educational reference implementation: Pascal is not a USACO submission language. The browser Pascal compiler stores Int64 as a double, so every value is two limbs in [0, 2^32), which a double represents exactly, and multiplication is repeated doubling instead of a 128-bit type. The source uses SysUtils and reads one value per line, so no decimal text is ever rounded, and it does not use IOResult."
+      operations: [parse, strip-small-primes, primality-test, rho-split, sort, print]
+    - id: program
+      language: javascript
+      file: javascript/program.js
+      kind: program
+      recommended: recommended
+      reason: "Educational reference implementation: JavaScript is not a USACO submission language. The canonical program: it reads a count and that many 64-bit integers and prints the prime factors of each in ascending order, with a deterministic rho."
+      time: "expected O(n^{1/4}) rho iterations per semiprime, each O(log n) for the gcd"
+      auxiliarySpace: "O(log n) for the stack and the factor list"
+      status: unverified
+      inputs: "t on the first line, then t lines, each holding one positive integer below 2^63."
+      outputs: "One line per integer, holding its prime factors in ascending order separated by single spaces. The factorization of 1 is an empty line."
+      notes: "Educational reference implementation: JavaScript is not a USACO submission language. BigInt supplies exact 64-bit input and exact 128-bit intermediate products, while a Number would lose precision above 2^53. Small primes up to 37 are removed before the rho loop, and the factors are sorted with a BigInt comparator."
+      operations: [parse, strip-small-primes, primality-test, rho-split, sort, print]

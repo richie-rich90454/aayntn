@@ -1,0 +1,9 @@
+- name: boundary values, repeated factors and a prime
+  input: "8\n1\n2\n3\n4\n8\n64\n729\n999983\n"
+  expected: "\n2\n3\n2 2\n2 2 2\n2 2 2 2 2 2\n3 3 3 3 3 3\n999983\n"
+- name: ordinary composites and a product of two large primes
+  input: "4\n6\n600851475143\n100000007700000049\n1234567890123456789\n"
+  expected: "2 3\n71 839 1471 6857\n100000007 1000000007\n3 3 101 3541 3607 3803 27961\n"
+- name: the top of the signed 64-bit range
+  input: "3\n9223372036854775807\n4294967297\n9007199254740991\n"
+  expected: "7 7 73 127 337 92737 649657\n641 6700417\n6361 69431 20394401\n"
