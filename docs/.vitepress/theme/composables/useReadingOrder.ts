@@ -9,10 +9,16 @@
  */
 import { computed } from "vue";
 import { useData } from "vitepress";
-import lessons from "../../data/generated/lessons.json";
-import type { LessonEntry } from "../../data/types";
+import readingOrder from "../../data/generated/reading-order.json";
 
-const lessonList = lessons as LessonEntry[];
+/** The fields the reading order needs; the rest of the lesson stays on its page. */
+export interface ReadingOrderEntry {
+    id: string;
+    title: string;
+    href: string;
+}
+
+const lessonList = readingOrder as ReadingOrderEntry[];
 
 export function normalizeHref(href: string): string {
     const trimmed = href.replace(/\/+$/, "");
@@ -28,23 +34,23 @@ export function pageHref(relativePath: string): string {
 const byId = new Map(lessonList.map((entry) => [entry.id, entry]));
 const byHref = new Map(lessonList.map((entry) => [normalizeHref(entry.href), entry]));
 
-export function lookupLesson(id: string): LessonEntry | undefined {
+export function lookupLesson(id: string): ReadingOrderEntry | undefined {
     return byId.get(id);
 }
 
-export function lookupHref(href: string): LessonEntry | undefined {
+export function lookupHref(href: string): ReadingOrderEntry | undefined {
     return byHref.get(normalizeHref(href));
 }
 
 /** The kind of page a lesson is, in the words the pager shows. */
-export function lessonKind(lesson: LessonEntry): string {
+export function lessonKind(lesson: ReadingOrderEntry): string {
     if (/(^|\.)index$/.test(lesson.id)) return "Subject overview";
     if (lesson.href.startsWith("/algorithms/")) return "Technique";
     return "Lesson";
 }
 
 export interface ReadingStep {
-    lesson: LessonEntry;
+    lesson: ReadingOrderEntry;
     kind: string;
 }
 
@@ -52,7 +58,7 @@ export function useReadingOrder() {
     const { page, frontmatter } = useData();
 
     const href = computed(() => pageHref(page.value.relativePath ?? ""));
-    const current = computed<LessonEntry | undefined>(() => {
+    const current = computed<ReadingOrderEntry | undefined>(() => {
         const id = frontmatter.value["id"] as string | undefined;
         return (id ? byId.get(id) : undefined) ?? byHref.get(href.value);
     });

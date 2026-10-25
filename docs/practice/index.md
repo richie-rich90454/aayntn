@@ -13,6 +13,10 @@ prerequisites:
 reviewed: false
 ---
 
+<script setup lang="ts">
+import PracticeCatalog from "../.vitepress/theme/components/problems/PracticeCatalog.vue";
+</script>
+
 Practice is where the encyclopedia stops being a book. The theory is written down; the theory is only learned by writing programs against problems that were not designed to make the theory look easy.
 
 This page explains what the practice system contains, how the hints work, how the six stages of a progression are meant to be used, and how to run a contest simulation on your own machine.
@@ -92,7 +96,7 @@ Stated plainly, because a practice site that pretends otherwise is worse than no
 
 ## The catalog
 
-<PracticeCatalog limit="24" />
+<PracticeCatalog :limit="24" />
 
 A note on what is in the list. The entries are ordered by their position in the generated data, not by difficulty, and the limit above shows the first twenty-four. Narrow the list with the division and technique filters in the interface when you want a specific set.
 

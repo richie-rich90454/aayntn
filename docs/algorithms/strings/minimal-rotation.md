@@ -30,11 +30,17 @@ implementations: strings.minimal-rotation
 reviewed: false
 ---
 
-<AlgorithmSummary algorithm="strings.minimal-rotation" />
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/strings.minimal-rotation.json";
+</script>
+
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="strings.minimal-rotation" />
+<CodeViewer :entry="algorithm" />
 
 ## At a glance
 

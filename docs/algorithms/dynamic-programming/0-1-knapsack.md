@@ -21,13 +21,20 @@ visualization: dynamic-programming.0-1-knapsack
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmPlayer from "../../.vitepress/theme/laboratories/core/AlgorithmPlayer.vue";
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/dynamic-programming.0-1-knapsack.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="dynamic-programming.0-1-knapsack" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="dynamic-programming.0-1-knapsack" />
+<CodeViewer :entry="algorithm" />
 
 The 0/1 knapsack problem asks for the most valuable subset of items whose total weight does not exceed a given capacity. Every item is a single physical object, so it is either in the knapsack or it is not. It cannot be in there twice. That last clause is the whole difficulty of the problem, and it is the clause that a careless implementation breaks.
 

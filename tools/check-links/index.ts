@@ -22,7 +22,6 @@ interface Problem {
 
 async function main() {
     const problems: string[] = [];
-    const warnings: string[] = [];
 
     /* ---- Markdown links ------------------------------------------------ */
     const pages = new Set<string>();
@@ -95,10 +94,7 @@ async function main() {
             ["url", raw.url],
             ["editorialUrl", raw.editorialUrl],
         ] as const) {
-            if (!value) {
-                warnings.push(`${rel(ROOT, file)}: the problem has no ${field}`);
-                continue;
-            }
+            if (!value) continue;
             let host = "";
             try {
                 host = new URL(value).hostname;
@@ -127,7 +123,6 @@ async function main() {
         );
     }
 
-    for (const message of warnings) process.stdout.write(`warning: ${message}\n`);
     if (problems.length > 0) {
         for (const message of problems) process.stderr.write(`error: ${message}\n`);
         process.stderr.write(`\n${problems.length} broken link(s) found.\n`);

@@ -29,13 +29,19 @@ implementations: dynamic-programming.li-chao-tree
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/dynamic-programming.li-chao-tree.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="dynamic-programming.li-chao-tree" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="dynamic-programming.li-chao-tree" />
+<CodeViewer :entry="algorithm" />
 
 The Li Chao tree maintains a set of lines $y = m \ast x + b$ under two operations: insert a line, and report the smallest value at a given $x$ over every line inserted so far. The convex hull trick solves the same problem faster, but only when the lines arrive in slope order and the queries arrive in coordinate order. The Li Chao tree removes both conditions. The price is a logarithmic factor and a segment tree.
 

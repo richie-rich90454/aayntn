@@ -29,13 +29,19 @@ implementations: dynamic-programming.divide-and-conquer-optimization
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/dynamic-programming.divide-and-conquer-optimization.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="dynamic-programming.divide-and-conquer-optimization" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="dynamic-programming.divide-and-conquer-optimization" />
+<CodeViewer :entry="algorithm" />
 
 Divide-and-conquer optimization is a way to evaluate one layer of a dynamic program without trying every split point. It applies to recurrences of the form
 

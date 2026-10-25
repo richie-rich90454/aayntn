@@ -20,13 +20,20 @@ visualization: range-queries.segment-tree
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmPlayer from "../../.vitepress/theme/laboratories/core/AlgorithmPlayer.vue";
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/range-queries.segment-tree.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="range-queries.segment-tree" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="range-queries.segment-tree" />
+<CodeViewer :entry="algorithm" />
 
 A segment tree is a complete binary tree laid over the array. Every node covers one contiguous range of positions and stores the result of combining the values in that range. The root covers everything, its two children cover the two halves, and the leaves hold the values themselves.
 

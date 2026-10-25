@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import algorithms from "../../../data/generated/algorithms.json";
 import type { AlgorithmEntry } from "../../../data/types";
 
 /**
@@ -8,15 +6,12 @@ import type { AlgorithmEntry } from "../../../data/types";
  *
  * Complexity, prerequisites, constraints, applicability, and — just as
  * important — the situations in which the algorithm is the wrong choice.
+ * The entry is passed by the article, which imports only its own document.
  */
 
-const props = defineProps<{
-    algorithm: string;
+defineProps<{
+    entry: AlgorithmEntry;
 }>();
-
-const entry = computed<AlgorithmEntry | undefined>(() =>
-    (algorithms as AlgorithmEntry[]).find((item) => item.id === props.algorithm),
-);
 </script>
 
 <template>

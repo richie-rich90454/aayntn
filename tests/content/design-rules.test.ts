@@ -83,20 +83,35 @@ describe("the design", () => {
         }
     });
 
-    it("never marks a callout with a left-only border", async () => {
-        const callout =
-            /aayntn-math|aayntn-note|aayntn-hint|aayntn-variant-note|aayntn-contest__notice|book-panel|book-note|blockquote/;
+    it("never draws a left-only border or stripe anywhere in the theme", async () => {
         for (const file of await themeFiles()) {
             if (!file.endsWith(".css") && !file.endsWith(".vue")) continue;
             const source = (await readFile(file, "utf8")).replace(/\/\*[\s\S]*?\*\//g, "");
-            for (const match of source.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
-                const selector = match[1]!.trim();
-                if (!callout.test(selector)) continue;
-                expect(
-                    /border-left\s*:|border-inline-start\s*:/.test(match[2]!),
-                    `${file.replace(ROOT + "\\", "")} gives ${selector} a left-only border`,
-                ).toBe(false);
-            }
+            const name = file.replace(ROOT + "\\", "");
+            expect(/border-left\s*:/.test(source), `${name} uses a left border`).toBe(false);
+            expect(
+                /border-inline-start\s*:/.test(source),
+                `${name} uses a logical left border`,
+            ).toBe(false);
+            expect(
+                /box-shadow:\s*inset\s+[1-9]\d*px\s+0/.test(source),
+                `${name} paints a left inset stripe`,
+            ).toBe(false);
+        }
+    });
+
+    it("keeps the generated catalogues out of the entry bundle", async () => {
+        const entry = await readFile(join(ROOT, "docs/.vitepress/theme/index.ts"), "utf8");
+        expect(entry).not.toContain("generated/algorithms.json");
+        expect(entry).not.toContain("generated/problems.json");
+        for (const file of [
+            "docs/.vitepress/theme/components/articles/AlgorithmSummary.vue",
+            "docs/.vitepress/theme/components/code/CodeViewer.vue",
+        ]) {
+            const source = await readFile(join(ROOT, file), "utf8");
+            expect(source, `${file} imports the whole catalogue`).not.toContain(
+                "generated/algorithms.json",
+            );
         }
     });
 

@@ -37,11 +37,15 @@ const hasRail = computed(() => {
     return !isHome.value;
 });
 
-initPreferences(LANGUAGE_IDS);
-
 const route = useRoute();
 
+/*
+ * Preferences live in localStorage, which does not exist during the server
+ * render. Applying them only after hydration keeps the first client render
+ * identical to the server render; the code viewer reacts to the change.
+ */
 onMounted(() => {
+    initPreferences(LANGUAGE_IDS);
     enhanceSourceArchive();
 });
 

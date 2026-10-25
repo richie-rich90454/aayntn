@@ -31,13 +31,19 @@ implementations: range-queries.persistent-segment-tree
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/range-queries.persistent-segment-tree.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="range-queries.persistent-segment-tree" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="range-queries.persistent-segment-tree" />
+<CodeViewer :entry="algorithm" />
 
 A persistent segment tree keeps every historical state of a segment tree and shares the parts that did not change. In the range-query setting the states are the prefixes of a static array, so there is one version per prefix. The version for prefix $i$ is a frequency tree over the ranks of $a_1, \ldots, a_i$: each leaf counts how many times its value occurs in that prefix, and each internal node stores the sum of its children.
 

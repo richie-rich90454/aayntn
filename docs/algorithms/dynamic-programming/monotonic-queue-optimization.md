@@ -27,13 +27,19 @@ implementations: dynamic-programming.monotonic-queue-optimization
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/dynamic-programming.monotonic-queue-optimization.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="dynamic-programming.monotonic-queue-optimization" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="dynamic-programming.monotonic-queue-optimization" />
+<CodeViewer :entry="algorithm" />
 
 A dynamic program becomes quadratic when every state scans a range of earlier states. When that range is a window of the last $k$ positions, the scan is asking for a sliding window minimum, and a monotonic deque answers it in constant amortized time. The transition disappears, and the whole program runs in linear time.
 

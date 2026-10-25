@@ -28,11 +28,17 @@ implementations: trees.small-to-large-merging
 reviewed: false
 ---
 
-<AlgorithmSummary algorithm="trees.small-to-large-merging" />
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/trees.small-to-large-merging.json";
+</script>
+
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="trees.small-to-large-merging" />
+<CodeViewer :entry="algorithm" />
 
 ## At a glance
 

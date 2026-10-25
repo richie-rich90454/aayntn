@@ -20,13 +20,20 @@ visualization: range-queries.fenwick-tree
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmPlayer from "../../.vitepress/theme/laboratories/core/AlgorithmPlayer.vue";
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/range-queries.fenwick-tree.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="range-queries.fenwick-tree" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="range-queries.fenwick-tree" />
+<CodeViewer :entry="algorithm" />
 
 A Fenwick tree, also called a binary indexed tree, keeps a set of running totals for an array in a single array of $n + 1$ entries. Each entry holds the total of one block of positions, and the blocks are chosen by the binary representation of their indices.
 

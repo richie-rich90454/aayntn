@@ -14,6 +14,11 @@ reviewed: false
 draft: false
 ---
 
+<script setup lang="ts">
+import PrerequisiteGraph from "../.vitepress/theme/components/PrerequisiteGraph.vue";
+import Synonyms from "../.vitepress/theme/components/Synonyms.vue";
+</script>
+
 A.A.Y.N.T.N. is an encyclopedia rather than a course. It will not assign your week or tell you which problem to attempt on Tuesday. It does something narrower and, we hope, more durable: it collects the whole body of competitive programming knowledge into one fixed order, with the proofs and the complexity arguments that most explanations quietly omit.
 
 This page explains what is inside, how the pieces fit together, and how to enter from wherever you are starting.

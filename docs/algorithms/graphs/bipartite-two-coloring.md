@@ -19,13 +19,19 @@ implementations: graphs.bipartite-two-coloring
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/graphs.bipartite-two-coloring.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="graphs.bipartite-two-coloring" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="graphs.bipartite-two-coloring" />
+<CodeViewer :entry="algorithm" />
 
 A graph is **bipartite** when its vertices can be split into two sides such that every edge has one endpoint on each side. The two-coloring test answers that question, and when the answer is yes it produces the split, by painting one vertex and forcing every neighbor to the opposite color.
 

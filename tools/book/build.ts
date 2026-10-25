@@ -123,6 +123,10 @@ function attribute(source: string, name: string): string {
 function prepareBody(body: string): string {
     let prepared = body.replace(/\r\n/g, "\n");
 
+    // A page may import its components and its own data in a script block.
+    // The printed book has neither, so the block is removed before rendering.
+    prepared = prepared.replace(/<script\b[\s\S]*?<\/script>\s*/g, "");
+
     prepared = prepared.replace(/^<MathPanel([^>]*)>[ \t]*$/gm, (_match, attributes: string) => {
         const type = (attribute(attributes, "type") || "note")
             .toLowerCase()

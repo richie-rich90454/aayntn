@@ -20,13 +20,20 @@ visualization: graphs.dsu
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmPlayer from "../../.vitepress/theme/laboratories/core/AlgorithmPlayer.vue";
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/graphs.dsu.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="graphs.dsu" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="graphs.dsu" />
+<CodeViewer :entry="algorithm" />
 
 A disjoint set union, also called a union-find, maintains a partition of $n$ elements into sets. It supports two operations: merging the sets of two elements, and asking whether two elements are in the same set. Both take amortized constant time.
 

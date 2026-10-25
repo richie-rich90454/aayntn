@@ -30,13 +30,19 @@ implementations: range-queries.segment-tree-beats
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/range-queries.segment-tree-beats.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="range-queries.segment-tree-beats" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="range-queries.segment-tree-beats" />
+<CodeViewer :entry="algorithm" />
 
 Segment tree beats is a segment tree whose nodes remember more than the aggregate. For range chmin with range sums, every node stores four numbers: the sum of its range, the largest value $m_1$, the second largest _distinct_ value $m_2$, and the number of positions that hold $m_1$, written $c$.
 

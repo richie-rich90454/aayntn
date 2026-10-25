@@ -22,13 +22,19 @@ implementations: dynamic-programming.profile-dp
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/dynamic-programming.profile-dp.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="dynamic-programming.profile-dp" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="dynamic-programming.profile-dp" />
+<CodeViewer :entry="algorithm" />
 
 Profile dynamic programming counts the ways to tile a grid with dominoes by sweeping the cells in row-major order and keeping a bitmask of the **frontier**, the boundary between cells that are already decided and cells that are not. The mask has one bit per column. Bit $0$ describes the current cell, bit $1$ the cell to its right, and so on around the row and into the next row.
 

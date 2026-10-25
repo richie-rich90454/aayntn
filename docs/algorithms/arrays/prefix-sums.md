@@ -20,13 +20,20 @@ visualization: arrays.prefix-sums
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmPlayer from "../../.vitepress/theme/laboratories/core/AlgorithmPlayer.vue";
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/arrays.prefix-sums.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="arrays.prefix-sums" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="arrays.prefix-sums" />
+<CodeViewer :entry="algorithm" />
 
 Prefix sums are a way of spending $O(n)$ once so that every later question about a range of the array costs $O(1)$. The technique is to store the running total of the array: the sum of the first element, the sum of the first two, and so on. The sum of any range is then the difference of two stored totals.
 

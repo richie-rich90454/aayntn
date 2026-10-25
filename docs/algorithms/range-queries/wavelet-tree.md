@@ -33,13 +33,19 @@ implementations: range-queries.wavelet-tree
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/range-queries.wavelet-tree.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="range-queries.wavelet-tree" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="range-queries.wavelet-tree" />
+<CodeViewer :entry="algorithm" />
 
 A wavelet tree answers order-statistic questions about a subarray of a static array. It is given $a_0, \ldots, a_{n-1}$ once, and then it must answer queries of the form "what is the $k$-th smallest value among $a_l, \ldots, a_{r-1}$?" and "how many values in that range are below a threshold $x$?" without sorting the range again.
 

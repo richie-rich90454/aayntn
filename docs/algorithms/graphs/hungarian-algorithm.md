@@ -28,11 +28,17 @@ implementations: graphs.hungarian-algorithm
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/graphs.hungarian-algorithm.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="graphs.hungarian-algorithm" />
+<AlgorithmSummary :entry="algorithm" />
 
-<CodeViewer algorithm="graphs.hungarian-algorithm" />
+<CodeViewer :entry="algorithm" />
 
 The Hungarian algorithm solves the assignment problem: given an $n$ by $n$ matrix of costs, pair every row with a different column so that the total cost is as small as possible. The answer is a permutation, and its cost is the sum of the $n$ chosen cells.
 

@@ -30,13 +30,19 @@ implementations: range-queries.mos-algorithm
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/range-queries.mos-algorithm.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="range-queries.mos-algorithm" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="range-queries.mos-algorithm" />
+<CodeViewer :entry="algorithm" />
 
 Mo's algorithm is an offline technique for a batch of range queries on an array that never changes. It does not build a tree and it does not precompute an aggregate. It maintains one window over the array and moves the two ends of that window from one query to the next, updating the answer as elements enter and leave.
 

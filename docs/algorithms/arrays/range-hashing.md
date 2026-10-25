@@ -29,13 +29,19 @@ implementations: arrays.range-hashing
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/arrays.range-hashing.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="arrays.range-hashing" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="arrays.range-hashing" />
+<CodeViewer :entry="algorithm" />
 
 Range hashing answers the question "are these two ranges of the array the same?" without looking at either range element by element. Each prefix of the array is reduced to a single 64-bit fingerprint, and the fingerprint of a range is recovered from two prefix fingerprints in constant time.
 

@@ -560,10 +560,46 @@ export default defineConfig({
 
     vite: {
         build: {
+            /*
+             * A single mathematics-heavy article carries every formula as
+             * server-rendered KaTeX in its own content chunk. That chunk is
+             * intentionally large and compresses well; the lean chunk that a
+             * reader downloads first stays small. The threshold records that
+             * budget instead of warning about the encyclopedia's own prose.
+             */
+            chunkSizeWarningLimit: 900,
             rollupOptions: {
                 output: {
-                    manualChunks: {
-                        laboratory: ["docs/.vitepress/theme/laboratories/core/AlgorithmPlayer.vue"],
+                    manualChunks(id) {
+                        if (
+                            id.includes(
+                                "docs/.vitepress/theme/laboratories/core/AlgorithmPlayer.vue",
+                            )
+                        ) {
+                            return "laboratory";
+                        }
+                        /*
+                         * VitePress reexports Content through its client entry,
+                         * while Content imports that entry. Keeping both in one
+                         * chunk removes the cross-chunk cycle Rollup warns
+                         * about.
+                         */
+                        if (
+                            id.includes("vitepress/dist/client/index") ||
+                            id.includes("vitepress/dist/client/app/components/Content")
+                        ) {
+                            return "vitepress";
+                        }
+                        if (id.includes("node_modules/.pnpm/vitepress@")) return "vitepress";
+                        if (
+                            id.includes("node_modules/.pnpm/vue@") ||
+                            id.includes("node_modules/.pnpm/@vue+") ||
+                            id.includes("node_modules/.pnpm/vue-router@")
+                        ) {
+                            return "vue";
+                        }
+                        if (id.includes("node_modules/.pnpm/minisearch@")) return "search";
+                        return undefined;
                     },
                 },
             },

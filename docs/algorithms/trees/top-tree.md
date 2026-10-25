@@ -39,13 +39,19 @@ implementations: trees.top-tree
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/trees.top-tree.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="trees.top-tree" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="trees.top-tree" />
+<CodeViewer :entry="algorithm" />
 
 A top tree is a balanced binary tree that describes a forest. Every node of that binary tree is a **cluster**: a connected piece of the forest with an **interface** of at most two vertices, chosen so that every edge leaving the cluster touches the interface. The leaves of the top tree are single vertices or single edges, and every internal node merges two clusters that share exactly one interface vertex.
 

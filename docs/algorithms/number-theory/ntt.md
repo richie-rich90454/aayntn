@@ -31,11 +31,17 @@ implementations: number-theory.ntt
 reviewed: false
 ---
 
-<AlgorithmSummary algorithm="number-theory.ntt" />
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/number-theory.ntt.json";
+</script>
+
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="number-theory.ntt" />
+<CodeViewer :entry="algorithm" />
 
 ## At a glance
 

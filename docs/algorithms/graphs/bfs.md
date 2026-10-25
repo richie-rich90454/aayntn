@@ -20,13 +20,20 @@ visualization: graphs.bfs
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmPlayer from "../../.vitepress/theme/laboratories/core/AlgorithmPlayer.vue";
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/graphs.bfs.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="graphs.bfs" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="graphs.bfs" />
+<CodeViewer :entry="algorithm" />
 
 A breadth-first search explores a graph in rings. It visits every vertex at distance one from the start, then every vertex at distance two, and so on, so the traversal order is an order by distance. That single property is why a breadth-first search answers shortest-path questions in an unweighted graph, and it is the only reason.
 

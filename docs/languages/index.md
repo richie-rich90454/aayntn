@@ -14,6 +14,11 @@ reviewed: false
 draft: false
 ---
 
+<script setup lang="ts">
+import PrerequisiteGraph from "../.vitepress/theme/components/PrerequisiteGraph.vue";
+import Synonyms from "../.vitepress/theme/components/Synonyms.vue";
+</script>
+
 <Synonyms terms="language centers, programming language reference, contest language comparison, choosing a language" />
 
 Six languages appear in this encyclopedia, and they are not six ways of writing the same program. They differ in what they make easy, in what they make expensive, in how much memory each element costs, and in how deep a recursion may go before the program dies. This page compares them so that you can choose one deliberately instead of by habit.

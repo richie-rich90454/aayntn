@@ -39,6 +39,9 @@ const algorithms = registry.algorithms;
 const generated = JSON.parse(
     await readFile(join(ROOT, "docs/.vitepress/data/generated/algorithms.json"), "utf8"),
 ) as GeneratedAlgorithm[];
+const counts = JSON.parse(
+    await readFile(join(ROOT, "docs/.vitepress/data/generated/algorithm-counts.json"), "utf8"),
+) as Record<string, number>;
 
 async function articles(): Promise<Map<string, string>> {
     const files = await fg("docs/algorithms/**/*.md", { cwd: ROOT, absolute: true });
@@ -72,11 +75,14 @@ describe("the algorithms", () => {
                 continue;
             }
             const source = await readFile(file, "utf8");
-            if (!source.includes(`<AlgorithmSummary algorithm="${algorithm.id}" />`)) {
+            if (!source.includes(`<AlgorithmSummary :entry="algorithm" />`)) {
                 problems.push(`${algorithm.id} has no summary in ${file}`);
             }
-            if (!source.includes(`<CodeViewer algorithm="${algorithm.id}" />`)) {
+            if (!source.includes(`<CodeViewer :entry="algorithm" />`)) {
                 problems.push(`${algorithm.id} has no code viewer in ${file}`);
+            }
+            if (!source.includes(`data/generated/algorithms/${algorithm.id}.json`)) {
+                problems.push(`${algorithm.id} does not import its own data in ${file}`);
             }
         }
         expect(problems).toEqual([]);
@@ -150,6 +156,18 @@ describe("the algorithms", () => {
                 problems.push(
                     `${algorithm.id} has ${entry.variants.length} generated variants and ${manifest.variants.length} in the manifest`,
                 );
+            }
+            const own = JSON.parse(
+                await readFile(
+                    join(ROOT, "docs/.vitepress/data/generated/algorithms", `${algorithm.id}.json`),
+                    "utf8",
+                ),
+            ) as GeneratedAlgorithm;
+            if (own.id !== algorithm.id || own.variants.length !== entry.variants.length) {
+                problems.push(`${algorithm.id} has an incomplete per-page document`);
+            }
+            if (counts[algorithm.id] !== entry.variants.length) {
+                problems.push(`${algorithm.id} has the wrong count in the article header data`);
             }
         }
         expect(problems).toEqual([]);

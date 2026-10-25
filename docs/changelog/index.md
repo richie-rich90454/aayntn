@@ -13,6 +13,10 @@ prerequisites:
 reviewed: false
 ---
 
+<script setup lang="ts">
+import ChangelogList from "../.vitepress/theme/components/changelog/ChangelogList.vue";
+</script>
+
 Every change to the encyclopedia is one commit and one file, with a conventional subject line. This page is generated from that history when the site is built, so it cannot fall behind the repository.
 
 <ChangelogList />

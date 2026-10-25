@@ -29,13 +29,19 @@ implementations: trees.virtual-tree
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/trees.virtual-tree.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="trees.virtual-tree" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="trees.virtual-tree" />
+<CodeViewer :entry="algorithm" />
 
 A **virtual tree** of a set $S$ of vertices is the smallest subtree of the original tree that connects $S$, with every non-marked vertex of degree two suppressed. Its vertex set is $S$ together with the lowest common ancestor of every pair of vertices in $S$. Every edge of the virtual tree is therefore a path of the original tree, and it carries the length of that path.
 

@@ -20,11 +20,17 @@ implementations: graphs.minimum-cost-flow
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/graphs.minimum-cost-flow.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="graphs.minimum-cost-flow" />
+<AlgorithmSummary :entry="algorithm" />
 
-<CodeViewer algorithm="graphs.minimum-cost-flow" />
+<CodeViewer :entry="algorithm" />
 
 Minimum cost flow answers two questions at once. How much can be sent from a source $s$ to a sink $t$ through a network whose edges have capacities, and among all ways of sending that much, which one costs the least?
 

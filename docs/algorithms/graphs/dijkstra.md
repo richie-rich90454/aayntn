@@ -20,13 +20,20 @@ visualization: graphs.dijkstra
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmPlayer from "../../.vitepress/theme/laboratories/core/AlgorithmPlayer.vue";
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/graphs.dijkstra.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="graphs.dijkstra" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="graphs.dijkstra" />
+<CodeViewer :entry="algorithm" />
 
 Dijkstra's algorithm computes the distance from one source vertex to every other vertex of a graph whose edge weights are all nonnegative. It does so by repeatedly taking the vertex whose tentative distance is smallest, declaring that distance final, and relaxing the edges that leave it.
 

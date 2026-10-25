@@ -27,13 +27,19 @@ implementations: graphs.floyd-warshall
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/graphs.floyd-warshall.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="graphs.floyd-warshall" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="graphs.floyd-warshall" />
+<CodeViewer :entry="algorithm" />
 
 Floyd-Warshall computes the shortest distance between every ordered pair of vertices of a weighted graph. It keeps a matrix of tentative distances and, one vertex at a time, asks a single question of every pair: is the route that passes through the vertex just admitted cheaper than the best route found so far?
 

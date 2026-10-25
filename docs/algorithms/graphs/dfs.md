@@ -20,13 +20,20 @@ visualization: graphs.dfs
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmPlayer from "../../.vitepress/theme/laboratories/core/AlgorithmPlayer.vue";
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/graphs.dfs.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="graphs.dfs" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="graphs.dfs" />
+<CodeViewer :entry="algorithm" />
 
 A depth-first search explores a graph by following one branch as far as it goes and only then backtracking to the most recent vertex that still has an unexplored neighbor. The whole algorithm is a visited array and a container that hands back the most recently discovered vertex.
 

@@ -32,13 +32,19 @@ implementations: trees.dynamic-trees
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/trees.dynamic-trees.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="trees.dynamic-trees" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="trees.dynamic-trees" />
+<CodeViewer :entry="algorithm" />
 
 A **link-cut tree** maintains a forest while edges are inserted and removed. It does not store the forest directly. Instead, it chooses at every vertex at most one **preferred child**, and the preferred edges form vertex-disjoint **preferred paths**. Each preferred path is stored in a splay tree whose in-order is the path from its highest vertex to its lowest.
 

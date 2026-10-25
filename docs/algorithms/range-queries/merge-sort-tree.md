@@ -30,13 +30,19 @@ implementations: range-queries.merge-sort-tree
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/range-queries.merge-sort-tree.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="range-queries.merge-sort-tree" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="range-queries.merge-sort-tree" />
+<CodeViewer :entry="algorithm" />
 
 A merge sort tree is a [segment tree](/algorithms/range-queries/segment-tree) over the positions of a static array in which every node stores the sorted values of its interval. The root stores the whole array sorted, the leaves store single values, and an internal node stores the merge of its two children's lists. The build is exactly the merge step of merge sort, once per internal node, which is where the structure gets its name.
 

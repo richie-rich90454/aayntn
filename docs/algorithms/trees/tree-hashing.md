@@ -20,11 +20,17 @@ implementations: trees.tree-hashing
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/trees.tree-hashing.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="trees.tree-hashing" />
+<AlgorithmSummary :entry="algorithm" />
 
-<CodeViewer algorithm="trees.tree-hashing" />
+<CodeViewer :entry="algorithm" />
 
 Two rooted trees are isomorphic when one can be relabeled into the other while the root stays the root. The relabeling is a bijection on the vertices that preserves every parent-child relation, so the labels themselves carry no information: only the shape matters.
 

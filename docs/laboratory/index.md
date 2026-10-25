@@ -13,6 +13,11 @@ prerequisites:
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmPlayer from "../.vitepress/theme/laboratories/core/AlgorithmPlayer.vue";
+import ClipGallery from "../.vitepress/theme/components/laboratory/ClipGallery.vue";
+</script>
+
 The laboratory holds one demonstration for each algorithm that the encyclopedia teaches. Every demonstration is a sequence of steps: at each step a picture is drawn, and one sentence says what changed and why.
 
 The pictures are not drawn by hand and they are not recorded. Each demonstration is produced by a trusted TypeScript reference implementation that lives with the algorithm it illustrates. The implementation runs, it reports every intermediate value, and the picture is generated from those values. The consequence is worth stating plainly: a demonstration cannot drift away from the algorithm, because the algorithm is what draws the picture.

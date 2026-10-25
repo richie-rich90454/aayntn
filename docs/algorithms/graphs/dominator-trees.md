@@ -29,11 +29,17 @@ implementations: graphs.dominator-trees
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/graphs.dominator-trees.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="graphs.dominator-trees" />
+<AlgorithmSummary :entry="algorithm" />
 
-<CodeViewer algorithm="graphs.dominator-trees" />
+<CodeViewer :entry="algorithm" />
 
 A vertex $d$ **dominates** a vertex $v$ when every directed path from the source $s$ to $v$ passes through $d$. The relation is reflexive and transitive, and for a fixed $v$ the vertices that dominate it are totally ordered: if two of them were incomparable, a path could avoid one of them and reach the other, and appending the rest of the route would reach $v$ while avoiding the first. That chain has a deepest strict element, the **immediate dominator** of $v$, and drawing one edge from each vertex to its immediate dominator produces the **dominator tree**.
 

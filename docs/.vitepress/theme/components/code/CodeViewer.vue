@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
-import algorithms from "../../../data/generated/algorithms.json";
+import { computed, onMounted, ref, watch } from "vue";
 import { loadImplementationHtml } from "../../../data/loader";
 import { language as preferredLanguage, preferredVariant } from "../../composables/usePreferences";
 import type { AlgorithmEntry, AlgorithmVariant, LanguageId } from "../../../data/types";
@@ -17,15 +16,13 @@ import { LANGUAGE_LABELS, isUsacoSubmittable } from "../../../data/types";
  */
 
 const props = defineProps<{
-    /** Algorithm identifier, matching the `algorithm` field of a manifest. */
-    algorithm: string;
+    /** The algorithm document, imported by the article that uses the viewer. */
+    entry: AlgorithmEntry;
     /** Hide the variant selector when the algorithm has only one variant. */
     hideVariants?: boolean;
 }>();
 
-const entry = computed<AlgorithmEntry | undefined>(() =>
-    (algorithms as AlgorithmEntry[]).find((item) => item.id === props.algorithm),
-);
+const entry = computed(() => props.entry);
 
 const languages = computed<LanguageId[]>(() => {
     if (!entry.value) return [];
@@ -38,7 +35,7 @@ const languages = computed<LanguageId[]>(() => {
 const activeLanguage = ref<LanguageId>("cpp17");
 
 watch(
-    [entry, languages],
+    [entry, languages, preferredLanguage],
     () => {
         if (!entry.value) return;
         const available = languages.value;
@@ -89,7 +86,21 @@ async function load() {
     loading.value = false;
 }
 
-watch([activeVariant], load, { immediate: true });
+/*
+ * The server cannot fetch a fragment, so the first render is the same empty
+ * shell on both sides. The listing is loaded after hydration, which keeps the
+ * server output and the first client render identical.
+ */
+let mounted = false;
+
+onMounted(() => {
+    mounted = true;
+    void load();
+});
+
+watch([activeVariant], () => {
+    if (mounted) void load();
+});
 
 function selectLanguage(id: LanguageId) {
     activeLanguage.value = id;
@@ -263,9 +274,5 @@ const rawHref = computed(() => {
         </Teleport>
     </section>
 
-    <p v-else class="aayntn-code__loading">
-        No implementation manifest is registered for
-        <code>{{ algorithm }}</code>
-        .
-    </p>
+    <p v-else class="aayntn-code__loading">The algorithm document is unavailable.</p>
 </template>

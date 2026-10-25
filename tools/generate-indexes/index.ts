@@ -714,14 +714,42 @@ async function main() {
         );
     }
 
+    /*
+     * One compact document per algorithm. An article imports only its own
+     * document, so a page never carries the other ninety-two algorithms and
+     * the bundler can tree-shake the rest. The counts are tiny enough for the
+     * article header, which needs one number and not the variants.
+     */
+    const algorithmDataDir = join(GENERATED_DIR, "algorithms");
+    await rm(algorithmDataDir, { recursive: true, force: true });
+    await mkdir(algorithmDataDir, { recursive: true });
+    for (const algorithm of algorithms) {
+        await writeFile(
+            join(algorithmDataDir, `${algorithm.id}.json`),
+            JSON.stringify(algorithm),
+            "utf8",
+        );
+    }
+    await writeFile(
+        join(GENERATED_DIR, "algorithm-counts.json"),
+        JSON.stringify(
+            Object.fromEntries(
+                algorithms.map((algorithm) => [algorithm.id, algorithm.variants.length]),
+            ),
+        ),
+        "utf8",
+    );
+    await writeFile(
+        join(GENERATED_DIR, "reading-order.json"),
+        JSON.stringify(lessonEntries.map(({ id, title, href }) => ({ id, title, href }))),
+        "utf8",
+    );
+
     /* Stable per-algorithm source pages ---------------------------------- */
     /*
-     * One page per variant rather than one page per algorithm. A page that
-     * carries every listing of an algorithm is several hundred kilobytes of
-     * markup, which the client-side router then has to carry as a script.
-     * Splitting them keeps every page small and gives each listing its own
-     * address, which is what a reader who wants to copy one implementation
-     * actually wants.
+     * One page per algorithm. The listings are sections of that page, so the
+     * reader gets the whole source in one place and the router carries ninety
+     * pages rather than seven hundred.
      */
     const implPagesDir = join(DOCS_DIR, "implementations");
     await rm(implPagesDir, { recursive: true, force: true });

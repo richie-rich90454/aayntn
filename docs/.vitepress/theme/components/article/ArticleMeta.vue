@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { useData, withBase } from "vitepress";
-import type { AlgorithmEntry } from "../../../data/types";
-import algorithms from "../../../data/generated/algorithms.json";
+import algorithmCounts from "../../../data/generated/algorithm-counts.json";
 import { lookupLesson } from "../../composables/useReadingOrder";
 import CopyLinkButton from "./CopyLinkButton.vue";
 import LessonStatus from "./LessonStatus.vue";
@@ -40,15 +39,13 @@ const requirements = computed(() => {
     });
 });
 
+const counts = algorithmCounts as Record<string, number>;
 const implementations = ref<number | null>(null);
 
 watch(
     () => frontmatter.value.implementations as string | undefined,
     (id) => {
-        implementations.value = null;
-        if (!id) return;
-        const entry = (algorithms as AlgorithmEntry[]).find((item) => item.id === id);
-        implementations.value = entry ? entry.variants.length : null;
+        implementations.value = id ? (counts[id] ?? null) : null;
     },
     { immediate: true },
 );

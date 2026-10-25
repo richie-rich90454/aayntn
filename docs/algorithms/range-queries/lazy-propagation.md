@@ -29,13 +29,19 @@ implementations: range-queries.lazy-propagation
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/range-queries.lazy-propagation.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="range-queries.lazy-propagation" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="range-queries.lazy-propagation" />
+<CodeViewer :entry="algorithm" />
 
 A lazy segment tree is an ordinary [segment tree](/algorithms/range-queries/segment-tree) with one extra array. The tree stores the aggregate of every node, as before, and the extra array stores, at a node, an update that has already been applied to that node but not yet to its children.
 

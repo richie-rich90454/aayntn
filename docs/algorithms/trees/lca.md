@@ -20,13 +20,20 @@ visualization: trees.lca
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmPlayer from "../../.vitepress/theme/laboratories/core/AlgorithmPlayer.vue";
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/trees.lca.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="trees.lca" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="trees.lca" />
+<CodeViewer :entry="algorithm" />
 
 The lowest common ancestor of two vertices is the deepest vertex that is an ancestor of both. The technique for answering queries about it is binary lifting: a table that stores, for every vertex and every $k$, the ancestor of that vertex which lies $2^k$ edges above it.
 

@@ -13,6 +13,10 @@ prerequisites:
 reviewed: false
 ---
 
+<script setup lang="ts">
+import ContestSimulation from "../.vitepress/theme/components/practice/ContestSimulation.vue";
+</script>
+
 Contest solving is a different activity from practice solving, and the difference is not the mathematics. It is the budget. In practice you can look something up, you can try a problem four times, and you can stop for dinner. In a contest you get one attempt per problem, a fixed number of minutes, and a statement you have never seen before. The recognition skill you have built over months is either there or it is not, and the contest is the instrument that tells you which.
 
 This page explains what a simulation is for, what a USACO contest actually looks like, what the published rules permit while the clock is running, and how to run a session here. The simulation itself is the component at the bottom of the page. It is deliberately austere: a division, a set of problems, a clock, a verdict for each problem, and a report at the end.

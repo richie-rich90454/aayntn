@@ -20,13 +20,20 @@ visualization: trees.heavy-light-decomposition
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmPlayer from "../../.vitepress/theme/laboratories/core/AlgorithmPlayer.vue";
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/trees.heavy-light-decomposition.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="trees.heavy-light-decomposition" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="trees.heavy-light-decomposition" />
+<CodeViewer :entry="algorithm" />
 
 A heavy-light decomposition cuts a tree into chains. At every vertex, one child is designated **heavy**: the child whose subtree holds the most vertices. The chain follows heavy edges downward, so each chain is a path from a vertex down to a leaf or to a light edge. The chains are then flattened into one array, and the vertices of each chain occupy a contiguous range of it.
 

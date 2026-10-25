@@ -26,13 +26,19 @@ implementations: dynamic-programming.aliens-trick
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/dynamic-programming.aliens-trick.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="dynamic-programming.aliens-trick" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="dynamic-programming.aliens-trick" />
+<CodeViewer :entry="algorithm" />
 
 The aliens trick removes one dimension from a dynamic program. The dimension is a count: exactly $k$ groups, exactly $k$ operations, exactly $k$ photos. Instead of paying a factor of $k$ to track that count, the trick charges a price $\lambda$ for every group, solves the problem with no count constraint at all, and then searches for the price at which the unconstrained optimum happens to use $k$ groups.
 

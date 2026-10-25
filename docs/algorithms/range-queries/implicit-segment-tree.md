@@ -29,11 +29,17 @@ implementations: range-queries.implicit-segment-tree
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/range-queries.implicit-segment-tree.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="range-queries.implicit-segment-tree" />
+<AlgorithmSummary :entry="algorithm" />
 
-<CodeViewer algorithm="range-queries.implicit-segment-tree" />
+<CodeViewer :entry="algorithm" />
 
 An implicit segment tree is a [segment tree](/algorithms/range-queries/segment-tree) that creates a node only when an update first reaches the node's interval. The domain can be a billion positions, and the structure still uses memory proportional to the number of positions that were actually touched, not to the size of the domain.
 

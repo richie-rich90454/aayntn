@@ -22,11 +22,17 @@ implementations: enumeration.constraint-propagation
 reviewed: false
 ---
 
-<AlgorithmSummary algorithm="enumeration.constraint-propagation" />
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/enumeration.constraint-propagation.json";
+</script>
+
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="enumeration.constraint-propagation" />
+<CodeViewer :entry="algorithm" />
 
 ## At a glance
 

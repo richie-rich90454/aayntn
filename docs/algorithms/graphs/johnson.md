@@ -22,11 +22,17 @@ implementations: graphs.johnson
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/graphs.johnson.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="graphs.johnson" />
+<AlgorithmSummary :entry="algorithm" />
 
-<CodeViewer algorithm="graphs.johnson" />
+<CodeViewer :entry="algorithm" />
 
 Johnson's algorithm computes the shortest distance between every ordered pair of vertices of a sparse directed graph whose edge weights may be negative. It does so in three phases: one Bellman-Ford run from a virtual source produces a _potential_ for every vertex, every edge is reweighted with those potentials so that all weights become nonnegative, and one Dijkstra run from every vertex produces the reweighted distances, which are then shifted back into the original units.
 

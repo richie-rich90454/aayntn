@@ -29,13 +29,19 @@ implementations: arrays.two-dimensional-difference-arrays
 reviewed: false
 ---
 
+<script setup lang="ts">
+import AlgorithmSummary from "../../.vitepress/theme/components/articles/AlgorithmSummary.vue";
+import CodeViewer from "../../.vitepress/theme/components/code/CodeViewer.vue";
+import algorithm from "../../.vitepress/data/generated/algorithms/arrays.two-dimensional-difference-arrays.json";
+</script>
+
 ## At a glance
 
-<AlgorithmSummary algorithm="arrays.two-dimensional-difference-arrays" />
+<AlgorithmSummary :entry="algorithm" />
 
 <!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
 
-<CodeViewer algorithm="arrays.two-dimensional-difference-arrays" />
+<CodeViewer :entry="algorithm" />
 
 A two-dimensional difference array is the inverse of a two-dimensional prefix sum, in the same way that a one-dimensional difference array is the inverse of a one-dimensional prefix sum. The grid is stored as the mixed differences between neighboring cells, so that adding a constant to a rectangle touches only four entries: the top-left corner, the two cells just past the right and bottom edges, and the cell diagonally past the bottom-right corner.
 
