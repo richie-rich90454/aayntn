@@ -20,6 +20,10 @@ export interface CoverageDivision {
 
 export interface CoverageSummary {
     updated: string | null;
+    techniques: number;
+    published: number;
+    missing: number;
+    algorithms: number;
     required: number;
     complete: number;
     taggedTasks: number;

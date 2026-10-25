@@ -1,5 +1,9 @@
 {
-    "updated": "2026-10-24",
+    "updated": "2026-10-25",
+    "techniques": 159,
+    "published": 159,
+    "missing": 0,
+    "algorithms": 93,
     "required": 34,
     "complete": 12,
     "taggedTasks": 57,

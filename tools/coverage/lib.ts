@@ -52,6 +52,10 @@ export interface CoverageDivision {
 
 export interface CoverageSummary {
     updated: string | null;
+    techniques: number;
+    published: number;
+    missing: number;
+    algorithms: number;
     required: number;
     complete: number;
     taggedTasks: number;
@@ -145,6 +149,11 @@ export function computeSummary(
 
     return {
         updated: null,
+        techniques: taxonomy.techniques.length,
+        published: taxonomy.techniques.filter((technique) => technique.status === "published")
+            .length,
+        missing: taxonomy.techniques.filter((technique) => technique.status === "missing").length,
+        algorithms: registered.size,
         required: required.length,
         complete: complete.length,
         taggedTasks: countTagged(corpus.tasks),
