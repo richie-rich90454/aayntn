@@ -101,7 +101,7 @@ test.describe("the article frame", () => {
 
     test("study mode hides the code and survives a reload", async ({ page }) => {
         await page.setViewportSize({ width: 1440, height: 900 });
-        await page.goto(CODE_PAGE, { waitUntil: "domcontentloaded" });
+        await page.goto(CODE_PAGE, { waitUntil: "networkidle" });
 
         const toggle = page.locator("[data-study-toggle]");
         await expect(toggle).toHaveAttribute("aria-pressed", "false");
@@ -110,7 +110,7 @@ test.describe("the article frame", () => {
         await expect(page.locator("html")).toHaveClass(/aayntn-study/);
         await expect(page.locator(".aayntn-code__body").first()).toBeHidden();
 
-        await page.reload({ waitUntil: "domcontentloaded" });
+        await page.reload({ waitUntil: "networkidle" });
         await expect(page.locator("html")).toHaveClass(/aayntn-study/);
         await expect(page.locator(".aayntn-code__body").first()).toBeHidden();
         await expect(page.locator("[data-study-toggle]")).toHaveAttribute("aria-pressed", "true");
