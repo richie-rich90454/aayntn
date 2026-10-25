@@ -164,7 +164,7 @@
 .vp-doc blockquote {
     margin: var(--space-6) 0;
     padding: var(--space-4) var(--space-6);
-    border-left: 4px solid var(--color-gold);
+    border: 1px solid var(--border-ink);
     background: var(--surface-sunken);
     color: var(--text-secondary);
 }
@@ -279,7 +279,7 @@ html.dark .vp-doc th {
     margin: var(--space-6) 0;
     padding: var(--space-4) var(--space-6);
     background: var(--color-parchment);
-    border-left: 4px solid var(--color-oxblood);
+    border: 1px solid var(--color-oxblood);
     color: #4a3a2a;
     font-size: var(--text-secondary-copy);
 }

@@ -240,15 +240,14 @@ body.book {
 .book-chapter blockquote {
     margin: 5mm 0;
     padding: 3mm 4mm;
-    border-left: 3px solid var(--book-rule);
+    border: 1px solid var(--book-rule);
     background: var(--book-soft);
 }
 
 .book-panel {
     margin: 5mm 0;
     padding: 3mm 4mm;
-    border: 1px solid var(--book-rule);
-    border-left: 3px solid var(--book-accent);
+    border: 1px solid var(--book-accent);
     background: var(--book-soft);
     break-inside: avoid;
 }
@@ -273,7 +272,7 @@ body.book {
 .book-note {
     margin: 4mm 0;
     padding: 2mm 3mm;
-    border-left: 2px solid var(--book-rule);
+    border: 1px solid var(--book-rule);
     color: var(--book-muted);
     font-size: 9pt;
 }

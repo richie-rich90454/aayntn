@@ -83,6 +83,23 @@ describe("the design", () => {
         }
     });
 
+    it("never marks a callout with a left-only border", async () => {
+        const callout =
+            /aayntn-math|aayntn-note|aayntn-hint|aayntn-variant-note|aayntn-contest__notice|book-panel|book-note|blockquote/;
+        for (const file of await themeFiles()) {
+            if (!file.endsWith(".css") && !file.endsWith(".vue")) continue;
+            const source = (await readFile(file, "utf8")).replace(/\/\*[\s\S]*?\*\//g, "");
+            for (const match of source.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+                const selector = match[1]!.trim();
+                if (!callout.test(selector)) continue;
+                expect(
+                    /border-left\s*:|border-inline-start\s*:/.test(match[2]!),
+                    `${file.replace(ROOT + "\\", "")} gives ${selector} a left-only border`,
+                ).toBe(false);
+            }
+        }
+    });
+
     it("places the raw implementation directly below the description", async () => {
         for (const file of await articles()) {
             const source = await readFile(file, "utf8");

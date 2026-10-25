@@ -602,7 +602,7 @@ selectDivision("bronze");
 }
 
 .aayntn-contest__notice {
-    border-left: 4px solid var(--color-oxblood);
+    border-color: var(--color-oxblood);
 }
 
 .aayntn-contest__notice h3,

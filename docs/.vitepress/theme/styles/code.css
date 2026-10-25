@@ -171,7 +171,6 @@ html.dark .aayntn-code__line--highlight {
 .aayntn-prose div[class*="language-"] {
     margin: var(--space-6) 0;
     border: 1px solid var(--border-ink);
-    border-left: 3px solid var(--color-cobalt);
     background: var(--surface-code);
     overflow-x: auto;
 }
@@ -283,7 +282,7 @@ html.dark .aayntn-source--highlighted .shiki span {
 .aayntn-variant-note {
     margin: var(--space-4) 0;
     padding: var(--space-3) var(--space-4);
-    border-left: 3px solid var(--color-cobalt);
+    border: 1px solid var(--color-cobalt);
     background: var(--surface-sunken);
     font-size: var(--text-secondary-copy);
     line-height: 1.6;

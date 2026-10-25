@@ -508,8 +508,7 @@ html.dark .aayntn-field:not(.aayntn-field--gold):not(.aayntn-field--vermilion) .
 .aayntn-code,
 .aayntn-code__status,
 .aayntn-storyboard__frame,
-.aayntn-math--lemma,
-.aayntn-math--theorem,
+.aayntn-math,
 .vp-doc div[class*="language-"],
 .aayntn-prose :not(pre) > code {
     border-radius: var(--radius);

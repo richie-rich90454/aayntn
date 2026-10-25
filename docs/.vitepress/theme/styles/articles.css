@@ -92,7 +92,7 @@
 .aayntn-math {
     margin: var(--space-6) 0;
     padding: var(--space-4) var(--space-6);
-    border-left: 4px solid var(--color-cobalt);
+    border: 1px solid var(--color-cobalt);
     background: var(--surface-raised);
     /* A display equation is wider than a phone, and it cannot be broken
        across two lines without becoming wrong. It scrolls inside the panel
@@ -110,8 +110,7 @@
 }
 
 .aayntn-math--lemma {
-    border: 1px solid var(--border-ink);
-    border-left: 4px solid var(--color-oxblood);
+    border-color: var(--color-oxblood);
 }
 
 .aayntn-math--lemma .aayntn-math__label {
@@ -120,11 +119,10 @@
 
 .aayntn-math--theorem {
     border: 3px double var(--border-ink);
-    border-left: 6px double var(--border-ink);
 }
 
 .aayntn-math--proof {
-    border-left: 1px solid var(--border-ink);
+    border: 1px solid var(--border-subtle);
     background: var(--surface-sunken);
 }
 
@@ -153,8 +151,8 @@
 }
 
 .aayntn-math--recurrence {
-    border-left-color: var(--color-gold);
-    background: linear-gradient(90deg, rgba(232, 184, 74, 0.16), transparent 65%);
+    border-color: var(--color-gold);
+    background: rgba(232, 184, 74, 0.14);
 }
 
 .aayntn-math--recurrence .aayntn-math__label {
@@ -166,7 +164,7 @@ html.dark .aayntn-math--recurrence .aayntn-math__label {
 }
 
 .aayntn-math--counterexample {
-    border-left-color: var(--color-vermilion);
+    border-color: var(--color-vermilion);
     background: rgba(198, 61, 50, 0.07);
 }
 
@@ -369,7 +367,7 @@ html.dark .aayntn-math--recurrence .aayntn-math__label {
 .aayntn-hint__body {
     margin-top: var(--space-2);
     padding: var(--space-3) var(--space-4);
-    border-left: 3px solid var(--color-gold);
+    border: 1px solid var(--color-gold);
     background: var(--surface-sunken);
     color: var(--text-secondary);
     font-size: var(--text-secondary-copy);
