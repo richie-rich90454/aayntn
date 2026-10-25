@@ -57,7 +57,7 @@ The signal that rules the subject out is "the shortest path" on a graph that is 
 | The ancestor of a node $k$ levels above it | [Binary lifting](/algorithms/trees/binary-lifting) |
 | The sum or maximum on a path | [Heavy-light decomposition](/algorithms/trees/heavy-light-decomposition) |
 | A value on a path, and the tree is static with many queries | Heavy-light decomposition, or a Fenwick tree over an [Euler tour](/algorithms/trees/euler-tour) |
-| A value on a path, and the tree changes | A link-cut tree, which is not covered yet |
+| A value on a path, and the tree changes | [A link-cut tree](/algorithms/trees/dynamic-trees) |
 | The best value achievable in every subtree | [Tree dynamic programming](/algorithms/trees/tree-dp) |
 | The answer depends on every pair of nodes | [Rerooting](/algorithms/trees/rerooting), which is the quadratic tree program in $O(n)$ |
 | The answer for every subtree of a tree that is built one node at a time | An [Euler tour](/algorithms/trees/euler-tour) with a Fenwick tree |
@@ -66,13 +66,26 @@ The signal that rules the subject out is "the shortest path" on a graph that is 
 
 The rerooting row is worth reading twice. The naive way to answer "for every node, treat it as the root" is to run the tree dynamic program once per root, which costs $O(n^2)$. The two-pass rerooting runs it once downward and once upward, with the sibling exclusion done in constant time, and it costs $O(n)$.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **Small-to-large merging.** Merging the children of a node by always merging the smallest structure into the largest, which gives $O(n \log n)$ for problems that attach a multiset to every node.
-- **Virtual trees.** Compressing a tree down to the nodes that matter for one query, so that a query about $k$ marked nodes takes $O(k \log k)$ rather than $O(n)$.
-- **Dynamic trees.** Link-cut trees and top trees, which support structural changes to a tree while answering path queries, and which are the right answer when the tree is not static.
-- **Tree hashing.** Hashing the shape of a subtree so that two subtrees can be compared in constant time, which answers "are these two subtrees isomorphic" in near-linear time.
-- **The top-tree and rake-compress formulation.** The single data structure that subsumes link-cut trees, static top trees, and dynamic trees, and the subject's natural endpoint for anyone who wants one structure for all of it.
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Binary lifting | O(n log n) to build, O(log n) per query | O(n log n) | `graphs.bfs` | [Binary lifting](/algorithms/trees/binary-lifting) | Prose only |
+| Centroid decomposition | O(n log n) | O(n) | `graphs.dfs` | [Centroid decomposition](/algorithms/trees/centroid-decomposition) | Prose only |
+| Dynamic trees | O(log n) amortized per operation | O(n) | `trees.lca` | [Dynamic trees](/algorithms/trees/dynamic-trees) | [Source](/implementations/trees-dynamic-trees/) |
+| Euler tour for trees | O(n) to build, O(log n) per query with a Fenwick tree | O(n) | `graphs.dfs` | [Euler tour for trees](/algorithms/trees/euler-tour) | Prose only |
+| Heavy-light decomposition | O(n) to build, O(log n) per path query | O(n) | `graphs.bfs` | [Heavy-light decomposition](/algorithms/trees/heavy-light-decomposition) | [Source](/implementations/trees-heavy-light-decomposition/) |
+| Lowest common ancestor | O((n + m) log n) to build, O(log n) per query | O(n log n) | `graphs.bfs` | [Lowest common ancestor](/algorithms/trees/lca) | [Source](/implementations/trees-lca/) |
+| Rerooting | O(n) | O(n) | `graphs.dfs` | [Rerooting](/algorithms/trees/rerooting) | Prose only |
+| Small-to-large merging | O(n log n) expected | O(n) | `graphs.dfs` | [Small-to-large merging](/algorithms/trees/small-to-large-merging) | [Source](/implementations/trees-small-to-large-merging/) |
+| The top-tree and rake-compress formulation | O(log n) amortized per operation | O(n) | `trees.lca` | [The top-tree and rake-compress formulation](/algorithms/trees/top-tree) | [Source](/implementations/trees-top-tree/) |
+| Tree dynamic programming | O(n) | O(n) | `graphs.bfs` | [Tree dynamic programming](/algorithms/trees/tree-dp) | Prose only |
+| Tree hashing | O(n log n + m log m) | O(n + m) | `trees.tree-dp` | [Tree hashing](/algorithms/trees/tree-hashing) | [Source](/implementations/trees-tree-hashing/) |
+| Virtual trees | O(n log n) to preprocess, O(k log k + k log n) per query | O(n log n) for the ancestor table, O(k) for the virtual tree | `trees.lca` | [Virtual trees](/algorithms/trees/virtual-tree) | [Source](/implementations/trees-virtual-tree/) |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

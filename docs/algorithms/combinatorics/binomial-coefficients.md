@@ -490,4 +490,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The string search whose prefix function counts the occurrences of a pattern inside itself, which is the same counting idea applied to strings, is in [KMP](/algorithms/strings/kmp).
 - The number of lattice points inside a polygon is counted from its hull and from a congruence, so the geometry of the subject meets this counting in [convex hull](/algorithms/geometry/convex-hull).
 - A count that depends on a monotone condition over many candidates is often found by an offline batch of binary searches, which is in [parallel binary search](/algorithms/advanced/parallel-binary-search).
-- The subject index lists this technique, [binomial coefficients](/algorithms/combinatorics/binomial-coefficients), beside the counting arguments it does not yet cover: [the combinatorics](/algorithms/combinatorics/).
+- The subject index lists this technique, [binomial coefficients](/algorithms/combinatorics/binomial-coefficients), beside the rest of the subject: [the combinatorics](/algorithms/combinatorics/).

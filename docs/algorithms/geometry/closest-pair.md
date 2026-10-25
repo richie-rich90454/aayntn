@@ -436,4 +436,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The sweep line that answers the same problem in a different way, and the active set that it maintains, are in [sweep line](/algorithms/geometry/sweep-line).
 - The sorting that the algorithm begins with is in [sorting](/algorithms/foundations/sorting).
 - The recursion whose depth and space this algorithm's recursion is measured against is in [recursion](/algorithms/foundations/recursion).
-- The subject index lists this technique, [closest pair](/algorithms/geometry/closest-pair), beside the geometry it does not yet cover: [the computational geometry](/algorithms/geometry/).
+- The subject index lists this technique, [closest pair](/algorithms/geometry/closest-pair), beside the rest of the subject: [the computational geometry](/algorithms/geometry/).

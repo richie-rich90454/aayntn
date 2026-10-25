@@ -440,7 +440,7 @@ Answer these without looking back. If you cannot, revisit the section named in p
 
 ## Further reading
 
-- The subject index lists this technique, [convex hull](/algorithms/geometry/convex-hull), beside the geometry it does not yet cover: [the computational geometry](/algorithms/geometry/).
+- The subject index lists this technique, [convex hull](/algorithms/geometry/convex-hull), beside the rest of the subject: [the computational geometry](/algorithms/geometry/).
 - The sorting that the monotone chain begins with is described in [sorting](/algorithms/foundations/sorting).
 - A boundary is the subject of more than one field. The prefix function of [KMP](/algorithms/strings/kmp) is a table of the borders of a string, and it is the string version of the same idea that this page applies to a set of points.
 - The binary search that answers a point-in-convex-polygon query in logarithmic time is in [binary search](/algorithms/searching/binary-search).

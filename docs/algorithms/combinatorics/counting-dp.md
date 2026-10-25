@@ -435,4 +435,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The count of the ways to place identical items into distinct boxes, which is a formula rather than a table, is in [stars and bars](/algorithms/combinatorics/stars-and-bars).
 - The count of the increasing subsequences, which is a table over a different state, is in [longest increasing subsequence](/algorithms/dynamic-programming/longest-increasing-subsequence).
 - The tree version of the same idea, where the state is a subtree, is in [tree dynamic programming](/algorithms/trees/tree-dp).
-- The subject index lists this technique, [counting dynamic programming](/algorithms/combinatorics/counting-dp), beside the counting arguments it does not yet cover: [the combinatorics](/algorithms/combinatorics/).
+- The subject index lists this technique, [counting dynamic programming](/algorithms/combinatorics/counting-dp), beside the rest of the subject: [the combinatorics](/algorithms/combinatorics/).

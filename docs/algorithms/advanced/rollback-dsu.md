@@ -30,6 +30,12 @@ implementations: advanced.rollback-dsu
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="advanced.rollback-dsu" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="advanced.rollback-dsu" />
+
 ## At a glance
 
 A rollback disjoint set union is an ordinary union-find with one rule removed and one array added. The rule is path compression: it never runs. The array is a stack of merge records, and popping the stack restores the partition to the state before the corresponding merge.

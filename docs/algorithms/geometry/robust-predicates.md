@@ -28,6 +28,12 @@ implementations: geometry.robust-predicates
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="geometry.robust-predicates" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="geometry.robust-predicates" />
+
 ## At a glance
 
 The orientation predicate takes three points and answers one of three questions: does the path from the first point to the second to the third turn left, go straight, or turn right? The answer is the sign of a two by two determinant, and with integer coordinates that determinant is an integer.

@@ -31,6 +31,12 @@ implementations: number-theory.discrete-logarithm
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="number-theory.discrete-logarithm" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="number-theory.discrete-logarithm" />
+
 ## At a glance
 
 The discrete logarithm is the inverse of modular exponentiation. Given $a$, $b$ and $m$, it asks for an exponent $x$ with

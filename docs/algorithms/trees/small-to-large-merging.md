@@ -28,6 +28,12 @@ implementations: trees.small-to-large-merging
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="trees.small-to-large-merging" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="trees.small-to-large-merging" />
+
 ## At a glance
 
 | Property | Value |

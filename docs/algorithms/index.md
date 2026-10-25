@@ -15,7 +15,7 @@ reviewed: false
 
 This is the subject-based encyclopedia. It collects the techniques a competitor needs, and it arranges them by the idea that makes each one work rather than by the contest the technique first appeared in.
 
-There are fourteen subjects, more than seventy techniques, and one method for reading every article. The index below is the map. Pick the subject that matches the idea you are looking for, read the subject page, and follow the technique from there.
+There are fourteen subjects, more than a hundred and fifty techniques, and one method for reading every article. The index below is the map. Pick the subject that matches the idea you are looking for, read the subject page, and follow the technique from there.
 
 ## Why the organization is by subject
 
@@ -269,13 +269,13 @@ Read the method in that order once. After that, jump to the part you need: the r
 
 The encyclopedia is honest about what it has. Two levels of completeness appear in the frontmatter of every article.
 
-A **tested implementation** means the technique has a manifest, six-language source listings, and a fixture suite that the build runs before the site is published. Twelve techniques currently ship one: binary search, prefix sums, the Fenwick tree, the segment tree, the disjoint set union, depth-first search, breadth-first search, Dijkstra's algorithm, the lowest common ancestor, heavy-light decomposition, the 0/1 knapsack, and the convex hull trick.
+A **tested implementation** means the technique has a manifest, six-language source listings, and a fixture suite that the build runs before the site is published. Every registered algorithm currently ships one, and each subject page links the source beside the article.
 
-Every other article in the encyclopedia is **prose only**. It derives the technique, states its complexity, proves its correctness, and gives code inline, but it has no manifest and no compiled verification. The code in a prose article is written to be read, and reading it is the point; the claim that it compiles on every input is not made.
+A technique article without a manifest is **prose only**. It derives the technique, states its complexity, proves its correctness, and gives code inline, but it has no manifest and no compiled verification. The code in a prose article is written to be read, and reading it is the point; the claim that it compiles on every input is not made.
 
 A smaller flag marks **reviewed** articles, which have been checked end to end against the article contract: the section order, the mathematics, the complexity claims, and the worked problems. At the time of writing, binary search is the only article in the encyclopedia that carries the flag. Treat every other article as accurate but unfinished, and report what you find.
 
-Each subject page ends with a list of the techniques that its subject implies and that this encyclopedia does not yet cover. Those lists are the boundary of the material, and they are written so that you know when a problem needs something this site has not explained yet.
+Every subject page lists every technique in its subject, with the article and, where one exists, the reference implementation. The [coverage page](/coverage/) states the publication and implementation figures, and the [algorithm encyclopedia](/algorithms/) is the complete index.
 
 ## Where to start
 

@@ -31,6 +31,12 @@ implementations: greedy.feasibility-oracle
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="greedy.feasibility-oracle" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="greedy.feasibility-oracle" />
+
 ## At a glance
 
 A budget of $W$ units and $n$ items, each with a weight. Every item is worth the same, so the objective is a count, and the only constraint is that the chosen items have total weight at most $W$. The task is to choose as many items as possible.

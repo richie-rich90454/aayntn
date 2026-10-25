@@ -29,6 +29,12 @@ implementations: geometry.smallest-enclosing-circle
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="geometry.smallest-enclosing-circle" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="geometry.smallest-enclosing-circle" />
+
 ## At a glance
 
 The **smallest enclosing circle** of a finite set of points $S$ is the circle of least radius whose closed disk contains every point of $S$. It is unique, and it is fixed by at most three points of $S$ on its boundary: either two points at opposite ends of a diameter, or three points that form an acute triangle.

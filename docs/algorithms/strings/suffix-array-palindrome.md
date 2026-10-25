@@ -31,6 +31,12 @@ implementations: strings.suffix-array-palindrome
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="strings.suffix-array-palindrome" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="strings.suffix-array-palindrome" />
+
 ## At a glance
 
 A palindrome reads the same forwards and backwards. That symmetry is a statement about two halves of one interval: the right half, read forwards, equals the left half, read backwards. If $R$ is the reverse of $S$, the left half read backwards is a forward substring of $R$. The longest palindrome at a center is therefore the longest common prefix of two suffixes, one starting in $S$ and one starting in $R$.

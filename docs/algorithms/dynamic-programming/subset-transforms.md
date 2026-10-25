@@ -36,6 +36,12 @@ implementations: dynamic-programming.subset-transforms
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="dynamic-programming.subset-transforms" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="dynamic-programming.subset-transforms" />
+
 ## At a glance
 
 A subset transform takes an array indexed by masks and produces another array indexed by masks, in which each entry aggregates a whole family of subsets. The **subset zeta transform** is

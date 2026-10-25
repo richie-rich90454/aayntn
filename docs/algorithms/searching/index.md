@@ -62,12 +62,23 @@ The signal that rules the subject out is a query that depends on the whole colle
 
 The binary search on the answer row is the one worth memorizing, and it is the subject's most useful trick. When a statement asks "what is the smallest $k$ such that something holds", and the condition only becomes easier as $k$ grows, you can binary search over $k$ and evaluate the condition with any linear-time method you like. The condition must be monotone in $k$, and that is the part that has to be argued rather than assumed. The cost is $O(c \log R)$, where $c$ is the cost of one check and $R$ is the width of the answer range, so the check is what has to be made cheap.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **The individual two-pointer patterns.** Partitioning an array around a pivot, the three-sum problem, the container with most water, and the palindrome check by two pointers. The [two pointers article](/algorithms/searching/two-pointers) derives the general technique; each of these patterns is a worked example there rather than a separate lesson.
-- **The sliding window variants with a state machine.** Windows over a string with a variable number of distinct characters, the longest substring with $k$ distinct characters, and the minimum window that covers a set of characters. The general technique is in the [sliding window article](/algorithms/searching/sliding-window).
-- **Search over a sorted range of indices.** Binary searching a sub-range of an array, and binary searching a vector of intervals to find the one that contains a point. This is an interval tree query, and it is a common contest shape that no article currently collects.
-- **The parametric search generalization.** Searching for the point at which a predicate changes, when the predicate is monotone but the data cannot be sorted or scanned cheaply. The [binary search on the answer article](/algorithms/searching/binary-search-on-answer) is a special case of it.
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Binary search | O(log n) | O(1) | `foundations.complexity` | [Binary search](/algorithms/searching/binary-search) | [Source](/implementations/searching-binary-search/) |
+| Binary search on the answer | O(c log R) | O(1) beyond the check's own working space | `searching.binary-search` | [Binary search on the answer](/algorithms/searching/binary-search-on-answer) | Prose only |
+| Parametric search | O(n log U) | O(1) | `searching.binary-search` | [Parametric search](/algorithms/searching/parametric-search) | [Source](/implementations/searching-parametric-search/) |
+| Search over a sorted range of indices | O(log n) | O(1) | `searching.binary-search` | [Search over a sorted range of indices](/algorithms/searching/sorted-range-search) | [Source](/implementations/searching-sorted-range-search/) |
+| Sliding window | O(n) | O(1) for a running sum, O(sigma) for a frequency map | `searching.two-pointers` | [Sliding window](/algorithms/searching/sliding-window) | Prose only |
+| Ternary search | O(log_{3/2}(L / varepsilon)) iterations, each costing two evaluations | O(1) | `foundations.complexity` | [Ternary search](/algorithms/searching/ternary-search) | Prose only |
+| The individual two-pointer patterns | O(n) | O(1) | `foundations.complexity` | [The individual two-pointer patterns](/algorithms/searching/two-pointer-patterns) | [Source](/implementations/searching-two-pointer-patterns/) |
+| The sliding window variants with a state machine | O(n) | O(1) for a fixed byte alphabet, O(sigma) for a hash map | `searching.sliding-window` | [The sliding window variants with a state machine](/algorithms/searching/sliding-window-variants) | [Source](/implementations/searching-sliding-window-variants/) |
+| Two pointers | O(n) | O(1) | `foundations.complexity` | [Two pointers](/algorithms/searching/two-pointers) | Prose only |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

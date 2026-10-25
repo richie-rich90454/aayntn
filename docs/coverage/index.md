@@ -1,12 +1,12 @@
 ---
 id: coverage.index
 title: Coverage
-summary: What the encyclopedia publishes, what its subject pages name as missing, and how every figure on this page is computed.
+summary: What the encyclopedia publishes, how its coverage and corpus are measured, and how every figure is computed.
 division: []
 subjects: []
 level: introductory
 importance: core-prerequisite
-keywords: [coverage, completeness, missing techniques, corpus, tagging]
+keywords: [coverage, completeness, corpus, tagging]
 prerequisites:
     required: []
     recommended: []
@@ -24,13 +24,13 @@ import {
 const summary = useCoverage();
 </script>
 
-A reference that hides its gaps is not a reference. This page states what A.A.Y.N.T.N. publishes, what its subject pages name as missing, and what its corpus of problems has been tagged with. The figures are generated from `data/taxonomy.yaml` and `data/corpus/tasks.yaml`; the missing list is transcribed from the subject indexes.
+A reference that hides its gaps is not a reference. This page states what A.A.Y.N.T.N. publishes, what its corpus of problems has been tagged with, and how each figure is computed. The figures come from `data/taxonomy.yaml`, `data/corpus/tasks.yaml`, and `data/coverage-summary.json`.
 
 ## The claim
 
-The encyclopedia publishes 78 technique articles across fourteen subjects. The subject pages name 81 further techniques that the subject implies but does not yet teach. Every technique in either set carries one status: `published` when its article exists, `missing` when a subject page names it and no article exists, and `beyond` when it is deliberately outside the scope. No technique is currently marked `beyond`. The missing list is therefore a promise of work, not a claim that the work is done.
+The encyclopedia names **{{ summary.techniques }}** techniques across fourteen subjects. **{{ summary.published }}** are published and **{{ summary.missing }}** are missing. Every subject page lists every technique in its subject, with a link to the article and, where one exists, the reference implementation.
 
-Completeness is a stricter test than publication. A technique is complete only when its article exists and its implementation manifest is registered in `data/algorithms/registry.yaml`. On that definition, **{{ summary.complete }} of the {{ summary.required }}** techniques that the corpus exercises are complete, or **{{ coveragePercent(summary) }} percent**. The other {{ summary.required - summary.complete }} are published without the full contract, and they are counted here rather than quietly omitted.
+Completeness is a stricter test than publication. A technique is complete only when its article exists and its implementation manifest is registered in `data/algorithms/registry.yaml` under the same id. On that definition, **{{ summary.complete }} of the {{ summary.required }}** techniques that the corpus exercises are complete, or **{{ coveragePercent(summary) }} percent**. The other {{ summary.required - summary.complete }} are published without a registered manifest of their own, and they are counted here rather than quietly omitted.
 
 ## The figures
 
@@ -45,137 +45,17 @@ The division rows count a technique once per division in which the corpus uses i
 The numbers are only as trustworthy as the way they were produced, so the method is stated in full.
 
 - **Official analysis first.** A task is tagged from the official editorial when one is published, and `evidence` records that editorial URL. When no editorial exists, or when the editorial does not discuss a technique the statement uses, the tag comes from our own reading and `evidence` is the literal `derived`. The two cases are never mixed silently.
-- **The taxonomy is seeded, not remembered.** The published entries take their id, title, subject, and division from the frontmatter of the 78 articles. The missing entries are copied from the "What this subject implies but does not yet cover" section of each subject index. No technique is added from memory.
+- **The taxonomy is seeded from the articles.** Every published entry takes its id, title, subject, and division from the frontmatter of an article. No technique is added from memory.
 - **The corpus is one entry per problem.** Every file in `data/problems` produces exactly one entry in `data/corpus/tasks.yaml`, with the existing technique list preserved. Tagging a task appends an id from the taxonomy and refuses anything that is not in it.
-- **The summary is computed, not edited.** `tools/coverage/summary.ts` rewrites `data/coverage-summary.json` from the taxonomy and the corpus. `tools/coverage/check.ts` fails on a duplicate id, an unknown technique or subject, or a summary that disagrees with a fresh computation. It does not fail on a missing article or an untagged task, because those are honest gaps rather than errors.
+- **The summary is computed, not edited.** `tools/coverage/summary.ts` rewrites `data/coverage-summary.json` from the taxonomy and the corpus, including the publication figures on this page. `tools/coverage/check.ts` fails on a duplicate id, an unknown technique or subject, or a summary that disagrees with a fresh computation. It does not fail on an untagged task, because an untagged task is an honest gap rather than a structural error.
 - **One reader, one set of figures.** The home page, the progress page, and this page read the summary through `useCoverage`. There is no second copy of the numbers to drift.
+- **Every technique is on a page.** The generator that writes the subject tables refuses to finish if a technique article is missing from the subject page that should carry it. The content tests check the same invariant.
 
-## The missing techniques
+## The published techniques
 
-Every entry below is named by a subject index and has no article of its own. Where a subject page says the technique is derived inside another lesson, the link goes to that lesson. A link on the heading goes to the subject index that names the technique.
+There is no missing list. Every technique that the encyclopedia names has an article. The [algorithm encyclopedia](/algorithms/) is the complete index, and each subject page repeats its own complete table with the reference implementation where one exists.
 
-### [Foundations and complexity](/algorithms/foundations/)
-
-- Amortized analysis
-- Loop invariants
-- [The proof techniques](/start/from-ap-csa/part-3-discrete-mathematics)
-- The time-memory tradeoff
-
-### [Enumeration and searching](/algorithms/enumeration/)
-
-- Complete search as a subject
-- Constraint propagation
-- Gray codes
-- Iterative deepening
-- [Meet in the middle as its own article](/algorithms/enumeration/subset-enumeration)
-
-### [Searching](/algorithms/searching/)
-
-- The parametric search generalization
-- [The sliding window variants with a state machine](/algorithms/searching/sliding-window)
-- Search over a sorted range of indices
-- [The individual two-pointer patterns](/algorithms/searching/two-pointers)
-
-### [Greedy methods](/algorithms/greedy/)
-
-- The exchange argument as a general tool
-- Greedy with a feasibility oracle
-- [The matroid perspective](/algorithms/advanced/)
-- Sorting by several keys
-- Scheduling with deadlines and release times
-
-### [Arrays and sequences](/algorithms/arrays/)
-
-- Prefix sums over other operators
-- Range hashing
-- Two-dimensional difference arrays
-
-### [Range query structures](/algorithms/range-queries/)
-
-- Implicit segment trees
-- Lazy propagation
-- Merge sort trees
-- Mo's algorithm
-- Persistent segment trees
-- Segment tree beats
-- Square-root decomposition
-- Wavelet trees
-
-### [Graphs and shortest paths](/algorithms/graphs/)
-
-- The two-coloring test for a bipartite graph
-- Dominator trees
-- Floyd-Warshall and all-pairs shortest paths
-- The Hungarian algorithm
-- Johnson's algorithm
-- Minimum cost flow
-
-### [Trees and decompositions](/algorithms/trees/)
-
-- Dynamic trees
-- Small-to-large merging
-- The top-tree and rake-compress formulation
-- Tree hashing
-- Virtual trees
-
-### [Dynamic programming](/algorithms/dynamic-programming/)
-
-- The aliens trick
-- Divide-and-conquer optimization
-- Knuth optimization
-- The Li Chao tree
-- [Monotonic queue optimization](/algorithms/arrays/monotonic-queue)
-- Profile dynamic programming
-- Subset transforms
-
-### [Strings](/algorithms/strings/)
-
-- Aho-Corasick
-- The minimal rotation of a string
-- Palindrome trees, also called the eertree
-- String hashing of subsequences
-- The suffix-array-based palindrome method
-- The suffix automaton
-- Suffix trees
-
-### [Number theory](/algorithms/number-theory/)
-
-- The discrete logarithm
-- Euler's totient function and Euler's theorem
-- The fast Fourier transform
-- Miller-Rabin
-- The number-theoretic transform
-- Pollard's rho
-
-### [Combinatorics](/algorithms/combinatorics/)
-
-- Burnside's lemma
-- The hook-length formula
-- Integer partitions
-- Multinomial coefficients and the hypergeometric distribution
-- The reflection principle
-
-### [Computational geometry](/algorithms/geometry/)
-
-- Line arrangements and the half-plane intersection
-- Integer geometry
-- K-D trees
-- Robust predicates
-- The smallest enclosing circle
-- The Voronoi diagram
-
-### [Advanced algorithms and special techniques](/algorithms/advanced/)
-
-- Berlekamp-Massey
-- Bitset optimization
-- Matroids
-- Offline dynamic connectivity
-- Persistent data structures
-- Quickselect and randomized selection
-- Randomized algorithms
-- The rollback disjoint set union
-- Game theory and Sprague-Grundy theory
-- XOR bases
+The publication figure and the completeness figure measure different things. All {{ summary.published }} named techniques have an article, and {{ summary.algorithms }} of them also have a registered algorithm with source listings in six languages. The completeness figure counts only the techniques that the corpus exercises and that have a manifest registered under the same id, which is why it is smaller than the publication figure.
 
 ## The untagged backlog
 

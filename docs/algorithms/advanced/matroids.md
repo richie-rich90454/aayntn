@@ -29,6 +29,12 @@ implementations: advanced.matroids
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="advanced.matroids" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="advanced.matroids" />
+
 ## At a glance
 
 A matroid is an abstraction of independence. It consists of a finite ground set $E$ and a family $\mathcal{I}$ of subsets of $E$ that contains the empty set, is closed under taking subsets, and satisfies the exchange property: if $A$ and $B$ are independent and $|A| < |B|$, then some element of $B \setminus A$ can be added to $A$ and keep it independent.

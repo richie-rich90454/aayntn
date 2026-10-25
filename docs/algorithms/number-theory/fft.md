@@ -31,6 +31,12 @@ implementations: number-theory.fft
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="number-theory.fft" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="number-theory.fft" />
+
 ## At a glance
 
 The fast Fourier transform multiplies two polynomials in $O(n \log n)$ instead of $O(n^2)$. It changes the representation: a polynomial is written by its values at $n$ chosen points, multiplication becomes pointwise, and an inverse transform returns the coefficients.

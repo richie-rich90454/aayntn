@@ -29,6 +29,12 @@ implementations: number-theory.miller-rabin
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="number-theory.miller-rabin" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="number-theory.miller-rabin" />
+
 ## At a glance
 
 The Miller-Rabin test decides whether an integer is prime. It is Fermat's little theorem with one extra observation, and the extra observation is what turns a test that Carmichael numbers defeat into one that is exact on the whole 64-bit range when the bases are chosen in advance.

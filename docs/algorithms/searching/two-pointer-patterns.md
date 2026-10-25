@@ -29,6 +29,12 @@ implementations: searching.two-pointer-patterns
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="searching.two-pointer-patterns" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="searching.two-pointer-patterns" />
+
 ## At a glance
 
 | Property | Value |

@@ -434,4 +434,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The multiset count that some of these series reduce to, when the weights are all equal, is in [stars and bars](/algorithms/combinatorics/stars-and-bars).
 - The convolution that the product of two series computes is the same arithmetic as the prefix sum, applied to a table rather than to a sequence. (Algorithm selection)
 - The discrete mathematics of formal series, roots and the algebra behind the identities is in [discrete mathematics](/start/from-ap-csa/part-3-discrete-mathematics).
-- The subject index lists this technique, [generating functions](/algorithms/combinatorics/generating-functions), beside the counting arguments it does not yet cover: [the combinatorics](/algorithms/combinatorics/).
+- The subject index lists this technique, [generating functions](/algorithms/combinatorics/generating-functions), beside the rest of the subject: [the combinatorics](/algorithms/combinatorics/).

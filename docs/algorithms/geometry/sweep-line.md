@@ -441,4 +441,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The Fenwick tree, which is the status structure for the one-dimensional version of the sweep, is in [Fenwick tree](/algorithms/range-queries/fenwick-tree).
 - The union find, which answers the connectivity questions that a sweep over intervals often raises, is in [disjoint set union](/algorithms/graphs/dsu).
 - The sorting that builds the event list is in [sorting](/algorithms/foundations/sorting).
-- The subject index lists this technique, [sweep line](/algorithms/geometry/sweep-line), beside the geometry it does not yet cover: [the computational geometry](/algorithms/geometry/).
+- The subject index lists this technique, [sweep line](/algorithms/geometry/sweep-line), beside the rest of the subject: [the computational geometry](/algorithms/geometry/).

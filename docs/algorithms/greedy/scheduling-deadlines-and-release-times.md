@@ -30,6 +30,12 @@ implementations: greedy.scheduling-deadlines-and-release-times
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="greedy.scheduling-deadlines-and-release-times" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="greedy.scheduling-deadlines-and-release-times" />
+
 ## At a glance
 
 A single machine processes unit-time jobs. Job $j$ has a deadline $d_j$ and a profit $p_j$, and the profit is earned only if the job occupies one of the slots $1, 2, \ldots, d_j$. The question is which jobs to run.

@@ -65,14 +65,26 @@ The signal that rules the subject out is a question whose answer is a configurat
 
 The last row is the one people get wrong most often. A problem that does not say "modulo" usually wants the exact answer, and returning a reduced value is wrong. If the exact answer does not fit, the problem will say so.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **The fast Fourier transform.** Converting a polynomial product into a convolution in $O(n \log n)$, which is the standard way to count the number of ways to write a number as a sum.
-- **The number-theoretic transform.** The same idea over a finite field, which is what makes it usable when the answer must be taken modulo a prime. It is the engine of most competitive programming convolution problems.
-- **Miller-Rabin.** The primality test built on Fermat's little theorem with a random base. The [modular arithmetic article](/algorithms/number-theory/modular-arithmetic) names it in its variants section, but the test itself has no article.
-- **Pollard's rho.** The randomized factorization algorithm that finds a prime factor of a large composite in roughly the fourth root of the number, which is the standard tool once trial division and sieving stop being fast enough.
-- **Euler's totient function and Euler's theorem.** The count of the residues coprime to a modulus and the periodicity theorem that follows from it, which is the standard route to a modular inverse for a composite modulus.
-- **The discrete logarithm.** Solving for the exponent in a multiplicative group, which is the reason the number-theoretic transform and the discrete logarithm are the reason the RSA assumptions are believed hard.
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Chinese remainder theorem | O(k log M) | O(1) | `number-theory.modular-arithmetic` | [Chinese remainder theorem](/algorithms/number-theory/chinese-remainder) | Prose only |
+| Euler's totient function and Euler's theorem | O(sqrt n) for one totient, O(log m) for one power | O(1) | `foundations.complexity` | [Euler's totient function and Euler's theorem](/algorithms/number-theory/euler-totient) | [Source](/implementations/number-theory-euler-totient/) |
+| Matrix exponentiation | O(n^3 log k) | O(n^2) | `number-theory.modular-arithmetic` | [Matrix exponentiation](/algorithms/number-theory/matrix-exponentiation) | Prose only |
+| Miller-Rabin primality test | O(k log n) modular multiplications with k = 12 | O(1) | `number-theory.modular-arithmetic` | [Miller-Rabin primality test](/algorithms/number-theory/miller-rabin) | [Source](/implementations/number-theory-miller-rabin/) |
+| Modular arithmetic | O(log m) per operation | O(1) | `foundations.complexity` | [Modular arithmetic](/algorithms/number-theory/modular-arithmetic) | Prose only |
+| Pollard's rho | expected O(n^{1/4}) iterations for a semiprime, each O(log n) | O(log n) for the stack of pending cofactors | `number-theory.modular-arithmetic` | [Pollard's rho](/algorithms/number-theory/pollard-rho) | [Source](/implementations/number-theory-pollard-rho/) |
+| Prime factorization | O(sqrt{n}) | O(1) | `foundations.complexity` | [Prime factorization](/algorithms/number-theory/prime-factorization) | Prose only |
+| Sieve of Eratosthenes | O(n log log n) | O(n) | `foundations.complexity` | [Sieve of Eratosthenes](/algorithms/number-theory/sieve) | Prose only |
+| The discrete logarithm | O(sqrt m) modular multiplications per query | O(sqrt m) | `number-theory.modular-arithmetic` | [The discrete logarithm](/algorithms/number-theory/discrete-logarithm) | [Source](/implementations/number-theory-discrete-logarithm/) |
+| The extended Euclidean algorithm | O(log min(a, b)) | O(1) | `foundations.complexity` | [The extended Euclidean algorithm](/algorithms/number-theory/extended-euclidean) | Prose only |
+| The fast Fourier transform | O(n log n) | O(n) | `foundations.complexity` | [The fast Fourier transform](/algorithms/number-theory/fft) | [Source](/implementations/number-theory-fft/) |
+| The number-theoretic transform | O(n log n) | O(n) | `number-theory.modular-arithmetic` | [The number-theoretic transform](/algorithms/number-theory/ntt) | [Source](/implementations/number-theory-ntt/) |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

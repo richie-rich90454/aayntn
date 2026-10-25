@@ -365,7 +365,7 @@ The lesson generalizes: **a copy is only valid over the range the source guarant
 
 - **The pattern search.** Concatenate the pattern, a separator, and the text, and read off the positions where the Z value reaches the length of the pattern. This is the standard alternative to [KMP](/algorithms/strings/kmp).
 - **The extended Z algorithm.** The variant that computes, for two strings $A$ and $B$, the length of the longest common prefix of $B$ with each suffix of $A$, in $O(|A| + |B|)$ time. It is the same algorithm with two boxes, one for each string.
-- **The suffix automaton.** A different linear-time structure that answers the substring questions directly, and the natural next step after the Z array. It is not covered here.
+- **The suffix automaton.** A different linear-time structure that answers the substring questions directly, and the natural next step after the Z array. It is in [the suffix automaton](/algorithms/strings/suffix-automaton).
 - **The Z array of a reversed string.** The Z array of the reversed string, combined with the Z array of the original, gives the longest palindromic substring in linear time, and it is the basis of a simpler version of the [Manacher algorithm](/algorithms/strings/manacher).
 - **The Z array as a histogram.** The number of positions with a match of length at least $k$ is the number of entries of the Z array that are at least $k$, and the number with a match of exactly $k$ is a difference of two such counts.
 - **The minimum period.** The smallest period of a string is the smallest $k$ such that $z[k]$ is at least $n - k$, and it is found in linear time from the Z array.
@@ -464,6 +464,6 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The faster but less certain tool for substring equality is in [the rolling hash](/algorithms/strings/rolling-hash).
 - The structure that answers the longest common substring question is in [the suffix array](/algorithms/strings/suffix-array).
 - The linear-time palindrome algorithm, which shares the amortization argument, is in [the Manacher algorithm](/algorithms/strings/manacher).
-- The subject overview, which lists the string techniques that are not yet covered, is at [the strings](/algorithms/strings/).
+- The subject overview is at [the strings](/algorithms/strings/).
 - The two-pointer technique that solves a family of similar questions in linear time is in [two pointers](/algorithms/searching/two-pointers).
 - The search that a single character comparison replaces, when the search is a single value rather than a string, is in [binary search](/algorithms/searching/binary-search).

@@ -522,7 +522,7 @@ Answer these without looking back. If you cannot, revisit the section named in p
 ## Further reading
 
 - The subject index lists this technique, [the sieve of Eratosthenes](/algorithms/number-theory/sieve), beside the other number theory articles.
-- The subject overview, which lists the number theory techniques that are not yet covered, is at [the number theory](/algorithms/number-theory/).
+- The subject overview is at [the number theory](/algorithms/number-theory/).
 - The arithmetic that reduces a large count modulo a prime is in [modular arithmetic](/algorithms/number-theory/modular-arithmetic).
 - The inverse that the factorization of a number modulo a prime needs is in [the extended Euclidean algorithm](/algorithms/number-theory/extended-euclidean).
 - The prime list that the trial division baseline needs is what the sieve produces, and the range queries over it are in [a Fenwick tree](/algorithms/range-queries/fenwick-tree).

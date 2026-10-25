@@ -22,6 +22,12 @@ implementations: enumeration.iterative-deepening
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="enumeration.iterative-deepening" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="enumeration.iterative-deepening" />
+
 ## At a glance
 
 Iterative deepening runs a depth-first search with a hard depth limit, starting at $0$ and increasing the limit by one after every failure. The first limit at which the search reaches the target is the length of a shortest path, because every smaller limit has already been refuted.

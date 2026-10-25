@@ -31,6 +31,12 @@ implementations: number-theory.ntt
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="number-theory.ntt" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="number-theory.ntt" />
+
 ## At a glance
 
 The number-theoretic transform is the fast Fourier transform carried out in the integers modulo a prime. It turns a polynomial into its values at the powers of a primitive root of unity, multiplies two such value tables pointwise, and turns the result back into coefficients. A convolution that costs $O(nm)$ directly costs $O(n \log n)$ this way.

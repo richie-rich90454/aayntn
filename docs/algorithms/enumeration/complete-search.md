@@ -31,6 +31,12 @@ implementations: enumeration.complete-search
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="enumeration.complete-search" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="enumeration.complete-search" />
+
 ## At a glance
 
 Complete search is the technique of enumerating every candidate in a finite space, testing each one against the statement, and counting or recording the successes. It assumes nothing about the problem beyond the shape of the candidate space. Correctness is by exhaustion, and cost is the size of that space.

@@ -23,7 +23,7 @@ The difficulty of greedy is never the implementation. A greedy algorithm is usua
 | --- | --- | --- | --- | --- |
 | Interval scheduling | $O(n \log n)$ | $O(n)$ | `foundations.sorting` | [Interval scheduling](/algorithms/greedy/interval-scheduling) |
 
-The interval scheduling article is the worked example of the subject. It shows the full shape of a greedy argument: sort by the end time, take the first interval, discard everything that overlaps it, and prove by exchange that each choice is safe. It is also the subject's one article, which is worth saying plainly. Greedy is not a small technique with many variants; it is one proof pattern that has to be re-derived for each problem.
+The interval scheduling article is the worked example of the subject. It shows the full shape of a greedy argument: sort by the end time, take the first interval, discard everything that overlaps it, and prove by exchange that each choice is safe. The other five articles apply the same pattern to a feasibility oracle, several sort keys, deadlines and release times, the matroid perspective, and the exchange argument in general. Greedy is not a small technique with many variants; it is one proof pattern that has to be re-derived for each problem.
 
 The $O(n \log n)$ is the sort by finish time, and the scan itself is $O(n)$. When the intervals arrive already in that order, the whole thing is $O(n)$.
 
@@ -54,13 +54,20 @@ The signal that rules greedy out is a statement whose goal is a _combination_ wh
 
 The proof is the deliverable, and there is a shape for it that works almost everywhere: take an optimal solution, find the place where it disagrees with the greedy choice, swap the two, and show the result is still feasible and no worse. The [interval scheduling article](/algorithms/greedy/interval-scheduling) writes that argument out in full, and it is the argument to imitate in every other greedy solution.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **The exchange argument as a general tool.** The proof that the greedy article develops for one specific problem: take an optimal solution, find the place where it disagrees with the greedy choice, swap the two, and show the result is still feasible and no worse. Written up once, it applies to most greedy problems. This is the single most valuable missing lesson in the encyclopedia.
-- **Sorting by several keys**, and the rule that a greedy algorithm over intervals needs a total order, not a partial one. Two intervals with the same end time need a tie-breaker, and the tie-breaker is sometimes the whole problem.
-- **Greedy with a feasibility oracle.** Choosing the largest item that still leaves a feasible completion, which is a different argument from choosing the largest item outright.
-- **Scheduling with deadlines and release times**, which is a matching problem in disguise and belongs to the boundary between greedy and [graphs](/algorithms/graphs/).
-- **The matroid perspective.** The reason some greedy algorithms are provably correct and others are not: the feasible sets form a matroid, and a matroid has the exchange property that makes greedy work. It is named in the [advanced algorithms page](/algorithms/advanced/) as a technique not yet covered.
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Greedy with a feasibility oracle | O(n log n) | O(n) | `foundations.sorting` | [Greedy with a feasibility oracle](/algorithms/greedy/feasibility-oracle) | [Source](/implementations/greedy-feasibility-oracle/) |
+| Interval scheduling | O(n log n) | O(n) | `foundations.sorting` | [Interval scheduling](/algorithms/greedy/interval-scheduling) | Prose only |
+| Scheduling with deadlines and release times | O(n log n) | O(n) | `foundations.sorting` | [Scheduling with deadlines and release times](/algorithms/greedy/scheduling-deadlines-and-release-times) | [Source](/implementations/greedy-scheduling-deadlines-and-release-times/) |
+| Sorting by several keys | O(n log n) | O(n) | `foundations.sorting` | [Sorting by several keys](/algorithms/greedy/multi-key-sorting) | [Source](/implementations/greedy-multi-key-sorting/) |
+| The exchange argument as a general tool | O(n log n) | O(n) | `foundations.sorting` | [The exchange argument as a general tool](/algorithms/greedy/exchange-argument) | [Source](/implementations/greedy-exchange-argument/) |
+| The matroid perspective | O(n log n) | O(n) | `foundations.sorting` | [The matroid perspective](/algorithms/greedy/matroid-perspective) | [Source](/implementations/greedy-matroid-perspective/) |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

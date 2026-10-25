@@ -57,14 +57,22 @@ The word that most often signals this subject is simply "how many". A counting p
 | A count grows past $2^{63}$ | [Modular arithmetic](/algorithms/number-theory/modular-arithmetic) |
 | You must pick or leave each of $n \le 20$ items | [Subset enumeration](/algorithms/enumeration/subset-enumeration) |
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-The following belong to this subject and do not yet have an article of their own.
+<!-- aayntn:subject:start -->
 
-- **Amortized analysis.** The reason a single `push` into a growing array can be linear while the whole sequence of pushes is linear, and the reason a disjoint set union operation is "almost" constant. The amortization argument inside the [disjoint set union article](/algorithms/graphs/dsu) is the only place it is currently worked out in full.
-- **Loop invariants.** The formal statement that a loop maintains, and how to discover it. Every article in this encyclopedia states its invariant, but none of them explains how to find one.
-- **The proof techniques.** Induction, contradiction, contrapositive, the pigeonhole principle, and the difference between a proof of an algorithm's correctness and a proof of its lower bound. The [discrete mathematics part](/start/from-ap-csa/part-3-discrete-mathematics) of the academy covers the mathematics; it does not yet connect it to the algorithm articles.
-- **The time-memory tradeoff.** Why caching $O(n)$ answers to trade space for time is a decision rather than an accident, and how to decide which side to pay on when the memory limit is 256 megabytes.
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Amortized analysis | O(n) total for n pushes, O(1) amortized per push | O(n) for the array | `foundations.complexity` | [Amortized analysis](/algorithms/foundations/amortized-analysis) | [Source](/implementations/foundations-amortized-analysis/) |
+| Binary representation | O(1) per word operation | O(1) | `start.computational-foundations` | [Binary representation](/algorithms/foundations/binary-representation) | Prose only |
+| Complexity analysis | a method, not an algorithm | a method, not an algorithm | `start.computational-foundations` | [Complexity analysis](/algorithms/foundations/complexity) | Prose only |
+| Loop invariants | O(n) to read the array, then O(log n) probes | O(n) for the array, O(1) auxiliary | `foundations.complexity` | [Loop invariants](/algorithms/foundations/loop-invariants) | [Source](/implementations/foundations-loop-invariants/) |
+| Recursion | the cost of its recurrence | O(d) for the call stack | `start.computational-foundations` | [Recursion](/algorithms/foundations/recursion) | Prose only |
+| Sorting | O(n log n) | O(n) for merge sort, O(1) for heapsort | `foundations.complexity` | [Sorting](/algorithms/foundations/sorting) | Prose only |
+| The proof techniques | a method, not an algorithm | a method, not an algorithm | `foundations.loop-invariants` | [The proof techniques](/algorithms/foundations/proof-techniques) | [Source](/implementations/foundations-proof-techniques/) |
+| The time-memory tradeoff | O(n) preprocessing and O(1) per query for the full block table; O(n/B + B) per query for block totals alone | O(n + n/B) = O(n) for the full table; O(n/B) = O(sqrt n) for block totals alone | `foundations.complexity` | [The time-memory tradeoff](/algorithms/foundations/time-memory-tradeoff) | [Source](/implementations/foundations-time-memory-tradeoff/) |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

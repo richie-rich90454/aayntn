@@ -897,6 +897,61 @@ async function fillGeneratedRegions(
     );
 
     if (updated !== source) await writeFile(index, updated, "utf8");
+
+    await fillSubjectRegions(dir, lessons, algorithms);
+}
+
+/**
+ * Every subject page carries the complete list of its techniques, including
+ * the reference implementation when one exists. The list is generated from the
+ * same lessons and manifests as the rest of the site, and the build refuses to
+ * publish if a technique is missing from the page that should carry it.
+ */
+async function fillSubjectRegions(
+    dir: string,
+    lessons: LoadedLesson[],
+    algorithms: AlgorithmEntry[],
+): Promise<void> {
+    const published = lessons.filter(
+        (lesson) => lesson.href.startsWith("/algorithms/") && lesson.href.split("/").length > 3,
+    );
+    const placed = new Set<string>();
+
+    for (const subject of SUBJECTS) {
+        const file = join(dir, "algorithms", subject, "index.md");
+        if (!existsSync(file)) continue;
+
+        const rows = published
+            .filter((lesson) => lesson.href.startsWith(`/algorithms/${subject}/`))
+            .sort((a, b) => a.title.localeCompare(b.title))
+            .map((lesson) => {
+                placed.add(lesson.href);
+                const algorithm = algorithms.find((entry) => entry.id === lesson.implementations);
+                const time = lesson.complexity?.time ?? algorithm?.complexity.time ?? "varies";
+                const space = lesson.complexity?.space ?? algorithm?.complexity.space ?? "varies";
+                const requires = lesson.prerequisites.required[0] ?? "none";
+                const source = algorithm
+                    ? `[Source](/implementations/${algorithm.id.replace(/\./g, "-")}/)`
+                    : "Prose only";
+                return `| ${lesson.title.replaceAll("|", "\\|")} | ${time.replaceAll("|", "\\|")} | ${space.replaceAll("|", "\\|")} | \`${requires}\` | [${lesson.title.replaceAll("|", "\\|")}](${lesson.href}) | ${source} |`;
+            });
+
+        const source = await readFile(file, "utf8");
+        const updated = source.replace(
+            /<!-- aayntn:subject:start -->[\s\S]*?<!-- aayntn:subject:end -->/,
+            `<!-- aayntn:subject:start -->\n\n| Technique | Time | Space | Prerequisite | Article | Source |\n| --- | --- | --- | --- | --- | --- |\n${rows.join("\n")}\n\n<!-- aayntn:subject:end -->`,
+        );
+        if (updated !== source) await writeFile(file, updated, "utf8");
+    }
+
+    const missing = published.filter((lesson) => !placed.has(lesson.href));
+    if (missing.length > 0) {
+        throw new Error(
+            `subject pages do not list every technique: ${missing
+                .map((lesson) => lesson.href)
+                .join(", ")}`,
+        );
+    }
 }
 
 main().catch((error) => {

@@ -437,4 +437,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The binary search that answers a point-in-convex-polygon query in logarithmic time is in [binary search](/algorithms/searching/binary-search).
 - The offline batch of binary searches, which is the other way to answer many queries at once, is in [parallel binary search](/algorithms/advanced/parallel-binary-search).
 - The strip argument of the closest-pair algorithm, which is a parity argument about a vertical line, is in [closest pair](/algorithms/geometry/closest-pair).
-- The subject index lists this technique, [point in polygon](/algorithms/geometry/point-in-polygon), beside the geometry it does not yet cover: [the computational geometry](/algorithms/geometry/).
+- The subject index lists this technique, [point in polygon](/algorithms/geometry/point-in-polygon), beside the rest of the subject: [the computational geometry](/algorithms/geometry/).

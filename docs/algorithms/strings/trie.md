@@ -536,7 +536,7 @@ Answer these without looking back. If you cannot, revisit the section named in p
 ## Further reading
 
 - The subject index lists this technique, [the trie](/algorithms/strings/trie), beside the other string algorithms in the encyclopedia.
-- The subject overview, which lists the string techniques that are not yet covered, is at [the strings](/algorithms/strings/).
+- The subject overview is at [the strings](/algorithms/strings/).
 - The structure that answers the substring questions that a trie cannot is in [the suffix array](/algorithms/strings/suffix-array).
 - The exact linear-time pattern search, which is the alternative for the "does this pattern occur" question, is in [Knuth-Morris-Pratt](/algorithms/strings/kmp).
 - The tree representation whose node structure the trie borrows is covered in [graph representation](/algorithms/graphs/representation).

@@ -305,7 +305,7 @@ Each center of radius $k$ contributes exactly $k$ palindromes, one for each radi
 | The number of palindromes of each length | Manacher, then a histogram of the radii |
 | The longest palindromic prefix | Manacher, then a scan of the odd radii |
 | The longest palindromic subsequence | An [interval dynamic program](/algorithms/dynamic-programming/interval-dp), $O(n^2)$ |
-| The number of distinct palindromes | A palindromic tree, which is not covered here |
+| The number of distinct palindromes | [A palindromic tree](/algorithms/strings/palindrome-tree) |
 | The palindromes in a range of queries | A different technique; the radii do not answer range queries directly |
 | One palindrome check | A direct comparison, $O(n)$ |
 | The longest common substring | A [suffix array](/algorithms/strings/suffix-array) |
@@ -509,8 +509,8 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The subject index lists this technique, [the Manacher algorithm](/algorithms/strings/manacher), beside the other string algorithms in the encyclopedia.
 - The sibling algorithm, which reuses work through a prefix relation rather than a mirror relation, is in [the Z algorithm](/algorithms/strings/z-algorithm).
 - The exact linear-time pattern search is in [Knuth-Morris-Pratt](/algorithms/strings/kmp).
-- The structure that answers the questions about distinct palindromes is the palindromic tree, which is not yet covered.
+- The structure that answers the questions about distinct palindromes is [the palindromic tree](/algorithms/strings/palindrome-tree).
 - The quadratic technique that answers the palindromic **subsequence** question is in [interval dynamic programming](/algorithms/dynamic-programming/interval-dp).
 - The structure that answers the longest common substring question is in [the suffix array](/algorithms/strings/suffix-array).
-- The subject overview, which lists the string techniques that are not yet covered, is at [the strings](/algorithms/strings/).
+- The subject overview is at [the strings](/algorithms/strings/).
 - The sparse table that the range queries use is in [a sparse table](/algorithms/range-queries/sparse-table).

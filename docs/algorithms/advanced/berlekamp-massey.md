@@ -30,6 +30,12 @@ implementations: advanced.berlekamp-massey
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="advanced.berlekamp-massey" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="advanced.berlekamp-massey" />
+
 ## At a glance
 
 Berlekamp-Massey takes a finite prefix $s_0, s_1, \ldots, s_{n-1}$ of a sequence over a prime field and returns the shortest linear recurrence the prefix satisfies. The answer is an order $d$ and coefficients $c_1, \ldots, c_d$ such that

@@ -401,4 +401,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The enumeration that the count replaces, and the reference implementation that catches a wrong formula, is in [subset enumeration](/algorithms/enumeration/subset-enumeration).
 - The discrete mathematics of bijections, permutations and multisets is in [discrete mathematics](/start/from-ap-csa/part-3-discrete-mathematics).
 - The count of paths on a grid, which is a binomial coefficient by a different argument, is in [binomial coefficients](/algorithms/combinatorics/binomial-coefficients).
-- The subject index lists this technique, [stars and bars](/algorithms/combinatorics/stars-and-bars), beside the counting arguments it does not yet cover: [the combinatorics](/algorithms/combinatorics/).
+- The subject index lists this technique, [stars and bars](/algorithms/combinatorics/stars-and-bars), beside the rest of the subject: [the combinatorics](/algorithms/combinatorics/).

@@ -35,6 +35,12 @@ implementations: foundations.proof-techniques
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="foundations.proof-techniques" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="foundations.proof-techniques" />
+
 ## At a glance
 
 A **proof** is a finite argument that a statement holds for every input in a stated domain. The word that matters is _finite_. The statement may range over infinitely many values of $n$, but the argument has a fixed number of lines, and every line can be checked without running the program.

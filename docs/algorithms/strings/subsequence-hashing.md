@@ -30,6 +30,12 @@ implementations: strings.subsequence-hashing
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="strings.subsequence-hashing" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="strings.subsequence-hashing" />
+
 ## At a glance
 
 A **subsequence** of a string is what remains after some characters are deleted. The simplest subsequence deletes exactly one character. Given a string $s$ of length $n$ and an index $i$, write $D_i$ for the string obtained by deleting $s_i$:

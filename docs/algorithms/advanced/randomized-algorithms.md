@@ -33,6 +33,12 @@ implementations: advanced.randomized-algorithms
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="advanced.randomized-algorithms" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="advanced.randomized-algorithms" />
+
 ## At a glance
 
 A randomized algorithm makes random choices while it runs. The input is fixed before those choices are made, so the analysis is an average over the algorithm's own coin flips rather than an assumption that the input is random. That distinction is the whole subject: a random pivot does not make the input easier, it makes the difficulty depend on chance instead of on the order the adversary chose.

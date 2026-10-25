@@ -31,6 +31,12 @@ implementations: foundations.amortized-analysis
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="foundations.amortized-analysis" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="foundations.amortized-analysis" />
+
 ## At a glance
 
 Amortized analysis answers a question that a worst-case bound cannot answer: over a long sequence of operations, how much work does the sequence do in total? A single operation may be expensive, but if the expensive operations are rare and each one is paid for by many cheap operations, the average cost over the sequence can be small even though no individual operation is cheap.

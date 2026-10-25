@@ -36,6 +36,12 @@ implementations: geometry.voronoi-diagram
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="geometry.voronoi-diagram" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="geometry.voronoi-diagram" />
+
 ## At a glance
 
 A **Voronoi diagram** of a set of sites is the partition of the plane into one region per site, where the region of a site contains exactly the points that are at least as close to that site as to every other site. The regions are called **Voronoi cells**, and the boundaries between them are pieces of the perpendicular bisectors of pairs of sites.

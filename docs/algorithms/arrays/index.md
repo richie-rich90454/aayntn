@@ -71,11 +71,26 @@ The signal that rules the subject out is a question about a set of positions tha
 
 The last row is worth stating because the table of techniques here is tempting. If there is one range question, a prefix-sum table is $O(n)$ of work for an $O(n)$ answer, and the direct sum is better in every way. These techniques pay off when the questions are many.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **Prefix sums over other operators.** Products, minimums, and counts of a predicate under a prefix operation, none of which support the subtraction trick that makes the ordinary prefix sum work.
-- **Two-dimensional difference arrays.** Applying an update to a rectangle and reading the grid back afterward, which is the two-dimensional analog of the difference array and reduces a rectangle update to four writes.
-- **Range hashing.** A hash of every prefix of the array, so that two ranges can be compared in constant time. It is the array counterpart of the [rolling hash](/algorithms/strings/rolling-hash), and it carries the same collision risk.
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Coordinate compression | O(n log n + q log n) | O(n) | `foundations.sorting` | [Coordinate compression](/algorithms/arrays/coordinate-compression) | Prose only |
+| Difference arrays | O(n + q) | O(n) | `arrays.prefix-sums` | [Difference arrays](/algorithms/arrays/difference-arrays) | Prose only |
+| Monotonic queue | O(n) amortized | O(k) for a window of size k, O(n) without a window | `foundations.complexity` | [Monotonic queue](/algorithms/arrays/monotonic-queue) | Prose only |
+| Monotonic stack | O(n) | O(n) in the worst case | `foundations.complexity` | [Monotonic stack](/algorithms/arrays/monotonic-stack) | Prose only |
+| Prefix sums | O(n + q) | O(n) | `foundations.complexity` | [Prefix sums](/algorithms/arrays/prefix-sums) | [Source](/implementations/arrays-prefix-sums/) |
+| Prefix sums over other operators | O(n + q) | O(n) | `arrays.prefix-sums` | [Prefix sums over other operators](/algorithms/arrays/prefix-sums-over-other-operators) | [Source](/implementations/arrays-prefix-sums-over-other-operators/) |
+| Range hashing | O(n + q) | O(n) | `arrays.prefix-sums` | [Range hashing](/algorithms/arrays/range-hashing) | [Source](/implementations/arrays-range-hashing/) |
+| Sliding window maximum | O(n) | O(k) besides the output | `foundations.complexity` | [Sliding window maximum](/algorithms/arrays/window-maximum) | Prose only |
+| Subarray sums | O(n) expected with a frequency map, O(n log n) without one | O(n) | `arrays.prefix-sums` | [Subarray sums](/algorithms/arrays/subarray-sums) | Prose only |
+| Two pointers on an array | O(n) | O(1) in place, O(n) when a frequency map is needed | `foundations.complexity` | [Two pointers on an array](/algorithms/arrays/two-pointers) | Prose only |
+| Two-dimensional difference arrays | O(RC + q) | O(RC) | `arrays.difference-arrays` | [Two-dimensional difference arrays](/algorithms/arrays/two-dimensional-difference-arrays) | [Source](/implementations/arrays-two-dimensional-difference-arrays/) |
+| Two-dimensional prefix sums | O(RC + q) | O(RC) | `arrays.prefix-sums` | [Two-dimensional prefix sums](/algorithms/arrays/two-dimensional-prefix-sums) | Prose only |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

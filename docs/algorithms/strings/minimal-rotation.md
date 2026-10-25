@@ -30,6 +30,12 @@ implementations: strings.minimal-rotation
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="strings.minimal-rotation" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="strings.minimal-rotation" />
+
 ## At a glance
 
 A rotation of a string is what you get by cutting it at some position and swapping the two pieces. The string `acab` has four rotations: `acab`, `caba`, `abac` and `baca`, and the smallest of them in dictionary order is `abac`. The minimal rotation problem asks for that smallest rotation, or for the cut at which it starts.

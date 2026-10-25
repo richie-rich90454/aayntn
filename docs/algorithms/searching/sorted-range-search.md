@@ -20,6 +20,12 @@ implementations: searching.sorted-range-search
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="searching.sorted-range-search" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="searching.sorted-range-search" />
+
 ## At a glance
 
 | Property | Value |

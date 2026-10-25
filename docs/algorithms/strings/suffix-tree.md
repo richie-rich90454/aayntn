@@ -32,6 +32,12 @@ implementations: strings.suffix-tree
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="strings.suffix-tree" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="strings.suffix-tree" />
+
 ## At a glance
 
 A suffix tree of a string is the compact trie of all its suffixes. The suffixes share long prefixes, and the trie would repeat those prefixes at every depth; the suffix tree keeps only the branching points, so a string of length $n$ produces at most $2n+1$ nodes instead of $\Theta(n^2)$.

@@ -429,4 +429,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The prime factorization of the moduli, which is what tells you whether they are pairwise coprime, is in [prime factorization](/algorithms/number-theory/prime-factorization).
 - The inclusion and exclusion formula counts the solutions of a system of conditions on a universe, which is a different kind of "all the conditions at once". (Algorithm selection)
 - The discrete mathematics of congruences, the greatest common divisor and the group theory behind the theorem is in [discrete mathematics](/start/from-ap-csa/part-3-discrete-mathematics).
-- The subject index lists this technique, [Chinese remainder theorem](/algorithms/number-theory/chinese-remainder), beside the arithmetic it does not yet cover: [the number theory](/algorithms/number-theory/).
+- The subject index lists this technique, [Chinese remainder theorem](/algorithms/number-theory/chinese-remainder), beside the rest of the subject: [the number theory](/algorithms/number-theory/).

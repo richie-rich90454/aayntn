@@ -252,7 +252,7 @@ The bound is tight for a different reason than it is for a traversal. The search
 | Minimum number of edges whose removal disconnects the graph | A minimum cut, by [max-flow min-cut](/algorithms/graphs/minimum-cut) |
 | Which vertices are reachable from a source | A plain traversal |
 | Whether a directed graph has a cycle | A three-state depth-first search |
-| The same question on a directed graph | Not covered here; the answer needs dominators |
+| The same question on a directed graph | [Dominator trees](/algorithms/graphs/dominator-trees) |
 
 The distinction between articulation points and bridges is worth stating precisely, because the two are computed from the same numbers and differ in exactly one place. An articulation point is a vertex whose removal disconnects the graph; a bridge is an edge whose removal disconnects the graph. The test for a vertex uses $\ge$ and the test for an edge uses $>$, and the reason for the difference is that a subtree may reach the articulation point itself and still be cut off, whereas an edge whose child's low link equals the parent's discovery time still has a route back to the parent through a different edge.
 

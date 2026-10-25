@@ -31,6 +31,12 @@ implementations: combinatorics.multinomial-coefficients
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="combinatorics.multinomial-coefficients" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="combinatorics.multinomial-coefficients" />
+
 ## At a glance
 
 A multinomial coefficient counts the ways to split $n$ labeled positions into groups of fixed sizes. The same ratio counts the arrangements of a word whose letters repeat, the coefficient of one monomial in a multinomial expansion, and the numerator of a sample drawn without replacement.

@@ -56,7 +56,7 @@ The signal that rules the subject out is a question about a subsequence rather t
 | --- | --- |
 | One pattern, one text, find the first occurrence | [KMP](/algorithms/strings/kmp) |
 | One pattern, many texts | [KMP](/algorithms/strings/kmp), with the pattern's prefix function computed once |
-| Many patterns, one text | Aho-Corasick, which is not covered yet |
+| Many patterns, one text | [Aho-Corasick](/algorithms/strings/aho-corasick) |
 | Compare two substrings in constant time | [Rolling hash](/algorithms/strings/rolling-hash) |
 | The longest common prefix of two suffixes | [The Z function](/algorithms/strings/z-algorithm) or a [suffix array](/algorithms/strings/suffix-array) |
 | The longest common substring of two texts | [Suffix array](/algorithms/strings/suffix-array) |
@@ -70,15 +70,27 @@ The signal that rules the subject out is a question about a subsequence rather t
 
 The last row matters more than it looks. The [KMP article](/algorithms/strings/kmp) uses the naive search as the reference implementation, exactly as the [binary search article](/algorithms/searching/binary-search) uses the linear scan, because a disagreement between the two is the fastest way to find the bug.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **Aho-Corasick.** The automaton that matches many patterns at once, which is the trie with failure links and the standard answer to a multi-pattern search.
-- **Suffix trees.** The tree that compresses the suffixes of a string, which answers the longest common substring and the counting questions in linear time rather than $O(n \log n)$.
-- **The suffix automaton.** The smallest automaton that recognizes every substring of a string, which answers the substring questions in $O(n)$ without sorting anything.
-- **Palindrome trees, also called the eertree.** The structure that holds every distinct palindromic substring of a text, which answers "how many distinct palindromes" in linear time.
-- **The suffix-array-based palindrome method.** The simpler $O(n \log n)$ alternative to Manacher's algorithm, which binary searches the suffix array for the longest common prefix of the suffixes at each center.
-- **The minimal rotation of a string.** Finding the lexicographically smallest rotation of a text in linear time with Booth's algorithm, which is a string question that no array technique answers.
-- **String hashing of subsequences**, and the difference between the string problem and the array problem, since a string comparison is not a constant-time operation in most languages.
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Aho-Corasick | O(26L + n) for a lowercase alphabet | O(26L) for the transitions, where L is the total pattern length | `strings.trie` | [Aho-Corasick](/algorithms/strings/aho-corasick) | [Source](/implementations/strings-aho-corasick/) |
+| Knuth-Morris-Pratt | O(n + m) | O(m) | `foundations.complexity` | [Knuth-Morris-Pratt](/algorithms/strings/kmp) | Prose only |
+| Palindrome trees (eertree) | O(n) | O(n) | `foundations.complexity` | [Palindrome trees (eertree)](/algorithms/strings/palindrome-tree) | [Source](/implementations/strings-palindrome-tree/) |
+| Rolling hash | O(n) to build, O(1) per substring query | O(n) for the two tables | `foundations.complexity` | [Rolling hash](/algorithms/strings/rolling-hash) | Prose only |
+| String hashing of subsequences | O(n + q) for one string and q queries | O(n) for the prefix, suffix and power tables | `foundations.complexity` | [String hashing of subsequences](/algorithms/strings/subsequence-hashing) | [Source](/implementations/strings-subsequence-hashing/) |
+| Suffix array | O(n log n) | O(n) | `foundations.sorting` | [Suffix array](/algorithms/strings/suffix-array) | Prose only |
+| Suffix trees | O(n^2) for the published quadratic construction; O(n) for both answers after the build | O(n) nodes with 27 child slots each | `strings.trie` | [Suffix trees](/algorithms/strings/suffix-tree) | [Source](/implementations/strings-suffix-tree/) |
+| The Manacher algorithm | O(n) | O(n) | `foundations.complexity` | [The Manacher algorithm](/algorithms/strings/manacher) | Prose only |
+| The minimal rotation of a string | O(n) | O(1) beyond the input string | `foundations.complexity` | [The minimal rotation of a string](/algorithms/strings/minimal-rotation) | [Source](/implementations/strings-minimal-rotation/) |
+| The suffix automaton | O(26n) for a lowercase alphabet | O(26n) for the transition table | `strings.trie` | [The suffix automaton](/algorithms/strings/suffix-automaton) | [Source](/implementations/strings-suffix-automaton/) |
+| The suffix-array-based palindrome method | O(n log n) | O(n log n) | `strings.suffix-array` | [The suffix-array-based palindrome method](/algorithms/strings/suffix-array-palindrome) | [Source](/implementations/strings-suffix-array-palindrome/) |
+| The Z algorithm | O(n) to build, O(n + m) for a search | O(n) | `foundations.complexity` | [The Z algorithm](/algorithms/strings/z-algorithm) | Prose only |
+| Trie | O(L) per word | O(N) nodes, plus one pointer per alphabet symbol per node when the children are stored densely | `foundations.complexity` | [Trie](/algorithms/strings/trie) | Prose only |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

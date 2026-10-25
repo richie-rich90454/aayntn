@@ -22,6 +22,12 @@ implementations: enumeration.constraint-propagation
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="enumeration.constraint-propagation" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="enumeration.constraint-propagation" />
+
 ## At a glance
 
 Constraint propagation is the part of a search that turns a choice into knowledge. When a queen is placed, the squares it attacks are known immediately. Every later placement can consult that knowledge instead of rechecking the queen, and the cheapest way to hold it is a set of occupancy bits.

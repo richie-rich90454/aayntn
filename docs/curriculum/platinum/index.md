@@ -15,7 +15,7 @@ reviewed: false
 
 The Platinum track is about making the right solution expressible. A Platinum problem is usually not hard because the idea is obscure. It is hard because the constraint rules out the direct formulation, and the solver has to find the reformulation in which the answer becomes a state, or the structure in which the operation becomes cheap.
 
-The techniques here are the ones that change the shape of a problem rather than the speed of a loop. They are also the techniques that most often require two ideas at once, which is why the track ends with a section on the technique the encyclopedia does not yet cover.
+The techniques here are the ones that change the shape of a problem rather than the speed of a loop. They are also the techniques that most often require two ideas at once, which is why the track ends by naming the techniques at its edge, each of which has an article of its own.
 
 ## The techniques, in order
 
@@ -44,18 +44,18 @@ You should be able to take a problem whose constraint defeats the obvious soluti
 - **Explain what you left out.** A Platinum solution that meets the time limit by a small margin needs a fallback, and knowing the fallback is part of the solution.
 - **Work within the limit.** Know the practical cost of a segment tree with $10^5$ leaves, a Fenwick tree with $10^6$ updates, and a convex hull trick with $10^6$ lines, because the constant factors decide the contest.
 
-## What this track implies and the encyclopedia does not yet cover
+## Where this track leads
 
-The techniques below belong at this level and do not yet have an article of their own. Knowing they exist is part of knowing where the material ends.
+The techniques below sit at the edge of this track. Each one has an article; read it after the track.
 
-- **Offline dynamic connectivity** and the rollback disjoint set union that supports it.
-- **Persistent data structures**, and the persistent segment tree in particular.
-- **Centroid decomposition** and **small-to-large merging** for tree problems.
-- **Randomized algorithms**, and the distinction between a Monte Carlo algorithm and a Las Vegas one.
-- **XOR bases** for the maximum-XOR-subset family of problems.
-- **Bitset optimization**, which packs the inner loop of a dynamic program into machine words.
-- **The matroid perspective**, which is the theoretical reason that some greedy algorithms are provably correct.
-- **Sprague-Grundy theory**, the standard tool for impartial two-player games.
+- [Offline dynamic connectivity](/algorithms/advanced/offline-dynamic-connectivity) and [the rollback disjoint set union](/algorithms/advanced/rollback-dsu) that supports it.
+- [Persistent data structures](/algorithms/advanced/persistent-data-structures), and the persistent segment tree in particular.
+- [Centroid decomposition](/algorithms/trees/centroid-decomposition) and [small-to-large merging](/algorithms/trees/small-to-large-merging) for tree problems.
+- [Randomized algorithms](/algorithms/advanced/randomized-algorithms), and the distinction between a Monte Carlo algorithm and a Las Vegas one.
+- [XOR bases](/algorithms/advanced/xor-bases) for the maximum-XOR-subset family of problems.
+- [Bitset optimization](/algorithms/advanced/bitset-optimization), which packs the inner loop of a dynamic program into machine words.
+- [The matroid perspective](/algorithms/greedy/matroid-perspective), which is the theoretical reason that some greedy algorithms are provably correct.
+- [Sprague-Grundy theory](/algorithms/advanced/sprague-grundy), the standard tool for impartial two-player games.
 
 ## The subjects this track draws on
 
@@ -69,4 +69,4 @@ The techniques below belong at this level and do not yet have an article of thei
 
 USACO does not publish a fixed syllabus, and there is no official list of what a Platinum problem may contain. The division is defined by the difficulty of the problems, and the difficulty comes from the setter's choice of constraint. A Platinum problem is very often a Gold problem with a tighter limit.
 
-The list above is a curated route rather than an official one, and it is not a complete description of what a Platinum problem can require: several of the techniques it names have no article in this encyclopedia yet, and they are listed above so that the boundary is visible. This track is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad, and completing it does not predict a result in any contest.
+The list above is a curated route rather than an official one, and it is not a complete description of what a Platinum problem can require. The techniques it names each have an article, and the list in the previous section is where to continue. This track is not affiliated with, endorsed by, or supported by the United States of America Computing Olympiad, and completing it does not predict a result in any contest.

@@ -30,6 +30,12 @@ implementations: geometry.half-plane-intersection
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="geometry.half-plane-intersection" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="geometry.half-plane-intersection" />
+
 ## At a glance
 
 A **half-plane** is the set of points on one side of a line. With integer coefficients $a$, $b$ and $c$, the closed half-plane is

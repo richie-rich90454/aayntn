@@ -33,6 +33,12 @@ implementations: foundations.time-memory-tradeoff
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="foundations.time-memory-tradeoff" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="foundations.time-memory-tradeoff" />
+
 ## At a glance
 
 A time-memory tradeoff is a deliberate purchase: memory is spent on a table that has already computed something, so the program does not compute it again. The purchase is worth making when the table is queried more often than it is built, and it is worth refusing when the memory limit leaves no room for it or when the queries are too few to repay the build.

@@ -35,6 +35,12 @@ implementations: combinatorics.hook-length-formula
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="combinatorics.hook-length-formula" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="combinatorics.hook-length-formula" />
+
 ## At a glance
 
 A **Young diagram** is a left-aligned arrangement of cells whose row lengths never increase. If the row lengths are $\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_k \ge 1$, the shape is written $\lambda = (\lambda_1, \ldots, \lambda_k)$, and the number of cells is $n = \lambda_1 + \cdots + \lambda_k$.

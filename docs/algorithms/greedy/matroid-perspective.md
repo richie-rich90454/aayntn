@@ -39,6 +39,12 @@ implementations: greedy.matroid-perspective
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="greedy.matroid-perspective" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="greedy.matroid-perspective" />
+
 ## At a glance
 
 A matroid is the structure that makes a greedy algorithm provably correct. It is an independence system with one extra axiom, the **exchange property**, and that axiom is exactly what an exchange argument needs. When the feasible sets of a problem form a matroid, sorting the items by weight and taking every item that keeps the set feasible returns a maximum-weight feasible set. No problem-specific search, no dynamic program, and no case analysis is required.

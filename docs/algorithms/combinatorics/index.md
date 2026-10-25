@@ -62,13 +62,24 @@ The signal that rules the subject out is a question whose answer is a configurat
 
 The bottom row is the standard way a combinatorial problem becomes a number-theoretic one. Whenever a count is enormous, the statement almost always supplies a modulus, and the count is then computed with the same formula under a different set of rules.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **Burnside's lemma**, for counting configurations up to rotation and reflection, and the Polya enumeration that generalizes it.
-- **Multinomial coefficients and the hypergeometric distribution**, for the counting problems that involve drawing without replacement.
-- **The reflection principle.** The argument that turns a ballot problem into a difference of two binomial coefficients, and the standard route to the Catalan numbers.
-- **The hook-length formula.** The product that counts the standard Young tableaux of a shape, and the reason a board game that reduces to a tableau has a closed form.
-- **Integer partitions.** Counting the ways to write a number as a sum, which is the canonical application of a generating function and has a partition-number formula of its own.
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Binomial coefficients | O(min(k, n-k)) per value | O(1) per value, O(k) for a Pascal table | `foundations.complexity` | [Binomial coefficients](/algorithms/combinatorics/binomial-coefficients) | Prose only |
+| Burnside's lemma | O(sqrt(n) * (sqrt(n) + log n)) | O(1) | `number-theory.modular-arithmetic` | [Burnside's lemma](/algorithms/combinatorics/burnside-lemma) | [Source](/implementations/combinatorics-burnside-lemma/) |
+| Counting dynamic programming | O(S * T) | O(S) | `dynamic-programming.0-1-knapsack` | [Counting dynamic programming](/algorithms/combinatorics/counting-dp) | Prose only |
+| Generating functions | O(nk) for the dynamic program | O(n) | `combinatorics.binomial-coefficients` | [Generating functions](/algorithms/combinatorics/generating-functions) | Prose only |
+| Inclusion and exclusion | O(2^m) | O(1) to O(m) | `combinatorics.binomial-coefficients` | [Inclusion and exclusion](/algorithms/combinatorics/inclusion-exclusion) | Prose only |
+| Integer partitions | O(n sqrt n) | O(n) | `foundations.complexity` | [Integer partitions](/algorithms/combinatorics/integer-partitions) | [Source](/implementations/combinatorics-integer-partitions/) |
+| Multinomial coefficients and the hypergeometric distribution | O(n + log p) per word | O(n) | `combinatorics.binomial-coefficients` | [Multinomial coefficients and the hypergeometric distribution](/algorithms/combinatorics/multinomial-coefficients) | [Source](/implementations/combinatorics-multinomial-coefficients/) |
+| Stars and bars | O(min(k-1, n)) | O(1) | `combinatorics.binomial-coefficients` | [Stars and bars](/algorithms/combinatorics/stars-and-bars) | Prose only |
+| The hook-length formula | O(n + w) for a diagram of n cells and width w, plus O(log M) for the inverse | O(k + w) for k row lengths and w column heights | `foundations.complexity` | [The hook-length formula](/algorithms/combinatorics/hook-length-formula) | [Source](/implementations/combinatorics-hook-length-formula/) |
+| The reflection principle | O(n + log p) | O(1) | `combinatorics.binomial-coefficients` | [The reflection principle](/algorithms/combinatorics/reflection-principle) | [Source](/implementations/combinatorics-reflection-principle/) |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

@@ -400,4 +400,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The convex hull trick, a different technique that shares the name, is in [convex hull trick](/algorithms/dynamic-programming/convex-hull-trick).
 - The monotone two-pointer technique in one dimension, which is the direct ancestor of the calipers, is in [two pointers](/algorithms/searching/two-pointers).
 - The sliding window maximum, which is the same monotone pointer idea in a different setting, is in [sliding window](/algorithms/searching/sliding-window).
-- The subject index lists this technique, [rotating calipers](/algorithms/geometry/rotating-calipers), beside the geometry it does not yet cover: [the computational geometry](/algorithms/geometry/).
+- The subject index lists this technique, [rotating calipers](/algorithms/geometry/rotating-calipers), beside the rest of the subject: [the computational geometry](/algorithms/geometry/).

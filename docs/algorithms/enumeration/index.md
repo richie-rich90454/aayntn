@@ -61,15 +61,23 @@ The signal that rules enumeration out is a constraint above about $30$ combined 
 
 The admissible-bound row is the one to be careful about. A bound that is admissible never exceeds the true cost of any completion, so pruning on it is safe. A bound that is too weak prunes nothing and the search degenerates into brute force. A bound that is not admissible prunes the optimum, and the answer is silently wrong. The three cases look the same on paper and behave nothing alike.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-These techniques belong to enumeration and do not yet have an article of their own.
+<!-- aayntn:subject:start -->
 
-- **Complete search as a subject.** The philosophy of exhaustive search as a baseline, and the discipline of writing a brute-force version first and using it as the reference for the fast one. The [academy](/start/from-ap-csa/) covers the contest craft around it; the encyclopedia does not yet have an article.
-- **Meet in the middle as its own article.** The technique is derived in full inside the [subset enumeration article](/algorithms/enumeration/subset-enumeration), including the counting variant with multiplicities, but it does not have a page of its own.
-- **Gray codes.** Enumerating all $2^n$ subsets so that consecutive subsets differ in exactly one bit, which turns a per-subset cost of $O(n)$ into a per-subset cost of $O(1)$.
-- **Constraint propagation.** Narrowing the set of allowed values as the search proceeds, which is what makes a backtracking search over a constraint problem finish, and which is distinct from the plain bound of branch and bound.
-- **Iterative deepening.** Running a search with an increasing depth limit so that the first solution found is optimal, at the cost of repeating the shallower work.
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Backtracking | O(b^d * t) in the worst case, far less with pruning | O(d + s) | `foundations.recursion` | [Backtracking](/algorithms/enumeration/backtracking) | Prose only |
+| Branch and bound | O(b * V), where V is the number of surviving nodes | O(n) | `enumeration.backtracking` | [Branch and bound](/algorithms/enumeration/branch-and-bound) | Prose only |
+| Complete search | O(n 2^n) for the subset contract, O(S c) for a candidate space of S candidates with a test of cost c | O(n) for the recursion, or O(1) beyond the input for a mask loop | `foundations.complexity` | [Complete search](/algorithms/enumeration/complete-search) | [Source](/implementations/enumeration-complete-search/) |
+| Constraint propagation | O(N), where N is the number of visited nodes, which is 856189 for n = 12 | O(n) for the recursion and O(1) masks per frame | `enumeration.backtracking` | [Constraint propagation](/algorithms/enumeration/constraint-propagation) | [Source](/implementations/enumeration-constraint-propagation/) |
+| Gray codes | O(n 2^n) | O(n) auxiliary | `foundations.binary-representation` | [Gray codes](/algorithms/enumeration/gray-codes) | [Source](/implementations/enumeration-gray-codes/) |
+| Iterative deepening | O(b^d) for branching factor b and solution depth d | O(d) auxiliary, plus O(n + m) for the graph | `foundations.recursion` | [Iterative deepening](/algorithms/enumeration/iterative-deepening) | [Source](/implementations/enumeration-iterative-deepening/) |
+| Meet in the middle | O(n 2^(n/2)) | O(2^(n/2)) | `enumeration.subset-enumeration` | [Meet in the middle](/algorithms/enumeration/meet-in-the-middle) | [Source](/implementations/enumeration-meet-in-the-middle/) |
+| Permutations | O(n * n!) | O(n) | `enumeration.backtracking` | [Permutations](/algorithms/enumeration/permutations) | Prose only |
+| Subset enumeration | O(2^n) per mask, O(n 2^n) with the subsets materialized | O(1) per mask, O(n) per subset | `foundations.binary-representation` | [Subset enumeration](/algorithms/enumeration/subset-enumeration) | Prose only |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

@@ -34,7 +34,7 @@ The parallel binary search article is the worked example of the subject. It take
 
 The bound is $O((n + q) \log^2 n)$ because there are $O(\log n)$ rounds, and each round costs $O((n + q) \log n)$: the sweep applies each of the $n$ deliveries once at $O(\log n)$ per delivery, and each of the $q$ queries performs one check at $O(\log n)$. One independent search per query over a rebuilt tree would cost $O(qn \log n)$, so at $n = q = 10^5$ the parallel version is about two thousand times faster.
 
-This is currently the only article in the subject, and the list below is long because the subject is a category rather than a technique. Each entry names something that belongs here and does not yet have a page.
+The subject holds ten registered algorithms, each with source listings in six languages. The complete table below lists every technique in the subject, with the article and the reference implementation where one exists.
 
 ## Recognition signals
 
@@ -53,26 +53,33 @@ The signal that rules the subject out is a problem that requires each answer bef
 | The situation | What to use |
 | --- | --- |
 | Many binary searches over one data structure | [Parallel binary search](/algorithms/advanced/parallel-binary-search) |
-| Many connectivity queries, with edges added between them | An offline connectivity algorithm, which is not covered yet |
-| The $k$-th smallest element, with no full sort | Quickselect, which is not covered yet |
+| Many connectivity queries, with edges added between them | [Offline dynamic connectivity](/algorithms/advanced/offline-dynamic-connectivity) |
+| The $k$-th smallest element, with no full sort | [Quickselect](/algorithms/advanced/quickselect) |
 | The same subproblem is reached many times | Memoization, or a dynamic program |
 | A quadratic loop over pairs that can be split | The divide-and-conquer closest-pair algorithm |
 | The answer is monotone in a parameter | [Binary search on the answer](/algorithms/searching/binary-search-on-answer) |
 | A deterministic algorithm is too slow | A randomized one, with the error probability stated |
 | The problem is a known hard one | Accept the complexity, and make the constant small |
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **Offline dynamic connectivity.** Answering connectivity queries when edges are added between them, by segmenting the timeline and using a rollback disjoint set union. This is the standard technique for the hardest connectivity problems and it has no article yet.
-- **The rollback disjoint set union.** The variant of the disjoint set union that supports undoing a merge, which is what makes the offline segmentation work. The ordinary [disjoint set union](/algorithms/graphs/dsu) cannot be rolled back, and that single fact is what the whole offline machinery exists to work around.
-- **Persistent data structures.** Structures that keep every version, so that an old version can be queried, at the cost of $O(\log n)$ extra space per version. The persistent segment tree is the standard one.
-- **Randomized algorithms.** The whole family: the fingerprinting of a set of strings, the randomized choice of a pivot in a quicksort-like algorithm, and the Monte Carlo versus Las Vegas distinction.
-- **Quickselect and randomized selection.** Finding the $k$-th smallest element in linear expected time without a full sort, and the reason it is faster than sorting for that one question.
-- **XOR bases.** A basis over the field of two elements, which answers the question of whether a value can be expressed as the XOR of a subset of a set in $O(\log n)$ per query, and which is how the maximum XOR subset problems are solved.
-- **Bitset optimization.** Packing $64$ booleans into a machine word, which turns a dynamic program's inner loop into a few word operations and is the difference between passing and timing out on many problems.
-- **Matroids.** The family of structures whose feasible sets have the exchange property, which is the theoretical reason some greedy algorithms are correct.
-- **Berlekamp-Massey.** Recovering the shortest linear recurrence that fits a sequence of terms, which turns "find the $k$-th term of this unknown recurrence" into a matrix power.
-- **Game theory and Sprague-Grundy theory.** The theory of impartial two-player games, and the theorem that lets independent games be combined by XORing their Grundy values. The combinatorial games that appear in contests are usually small enough to solve by dynamic programming over the position, which is a more approachable route.
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Berlekamp-Massey | O(n^2) | O(n) | `number-theory.modular-arithmetic` | [Berlekamp-Massey](/algorithms/advanced/berlekamp-massey) | [Source](/implementations/advanced-berlekamp-massey/) |
+| Bitset optimization | O(nW / 32) | O(W / 32) | `foundations.binary-representation` | [Bitset optimization](/algorithms/advanced/bitset-optimization) | [Source](/implementations/advanced-bitset-optimization/) |
+| Game theory and Sprague-Grundy theory | O(M k + h) to tabulate the Grundy values up to the largest heap, where k moves are allowed | O(M + k) | `foundations.complexity` | [Game theory and Sprague-Grundy theory](/algorithms/advanced/sprague-grundy) | [Source](/implementations/advanced-sprague-grundy/) |
+| Matroids | O(m log m + (n + m) α(n)) | O(n + m) | `graphs.mst` | [Matroids](/algorithms/advanced/matroids) | [Source](/implementations/advanced-matroids/) |
+| Offline dynamic connectivity | O(q log q log n) | O(n + q log q) | `graphs.dsu` | [Offline dynamic connectivity](/algorithms/advanced/offline-dynamic-connectivity) | [Source](/implementations/advanced-offline-dynamic-connectivity/) |
+| Parallel binary search | O((N + Q) log^2 N) | O(N + Q) | `searching.binary-search` | [Parallel binary search](/algorithms/advanced/parallel-binary-search) | Prose only |
+| Persistent data structures | O(1) per operation on the persistent stack | O(q) for q operations, one node per push | `foundations.complexity` | [Persistent data structures](/algorithms/advanced/persistent-data-structures) | [Source](/implementations/advanced-persistent-data-structures/) |
+| Quickselect and randomized selection | O(n) expected with a random pivot, O(n^2) worst case | O(1) auxiliary in the iterative form, O(n) stack in the worst recursive form | `foundations.sorting` | [Quickselect and randomized selection](/algorithms/advanced/quickselect) | [Source](/implementations/advanced-quickselect/) |
+| Randomized algorithms | O(n log n) expected comparisons, O(n^2) worst case | O(n) for the array, O(log n) expected recursion stack, O(n) in the worst case | `foundations.sorting` | [Randomized algorithms](/algorithms/advanced/randomized-algorithms) | [Source](/implementations/advanced-randomized-algorithms/) |
+| The rollback disjoint set union | O(log n) per find or union, O(1) per rollback | O(n + q) for the forest and its history | `graphs.dsu` | [The rollback disjoint set union](/algorithms/advanced/rollback-dsu) | [Source](/implementations/advanced-rollback-dsu/) |
+| XOR bases | O((n + q) log A) | O(log A) | `foundations.binary-representation` | [XOR bases](/algorithms/advanced/xor-bases) | [Source](/implementations/advanced-xor-bases/) |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

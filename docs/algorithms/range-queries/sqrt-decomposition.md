@@ -28,6 +28,12 @@ implementations: range-queries.sqrt-decomposition
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="range-queries.sqrt-decomposition" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="range-queries.sqrt-decomposition" />
+
 ## At a glance
 
 Square-root decomposition splits an array of $n$ values into blocks of $B$ consecutive positions, where $B$ is about $\sqrt{n}$. It keeps the values themselves and one aggregate per block. A point update writes one value and one block aggregate, which is $O(1)$. A range query adds the whole blocks that lie inside the range and scans the elements in the at most two partial blocks at the ends, which is $O(B + n/B)$.

@@ -32,6 +32,12 @@ implementations: advanced.persistent-data-structures
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="advanced.persistent-data-structures" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="advanced.persistent-data-structures" />
+
 ## At a glance
 
 A persistent data structure keeps every version of itself. An update does not overwrite the old state. It creates a new version, and the old version remains readable exactly as it was.

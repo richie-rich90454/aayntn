@@ -34,6 +34,12 @@ implementations: combinatorics.integer-partitions
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="combinatorics.integer-partitions" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="combinatorics.integer-partitions" />
+
 ## At a glance
 
 A partition of a positive integer $n$ is a way to write $n$ as a sum of positive integers in which the order of the summands does not matter. The number of partitions is written $p(n)$, with $p(0) = 1$ for the empty sum.

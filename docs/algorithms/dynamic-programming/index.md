@@ -68,15 +68,28 @@ The signal that rules the subject out is a question whose subproblems do not ove
 
 The bottom row is the useful one. Before writing a table, check that the recursion really does revisit the same subproblems. If it does not, you are writing a search, and the search will be exponential.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **Profile dynamic programming.** A state that records the shape of the frontier of a partially built solution, which is how the traveling salesman problem and the plug-like grid problems are solved.
-- **The Li Chao tree.** A structure that supports inserting a line and querying the minimum at a point in $O(\log n)$, without the monotone-slope condition the convex hull trick requires.
-- **Divide-and-conquer optimization.** Computing a dynamic program in $O(n \log n)$ when the recurrence's transition ranges are monotone in the state index.
-- **Knuth optimization.** The same speedup when the recurrence satisfies the quadrangle inequality, which is what makes the interval dynamic program fast.
-- **Monotonic queue optimization.** Reducing a transition from $O(n^2)$ to $O(n)$ when the transition is a minimum over a sliding window of the previous row. The [monotonic queue article](/algorithms/arrays/monotonic-queue) builds the structure, but the dynamic program that uses it is not written up.
-- **Subset transforms.** The fast zeta and Mobius transforms over the subsets of a set, which turn $O(3^n)$ subset convolution into $O(n 2^n)$. The subset sum transform is a variant of the [bitmask article](/algorithms/dynamic-programming/bitmask-dp), and the general transforms are not.
-- **The aliens trick.** Lagrangian optimization, which removes a dimension from a minimization by penalizing the count and then searching for the penalty that makes the optimum change count, at the cost of a binary search over the penalty.
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| 0/1 knapsack | O(nW) | O(W) | `foundations.complexity` | [0/1 knapsack](/algorithms/dynamic-programming/0-1-knapsack) | [Source](/implementations/dynamic-programming-0-1-knapsack/) |
+| Bitmask dynamic programming | O(n 2^n) | O(2^n) | `foundations.complexity` | [Bitmask dynamic programming](/algorithms/dynamic-programming/bitmask-dp) | Prose only |
+| Convex hull trick | O(n + q) amortized | O(n) | `foundations.complexity` | [Convex hull trick](/algorithms/dynamic-programming/convex-hull-trick) | [Source](/implementations/dynamic-programming-convex-hull-trick/) |
+| Digit dynamic programming | O(D * S * b) | O(D * S) | `foundations.complexity` | [Digit dynamic programming](/algorithms/dynamic-programming/digit-dp) | Prose only |
+| Divide-and-conquer optimization | O(k n log n) | O(n) | `dynamic-programming.0-1-knapsack` | [Divide-and-conquer optimization](/algorithms/dynamic-programming/divide-and-conquer-optimization) | [Source](/implementations/dynamic-programming-divide-and-conquer-optimization/) |
+| Dynamic programming on a directed acyclic graph | O(V + E) | O(V) | `graphs.topological-sort` | [Dynamic programming on a directed acyclic graph](/algorithms/dynamic-programming/dag-dp) | Prose only |
+| Interval dynamic programming | O(n^3) | O(n^2) | `foundations.complexity` | [Interval dynamic programming](/algorithms/dynamic-programming/interval-dp) | Prose only |
+| Knuth optimization | O(n^2) | O(n^2) | `dynamic-programming.interval-dp` | [Knuth optimization](/algorithms/dynamic-programming/knuth-optimization) | [Source](/implementations/dynamic-programming-knuth-optimization/) |
+| Longest increasing subsequence | O(n log n) | O(n) | `foundations.sorting` | [Longest increasing subsequence](/algorithms/dynamic-programming/longest-increasing-subsequence) | Prose only |
+| Monotonic queue optimization | O(n) | O(n) | `foundations.complexity` | [Monotonic queue optimization](/algorithms/dynamic-programming/monotonic-queue-optimization) | [Source](/implementations/dynamic-programming-monotonic-queue-optimization/) |
+| Profile dynamic programming | O(rc 2^c) | O(2^c) | `foundations.complexity` | [Profile dynamic programming](/algorithms/dynamic-programming/profile-dp) | [Source](/implementations/dynamic-programming-profile-dp/) |
+| Subset transforms | O(n 2^n) | O(2^n) | `foundations.complexity` | [Subset transforms](/algorithms/dynamic-programming/subset-transforms) | [Source](/implementations/dynamic-programming-subset-transforms/) |
+| The aliens trick | O(n log n log(S_n^2)) | O(n) | `dynamic-programming.0-1-knapsack` | [The aliens trick](/algorithms/dynamic-programming/aliens-trick) | [Source](/implementations/dynamic-programming-aliens-trick/) |
+| The Li Chao tree | O(log k) per insertion and per query, after O(q log q) preprocessing | O(q) total, O(k) for the tree | `foundations.complexity` | [The Li Chao tree](/algorithms/dynamic-programming/li-chao-tree) | [Source](/implementations/dynamic-programming-li-chao-tree/) |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

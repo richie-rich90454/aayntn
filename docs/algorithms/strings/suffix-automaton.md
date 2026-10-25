@@ -31,6 +31,12 @@ implementations: strings.suffix-automaton
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="strings.suffix-automaton" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="strings.suffix-automaton" />
+
 ## At a glance
 
 The suffix automaton of a string $s$ is the smallest deterministic automaton whose paths from the initial state spell exactly the substrings of $s$. Every state is an accepting state, because accepting a path means "this path is a substring", and the automaton exists to answer questions about all substrings at once rather than about one pattern.

@@ -29,6 +29,12 @@ implementations: searching.parametric-search
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="searching.parametric-search" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="searching.parametric-search" />
+
 ## At a glance
 
 | Property | Value |

@@ -520,4 +520,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The other exact linear-time string algorithm, which computes the longest match with the whole string at every position, is in [the Z algorithm](/algorithms/strings/z-algorithm).
 - The arithmetic that keeps a large count inside a machine word is in [modular arithmetic](/algorithms/number-theory/modular-arithmetic).
 - The bit arithmetic that the overflow variant of the hash relies on is in [binary representation](/algorithms/foundations/binary-representation).
-- The subject overview, which lists the string techniques that are not yet covered, is at [the strings](/algorithms/strings/).
+- The subject overview is at [the strings](/algorithms/strings/).

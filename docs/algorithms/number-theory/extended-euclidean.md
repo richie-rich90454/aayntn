@@ -558,7 +558,7 @@ Answer these without looking back. If you cannot, revisit the section named in p
 ## Further reading
 
 - The subject index lists this technique, [the extended Euclidean algorithm](/algorithms/number-theory/extended-euclidean), beside the other number theory articles.
-- The subject overview, which lists the number theory techniques that are not yet covered, is at [the number theory](/algorithms/number-theory/).
+- The subject overview is at [the number theory](/algorithms/number-theory/).
 - The arithmetic that the inverse is used inside is in [modular arithmetic](/algorithms/number-theory/modular-arithmetic).
 - The primes that the trial division baseline needs are produced by [the sieve of Eratosthenes](/algorithms/number-theory/sieve).
 - The recursion whose depth the recursive form uses is described in [recursion](/algorithms/foundations/recursion).

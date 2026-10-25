@@ -15,7 +15,7 @@ reviewed: false
 
 The encyclopedia uses a specific vocabulary, and a reader who does not know a word cannot read the sentence containing it. This page defines the terms that appear across more than one subject, each in a single sentence, with a link to the article that teaches it.
 
-Terms are listed alphabetically. Where the encyclopedia does not yet have an article on a technique, the entry says so and points at the subject page that describes it, rather than pretending the technique is covered.
+Terms are listed alphabetically. Where the encyclopedia has an article on the technique, the entry links to it. A few terms outside the named technique set are defined here and point at the subject that covers the surrounding material.
 
 Where a term is taught in the [mathematical reference](/mathematics/), the link points there; where it is taught in an algorithm article, the link points at that article; and where it belongs to the contest process rather than to an algorithm, the link points at [Contest problem-solving literacy](/start/from-ap-csa/part-6-contest-literacy).
 
@@ -23,9 +23,9 @@ Where a term is taught in the [mathematical reference](/mathematics/), the link 
 
 **Adjacency matrix.** A representation of a graph as a table indexed by vertices, where a cell holds whether an edge exists. It uses $O(V^2)$ space and answers an edge query in $O(1)$, and it is only competitive for dense graphs. See <a href="/algorithms/graphs/representation">Graph representation</a>.
 
-**Amortized.** Describing a cost that is small on average over a sequence of operations, even when an individual operation can be expensive. See <a href="/start/from-ap-csa/part-2-algorithm-analysis">Algorithm analysis</a>.
+**Amortized.** Describing a cost that is small on average over a sequence of operations, even when an individual operation can be expensive. See <a href="/algorithms/foundations/amortized-analysis">Amortized analysis</a>.
 
-**Amortized analysis.** The method of bounding the total cost of a sequence of operations by dividing it among the operations, rather than bounding each operation separately. Appending to a growing array is $O(n)$ in the worst individual case but $O(1)$ amortized. See <a href="/start/from-ap-csa/part-2-algorithm-analysis">Algorithm analysis</a>.
+**Amortized analysis.** The method of bounding the total cost of a sequence of operations by dividing it among the operations, rather than bounding each operation separately. Appending to a growing array is $O(n)$ in the worst individual case but $O(1)$ amortized. See <a href="/algorithms/foundations/amortized-analysis">Amortized analysis</a>.
 
 **Backtracking.** A search that builds a solution incrementally, abandons a partial solution as soon as it is shown to be impossible, and tries the next choice. See <a href="/algorithms/enumeration/backtracking">Backtracking</a>.
 
@@ -45,7 +45,7 @@ Where a term is taught in the [mathematical reference](/mathematics/), the link 
 
 **Cartesian tree.** The tree formed from a sequence by making the smallest element the root and recursing on the parts to its left and right. Its nodes are in-order the original sequence. This encyclopedia does not yet have an article on it; see <a href="/algorithms/trees/">Trees and decompositions</a>.
 
-**Centroid decomposition.** The technique of splitting a tree at a vertex whose removal leaves components of at most half the size, and recursing, which reduces many tree problems to $O(n \log n)$. This encyclopedia does not yet have an article on it; see <a href="/algorithms/trees/">Trees and decompositions</a>.
+**Centroid decomposition.** The technique of splitting a tree at a vertex whose removal leaves components of at most half the size, and recursing, which reduces many tree problems to $O(n \log n)$. See <a href="/algorithms/trees/centroid-decomposition">Centroid decomposition</a>.
 
 **Connected component.** A maximal set of vertices in which every pair is joined by a path. See <a href="/algorithms/graphs/bfs">Breadth-first search</a>.
 
@@ -75,19 +75,19 @@ Where a term is taught in the [mathematical reference](/mathematics/), the link 
 
 **Dynamic programming.** The technique of solving a problem by combining answers to overlapping subproblems, each computed once and stored. See <a href="/algorithms/dynamic-programming/">Dynamic programming</a>.
 
-**Euler tour.** A numbering of the vertices of a tree in which every subtree occupies a contiguous interval, which turns a subtree query into a range query. See <a href="/algorithms/trees/lca">Lowest common ancestor</a>.
+**Euler tour.** A numbering of the vertices of a tree in which every subtree occupies a contiguous interval, which turns a subtree query into a range query. See <a href="/algorithms/trees/euler-tour">Euler tour</a>.
 
-**Exchange argument.** A proof that a greedy choice is safe: take an optimal solution, find where it disagrees with the choice, swap the two, and show the result is still feasible and no worse. See <a href="/algorithms/greedy/interval-scheduling">Interval scheduling</a>.
+**Exchange argument.** A proof that a greedy choice is safe: take an optimal solution, find where it disagrees with the choice, swap the two, and show the result is still feasible and no worse. See <a href="/algorithms/greedy/exchange-argument">The exchange argument</a>.
 
-**Expected value.** The probability-weighted average of the possible outcomes of a random variable, used to reason about randomized algorithms. See <a href="/start/from-ap-csa/part-3-discrete-mathematics">Discrete mathematics</a>.
+**Expected value.** The probability-weighted average of the possible outcomes of a random variable, used to reason about randomized algorithms. See <a href="/algorithms/advanced/randomized-algorithms">Randomized algorithms</a>.
 
-**Extended Euclidean algorithm.** The Euclidean algorithm extended to return the coefficients of Bézout's identity, which gives the modular inverse of an integer modulo another. See <a href="/start/from-ap-csa/part-3-discrete-mathematics">Discrete mathematics</a>.
+**Extended Euclidean algorithm.** The Euclidean algorithm extended to return the coefficients of Bézout's identity, which gives the modular inverse of an integer modulo another. See <a href="/algorithms/number-theory/extended-euclidean">The extended Euclidean algorithm</a>.
 
 **Factorial.** The product of all integers from $1$ to $n$, written $n!$, which counts the orderings of $n$ distinct objects. See <a href="/algorithms/combinatorics/">Combinatorics</a>.
 
 **Fenwick tree.** A structure that supports prefix sums and point updates in $O(\log n)$ time each, and range sums as a difference of two prefix sums. See <a href="/algorithms/range-queries/fenwick-tree">Fenwick tree</a>.
 
-**Fermat's little theorem.** The statement that for a prime $p$ and an $a$ not divisible by $p$, $a^{p-1} \equiv 1 \pmod p$, which turns a modular inverse into a modular power. See <a href="/start/from-ap-csa/part-3-discrete-mathematics">Discrete mathematics</a>.
+**Fermat's little theorem.** The statement that for a prime $p$ and an $a$ not divisible by $p$, $a^{p-1} \equiv 1 \pmod p$, which turns a modular inverse into a modular power. See <a href="/algorithms/number-theory/modular-arithmetic">Modular arithmetic</a>.
 
 **Greedy algorithm.** An algorithm that makes the locally best choice at each step and never revises it, and that is correct only when the choice can be proved safe. See <a href="/algorithms/greedy/">Greedy methods</a>.
 
@@ -99,15 +99,15 @@ Where a term is taught in the [mathematical reference](/mathematics/), the link 
 
 **Implicit treap.** A randomized balanced binary search tree whose positions are determined by the priorities of its nodes rather than by explicit keys, giving it $O(\log n)$ expected operations. This encyclopedia does not yet have an article on it; see <a href="/algorithms/advanced/">Advanced algorithms</a>.
 
-**Inclusion and exclusion.** The counting technique that adds the sizes of overlapping sets and then subtracts their intersections, adding back the triple intersections and so on. See <a href="/mathematics/">the mathematical reference</a>.
+**Inclusion and exclusion.** The counting technique that adds the sizes of overlapping sets and then subtracts their intersections, adding back the triple intersections and so on. See <a href="/algorithms/combinatorics/inclusion-exclusion">Inclusion and exclusion</a>.
 
-**Induction.** A proof that a claim holds for every natural number by establishing a base case and a step from $k$ to $k+1$. See <a href="/start/from-ap-csa/part-3-discrete-mathematics">Discrete mathematics</a>.
+**Induction.** A proof that a claim holds for every natural number by establishing a base case and a step from $k$ to $k+1$. See <a href="/algorithms/foundations/proof-techniques">The proof techniques</a>.
 
-**Invariant.** A statement about the state of a program that holds before a loop and is preserved by each iteration, and whose truth at the end gives the answer. See <a href="/start/from-ap-csa/part-3-discrete-mathematics">Discrete mathematics</a>.
+**Invariant.** A statement about the state of a program that holds before a loop and is preserved by each iteration, and whose truth at the end gives the answer. See <a href="/algorithms/foundations/loop-invariants">Loop invariants</a>.
 
 **Inversion.** A pair of indices $i < j$ in a sequence whose values satisfy $a_i > a_j$, so that counting inversions measures how far the sequence is from sorted. See <a href="/algorithms/range-queries/fenwick-tree">Fenwick tree</a>.
 
-**Lazy propagation.** The technique of deferring an update to the children of a node until a query forces it to be applied, so that a range update costs $O(\log n)$. See <a href="/algorithms/range-queries/segment-tree">Segment tree</a>.
+**Lazy propagation.** The technique of deferring an update to the children of a node until a query forces it to be applied, so that a range update costs $O(\log n)$. See <a href="/algorithms/range-queries/lazy-propagation">Lazy propagation</a>.
 
 **Linear scan.** A pass over the data in its natural order, examining each element once, which costs $O(n)$ time and $O(1)$ extra space. See <a href="/algorithms/arrays/prefix-sums">Prefix sums</a>.
 
@@ -117,13 +117,13 @@ Where a term is taught in the [mathematical reference](/mathematics/), the link 
 
 **Memoization.** Caching the result of a function call so that a repeated call with the same arguments returns the stored answer instead of recomputing it. See <a href="/algorithms/foundations/recursion">Recursion</a>.
 
-**Modular arithmetic.** Arithmetic on the residues of integers modulo a fixed modulus, in which the answer is the unique representative in a stated range. See <a href="/algorithms/number-theory/">Number theory</a>.
+**Modular arithmetic.** Arithmetic on the residues of integers modulo a fixed modulus, in which the answer is the unique representative in a stated range. See <a href="/algorithms/number-theory/modular-arithmetic">Modular arithmetic</a>.
 
-**Modular inverse.** The value $a^{-1}$ with $a \cdot a^{-1} \equiv 1 \pmod m$, which turns division modulo $m$ into multiplication. See <a href="/start/from-ap-csa/part-3-discrete-mathematics">Discrete mathematics</a>.
+**Modular inverse.** The value $a^{-1}$ with $a \cdot a^{-1} \equiv 1 \pmod m$, which turns division modulo $m$ into multiplication. See <a href="/algorithms/number-theory/modular-arithmetic">Modular arithmetic</a>.
 
-**Monotonic queue.** A deque whose elements are kept in increasing or decreasing order, so that the front always holds the extreme of the window; combined with a window it answers every window minimum in $O(n)$ total. See <a href="/algorithms/arrays/">Arrays and sequences</a> and <a href="/algorithms/searching/sliding-window">Sliding window</a>.
+**Monotonic queue.** A deque whose elements are kept in increasing or decreasing order, so that the front always holds the extreme of the window; combined with a window it answers every window minimum in $O(n)$ total. See <a href="/algorithms/arrays/monotonic-queue">Monotonic queue</a> and <a href="/algorithms/searching/sliding-window">Sliding window</a>.
 
-**Monotonic stack.** A stack whose elements are kept in increasing or decreasing order, so that elements made useless by a new arrival are discarded at once. This encyclopedia does not yet have an article on it; see <a href="/algorithms/searching/">Searching</a>.
+**Monotonic stack.** A stack whose elements are kept in increasing or decreasing order, so that elements made useless by a new arrival are discarded at once. See <a href="/algorithms/arrays/monotonic-stack">Monotonic stack</a>.
 
 **Off-by-one error.** A bug in which a loop bound or an index is off by exactly one, which usually shows up as a missing element at an end or an out-of-bounds access at the last iteration. See <a href="/start/from-ap-csa/part-6-contest-literacy">Contest problem-solving literacy</a>.
 
@@ -135,7 +135,7 @@ Where a term is taught in the [mathematical reference](/mathematics/), the link 
 
 **Path compression.** The disjoint set union optimization in which every visited node is repointed to the root of its set, flattening the structure and speeding later finds. See <a href="/algorithms/graphs/dsu">Disjoint set union</a>.
 
-**Pigeonhole principle.** The statement that placing more objects than boxes forces some box to hold at least two objects, and the counting argument behind it. See <a href="/start/from-ap-csa/part-3-discrete-mathematics">Discrete mathematics</a>.
+**Pigeonhole principle.** The statement that placing more objects than boxes forces some box to hold at least two objects, and the counting argument behind it. See <a href="/algorithms/foundations/proof-techniques">The proof techniques</a>.
 
 **Prefix sum.** The running total of the first $k$ elements of an array, so that the sum of a range is the difference of two prefix sums. See <a href="/algorithms/arrays/prefix-sums">Prefix sums</a>.
 
@@ -153,17 +153,17 @@ Where a term is taught in the [mathematical reference](/mathematics/), the link 
 
 **Shortest path.** A path between two vertices whose total weight is as small as possible, computed by breadth-first search when weights are equal, by Dijkstra's algorithm when they are nonnegative, and by Bellman-Ford when they may be negative. See <a href="/algorithms/graphs/dijkstra">Dijkstra's algorithm</a>.
 
-**Sieve of Eratosthenes.** The method of marking the multiples of every prime up to $n$, producing every prime up to $n$ in $O(n \log \log n)$ time. See <a href="/start/from-ap-csa/part-3-discrete-mathematics">Discrete mathematics</a>.
+**Sieve of Eratosthenes.** The method of marking the multiples of every prime up to $n$, producing every prime up to $n$ in $O(n \log \log n)$ time. See <a href="/algorithms/number-theory/sieve">Sieve of Eratosthenes</a>.
 
 **Sliding window.** The technique of maintaining a window over the data and moving its ends so that every index is added and removed at most once, giving $O(n)$ total time. See <a href="/algorithms/searching/sliding-window">Sliding window</a>.
 
 **Sparse table.** A precomputed table of the aggregate of every range whose length is a power of two, giving $O(1)$ range queries on static data at the cost of $O(n \log n)$ space. See <a href="/algorithms/range-queries/sparse-table">Sparse table</a>.
 
-**Stars and bars.** The formula for the number of ways to distribute $n$ identical items into $k$ distinct boxes, derived from the binomial coefficient by a bijection. See <a href="/algorithms/combinatorics/">Combinatorics</a> and <a href="/mathematics/">the mathematical reference</a>.
+**Stars and bars.** The formula for the number of ways to distribute $n$ identical items into $k$ distinct boxes, derived from the binomial coefficient by a bijection. See <a href="/algorithms/combinatorics/stars-and-bars">Stars and bars</a> and <a href="/mathematics/">the mathematical reference</a>.
 
 **Stack overflow.** The failure that occurs when a recursion consumes more call frames than the runtime has stack space, which crashes the process in C and C++, throws an error in Java, Python, and JavaScript, and is reported as a run-time error by a judge. See <a href="/start/from-ap-csa/part-1-computational-foundations">Computational foundations</a>.
 
-**Sweep line.** The technique of moving a line across a set of events in sorted order, maintaining an active set, which answers many geometric and interval questions in linear time. See <a href="/algorithms/arrays/difference-arrays">Difference arrays</a>.
+**Sweep line.** The technique of moving a line across a set of events in sorted order, maintaining an active set, which answers many geometric and interval questions in linear time. See <a href="/algorithms/geometry/sweep-line">Sweep line</a>.
 
 **Tabulation.** The bottom-up form of dynamic programming, in which a table is filled in a fixed order so that every needed entry has already been computed. See <a href="/algorithms/dynamic-programming/0-1-knapsack">0/1 knapsack</a>.
 
@@ -187,4 +187,4 @@ Where a term is taught in the [mathematical reference](/mathematics/), the link 
 
 A definition here is deliberately short. The encyclopedia's articles do not repeat these definitions; they use them, and each article opens with its own formal statement of the problem it solves. When a definition here is not enough, follow the link.
 
-If a term you meet in an article is not in this glossary, it is probably defined in the article that uses it, and it belongs to a technique that is described on a subject page but does not yet have an article of its own. The subject pages in the [encyclopedia](/algorithms/) each end with a list of the techniques they imply and do not yet cover, and those lists are the honest boundary of the material.
+If a term you meet in an article is not in this glossary, it is probably defined in the article that uses it. The [algorithm encyclopedia](/algorithms/) lists every technique with its article, and each subject page repeats that complete list with the reference implementation where one exists.

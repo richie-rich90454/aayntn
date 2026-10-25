@@ -65,16 +65,25 @@ The signal that rules the subject out is a question about an arbitrary set of po
 
 The choice between the Fenwick tree and the segment tree is the one that matters most, because both are logarithmic. A Fenwick tree is a third of the code and answers sums and differences. A segment tree answers any associative operation: minimum, maximum, count, product, or a combination. Reach for the Fenwick tree when the operation is addition or subtraction and the segment tree when it is anything else.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **Lazy propagation.** The rule that lets a segment tree apply a range update in $O(\log n)$ by deferring the update to the children until a query needs them. It is named in the [segment tree article](/algorithms/range-queries/segment-tree) as the extension that handles range updates, and it does not have an article of its own.
-- **Persistent segment trees.** Keeping every version of the tree so that an old version can be queried, at the cost of $O(\log n)$ extra space per version. This is the standard route to the offline dynamic connectivity problems in [advanced algorithms](/algorithms/advanced/).
-- **Implicit segment trees.** Building a tree over a value range so large that it cannot be allocated, letting the tree create nodes only where they are needed.
-- **Segment tree beats.** Extending the segment tree with a second aggregate, such as the minimum and the second minimum, so that a range update can skip nodes where it would not change the answer.
-- **Wavelet trees.** A different partition of the value axis that answers range order statistics and range counting in $O(\log n)$ without the merges of a segment tree.
-- **Merge sort trees.** A segment tree whose nodes hold sorted lists, which answers a range order statistic in $O(\log^2 n)$ by binary searching inside each covered node.
-- **Square-root decomposition.** Splitting the array into blocks of about $\sqrt{n}$ elements, giving $O(\sqrt{n})$ per operation and often passing when the logarithm is not needed.
-- **Mo's algorithm.** Answering offline range queries in $O((n + q)\sqrt{n})$ by moving the endpoints of the range one element at a time and maintaining an answer that updates in constant time. It is the standard answer when the query is unusual enough that no aggregate fits.
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Fenwick tree | O(log n) per operation | O(n) | `arrays.prefix-sums` | [Fenwick tree](/algorithms/range-queries/fenwick-tree) | [Source](/implementations/range-queries-fenwick-tree/) |
+| Implicit segment trees | O(log C) per operation | O(k log C) for k touched positions | `range-queries.segment-tree` | [Implicit segment trees](/algorithms/range-queries/implicit-segment-tree) | [Source](/implementations/range-queries-implicit-segment-tree/) |
+| Lazy propagation | O(log n) per range update and per range query | O(n) | `range-queries.segment-tree` | [Lazy propagation](/algorithms/range-queries/lazy-propagation) | [Source](/implementations/range-queries-lazy-propagation/) |
+| Merge sort trees | O(log^2 n) per rank query; O(log C log^2 n) per k-th smallest query | O(n log n) | `range-queries.segment-tree` | [Merge sort trees](/algorithms/range-queries/merge-sort-tree) | [Source](/implementations/range-queries-merge-sort-tree/) |
+| Mo's algorithm | O((n + q) sqrt n) for the batch, plus O(q log q) to sort | O(n + q) | `arrays.prefix-sums` | [Mo's algorithm](/algorithms/range-queries/mos-algorithm) | [Source](/implementations/range-queries-mos-algorithm/) |
+| Persistent segment trees | O(n log n) to build; O(log n) per query | O(n log n) | `range-queries.segment-tree` | [Persistent segment trees](/algorithms/range-queries/persistent-segment-tree) | [Source](/implementations/range-queries-persistent-segment-tree/) |
+| Segment tree | O(log n) per operation | O(n) | `arrays.prefix-sums` | [Segment tree](/algorithms/range-queries/segment-tree) | [Source](/implementations/range-queries-segment-tree/) |
+| Segment tree beats | amortized O(log n) per operation | O(n) | `range-queries.segment-tree` | [Segment tree beats](/algorithms/range-queries/segment-tree-beats) | [Source](/implementations/range-queries-segment-tree-beats/) |
+| Sparse table | O(n log n) to build, O(1) per query | O(n log n) | `arrays.prefix-sums` | [Sparse table](/algorithms/range-queries/sparse-table) | Prose only |
+| Square-root decomposition | O(n) to build, O(1) per point update, O(sqrt n) per range query | O(n) | `arrays.prefix-sums` | [Square-root decomposition](/algorithms/range-queries/sqrt-decomposition) | [Source](/implementations/range-queries-sqrt-decomposition/) |
+| Wavelet trees | O(log sigma) per k-th smallest or rank query; O(n log sigma) to build | O(n log sigma) prefix counts, plus O(n) working arrays | `range-queries.merge-sort-tree` | [Wavelet trees](/algorithms/range-queries/wavelet-tree) | [Source](/implementations/range-queries-wavelet-tree/) |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

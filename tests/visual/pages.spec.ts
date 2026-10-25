@@ -28,6 +28,7 @@ const REFERENCES = [
     { name: "language-center", path: "/languages/cpp17/" },
     { name: "curriculum", path: "/curriculum/gold/" },
     { name: "index-tables", path: "/algorithms/" },
+    { name: "subject-table", path: "/algorithms/graphs/" },
     { name: "source-index", path: "/implementations/graphs-dijkstra/" },
     { name: "contest", path: "/contest/" },
     { name: "debugging", path: "/debugging/" },

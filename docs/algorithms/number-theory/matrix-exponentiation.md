@@ -458,4 +458,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The representation of a graph, whose edge list and adjacency matrix are the two forms the walk count is computed from, is in [graph representation](/algorithms/graphs/representation).
 - The linear recurrence of a knapsack, whose count is reported modulo a prime and whose matrix form is the same companion matrix, is in [0/1 knapsack](/algorithms/dynamic-programming/0-1-knapsack).
 - The binary representation of the exponent, which is what the squaring follows, is in [binary representation](/algorithms/foundations/binary-representation).
-- The subject index lists this technique, [matrix exponentiation](/algorithms/number-theory/matrix-exponentiation), beside the arithmetic it does not yet cover: [the number theory](/algorithms/number-theory/).
+- The subject index lists this technique, [matrix exponentiation](/algorithms/number-theory/matrix-exponentiation), beside the rest of the subject: [the number theory](/algorithms/number-theory/).

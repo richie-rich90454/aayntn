@@ -446,4 +446,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The inclusion and exclusion step that counts the integers avoiding a list of primes, which is the other direction of the same subject, is in [inclusion and exclusion](/algorithms/combinatorics/inclusion-exclusion).
 - The discrete mathematics of divisibility, the greatest common divisor and the unique factorization is in [discrete mathematics](/start/from-ap-csa/part-3-discrete-mathematics).
 - The binary representation of a number, which the exponent of a prime controls, is in [binary representation](/algorithms/foundations/binary-representation).
-- The subject index lists this technique, [prime factorization](/algorithms/number-theory/prime-factorization), beside the arithmetic it does not yet cover: [the number theory](/algorithms/number-theory/).
+- The subject index lists this technique, [prime factorization](/algorithms/number-theory/prime-factorization), beside the rest of the subject: [the number theory](/algorithms/number-theory/).

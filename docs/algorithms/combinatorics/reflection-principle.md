@@ -33,6 +33,12 @@ implementations: combinatorics.reflection-principle
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="combinatorics.reflection-principle" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="combinatorics.reflection-principle" />
+
 ## At a glance
 
 A monotone lattice path from $(0,0)$ to $(n,n)$ uses only east steps $(1,0)$ and north steps $(0,1)$. The path is **ballot-admissible** when every prefix has at least as many east steps as north steps, which is the same as saying that the path never rises above the line $y = x$. The number of admissible paths is the Catalan number $C_n$.

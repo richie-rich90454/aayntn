@@ -434,7 +434,7 @@ Answer these without looking back. If you cannot, revisit the section named in p
 
 ## Further reading
 
-- The subject index lists this technique, [parallel binary search](/algorithms/advanced/parallel-binary-search), beside the offline techniques it does not yet cover: [the advanced algorithms](/algorithms/advanced/).
+- The subject index lists this technique, [parallel binary search](/algorithms/advanced/parallel-binary-search), beside the rest of the subject: [the advanced algorithms](/algorithms/advanced/).
 - The binary search that every one of these searches is a run of is in [binary search](/algorithms/searching/binary-search).
 - The Fenwick tree that the checks read is in [the Fenwick tree](/algorithms/range-queries/fenwick-tree).
 - The disjoint set union that the rollback variant replaces the Fenwick tree with is in [the disjoint set union](/algorithms/graphs/dsu).

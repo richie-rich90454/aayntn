@@ -31,6 +31,12 @@ implementations: geometry.kd-trees
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="geometry.kd-trees" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="geometry.kd-trees" />
+
 ## At a glance
 
 A **K-D tree** is a binary tree that stores a set of points and partitions the plane as it is built. Each node holds one point, and the remaining points are divided by a line through that point: the points that sort before the node go to the left subtree and the points that sort after it go to the right subtree, so the two subtrees lie on opposite sides of the line, with points on the line split by their indices. The splitting axis alternates with depth, so the root splits on $x$, its children split on $y$, their children split on $x$ again, and so on.

@@ -29,6 +29,12 @@ implementations: strings.palindrome-tree
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="strings.palindrome-tree" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="strings.palindrome-tree" />
+
 ## At a glance
 
 A palindrome tree, also called an **eertree**, stores every distinct palindromic substring of a string as one node of a tree. For a string of length $n$ it uses at most $n + 2$ nodes, and it is built in one left-to-right pass in $O(n)$ time and $O(n)$ space.

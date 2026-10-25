@@ -285,7 +285,7 @@ The three columns describe the same computation at three levels of generality. T
 | The smallest set of vertices meeting every edge | Minimum vertex cover, which equals the maximum matching size in a bipartite graph |
 | The maximum number of edge-disjoint paths in a bipartite graph | Maximum flow, by Menger's theorem |
 | The cheapest assignment of workers to jobs | The Hungarian algorithm, or a minimum-cost flow |
-| A matching in a graph that is not bipartite | A blossom algorithm, which is not covered here |
+| A matching in a graph that is not bipartite | A blossom algorithm, for which this encyclopedia has no dedicated article |
 | A matching in a general graph with $V \le 100$ | A bitmask dynamic program over the vertices |
 | A maximum matching in a tree | A greedy pass from the leaves |
 | A matching where every vertex has degree at most two | A linear scan; the graph is a set of paths and cycles |

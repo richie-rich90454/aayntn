@@ -36,6 +36,12 @@ implementations: number-theory.euler-totient
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="number-theory.euler-totient" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="number-theory.euler-totient" />
+
 ## At a glance
 
 Euler's totient function $\varphi(n)$ counts the integers in $[1, n]$ that are coprime to $n$. It is the size of the group of units modulo $n$, and that single fact produces almost every application of the function.

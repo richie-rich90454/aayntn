@@ -52,7 +52,7 @@ The constraint values that rule the technique in and out:
 | $n \le 10^3$, $m \le 10^3$ | The naive search is fine and is the reference implementation |
 | $n \le 10^6$, $m \le 10^6$ | The naive search is $10^{12}$ comparisons; KMP is required |
 | The pattern is one character | A single scan; no technique needed |
-| Many patterns, one text | Aho-Corasick, which is not covered here |
+| Many patterns, one text | [Aho-Corasick](/algorithms/strings/aho-corasick) |
 | The question is about a subsequence | A dynamic program, not a string search |
 
 The last row is the one that catches people. "Is the sequence a subsequence of the text" is solved in $O(nm)$ by dynamic programming, and KMP does not apply to it at all, because a subsequence is not contiguous.
@@ -271,17 +271,17 @@ The prefix function is worth computing once and reusing for many texts. A proble
 
 ## Algorithm selection
 
-| Situation                                        | What to use                                 |
-| ------------------------------------------------ | ------------------------------------------- |
-| One pattern, one text, first occurrence          | KMP                                         |
-| One pattern, one text, all occurrences           | KMP, reporting every match                  |
-| One pattern, many texts                          | KMP, with the prefix function computed once |
-| Overlapping occurrences                          | KMP, with the state reset to $\pi[m-1]$     |
-| Longest prefix of a string that is also a suffix | The prefix function alone                   |
-| Minimum period of a string                       | $m - \pi[m-1]$                              |
-| Many patterns, one text                          | Aho-Corasick, which is not covered here     |
-| Longest common prefix of two strings             | A direct scan, or the Z algorithm           |
-| Subsequence rather than substring                | A dynamic program, not a string search      |
+| Situation | What to use |
+| --- | --- |
+| One pattern, one text, first occurrence | KMP |
+| One pattern, one text, all occurrences | KMP, reporting every match |
+| One pattern, many texts | KMP, with the prefix function computed once |
+| Overlapping occurrences | KMP, with the state reset to $\pi[m-1]$ |
+| Longest prefix of a string that is also a suffix | The prefix function alone |
+| Minimum period of a string | $m - \pi[m-1]$ |
+| Many patterns, one text | [Aho-Corasick](/algorithms/strings/aho-corasick) |
+| Longest common prefix of two strings | A direct scan, or the Z algorithm |
+| Subsequence rather than substring | A dynamic program, not a string search |
 
 ## Recursion decision
 
@@ -434,7 +434,7 @@ Answer these without looking back. If you cannot, revisit the section named in p
 
 ## Further reading
 
-- The subject index lists this technique, [Knuth-Morris-Pratt](/algorithms/strings/kmp), beside the techniques the subject does not yet cover: [the strings](/algorithms/strings/).
+- The subject index lists this technique, [Knuth-Morris-Pratt](/algorithms/strings/kmp), beside the rest of the subject: [the strings](/algorithms/strings/).
 - The general idea of searching an ordered structure, and the predicate that makes it valid, is in [binary search](/algorithms/searching/binary-search).
 - The discrete mathematics behind the divisibility and the periodicity argument of Problem 3 is in [discrete mathematics](/start/from-ap-csa/part-3-discrete-mathematics).
 - The counting argument that answers "how many ways" questions, which is the other way to avoid enumerating, is in [binomial coefficients](/algorithms/combinatorics/binomial-coefficients).

@@ -28,6 +28,12 @@ implementations: enumeration.gray-codes
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="enumeration.gray-codes" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="enumeration.gray-codes" />
+
 ## At a glance
 
 A Gray code is an ordering of all $2^n$ binary strings of length $n$ in which each string differs from the next in exactly one bit. The order is not the usual binary counting order. For two bits the Gray code is

@@ -33,6 +33,12 @@ implementations: combinatorics.burnside-lemma
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="combinatorics.burnside-lemma" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="combinatorics.burnside-lemma" />
+
 ## At a glance
 
 A necklace is a circular string of $n$ beads, each painted with one of $k$ colors. Two necklaces are the same when a rotation of the circle turns one into the other. The question is how many different necklaces exist.

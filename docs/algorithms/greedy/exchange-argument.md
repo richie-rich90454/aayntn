@@ -30,6 +30,12 @@ implementations: greedy.exchange-argument
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="greedy.exchange-argument" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="greedy.exchange-argument" />
+
 ## At a glance
 
 An exchange argument proves that a greedy algorithm is correct by transforming an optimal solution into the greedy solution, one swap at a time, without ever making the solution worse. The transformation ends at the greedy solution, so the greedy solution is optimal too.

@@ -33,6 +33,12 @@ implementations: number-theory.pollard-rho
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="number-theory.pollard-rho" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="number-theory.pollard-rho" />
+
 ## At a glance
 
 Pollard's rho finds a factor of a composite number by following a pseudorandom sequence modulo that number. It never divides by a trial divisor. Instead, it waits for two values of the sequence to become congruent modulo an unknown prime factor $p$, and a single gcd exposes $p$.

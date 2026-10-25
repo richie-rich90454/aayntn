@@ -32,6 +32,12 @@ implementations: foundations.loop-invariants
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="foundations.loop-invariants" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="foundations.loop-invariants" />
+
 ## At a glance
 
 A **loop invariant** is a statement about the variables of a loop that is true before the loop starts and remains true after every iteration. It is the contract between iterations: each pass may change the variables, but it may not break the statement. When the loop ends, the invariant plus the termination condition should imply the answer.

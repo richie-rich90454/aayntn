@@ -31,6 +31,12 @@ implementations: advanced.quickselect
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="advanced.quickselect" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="advanced.quickselect" />
+
 ## At a glance
 
 Quickselect finds the $k$-th smallest element of an array without sorting it. It partitions the array around a pivot, exactly as quicksort does, and then keeps only the side that contains the wanted rank. The other side is discarded without being sorted or even examined again.

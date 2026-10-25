@@ -29,6 +29,12 @@ implementations: advanced.xor-bases
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="advanced.xor-bases" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="advanced.xor-bases" />
+
 ## At a glance
 
 An XOR basis is a small set of numbers that has exactly the same subset XORs as the original set, but contains no redundant element. The original set may have $n$ numbers; the basis has at most one number per bit, so at most $30$ numbers when the values are below $2^{30}$.

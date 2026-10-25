@@ -23,6 +23,12 @@ implementations: geometry.integer-geometry
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="geometry.integer-geometry" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="geometry.integer-geometry" />
+
 ## At a glance
 
 A polygon whose vertices are lattice points has three integer quantities that are easy to confuse and easy to compute: twice its area, the number of lattice points on its boundary, and the number of lattice points strictly inside it.

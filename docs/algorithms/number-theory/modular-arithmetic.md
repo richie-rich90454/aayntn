@@ -474,4 +474,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The string search whose prefix function is the same border structure that makes the extended Euclidean algorithm's coefficients fall into place is in [KMP](/algorithms/strings/kmp).
 - The number of lattice points inside a polygon is counted from its hull and from a congruence, so the geometry of this subject meets this arithmetic in [convex hull](/algorithms/geometry/convex-hull).
 - A count that must be reduced and a search over many candidates at once are frequently the same problem, and the offline search is in [parallel binary search](/algorithms/advanced/parallel-binary-search).
-- The subject index lists this technique, [modular arithmetic](/algorithms/number-theory/modular-arithmetic), beside the arithmetic it does not yet cover: [the number theory](/algorithms/number-theory/).
+- The subject index lists this technique, [modular arithmetic](/algorithms/number-theory/modular-arithmetic), beside the rest of the subject: [the number theory](/algorithms/number-theory/).

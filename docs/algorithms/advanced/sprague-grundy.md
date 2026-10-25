@@ -32,6 +32,12 @@ implementations: advanced.sprague-grundy
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="advanced.sprague-grundy" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="advanced.sprague-grundy" />
+
 ## At a glance
 
 The Sprague-Grundy theorem assigns to every position of a finite impartial game a single non-negative integer, its **Grundy value**, written $g$. The value is defined by

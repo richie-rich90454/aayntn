@@ -20,6 +20,12 @@ implementations: enumeration.meet-in-the-middle
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="enumeration.meet-in-the-middle" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="enumeration.meet-in-the-middle" />
+
 ## At a glance
 
 Meet in the middle pays for an exponential search in two installments. Split the $n$ decisions into two halves of about $n/2$ each, enumerate every state of each half on its own, and then match the two lists against each other. The enumeration cost falls from $2^n$ to $2^{n/2}$, and the matching is usually a sort followed by a binary search.

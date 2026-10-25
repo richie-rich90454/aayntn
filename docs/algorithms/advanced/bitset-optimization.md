@@ -26,6 +26,12 @@ implementations: advanced.bitset-optimization
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="advanced.bitset-optimization" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="advanced.bitset-optimization" />
+
 ## At a glance
 
 Bitset optimization replaces a loop over a set of small integers with a few instructions that act on a machine word at a time. The set is stored as a bit vector: bit $s$ is one exactly when $s$ is in the set. One word holds 32 or 64 consecutive values, so one shift moves a whole block of candidates.

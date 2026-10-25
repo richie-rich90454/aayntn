@@ -58,18 +58,29 @@ The signal that rules the subject out is a problem about shapes whose exact coor
 | The pair of points that is farthest apart | [Rotating calipers](/algorithms/geometry/rotating-calipers) over the hull |
 | Whether two segments cross | Orientation tests on the four endpoints |
 | Whether any two of many segments cross | [Sweep line](/algorithms/geometry/sweep-line) |
-| The smallest circle containing the points | The smallest enclosing circle, which is not covered yet |
+| The smallest circle containing the points | [The smallest enclosing circle](/algorithms/geometry/smallest-enclosing-circle) |
 
 The convex hull is the common first step: the closest pair of points is not necessarily a pair of hull vertices, but the extreme point questions almost always are, and any question about the shape of a point set becomes simpler once the hull has been computed.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **Integer geometry.** The lattice-specific techniques: the Pick's theorem for the area and the boundary count of a lattice polygon, and the gcd-based formula for the number of lattice points on a segment.
-- **Line arrangements and the half-plane intersection**, and the problem of finding the region that satisfies a set of linear constraints.
-- **The smallest enclosing circle.** The circle of least radius that contains every point, found in linear time with a randomized incremental algorithm, and the answer to the "minimum radius to cover the sensors" shape of problem.
-- **The Voronoi diagram.** The partition of the plane into the regions closest to each point, which answers nearest-neighbor and largest-empty-circle questions and is the dual of the convex hull.
-- **K-D trees.** A balanced tree that splits the plane alternately by coordinate, which answers a nearest-neighbor query in about $O(\log n)$ on average and is the standard structure for a point set with no further structure.
-- **Robust predicates.** The exact-arithmetic orientation test, which decides whether three points are collinear without a rounding error. Every article in this subject warns about the size of the cross product, and the warning has no dedicated article yet.
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| Closest pair | O(n log n) | O(n) | `geometry.convex-hull` | [Closest pair](/algorithms/geometry/closest-pair) | Prose only |
+| Convex hull | O(n log n) | O(n) | `foundations.sorting` | [Convex hull](/algorithms/geometry/convex-hull) | Prose only |
+| Integer geometry | O(n log C) | O(n) | `number-theory.extended-euclidean` | [Integer geometry](/algorithms/geometry/integer-geometry) | [Source](/implementations/geometry-integer-geometry/) |
+| K-D trees | O(n log^2 n) build with a full sort per node; O(log n) average per query and O(n) worst case | O(n) | `foundations.sorting` | [K-D trees](/algorithms/geometry/kd-trees) | [Source](/implementations/geometry-kd-trees/) |
+| Line arrangements and the half-plane intersection | O(n^2) for the reference clipping, O(n log n) with the angular sweep | O(n) | `geometry.convex-hull` | [Line arrangements and the half-plane intersection](/algorithms/geometry/half-plane-intersection) | [Source](/implementations/geometry-half-plane-intersection/) |
+| Point in polygon | O(n) per query | O(1) per query | `geometry.convex-hull` | [Point in polygon](/algorithms/geometry/point-in-polygon) | Prose only |
+| Robust predicates | O(1) per query | O(1) | `foundations.complexity` | [Robust predicates](/algorithms/geometry/robust-predicates) | [Source](/implementations/geometry-robust-predicates/) |
+| Rotating calipers | O(n log n) for the whole algorithm | O(n) | `geometry.convex-hull` | [Rotating calipers](/algorithms/geometry/rotating-calipers) | Prose only |
+| Sweep line | O(n log n) for the decision version | O(n) | `geometry.convex-hull` | [Sweep line](/algorithms/geometry/sweep-line) | Prose only |
+| The smallest enclosing circle | O(n^3) worst case; O(n) expected with a random shuffle | O(n) for the points, O(1) auxiliary | `geometry.convex-hull` | [The smallest enclosing circle](/algorithms/geometry/smallest-enclosing-circle) | [Source](/implementations/geometry-smallest-enclosing-circle/) |
+| The Voronoi diagram | O(n) per nearest-site query; O(n log n) to build the full diagram | O(1) extra for a direct query; O(n) for the full diagram | `geometry.convex-hull` | [The Voronoi diagram](/algorithms/geometry/voronoi-diagram) | [Source](/implementations/geometry-voronoi-diagram/) |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

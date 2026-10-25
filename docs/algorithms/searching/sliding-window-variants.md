@@ -30,6 +30,12 @@ implementations: searching.sliding-window-variants
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="searching.sliding-window-variants" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="searching.sliding-window-variants" />
+
 ## At a glance
 
 A sliding window is a contiguous range of an array together with a small summary of its contents. The range is moved by two pointers, and the summary is updated when an element enters or leaves. The technique is linear because each pointer crosses the array once, and it is correct because the summary is enough to decide whether the current window satisfies the problem's condition.

@@ -21,6 +21,12 @@ implementations: strings.aho-corasick
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="strings.aho-corasick" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="strings.aho-corasick" />
+
 ## At a glance
 
 Aho-Corasick finds every occurrence of every pattern in a dictionary inside one text, in a single left-to-right pass. For patterns whose total length is $L$ and a text of length $n$, the cost is $O(26L + n)$ over a lowercase alphabet, and the memory is $O(26L)$ for the transitions.

@@ -553,6 +553,6 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The exact linear-time pattern search is in [Knuth-Morris-Pratt](/algorithms/strings/kmp).
 - The faster but less certain tool for equality is in [the rolling hash](/algorithms/strings/rolling-hash).
 - The linear-time palindrome algorithm is in [the Manacher algorithm](/algorithms/strings/manacher).
-- The subject overview, which lists the string techniques that are not yet covered, is at [the strings](/algorithms/strings/).
+- The subject overview is at [the strings](/algorithms/strings/).
 - The range queries that the occurrence counts need are in [a segment tree](/algorithms/range-queries/segment-tree) and in [a sparse table](/algorithms/range-queries/sparse-table).
 - The counting sort that makes the construction linear is the same technique as the counting sort in the [merge sort](/algorithms/foundations/sorting), which the subject index lists under sorting.

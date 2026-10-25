@@ -34,6 +34,12 @@ implementations: advanced.offline-dynamic-connectivity
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="advanced.offline-dynamic-connectivity" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="advanced.offline-dynamic-connectivity" />
+
 ## At a glance
 
 Offline dynamic connectivity answers connectivity questions about a graph whose edges appear and disappear. It reads the entire operation sequence before producing an answer. Each edge is alive during one or more intervals of time. A segment tree over the timeline stores every interval in the $O(\log q)$ nodes that cover it, and a depth-first traversal of that tree keeps a rollback union-find of exactly the edges stored on the current path.

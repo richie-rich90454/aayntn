@@ -80,20 +80,41 @@ The signal that rules the subject out is a statement where the objects have a fi
 | A route that uses every edge exactly once | [Euler tour](/algorithms/graphs/euler-tour) |
 | How much can this network carry | [Minimum cut](/algorithms/graphs/minimum-cut) |
 | Pair every item on the left with an item on the right | [Bipartite matching](/algorithms/graphs/bipartite-matching) |
-| The cheapest path between every pair of vertices | Floyd-Warshall, which is not covered yet |
-| The graph is undirected, weights may be negative, and all pairs are needed | Johnson's algorithm, which is not covered yet |
+| The cheapest path between every pair of vertices | [Floyd-Warshall](/algorithms/graphs/floyd-warshall) |
+| The graph is undirected, weights may be negative, and all pairs are needed | [Johnson's algorithm](/algorithms/graphs/johnson) |
 | The graph is a tree and the question is about a path | [Trees and decompositions](/algorithms/trees/) |
 
 The weight column is the whole decision for shortest paths. Three sentences in the statement decide it: unweighted means breadth-first search, nonnegative means Dijkstra, and possibly negative means Bellman-Ford. The number of edges is the second decision, because $O(VE)$ is only affordable when $V$ is in the hundreds.
 
-## What this subject implies but does not yet cover
+## Every technique in this subject
 
-- **The Hungarian algorithm.** The assignment problem, which is the weighted version of bipartite matching: assign every worker to a job at minimum total cost. The [bipartite matching article](/algorithms/graphs/bipartite-matching) covers the unweighted version, and the weighted version needs a different argument.
-- **Minimum cost flow.** A flow network in which each unit of flow also carries a price, which turns the assignment problem and the transportation problem into one method. The [minimum cut article](/algorithms/graphs/minimum-cut) builds the network but stops at the unweighted case.
-- **Floyd-Warshall and all-pairs shortest paths.** The $O(V^3)$ dynamic program over the path that goes through each vertex in turn, which is the standard answer when the graph is small and every pair is queried.
-- **Johnson's algorithm**, which uses Bellman-Ford to remove the negative edges and then runs Dijkstra, and which is the standard answer when the graph is dense and some weights are negative.
-- **The two-coloring test for a bipartite graph.** Assigning two colors so that no edge joins two vertices of the same color, which is one depth-first search and is the step before any matching algorithm when the partition is not given.
-- **Dominator trees.** The tree that records which vertices dominate which others in a flow graph, computed in near-linear time and the standard answer to "must every path from $s$ to $t$ pass through $v$".
+<!-- aayntn:subject:start -->
+
+| Technique | Time | Space | Prerequisite | Article | Source |
+| --- | --- | --- | --- | --- | --- |
+| 0-1 BFS | O(V + E) | O(V + E) | `graphs.bfs` | [0-1 BFS](/algorithms/graphs/0-1-bfs) | Prose only |
+| Articulation points | O(V + E) | O(V) | `graphs.representation` | [Articulation points](/algorithms/graphs/articulation-points) | Prose only |
+| Bellman-Ford | O(VE) | O(V) | `graphs.representation` | [Bellman-Ford](/algorithms/graphs/bellman-ford) | Prose only |
+| Bipartite matching | O(E sqrt{V}) | O(V) beyond the adjacency list | `graphs.representation` | [Bipartite matching](/algorithms/graphs/bipartite-matching) | Prose only |
+| Breadth-first search | O(V + E) | O(V + E) | `graphs.representation` | [Breadth-first search](/algorithms/graphs/bfs) | [Source](/implementations/graphs-bfs/) |
+| Bridges | O(V + E) | O(V) | `graphs.representation` | [Bridges](/algorithms/graphs/bridges) | Prose only |
+| Depth-first search | O(V + E) | O(V + E) | `graphs.representation` | [Depth-first search](/algorithms/graphs/dfs) | [Source](/implementations/graphs-dfs/) |
+| Dijkstra's algorithm | O((V + E) log V) | O(V + E) | `graphs.representation` | [Dijkstra's algorithm](/algorithms/graphs/dijkstra) | [Source](/implementations/graphs-dijkstra/) |
+| Disjoint set union | O((n + q) alpha(n)) | O(n) | `foundations.recursion` | [Disjoint set union](/algorithms/graphs/dsu) | [Source](/implementations/graphs-dsu/) |
+| Dominator trees | O(V E) per pass, two or three passes in practice | O(V + E) | `graphs.representation` | [Dominator trees](/algorithms/graphs/dominator-trees) | [Source](/implementations/graphs-dominator-trees/) |
+| Euler tours in graphs | O(V + E) | O(V) beyond the adjacency list and the output | `graphs.representation` | [Euler tours in graphs](/algorithms/graphs/euler-tour) | Prose only |
+| Floyd-Warshall and all-pairs shortest paths | O(V^3) | O(V^2) | `graphs.representation` | [Floyd-Warshall and all-pairs shortest paths](/algorithms/graphs/floyd-warshall) | [Source](/implementations/graphs-floyd-warshall/) |
+| Graph representation | O(V + E) to build | O(V + E) for an adjacency list | `foundations.complexity` | [Graph representation](/algorithms/graphs/representation) | Prose only |
+| Johnson's algorithm | O(VE + V(V + E) log V) | O(V + E) | `graphs.dijkstra` | [Johnson's algorithm](/algorithms/graphs/johnson) | [Source](/implementations/graphs-johnson/) |
+| Minimum cost flow | O(F (V + E) log V) | O(V + E) | `graphs.representation` | [Minimum cost flow](/algorithms/graphs/minimum-cost-flow) | [Source](/implementations/graphs-minimum-cost-flow/) |
+| Minimum cut | O(V E^2) for Edmonds-Karp, O(V^2 E) for Dinic | O(V + E) | `graphs.representation` | [Minimum cut](/algorithms/graphs/minimum-cut) | Prose only |
+| Minimum spanning tree | O(E log E) | O(V + E) | `graphs.representation` | [Minimum spanning tree](/algorithms/graphs/mst) | Prose only |
+| Strongly connected components | O(V + E) | O(V) for Tarjan, O(V + E) for Kosaraju | `graphs.representation` | [Strongly connected components](/algorithms/graphs/strongly-connected-components) | Prose only |
+| The Hungarian algorithm | O(n^3) | O(n^2) | `graphs.bipartite-matching` | [The Hungarian algorithm](/algorithms/graphs/hungarian-algorithm) | [Source](/implementations/graphs-hungarian-algorithm/) |
+| The two-coloring test for a bipartite graph | O(V + E) | O(V + E) | `graphs.representation` | [The two-coloring test for a bipartite graph](/algorithms/graphs/bipartite-two-coloring) | [Source](/implementations/graphs-bipartite-two-coloring/) |
+| Topological sort | O(V + E) | O(V) | `graphs.representation` | [Topological sort](/algorithms/graphs/topological-sort) | Prose only |
+
+<!-- aayntn:subject:end -->
 
 ## Related subjects
 

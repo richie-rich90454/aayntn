@@ -480,4 +480,4 @@ Answer these without looking back. If you cannot, revisit the section named in p
 - The arithmetic that keeps a count exact when the numbers are large, and the inverse that a division needs, are in [modular arithmetic](/algorithms/number-theory/modular-arithmetic).
 - The discrete mathematics of sets, functions and the proof techniques behind the principle is in [discrete mathematics](/start/from-ap-csa/part-3-discrete-mathematics).
 - The Chinese remainder theorem counts the solutions of a system of congruences, which is a different kind of "the objects that satisfy all the conditions at once". (Algorithm selection)
-- The subject index lists this technique, [inclusion and exclusion](/algorithms/combinatorics/inclusion-exclusion), beside the counting arguments it does not yet cover: [the combinatorics](/algorithms/combinatorics/).
+- The subject index lists this technique, [inclusion and exclusion](/algorithms/combinatorics/inclusion-exclusion), beside the rest of the subject: [the combinatorics](/algorithms/combinatorics/).

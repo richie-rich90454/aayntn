@@ -19,6 +19,12 @@ implementations: greedy.multi-key-sorting
 reviewed: false
 ---
 
+<AlgorithmSummary algorithm="greedy.multi-key-sorting" />
+
+<!-- The raw implementation, placed here so that a reader who came for the code does not have to scroll to the end of the article. -->
+
+<CodeViewer algorithm="greedy.multi-key-sorting" />
+
 ## At a glance
 
 Sorting by several keys orders records by a lexicographic rule. In this article the rule is:

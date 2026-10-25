@@ -21,7 +21,7 @@ The knowledge a competitor needs is not large. It is a few dozen techniques, a h
 
 A.A.Y.N.T.N. exists to write those parts down, once, in an order that a reader can follow from a passing grade in AP Computer Science A to the harder end of the Platinum division. It is a reference that happens to be readable, not a curriculum that happens to be accurate.
 
-The encyclopedia is deliberately explicit about the boundary of its own coverage. Every article states its complexity together with the implementation the bound assumes, every subject page ends with the list of techniques it implies and does not yet cover, and an article that has not been checked end to end is marked as unreviewed rather than presented as finished.
+The encyclopedia is deliberately explicit about its own coverage. Every article states its complexity together with the implementation the bound assumes, every subject page lists every technique in its subject with the article and, where one exists, the reference implementation, and an article that has not been checked end to end is marked as unreviewed rather than presented as finished.
 
 ## The editorial standard
 
