@@ -744,6 +744,23 @@ async function main() {
         JSON.stringify(lessonEntries.map(({ id, title, href }) => ({ id, title, href }))),
         "utf8",
     );
+    await writeFile(
+        join(GENERATED_DIR, "subject-counts.json"),
+        JSON.stringify(
+            Object.fromEntries(
+                SUBJECTS.map((subject) => [
+                    subject,
+                    lessons.filter(
+                        (lesson) =>
+                            lesson.subjects.includes(subject) &&
+                            lesson.href.startsWith(`/algorithms/${subject}/`) &&
+                            lesson.href !== `/algorithms/${subject}`,
+                    ).length,
+                ]),
+            ),
+        ),
+        "utf8",
+    );
 
     /* Stable per-algorithm source pages ---------------------------------- */
     /*

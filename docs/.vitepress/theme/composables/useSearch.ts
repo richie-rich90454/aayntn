@@ -18,7 +18,6 @@ import {
     type SearchEntry,
     type Subject,
 } from "../../data/types";
-import lessonList from "../../data/generated/lessons.json";
 
 export type SearchGroupId = "lessons" | "laboratories" | "problems" | "reference";
 
@@ -154,8 +153,10 @@ export function ensureIndex(): Promise<void> {
                 throw new Error(`The search index answered with ${response.status}.`);
             }
             const payload = (await response.json()) as { entries: SearchEntry[] };
-            const lessons = lessonList as unknown as LessonEntry[];
-            const metadata = new Map(lessons.map((lesson) => [lesson.id, lesson]));
+            const { default: lessons } = await import("../../data/generated/lessons.json");
+            const metadata = new Map(
+                (lessons as LessonEntry[]).map((lesson) => [lesson.id, lesson]),
+            );
 
             items.value = payload.entries.map((entry) => enrich(entry, metadata));
 

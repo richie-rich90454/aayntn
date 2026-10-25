@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withBase } from "vitepress";
 import stats from "../data/generated/stats.json";
-import lessons from "../data/generated/lessons.json";
+import subjectCounts from "../data/generated/subject-counts.json";
 import visualizations from "../data/generated/visualizations.json";
 import {
     LANGUAGE_IDS,
@@ -10,7 +10,7 @@ import {
     SUBJECT_LABELS,
     isUsacoSubmittable,
 } from "../data/types";
-import type { LessonEntry, Subject, VisualizationEntry } from "../data/types";
+import type { Subject, VisualizationEntry } from "../data/types";
 import { coveragePercent, taggingPercent, useCoverage } from "./composables/useCoverage";
 
 /**
@@ -22,7 +22,7 @@ import { coveragePercent, taggingPercent, useCoverage } from "./composables/useC
  * generated data, so the page cannot claim more than the build published.
  */
 
-const lessonList = lessons as LessonEntry[];
+const counts = subjectCounts as Record<Subject, number>;
 const laboratoryList = visualizations as VisualizationEntry[];
 const coverage = useCoverage();
 
@@ -58,21 +58,12 @@ const paths = [
     },
 ];
 
-const subjects = SUBJECTS.map((subject: Subject) => {
-    const prefix = `/algorithms/${subject}/`;
-    const count = lessonList.filter(
-        (lesson) =>
-            lesson.subjects.includes(subject) &&
-            lesson.href.startsWith(prefix) &&
-            lesson.href !== `/algorithms/${subject}`,
-    ).length;
-    return {
-        id: subject,
-        label: SUBJECT_LABELS[subject],
-        count,
-        href: withBase(prefix),
-    };
-});
+const subjects = SUBJECTS.map((subject: Subject) => ({
+    id: subject,
+    label: SUBJECT_LABELS[subject],
+    count: counts[subject] ?? 0,
+    href: withBase(`/algorithms/${subject}/`),
+}));
 
 const laboratories = laboratoryList.map((laboratory) => ({
     id: laboratory.id,
