@@ -73,6 +73,7 @@
 .aayntn-code__actions {
     display: flex;
     align-items: stretch;
+    gap: 1px;
     margin-left: auto;
 }
 
@@ -81,7 +82,6 @@
     align-items: center;
     padding: var(--space-2) var(--space-4);
     border: none;
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
     background: transparent;
     color: rgba(255, 255, 255, 0.8);
     font-size: var(--text-meta);
@@ -147,7 +147,6 @@ html.dark .aayntn-code--numbered .aayntn-code__body pre code .line::before {
 /* The highlighted row, used when the animation synchronizes with the source. */
 .aayntn-code__line--highlight {
     background: #fff0bd;
-    box-shadow: inset 3px 0 0 var(--color-gold);
 }
 
 html.dark .aayntn-code__line--highlight {
@@ -156,7 +155,6 @@ html.dark .aayntn-code__line--highlight {
 
 .aayntn-code__line--error {
     background: #fce1e0;
-    box-shadow: inset 3px 0 0 var(--color-vermilion);
 }
 
 .aayntn-code__loading {

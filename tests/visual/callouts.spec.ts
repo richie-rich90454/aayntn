@@ -1,15 +1,29 @@
 /**
- * The callouts must carry their emphasis in a complete border or in their
- * background. A left-only stripe is the one treatment they may not use.
+ * Callouts, navigation rails, headings and code actions must carry their
+ * emphasis in a complete border, a background, or a horizontal rule. A
+ * left-only stripe is the one treatment they may not use.
  */
 import { test, expect } from "@playwright/test";
 
-const SELECTOR =
-    ".aayntn-math, .aayntn-note, .aayntn-hint__body, .aayntn-variant-note, .aayntn-contest__notice, blockquote";
+const SELECTOR = [
+    ".aayntn-math",
+    ".aayntn-note",
+    ".aayntn-hint__body",
+    ".aayntn-variant-note",
+    ".aayntn-contest__notice",
+    ".aayntn-nav__link",
+    ".aayntn-nav__item",
+    ".aayntn-sidebar__link",
+    ".aayntn-outline__link",
+    ".aayntn-code__action",
+    ".vp-doc h2",
+    ".vp-doc h3",
+    "blockquote",
+].join(", ");
 
-test.describe("the callouts", () => {
+test.describe("the vertical rules", () => {
     test("never use a left-only border", async ({ page }) => {
-        const paths = ["/algorithms/graphs/dijkstra/", "/practice/", "/contest/"];
+        const paths = ["/", "/algorithms/graphs/dijkstra/", "/practice/", "/contest/"];
 
         for (const path of paths) {
             await page.goto(path, { waitUntil: "networkidle" });

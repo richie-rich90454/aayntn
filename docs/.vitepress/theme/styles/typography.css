@@ -26,31 +26,17 @@
    the left, which is the one ornament the running prose gets. */
 .aayntn-prose h2,
 .vp-doc h2 {
-    position: relative;
     margin: var(--space-16) 0 var(--space-4);
-    padding: 0 0 var(--space-3) var(--space-4);
+    padding: 0 0 var(--space-3);
     border-bottom: 1px solid var(--border-ink);
     font-size: var(--text-section);
     font-weight: 700;
     letter-spacing: -0.012em;
 }
 
-.aayntn-prose h2::before,
-.vp-doc h2::before {
-    content: "";
-    position: absolute;
-    top: 0.15em;
-    left: 0;
-    width: 6px;
-    height: 1.05em;
-    background: var(--color-cobalt);
-}
-
 .aayntn-prose h3,
 .vp-doc h3 {
     margin: var(--space-12) 0 var(--space-3);
-    padding-left: var(--space-3);
-    border-left: 2px solid var(--color-gold);
     font-size: var(--text-subsection);
     font-weight: 700;
     letter-spacing: -0.006em;

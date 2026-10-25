@@ -89,7 +89,6 @@ html.dark .aayntn-lab__head {
 }
 
 .aayntn-lab__sidebar {
-    border-left: 1px solid var(--border-subtle);
     background: var(--surface-sunken);
     overflow-y: auto;
     max-height: 560px;

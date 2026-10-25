@@ -854,7 +854,7 @@ selectDivision("bronze");
 
 .aayntn-contest__list-item--current {
     background: var(--surface-sunken);
-    box-shadow: inset 3px 0 0 var(--color-gold);
+    box-shadow: inset 0 0 0 1px var(--color-gold);
 }
 
 .aayntn-contest__list-title {

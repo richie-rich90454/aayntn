@@ -360,28 +360,26 @@
 
 .aayntn-rail .aayntn-outline__link {
     display: block;
-    padding: 3px 0 3px var(--space-3);
-    border-left: 2px solid var(--border-subtle);
+    padding: 3px var(--space-3);
+    border-radius: var(--radius);
     color: var(--text-muted);
     line-height: 1.45;
     overflow-wrap: anywhere;
     transition:
         color var(--transition-fast),
-        background var(--transition-fast),
-        border-color var(--transition-fast);
+        background var(--transition-fast);
 }
 
 .aayntn-rail .aayntn-outline__link:hover {
     padding-right: var(--space-2);
     background: var(--hover-surface);
-    border-left-color: var(--border-strong);
     color: var(--hover-ink);
     text-decoration: none;
 }
 
 .aayntn-rail .aayntn-outline__link.is-active {
+    background: var(--surface-sunken);
     color: var(--text-accent);
-    border-left-color: var(--text-accent);
     font-weight: 600;
 }
 

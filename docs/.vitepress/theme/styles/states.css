@@ -229,14 +229,12 @@ html .aayntn-code__action:hover {
 
 .aayntn-sidebar__link:hover {
     background: var(--hover-surface);
-    border-left-color: var(--border-strong);
     color: var(--hover-ink);
     text-decoration: none;
 }
 
 .aayntn-sidebar__link.is-active:hover {
     background: var(--hover-surface-strong);
-    border-left-color: var(--color-primary);
     color: var(--text-accent);
 }
 

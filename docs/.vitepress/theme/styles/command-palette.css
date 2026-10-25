@@ -198,7 +198,7 @@
 }
 
 .aayntn-palette__result.is-active {
-    box-shadow: inset 3px 0 0 var(--focus-ring);
+    box-shadow: inset 0 0 0 1px var(--focus-ring);
 }
 
 .aayntn-palette__result:focus-visible,
